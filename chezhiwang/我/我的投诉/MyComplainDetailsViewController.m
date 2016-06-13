@@ -140,7 +140,7 @@
     self.navigationItem.title = @"投诉详情";
     self.view.backgroundColor = [UIColor whiteColor];
     
-    [self createLeftItem];
+    
     [self createScrollView];
     [self createHeader];
     [self createButton];
@@ -695,16 +695,6 @@
     label.textColor = [UIColor grayColor];
     [rightView addSubview:label];
     return label;
-}
-
-#pragma mark - 返回
--(void)createLeftItem{
-    self.navigationItem.leftBarButtonItem = [LHController createLeftItemButtonWithTarget:self Action:@selector(itemClick)];
-}
-
--(void)itemClick{
-    
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - block回调

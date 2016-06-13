@@ -30,7 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self createLeftItem];
+   
     [self createTableView];
     [self readData];
 }
@@ -53,13 +53,6 @@
     [spaceView addSubview:label];
 }
 
--(void)createLeftItem{
-    self.navigationItem.leftBarButtonItem = [LHController createLeftItemButtonWithTarget:self Action:@selector(leftItemClick)];
-}
-
--(void)leftItemClick{
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 -(void)createTableView{
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT-64) style:UITableViewStylePlain];

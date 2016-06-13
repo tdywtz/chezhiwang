@@ -65,18 +65,11 @@
     _dataArray = [[NSMutableArray alloc] init];
     _indexArray = [[NSMutableArray alloc] init];
 
-    [self createLeftItem];
+    
     [self createTableView];
     [self readData];
 }
 
--(void)createLeftItem{
-    self.navigationItem.leftBarButtonItem = [LHController createLeftItemButtonWithTarget:self Action:@selector(leftItemClick)];
-}
-
--(void)leftItemClick{
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 -(void)createTableView{
     _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];

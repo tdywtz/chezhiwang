@@ -35,12 +35,10 @@
     [super viewDidLoad];
     
     B = [LHController setFont];
-    //    if (self.isRoot) {
-    //        _temp = 49;
-    //    }
+ 
     self.navigationItem.title = @"我要提问";
     self.view.backgroundColor = [UIColor whiteColor];
-    [self createLeftItem];
+
     [self createScrollView];
     [self createUI];
     [self onTapToGenerateCode:nil];
@@ -222,13 +220,7 @@
 
 
 #pragma mark - 返回
--(void)createLeftItem{
-    
-    self.navigationItem.leftBarButtonItem = [LHController createLeftItemButtonWithTarget:self Action:@selector(itemClick)];
-    
-}
-
--(void)itemClick{
+-(void)leftItemBackClick{
     
     if (self.isLogoIn) {
         UIViewController *vc  = self.navigationController.viewControllers[self.navigationController.viewControllers.count-3];
@@ -261,21 +253,8 @@
     return YES;
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if ([LHController stringContainsEmoji:string]){
-        return NO;
-    }
-    return YES;
-}
 
 #pragma mark - UITextViewDelegate
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
-    if ([LHController stringContainsEmoji:text]){
-        return NO;
-    }
-    return YES;
-}
-
 -(BOOL)textViewShouldBeginEditing:(UITextView *)textView{
     frame_y = textView.superview.frame.origin.y+textView.superview.frame.size.height;
     return YES;

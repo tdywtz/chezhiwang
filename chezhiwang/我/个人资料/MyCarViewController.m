@@ -123,8 +123,7 @@
     B = [LHController setFont];
    
     
-    [self createLeftItem];
-   // [self createRightItem];
+
     [self createTableView];
     NSDictionary *dict = @{@"img":@"",@"uname":@"",@"rname":@"",@"sex":@"",@"birth":@"",@"email":@"",@"mobile":@"",@"phone":@"",@"qq":@"",@"brandName":@"",@"brand":@"",@"seriesName":@"",@"series":@"",@"modelName":@"",@"model":@""};
     [dicData setDictionary:dict];
@@ -164,13 +163,6 @@
     [self.view addSubview:_tabelView];
 }
 
--(void)createLeftItem{
-    self.navigationItem.leftBarButtonItem = [LHController createLeftItemButtonWithTarget:self Action:@selector(leftItemClink)];
-}
-
--(void)leftItemClink{
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 
 - (void)didReceiveMemoryWarning {

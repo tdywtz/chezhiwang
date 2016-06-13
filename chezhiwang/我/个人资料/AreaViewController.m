@@ -59,8 +59,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     _pickDataArray  = [[NSMutableArray alloc] init];
     B = [LHController setFont];
-    [self createLeftItem];
-    //[self createRightITem];
+
     [self createUI];
     [self createChangPickView];
     [self loadData];
@@ -103,13 +102,6 @@
     [self.view endEditing:YES];
 }
 
--(void)createLeftItem{
-    self.navigationItem.leftBarButtonItem = [LHController createLeftItemButtonWithTarget:self Action:@selector(leftItemClick)];
-}
-
--(void)leftItemClick{
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 #pragma mark - 注册通知
 -(void)createNotification{
@@ -288,12 +280,7 @@
     return YES;
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if ([LHController stringContainsEmoji:string]){
-        return NO;
-    }
-    return YES;
-}
+
 
 #pragma mark - UITextViewDelegate
 -(BOOL)textViewShouldBeginEditing:(UITextView *)textView{
@@ -301,12 +288,6 @@
     return YES;
 }
 
--(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
-    if ([LHController stringContainsEmoji:text]) {
-        return NO;
-    }
-    return YES;
-}
 
 #pragma  mark - 创建选择列表框pickView
 -(void)createChangPickView{

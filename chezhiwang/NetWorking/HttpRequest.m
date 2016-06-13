@@ -165,4 +165,28 @@
     return task;
 }
 
+
++(void)downloadProvince{
+    [HttpRequest GET:[URLFile urlStringForPro] success:^(id responseObject) {
+        if ([responseObject count] > 0) {
+            NSMutableArray *array = [[NSMutableArray alloc] init];
+            for (NSDictionary *dict in responseObject) {
+                NSString *title = [dict[@"License_plate"] length] > 0?dict[@"License_plate"]:@"台";
+                [array
+                 addObject:@{@"id":dict[@"Id"],@"title":title,@"name":dict[@"Name"]}];
+            }
+            [[NSUserDefaults standardUserDefaults] setObject:array forKey:@"province"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
++(NSArray *)readProvince{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"province"];
+}
+
+
 @end

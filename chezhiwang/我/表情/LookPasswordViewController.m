@@ -25,7 +25,6 @@
   
     self.title = @"找回密码";
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.leftBarButtonItem = [LHController createLeftItemButtonWithTarget:self Action:@selector(blackClick)];
     
     self.nameTextField = [LHController createTextFieldWithFrame:CGRectZero Placeholder:@"用户名" Font:15 Delegate:nil];
     self.nameTextField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
@@ -102,13 +101,11 @@
     [super viewWillDisappear:animated];
      [MobClick endLogPageView:@"PageOne"];
 }
+
 -(void)spaceTap{
     [self.view endEditing:YES];
 }
 
--(void)blackClick{
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 -(void)changeClick{
     

@@ -185,13 +185,6 @@
     return YES;
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if ([LHController stringContainsEmoji:string]){
-        return NO;
-    }
-    return YES;
-}
-
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
     self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     if (self.myBlock) {

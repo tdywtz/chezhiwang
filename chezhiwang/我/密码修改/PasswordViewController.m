@@ -27,19 +27,11 @@
     self.navigationItem.title = @"密码修改";
     self.view.backgroundColor = [UIColor whiteColor];
     
-    [self createLeftItem];
+
     //[self createRightItem];
     [self createTextField];
     [self createTap];
     [self createNotification];
-}
-
--(void)createLeftItem{
-    self.navigationItem.leftBarButtonItem = [LHController createLeftItemButtonWithTarget:self Action:@selector(leftItemCLick)];
-}
-
--(void)leftItemCLick{
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - 通知
@@ -180,13 +172,6 @@
 #pragma mark - textfield
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     [self.view endEditing:YES];
-    return YES;
-}
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if ([LHController stringContainsEmoji:string]){
-        return NO;
-    }
     return YES;
 }
 

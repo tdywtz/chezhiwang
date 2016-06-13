@@ -76,7 +76,7 @@
 
     self.navigationItem.title = @"我的投诉";
     self.view.backgroundColor = [UIColor whiteColor];
-    [self createLeftItem];
+
     [self creaRightItem];
     
     _dataArray = [[NSMutableArray alloc] init];
@@ -128,12 +128,9 @@
     label.font = [UIFont systemFontOfSize:15];
     [imageView addSubview:label];
 }
-#pragma mark - 返回
--(void)createLeftItem{
-    self.navigationItem.leftBarButtonItem = [LHController createLeftItemButtonWithTarget:self Action:@selector(itemClick:)];
-}
 
--(void)itemClick:(UIButton *)button{
+#pragma mark - 返回
+-(void)leftItemBackClick{
     if (self.isRoot) {
       
         [self.navigationController popViewControllerAnimated:YES];

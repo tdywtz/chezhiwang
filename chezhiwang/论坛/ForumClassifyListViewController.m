@@ -94,7 +94,6 @@
     
     _dataArray = [[NSMutableArray alloc] init];
 
-    [self createLeftItem];
     [self createRightItem];
     [self createTableView];
     //[self createFootView];
@@ -104,15 +103,6 @@
     _count = 1;
     [self setUrl];
     [self loadDataWithP:_count  andS:10];
-}
-
-#pragma mark - leftItem
--(void)createLeftItem{
-    self.navigationItem.leftBarButtonItem = [LHController createLeftItemButtonWithTarget:self Action:@selector(leftItemClick)];
-}
-
--(void)leftItemClick{
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)createRightItem{

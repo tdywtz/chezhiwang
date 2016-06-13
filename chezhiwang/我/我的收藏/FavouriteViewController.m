@@ -52,7 +52,6 @@
     self.navigationItem.title = @"我的收藏";
     self.view.backgroundColor = [UIColor whiteColor];
 
-    [self createLeftItem];
     [self createTableView];
 }
 
@@ -82,16 +81,6 @@
     label.font = [UIFont systemFontOfSize:B-2];
     [imageView addSubview:label];
     
-}
-#pragma mark - 返回
--(void)createLeftItem{
-   
-    self.navigationItem.leftBarButtonItem = [LHController createLeftItemButtonWithTarget:self Action:@selector(itemClick)];
-}
-
--(void)itemClick{
-
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

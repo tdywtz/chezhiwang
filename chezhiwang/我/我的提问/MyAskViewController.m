@@ -74,7 +74,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.model = [[MyAskModel alloc] init];
     
-    [self createLeftItem];
+   
     [self createRightItem];
   
     [self createTabelView];
@@ -116,11 +116,7 @@
 }
 
 #pragma mark - 返回
--(void)createLeftItem{
-    self.navigationItem.leftBarButtonItem = [LHController createLeftItemButtonWithTarget:self Action:@selector(itemClick)];
-}
-
--(void)itemClick{
+-(void)leftItemBackClick{
     
     if (self.isRoot) {
         

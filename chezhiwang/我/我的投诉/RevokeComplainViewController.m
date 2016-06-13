@@ -189,7 +189,7 @@
     [super viewDidLoad];
    
     self.title = @"申请撤诉";
-    [self createLeftItem];
+    
     [self createCollectionView];
 
     [self.collectionView reloadData];
@@ -198,15 +198,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
-#pragma mark - 返回
--(void)createLeftItem{
-    self.navigationItem.leftBarButtonItem = [LHController createLeftItemButtonWithTarget:self Action:@selector(itemClick:)];
-}
 
--(void)itemClick:(UIButton *)button{
-
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 -(void)keyboardWillShow:(NSNotification *)notification{
     

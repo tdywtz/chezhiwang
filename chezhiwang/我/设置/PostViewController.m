@@ -74,7 +74,7 @@ typedef enum {
     self.view.backgroundColor = [UIColor whiteColor];
     self.webDataArray = [[NSMutableArray alloc] init];
     
-    [self createLeftItem];
+    
     [self crateRigthItem];
     [self.view addSubview:[[UIView alloc] init]];
     [self createWebView];
@@ -104,16 +104,6 @@ typedef enum {
     _webView = _webOne;
 }
 
-
-#pragma mark - 返回
--(void)createLeftItem{
-    self.navigationItem.leftBarButtonItem = [LHController createLeftItemButtonWithTarget:self Action:@selector(itemClick)];
-}
-
--(void)itemClick{
-    
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 #pragma mark - rightItem
 -(void)crateRigthItem{

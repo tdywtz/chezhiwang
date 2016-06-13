@@ -140,25 +140,6 @@
     return NO;
 }
 
-//#pragma mark - 导航栏左侧返回按钮
-+(UIBarButtonItem *)createLeftItemButtonWithTarget:(id)target Action:(SEL)action{
-
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(0, 0, 50, 40);
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(-5, 10, 10.5, 20)];
-    UIImage*leftImage=[UIImage imageNamed:@"bar_btn_icon_returntext"];
-
-    imageView.image = leftImage;
-    [button addSubview:imageView];
-
-    [button setTitle:@"返回" forState:UIControlStateNormal];
-    button.titleLabel.font = [UIFont systemFontOfSize:[LHController setFont]-2];
-    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-    
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:button];
-    return item;
-}
 
 #pragma mark - 创建圆心选择按钮
 +(UIButton *)createButtnFram:(CGRect)frame Target:(id)target Action:(SEL)action{
@@ -244,34 +225,6 @@
     return YES;
 }
 
-#pragma mark 属性化字符串
-+(NSAttributedString *)attributeSize:(NSString *)str Font:(CGFloat)size Must:(BOOL)must{
-    
-    NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:str];
-    [att addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"STHeitiK-Medium" size:size] range:NSMakeRange(0, att.length)];
-    if (must) {
-        [att addAttribute:NSForegroundColorAttributeName value:[UIColor orangeColor] range:NSMakeRange(0, 1)];
-    }
-    [att addAttribute:NSKernAttributeName value:[NSNumber numberWithFloat:0.5] range:NSMakeRange(0,att.length)];
-    // [att addAttribute:NSStrokeWidthAttributeName value:[NSNumber numberWithFloat:1] range:NSMakeRange(0, att.length)];
-//    NSShadow *shadow = [[NSShadow alloc] init];
-//    shadow.shadowOffset = CGSizeMake(1, 5);
-//    shadow.shadowColor = [UIColor blackColor];
-//    shadow.shadowBlurRadius = 10;
-//    
-//    [att addAttribute:NSShadowAttributeName value:shadow range:NSMakeRange(0, att.length)];
-    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
-    [style setLineSpacing:5];
-    [style setLineBreakMode:NSLineBreakByWordWrapping];
-    style.firstLineHeadIndent = 30;
-    style.paragraphSpacing = 20;
-    [att addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, att.length)];
-    //    CGSize size = [att boundingRectWithSize:CGSizeMake(WIDTH-65, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil].size;
-    //    NSLog(@"%f==%f",size.width,size.height);
-    //    NSLog(@"%@",att);
-    
-    return att;
-}
 
 #pragma mark - alertview
 +(void)alert:(NSString *)str{
@@ -286,52 +239,47 @@
     });
 }
 
-#pragma mark - 计算字符串size
-+(CGSize)getSizeWith:(NSString *)str Font:(CGFloat)font Size:(CGSize)size{
-  return   [str boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:font]} context:nil].size;
-}
-
-#pragma mark - 判断输入文字是否含有表情字符
-+ (BOOL)stringContainsEmoji:(NSString *)string {
-    return NO;
-    __block BOOL returnValue = NO;
-    [string enumerateSubstringsInRange:NSMakeRange(0, [string length]) options:NSStringEnumerationByComposedCharacterSequences usingBlock:
-     ^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
-         
-         const unichar hs = [substring characterAtIndex:0];
-         // surrogate pair
-         if (0xd800 <= hs && hs <= 0xdbff) {
-             if (substring.length > 1) {
-                 const unichar ls = [substring characterAtIndex:1];
-                 const int uc = ((hs - 0xd800) * 0x400) + (ls - 0xdc00) + 0x10000;
-                 if (0x1d000 <= uc && uc <= 0x1f77f) {
-                     returnValue = YES;
-                 }
-             }
-         } else if (substring.length > 1) {
-             const unichar ls = [substring characterAtIndex:1];
-             if (ls == 0x20e3) {
-                 returnValue = YES;
-             }
-             
-         } else {
-             // non surrogate
-             if (0x2100 <= hs && hs <= 0x27ff) {
-                 returnValue = YES;
-             } else if (0x2B05 <= hs && hs <= 0x2b07) {
-                 returnValue = YES;
-             } else if (0x2934 <= hs && hs <= 0x2935) {
-                 returnValue = YES;
-             } else if (0x3297 <= hs && hs <= 0x3299) {
-                 returnValue = YES;
-             } else if (hs == 0xa9 || hs == 0xae || hs == 0x303d || hs == 0x3030 || hs == 0x2b55 || hs == 0x2b1c || hs == 0x2b1b || hs == 0x2b50) {
-                 returnValue = YES;
-             }
-         }
-     }];
-    
-    return returnValue;
-}
+//#pragma mark - 判断输入文字是否含有表情字符
+//+ (BOOL)stringContainsEmoji:(NSString *)string {
+//    return NO;
+//    __block BOOL returnValue = NO;
+//    [string enumerateSubstringsInRange:NSMakeRange(0, [string length]) options:NSStringEnumerationByComposedCharacterSequences usingBlock:
+//     ^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
+//         
+//         const unichar hs = [substring characterAtIndex:0];
+//         // surrogate pair
+//         if (0xd800 <= hs && hs <= 0xdbff) {
+//             if (substring.length > 1) {
+//                 const unichar ls = [substring characterAtIndex:1];
+//                 const int uc = ((hs - 0xd800) * 0x400) + (ls - 0xdc00) + 0x10000;
+//                 if (0x1d000 <= uc && uc <= 0x1f77f) {
+//                     returnValue = YES;
+//                 }
+//             }
+//         } else if (substring.length > 1) {
+//             const unichar ls = [substring characterAtIndex:1];
+//             if (ls == 0x20e3) {
+//                 returnValue = YES;
+//             }
+//             
+//         } else {
+//             // non surrogate
+//             if (0x2100 <= hs && hs <= 0x27ff) {
+//                 returnValue = YES;
+//             } else if (0x2B05 <= hs && hs <= 0x2b07) {
+//                 returnValue = YES;
+//             } else if (0x2934 <= hs && hs <= 0x2935) {
+//                 returnValue = YES;
+//             } else if (0x3297 <= hs && hs <= 0x3299) {
+//                 returnValue = YES;
+//             } else if (hs == 0xa9 || hs == 0xae || hs == 0x303d || hs == 0x3030 || hs == 0x2b55 || hs == 0x2b1c || hs == 0x2b1b || hs == 0x2b50) {
+//                 returnValue = YES;
+//             }
+//         }
+//     }];
+//    
+//    return returnValue;
+//}
 
 //我要投诉按钮
 +(UIBarButtonItem *)createComplainItemWthFrame:(CGRect)frame Target:(id)target Action:(SEL)action{

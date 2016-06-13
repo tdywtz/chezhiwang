@@ -39,11 +39,9 @@
     B = [LHController setFont];
     self.view.backgroundColor = [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1];
     self.navigationItem.title = @"设置";
-    [self createLeftItem];
-    //[self createUIVeiw];
+  
     [self createBtn];
-    //[self creaBGView];
-    //[self createArea];
+  
     
     [self getText];
 }
@@ -195,18 +193,6 @@
     [[NSUserDefaults standardUserDefaults] setObject:btn.titleLabel.text forKey:AREA];
 }
 
-#pragma mark - 返回
--(void)createLeftItem{
-    self.navigationItem.leftBarButtonItem = [LHController createLeftItemButtonWithTarget:self Action:@selector(itemClick)];
-}
-
--(void)itemClick{
-//    UIWindow * window = [UIApplication sharedApplication].keyWindow;
-//    CustomTabBarController * ct =(CustomTabBarController *) window.rootViewController;
-//    ct.bgImageView.hidden = NO;
-    
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 
 -(void)clearClick:(UIButton *)btn{

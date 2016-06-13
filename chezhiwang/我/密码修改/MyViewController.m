@@ -227,9 +227,13 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row != 0) {
+    if (indexPath.section != 0) {
         if (![[NSUserDefaults standardUserDefaults] objectForKey:user_name]) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您还未登陆，您可以登陆后进行操作" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                            message:@"您还未登陆，您可以登陆后进行操作"
+                                                           delegate:nil
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:@"确定", nil];
             [alert show];
             return;
         }

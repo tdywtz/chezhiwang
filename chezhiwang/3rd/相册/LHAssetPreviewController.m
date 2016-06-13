@@ -27,25 +27,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+  
     _array = [[NSMutableArray alloc] init];
     if (self.resultArray) {
         [_array setArray:self.resultArray];
     }
     LHAssetPickerController *picker = (LHAssetPickerController *)self.navigationController;
     picker.navigationBar.alpha = 0.8;
-    [self createLeftItem];
-    //[self craeteScrollView];
+
+ 
     [self createTableView];
     [self createtRightItem];
     [self btnState:self.index];
 }
 
--(void)createLeftItem{
-    self.navigationItem.leftBarButtonItem = [LHController createLeftItemButtonWithTarget:self Action:@selector(blockClick)];
-}
 
--(void)blockClick{
+-(void)leftItemBackClick{
     if (self.getRsuelt) {
         self.getRsuelt(_array);
     }

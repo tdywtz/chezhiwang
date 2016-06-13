@@ -21,7 +21,7 @@
    
     self.title = @"找回密码";
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.leftBarButtonItem = [LHController createLeftItemButtonWithTarget:self Action:@selector(backClick)];
+ 
     if (self.email == nil) {
         self.email = @"";
     }
@@ -83,9 +83,6 @@
      [MobClick endLogPageView:@"PageOne"];
 }
 
--(void)backClick{
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 -(void)buttonClick{
      [self.navigationController popViewControllerAnimated:YES];

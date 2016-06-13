@@ -24,9 +24,7 @@
     B = [LHController setFont];
     self.navigationItem.title = @"关于我们";
     self.view.backgroundColor = [UIColor whiteColor];
-    [self createLeftItem];
-   
- 
+
     [self createUI];
 //    UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, WIDTH,400)];
 //    [self.view addSubview:web];
@@ -65,15 +63,6 @@
     _scrollView.contentSize = CGSizeMake(0, banquan.frame.origin.y+banquan.frame.size.height+30);
 }
 
-#pragma mark - 返回
--(void)createLeftItem{
-    self.navigationItem.leftBarButtonItem = [LHController createLeftItemButtonWithTarget:self Action:@selector(itemClick)];
-}
-
--(void)itemClick{
-    
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];

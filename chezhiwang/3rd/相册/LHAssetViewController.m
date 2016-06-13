@@ -38,7 +38,7 @@
     _resultArray = [[NSMutableArray alloc] init];
     
   
-    [self createLeftItem];
+ 
     [self createRightItem];
     [self createCollcetionView];
     [self setAssetArray];
@@ -58,15 +58,6 @@
             }
         }
     }
-}
-
--(void)createLeftItem{
-   // self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[self createButtonWithFrame:CGRectMake(0, 0, 60, 20) Target:self action:@selector(blockClick) ImageName:@"item_left@3x" Text:@"返回"]];
-    self.navigationItem.leftBarButtonItem = [LHController createLeftItemButtonWithTarget:self Action:@selector(blockClick)];
-}
-
--(void)blockClick{
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)createRightItem{

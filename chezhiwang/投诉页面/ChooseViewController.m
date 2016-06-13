@@ -7,7 +7,6 @@
 //
 
 #import "ChooseViewController.h"
-#import "CarData.h"
 #import "AIMTableViewIndexBar.h"
 
 typedef enum {

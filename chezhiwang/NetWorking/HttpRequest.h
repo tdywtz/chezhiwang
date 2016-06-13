@@ -43,4 +43,8 @@
                        success:(void (^)(id responseObject))success
                        failure:(void (^)(NSError * error))failure;
 
+
+
++ (void) downloadProvince;
++(NSArray *) readProvince;
 @end

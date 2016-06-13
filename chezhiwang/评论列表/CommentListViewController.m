@@ -59,20 +59,12 @@ typedef enum {
     self.navigationItem.title = @"评论";
     B = [LHController setFont];
     _dataArray = [[NSMutableArray alloc] init];
-    [self createLeftItem];
     [self createTableView];
     [self createFootView];
     
     [self loadDataWithP:1 andS:10];
 }
 
--(void)createLeftItem{
-    self.navigationItem.leftBarButtonItem = [LHController createLeftItemButtonWithTarget:self Action:@selector(leftItemClick)];
-}
-
--(void)leftItemClick{
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 -(void)createSpace{
     if (spaceView) {
@@ -235,14 +227,6 @@ typedef enum {
     return _height;
 }
 
-#pragma mark - UITextViewDelegate
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
-    if ([LHController stringContainsEmoji:text]) {
-        
-        return NO;
-    }
-    return YES;
-}
 
 /*
  #pragma mark - Navigation

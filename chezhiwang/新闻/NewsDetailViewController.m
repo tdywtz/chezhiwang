@@ -12,7 +12,7 @@
 #import "CommentListViewController.h"
 #import "CustomCommentView.h"
 
-@interface NewsDetailViewController ()<UIWebViewDelegate,UITextViewDelegate>
+@interface NewsDetailViewController ()<UIWebViewDelegate>
 {
     UILabel *_titleLabel;
     UILabel *_infoLabel;
@@ -459,13 +459,6 @@
     [activity animationStoping];
 }
 
-#pragma mark - UITextViewDelegate
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
-    if ([LHController stringContainsEmoji:text]){
-        return NO;
-    }
-    return YES;
-}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

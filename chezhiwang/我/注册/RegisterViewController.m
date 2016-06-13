@@ -30,7 +30,7 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"注册";
-    [self createLeftItem];
+   
     [self createTExtField];
     
     // NSString *str = [LHController deviceIPAdress];
@@ -246,15 +246,6 @@
     [UIView animateWithDuration:0.1 animations:^{
         serverView.frame = CGRectMake(-WIDTH, 20, WIDTH, HEIGHT-20);
     }];
-}
-
-#pragma mark - 返回
--(void)createLeftItem{
-    self.navigationItem.leftBarButtonItem = [LHController createLeftItemButtonWithTarget:self Action:@selector(itemClick)];
-}
-
--(void)itemClick{
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{

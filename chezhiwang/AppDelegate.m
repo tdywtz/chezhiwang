@@ -11,7 +11,6 @@
 #import "UMSocial.h"
 #import "UMSocialQQHandler.h"
 #import "UMSocialWechatHandler.h"
-#import "CarData.h"
 #import "CZWAppPrompt.h"
 
 
@@ -51,7 +50,7 @@
      } failure:^(NSError *error) {
          
      }];
-    [CarData downloadProvince];
+    [HttpRequest downloadProvince];
   
     _window.backgroundColor = [UIColor whiteColor];
     [NSThread sleepForTimeInterval:2.0];

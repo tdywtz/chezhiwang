@@ -14,7 +14,6 @@
 #import "LHPickerView.h"
 #import "CityChooseViewController.h"
 #import "ChooseViewController.h"
-#import "CarData.h"
 #import "EditImageViewController.h"
 
 #define SPACE 35
@@ -119,7 +118,7 @@
 
     first = YES;
      self.title = @"我要投诉";
-    [self createLeftItem];
+    
     [self createScorll];
     [self createHeader];
     [self createUI];
@@ -754,12 +753,8 @@
 
 
 #pragma mark - 返回
--(void)createLeftItem{
-   
-    self.navigationItem.leftBarButtonItem = [LHController createLeftItemButtonWithTarget:self Action:@selector(itemClick)];
-}
 
--(void)itemClick{
+-(void)leftItemBackClick{
     if (self.isLogoIn) {
         UIViewController *controller = self.navigationController.viewControllers[self.viewIndex];
         [self.navigationController popToViewController:controller animated:YES];
@@ -1007,7 +1002,7 @@
     if (textField == province) {
         LHPickerView *picker = [[LHPickerView alloc] init];
         [[UIApplication sharedApplication].keyWindow addSubview:picker];
-        picker.dataArray = [CarData readProvince];
+        picker.dataArray = [HttpRequest readProvince];
         picker.titleText = @"省份简称";
         [picker showPickerView];
         [picker returnResult:^(NSString *title, NSString *ID) {
@@ -1139,24 +1134,10 @@
     if ([string isEqualToString:@" "]) {
         return NO;
     }
-    if ([LHController stringContainsEmoji:string]) {
-        
-        return NO;
-    }
     return YES;
 }
 
 #pragma mark - UITextViewDelegate
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
-        if ([LHController stringContainsEmoji:text]) {
-        
-        return NO;
-    }
-    return YES;
-}
-- (void)textViewDidChange:(UITextView *)textView{
-}
-
 - (void)textViewDidChangeSelection:(UITextView *)textView{
     if (textView.text.length == 0) {
         textViewplaceholder.hidden = NO;

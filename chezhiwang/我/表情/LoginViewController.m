@@ -31,7 +31,7 @@
     B = [LHController setFont];
     self.navigationItem.title = @"登录";
     [self createScrollView];
-    [self createLeftItem];
+ 
     [self createRightItem];
     [self createField];
     [self createLogoin];
@@ -42,17 +42,6 @@
     _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT-64)];
     _scrollView.alwaysBounceVertical = YES;
     [self.view addSubview:_scrollView];
-}
-#pragma mark - 返回
--(void)createLeftItem{
-    if (self.navigationItem.leftBarButtonItem == nil) {
-        self.navigationItem.leftBarButtonItem = [LHController createLeftItemButtonWithTarget:self Action:@selector(itemLeftClick)];
-    }
-}
-
--(void)itemLeftClick{
-
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - 注册按钮
@@ -220,13 +209,6 @@
 #pragma mark - uitxetfieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [self.view endEditing:YES];
-    return YES;
-}
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if ([LHController stringContainsEmoji:string]){
-        return NO;
-    }
     return YES;
 }
 

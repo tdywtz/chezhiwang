@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface LHController : NSObject
 //设置字体
@@ -24,8 +25,7 @@
 +(BOOL)judegmentCarNum:(NSString *)str;
 #pragma mark - 判断时间大小
 +(BOOL)judgementWithDateOneSmall:(NSString *)dateOne andDateTwo:(NSString *)dateTwo;
-#pragma mark - 创建导航栏左侧返回按钮
-+(UIBarButtonItem *)createLeftItemButtonWithTarget:(id)target Action:(SEL)action;
+
 //complain2
 #pragma mark - 创建圆心选择按钮
 +(UIButton *)createButtnFram:(CGRect)frame Target:(id)target Action:(SEL)action;
@@ -43,15 +43,11 @@
 #pragma mark - 邮箱格式验证
 +(BOOL)emailTest:(NSString *)email;
 
-#pragma mark 属性化字符串
-+(NSAttributedString *)attributeSize:(NSString *)str Font:(CGFloat)size Must:(BOOL)must;
 #pragma mark - alertview
 +(void)alert:(NSString *)str;
-#pragma mark - 计算字符串size
-+(CGSize)getSizeWith:(NSString *)str Font:(CGFloat)font Size:(CGSize)size;
 
-#pragma mark - 判断输入文字是否含有表情字符
-+ (BOOL)stringContainsEmoji:(NSString *)string;
+//#pragma mark - 判断输入文字是否含有表情字符
+//+ (BOOL)stringContainsEmoji:(NSString *)string;
 //投诉item
 +(UIBarButtonItem *)createComplainItemWthFrame:(CGRect)frame Target:(id)target Action:(SEL)action;
 @end

@@ -23,7 +23,7 @@
     [super viewDidLoad];
    
     self.navigationItem.title = @"栏目论坛";
-    [self createLeftItem];
+   
     [self createTableView];
     
     [self createData];
@@ -37,14 +37,6 @@
         [_dataArray addObject:@{@"name":array1[i],@"cid":array2[i]}];
     }
     [_tableView reloadData];
-}
-
--(void)createLeftItem{
-    self.navigationItem.leftBarButtonItem = [LHController createLeftItemButtonWithTarget:self Action:@selector(leftItemClick)];
-}
-
--(void)leftItemClick{
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)createTableView{

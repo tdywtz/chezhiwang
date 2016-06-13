@@ -12,7 +12,8 @@
 #import "UMSocial.h"
 #import "CustomCommentView.h"
 
-@interface ComplainDetailsViewController ()<UITextViewDelegate>
+
+@interface ComplainDetailsViewController ()
 {
     UIScrollView *scrollView;
     UIView *sview;
@@ -24,8 +25,13 @@
     
     CGFloat B;
     CustomActivity *activity;
-//    LHLabel *parameterLabel;//参数
+    
+    CZWLabel *titleLabel;
+    CZWLabel *parameterLabel;//参数
 }
+@property (nonatomic,strong) UIScrollView *scrollView;
+@property (strong,nonatomic) UIView *contentView;
+
 @end
 
 @implementation ComplainDetailsViewController
@@ -61,7 +67,7 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    [self createLaftItem];
+  
     [self createRightItems];
      [self createBgView];
     [self createScrollView];
@@ -88,14 +94,6 @@
         shareView.frame = CGRectMake(0, HEIGHT, WIDTH, 260);
        
     }];
-}
-
--(void)createLaftItem{
-    self.navigationItem.leftBarButtonItem = [LHController createLeftItemButtonWithTarget:self Action:@selector(leftItemClick)];
-}
-
--(void)leftItemClick{
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)createRightItems{
@@ -585,14 +583,6 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
-#pragma mark - UITextViewDelegate
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
-    if ([LHController stringContainsEmoji:text]){
-        return NO;
-    }
-    return YES;
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

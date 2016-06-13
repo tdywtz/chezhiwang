@@ -12,28 +12,18 @@
 @interface EditImageViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,UIScrollViewDelegate>
 {
     UICollectionView *_collectionView;
-   // NSInteger _index;
+
 }
 @end
 
 @implementation EditImageViewController
 
-//- (instancetype)init
-//{
-//    self = [super init];
-//    if (self) {
-//        self.imageArray = [[NSMutableArray alloc] init];
-//    }
-//    return self;
-//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
    
     self.view.backgroundColor  = [UIColor whiteColor];
-//    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-//    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-    [self createLeftItem];
+
     [self createRightItem];
     [self createCollcetionView];
     
@@ -46,14 +36,6 @@
 
     });
     
-}
-
--(void)createLeftItem{
-    self.navigationItem.leftBarButtonItem = [LHController createLeftItemButtonWithTarget:self Action:@selector(leftItemClick)];
-}
-
--(void)leftItemClick{
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)createRightItem{

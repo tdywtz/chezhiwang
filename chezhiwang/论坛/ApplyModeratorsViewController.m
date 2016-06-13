@@ -75,7 +75,7 @@
     _sizeFont = [LHController setFont];
    
     [self createArray];
-    [self createLeftItem];
+  
     [self makeUI];
     [self createNotifacation];
     [self createChangPickView];
@@ -88,14 +88,6 @@
     _pickDataArray = [[NSMutableArray alloc] init];
     provinceArray = [[NSMutableArray alloc] init];
     brandArray = [[NSMutableArray alloc] init];
-}
-
--(void)createLeftItem{
-    self.navigationItem.leftBarButtonItem = [LHController createLeftItemButtonWithTarget:self Action:@selector(leftItemClick)];
-}
-
--(void)leftItemClick{
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 
@@ -648,21 +640,8 @@
     return YES;
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if ([LHController stringContainsEmoji:string]){
-        return NO;
-    }
-    return YES;
-}
 
 #pragma mark - UITextViewDelegate
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
-    if ([LHController stringContainsEmoji:text]){
-        return NO;
-    }
-    return YES;
-}
-
 - (void)textViewDidChangeSelection:(UITextView *)textView{
     if (textView.text.length == 0) {
         textViewplaceholder.hidden = NO;

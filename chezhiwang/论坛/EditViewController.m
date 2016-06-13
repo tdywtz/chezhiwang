@@ -31,7 +31,7 @@
     [super viewDidLoad];
    
     self.view.backgroundColor  = [UIColor whiteColor];
-    [self createLeftItem];
+
     [self createRightItem];
     [self createCollcetionView];
     
@@ -43,14 +43,6 @@
         _collectionView.contentOffset = CGPointMake(WIDTH*self.index, 0);
 
     });
-}
-
--(void)createLeftItem{
-    self.navigationItem.leftBarButtonItem = [LHController createLeftItemButtonWithTarget:self Action:@selector(leftItemClick)];
-}
-
--(void)leftItemClick{
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)createRightItem{
