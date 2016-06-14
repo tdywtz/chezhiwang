@@ -55,6 +55,20 @@
     self.viewControllers  = @[n1,n2,n3,n4,n5];
    
     [self createCustomTabBar];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        UIImageView *iamgeView = [[UIImageView alloc] initWithImage:[self convertViewToImage:self.view]];
+        [self.view addSubview:iamgeView];
+    });
+  
+}
+-(UIImage *)convertViewToImage:(UIView *)view
+{
+    UIGraphicsBeginImageContext(view.bounds.size);
+    [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:YES];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
 }
 
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item{

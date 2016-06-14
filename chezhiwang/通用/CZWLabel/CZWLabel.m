@@ -49,6 +49,7 @@
 - (BOOL)canBecomeFirstResponder{
     return YES;
 }
+
 //"反馈"关心的功能，即放出你需要的功能，比如你要放出copy，你就返回YES，否则返回NO；
 -(BOOL)canPerformAction:(SEL)action withSender:(id)sender{
     
@@ -64,7 +65,6 @@
     UIPasteboard *pboard = [UIPasteboard generalPasteboard];
     pboard.string = self.text;
 }
-
 
 -(void)attachTapHandler{
   // self.userInteractionEnabled =YES;  //用户交互的总开关
@@ -112,6 +112,7 @@
 
 #pragma mark - add
 -(void)addattributeName{
+ 
     NSRange range = NSMakeRange(0, self.attributeString.length);
     [self.attributeString addAttribute:NSForegroundColorAttributeName value:self.textColor range:range];
     [self.attributeString addAttribute:NSFontAttributeName value:self.font range:range];
@@ -126,7 +127,7 @@
     self.parapgStyle.paragraphSpacingBefore = self.paragraphSpacingBefore;
     
     [self.attributeString addAttribute:NSParagraphStyleAttributeName value:self.parapgStyle range:range];
-    
+
   //  [self.attributeString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Snell Roundhand" size:15] range:range];
 
 }

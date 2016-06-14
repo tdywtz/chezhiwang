@@ -29,7 +29,6 @@
     CZWLabel *titleLabel;
     CZWLabel *parameterLabel;//参数
 }
-@property (nonatomic,strong) UIScrollView *scrollView;
 @property (strong,nonatomic) UIView *contentView;
 
 @end
@@ -41,12 +40,10 @@
     [shareView removeFromSuperview];
     [sview removeFromSuperview];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
 }
 
 -(void)loadDataOne{
     
-
     NSString *url = [NSString stringWithFormat:[URLFile urlStringForComplain],_cid];
    [HttpRequest GET:url success:^(id responseObject) {
  
@@ -69,7 +66,7 @@
     
   
     [self createRightItems];
-     [self createBgView];
+    [self createBgView];
     [self createScrollView];
     [self createFootView];
     

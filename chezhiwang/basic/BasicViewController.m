@@ -66,6 +66,15 @@
    [self.navigationController popViewControllerAnimated:YES];
 }
 
+
+-(UIScrollView *)scrollView{
+    if (_scrollView == nil) {
+        _scrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
+        [self.view addSubview:_scrollView];
+    }
+    return _scrollView;
+}
+
 - (UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleLightContent;
 }

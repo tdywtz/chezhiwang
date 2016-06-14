@@ -7,7 +7,9 @@
 //
 
 #import "BasicViewController.h"
-
+/**
+ *  投诉详情
+ */
 @interface ComplainDetailsViewController : BasicViewController
 
 @property (nonatomic,copy) NSString *cid;

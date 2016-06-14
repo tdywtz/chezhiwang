@@ -10,6 +10,8 @@
 
 @interface BasicViewController : UIViewController
 
+@property (nonatomic,strong) UIScrollView *scrollView;
+
 -(void)createLeftItemBack;
 
 @end
