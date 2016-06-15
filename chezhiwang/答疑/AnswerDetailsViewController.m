@@ -12,6 +12,7 @@
 {
     CGFloat A;
 }
+@property (nonatomic,strong) NSDictionary *dict;
 @end
 
 @implementation AnswerDetailsViewController

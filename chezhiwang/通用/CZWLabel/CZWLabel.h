@@ -18,22 +18,21 @@
 @property (nonatomic,assign) CGFloat          characterSpace;
 
 //段落样式
-///**换行模式*/
-//@property (nonatomic,assign)    NSLineBreakMode lineBreakMode;
 /**行距*/
-@property (nonatomic,assign)    CGFloat         lineSpacing;
+@property (nonatomic,assign)    CGFloat         linesSpacing;
 /**段落距离*/
-@property(NS_NONATOMIC_IOSONLY) CGFloat         paragraphSpacing;
-/**对其方式*/
-@property(NS_NONATOMIC_IOSONLY) NSTextAlignment alignment;
+@property(nonatomic,assign) CGFloat         paragraphSpacing;
 /** 段落首行距离左边长度*/
-@property(NS_NONATOMIC_IOSONLY) CGFloat         firstLineHeadIndent;
+@property(nonatomic,assign) CGFloat         firstLineHeadIndent;
 /**除去首行段落距离左边长度 */
-@property(NS_NONATOMIC_IOSONLY) CGFloat         headIndent;
+@property(nonatomic,assign) CGFloat         headIndent;
 /**段落宽度*/
-@property(NS_NONATOMIC_IOSONLY) CGFloat         tailIndent;
+@property(nonatomic,assign) CGFloat         tailIndent;
 /**段落前空白距离*/
-@property(NS_NONATOMIC_IOSONLY) CGFloat         paragraphSpacingBefore;
+@property(nonatomic,assign) CGFloat         paragraphSpacingBefore;
 
 - (void)addColor:(UIColor *)color range:(NSRange)range;
+- (void)insertImage:(UIImage *)image size:(CGSize)size index:(NSInteger)index;
+- (void)addImage:(UIImage *)image size:(CGSize)size range:(NSRange)range;
+
 @end

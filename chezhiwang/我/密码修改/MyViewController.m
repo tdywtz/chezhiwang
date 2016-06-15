@@ -84,7 +84,7 @@
     }else{
         _dataArray = @[
                        @[
-                           @{@"class":@"MyCarViewController",@"title":@"",@"imageName":@"defaultImage_icon"}
+                       @{@"class":@"MyCarViewController",@"title":@"",@"imageName":@"defaultImage_icon"}
                            ],
                        @[
                            @{@"class":@"MyComplainViewController",@"title":@"我的投诉",@"imageName":@"center_complain"},
@@ -178,6 +178,7 @@
         }
         return cell;
     }
+    
     //
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"centerCell"];
     if (!cell) {

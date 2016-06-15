@@ -6,8 +6,14 @@
 //  Copyright (c) 2015年 车质网. All rights reserved.
 //
 
-#import "ComplainDetailsViewController.h"
+#import "BasicViewController.h"
+/**
+ *  答疑详情页
+ */
+@interface AnswerDetailsViewController : BasicViewController
 
-@interface AnswerDetailsViewController : ComplainDetailsViewController
+@property (nonatomic,copy) NSString *cid;
+@property (nonatomic,copy) NSString *textTitle;
+@property (nonatomic,copy) NSString *type;
 
 @end

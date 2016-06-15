@@ -35,7 +35,7 @@
 /** - 自定义按钮*/
 +(UIButton *)createButtnFram:(CGRect)frame Target:(id)target Action:(SEL)action Text:(NSString *)text;
 
-#pragma mark --创建Label
+/** - --创建Label*/
 +(UILabel*)createLabelWithFrame:(CGRect)frame Font:(CGFloat)font Bold:(BOOL)bold TextColor:(UIColor *)color Text:(NSString*)text;
 #define mark - 创建图片控制器
 +(UIImageView *)createImageViewWithFrame:(CGRect)frame ImageName:(NSString *)name;

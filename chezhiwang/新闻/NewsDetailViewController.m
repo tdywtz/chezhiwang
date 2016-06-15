@@ -11,6 +11,7 @@
 #import "LoginViewController.h"
 #import "CommentListViewController.h"
 #import "CustomCommentView.h"
+#import "CZWShareViewController.h"//分享
 
 @interface NewsDetailViewController ()<UIWebViewDelegate>
 {
@@ -174,7 +175,18 @@
 
 -(void)rightItemClick:(UIButton *)btn{
     if (btn.tag == 100) {
-        [self createShare];
+        //[self createShare];
+        
+        CZWShareViewController *share = [[CZWShareViewController alloc] initWithParentViewController:self];
+        share.shareUrl = self.dictionary[@"url"];
+        share.shareImage = [UIImage imageNamed:@"Icon-60"];
+        NSString *html = [_webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerText"];
+        if (html.length > 100) html = [html substringToIndex:99];
+        share.shareContent = html;
+        share.shareTitle = self.titleLabelText;
+        [share setBluffImageWithView:[UIApplication sharedApplication].keyWindow.rootViewController.view];
+        [self presentViewController:share animated:YES completion:nil];
+
     }else{
         btn.selected = !btn.selected;
         if (btn.selected) {

@@ -37,7 +37,7 @@
 -(void)setUp{
     self.numberOfLines = 0;
     self.lineBreakMode = NSLineBreakByCharWrapping;
-    self.alignment = NSTextAlignmentLeft;
+    self.textAlignment = NSTextAlignmentLeft;
     self.backgroundColor = [UIColor clearColor];
     self.textInsets = UIEdgeInsetsZero;
    //添加手势
@@ -49,7 +49,6 @@
 - (BOOL)canBecomeFirstResponder{
     return YES;
 }
-
 //"反馈"关心的功能，即放出你需要的功能，比如你要放出copy，你就返回YES，否则返回NO；
 -(BOOL)canPerformAction:(SEL)action withSender:(id)sender{
     
@@ -65,6 +64,7 @@
     UIPasteboard *pboard = [UIPasteboard generalPasteboard];
     pboard.string = self.text;
 }
+
 
 -(void)attachTapHandler{
   // self.userInteractionEnabled =YES;  //用户交互的总开关
@@ -112,14 +112,14 @@
 
 #pragma mark - add
 -(void)addattributeName{
- 
+    [_attributeString beginEditing];
     NSRange range = NSMakeRange(0, self.attributeString.length);
     [self.attributeString addAttribute:NSForegroundColorAttributeName value:self.textColor range:range];
     [self.attributeString addAttribute:NSFontAttributeName value:self.font range:range];
     [self.attributeString addAttribute:NSKernAttributeName value:@(self.characterSpace) range:range];
-    self.parapgStyle.lineSpacing =  self.lineSpacing;
+    self.parapgStyle.lineSpacing =  self.linesSpacing;
     self.parapgStyle.paragraphSpacing = self.paragraphSpacing;
-    self.parapgStyle.alignment = self.alignment;
+    self.parapgStyle.alignment = self.textAlignment;
     self.parapgStyle.firstLineHeadIndent = self.firstLineHeadIndent;
     self.parapgStyle.headIndent = self.headIndent;
     self.parapgStyle.tailIndent = self.tailIndent;
@@ -127,8 +127,7 @@
     self.parapgStyle.paragraphSpacingBefore = self.paragraphSpacingBefore;
     
     [self.attributeString addAttribute:NSParagraphStyleAttributeName value:self.parapgStyle range:range];
-
-  //  [self.attributeString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Snell Roundhand" size:15] range:range];
+    [_attributeString endEditing];
 
 }
 
@@ -151,69 +150,32 @@
     self.attributedText = self.attributeString;
 }
 
-////接受触摸事件
-//-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-//    //获取UITouch对象
-//
-//    UITouch *touch = [touches anyObject];
-//    //获取触摸点击当前view的坐标位置
-//    CGPoint location = [touch locationInView:self];
-//    NSLog(@"touch:%@",NSStringFromCGPoint(location));
-//    //获取每一行
-//    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)[self.attributeString copy]);
-//    CGRect insetRect = UIEdgeInsetsInsetRect(self.bounds, self.textInsets);
-//    CTFrameRef _frame = [self createFrameRefWithFramesetter:framesetter textSize:insetRect.size];
-//    CFArrayRef lines = CTFrameGetLines(_frame);
-//    CGPoint origins[CFArrayGetCount(lines)];
-//    //获取每行的原点坐标
-//    CTFrameGetLineOrigins(_frame, CFRangeMake(0, 0), origins);
-//    CTLineRef line = NULL;
-//    CGPoint lineOrigin = CGPointZero;
-//    for (int i= 0; i < CFArrayGetCount(lines); i++)
-//    {
-//        CGPoint origin = origins[i];
-//        CGPathRef path = CTFrameGetPath(_frame);
-//        //获取整个CTFrame的大小
-//        CGRect rect = CGPathGetBoundingBox(path);
-//      //  NSLog(@"origin:%@",NSStringFromCGPoint(origin));
-//       // NSLog(@"rect:%@",NSStringFromCGRect(rect));
-//        //坐标转换，把每行的原点坐标转换为uiview的坐标体系
-//        CGFloat y = self.frame.size.height - rect.size.height - origin.y;
-//       // NSLog(@"y:%f",y);
-//        //判断点击的位置处于那一行范围内
-//        if ((location.y <= y) && (location.x >= origin.x))
-//        {
-//            line = CFArrayGetValueAtIndex(lines, i);
-//            lineOrigin = origin;
-//            break;
-//        }
-//    }
-//    
-//    location.x -= lineOrigin.x;
-//   
-//    //获取点击位置所处的字符位置，就是相当于点击了第几个字符
-//    CFIndex index = CTLineGetStringIndexForPosition(line, location);
-//    NSLog(@"index:%ld",index);
-//    //判断点击的字符是否在需要处理点击事件的字符串范围内，这里是hard code了需要触发事件的字符串范围
-//    if (index>=0&&index<=3) {
-//        NSLog(@"asdf");
-//    }
-//    CFRelease(_frame);
-//    CFRelease(framesetter);
-//}
-//
-//
-//#pragma mark -
-//-  (CTFrameRef)createFrameRefWithFramesetter:(CTFramesetterRef)framesetter textSize:(CGSize)textSize
+- (void)insertImage:(UIImage *)image size:(CGSize)size index:(NSInteger)index{
+    NSTextAttachment *achment = [[NSTextAttachment alloc] init];
+    achment.image = image;
+    achment.bounds = CGRectMake(0, 0, size.width, size.height);
+    NSAttributedString *att = [NSAttributedString attributedStringWithAttachment:achment];
+    [self.attributeString insertAttributedString:att atIndex:index];
+     self.attributedText = self.attributeString;
+}
+
+- (void)addImage:(UIImage *)image size:(CGSize)size range:(NSRange)range{
+    NSTextAttachment *achment = [[NSTextAttachment alloc] init];
+    achment.image = image;
+    achment.bounds = CGRectMake(0, 0, size.width, size.height);
+    NSAttributedString *att = [NSAttributedString attributedStringWithAttachment:achment];
+    [self.attributeString replaceCharactersInRange:range withAttributedString:att];
+    self.attributedText = self.attributeString;
+}
+
+//- (NSString *)spaceReplaceString
 //{
-//    // 这里你需要创建一个用于绘制文本的路径区域,通过 self.bounds 使用整个视图矩形区域创建 CGPath 引用。
-//    CGMutablePathRef path = CGPathCreateMutable();
-//    CGPathAddRect(path, NULL, CGRectMake(self.textInsets.left , self.textInsets.top, textSize.width, textSize.height));
-//    
-//    CTFrameRef frameRef = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, [self.attributeString length]), path, NULL);
-//    CFRelease(path);
-//    return frameRef;
+//    // 替换字符
+//    unichar objectReplacementChar           = 0xFFFC;
+//    NSString *objectReplacementString       = [NSString stringWithCharacters:&objectReplacementChar length:1];
+//    return objectReplacementString;
 //}
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

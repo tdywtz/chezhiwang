@@ -20,7 +20,7 @@
 {
     self = [super init];
     if (self) {
-        self.backgroundColor = [UIColor blackColor];
+        self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.9];
         //隐藏阴影线
         [[UITabBar appearance] setShadowImage:[UIImage new]];
         [[UITabBar appearance] setBackgroundImage:[[UIImage alloc]init]];
