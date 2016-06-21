@@ -70,6 +70,7 @@
 -(UIScrollView *)scrollView{
     if (_scrollView == nil) {
         _scrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
+        _scrollView.alwaysBounceVertical = YES;
         [self.view addSubview:_scrollView];
     }
     return _scrollView;

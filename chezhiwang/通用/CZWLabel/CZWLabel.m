@@ -7,8 +7,6 @@
 //
 
 #import "CZWLabel.h"
-#import <CoreText/CoreText.h>
-
 
 @interface CZWLabel()<UIGestureRecognizerDelegate>
 

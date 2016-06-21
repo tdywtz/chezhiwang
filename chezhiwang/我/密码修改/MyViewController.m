@@ -16,10 +16,6 @@
 #import "MyCarViewController.h"
 #import "LoginViewController.h"
 
-
-#define bidui @"bidui"//tiwen
-#define bidui_com @"biduiComolain"//toshu
-
 @interface MyViewController ()<UIAlertViewDelegate,UITableViewDataSource,UITableViewDelegate>
 {
     

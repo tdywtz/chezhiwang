@@ -154,7 +154,7 @@
     [self.view addSubview:scrollView];
 }
 
-#pragma mark - 数据显示
+#pragma mark -
 -(void)createScrollViewSubViews{
     
     self.contentView = [[UIView alloc] init];
@@ -177,7 +177,6 @@
     UILabel *complainTitle = [LHController createLabelWithFrame:CGRectZero Font:B-3 Bold:NO TextColor:colorLightGray Text:@"投诉内容："];
     
     questionContent = [[CZWLabel alloc] init];
-    questionContent.linesSpacing = 3;
    // questionContent.paragraphSpacing = 50;
     questionContent.firstLineHeadIndent = 28;
     questionContent.textColor = colorDeepGray;

@@ -11,99 +11,137 @@
 @interface AnswerDetailsViewController ()
 {
     CGFloat A;
+    CZWLabel *titleLabel;//标题
+    UILabel *questionDate;//问题时间
+    CZWLabel *questionContent;//问题内容
+    
+    CZWLabel *answerContent;//回复内容
+    UILabel *answerDate;//回复时间
 }
+@property (strong,nonatomic) UIView *contentView;
 @property (nonatomic,strong) NSDictionary *dict;
+
 @end
 
 @implementation AnswerDetailsViewController
 -(void)loadDataOne{
-    CustomActivity *activity = [self valueForKey:@"activity"];
 
-    NSString *url = [NSString stringWithFormat:[URLFile urlStringForGetZJDY],self.cid];
+   
+NSString *url = [NSString stringWithFormat:[URLFile urlStringForGetZJDY],self.cid];
+   
   [HttpRequest GET:url success:^(id responseObject) {
       self.dict = responseObject[0];
-      [self createScrollViewSubViews];
-      [activity animationStoping];
+     
+      questionContent.text = _dict[@"Content"];
+      questionDate.text = _dict[@"IssueDate"];
+      answerContent.text = _dict[@"Answer"];
+      answerDate.text = _dict[@"AnswerTime"];
+
+   
   } failure:^(NSError *error) {
-      [activity animationStoping];
+   
   }];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     A = [LHController setFont];
+    
+    [self createScrollViewSubViews];
+   [self loadDataOne];
 }
 
 #pragma mark - 数据显示
 -(void)createScrollViewSubViews{
-    UIScrollView *scrollView = [self valueForKey:@"scrollView"];
+    self.contentView = [[UIView alloc] init];
+    [self.scrollView addSubview:self.contentView];
+    [self.contentView makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(UIEdgeInsetsZero);
+        make.width.equalTo(WIDTH);
+    }];
     
-    CGSize textSize =[self.textTitle boundingRectWithSize:CGSizeMake(WIDTH-20, 1000) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:A]} context:nil].size;
+    titleLabel = [[CZWLabel alloc] init];
+    titleLabel.font = [UIFont systemFontOfSize:17];
+    titleLabel.text = self.textTitle;
+   
     
-    UILabel *titleLabel = [LHController createLabelWithFrame:CGRectMake(10, 30, WIDTH-20, textSize.height) Font:A Bold:NO TextColor:nil Text:self.textTitle];
-    titleLabel.numberOfLines = 0;
-    titleLabel.textAlignment = NSTextAlignmentCenter;
-    [scrollView addSubview:titleLabel];
-    
-    UILabel *complainTitle = [LHController createLabelWithFrame:CGRectMake(15, titleLabel.frame.size.height+titleLabel.frame.origin.y+25, 80, 20) Font:A-3 Bold:NO TextColor:colorLightGray Text:@"网友提问:"];
-    [scrollView addSubview:complainTitle];
-    
-    
-    NSString *str1 = self.dict[@"Content"];
-    NSAttributedString *att1 = [self attString:str1 Font:A-3];
-    //计算高度
-    CGSize size = [att1 boundingRectWithSize:CGSizeMake(WIDTH-30, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil].size;
-    
-    UILabel *complainContent = [LHController createLabelWithFrame:CGRectMake(15, complainTitle.frame.origin.y+30, WIDTH-30, size.height) Font:A-3 Bold:NO TextColor:nil Text:str1];
-    complainContent.attributedText = att1;
-    [complainContent sizeToFit];
-    [scrollView addSubview:complainContent];
-    
-    UILabel *questionTime = [LHController createLabelWithFrame:CGRectMake(WIDTH-145, complainContent.frame.size.height+complainContent.frame.origin.y+20, 130, 20) Font:A-5 Bold:NO TextColor:colorLightGray Text:self.dict[@"IssueDate"]];
-    questionTime.textAlignment = NSTextAlignmentRight;
-    [scrollView addSubview:questionTime];
-    
-    UIView *fg2 = [[UIView alloc] initWithFrame:CGRectMake(15, questionTime.frame.size.height+questionTime.frame.origin.y+10, WIDTH-30, 1)];
-    fg2.backgroundColor = colorLineGray;
-    [scrollView addSubview:fg2];
-    
-    UILabel *answer = [LHController createLabelWithFrame:CGRectMake(15, fg2.frame.origin.y+15, 80, 20) Font:A-3 Bold:NO TextColor:colorLightGray Text:@"专家答复:"];
-    [scrollView addSubview:answer];
-    
-    
-    NSString *str2 = self.dict[@"Answer"];
-    
-    NSAttributedString *att2 = [self attString:str2 Font:A-3];
-    CGSize size2 = [att2 boundingRectWithSize:CGSizeMake(WIDTH-30, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil].size;
-    
-    UILabel *answerContent = [LHController createLabelWithFrame:CGRectMake(15, answer.frame.origin.y+30, WIDTH-30, size2.height) Font:A-3 Bold:NO TextColor:nil Text:str2];
-    answerContent.attributedText = att2;
-    [answerContent sizeToFit];
-    [scrollView addSubview:answerContent];
-    
-    UILabel *answerTime = [LHController createLabelWithFrame:CGRectMake(WIDTH-145, answerContent.frame.origin.y+answerContent.frame.size.height+10, 130, 20) Font:A-5 Bold:NO TextColor:colorLightGray Text:self.dict[@"AnswerTime"]];
-    answerTime.textAlignment = NSTextAlignmentRight;
-    [scrollView addSubview:answerTime];
-    
-    scrollView.contentSize = CGSizeMake(0, answerTime.frame.origin.y+answerTime.frame.size.height+40);
-}
 
-#pragma mark - 属性化字符串
--(NSAttributedString *)attString:(NSString *)str Font:(CGFloat)size{
-    if (!str) {
-        return nil ;
-    }
+    UILabel *questionTitle = [LHController createLabelWithFrame:CGRectZero Font:A-3 Bold:NO TextColor:colorLightGray Text:@"网友提问："];
     
-    NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:str];
-    [att addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:size] range:NSMakeRange(0, att.length)];
-    NSMutableParagraphStyle *syyle = [[NSMutableParagraphStyle alloc] init];
-    [syyle setLineSpacing:4];
-    [syyle setLineBreakMode:NSLineBreakByWordWrapping];
-    syyle.firstLineHeadIndent = 30;
+    questionContent = [[CZWLabel alloc] init];
+    questionContent.linesSpacing = 3;
+    questionContent.firstLineHeadIndent = 28;
+    questionContent.textColor = colorDeepGray;
+    questionContent.font = [UIFont systemFontOfSize:14];
     
-    [att addAttribute:NSParagraphStyleAttributeName value:syyle range:NSMakeRange(0, str.length)];
-    //[att addAttribute:NSKernAttributeName value:[NSNumber numberWithFloat:0.5] range:NSMakeRange(0,str.length)];
-    return att;
+    questionDate = [LHController createLabelWithFrame:CGRectZero Font:13 Bold:NO TextColor:colorLightGray Text:nil];
+    
+    UIView *lineView = [[UIView alloc] init];
+    lineView.backgroundColor = colorLineGray;
+    
+    UILabel *answerTitle = [LHController createLabelWithFrame:CGRectZero Font:A-3 Bold:NO TextColor:colorLightGray Text:@"专家答复："];
+    
+    answerContent = [[CZWLabel alloc] init];
+    answerContent.linesSpacing = 3;
+    answerContent.firstLineHeadIndent = 28;
+    answerContent.textColor = colorDeepGray;
+    answerContent.font = [UIFont systemFontOfSize:14];
+    
+    answerDate = [LHController createLabelWithFrame:CGRectZero Font:13 Bold:NO TextColor:colorLightGray Text:nil];
+    
+    [self.contentView addSubview:titleLabel];
+    [self.contentView addSubview:questionTitle];
+    [self.contentView addSubview:questionContent];
+    [self.contentView addSubview:questionDate];
+    [self.contentView addSubview:lineView];
+    [self.contentView addSubview:answerTitle];
+    [self.contentView addSubview:answerContent];
+    [self.contentView addSubview:answerDate];
+
+   [titleLabel makeConstraints:^(MASConstraintMaker *make) {
+       make.centerX.equalTo(0);
+       make.top.equalTo(20);
+       make.width.lessThanOrEqualTo(WIDTH-30);
+   }];
+    [questionTitle makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(15);
+        make.top.equalTo(titleLabel.bottom).offset(10);
+    }];
+    
+    [questionContent makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(questionTitle.bottom).offset(10);
+        make.left.equalTo(questionTitle);
+        make.right.equalTo(-15);
+    }];
+    
+    [questionDate makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(questionContent.bottom).offset(10);
+        make.right.equalTo(-15);
+    }];
+    
+    [lineView makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(0);
+        make.top.equalTo(questionDate.bottom).offset(10);
+        make.height.equalTo(1);
+    }];
+    
+    [answerTitle makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(lineView.bottom).offset(10);
+        make.left.equalTo(15);
+    }];
+    
+    [answerContent makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(15);
+        make.top.equalTo(answerTitle.bottom).offset(10);
+        make.right.equalTo(-15);
+    }];
+    
+    [answerDate makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(answerContent.bottom).offset(10);
+        make.right.equalTo(-15);
+        make.bottom.equalTo(-20);
+    }];
+    
 }
 
 #pragma  mark - 收藏

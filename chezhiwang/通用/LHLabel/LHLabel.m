@@ -10,7 +10,7 @@
 #import <CoreText/CoreText.h>
 
 static NSString* const kEllipsesCharacter = @"\u2026";
-NSString *const kTYTextRunAttributedName = @"TYTextRunAttributedName";
+NSString *const kTYTextRunAttributedName = @"KTYTextRunAttributedName";
 
 static inline CGFLOAT_TYPE CGFloat_ceil(CGFLOAT_TYPE cgfloat) {
 #if CGFLOAT_IS_DOUBLE

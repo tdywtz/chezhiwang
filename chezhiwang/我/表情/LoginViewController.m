@@ -191,7 +191,6 @@
        [UIView animateWithDuration:0.3 animations:^{
            [al dismissWithClickedButtonIndex:0 animated:YES];
        }];
-
    }];
 }
 
