@@ -466,6 +466,7 @@
 		4DD765D91BFB2A7100715B40 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DD765D81BFB2A7100715B40 /* Icon@2x.png */; };
 		4DD765DB1BFB2E5300715B40 /* Icon-57.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DD765DA1BFB2E5300715B40 /* Icon-57.png */; };
 		4DD79FB21C03F21700F9820C /* chooseImage_check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DD79FB11C03F21700F9820C /* chooseImage_check@2x.png */; };
+		4DDD33471D1A623800F52C0C /* UIFont+LH.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD33461D1A623800F52C0C /* UIFont+LH.m */; };
 		4DE011C51D07ACE6003A3681 /* MyCommentShowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DE011C41D07ACE6003A3681 /* MyCommentShowCell.m */; };
 		4DE011C81D07C487003A3681 /* MyComplainShowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DE011C71D07C487003A3681 /* MyComplainShowCell.m */; };
 		4DE1C7F41CAA1ABE008B0A8A /* NSMutableAttributedString+CZWMutableAttributedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DE1C7F11CAA1ABE008B0A8A /* NSMutableAttributedString+CZWMutableAttributedString.m */; };
@@ -1182,6 +1183,8 @@
 		4DD765D81BFB2A7100715B40 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		4DD765DA1BFB2E5300715B40 /* Icon-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-57.png"; sourceTree = "<group>"; };
 		4DD79FB11C03F21700F9820C /* chooseImage_check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chooseImage_check@2x.png"; sourceTree = "<group>"; };
+		4DDD33451D1A623800F52C0C /* UIFont+LH.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+LH.h"; sourceTree = "<group>"; };
+		4DDD33461D1A623800F52C0C /* UIFont+LH.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+LH.m"; sourceTree = "<group>"; };
 		4DE011C31D07ACE6003A3681 /* MyCommentShowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCommentShowCell.h; sourceTree = "<group>"; };
 		4DE011C41D07ACE6003A3681 /* MyCommentShowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCommentShowCell.m; sourceTree = "<group>"; };
 		4DE011C61D07C487003A3681 /* MyComplainShowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyComplainShowCell.h; sourceTree = "<group>"; };
@@ -2454,6 +2457,8 @@
 				4DCAD2C91CEC2A5A00A539B2 /* UIImage+LH.m */,
 				4DCAD2CB1CEC2A8E00A539B2 /* UIViewController+LH.h */,
 				4DCAD2CC1CEC2A8E00A539B2 /* UIViewController+LH.m */,
+				4DDD33451D1A623800F52C0C /* UIFont+LH.h */,
+				4DDD33461D1A623800F52C0C /* UIFont+LH.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -2938,6 +2943,7 @@
 				4D04B7021D01118400D1DB97 /* MyTabbar.m in Sources */,
 				4D9A3F5B1B9E7255008805E4 /* FMResultSet.m in Sources */,
 				4D41862D1D0FF66500C9802C /* POPPropertyAnimation.mm in Sources */,
+				4DDD33471D1A623800F52C0C /* UIFont+LH.m in Sources */,
 				4D2DE5431CDB2AAA001B7B86 /* RevokeComplainViewController.m in Sources */,
 				4D0A8EE71CF2E7D9001BC612 /* ComplainChartViewController.m in Sources */,
 				4DBF164D1CF5421500D5ADF7 /* SVIndefiniteAnimatedView.m in Sources */,

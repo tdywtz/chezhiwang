@@ -35,10 +35,11 @@
             self.bounds = CGRectMake(0, 0, button.frame.origin.x+button.frame.size.width, button.frame.size.height);
         }
     }
-    
+    self.backgroundColor = [UIColor blackColor];
 }
 
 - (void)buttonClick:(UIButton *)btn{
+    
     if (self.click) {
         self.click(btn.titleLabel.text);
     }
@@ -52,7 +53,7 @@
 @implementation MyComplainShowCell
 {
     UILabel *stateLabel;
-    UILabel *stepLabel;
+    LHLabel *stepLabel;
     ButtonView *btnView;
 }
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -72,15 +73,17 @@
     stateLabel.font = [UIFont systemFontOfSize:15];
     stateLabel.numberOfLines = 0;
     
-    stepLabel = [[UILabel alloc] init];
+    stepLabel = [[LHLabel alloc] init];
     stepLabel.textColor = colorDeepGray;
     stepLabel.font = [UIFont systemFontOfSize:12];
+    stepLabel.paragraphSpacing = 4;
     stepLabel.numberOfLines = 0;
     
     btnView = [[ButtonView alloc] init];
    
     __weak __typeof(self)weakSelf = self;
     btnView.click = ^(NSString *title){
+       
         __strong __typeof(weakSelf) strongSelf = weakSelf;
         if ([title isEqualToString:@"查看详情"]) {
             MyComplainDetailsViewController *cp = [[MyComplainDetailsViewController alloc] init];
@@ -113,6 +116,7 @@
         make.right.equalTo(-10);
     }];
     
+    stepLabel.preferredMaxLayoutWidth = WIDTH-20;
     [stepLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(stateLabel);
         make.top.equalTo(stateLabel.bottom).offset(15);

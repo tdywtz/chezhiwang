@@ -25,21 +25,20 @@
 @end
 
 @implementation CustomTabBarController
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
-    [self setValue:[[MyTabbar alloc] init] forKey:@"_tabBar"];
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-       
-    }
-    return self;
-   
-}
+//- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
+//    [self setValue:[[MyTabbar alloc] init] forKey:@"_tabBar"];
+//    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+//       
+//    }
+//    return self;
+//   
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
     self.delegate = self;
- 
+    
     NewsViewController             *news = [[NewsViewController alloc] init];
     ComplainListViewController *complain = [[ComplainListViewController alloc] init];
     AnswerViewController         *answer = [[AnswerViewController alloc] init];
@@ -65,27 +64,9 @@
 }
 
 
-
-- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item{
-    int i = 0;
-    for (UIView *view in tabBar.subviews) {
-      NSString *classString =  NSStringFromClass([view class]);
-      //  NSClassFromString(<#NSString * _Nonnull aClassName#>)
-        if ([classString isEqualToString:@"UITabBarButton"]) {
-            if (i == 2) {
-                view.backgroundColor = [UIColor whiteColor];
-            }
-            
-             NSLog(@"%@", view.superclass);
-            i ++;
-        }
-       
-    }
-}
-
 //处理 UITabBarItem
 -(void)createCustomTabBar{
-  //  self.tabBar.barTintColor = colorLightBlue;
+    self.tabBar.barTintColor = colorLightBlue;
     
     custommoveView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tabBar.bounds.size.width/self.viewControllers.count, self.tabBar.bounds.size.height)];
     custommoveView.backgroundColor  = colorDeepBlue;

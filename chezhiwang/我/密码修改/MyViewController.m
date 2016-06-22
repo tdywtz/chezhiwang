@@ -76,8 +76,10 @@
                            @{@"class":@"FavouriteViewController",@"title":@"我的收藏",@"imageName":@"center_favorite"}
                            ],
                        ];
+        _tableView.tableFooterView.hidden = YES;
 
     }else{
+         _tableView.tableFooterView.hidden = NO;
         _dataArray = @[
                        @[
                        @{@"class":@"MyCarViewController",@"title":@"",@"imageName":@"defaultImage_icon"}
@@ -91,9 +93,6 @@
                        @[
                            @{@"class":@"PasswordViewController",@"title":@"密码修改",@"imageName":@"center_password"}
                            ],
-                       @[
-                           @{@"class":@"退出按钮",@"title":@"",@"imageName":@"退出按钮"}
-                           ]
                        ];
 
     }
@@ -106,6 +105,15 @@
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
+    
+    
+    UIView *tableFootView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 80)];
+    UIButton *btn = [LHController createButtnFram:CGRectZero Target:self Action:@selector(logoutClick) Font:15 Text:@"退出登录"];
+    [tableFootView addSubview:btn];
+    [btn makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(UIEdgeInsetsMake(20, 15, 20, 15));
+    }];
+    _tableView.tableFooterView = tableFootView;
 }
 
 
@@ -175,45 +183,52 @@
         return cell;
     }
     
-    //
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"centerCell"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"centerCell"];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        UILabel *label = [[UILabel alloc ] init];
-        label.font = [UIFont systemFontOfSize:15];
-        label.textColor = colorLightGray;
-        label.tag = 100;
-        [cell.contentView addSubview:label];
-        [label makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(-4);
-            make.centerY.equalTo(0);
-        }];
-    }
-    NSDictionary *dict = _dataArray[indexPath.section][indexPath.row];
-    cell.imageView.image = [UIImage imageNamed:dict[@"imageName"]];
-    cell.textLabel.text = dict[@"title"];
-
-    UILabel *label = (UILabel *)[cell.contentView viewWithTag:100];
-    if (indexPath.section == 1) {
-        if (indexPath.row == 0) {
-            label.text = numDictonary[@"complain"];
-        }else if (indexPath.row == 1){
-            label.text = numDictonary[@"question"];
-        }else if (indexPath.row == 2){
-            label.text = numDictonary[@"discuss"];
-        }else if (indexPath.row == 3){
-            label.text = [NSString stringWithFormat:@"%ld",(long)[[FmdbManager shareManager] selectCollectNumber]];
-            
+        
+        //
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"centerCell"];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"centerCell"];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            UILabel *label = [[UILabel alloc ] init];
+            label.font = [UIFont systemFontOfSize:15];
+            label.textColor = colorLightGray;
+            label.tag = 100;
+            [cell.contentView addSubview:label];
+            [UIFont asynchronouslySetFontName:[UIFont fontNameSTXingkai_SC_Bold] success:^(NSString *name) {
+                cell.textLabel.font = [UIFont fontWithName:name size:18];
+            }];
+            [label makeConstraints:^(MASConstraintMaker *make) {
+                make.right.equalTo(-4);
+                make.centerY.equalTo(0);
+            }];
         }
-    }else{
-        label.text = @"";
-    }
-
-    return cell;
+        NSDictionary *dict = _dataArray[indexPath.section][indexPath.row];
+        cell.imageView.image = [UIImage imageNamed:dict[@"imageName"]];
+        cell.textLabel.text = dict[@"title"];
+        
+        UILabel *label = (UILabel *)[cell.contentView viewWithTag:100];
+       
+            if (indexPath.row == 0) {
+                label.text = numDictonary[@"complain"];
+            }else if (indexPath.row == 1){
+                label.text = numDictonary[@"question"];
+            }else if (indexPath.row == 2){
+                label.text = numDictonary[@"discuss"];
+            }else if (indexPath.row == 3){
+                label.text = [NSString stringWithFormat:@"%ld",(long)[[FmdbManager shareManager] selectCollectNumber]];
+                
+            }
+        
+        
+        return cell;
 }
 
+- (void)logoutClick{
+    [[NSUserDefaults standardUserDefaults]  removeObjectForKey:user_name];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self reloadData];
+}
 
 #pragma mark - UITableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -223,19 +238,27 @@
     return 44;
 }
 
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section != 0) {
         if (![[NSUserDefaults standardUserDefaults] objectForKey:user_name]) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                            message:@"您还未登陆，您可以登陆后进行操作"
-                                                           delegate:nil
-                                                  cancelButtonTitle:nil
-                                                  otherButtonTitles:@"确定", nil];
-            [alert show];
-            return;
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                                message:@"您还未登陆，您可以登陆后进行操作"
+                                                               delegate:nil
+                                                      cancelButtonTitle:nil
+                                                      otherButtonTitles:@"确定", nil];
+                [alert show];
+               
+
+            });
+             return;
         }
     }
     Class cls = NSClassFromString(_dataArray[indexPath.section][indexPath.row][@"class"]);
+    if (!cls) {
+        return;
+    }
     UIViewController *vc = [[cls alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];

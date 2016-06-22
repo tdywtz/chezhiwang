@@ -21,7 +21,7 @@
     if (self.navigationController.viewControllers.count > 1) {
         [self createLeftItemBack];
     }
-    [self setNagitionBar];
+   // [self setNagitionBar];
 }
 -(void)setNagitionBar{
     //    if (SYSTEM_VERSION_GREATER_THAN(8.0)) {
