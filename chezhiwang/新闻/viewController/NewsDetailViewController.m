@@ -84,7 +84,6 @@
             range = [newsContentHTML rangeOfString:@"<qqimg"];
             
         }
-        
         [_webView loadHTMLString:newsContentHTML baseURL:nil];
     } failure:^(NSError *error) {
          [activity animationStoping];

@@ -62,8 +62,8 @@ typedef NS_ENUM(NSInteger,ChartChooseType) {
 
 @property (nonatomic,assign,readonly) DirectionStyle direction;
 @property (nonatomic,assign,readonly) ChartChooseType type;
-@property (nonatomic,copy) void(^chooseEnd)(NSString *title);
-@property (nonatomic,copy) void(^chooseDeate)(NSString *date);
+@property (nonatomic,copy) void(^chooseEnd)(NSString *title , NSString *tid);
+@property (nonatomic,copy) void(^chooseDeate)(NSString *beginDate , NSString *endDate);
 
 -(instancetype)initWithType:(ChartChooseType)type direction:(DirectionStyle)direction;
 

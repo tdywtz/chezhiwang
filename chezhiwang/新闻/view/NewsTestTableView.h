@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+/**
+ *  新闻-评测-精品试驾
+ */
 @interface NewsTestTableView : UIView
 
 - (instancetype)initWithFrame:(CGRect)frame parentViewController:(UIViewController *)parent;

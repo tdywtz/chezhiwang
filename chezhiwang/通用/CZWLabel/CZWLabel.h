@@ -13,13 +13,13 @@
 @property (nonatomic,strong) NSMutableAttributedString *attributeString;
 
 //文字四周间距
-@property (nonatomic,assign) UIEdgeInsets     textInsets;
+@property (nonatomic,assign) UIEdgeInsets    textInsets;
 /**字距（0无效）*/
-@property (nonatomic,assign) CGFloat          characterSpace;
+@property (nonatomic,assign) CGFloat         characterSpace;
 
 //段落样式
 /**行距*/
-@property (nonatomic,assign) CGFloat         linesSpacing;
+@property (nonatomic,assign) CGFloat        linesSpacing;
 /**段落距离*/
 @property(nonatomic,assign) CGFloat         paragraphSpacing;
 /** 段落首行距离左边长度*/

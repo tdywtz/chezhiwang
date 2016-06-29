@@ -35,14 +35,14 @@
         [self.contentView addSubview:_percentageLabel];
      
         [_chartLabel makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(0);
+            make.top.bottom.equalTo(0);
             make.left.equalTo(25);
-            make.size.greaterThanOrEqualTo(CGSizeMake(20, 20));
+            make.size.greaterThanOrEqualTo(CGSizeMake(20, 44));
         }];
         
         [_brandLabel makeConstraints:^(MASConstraintMaker *make) {
             make.center.equalTo(CGPointZero);
-            make.width.lessThanOrEqualTo(100);
+            make.width.lessThanOrEqualTo(160);
         }];
         
         [_percentageLabel makeConstraints:^(MASConstraintMaker *make) {
@@ -52,6 +52,15 @@
         }];
     }
     return self;
+}
+
+- (void)setModel:(ComplainChartSecondModel *)model;{
+
+        _chartLabel.text = model.number;
+        _brandLabel.text = model.brandName;
+        _percentageLabel.text = model.percentage;
+
+  
 }
 
 - (void)awakeFromNib {

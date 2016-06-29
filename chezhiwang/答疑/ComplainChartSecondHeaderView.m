@@ -70,10 +70,11 @@
     
     [line makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(10);
-        make.right.equalTo(-10);
+        make.width.equalTo(self.frame.size.width-20);
         make.top.equalTo(CGRectGetHeight(self.frame)/2);
         make.height.equalTo(1);
     }];
+   
     [moveView makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(10);
         make.top.equalTo(CGRectGetHeight(self.frame)/2-2);
@@ -114,12 +115,14 @@
 
 
 -(void)buttonClick:(UIButton *)button{
-  
+    
+    _current = button.tag-100;
+    
     for (int i = 0; i < 3; i ++) {
         UIButton *btn = (UIButton *)[self viewWithTag:100+i];
         if ([btn isEqual:button]) {
             btn.selected = YES;
-          
+           
             [UIView animateWithDuration:0.2 animations:^{
                 [moveView remakeConstraints:^(MASConstraintMaker *make) {
                     make.left.equalTo(btn.left);
@@ -127,11 +130,16 @@
                     make.height.equalTo(2);
                     make.width.equalTo(btn.width);
                 }];
+                [moveView layoutIfNeeded];
             }];
             
         }else{
             btn.selected = NO;
         }
+    }
+    //回调
+    if (self.click) {
+        self.click(_current);
     }
 }
 /*

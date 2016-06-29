@@ -63,16 +63,26 @@
 }
 
 
-///**故障详情*/
-//+ (NSString *)urlStringForCarInfo{
-//    return [self stringWithBasic:@"act=CarInfo&id=%@"];
-//}
-//
-///**全部故障*/
-//+ (NSString *)urlStringForIssue{
-//    return [self stringWithBasic:@"act=issue&seriesID=%@&year=%@&count=%@"];
-//}
 
+#pragma mark - 投诉排行
+/**选择*/
++ (NSString *)urlString_rankingAct{
+    return @"http://192.168.1.114:8888/server/forAppWebService.ashx?act=rankingAct";
+}
+
+/**投诉排行列表*/
++ (NSString *)urlString_rankingList{
+    return @"http://192.168.1.114:8888/server/forAppWebService.ashx?act=rankingList&startTime=%@&endTime=%@&modelAttr=%@&brandAttr=%@&dep=%@&zlwt=%@";
+}
+
+/**回复率列表*/
++ (NSString *)urlString_rankingBotm{
+    return @"http://192.168.1.114:8888/server/forAppWebService.ashx?act=rankingBotm";
+}
+
+
+
+#pragma mark -投诉
 /**投诉列表*/
 + (NSString *)urlStringForZLTS{
     return [self stringWithBasic:@"act=zlts&p=%ld&s=%ld"];

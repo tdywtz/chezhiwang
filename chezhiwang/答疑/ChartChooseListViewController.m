@@ -9,6 +9,46 @@
 #import "ChartChooseListViewController.h"
 #import <objc/runtime.h>
 
+@interface ChartChooseModel : NSObject
+
+@property (nonatomic,copy) NSString *tid;
+@property (nonatomic,copy) NSString *title;
+
++ (NSArray *)initWithArray:(NSArray *)array type:(ChartChooseType)type;
+@end
+
+@implementation ChartChooseModel
+
++ (NSArray *)initWithArray:(NSArray *)array type:(ChartChooseType)type{
+    NSMutableArray *marr = [[NSMutableArray alloc] init];
+    
+    NSString *titleKey;
+    NSString *tidKey;
+    if (type == ChartChooseTypeAttributeBrand) {
+        titleKey = @"name";
+        tidKey   = @"brandAttr";
+    }else if (type == ChartChooseTypeAttributeModel){
+        titleKey = @"name";
+        tidKey   = @"modelAttr";
+    }else if (type == ChartChooseTypeAttributeSeries){
+        titleKey = @"name";
+        tidKey   = @"dep";
+    }else if (type == ChartChooseTypeQuality){
+        titleKey = @"name";
+        tidKey   = @"zlwt";
+    }
+    for (NSDictionary *dict in array) {
+        ChartChooseModel * model = [[ChartChooseModel alloc] init];
+        model.tid = dict[titleKey];
+        model.title = dict[titleKey];
+        [marr addObject:model];
+    }
+    
+    return marr;
+}
+
+@end
+
 @interface ChartChooseListViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     UITableView *_tableView;
@@ -42,9 +82,28 @@
             [self createTableView];
         }
         
-      //  [_tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self loadData];
     }
     return self;
+}
+
+- (void)loadData{
+    [HttpRequest GET:[URLFile urlString_rankingAct] success:^(id responseObject) {
+        if (self.type == ChartChooseTypeAttributeBrand) {
+            _dataArray = [ChartChooseModel initWithArray:responseObject[@"R_brandAttr"] type:ChartChooseTypeAttributeBrand];
+        }else if (self.type == ChartChooseTypeAttributeModel){
+             _dataArray = [ChartChooseModel initWithArray:responseObject[@"R_modelAttr"] type:ChartChooseTypeAttributeBrand];
+        }else if (self.type == ChartChooseTypeAttributeSeries){
+             _dataArray = [ChartChooseModel initWithArray:responseObject[@"R_dep"] type:ChartChooseTypeAttributeBrand];
+        }else if (self.type == ChartChooseTypeQuality){
+             _dataArray = [ChartChooseModel initWithArray:responseObject[@"R_zlwt"] type:ChartChooseTypeAttributeBrand];
+        }
+        
+        [_tableView reloadData];
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 - (void)viewDidLoad {
@@ -183,8 +242,9 @@
     [formatter setDateFormat:@"yyyy-MM-dd"];
     //
     beginDateLabel.text = [formatter stringFromDate:beginDatePicker.date];
-    
     endDatePicker.minimumDate = beginDatePicker.date;
+    
+    [self dateBlock];
 }
 
 -(void)endDateClick
@@ -195,13 +255,20 @@
         [formatter setDateFormat:@"yyyy-MM-dd"];
         //
         endDateLabel.text  = [formatter stringFromDate:endDatePicker.date];
-    
-    beginDatePicker.maximumDate = endDatePicker.date;
+        beginDatePicker.maximumDate = endDatePicker.date;
+     [self dateBlock];
 }
 
+- (void)dateBlock{
+    if ([endDateLabel.text integerValue] > 100 && [beginDateLabel.text integerValue] > 100) {
+        if (self.chooseDeate) {
+            self.chooseDeate(beginDateLabel.text,endDateLabel.text);
+        }
+    }
+}
 
 -(void)createTableView{
-    _dataArray = @[@"东方不败",@"独孤求败",@"布拉格依旧",@"布拉格无悔",@"至尊无数"];
+    
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 20)];
     view.backgroundColor = colorLightBlue;
     [self.view addSubview:view];
@@ -301,7 +368,8 @@
             cell.textLabel.textAlignment = NSTextAlignmentLeft;
         }
     }
-    cell.textLabel.text = _dataArray[indexPath.row];
+    ChartChooseModel *model = _dataArray[indexPath.row];
+    cell.textLabel.text = model.title;
     
     return cell;
     
@@ -316,7 +384,8 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
    
     if (self.chooseEnd) {
-        self.chooseEnd(_dataArray[indexPath.row]);
+        ChartChooseModel *model = _dataArray[indexPath.row];
+        self.chooseEnd(model.tid,model.title);
     }
     __weak __typeof(self)weakSelf = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ComplainChartSecondModel.h"
 
+/**
+ *  回复率列表cell
+ */
 @interface ComplainChartSecondCell : UITableViewCell
 /**
  *  排序
@@ -20,4 +24,5 @@
 /**百分比*/
 @property (nonatomic,strong) UILabel *percentageLabel;
 
+- (void)setModel:(ComplainChartSecondModel *)model;
 @end

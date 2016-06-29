@@ -34,6 +34,7 @@
     [self createItem];
     [self createTableView];
     [self reloadData];
+    [self updateNumber];
     
 }
 
@@ -178,7 +179,6 @@
         cell.textLabel.text = dict[@"title"];
         if ([[NSUserDefaults standardUserDefaults] objectForKey:user_name]) {
             [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[[NSUserDefaults standardUserDefaults] objectForKey:user_iconImage]] placeholderImage:[UIImage imageNamed:dict[@"imageName"]]];
-
         }
         return cell;
     }
@@ -208,19 +208,19 @@
         cell.textLabel.text = dict[@"title"];
         
         UILabel *label = (UILabel *)[cell.contentView viewWithTag:100];
-       
-            if (indexPath.row == 0) {
-                label.text = numDictonary[@"complain"];
-            }else if (indexPath.row == 1){
-                label.text = numDictonary[@"question"];
-            }else if (indexPath.row == 2){
-                label.text = numDictonary[@"discuss"];
-            }else if (indexPath.row == 3){
-                label.text = [NSString stringWithFormat:@"%ld",(long)[[FmdbManager shareManager] selectCollectNumber]];
-                
-            }
-        
-        
+    if (indexPath.section == 1) {
+        if (indexPath.row == 0) {
+            label.text = numDictonary[@"complain"];
+        }else if (indexPath.row == 1){
+            label.text = numDictonary[@"question"];
+        }else if (indexPath.row == 2){
+            label.text = numDictonary[@"discuss"];
+        }else if (indexPath.row == 3){
+            label.text = [NSString stringWithFormat:@"%ld",(long)[[FmdbManager shareManager] selectCollectNumber]];
+            
+        }
+    }
+    
         return cell;
 }
 

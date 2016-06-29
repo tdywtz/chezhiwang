@@ -7,7 +7,9 @@
 //
 
 #import "ComplainSearchViewController.h"
-
+/**
+ *  收索
+ */
 @interface NewsSearchViewController : ComplainSearchViewController
 
 @property (nonatomic,copy) NSString *style;

@@ -38,7 +38,6 @@
     titleLabel.numberOfLines = 1;
     [self.contentView addSubview:titleLabel];
     
-
     
     styleLabel = [LHController createLabelWithFrame:CGRectMake(10, 30, 51, 20*(51/61.0)) Font:B-7  Bold:NO TextColor:[UIColor colorWithRed:225/255.0 green:147/255.0 blue:4/255.0 alpha:1] Text:nil];
     styleLabel.textAlignment = NSTextAlignmentCenter;

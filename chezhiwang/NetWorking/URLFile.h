@@ -15,6 +15,8 @@
 #define xieyi @"http://m.12365auto.com/user/agreeForIOS.shtml"
 
 @interface URLFile : NSObject
+//
++ (NSString *)stringWithBasic:(NSString *)actString;
 
 /**登录*/
 + (NSString *)urlStringForLogin;
@@ -35,11 +37,13 @@
 
 
 
-///**故障详情*/
-//+ (NSString *)urlStringForCarInfo;
-//
-///**全部故障*/
-//+ (NSString *)urlStringForIssue;
+#pragma mark - 投诉排行
+/**选择*/
++ (NSString *)urlString_rankingAct;
+/**投诉排行列表*/
++ (NSString *)urlString_rankingList;
+/**回复率列表*/
++ (NSString *)urlString_rankingBotm;
 
 #pragma mark - 投诉
 /**投诉列表*/

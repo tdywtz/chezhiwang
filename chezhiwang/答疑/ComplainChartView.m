@@ -12,6 +12,7 @@
 
 @property (nonatomic,strong) UILabel *titleLabel;
 @property (nonatomic,strong) UIImageView *imageView;
+@property (nonatomic,copy) NSString *tid;//记录id
 
 @end
 
@@ -103,12 +104,18 @@
         self.block(index);
     }
 }
--(void)setTitle:(NSString *)title index:(NSInteger)index{
+-(void)setTitle:(NSString *)title tid:(NSString *)tid index:(NSInteger)index{
     ToolBar *btn = self.toolBars[index];
     btn.titleLabel.text = title;
+    btn.tid = tid;
     if (index == 0) {
          btn.titleLabel.font = [UIFont systemFontOfSize:12];
     }
+}
+
+- (NSString *)gettidWithIndex:(NSInteger)index{
+     ToolBar *btn = self.toolBars[index];
+    return btn.tid;
 }
 
 -(NSMutableArray *)toolBars{

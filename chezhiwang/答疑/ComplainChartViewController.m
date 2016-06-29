@@ -12,11 +12,15 @@
 #import "ComplainChartSecondCell.h"
 #import "ComplainChartSecondHeaderView.h"
 #import "ChartChooseListViewController.h"
+#import "BezierPathView.h"
 
 @interface ComplainChartViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     NSMutableArray *_firstArray;
+    //回复率数据字典，将数组存放到字典中 key： 0->厂家满意  1->车主满意  2->新车调查排行
+    NSMutableDictionary *_secondArrayDictionary;
     NSArray *_secondArray;
+    
     NSObject * _object;
 }
 @property (nonatomic,strong) UITableView *tableView;
@@ -39,18 +43,16 @@
     _object = [[NSObject alloc ]init];
     [self createTableView];
     _firstArray = [NSMutableArray arrayWithArray:@[@"",@"",@"",@"",@"",@"",@"",@"",@"",@"",@"",@"",@"",@"",@""]];
-    [_tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+    _secondArrayDictionary = [[NSMutableDictionary alloc] init];
+    _secondArray = [[NSMutableArray alloc] initWithArray:_firstArray];
     
+    [_tableView reloadData];
     
-    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeGradient];
-    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleLight];
-   // [SVProgressHUD setDefaultAnimationType:SVProgressHUDAnimationTypeNative];
-    [SVProgressHUD setInfoImage:[UIImage imageNamed:@"auto_toolbarRightTriangle@2x"]];
-    [SVProgressHUD showWithStatus:@"冲啊"];
-   dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 3*NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-       [SVProgressHUD dismiss];
-   });
+    [self loadDataRankingBotm];
+    [self loadDataRankingList];
     
+    BezierPathView *view = [[BezierPathView alloc] initWithFrame:self.view.frame bezierRect:CGRectMake(20, 69, 100, 25) radius:5];
+    [self.view addSubview:view];
 }
 
 - (void)createTableView{
@@ -64,7 +66,8 @@
     [_tableView makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(UIEdgeInsetsZero);
     }];
-
+    
+    __weak __typeof(self)weakSelf = self;
     _headerView = [[ComplainChartView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 44) titles:@[@"时间",@"车型属性",@"品牌属性",@"系别",@"质量问题"] block:^(NSInteger index) {
        
         DirectionStyle direction = DirectionRight;
@@ -72,13 +75,91 @@
             direction = DirectionLeft;
         }
         ChartChooseListViewController *chart = [[ChartChooseListViewController alloc] initWithType:index direction:direction];
-        chart.chooseEnd = ^(NSString *title){
-            [_headerView setTitle:title index:index];
+        //返回名和id
+        chart.chooseEnd = ^(NSString *title , NSString *tid){
+            [_headerView setTitle:title tid:tid index:index];
+            [weakSelf loadDataRankingList];
         };
-        [self presentViewController:chart animated:YES completion:nil];
+       //返回时间
+        chart.chooseDeate = ^(NSString * beginDate , NSString * endDate){
+            NSString *date = [NSString stringWithFormat:@"%@\n%@",beginDate,endDate];
+            [_headerView setTitle:date tid:nil index:index];
+            _headerView.beginDate = beginDate;
+            _headerView.endDate = endDate;
+            [weakSelf loadDataRankingList];
+        };
+        
+        [weakSelf presentViewController:chart animated:YES completion:nil];
     }];
     _tableView.tableHeaderView = _headerView;
+}
+
+//回复率列表
+- (void)loadDataRankingBotm{
+      [HttpRequest GET:[URLFile urlString_rankingBotm] success:^(id responseObject) {
+          //厂家满意
+          NSMutableArray *arrayOne = [[NSMutableArray alloc] init];
+          for (NSDictionary *dict in responseObject[@"CJHFL"]) {
+              ComplainChartSecondModel *model = [[ComplainChartSecondModel alloc] init];
+              model.number = dict[@"num"];
+              model.brandName = dict[@"brandName"];
+              model.percentage = dict[@"HFL"];
+              [arrayOne addObject:model];
+          }
+          //车主满意
+          NSMutableArray *arrayTwo = [[NSMutableArray alloc] init];
+          for (NSDictionary *dict in responseObject[@"CZDCPH"]) {
+              ComplainChartSecondModel *model = [[ComplainChartSecondModel alloc] init];
+              model.number = dict[@"num"];
+              model.brandName = dict[@"brandName"];
+              model.percentage = dict[@"PF"];
+              [arrayTwo addObject:model];
+          }
+          //新车调查排行
+          NSMutableArray *arrayThree = [[NSMutableArray alloc] init];
+          for (NSDictionary *dict in responseObject[@"PPMYD"]) {
+              ComplainChartSecondModel *model = [[ComplainChartSecondModel alloc] init];
+              model.number = dict[@"num"];
+              model.brandName = dict[@"brandName"];
+              model.percentage = dict[@"MYD"];
+              [arrayThree addObject:model];
+          }
+          [_secondArrayDictionary setObject:arrayOne forKey:@"0"];
+        [_secondArrayDictionary setObject:arrayTwo forKey:@"1"];
+           [_secondArrayDictionary setObject:arrayThree forKey:@"2"];
+          
+          
+          _secondArray = [arrayTwo copy];
+          
+          [_tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
+          
+      } failure:^(NSError *error) {
+          
+      }];
+}
+
+//加载投诉排行数据
+- (void)loadDataRankingList{
     
+    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeGradient];
+    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleLight];
+    [SVProgressHUD setDefaultAnimationType:SVProgressHUDAnimationTypeNative];
+    [SVProgressHUD setInfoImage:[UIImage imageNamed:@"auto_toolbarRightTriangle@2x"]];
+    [SVProgressHUD showWithStatus:@"冲啊"];
+    
+    NSString *url = [NSString stringWithFormat:[URLFile urlString_rankingList],_headerView.beginDate,_headerView.endDate,[_headerView gettidWithIndex:1],[_headerView gettidWithIndex:2],[_headerView gettidWithIndex:3],[_headerView gettidWithIndex:4]];
+    [HttpRequest GET:url success:^(id responseObject) {
+        
+         [SVProgressHUD dismiss];
+        
+        [_firstArray removeAllObjects];
+        for (NSDictionary *dict in responseObject[@"rel"]) {
+            [_firstArray addObject:dict];
+        }
+        [_tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -94,7 +175,7 @@
     if (section == 0) {
         return _firstArray.count;
     }
-    return 10;
+    return _secondArray.count;
 }
 
 
@@ -119,6 +200,7 @@
                 
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
+            [cell setDictionary:_firstArray[indexPath.row]];
             return cell;
         }
     }
@@ -129,6 +211,7 @@
 
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
+    [cell setModel:_secondArray[indexPath.row]];
     return cell;
 }
 
@@ -195,8 +278,15 @@
         return viewFirst;
     }
    
+    
     if (_secondHeaderView == nil) {
+        __weak __typeof(self)weakSelf = self;
         _secondHeaderView = [[ComplainChartSecondHeaderView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 88)];
+        _secondHeaderView.click = ^(NSInteger index){
+            NSString *str = [NSString stringWithFormat:@"%ld",index];
+            _secondArray = _secondArrayDictionary[str];
+            [weakSelf.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+        };
     }
     return _secondHeaderView;
 }

@@ -7,7 +7,9 @@
 //
 
 #import "BasicViewController.h"
-
+/**
+ *  新闻列表
+ */
 @interface NewsListViewController : BasicViewController
 
 @property (nonatomic,copy) NSString *urlString;

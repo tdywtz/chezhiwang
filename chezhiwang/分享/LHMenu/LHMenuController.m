@@ -70,7 +70,7 @@
 
 - (void)dealloc
 {
-    _items = nil;
+    _items = nil; 
     _buttons = nil;
 }
 
@@ -80,7 +80,7 @@
         self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         _duration = 1.0;
         _beginTime = 0.042;
-        _itemSize = CGSizeMake(80, 60);
+        _itemSize = CGSizeMake(80, 80);
         _lineSpacing = 30;
        _queues = 3;
         NSMutableArray *marray = [NSMutableArray new];
@@ -118,7 +118,7 @@
 -(void)setBluffImageWithView:(UIView *)view{
    // self.bluffImage = [self snapshootView:view];
     UIImage *image = [self convertViewToImage:view];
-    self.bluffImage = [self blurredImageWithRadius:35.1 iterations:2 tintColor:nil image:image];
+    self.bluffImage = [self blurredImageWithRadius:25.1 iterations:2 tintColor:nil image:image];
 }
 
 - (UIImage *) snapshootView:(UIView *)view{

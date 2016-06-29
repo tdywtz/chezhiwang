@@ -10,6 +10,7 @@
 #import "NewsTestTableView.h"
 #import "ComplainChartView.h"
 #import "ChartChooseListViewController.h"
+#import "ImageShowViewController.h"
 
 #pragma mark - 文字显示框
 
@@ -440,6 +441,12 @@
     [cell setdictionary];
     return cell;
     
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    ImageShowViewController *show = [[ImageShowViewController alloc] init];
+    show.hidesBottomBarWhenPushed = YES;
+    [self.parentViewController.navigationController pushViewController:show animated:YES];
 }
 
 

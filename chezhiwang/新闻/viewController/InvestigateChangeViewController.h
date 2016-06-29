@@ -8,6 +8,9 @@
 
 #import "BasicViewController.h"
 
+/**
+ *  新车调查选择数据页面
+ */
 @interface InvestigateChangeViewController : BasicViewController
 
 @property (nonatomic,copy) void(^blcok)(NSString *name,NSString *ID);

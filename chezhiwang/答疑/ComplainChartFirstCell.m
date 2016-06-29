@@ -28,7 +28,19 @@
 }
 
 -(void)setDictionary:(NSDictionary *)dcitonary{
-    
+    if ([dcitonary isKindOfClass:[NSDictionary class]]) {
+        _chartLabel.text = dcitonary[@"num"];
+        _brandLabel.text = dcitonary[@"brandName"];
+        _seriesLabel.text = dcitonary[@"seriesName"];
+        _modelLabel.text = dcitonary[@"carAttr"];
+        _numberLabel.text = dcitonary[@"count"];
+    }else{
+        _chartLabel.text = @"--";
+        _brandLabel.text = @"--";
+        _seriesLabel.text = @"--";
+        _modelLabel.text = @"--";
+        _numberLabel.text = @"--";
+    }
 }
 
 - (void)awakeFromNib {
