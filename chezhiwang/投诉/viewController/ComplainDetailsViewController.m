@@ -177,15 +177,15 @@
     UILabel *complainTitle = [LHController createLabelWithFrame:CGRectZero Font:B-3 Bold:NO TextColor:colorLightGray Text:@"投诉内容："];
     
     questionContent = [[CZWLabel alloc] init];
-   // questionContent.paragraphSpacing = 50;
     questionContent.firstLineHeadIndent = 28;
     questionContent.textColor = colorDeepGray;
+    questionContent.linesSpacing = 4;
     questionContent.font = [UIFont systemFontOfSize:14];
     
     UILabel *answerTitle = [LHController createLabelWithFrame:CGRectZero Font:B-3 Bold:NO TextColor:colorLightGray Text:@"投诉回复："];
     
     answerContent = [[CZWLabel alloc] init];
-    answerContent.linesSpacing = 3;
+    answerContent.linesSpacing = 4;
     answerContent.firstLineHeadIndent = 28;
     answerContent.textColor = colorDeepGray;
     answerContent.font = [UIFont systemFontOfSize:14];

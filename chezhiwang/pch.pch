@@ -39,6 +39,11 @@
 #define MAS_SHORTHAND_GLOBALS
 #import "Masonry.h"
 
+//#ifndef DEBUG
+//#undef NSLog
+//#define NSLog(args, ...)
+//#endif
+
 #define appOrigin @"7"//APP标识
 #define THE_APPID @"1059672225"//AppStore
 

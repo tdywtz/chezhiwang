@@ -101,7 +101,7 @@
         self.scrollView.scrollsToTop = NO;
         [self addSubview:self.scrollView];
         [self.scrollView makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(UIEdgeInsetsMake(0, 15, 0, 25));
+            make.edges.equalTo(UIEdgeInsetsMake(0, 5, 0, 25));
         }];
         
          self.contentView = [[UIView alloc] init];
@@ -117,11 +117,24 @@
         }];
         
         UIImageView *leftView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        leftView.image = [UIImage imageNamed:@"bar_btn_icon_returntext"];
-
+       // leftView.image = [UIImage imageNamed:@"bar_btn_icon_returntext"];
+        leftView.backgroundColor = colorLightBlue;;
+        leftView.layer.shadowColor = colorLightBlue.CGColor;
+        leftView.layer.shadowOpacity = 0.99;
+        leftView.layer.shadowOffset = CGSizeMake(10, 0);
+        leftView.layer.shadowRadius = 5;
+        
+    
         UIImageView *rightView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        rightView.image = [UIImage imageNamed:@"bar_btn_icon_returntext"];
-        rightView.transform  = CGAffineTransformMakeRotation(M_PI);
+       // rightView.image = [UIImage imageNamed:@"bar_btn_icon_returntext"];
+       // rightView.transform  = CGAffineTransformMakeRotation(M_PI);
+        rightView.backgroundColor = colorLightBlue;;
+        rightView.layer.shadowColor = colorLightBlue.CGColor;
+        rightView.layer.shadowOpacity = 0.99;
+        rightView.layer.shadowOffset = CGSizeMake(-10, 0);
+        rightView.layer.shadowRadius = 5;
+
+        
         
         [self addSubview:leftView];
         [self addSubview:rightView];
@@ -129,11 +142,13 @@
         [leftView makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(0);
             make.centerY.equalTo(0);
+            make.size.equalTo(CGSizeMake(15, 30));
         }];
         
         [rightView makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(_scrollView.right);
             make.centerY.equalTo(0);
+            make.size.equalTo(CGSizeMake(15, 30));
         }];
         
         UIImageView *imageview = [[UIImageView alloc] init];

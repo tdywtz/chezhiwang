@@ -68,7 +68,6 @@
     [btn setImage:[UIImage imageNamed:@"search"] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(searchClick) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
-    
 }
 
 #pragma mark - 搜索按钮

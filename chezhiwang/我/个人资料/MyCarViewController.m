@@ -146,7 +146,7 @@
     //读取键盘高度
     height = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
 
-    _tabelView.frame = CGRectMake(0, 0, WIDTH, HEIGHT-64-height);
+    _tabelView.frame = CGRectMake(0, 0, WIDTH, HEIGHT-height);
 }
 
 -(void)keyboardHide:(NSNotification *)notification
@@ -157,9 +157,10 @@
 
 #pragma mark - item
 -(void)createTableView{
-    _tabelView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT-64) style:UITableViewStylePlain];
+    _tabelView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
     _tabelView.delegate = self;
     _tabelView.dataSource = self;
+    _tabelView.tableFooterView = [UIView new];
     [self.view addSubview:_tabelView];
 }
 

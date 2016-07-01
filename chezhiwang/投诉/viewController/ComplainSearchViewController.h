@@ -7,7 +7,9 @@
 //
 
 #import "BasicViewController.h"
-
+/**
+ *  投诉收索
+ */
 @interface ComplainSearchViewController : BasicViewController
 
 @property (nonatomic,strong)   UISearchBar *searchBar;

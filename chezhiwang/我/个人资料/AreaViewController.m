@@ -172,7 +172,7 @@
 }
 
 -(void)createUI{
-    scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT-64)];
+    scrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
     [self.view addSubview:scrollView];
     
     UILabel *label1 = [LHController createLabelWithFrame:CGRectMake(LEFT, 40, 90, 30) Font:B Bold:NO TextColor:[UIColor grayColor] Text:@"所在地区:"];

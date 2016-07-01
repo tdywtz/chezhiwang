@@ -16,6 +16,7 @@
 @property (nonatomic,strong) UIView      *testView;
 @property (nonatomic,strong) NSString    *testString;
 @property (nonatomic,strong) UIButton    *submitButton;
+
 @end
 
 @implementation LookPasswordViewController
@@ -55,7 +56,7 @@
     [self.view addSubview:self.submitButton];
     
     [self.nameTextField makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(50);
+        make.top.equalTo(100);
         make.left.equalTo(10);
         make.right.equalTo(-10);
         make.height.equalTo(40);
@@ -92,14 +93,9 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-     [MobClick beginLogPageView:@"PageOne"];
+  
     [self onTapToGenerateCode];
     self.textTextField.text = @"";
-}
-
--(void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-     [MobClick endLogPageView:@"PageOne"];
 }
 
 -(void)spaceTap{
@@ -133,7 +129,7 @@
     [self.view addSubview:act];
     [act startAnimating];
 
-    NSString *url = [NSString stringWithFormat:@"http://192.168.1.114:8888/server/forCommonService.ashx/forCommonService.ashx?act=sendemail&username=%@&origin=%@",self.nameTextField.text,appOrigin];
+    NSString *url = [NSString stringWithFormat:[URLFile urlString_sendemail],self.nameTextField.text,appOrigin];
     
     __weak __typeof(self)weakSelf = self;
     [HttpRequest GET:url success:^(id responseObject) {

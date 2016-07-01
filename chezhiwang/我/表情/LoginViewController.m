@@ -39,7 +39,7 @@
 }
 
 -(void)createScrollView{
-    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT-64)];
+    _scrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
     _scrollView.alwaysBounceVertical = YES;
     [self.view addSubview:_scrollView];
 }

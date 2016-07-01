@@ -79,15 +79,16 @@
      UIViewController *new = self.controllers[current];
     [old viewDisappear];
     [new viewApper];
-    
+
     _current = current;
 }
+
 
 #pragma mark - UIScrollViewDelegate
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGFloat width = self.view.frame.size.width;
     CGFloat contentOffX = scrollView.contentOffset.x;
-   
+   // NSLog(@"%f",scrollView.contentOffset.x);
     //CGFloat mainProgress = contentOffX
     if (self.beginScrollProgress) {
         if (scrollView.contentOffset.x <= width) {
@@ -128,7 +129,7 @@
 #pragma mark - UIPageViewControllerDataSource
 -(UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
-   
+    
     NSInteger index = [self.controllers indexOfObject:viewController];
 
     if (index+1 < self.controllers.count) {

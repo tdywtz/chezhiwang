@@ -38,16 +38,11 @@
 }
 
 -(void)createTExtField{
-    scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT-64)];
+    scrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
     scrollView.alwaysBounceVertical = YES;
     scrollView.backgroundColor = colorLineGray;
     [self.view addSubview:scrollView];
-    
-    //    for (int i = 0; i < 5; i ++) {
-    //        UILabel *label = [ZCControl createLabelWithFrame:CGRectMake(0, 30+45*i, WIDTH, 1.5) Font:11 Text:nil];
-    //        label.backgroundColor = [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1];
-    //        [scrollView addSubview:label];
-    //    }
+
     userNameTextField = [LHController createTextFieldWithFrame:CGRectMake(10, 30, WIDTH-20, 45) Placeholder:@"用户名" Font:15  Delegate:self];
     userNameTextField.autocapitalizationType = NO;
     userNameTextField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
@@ -142,7 +137,7 @@
 
 #pragma mark - post数据
 -(void)registerData{
-    [MobClick endEvent:@"register"];//友盟统计
+
     if (userNameTextField.text.length == 0 || passwordTextField.text.length == 0) {
         return;
     }
@@ -180,11 +175,6 @@
     serverButton.titleLabel.font = [UIFont systemFontOfSize:15];
     [serverButton setTitleColor:colorOrangeRed forState:UIControlStateNormal];
     [scrollView addSubview:serverButton];
-    
-    //    UIImageView *iamgeView = [ZCControl createImageViewWithFrame:CGRectMake(0, 0, 390*40/59.0, 40) ImageName:@"wz_03.png"];
-    //    iamgeView.center = CGPointMake(WIDTH/2, 440);
-    //    [scrollView addSubview:iamgeView];
-    
     scrollView.contentSize = CGSizeMake(0, serverButton.frame.origin.y+100);
 }
 

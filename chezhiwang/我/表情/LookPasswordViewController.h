@@ -7,7 +7,9 @@
 //
 
 #import "BasicViewController.h"
-
+/**
+ *  找回密码
+ */
 @interface LookPasswordViewController : BasicViewController
 
 @end

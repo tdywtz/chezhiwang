@@ -7,10 +7,16 @@
 //
 
 #import "AnswerDetailsViewController.h"
+#import "CommentListViewController.h"
+#import "CustomCommentView.h"
+#import "LoginViewController.h"
 
 @interface AnswerDetailsViewController ()
 {
     CGFloat A;
+
+    UILabel *numLabel;
+    CustomCommentView *_commentView;
     CZWLabel *titleLabel;//标题
     UILabel *questionDate;//问题时间
     CZWLabel *questionContent;//问题内容
@@ -48,11 +54,17 @@ NSString *url = [NSString stringWithFormat:[URLFile urlStringForGetZJDY],self.ci
     A = [LHController setFont];
     
     [self createScrollViewSubViews];
+    [self createFootView];
    [self loadDataOne];
 }
 
 #pragma mark - 数据显示
 -(void)createScrollViewSubViews{
+
+    CGRect rect = self.scrollView.frame;
+    rect.size.height -= 49;
+    self.scrollView.frame = rect;
+
     self.contentView = [[UIView alloc] init];
     [self.scrollView addSubview:self.contentView];
     [self.contentView makeConstraints:^(MASConstraintMaker *make) {
@@ -144,9 +156,59 @@ NSString *url = [NSString stringWithFormat:[URLFile urlStringForGetZJDY],self.ci
     
 }
 
+
+#pragma mark - 底部横条
+-(void)createFootView{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, HEIGHT-49, WIDTH, 49)];
+    view.backgroundColor = [UIColor colorWithRed:0/255.0 green:126/255.0 blue:184/255.0 alpha:1];
+    [self.view addSubview:view];
+
+    UIButton *write =  [LHController createButtnFram:CGRectMake(10, 10,WIDTH-80, 28) Target:self Action:@selector(writeClick) Text:nil];
+    write.backgroundColor = [UIColor whiteColor];
+    [view addSubview:write];
+
+    [write setImage:[UIImage imageNamed:@"pen"] forState:UIControlStateNormal];
+    [write setTitle:@"写评论" forState:UIControlStateNormal];
+    [write setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [write setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
+    write.titleLabel.font = [UIFont systemFontOfSize:14];
+
+    UIButton *btn = [LHController createButtnFram:CGRectMake(write.frame.origin.x+write.frame.size.width+10, 9, 30, 30) Target:self Action:@selector(btnClick:) Text:nil];
+    [btn setImage:[UIImage imageNamed:@"share1"] forState:UIControlStateNormal];
+    [view addSubview:btn];
+    numLabel = [LHController createLabelWithFrame:CGRectMake(btn.frame.origin.x+btn.frame.size.width, btn.frame.origin.y, 20, 30) Font:A-3 Bold:NO TextColor:[UIColor whiteColor] Text:nil];
+    numLabel.textColor = [UIColor whiteColor];
+    [view addSubview:numLabel];
+    [self loadDataTotal];
+}
+//
+
+
+#pragma mark - 取得总评论数
+-(void)loadDataTotal{
+    NSString *url = [NSString stringWithFormat:[URLFile urlStringForPL_total],_cid,self.type];
+    [HttpRequest GET:url success:^(id responseObject) {
+        NSDictionary *dict = responseObject[0];
+        numLabel.text = dict[@"count"] == nil?@"0":dict[@"count"];
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+}
+
+#pragma mark - 底部右侧按钮响应方法
+-(void)btnClick:(UIButton *)btn{
+
+    CommentListViewController *uct = [[CommentListViewController alloc] init];
+    uct.cid = _cid;
+    uct.type = self.type;
+    uct.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self.navigationController pushViewController:uct animated:YES];
+
+}
+
 #pragma  mark - 收藏
 -(void)favorate{
-    
+
     if (self.textTitle && self.dict[@"IssueDate"] && self.cid) {
         FmdbManager *fb = [FmdbManager shareManager];
         [fb insertIntoCollectWithId:self.cid andTime:self.dict[@"IssueDate"] andTitle:self.textTitle andType:collectTypeAnswer];
@@ -157,6 +219,52 @@ NSString *url = [NSString stringWithFormat:[URLFile urlStringForGetZJDY],self.ci
 -(void)deleteFavorate{
     FmdbManager *fb = [FmdbManager shareManager];
     [fb deleteFromCollectWithId:self.cid andType:collectTypeAnswer];
+}
+
+
+#pragma mark - 点击评论按钮
+-(void)writeClick{
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:user_name]) {
+        _commentView = [[CustomCommentView alloc] init];
+        [_commentView show];
+        [_commentView send:^(NSString *content) {
+            [self submitComment:content];
+        }];
+    }else{
+        LoginViewController *my = [[LoginViewController alloc] init];
+        my.pushPop = pushTypePopView;
+        [self.navigationController pushViewController:my animated:YES];
+    }
+}
+
+
+#pragma mark - 提交评论
+-(void)submitComment:(NSString *)content{
+
+    if (![LHController judegmentSpaceChar:content]) {
+        return;
+    }
+
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+    [dict setObject:[[NSUserDefaults standardUserDefaults] objectForKey:user_id] forKey:@"uid"];
+    [dict setObject:@"0" forKey:@"fid"];
+    [dict setObject:content forKey:@"content"];
+    [dict setObject:self.cid forKey:@"tid"];
+    [dict setObject:self.type forKey:@"type"];
+    [dict setObject:appOrigin forKey:@"origin"];
+
+    [HttpRequest POST:[URLFile urlStringForAddcomment] parameters:dict success:^(id responseObject) {
+        [self loadDataTotal];
+        if ([responseObject[@"result"] isEqualToString:@"success"]) {
+            [LHController alert:@"评论成功"];
+            [self loadDataTotal];
+        }else{
+            [LHController alert:@"评论失败"];
+        }
+
+    } failure:^(NSError *error) {
+        [LHController alert:@"评论失败"];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

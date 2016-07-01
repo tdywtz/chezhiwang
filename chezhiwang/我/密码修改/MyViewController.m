@@ -16,6 +16,32 @@
 #import "MyCarViewController.h"
 #import "LoginViewController.h"
 
+
+@interface IconCell : UITableViewCell
+
+@end
+
+@implementation IconCell
+
+- (void)layoutSubviews{
+    [super  layoutSubviews];
+    
+    CGFloat width = self.frame.size.height-20;
+    self.imageView.frame = CGRectMake(10, 10, width,width);
+   // self.imageView.contentMode = UIViewContentModeCenter;
+    
+    CGRect tmpFrame = self.textLabel.frame;
+    tmpFrame.origin.x = 10+width+10;
+    self.textLabel.frame = tmpFrame;
+    
+    tmpFrame = self.detailTextLabel.frame;
+    tmpFrame.origin.x = 10+width+10;
+    self.detailTextLabel.frame = tmpFrame;
+}
+
+@end
+
+
 @interface MyViewController ()<UIAlertViewDelegate,UITableViewDataSource,UITableViewDelegate>
 {
     
@@ -34,15 +60,16 @@
     [self createItem];
     [self createTableView];
     [self reloadData];
-    [self updateNumber];
-    
 }
+
 
 -(void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
     //每次页面出现刷新页面数据
     [[SDImageCache sharedImageCache] removeImageForKey:[[NSUserDefaults standardUserDefaults] objectForKey:user_iconImage] fromDisk:YES];
+   
+    [self updateNumber];
     [self reloadData];
 }
 
@@ -166,9 +193,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (indexPath.section == 0) {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"iconCell"];
+        IconCell *cell = [tableView dequeueReusableCellWithIdentifier:@"iconCell"];
         if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"iconCell"];
+            cell = [[IconCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"iconCell"];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
@@ -179,6 +206,9 @@
         cell.textLabel.text = dict[@"title"];
         if ([[NSUserDefaults standardUserDefaults] objectForKey:user_name]) {
             [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[[NSUserDefaults standardUserDefaults] objectForKey:user_iconImage]] placeholderImage:[UIImage imageNamed:dict[@"imageName"]]];
+        }
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:user_name]) {
+            cell.textLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:user_name];
         }
         return cell;
     }
@@ -233,11 +263,18 @@
 #pragma mark - UITableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
-        return 80;
+        return 90;
     }
     return 44;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.1;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 20;
+}
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section != 0) {

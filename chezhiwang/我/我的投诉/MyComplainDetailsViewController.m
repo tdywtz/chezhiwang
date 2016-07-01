@@ -300,7 +300,7 @@
         [self.navigationController pushViewController:revoke animated:YES];
     }else if([btn.titleLabel.text isEqualToString:@"查看原因"]){
 
-        NSString *url = [NSString stringWithFormat:@"http://m.12365auto.com/server/forAppWebService.ashx?act=delComNoReason&cpid=%@",self.model.Cpid];
+        NSString *url = [NSString stringWithFormat:[URLFile urlString_delComNoReason],self.model.Cpid];
         [HttpRequest GET:url success:^(id responseObject) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"撤诉未成功原因"
                                                             message:responseObject[@"reason"]
@@ -318,86 +318,6 @@
         [self.navigationController pushViewController:cp2 animated:YES];
     }
 }
-
-//#pragma mark - 申请撤诉views
-//-(void)createWriteView{
-//    if (bgView == nil) {
-//        bgView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-//        bgView.backgroundColor = [UIColor blackColor];
-//        bgView.alpha = 0.5;
-//        [[UIApplication sharedApplication].keyWindow addSubview:bgView];
-//    }
-//    
-//    if (writeView == nil) {
-//        writeView = [[UIView alloc] initWithFrame:CGRectMake(0, HEIGHT, WIDTH, HEIGHT/2)];
-//        writeView.backgroundColor = [UIColor whiteColor];
-//        [[UIApplication sharedApplication].keyWindow addSubview:writeView];
-//        
-//        UIButton *cancel = [LHController createButtnFram:CGRectMake(10, 15, 40, 20) Target:self Action:@selector(certainClick:) Text:@"取消"];
-//        cancel.titleLabel.font = [UIFont systemFontOfSize:B-1];
-//        [cancel setTitleColor:[UIColor colorWithRed:5/255.0 green:143/255.0 blue:206/255.0 alpha:1] forState:UIControlStateNormal];
-//        [writeView addSubview:cancel];
-//        
-//        UIButton *certain = [LHController createButtnFram:CGRectMake(WIDTH-50, 15, 40, 20) Target:self Action:@selector(certainClick:) Text:@"提交"];
-//        certain.titleLabel.font = [UIFont systemFontOfSize:B-1];
-//        [certain setTitleColor:[UIColor colorWithRed:5/255.0 green:143/255.0 blue:206/255.0 alpha:1] forState:UIControlStateNormal];
-//        [writeView addSubview:certain];
-//        
-//        UILabel *titleLabel = [LHController createLabelWithFrame:CGRectMake(WIDTH/2-40, 10, 80, 20) Font:B Bold:NO TextColor:nil Text:@"申请撤诉"];
-//        titleLabel.textAlignment = NSTextAlignmentCenter;
-//        [writeView addSubview:titleLabel];
-//        
-//        UILabel *bgLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 40, WIDTH, 1)];
-//        bgLabel.backgroundColor = [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1];
-//        [writeView addSubview:bgLabel];
-//        
-//        textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 41, WIDTH, 150)];
-//        textView.font = [UIFont systemFontOfSize:B-1];
-//        placeholder = [LHController createLabelWithFrame:CGRectMake(5, 8, 200, 20) Font:B-1 Bold:NO TextColor:[UIColor colorWithRed:180/255.0 green:180/255.0 blue:180/255.0 alpha:1] Text:@"输入申请内容"];
-//        [textView addSubview:placeholder];
-//        textView.delegate = self;
-//        [writeView addSubview:textView];
-//
-//    }
-//    bgView.hidden = NO;
-//    [UIView animateWithDuration:0.3 animations:^{
-//         writeView.frame = CGRectMake(0, HEIGHT/2, WIDTH, HEIGHT/2);
-//    }];
-//}
-
-//-(void)certainClick:(UIButton *)btn{
-//    if ([btn.titleLabel.text isEqualToString:@"提交"]) {
-//        if ([LHController judegmentSpaceChar:textView.text] == NO) {
-//            [self alert:@"申请撤诉内容不能为空"];
-//        }else{
-//            [self getRmoveComplain];
-//            bgView.hidden = YES;
-//            [writeView endEditing:YES];
-//        }
-//    }else{
-//        bgView.hidden = YES;
-//        [writeView endEditing:YES];
-//        [UIView animateWithDuration:0.3 animations:^{
-//            writeView.frame = CGRectMake(0, HEIGHT, WIDTH, HEIGHT/2);
-//        }];
-//    }
-//    textView.text = nil;
-//    placeholder.hidden = NO;
-//}
-
-//#pragma mark - UITextViewDelegate
-//-(BOOL)textViewShouldBeginEditing:(UITextView *)textView{
-//    placeholder.hidden = YES;
-//    return YES;
-//}
-
-//- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
-//    if ([LHController stringContainsEmoji:text]) {
-//        return NO;
-//    }
-//    return YES;
-//}
-
 
 -(void)createTishi{
     fatherView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 280, 200)];

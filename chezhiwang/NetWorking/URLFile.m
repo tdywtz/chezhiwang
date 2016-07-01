@@ -11,7 +11,16 @@
 @implementation URLFile
 
 + (NSString *)stringWithBasic:(NSString *)actString{
-    NSString *basicString = @"http://m.12365auto.com/server/forAppWebService.ashx?";
+    NSString *basicString = nil;
+
+#ifdef DEBUG
+ // NSLog(@"debug");
+   basicString = @"http://192.168.1.114:8888/server/forAppWebService.ashx?";
+#else
+   //  NSLog(@"release");
+   basicString = @"http://m.12365auto.com/server/forAppWebService.ashx?";
+#endif
+
     return [NSString stringWithFormat:@"%@%@",basicString,actString];
 }
 
@@ -67,17 +76,19 @@
 #pragma mark - 投诉排行
 /**选择*/
 + (NSString *)urlString_rankingAct{
-    return @"http://192.168.1.114:8888/server/forAppWebService.ashx?act=rankingAct";
+
+    return [self stringWithBasic:@"act=rankingAct"];
 }
 
 /**投诉排行列表*/
 + (NSString *)urlString_rankingList{
-    return @"http://192.168.1.114:8888/server/forAppWebService.ashx?act=rankingList&startTime=%@&endTime=%@&modelAttr=%@&brandAttr=%@&dep=%@&zlwt=%@";
+
+    return   [self stringWithBasic:@"act=rankingList&startTime=%@&endTime=%@&modelAttr=%@&brandAttr=%@&dep=%@&zlwt=%@"];
 }
 
 /**回复率列表*/
 + (NSString *)urlString_rankingBotm{
-    return @"http://192.168.1.114:8888/server/forAppWebService.ashx?act=rankingBotm";
+    return [self stringWithBasic:@"act=rankingBotm"];
 }
 
 
@@ -223,7 +234,10 @@
 + (NSString *)urlStringForDetail{
     return [self stringWithBasic:@"act=detail&cpid=%@"];
 }
-
+/**插卡撤诉未成功原因*/
++ (NSString *)urlString_delComNoReason{
+    return [self stringWithBasic:@"act=delComNoReason&cpid=%@"];
+}
 
 /**我的评论*/
 + (NSString *)urlStringForComplainScore{
@@ -287,6 +301,12 @@
 /**我的提问*/
 + (NSString *)urlStringFor_myZJDY{
     return [self stringWithBasic:@"act=myZJDY&uid=%@&p=%ld&s=%ld"];
+}
+
+
+/** 找回密码*/
++ (NSString *)urlString_sendemail{
+    return [self stringWithBasic:@"act=sendemail&username=%@&origin=%@"];
 }
 
 @end

@@ -22,6 +22,7 @@
 + (NSString *)urlStringForLogin;
 /**注册*/
 + (NSString *)urlStringForRegister;
+/**注册协议*/
 
 #pragma mark - 新闻
 /**新闻列表*/
@@ -123,6 +124,8 @@
 + (NSString *)urlStringFor_mytsbyid;
 /**个人中心根据cpid获取投诉详情*/
 + (NSString *)urlStringForDetail;
+/**插卡撤诉未成功原因*/
++ (NSString *)urlString_delComNoReason;
 
 /**我的评论*/
 + (NSString *)urlStringForComplainScore;
@@ -156,5 +159,8 @@
 
 /**我的提问*/
 + (NSString *)urlStringFor_myZJDY;
+
+/** 找回密码*/
++ (NSString *)urlString_sendemail;
 
 @end
