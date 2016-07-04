@@ -56,9 +56,6 @@
     self.navigationBar.barStyle = UIBarStyleBlack;
     self.navigationBar.barTintColor = colorDeepBlue;
     self.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[UIColor whiteColor]};
-//    [UIFont asynchronouslySetFontName:[UIFont fontNameSTXingkai_SC_Bold] success:^(NSString *name) {
-//         self.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont fontWithName:name size:28],NSForegroundColorAttributeName:[UIColor whiteColor]};
-//    }];
 }
 
 -(void)endAlph{

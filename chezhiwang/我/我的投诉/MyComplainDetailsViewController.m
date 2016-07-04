@@ -96,30 +96,7 @@
     NSString *url  =[NSString stringWithFormat:[URLFile urlStringFor_mytsbyid],_model.Cpid];
     [HttpRequest GET:url success:^(id responseObject) {
         NSDictionary *dict = responseObject[0];
-        MyComplainModel *model = [[MyComplainModel alloc] init];
-        model.common = dict[@"common"];
-        model.Cpid = dict[@"Cpid"];
-        model.cs = dict[@"cs"];
-        model.date = dict[@"date"];
-        model.status = dict[@"status"];
-        model.stepid = dict[@"stepid"];
-        model.title = dict[@"title"];
-        model.huifu = dict[@"huifu"];
-        model.pingfen = dict[@"pingfen"];
-        model.ispf = dict[@"ispf"];
-        model.stars = dict[@"stars"];
-        model.show = dict[@"show"];
-        
-        NSMutableArray *arr = [[NSMutableArray alloc] init];
-        NSDictionary *subDict = dict[@"step"];
-        for (int i = 1; i <= 6; i ++) {
-            NSString *str = [NSString stringWithFormat:@"step%d",i];
-            if (subDict[str]) {
-                [arr addObject:subDict[str]];
-            }
-        }
-    
-        model.array = arr;
+        MyComplainModel *model = [[MyComplainModel alloc] initWithDictionary:dict];
         _model = model;
         [scrollView removeFromSuperview];
         [self createScrollView];
@@ -173,7 +150,7 @@
 }
 
 -(void)createScrollView{
-    scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT-64-40)];
+    scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT-40)];
     [self.view addSubview:scrollView];
 }
 
@@ -225,12 +202,18 @@
             freeBtn = [LHController createButtnFram:CGRectMake(WIDTH/2-30, headerView.frame.size.height-30, 100, 30) Target:self Action:@selector(changeClick:) Font:B-1 Text:@"查看原因"];
             [headerView addSubview:freeBtn];
         }
-
     }
    
     CGFloat gao = labelPace.frame.origin.y+labelPace.frame.size.height+10;
-    for (int i = 0; i < _model.array.count; i ++) {
-        UILabel *label = [self createGrayLabelWithFrame:CGRectMake(10, gao+20*i, WIDTH-20, 20) andText:_model.array[i]];
+    NSMutableArray *arr = [[NSMutableArray alloc] init];
+    for (int i = 1; i <= 6; i ++) {
+        NSString *str = [NSString stringWithFormat:@"step%d",i];
+        if (_model.step[str]) {
+            [arr addObject:_model.step[str]];
+        }
+    }
+    for (int i = 0; i < arr.count; i ++) {
+        UILabel *label = [self createGrayLabelWithFrame:CGRectMake(10, gao+20*i, WIDTH-20, 20) andText:arr[i]];
         [headerView addSubview:label];
         
         if (i == 3) {
@@ -239,7 +222,7 @@
         if (i >= 4) {
             label.frame = CGRectMake(10, gao+20*i+15, WIDTH-20, 20);
         }
-        if (i == _model.array.count-1) {
+        if (i == arr.count-1) {
             headerView.frame = CGRectMake(0, headerView.frame.origin.y, WIDTH, label.frame.origin.y+label.frame.size.height+60);
         }
     }
@@ -589,7 +572,7 @@
 
 #pragma mark - createFootView
 -(void)createFootView{
-    UILabel *label = [LHController createLabelWithFrame:CGRectMake(0, HEIGHT-104, WIDTH, 40) Font:9 Bold:NO TextColor:nil Text:@"投诉热线：010-65994868"];
+    UILabel *label = [LHController createLabelWithFrame:CGRectMake(0, HEIGHT-40, WIDTH, 40) Font:9 Bold:NO TextColor:nil Text:@"投诉热线：010-65994868"];
     label.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1];
     label.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:label];

@@ -11,7 +11,6 @@
 @implementation AnswerListCell
 {
     UILabel *questionLabel;
-    UIImageView *imageView;
     UILabel *answerLabel;
     UILabel *dateLabel;
     UILabel *typeLabel;
@@ -36,14 +35,13 @@
     questionLabel.textColor = colorBlack;
     [self.contentView addSubview:questionLabel];
     
-    imageView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 45, 70, 20)];
-    [self.contentView addSubview:imageView];
-    
-    typeLabel = [[UILabel alloc] initWithFrame:CGRectMake(1, 1, 68, 18)];
+
+    typeLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 45, 70, 20)];
     typeLabel.textAlignment = NSTextAlignmentCenter;
     typeLabel.font = [UIFont systemFontOfSize:B-3];
     typeLabel.backgroundColor = [UIColor whiteColor];
-    [imageView addSubview:typeLabel];
+    typeLabel.layer.borderWidth = 1;
+    [self.contentView addSubview:typeLabel];
     
     dateLabel = [LHController createLabelWithFrame:CGRectMake(100, 45, 200, 20) Font:B-5 Bold:NO TextColor:colorLightGray Text:nil];
     [self.contentView addSubview:dateLabel];
@@ -76,18 +74,17 @@
     
     if ([_model.type isEqualToString:@"1"] || [_model.type isEqualToString:@"0"]) {
         typeLabel.text = @"维修保养";
-        imageView.image = [UIImage imageNamed:@"zj"];
         typeLabel.textColor = [UIColor colorWithRed:78/255.0 green:191/255.0 blue:243/255.0 alpha:1];
        
     }else if ([_model.type isEqualToString:@"2"]){
         typeLabel.text = @"买车咨询";
-        imageView.image = [UIImage imageNamed:@"yellow"];
          typeLabel.textColor = colorYellow;
+        
     }else if([_model.type isEqualToString:@"3"]){
         typeLabel.text = @"政策法规";
-        imageView.image = [UIImage imageNamed:@"green"];
         typeLabel.textColor = [UIColor colorWithRed:27/255.0 green:188/255.0 blue:157/255.0 alpha:1];
     }
+    typeLabel.layer.borderColor = typeLabel.textColor.CGColor;
 }
 
 - (void)awakeFromNib {

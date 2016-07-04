@@ -8,7 +8,9 @@
 
 #import "BasicViewController.h"
 #import "MyComplainModel.h"
-
+/**
+ *  投诉详情
+ */
 @interface MyComplainDetailsViewController : BasicViewController
 
 @property (nonatomic,assign) NSInteger index;

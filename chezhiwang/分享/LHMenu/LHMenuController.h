@@ -33,7 +33,7 @@
 
 @property (nonatomic,strong) NSArray<__kindof LHMenuItem *> *items;
 
-
+/**/
 -(void)setBluffImageWithView:(UIView *)view;
 
 -(void)hidenItems;

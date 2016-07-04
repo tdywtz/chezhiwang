@@ -35,7 +35,6 @@
             self.bounds = CGRectMake(0, 0, button.frame.origin.x+button.frame.size.width, button.frame.size.height);
         }
     }
-    self.backgroundColor = [UIColor blackColor];
 }
 
 - (void)buttonClick:(UIButton *)btn{
@@ -80,7 +79,7 @@
     stepLabel.numberOfLines = 0;
     
     btnView = [[ButtonView alloc] init];
-   
+
     __weak __typeof(self)weakSelf = self;
     btnView.click = ^(NSString *title){
        
@@ -105,11 +104,15 @@
             [strongSelf.parentController.navigationController pushViewController:cp2 animated:YES];
         }
     };
-    
+
+    UIView *lineView = [[UIView alloc] init];
+    lineView.backgroundColor = colorLineGray;
+
     [self.contentView addSubview:stateLabel];
     [self.contentView addSubview:stepLabel];
     [self.contentView addSubview:btnView];
-    
+    [self.contentView addSubview:lineView];
+
     [stateLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(10);
         make.top.equalTo(15);
@@ -127,6 +130,11 @@
         make.centerX.equalTo(0);
         make.top.equalTo(stepLabel.bottom).offset(10);
         make.bottom.equalTo(-10);
+    }];
+
+    [lineView makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(0);
+        make.height.equalTo(1);
     }];
 }
 

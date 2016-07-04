@@ -7,7 +7,9 @@
 //
 
 #import "BasicViewController.h"
-
+/**
+ *  我的投诉列表
+ */
 @interface MyComplainViewController : BasicViewController
 
 @property (nonatomic,assign) BOOL have;

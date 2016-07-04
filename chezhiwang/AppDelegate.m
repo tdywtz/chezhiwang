@@ -38,8 +38,11 @@
     //[[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navigation"] forBarMetrics:UIBarMetricsDefault];
     
     [UMSocialData setAppKey:@"55f8e766e0f55a5cb5001444"];
-    [MobClick startWithAppkey:@"55f8e766e0f55a5cb5001444" reportPolicy:BATCH channelId:@"http://www.12365auto.com/zhuanti/app/index.aspx"];
-    
+
+    [MobClick startWithAppkey:@"55f8e766e0f55a5cb5001444" reportPolicy:BATCH channelId:@""];
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    [MobClick setAppVersion:version];
+
     [UMSocialQQHandler setQQWithAppId:@"1104889760" appKey:@"UKjSmfNFesY8GrPx" url:@"http://www.12365auto.com"];
     [UMSocialWechatHandler setWXAppId:@"wxfdc8e48568025b98" appSecret:@"2a61fc9735d8fbd1dbd946e8fb6b14ce" url:@"http://www.12365auto.com"];
     

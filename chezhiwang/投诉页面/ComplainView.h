@@ -6,10 +6,10 @@
 //  Copyright (c) 2015年 车质网. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BasicViewController.h"
 
 
-@interface ComplainView : UIViewController
+@interface ComplainView : BasicViewController
 
 @property (nonatomic,assign) BOOL siChange;
 @property (nonatomic,strong) NSDictionary *dictionary;

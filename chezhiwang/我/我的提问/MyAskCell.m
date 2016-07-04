@@ -100,7 +100,6 @@
         lineView.backgroundColor = colorLineGray;
         imageView.transform = CGAffineTransformIdentity;
     }
-
    
     if (_model.answer.length > 0) {
         haveLabel.text = @"已回复";

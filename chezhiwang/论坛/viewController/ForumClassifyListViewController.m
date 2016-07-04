@@ -245,47 +245,8 @@
     UIView *fg2 = [[UIView alloc] initWithFrame:CGRectMake(0, sge1.frame.origin.y+sge1  .frame.size.height+5, WIDTH, 1)];
     fg2.backgroundColor = colorLineGray;
     [view addSubview:fg2];
-//    for (int i = 0; i < array.count; i ++) {
-//        UIButton *btn = [LHController createButtnFram:CGRectMake(5+i*40, 10, 40, 20) Target:self Action:@selector(btnClick:) Text:array[i]];
-//        btn.titleLabel.font = [UIFont systemFontOfSize:[LHController setFont]-1];
-//        [btn setTitleColor:[UIColor colorWithRed:0/255.0 green:125/255.0 blue:184/255.0 alpha:1] forState:UIControlStateSelected];
-//        btn.tag = 100+i;
-//        [bgView addSubview:btn];
-//        if (i == 0 || i == 2) {
-//            btn.selected = YES;
-//        }
-//        if (i > 1) {
-//            btn.frame = CGRectMake(WIDTH-180+90*(i-2), 10, 77, 20);
-//            
-////            NSArray *array = @[@"arrowhead",@"arrowheadShadow"];
-////            UIImageView *imageView = [LHController createImageViewWithFrame:CGRectMake(btn.frame.size.width-5, 3, 5, btn.frame.size.height-6) ImageName:array[i-2]];
-////            [btn addSubview:imageView];
-//            if (i == 2) {
-//                UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(WIDTH-94.5, 10, 1, 20)];
-//                label.backgroundColor = [UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1];
-//                [bgView addSubview:label];
-//            }
-//        }
-//    }
 }
 
-//#pragma mark - 属性化字符串
-//-(NSAttributedString *)attString:(NSString *)str Font:(CGFloat)size{
-//    if (!str) {
-//        return nil ;
-//    }
-//    NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:str];
-//    [att addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:size] range:NSMakeRange(0, att.length)];
-//    [att addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, att.length)];
-//    [att addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:100/255.0 green:10 blue:100/255.0 alpha:1] range:NSMakeRange(0, 5)];
-//    for (int i = 0; i < str.length; i ++) {
-//        unichar C = [str characterAtIndex:i];
-//        if (isdigit(C)) {
-//            [att addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(i, 1)];
-//        }
-//    }
-//    return att;
-//}
 
 #pragma mark - 点击申请版主按钮响应方法
 -(void)applicationClick{
@@ -380,58 +341,6 @@
     [self loadDataWithP:_count andS:10];
 }
 
-//-(void)btnClick:(UIButton *)btn{
-//    if (btn.selected == YES) {
-//        return;
-//    }
-//    btn.selected = YES;
-//    if (btn.tag == 100) {
-//        UIButton *button = (UIButton *)[self.view viewWithTag:101];
-//        button.selected = NO;
-//        topicType = 0;
-//    }else if (btn.tag == 101){
-//        UIButton *button = (UIButton *)[self.view viewWithTag:100];
-//        button.selected = NO;
-//        topicType = 1;
-//    }else if (btn.tag == 102){
-////        for (UIView *view in btn.subviews) {
-////            if ([view isKindOfClass:[UIImageView class]]) {
-////                UIImageView *iamgeView = (UIImageView *)view;
-////                iamgeView.image = [UIImage imageNamed:@"arrowhead"];
-////            }
-////        }
-//        UIButton *button = (UIButton *)[self.view viewWithTag:103];
-//        button.selected = NO;
-////        for (UIView *view in button.subviews) {
-////            if ([view isKindOfClass:[UIImageView class]]) {
-////                UIImageView *iamgeView = (UIImageView *)view;
-////                iamgeView.image = [UIImage imageNamed:@"arrowheadShadow"];
-////            }
-////        }
-//        orderType = 0;
-//    }else{
-////        for (UIView *view in btn.subviews) {
-////            if ([view isKindOfClass:[UIImageView class]]) {
-////                UIImageView *iamgeView = (UIImageView *)view;
-////                iamgeView.image = [UIImage imageNamed:@"arrowhead"];
-////            }
-////        }
-////        
-//        UIButton *button = (UIButton *)[self.view viewWithTag:102];
-//        button.selected = NO;
-////        for (UIView *view in button.subviews) {
-////            if ([view isKindOfClass:[UIImageView class]]) {
-////                UIImageView *iamgeView = (UIImageView *)view;
-////                iamgeView.image = [UIImage imageNamed:@"arrowheadShadow"];
-////            }
-////        }
-//        orderType = 1;
-//    }
-//    _count = 1;
-//    header = YES;
-//    [self loadDataWithP:_count andS:10];
-//}
-
 -(void)createFootView{
     UIView *foot = [[UIView alloc] initWithFrame:CGRectMake(0, HEIGHT-64-49, WIDTH, HEIGHT)];
     foot.backgroundColor = [UIColor colorWithRed:6/255.0 green:143/255.0 blue:206/255.0 alpha:1];
@@ -510,16 +419,6 @@
         _count ++;
     }
     [self loadDataWithP:_count andS:10];
-}
-
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"PageOne"];
-}
-
--(void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"PageOne"];
 }
 
 - (void)didReceiveMemoryWarning {

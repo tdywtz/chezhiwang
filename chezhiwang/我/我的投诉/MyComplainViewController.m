@@ -184,6 +184,7 @@
         if (!showcell) {
             showcell = [[MyComplainShowCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"showcelle"];
         }
+        showcell.selectionStyle = UITableViewCellSelectionStyleNone;
         showcell.parentController = self;
         [showcell setModel:model];
         return showcell;
@@ -193,6 +194,7 @@
     MyComplainCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ID"];
     if (!cell) {
         cell = [[MyComplainCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ID"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     model.isOpen = NO;
     if ([model isEqual:openModel]) {
@@ -263,18 +265,12 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"PageOne"];
-    
+
     if (comont == YES) {
         _count = 1;
         [self loadDataWithP:1 andS:10];
     }
 }
--(void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"PageOne"];
-}
-
 
 /*
 #pragma mark - Navigation

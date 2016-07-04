@@ -7,7 +7,7 @@
 
 #import "BasicViewController.h"
 
-//论坛分类
+/**论坛分类*/
 @interface ForumClassifyListViewController : BasicViewController
 
 @property (nonatomic,copy) NSString *sid;

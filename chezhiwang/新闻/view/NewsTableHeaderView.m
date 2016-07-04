@@ -96,10 +96,14 @@
 
 -(void)makeUI{
     self.buttonTop   = [LHController createButtnFram:CGRectZero Target:self Action:@selector(buttonClick:) Text:nil];
+    self.buttonTop.titleLabel.font = [UIFont systemFontOfSize:15];
     [self.buttonTop setTitleColor:colorOrangeRed forState:UIControlStateNormal];
     
     self.buttonLeft  = [LHController createButtnFram:CGRectZero Target:self Action:@selector(buttonClick:) Text:nil];
+     self.buttonLeft.titleLabel.font = [UIFont systemFontOfSize:13];
+
     self.buttonRight = [LHController createButtnFram:CGRectZero Target:self Action:@selector(buttonClick:) Text:nil];
+     self.buttonRight.titleLabel.font = [UIFont systemFontOfSize:13];
     
     self.scrollView  = [[UIScrollView alloc] initWithFrame:CGRectZero];
     self.scrollView.delegate = self;
@@ -130,14 +134,15 @@
     
     [self.buttonLeft makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.buttonTop.bottom);
-        make.left.equalTo(10);
+        make.left.greaterThanOrEqualTo(10);
         make.height.equalTo(20);
-        make.right.equalTo(self.buttonRight.left).offset(-10);
+        make.right.equalTo(-WIDTH/2-10);
     }];
     
     [self.buttonRight makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.buttonLeft);
-        make.right.equalTo(-10);
+        make.right.lessThanOrEqualTo(-10);
+        make.left.equalTo(self.buttonLeft.right).offset(10);
         make.height.equalTo(self.buttonLeft);
     }];
     

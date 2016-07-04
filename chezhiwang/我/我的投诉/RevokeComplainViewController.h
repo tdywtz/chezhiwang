@@ -7,7 +7,9 @@
 //
 
 #import "BasicViewController.h"
-
+/**
+ *  申请撤诉
+ */
 @interface RevokeComplainViewController : BasicViewController
 
 @property (nonatomic,strong) NSMutableDictionary *dictionary;

@@ -90,33 +90,28 @@
             [marray addObject:[[LHMenuItem alloc]initWithTitle:titles[i] andImage: [UIImage imageNamed:[@"LHMenu.bundle" stringByAppendingPathComponent:name]]]];
         }
         _items = marray;
-
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    //self.view.backgroundColor = [UIColor colorWithWhite:1 alpha:0.95];
-   
-    UIImageView *iamgeView = [[UIImageView alloc] initWithFrame:self.view.frame];
 
- 
-    iamgeView.image =  self.bluffImage;
-
-    [self.view insertSubview:iamgeView atIndex:0];
-
-    
     [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapOnBackground)]];
-    
-    //[self addVisualEffectView];
+    if ([UIDevice currentDevice].systemVersion.floatValue >= 8.0) {
+          [self addVisualEffectView];
+    }else{
+        UIImageView *iamgeView = [[UIImageView alloc] initWithFrame:self.view.frame];
+        iamgeView.image =  self.bluffImage;
+        [self.view insertSubview:iamgeView atIndex:0];
+    }
+
     [self setUpView];
     [self showItems];
 }
 
 -(void)setBluffImageWithView:(UIView *)view{
-   // self.bluffImage = [self snapshootView:view];
+
     UIImage *image = [self convertViewToImage:view];
     self.bluffImage = [self blurredImageWithRadius:25.1 iterations:2 tintColor:nil image:image];
 }
@@ -130,15 +125,15 @@
     return image;
 }
 
-//-(void)addVisualEffectView{
-//    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-//
-//    UIVisualEffectView *effectview = [[UIVisualEffectView alloc] initWithEffect:blur];
-//    effectview.frame = self.view.bounds;
-//   
-//    [self.view insertSubview:effectview atIndex:0];
-//    
-//}
+-(void)addVisualEffectView{
+    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+
+    UIVisualEffectView *effectview = [[UIVisualEffectView alloc] initWithEffect:blur];
+    effectview.frame = self.view.bounds;
+   
+    [self.view insertSubview:effectview atIndex:0];
+    
+}
 
 //点击空白处，dismiss
 - (void)didTapOnBackground{
