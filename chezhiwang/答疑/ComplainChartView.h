@@ -15,10 +15,11 @@
 @property (nonatomic,copy) NSString * beginDate;//开始时间
 @property (nonatomic,copy) NSString * endDate;//结束时间
 
-@property (nonatomic,copy) void(^block)(NSInteger index);
+@property (nonatomic,copy) void(^block)(NSInteger index, BOOL initialSetUp);
 
--(instancetype)initWithFrame:(CGRect)frame titles:(NSArray *)titles block:(void(^)(NSInteger index))block;
+-(instancetype)initWithFrame:(CGRect)frame titles:(NSArray *)titles block:(void(^)(NSInteger index, BOOL initialSetUp))block;
 -(void)setTitle:(NSString *)title tid:(NSString *)tid index:(NSInteger)index;
 
 - (NSString *)gettidWithIndex:(NSInteger)index;
+- (void)hideBarWithIndex:(NSInteger)index;
 @end

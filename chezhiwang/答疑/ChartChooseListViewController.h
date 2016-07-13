@@ -66,5 +66,7 @@ typedef NS_ENUM(NSInteger,ChartChooseType) {
 @property (nonatomic,copy) void(^chooseDeate)(NSString *beginDate , NSString *endDate);
 
 -(instancetype)initWithType:(ChartChooseType)type direction:(DirectionStyle)direction;
+- (void)loadDataWithChartView;//排行榜数据
+- (void)loadDataWithTestView;//新闻-评测-精品试驾
 
 @end

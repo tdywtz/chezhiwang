@@ -59,10 +59,23 @@
     n4.navigationItem.title    = @"论坛";
     my.title                   = @"我";
     self.viewControllers  = @[n1,n2,n3,n4,n5];
-   
+
     [self createCustomTabBar];
+
+    //NSSetUncaughtExceptionHandler(&UncaughtExceptionHandler(NSException *exception));
 }
 
+//void UncaughtExceptionHandler(NSException *exception) {
+//
+//    　　NSArray *arr = [exception callStackSymbols];//得到当前调用栈信息
+//
+//    　　NSString *reason = [exception reason];//非常重要，就是崩溃的原因
+//
+//    　　NSString *name = [exception name];//异常类型
+//
+//    　　NSLog(@"exception type : %@ n crash reason : %@ n call stack info : %@", name, reason, arr);
+//    
+//    　　}
 
 //处理 UITabBarItem
 -(void)createCustomTabBar{

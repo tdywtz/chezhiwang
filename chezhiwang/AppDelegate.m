@@ -11,6 +11,7 @@
 #import "UMSocial.h"
 #import "UMSocialQQHandler.h"
 #import "UMSocialWechatHandler.h"
+#import "UMSocialSinaSSOHandler.h"
 #import "CZWAppPrompt.h"
 
 
@@ -36,7 +37,7 @@
    // [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     //
     //[[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navigation"] forBarMetrics:UIBarMetricsDefault];
-    
+
     [UMSocialData setAppKey:@"55f8e766e0f55a5cb5001444"];
 
     [MobClick startWithAppkey:@"55f8e766e0f55a5cb5001444" reportPolicy:BATCH channelId:@""];
@@ -46,7 +47,10 @@
     [UMSocialQQHandler setQQWithAppId:@"1104889760" appKey:@"UKjSmfNFesY8GrPx" url:@"http://www.12365auto.com"];
     [UMSocialWechatHandler setWXAppId:@"wxfdc8e48568025b98" appSecret:@"2a61fc9735d8fbd1dbd946e8fb6b14ce" url:@"http://www.12365auto.com"];
     
- 
+    [UMSocialSinaSSOHandler openNewSinaSSOWithAppKey:@"2288638211"
+                                           secret:@"b79a37a46aae4533c30204781a11ae24"
+                                      RedirectURL:@"http://sns.whalecloud.com/sina2/callback"];
+
      [HttpRequest GET:@"http://m.12365auto.com/server/forAppWebService.ashx?act=zlcti" success:^(id responseObject) {
          [[FmdbManager shareManager] createQuestion:responseObject];
 

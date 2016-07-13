@@ -51,7 +51,7 @@
     timeLabel.textColor = colorLightGray;
    
     imageView = [[UIImageView alloc] initWithFrame:CGRectMake(WIDTH-20, 30, 15, 15)];
-    imageView.image = [UIImage imageNamed:@"top"];
+    imageView.image = [UIImage imageNamed:@"arrowu"];
    
   
     
@@ -85,6 +85,11 @@
         make.top.equalTo(haveLabel.bottom).offset(10);
         make.left.bottom.and.right.equalTo(0);
         make.height.equalTo(1);
+    }];
+
+    [imageView makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(-20);
+        make.centerY.equalTo(0);
     }];
 }
 

@@ -21,6 +21,7 @@
     if (self.navigationController.viewControllers.count > 1) {
         [self createLeftItemBack];
     }
+
    // [self setNagitionBar];
 }
 -(void)setNagitionBar{
@@ -75,6 +76,7 @@
     }
     return _scrollView;
 }
+
 
 - (UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleLightContent;

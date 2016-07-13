@@ -174,12 +174,12 @@
 -(void)longFrame:(BOOL)yes FloatY:(CGFloat)y{
     if (yes) {
         [UIView animateWithDuration:0.3 animations:^{
-            _tabelView.frame = CGRectMake(0, 0, WIDTH, HEIGHT-64);
+            _tabelView.frame = self.view.frame;
             //_tabelView.contentOffset = CGPointMake(0, y);
         }];
     }else{
         [UIView animateWithDuration:0.3 animations:^{
-           _tabelView.frame = CGRectMake(0, 0, WIDTH, HEIGHT-64-200);
+            _tabelView.frame = CGRectMake(0, 0, WIDTH, HEIGHT-200);
             _tabelView.contentOffset = CGPointMake(0, y);
         }];
     }
@@ -221,7 +221,7 @@
     
                // doneBt.hidden = YES;
             }
-            CGFloat f =  80+num*40-(HEIGHT-64-240);
+            CGFloat f =  80+num*40-(HEIGHT-240);
             if (f > 0) {
                 [self longFrame:NO FloatY:f];
             }
@@ -348,6 +348,8 @@
         [cell.contentView addSubview:label];
         
         UITextField *textfield = [LHController createTextFieldWithFrame:CGRectMake(80, label.frame.origin.y, WIDTH-80-20, 30) andBGImageName:@"textView.png" andPlaceholder:@"" andTextFont:B-1 andSmallImageName:@"xuanze.png" andDelegate:self];
+        textfield.layer.borderWidth = 1;
+        textfield.layer.borderColor = colorLineGray.CGColor;
         [cell.contentView addSubview:textfield];
         textfield.returnKeyType = UIReturnKeyDone;
         if (i == 0){
@@ -578,7 +580,7 @@
 -(void)datePickerShow:(BOOL)hide{
     if (hide) {
         [UIView animateWithDuration:0.3 animations:^{
-            DatePickView.frame = CGRectMake(0, HEIGHT-64-220, WIDTH, 220);
+            DatePickView.frame = CGRectMake(0, HEIGHT-220, WIDTH, 220);
         }];
     }else{
         [UIView animateWithDuration:0.3 animations:^{
@@ -654,9 +656,9 @@
     if (yesORno) {
         [self.cellTextField endEditing:YES];
         [UIView animateWithDuration:0.2 animations:^{
-            _pickViewOfView.frame = CGRectMake(0, HEIGHT-64-220, WIDTH, 220);
+            _pickViewOfView.frame = CGRectMake(0, HEIGHT-220, WIDTH, 220);
             _tabelView.contentOffset = CGPointMake(_point.x, 45*10-HEIGHT+286+160);
-            _tabelView.frame = CGRectMake(0, 0, WIDTH, HEIGHT-200-64);
+            _tabelView.frame = CGRectMake(0, 0, WIDTH, HEIGHT-200);
            
         }];
 //        double delayInSeconds = 0.3;
@@ -668,7 +670,7 @@
         [UIView animateWithDuration:0.2 animations:^{
             _pickViewOfView.frame = CGRectMake(0, HEIGHT, WIDTH, 220);
            // _tabelView.contentOffset = CGPointMake(0, 0);
-            _tabelView.frame = CGRectMake(0, 0, WIDTH, HEIGHT-64);
+            _tabelView.frame = self.view.frame;
         }];
        
     }

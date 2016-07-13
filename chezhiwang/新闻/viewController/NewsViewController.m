@@ -54,6 +54,7 @@
             [array addObject:vc];
         }
     }
+    
     NewsInvestigateViewController *investigate = [[NewsInvestigateViewController alloc] init];
     [array addObject:investigate];
     
@@ -68,10 +69,22 @@
     [btn setImage:[UIImage imageNamed:@"search"] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(searchClick) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
+
+
+
+    LHLabel *label = [[LHLabel alloc] initWithFrame:CGRectMake(100, 100, 200, 200)];
+    label.preferredMaxLayoutWidth = 200;
+    [self.view addSubview:label];
+    [label makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(CGPointZero);
+    }];
 }
 
 #pragma mark - 搜索按钮
 -(void)searchClick{
+//    [self.navigationController pushViewController:[[NSClassFromString(@"SearchViewController") alloc] initWithSearchResultsController:nil] animated:YES];
+//    return;
+
     NSArray *typeArray = @[
                            @"0",@"1",@"5",@"14",@"4",@"15",@"2",@"13",
                            @"6",@"9",@"16",@"17",@"18",@"19",@""
@@ -106,9 +119,11 @@
 
 #pragma mark - LHToolScrollViewDelegate
 -(void)clickLeft:(NSInteger)index{
+    _searchIndex = index;
     [newsView setViewControllerWithCurrent:index];
 }
 -(void)clickRight:(NSInteger)index{
+    _searchIndex = index;
     [newsView setViewControllerWithCurrent:index];
 }
 

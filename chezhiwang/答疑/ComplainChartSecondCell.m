@@ -59,8 +59,6 @@
         _chartLabel.text = model.number;
         _brandLabel.text = model.brandName;
         _percentageLabel.text = model.percentage;
-
-  
 }
 
 - (void)awakeFromNib {

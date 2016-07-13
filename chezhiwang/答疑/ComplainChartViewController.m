@@ -68,7 +68,7 @@
     }];
     
     __weak __typeof(self)weakSelf = self;
-    _headerView = [[ComplainChartView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 44) titles:@[@"时间",@"车型属性",@"品牌属性",@"系别",@"质量问题"] block:^(NSInteger index) {
+    _headerView = [[ComplainChartView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 44) titles:@[@"时间",@"车型属性",@"品牌属性",@"系别",@"质量问题"] block:^(NSInteger index, BOOL initialSetUp) {
        
         DirectionStyle direction = DirectionRight;
         if (index == 2) {

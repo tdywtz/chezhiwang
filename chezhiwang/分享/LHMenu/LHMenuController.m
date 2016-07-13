@@ -113,7 +113,7 @@
 -(void)setBluffImageWithView:(UIView *)view{
 
     UIImage *image = [self convertViewToImage:view];
-    self.bluffImage = [self blurredImageWithRadius:25.1 iterations:2 tintColor:nil image:image];
+    self.bluffImage = [self blurredImageWithRadius:35.1 iterations:2 tintColor:nil image:image];
 }
 
 - (UIImage *) snapshootView:(UIView *)view{

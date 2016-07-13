@@ -35,7 +35,12 @@
 + (NSString *)urlStringForReport;
 /**新闻详情*/
 + (NSString *)urlStringForNewsinfo;
-
+/**新闻详情（新车调查）*/
++ (NSString *)urlString_carownerinfo;
+/**精品试list*/
++ (NSString *)urlString_testDrive;
+/**新闻搜索*/
++ (NSString *)urlStringForNewsSearch;
 
 
 #pragma mark - 投诉排行
@@ -99,8 +104,10 @@
 + (NSString *)urlStringForPostInfo;
 /**论坛车系品牌*/
 + (NSString *)urlStringForOtherSeries;
-/**指定论坛*/
+/**论坛分类->品牌论坛->指定论坛*/
 + (NSString *)urlStringForSeriesForm;
+/**论坛分类->栏目论坛->指定论坛*/
++ (NSString *)urlString_columnform;
 /**回复帖子*/
 + (NSString *)urlStringForReplyPost;
 /**回复其中一条评论*/
@@ -109,7 +116,12 @@
 + (NSString *)urlStringForApplyOwner;
 /**发表帖子*/
 + (NSString *)urlStringForNewTopic;
-
+/**下载用户数据*/
++ (NSString *)urlString_getApplyOwner;
+/**论坛分类->品牌论坛->论坛列表*/
++ (NSString *)urlStringForBrand_postlist;
+/**论坛分类->栏目论坛->论坛列表*/
++ (NSString *)urlStringForColumn_postlist;
 
 #pragma Mark- 个人中心
 /**获取用户信息*/
@@ -126,6 +138,8 @@
 + (NSString *)urlStringForDetail;
 /**插卡撤诉未成功原因*/
 + (NSString *)urlString_delComNoReason;
+/**申请撤诉-原因选择列表*/
++ (NSString *)urlString_delComTypeList;
 
 /**我的评论*/
 + (NSString *)urlStringForComplainScore;

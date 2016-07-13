@@ -11,13 +11,11 @@
 @implementation URLFile
 
 + (NSString *)stringWithBasic:(NSString *)actString{
-    NSString *basicString = nil;
+    NSString *basicString;
 
-#ifdef DEBUG
- // NSLog(@"debug");
+#if DEBUG
    basicString = @"http://192.168.1.114:8888/server/forAppWebService.ashx?";
 #else
-   //  NSLog(@"release");
    basicString = @"http://m.12365auto.com/server/forAppWebService.ashx?";
 #endif
 
@@ -57,7 +55,20 @@
     return [self stringWithBasic:@"act=newsinfo&id=%@"];
 }
 
+/**新闻详情（新车调查）*/
++ (NSString *)urlString_carownerinfo{
+    return [self stringWithBasic:@"act=carownerinfo&id=%@"];
+}
 
+/**精品试驾list*/
++ (NSString *)urlString_testDrive{
+    return [self stringWithBasic:@"act=testDrive&bid=%@&sid=%@&mattr=%@&battr=%@&dep=%@&p=%ld&s=10"];
+}
+
+/**新闻搜索*/
++ (NSString *)urlStringForNewsSearch{
+    return [self stringWithBasic:@"act=news&style=%@&title=%@&p=%ld&s=%ld"];
+}
 
 #pragma mark - 投诉
 /**大品牌*/
@@ -186,10 +197,14 @@
 + (NSString *)urlStringForOtherSeries{
     return  [self stringWithBasic:@"act=otherseries"];
 }
-/**指定论坛*/
+/**论坛分类->品牌论坛->指定论坛*/
 + (NSString *)urlStringForSeriesForm
 {
     return [self stringWithBasic:@"act=seriesform&sid=%@"];
+}
+/**论坛分类->栏目论坛->指定论坛*/
++ (NSString *)urlString_columnform{
+    return [self stringWithBasic:@"act=columnform&cid=%@"];
 }
 /**回复帖子*/
 + (NSString *)urlStringForReplyPost{
@@ -206,6 +221,18 @@
 /**发表帖子*/
 + (NSString *)urlStringForNewTopic{
     return [self stringWithBasic:@"act=newtopic"];
+}
+/**下载用户数据*/
++ (NSString *)urlString_getApplyOwner{
+    return [self stringWithBasic:@"act=getApplyOwner&uid=%@"];
+}
+/**论坛分类->品牌论坛->论坛列表*/
++ (NSString *)urlStringForBrand_postlist{
+    return [self stringWithBasic:@"act=postlist&sid=%@&order=%ld&topic=%ld&p=%ld&s=%ld"];
+}
+/**论坛分类->栏目论坛->论坛列表*/
++ (NSString *)urlStringForColumn_postlist{
+    return  [self stringWithBasic:@"act=postlist&cid=%@&order=%ld&topic=%ld&p=%ld&s=%ld"];
 }
 
 #pragma mark-个人中心
@@ -238,6 +265,12 @@
 + (NSString *)urlString_delComNoReason{
     return [self stringWithBasic:@"act=delComNoReason&cpid=%@"];
 }
+
+/**申请撤诉-原因选择列表*/
++ (NSString *)urlString_delComTypeList{
+    return [self stringWithBasic:@"act=delComTypeList"];
+}
+
 
 /**我的评论*/
 + (NSString *)urlStringForComplainScore{

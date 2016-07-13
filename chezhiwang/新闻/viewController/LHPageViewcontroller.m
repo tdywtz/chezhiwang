@@ -123,7 +123,7 @@
     }else{
         self.toLeftAndRgiht = 0;
     }
-
+    
 }
 
 #pragma mark - UIPageViewControllerDataSource
@@ -186,7 +186,6 @@
         if ([self.LHDelegate respondsToSelector:@selector(didFinishAnimatingApper:)]) {
             [self.LHDelegate didFinishAnimatingApper:self.current];
         }
-
     }
 }
 

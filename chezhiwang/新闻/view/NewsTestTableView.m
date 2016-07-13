@@ -16,8 +16,8 @@
 
 @interface TestLabel : LHLabel
 
-@property (nonatomic,assign) CGFloat draw_x;
-@property (nonatomic,assign) CGFloat cornerRadius;
+@property (nonatomic,assign) CGFloat draw_x;//突角点x坐标
+@property (nonatomic,assign) CGFloat cornerRadius;//弧度半径
 @end
 
 @implementation TestLabel
@@ -38,8 +38,8 @@
     CGContextTranslateCTM(context, 0, self.bounds.size.height);
     CGContextScaleCTM(context, 1.0, -1.0);
 
-    CGContextSetRGBStrokeColor(context, 0/255.0,  220/255.0, 220/255.0, 1);//线条颜色
-    CGContextSetRGBFillColor(context, 0.2, 0.3, 0.8, 0.5);
+    CGContextSetRGBStrokeColor(context, 255/255.0,  147/255.0, 4/255.0, 1);//线条颜色
+    //CGContextSetRGBFillColor(context, 0.2, 0.3, 0.8, 0.5);
     //CGContextMoveToPoint(context, 1, 10);
     CGContextMoveToPoint(context, self.draw_x-5, 10);
     CGContextAddLineToPoint(context, self.draw_x, 5);
@@ -50,7 +50,7 @@
     CGContextAddArcToPoint(context, 1, 10, self.draw_x-5, 10, self.cornerRadius);
   
     CGContextClosePath(context);
-    CGContextDrawPath(context, kCGPathFill);
+    CGContextDrawPath(context, kCGPathStroke);
 
     //三角
      CGContextRef jiantou = UIGraphicsGetCurrentContext();
@@ -94,6 +94,7 @@
     return self;
 }
 
+//设置选中view的背景颜色和标题颜色
 - (void)setCustomBarTitleColor:(UIColor *)color{
     _customTitleLabel.textColor = [UIColor colorWithCGColor:color.CGColor];
     _customImageView.backgroundColor = [UIColor colorWithCGColor:color.CGColor];
@@ -104,7 +105,8 @@
 @interface TestCellIntroduceView : UIView
 
 @property (nonatomic,strong) NSMutableArray <TestCustonBtn *> *buttons;
-@property (nonatomic,strong) TestLabel *contentLabel;
+@property (nonatomic,strong) TestLabel *contentLabel;//文字展示
+@property (nonatomic,strong) NSArray *descArray;//描述数组
 
 @end
 
@@ -130,9 +132,11 @@
             [self addSubview:btn];
             [_buttons addObject:btn];
             if (i == 0) {
-                [btn setCustomBarTitleColor:colorOrangeRed];
+                //设置选中颜色
+                [btn setCustomBarTitleColor:colorYellow];
             }else{
-                [btn setCustomBarTitleColor:colorDeepBlue];
+                //未选中颜色
+                [btn setCustomBarTitleColor:colorLightBlue];
             }
         }
         
@@ -156,20 +160,30 @@
 
 -(void)titleClick:(TestCustonBtn *)btn{
     _contentLabel.draw_x = btn.center.x;
-    
-    _contentLabel.text = [NSString stringWithFormat:@"你哦%ld啊换个卡对方能离开的时间按楼上的结果来看打暑假工诶够多了空格都过了就打开了愤怒的路口及胃癌",[self.buttons indexOfObject:btn]];
+
+    NSInteger index = [self.buttons indexOfObject:btn];
+    if (index < self.buttons.count) {
+        _contentLabel.text = _descArray[index][@"font"];//描述内容
+    }else{
+        _contentLabel.text = @"";
+    }
+
     for (TestCustonBtn *testBtn in self.buttons) {
       
         if ([testBtn isEqual:btn]) {
           
-            [testBtn setCustomBarTitleColor:colorOrangeRed];
+            [testBtn setCustomBarTitleColor:colorYellow];
            
         }else{
-            [testBtn setCustomBarTitleColor:colorDeepBlue];
+            [testBtn setCustomBarTitleColor:colorLightBlue];
         }
     }
 }
 
+- (void)setDescArray:(NSArray *)descArray{
+    _descArray = descArray;
+    [self titleClick:self.buttons[0]];
+}
 
 @end
 
@@ -178,6 +192,8 @@
 
 @interface TimeShowImageView : UIView
 
+@property (nonatomic,copy) void(^block)(NSInteger index, NSArray *urlArray);
+@property (nonatomic,strong) NSArray *urlArray;
 - (void)setImageWithUrl:(NSArray <NSString *>*)urlArray;
 @end
 
@@ -198,8 +214,11 @@
         UIImageView *temp = nil;
         for (int i =  0; i < 4; i ++) {
             UIImageView *imageView = [[UIImageView alloc] init];
+            imageView.tag = 100+i;
             [self addSubview:imageView];
-            
+            imageView.userInteractionEnabled = YES;
+            [imageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewTap:)]];
+
             if (!temp) {
                 [imageView makeConstraints:^(MASConstraintMaker *make) {
                     make.left.equalTo(0);
@@ -224,21 +243,30 @@
     return self;
 }
 
+- (void)imageViewTap:(UITapGestureRecognizer *)tap{
+    NSInteger index = tap.view.tag-100;
+    if (index >= 0 && index < _urlArray.count) {
+        if (self.block) {
+            self.block(index,_urlArray);
+        }
+    }
+}
 
-- (void)setImageWithUrl:(NSArray <NSString *>*)urlArray{
+- (void)setImageWithUrl:(NSArray <NSDictionary *>*)urlArray{
+    _urlArray = urlArray;
     imageViewOne.image = nil;
     imageViewTwo.image = nil;
     imageViewThree.image = nil;
     imageViewFour.image = nil;
     for (int i = 0; i < urlArray.count; i ++) {
         if (i == 0) {
-            [imageViewOne sd_setImageWithURL:[NSURL URLWithString:urlArray[i]] placeholderImage:[UIImage imageNamed:@"defaultImage_icon"]];
+            [imageViewOne sd_setImageWithURL:[NSURL URLWithString:urlArray[i][@"image"]] placeholderImage:[UIImage imageNamed:@"defaultImage_icon"]];
         }else if (i == 1){
-            [imageViewTwo sd_setImageWithURL:[NSURL URLWithString:urlArray[i]] placeholderImage:[UIImage imageNamed:@"defaultImage_icon"]];
+            [imageViewTwo sd_setImageWithURL:[NSURL URLWithString:urlArray[i][@"image"]] placeholderImage:[UIImage imageNamed:@"defaultImage_icon"]];
         }else if (i == 2){
-            [imageViewThree sd_setImageWithURL:[NSURL URLWithString:urlArray[i]] placeholderImage:[UIImage imageNamed:@"defaultImage_icon"]];
+            [imageViewThree sd_setImageWithURL:[NSURL URLWithString:urlArray[i][@"image"]] placeholderImage:[UIImage imageNamed:@"defaultImage_icon"]];
         }else if (i == 3){
-            [imageViewFour sd_setImageWithURL:[NSURL URLWithString:urlArray[i]] placeholderImage:[UIImage imageNamed:@"defaultImage_icon"]];
+            [imageViewFour sd_setImageWithURL:[NSURL URLWithString:urlArray[i][@"image"]] placeholderImage:[UIImage imageNamed:@"defaultImage_icon"]];
         }
     }
 }
@@ -248,15 +276,16 @@
 //
 @interface NewsTestTableViewCell : UITableViewCell
 
-- (void)setdictionary;
+@property (nonatomic,weak) UIViewController *parentController;
+- (void)setdictionary:(NSDictionary *)dictionary;
 @end
 
 @implementation NewsTestTableViewCell
 {
-    UILabel *titleLabel;
-    UIImageView *iconImageView;
-    TestCellIntroduceView *introduceView;
-    TimeShowImageView *showImageView;
+    UILabel *titleLabel;//标题
+    UIImageView *iconImageView;//左侧图片
+    TestCellIntroduceView *introduceView;//右侧5个按钮及描述视图
+    TimeShowImageView *showImageView;//底部图片展示
     
 }
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
@@ -288,6 +317,14 @@
     }];
     
     showImageView = [[TimeShowImageView alloc] init];
+    __weak __typeof(self)weakSelf = self;
+    showImageView.block = ^(NSInteger index, NSArray *urlArray){
+        ImageShowViewController *show = [[ImageShowViewController alloc] init];
+        show.imageUrlArray = urlArray;
+        show.pageIndex = index;
+        show.hidesBottomBarWhenPushed = YES;
+        [weakSelf.parentController.navigationController pushViewController:show animated:YES];
+    };
     
     UIView *line = [[UIView alloc] init];
     line.backgroundColor = colorLineGray;
@@ -338,19 +375,23 @@
     }];
 }
 
-- (void)setdictionary{
-    titleLabel.text = @"家里放极爱是导航奋斗开始给你看到附近";
-    iconImageView.image = [UIImage imageNamed:@"defaultImage_icon"];
-    [showImageView setImageWithUrl:@[@"",@"",@"",@""]];
+- (void)setdictionary:(NSDictionary *)dictionary{
+    titleLabel.text = dictionary[@"title"];
+    [iconImageView sd_setImageWithURL:[NSURL URLWithString:dictionary[@"maxImage"]] placeholderImage:[UIImage imageNamed:@"defaultImage_icon"]];
+    [showImageView setImageWithUrl:dictionary[@"minImage"]];
+    introduceView.descArray = dictionary[@"desc"]; 
 }
+
 @end
 
-#pragma mark - NewsTestTableView
+////////////////////////////////////////////////////////////////////////
+#pragma mark - NewsTestTableView////////////////////////////////////////////////////////////////////
 @interface NewsTestTableView ()<UITableViewDelegate,UITableViewDataSource>
 {
     NSMutableArray *_dataArray;
     UITableView *_tableView;
-    ComplainChartView *chart;
+    ComplainChartView *_chart;//头部选择数据
+    NSInteger _count;
 }
 @property (nonatomic,weak) UIViewController *parentViewController;
 @end
@@ -359,11 +400,19 @@
 
 - (instancetype)initWithFrame:(CGRect)frame parentViewController:(UIViewController *)parent{
     if (self = [super initWithFrame:frame]) {
+         _count = 1;
         _parentViewController = parent;
         _dataArray = [[NSMutableArray alloc] init];
         __weak __typeof(self)wealself = self;
-        chart = [[ComplainChartView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(frame), 80) titles:@[@"品牌",@"车系",@"车型",@"车型属性",@"品牌属性",@"系别"] block:^(NSInteger index) {
+        //创建头部选择按钮
+        _chart = [[ComplainChartView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(frame), 80) titles:@[@"品牌",@"车系",@"车型",@"车型属性",@"品牌属性",@"系别"] block:^(NSInteger index, BOOL initialSetUp) {
 
+            if (!initialSetUp) {
+                _count = 1;
+                [wealself loadData];
+                return ;
+            }
+            
             ChartChooseType chooseType;
             if (index == 0) {
                 chooseType = ChartChooseTypeBrand;
@@ -384,11 +433,30 @@
             }
     
             ChartChooseListViewController *choose = [[ChartChooseListViewController alloc] initWithType:chooseType direction:style];
+            //在choose页面选中数据后回调
+            choose.chooseEnd = ^(NSString *title , NSString *tid){
+                [_chart setTitle:title tid:tid index:index];
+                _count = 1;
+    
+                [wealself loadData];
+//                if (chooseType == ChartChooseTypeBrand) {
+//
+//                }else if (chooseType == ChartChooseTypeSeries){
+//
+//                }else if (chooseType == ChartChooseTypeAttributeModel){
+//
+//                }else if (chooseType == ChartChooseTypeAttributeBrand){
+//
+//                }else if (chooseType == ChartChooseTypeAttributeSeries){
+//
+//                }
+            };
             [wealself.parentViewController presentViewController:choose animated:NO completion:nil];
         }];
-        [self addSubview:chart];
+        [_chart hideBarWithIndex:2];//隐藏第三个按钮
+        [self addSubview:_chart];
     
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(chart.frame)+10, CGRectGetWidth(frame), CGRectGetHeight(frame)-CGRectGetHeight(chart.frame)) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(_chart.frame)+10, CGRectGetWidth(frame), CGRectGetHeight(frame)-CGRectGetHeight(_chart.frame)) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -396,10 +464,11 @@
         [self addSubview:_tableView];
         
         [_tableView makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(chart.bottom);
+            make.top.equalTo(_chart.bottom);
             make.left.and.right.equalTo(0);
             make.bottom.equalTo(0);
         }];
+
         [self loadData];
     }
     
@@ -407,7 +476,20 @@
 }
 
 - (void)loadData{
-    
+    NSString *bid = [_chart gettidWithIndex:0];
+    NSString *sid = [_chart gettidWithIndex:1];
+    NSString *mattr = [_chart gettidWithIndex:3];
+    NSString *battr = [_chart gettidWithIndex:4];
+    NSString *dep = [_chart gettidWithIndex:5];
+
+    NSString *url = [NSString stringWithFormat:[URLFile urlString_testDrive],bid,sid,mattr,battr,dep,_count];
+ 
+    [HttpRequest GET:url success:^(id responseObject) {
+        _dataArray = [responseObject[@"rel"] copy];
+        [_tableView reloadData];
+    } failure:^(NSError *error) {
+        
+    }];
 }
 /**
  *  <#Description#>
@@ -425,7 +507,7 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 3;
+    return _dataArray.count;
 }
 
 
@@ -436,18 +518,19 @@
     if (!cell) {
         cell = [[NewsTestTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"testCell"];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.parentController = self.parentViewController;
         
     }
-    [cell setdictionary];
+    [cell setdictionary:_dataArray[indexPath.row]];
     return cell;
     
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    ImageShowViewController *show = [[ImageShowViewController alloc] init];
-    show.hidesBottomBarWhenPushed = YES;
-    [self.parentViewController.navigationController pushViewController:show animated:YES];
-}
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//    ImageShowViewController *show = [[ImageShowViewController alloc] init];
+//    show.hidesBottomBarWhenPushed = YES;
+//    [self.parentViewController.navigationController pushViewController:show animated:YES];
+//}
 
 
 @end

@@ -12,4 +12,7 @@
  */
 @interface ImageShowViewController : BasicViewController
 
+@property (nonatomic,strong) NSArray *imageUrlArray;
+@property (nonatomic,assign) NSInteger pageIndex;
+
 @end

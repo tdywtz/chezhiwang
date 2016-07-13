@@ -10,19 +10,7 @@
 #import "LoginViewController.h"
 #import "ReplyViewController.h"
 #import "WritePostViewController.h"
-#import "UMSocial.h"
-
-typedef enum {
-    pageNumberFirst,
-    pageNumberLast,
-    pageNumberMiddle
-}pageNumber;
-
-//
-//typedef enum {
-//    pageTypeOne = 1,
-//    pageTypeTwo = -pageTypeOne
-//}pageType;
+#import "CZWShareViewController.h"
 
 //web页面按钮类型
 typedef enum {
@@ -33,29 +21,16 @@ typedef enum {
 
 @interface PostViewController ()<UIWebViewDelegate,UIScrollViewDelegate>
 {
-    UIWebView *_webView;
-    UIWebView *_hideWebView;
-    
     UIWebView *_webOne;
-    UIWebView *_webTwo;
-    NSInteger _count;
+
     CustomActivity *activity;
-    
-    UIView *sview;//分享背景
-    UIView *shareView;
     NSString *webHttp;
 }
-@property (nonatomic,strong)NSMutableArray *webDataArray;
-//@property (nonatomic,assign) pageType pagetype;
-@property (nonatomic,assign) pageNumber pagenumber;
 
 @end
 
 @implementation PostViewController
-- (void)dealloc
-{
-    [sview removeFromSuperview];
-}
+
 -(void)loadData{
    
     if (self.http) {
@@ -70,11 +45,7 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.webDataArray = [[NSMutableArray alloc] init];
-    
-    
+
     [self crateRigthItem];
     [self.view addSubview:[[UIView alloc] init]];
     [self createWebView];
@@ -98,10 +69,6 @@ typedef enum {
     _webOne.backgroundColor = [UIColor clearColor];
  
     [self.view addSubview:_webOne];
-    
-    self.pagenumber = pageNumberFirst;
-    _count = 1;
-    _webView = _webOne;
 }
 
 
@@ -141,152 +108,17 @@ typedef enum {
 }
 
 -(void)rightItemClickShare{
-    [self createShare];
+    CZWShareViewController *share = [[CZWShareViewController alloc] initWithParentViewController:self];
+    share.shareUrl = webHttp;
+    share.shareImage = [UIImage imageNamed:@"Icon-60"];
+    NSString *html = @"";
+    if (html.length > 100) html = [html substringToIndex:99];
+    share.shareContent = html;
+    share.shareTitle = self.titleText;
+    [share setBluffImageWithView:[UIApplication sharedApplication].keyWindow.rootViewController.view];
+    [self presentViewController:share animated:YES completion:nil];
 }
 
-#pragma mark - 分享
--(void)createShare{
-    if (shareView) {
-        sview.hidden = NO;
-        [UIView animateWithDuration:0.3 animations:^{
-            shareView.frame = CGRectMake(0, HEIGHT-260, WIDTH, 260);
-        }];
-    }else{
-        
-        [self createShareView];
-        sview.hidden = NO;
-        [UIView animateWithDuration:0.3 animations:^{
-            shareView.frame = CGRectMake(0, HEIGHT-260, WIDTH, 260);
-        }];
-    }
-}
-
--(void)createShareView{
-    sview = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    sview.backgroundColor = RGB_color(0, 0, 0, 0.5);
-    [[UIApplication sharedApplication].keyWindow addSubview:sview];
-    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
-    [sview addGestureRecognizer:tap];
-    
-    shareView = [[UIView alloc] initWithFrame:CGRectMake(0, HEIGHT, WIDTH, 260)];
-    shareView.backgroundColor = [UIColor whiteColor];
-    [sview addSubview:shareView];
-    
-    //NSArray *imageAray = @[];
-    NSArray *array = @[@"QQ好友",@"微信朋友圈",@"微信",@"新浪微博",@"QQ空间",@"复制链接"];
-    for (int i = 0; i < array.count; i ++) {
-        
-        UIButton *btn = [LHController createButtnFram:CGRectMake(15+WIDTH/3*(i%3), 15+110*(i/3), 80, 80) Target:self Action:@selector(shareClick:) Text:nil];
-        [btn setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"fenxiang%d",i+1]] forState:UIControlStateNormal];
-        btn.tag = 100+i;
-        [shareView addSubview:btn];
-        
-        UILabel *label = [LHController createLabelWithFrame:CGRectMake(15+WIDTH/3*(i%3), 15+110*(i/3)+80, 80, 20) Font:[LHController setFont]-4 Bold:NO TextColor:nil Text:array[i]];
-        label.textAlignment = NSTextAlignmentCenter;
-        [shareView addSubview:label];
-    }
-}
-
-#pragma mark - 背景view手势
--(void)tap:(UITapGestureRecognizer *)tap{
-    sview.hidden = YES;
-    shareView.frame = CGRectMake(0, HEIGHT, WIDTH, 200);
-}
-
-#pragma mark - 分享响应方法
--(void)shareClick:(UIButton *)btn{
-    sview.hidden = YES;
-    shareView.frame = CGRectMake(0, HEIGHT, WIDTH, 200);
-    
-    NSString *urlString = webHttp;
-    
-    UIImage *shareImage = [UIImage imageNamed:@"Icon-60"];
-    NSString *content = @"";//self.dict[@"content"] == nil?self.dict[@"Content"]:self.dict[@"content"];
-    if (content.length > 100) content = [content substringToIndex:99];
-    NSString *shareContent = content;
-    NSString *shareTitle = self.titleText;//self.textTitle;
-    NSString *shareUrl = webHttp;
-    switch (btn.tag) {
-        case 100:
-        {
-            [UMSocialData defaultData].extConfig.qqData.url = shareUrl;
-            [UMSocialData defaultData].extConfig.qqData.title =shareTitle;
-            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:shareContent image:shareImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-                if (response.responseCode == UMSResponseCodeSuccess) {
-                    //NSLog(@"分享成功！");
-                }
-            }];
-        }
-            break;
-            
-        case 101:
-        {
-            [UMSocialData defaultData].extConfig.wechatTimelineData.url = shareUrl;
-            //[UMSocialData defaultData].extConfig.wechatSessionData.shareText = @"dasfas";
-            [UMSocialData defaultData].extConfig.wechatTimelineData.title = shareTitle;
-            [UMSocialData defaultData].extConfig.wechatTimelineData.wxMessageType = UMSocialWXMessageTypeWeb;
-            
-            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:shareContent image:shareImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-                if (response.responseCode == UMSResponseCodeSuccess) {
-                    //NSLog(@"分享成功！");
-                }
-            }];
-            
-        }
-            break;
-            
-        case 102:
-        {
-            [UMSocialData defaultData].extConfig.wechatSessionData.url = shareUrl;
-            // [UMSocialData defaultData].extConfig.wechatSessionData.shareText = shareContent;
-            [UMSocialData defaultData].extConfig.wechatSessionData.title = shareTitle;
-            [UMSocialData defaultData].extConfig.wechatSessionData.wxMessageType = UMSocialWXMessageTypeWeb;
-            
-            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:shareContent image:shareImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-                if (response.responseCode == UMSResponseCodeSuccess) {
-                }
-            }];
-        }
-            break;
-            
-        case 103:
-        {
-            
-            [[UMSocialControllerService defaultControllerService] setShareText:urlString shareImage:nil socialUIDelegate:self];        //设置分享内容和回调对象
-            [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToSina].snsClickHandler(self,[UMSocialControllerService defaultControllerService],YES);
-            //  isAhare = YES;
-        }
-            break;
-            
-        case 104:
-        {
-            [UMSocialData defaultData].extConfig.qzoneData.url = shareUrl;
-            [UMSocialData defaultData].extConfig.qzoneData.title = shareTitle;
-            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQzone] content:shareContent image:shareImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-                if (response.responseCode == UMSResponseCodeSuccess) {
-                    // NSLog(@"分享成功！");
-                }
-            }];
-            
-        }
-            break;
-            
-        case 105:
-        {
-            //  http = self.dict[@"url"];
-            UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"复制成功" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
-            [al show];
-            [UIView animateWithDuration:0.3 animations:^{
-                [al dismissWithClickedButtonIndex:0 animated:YES];
-            }];
-        }
-            break;
-            
-        default:
-            break;
-    }
-}
 
 #pragma mark - UIScrollViewDelegate
 //动画结束
@@ -365,16 +197,6 @@ typedef enum {
         }
         [self presentViewController:nvc animated:YES completion:nil];
     }
-}
-
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"PageOne"];
-}
-
--(void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"PageOne"];
 }
 
 - (void)didReceiveMemoryWarning {

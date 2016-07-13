@@ -88,21 +88,24 @@
         if (weakSelf.timer == nil) {
             weakSelf.timer = [NSTimer scheduledTimerWithTimeInterval:3 target:weakSelf selector:@selector(scrollPages) userInfo:nil repeats:YES];
         }
-
     } failure:^(NSError *error) {
         
     }];
 }
 
 -(void)makeUI{
+
+
     self.buttonTop   = [LHController createButtnFram:CGRectZero Target:self Action:@selector(buttonClick:) Text:nil];
     self.buttonTop.titleLabel.font = [UIFont systemFontOfSize:15];
     [self.buttonTop setTitleColor:colorOrangeRed forState:UIControlStateNormal];
     
     self.buttonLeft  = [LHController createButtnFram:CGRectZero Target:self Action:@selector(buttonClick:) Text:nil];
+    [self.buttonLeft setTitleColor:colorDeepGray forState:UIControlStateNormal];
      self.buttonLeft.titleLabel.font = [UIFont systemFontOfSize:13];
 
     self.buttonRight = [LHController createButtnFram:CGRectZero Target:self Action:@selector(buttonClick:) Text:nil];
+    [self.buttonRight setTitleColor:colorDeepGray forState:UIControlStateNormal];
      self.buttonRight.titleLabel.font = [UIFont systemFontOfSize:13];
     
     self.scrollView  = [[UIScrollView alloc] initWithFrame:CGRectZero];
@@ -111,13 +114,19 @@
     self.scrollView.bounces = NO;
     self.scrollView.scrollsToTop = NO;
     
-    self.imageTitleLabel = [LHController createLabelWithFrame:CGRectZero Font:15 Bold:NO TextColor:colorDeepGray Text:nil];
+    self.imageTitleLabel = [LHController createLabelWithFrame:CGRectZero Font:15 Bold:NO TextColor:colorLightBlue Text:nil];
     self.imageTitleLabel.textAlignment = NSTextAlignmentCenter;
     
     self.pageControll = [[UIPageControl alloc] init];
     self.pageControll.pageIndicatorTintColor = [UIColor whiteColor];
     self.pageControll.currentPageIndicatorTintColor = [UIColor colorWithRed:204/255.0 green:5/255.0 blue:10/255.0 alpha:1];
-    
+
+    UIView *lineView1 = [[UIView alloc] init];
+    lineView1.backgroundColor = [UIColor whiteColor];
+    UIView *lineView2 = [[UIView alloc] init];
+    lineView2.backgroundColor = [UIColor whiteColor];
+    UIView *lineView3 = [[UIView alloc] init];
+    lineView3.backgroundColor = colorLightGray;
     
     [self addSubview:self.buttonTop];
     [self addSubview:self.buttonLeft];
@@ -125,17 +134,25 @@
     [self addSubview:self.scrollView];
     [self addSubview:self.imageTitleLabel];
     [self addSubview:self.pageControll];
-    
+
+    [self addSubview:lineView1];
+     [self addSubview:lineView2];
+     [self addSubview:lineView3];
+
+    [lineView1 makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.equalTo(0);
+        make.height.equalTo(4);
+    }];
     [self.buttonTop makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(10);
         make.centerX.equalTo(0);
-        make.size.lessThanOrEqualTo(CGSizeMake(WIDTH, 20));
+        make.size.lessThanOrEqualTo(CGSizeMake(WIDTH, 25));
     }];
     
     [self.buttonLeft makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.buttonTop.bottom);
         make.left.greaterThanOrEqualTo(10);
-        make.height.equalTo(20);
+        make.height.equalTo(25);
         make.right.equalTo(-WIDTH/2-10);
     }];
     
@@ -145,9 +162,15 @@
         make.left.equalTo(self.buttonLeft.right).offset(10);
         make.height.equalTo(self.buttonLeft);
     }];
-    
+
+    [lineView2 makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(0);
+        make.top.equalTo(self.buttonLeft.bottom).offset(4);
+        make.height.equalTo(lineView1);
+    }];
+
     [self.scrollView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.buttonLeft.bottom);
+        make.top.equalTo(lineView2.bottom);
         make.left.equalTo(0);
         make.right.equalTo(0);
         make.bottom.equalTo(self.imageTitleLabel.top);
@@ -158,7 +181,7 @@
         make.left.equalTo(0);
         make.right.equalTo(0);
         make.bottom.equalTo(0);
-        make.height.equalTo(30);
+        make.height.equalTo(35);
     }];
     
     [self.pageControll makeConstraints:^(MASConstraintMaker *make) {
@@ -166,6 +189,11 @@
         make.right.equalTo(0);
         make.bottom.equalTo(self.scrollView);
         make.height.equalTo(20);
+    }];
+
+    [lineView3 makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(0);
+        make.height.equalTo(1);
     }];
 }
 
@@ -195,7 +223,6 @@
             self.block(dict[@"id"],dict[@"title"]);
         }
     }
-
 }
 
 

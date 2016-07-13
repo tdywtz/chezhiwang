@@ -61,9 +61,9 @@
 
 -(void)setUrl{
     if (self.forumType == forumClassifyBrand) {
-        _urlString = @"http://m.12365auto.com/server/forAppWebService.ashx?act=postlist&sid=%@&order=%ld&topic=%ld&p=%ld&s=%ld";
+        _urlString = [URLFile urlStringForBrand_postlist];
     }else{
-        _urlString = @"http://m.12365auto.com/server/forAppWebService.ashx?act=postlist&cid=%@&order=%ld&topic=%ld&p=%ld&s=%ld";
+        _urlString = [URLFile urlStringForColumn_postlist];
     }
 }
 
@@ -72,7 +72,7 @@
     if (self.forumType == forumClassifyBrand) {
         url = [NSString stringWithFormat:[URLFile urlStringForSeriesForm],self.sid];
     }else{
-        url = [NSString stringWithFormat:@"http://m.12365auto.com/server/forAppWebService.ashx?act=columnform&cid=%@",self.sid];
+        url = [NSString stringWithFormat:[URLFile urlString_columnform],self.sid];
     }
  
   [HttpRequest GET:url success:^(id responseObject) {

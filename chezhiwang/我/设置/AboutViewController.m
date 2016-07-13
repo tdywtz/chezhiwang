@@ -31,7 +31,7 @@
 }
 
 -(void)createUI{
-    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT-64)];
+    _scrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
     [self.view addSubview:_scrollView];
     
     UIImageView *imageView = [LHController createImageViewWithFrame:CGRectMake(0, 0, 150*xs, 150*xs) ImageName:@"Icon-60"];

@@ -90,7 +90,7 @@ typedef enum {
 //tabelview
 -(void)createTableView{
     
-    _tabelView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, WIDTH, HEIGHT-49-64) style:UITableViewStylePlain];
+    _tabelView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
     _tabelView.delegate = self;
     _tabelView.dataSource = self;
     _tabelView.separatorStyle = UITableViewCellSeparatorStyleNone;

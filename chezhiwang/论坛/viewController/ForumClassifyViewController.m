@@ -26,9 +26,16 @@
 @implementation ForumClassifyViewController
 
 -(void)readData{
-    
+
+
+    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeGradient];
+    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleLight];
+    [SVProgressHUD setDefaultAnimationType:SVProgressHUDAnimationTypeNative];
+    [SVProgressHUD setInfoImage:[UIImage imageNamed:@"auto_toolbarRightTriangle@2x"]];
+    [SVProgressHUD showWithStatus:@"正在加载..."];
     NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
     [HttpRequest GET:[URLFile urlStringForOtherSeries] policy:NSURLRequestReturnCacheDataElseLoad success:^(id responseObject) {
+        [SVProgressHUD dismiss];
         for (NSDictionary *dict in responseObject) {
           
             NSString *key = dict[@"letter"];
@@ -54,7 +61,7 @@
         [_tableView reloadData];
 
     } failure:^(NSError *error) {
-        
+        [SVProgressHUD dismiss];
     }];
 }
 
@@ -65,7 +72,6 @@
     _dataArray = [[NSMutableArray alloc] init];
     _indexArray = [[NSMutableArray alloc] init];
 
-    
     [self createTableView];
     [self readData];
 }
@@ -217,16 +223,6 @@
 //回调
 -(void)returnSid:(returnSid)block{
     self.block = block;
-}
-
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"PageOne"];
-}
-
--(void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"PageOne"];
 }
 
 - (void)didReceiveMemoryWarning {

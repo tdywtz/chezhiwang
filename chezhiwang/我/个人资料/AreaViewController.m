@@ -55,7 +55,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
+    self.title = @"地区设置";
+
     self.view.backgroundColor = [UIColor whiteColor];
     _pickDataArray  = [[NSMutableArray alloc] init];
     B = [LHController setFont];
@@ -119,17 +121,15 @@
     if(gao < 0) gao = 0;
     
     [UIView animateWithDuration:0.3 animations:^{
-        scrollView.frame = CGRectMake(0, 0, WIDTH, HEIGHT-64-height);
+        scrollView.frame = CGRectMake(0, 0, WIDTH, HEIGHT-height);
         scrollView.contentOffset = CGPointMake(0, gao);
     }];
 }
 
 -(void)keyboardHide:(NSNotification *)notification
 {
-    [UIView animateWithDuration:0.3 animations:^{
-        scrollView.frame = CGRectMake(0, 0, WIDTH, HEIGHT-64);
-    }];
-    //doneBt.hidden = YES;
+
+    scrollView.frame = self.view.frame;
 }
 
 #pragma mark - 初始数据
@@ -180,6 +180,8 @@
     NSArray *array = @[@"选择省份",@"选择市区",@"选择县区"];
     for (int i = 0; i < array.count; i ++) {
         UITextField *textField = [LHController createTextFieldWithFrame:CGRectMake(LEFT+90, 40+i*35, WIDTH-90-LEFT*2, 30) andBGImageName:@"textView.png" andPlaceholder:array[i] andTextFont:B andSmallImageName:@"xuanze.png" andDelegate:self];
+        textField.layer.borderColor =  colorLineGray.CGColor;
+        textField.layer.borderWidth = 1;
         [scrollView addSubview:textField];
         if (i == 0) {
             province = textField;
@@ -196,24 +198,24 @@
     
     UILabel *label2 = [LHController createLabelWithFrame:CGRectMake(LEFT, 160, 90, 30) Font:B Bold:NO TextColor:[UIColor grayColor] Text:@"街道地址:"];
     [scrollView addSubview:label2];
-    
-    UIImageView *iamgeView = [[UIImageView alloc] initWithFrame:CGRectMake(LEFT+90, 160, WIDTH-90-LEFT*2, 100)];
-    iamgeView.image = [UIImage imageNamed:@"textView.png"];
-    iamgeView.userInteractionEnabled = YES;
-    [scrollView addSubview:iamgeView];
-    jiedao = [[UITextView alloc] initWithFrame:CGRectMake(1, 1, iamgeView.frame.size.width-2, iamgeView.frame.size.height-2)];
+
+    jiedao = [[UITextView alloc] initWithFrame:CGRectMake(LEFT+90, 160, WIDTH-90-LEFT*2, 100)];
     jiedao.delegate = self;
     jiedao.font = [UIFont systemFontOfSize:B];
-    [iamgeView addSubview:jiedao];
+    jiedao.layer.borderWidth = 1;
+    jiedao.layer.borderColor = colorLineGray.CGColor;
+    [scrollView addSubview:jiedao];
     
-    UIView *fg2 = [[UIView alloc] initWithFrame:CGRectMake(0, iamgeView.frame.origin.y+iamgeView.frame.size.height+10, WIDTH, 1)];
+    UIView *fg2 = [[UIView alloc] initWithFrame:CGRectMake(0, jiedao.frame.origin.y+jiedao.frame.size.height+10, WIDTH, 1)];
     fg2.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1];
     [scrollView addSubview:fg2];
 
-    UILabel *label3 = [LHController createLabelWithFrame:CGRectMake(LEFT, iamgeView.frame.origin.y+iamgeView.frame.size.height+20, 90, 30) Font:B Bold:NO TextColor:[UIColor grayColor] Text:@"邮政编码:"];
+    UILabel *label3 = [LHController createLabelWithFrame:CGRectMake(LEFT, jiedao.frame.origin.y+jiedao.frame.size.height+20, 90, 30) Font:B Bold:NO TextColor:[UIColor grayColor] Text:@"邮政编码:"];
     [scrollView addSubview:label3];
-    postcode = [LHController createTextFieldWithFrame:CGRectMake(LEFT+90, iamgeView.frame.origin.y+iamgeView.frame.size.height+20, WIDTH-90-LEFT*2, 30) andBGImageName: @"textView.png" andPlaceholder:nil andTextFont:B andSmallImageName:nil andDelegate:self];
+    postcode = [LHController createTextFieldWithFrame:CGRectMake(LEFT+90, jiedao.frame.origin.y+jiedao.frame.size.height+20, WIDTH-90-LEFT*2, 30) andBGImageName: @"textView.png" andPlaceholder:nil andTextFont:B andSmallImageName:nil andDelegate:self];
     [scrollView addSubview:postcode];
+    postcode.layer.borderColor = colorLineGray.CGColor;
+    postcode.layer.borderWidth = 1;
     postcode.keyboardType = UIKeyboardTypeNumberPad;
     
     UIButton *btn = [LHController createButtnFram:CGRectMake(LEFT, postcode.frame.origin.y+postcode.frame.size.height+30, WIDTH-LEFT*2, 35) Target:self Action:@selector(postClick) Font:B Text:@"保存"];
@@ -350,7 +352,7 @@
 -(void)showPickView:(BOOL)yesORno{
     if (yesORno) {
         [UIView animateWithDuration:0.2 animations:^{
-            _pickViewOfView.frame = CGRectMake(0, HEIGHT-64-220, WIDTH, 220);
+            _pickViewOfView.frame = CGRectMake(0, HEIGHT-220, WIDTH, 220);
          
         }];
         

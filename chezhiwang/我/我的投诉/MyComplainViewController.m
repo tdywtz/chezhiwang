@@ -183,6 +183,7 @@
         MyComplainShowCell *showcell = [tableView dequeueReusableCellWithIdentifier:@"showcell"];
         if (!showcell) {
             showcell = [[MyComplainShowCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"showcelle"];
+            showcell.contentView.backgroundColor = colorLineGray;
         }
         showcell.selectionStyle = UITableViewCellSelectionStyleNone;
         showcell.parentController = self;
@@ -197,8 +198,10 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     model.isOpen = NO;
+    cell.contentView.backgroundColor = [UIColor clearColor];
     if ([model isEqual:openModel]) {
         model.isOpen = YES;
+        cell.contentView.backgroundColor = colorLineGray;
     }
     
     cell.model = model;
@@ -226,9 +229,11 @@
         myModel = [[MyComplainModel alloc] initWithDictionary:[model getDcitonary]];
         [_dataArray insertObject:myModel atIndex:indexPath.row+1];
     }else{
+
         if (index == indexPath.row) {
-            return;
-        }else if (index == indexPath.row+1){
+
+           [_dataArray removeObject:myModel];
+        }else if (index-1 == indexPath.row){
             [_dataArray removeObject:myModel];
         }else{
             

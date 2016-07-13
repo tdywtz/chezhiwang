@@ -8,13 +8,15 @@
 
 #import "ImageShowViewController.h"
 #import "LTInfiniteScrollView.h"
-#import "JT3DScrollView.h"
+#import "LHPageView.h"
 
-@interface ImageShowViewController ()<LTInfiniteScrollViewDataSource,LTInfiniteScrollViewDelegate>
-
+@interface ImageShowViewController ()<LTInfiniteScrollViewDataSource,LTInfiniteScrollViewDelegate,LHPageViewDataSource,LHPageViewDelegate>
+{
+    LHPageView *_pageView;
+    NSMutableArray *_viewArray;
+}
 @property (nonatomic,strong) UILabel *titleLabel;
 @property (nonatomic,strong) LTInfiniteScrollView *LTScollView;
-@property (nonatomic,strong) JT3DScrollView *JTScrollView;
 
 @end
 
@@ -22,36 +24,38 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+
+    _viewArray = [[NSMutableArray alloc] init];
+
     self.titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    [self.view addSubview:self.titleLabel];
-    
+
+    _pageView = [[LHPageView alloc] initWithFrame:CGRectMake(0, 100, WIDTH, 300) space:10];
+    _pageView.delegate = self;
+    _pageView.dataSource = self;
+
     self.LTScollView = [[LTInfiniteScrollView alloc] initWithFrame:CGRectZero];
     self.LTScollView.verticalScroll = NO;
     self.LTScollView.delegate = self;
     self.LTScollView.dataSource = self;
     self.LTScollView.maxScrollDistance = 13;
-   
+
+     [self.view addSubview:self.titleLabel];
+    [self.view addSubview:_pageView];
     [self.view addSubview:self.LTScollView];
     
-    self.JTScrollView = [[JT3DScrollView alloc] initWithFrame:CGRectZero];
-    self.JTScrollView.effect = JT3DScrollViewEffectDepth;
-    [self.view addSubview:self.JTScrollView];
-    
-    
+
     [self.titleLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.equalTo(0);
         make.top.equalTo(64);
         make.height.equalTo(50);
     }];
-    
-    [self.JTScrollView makeConstraints:^(MASConstraintMaker *make) {
+
+    [_pageView makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(0);
         make.top.equalTo(self.titleLabel.bottom);
         make.bottom.equalTo(self.LTScollView.top);
-        make.left.equalTo(80);
-        make.right.equalTo(-80);
     }];
-    
+
     [self.LTScollView makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(0);
         make.right.equalTo(0);
@@ -63,40 +67,33 @@
     
     [self.LTScollView layoutIfNeeded];
     [self.LTScollView reloadDataWithInitialIndex:0];
-
-    
-    
     self.LTScollView.contentInset = UIEdgeInsetsMake(0, 100+100/4.0, 0, 100+100/4.0);
-    
-    [self.JTScrollView layoutIfNeeded];
-    [self createCardWithColor];
-    [self createCardWithColor];
-    [self createCardWithColor];
-    [self createCardWithColor];
+    [self.LTScollView scrollToIndex:self.pageIndex animated:NO];
+
+
+    for (int i = 0; i < self.imageUrlArray.count; i ++) {
+        UIImageView *imageView = [[UIImageView alloc] init];
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        NSURL *url = [NSURL URLWithString:self.imageUrlArray[i][@"image"]];
+        [imageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"defaultImage_icon"]];
+        [_viewArray addObject:imageView];
+    }
+    [_pageView layoutIfNeeded];
+     _pageView.backgroundColor = [UIColor blackColor];
+    [_pageView setView:_viewArray[_pageIndex] direction:LHPageViewDirectionForward anime:NO];
+    [self setTitleLabelTextWithIndex:_pageIndex];
 }
 
-- (void)createCardWithColor
-{
-    
-    CGFloat width = CGRectGetWidth(self.JTScrollView.frame);
-    CGFloat height = CGRectGetHeight(self.JTScrollView.frame);
-    
-    CGFloat x = self.JTScrollView.subviews.count * width;
-    
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(x, 0, width, height)];
-    view.backgroundColor = [UIColor colorWithRed:33/255. green:158/255. blue:238/255. alpha:1.];
-    
-    view.layer.cornerRadius = 8.;
-    
-    [self.JTScrollView addSubview:view];
-    self.JTScrollView.contentSize = CGSizeMake(x + width, height);
+- (void)setTitleLabelTextWithIndex:(NSInteger)index{
+    NSDictionary *dict = self.imageUrlArray[index];
+    _titleLabel.text = dict[@"image"];
+    NSLog(@"%@",dict);
 }
-
 
 # pragma mark - LTInfiniteScrollView dataSource
 - (NSInteger)numberOfViews
 {
-    return 20;
+    return _imageUrlArray.count;
 }
 
 - (NSInteger)numberOfVisibleViews
@@ -108,17 +105,14 @@
 - (UIView *)viewAtIndex:(NSInteger)index reusingView:(UIView *)view;
 {
     if (view) {
-        ((UILabel *)view).text = [NSString stringWithFormat:@"%ld", index];
         return view;
     }
     
-    UILabel *aView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-    aView.backgroundColor = [UIColor blackColor];
-    aView.backgroundColor = [UIColor darkGrayColor];
-    aView.textColor = [UIColor whiteColor];
-    aView.textAlignment = NSTextAlignmentCenter;
-    aView.text = [NSString stringWithFormat:@"%ld", index];
-    return aView;
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    NSDictionary *dict = self.imageUrlArray[index];
+    [imageView sd_setImageWithURL:[NSURL URLWithString:dict[@"image"]] placeholderImage:[UIImage imageNamed:@"defaultImage_icon"]];
+    return imageView;
 }
 
 - (void)updateView:(UIView *)view withProgress:(CGFloat)progress scrollDirection:(ScrollDirection)direction
@@ -128,7 +122,40 @@
 }
 
 - (void)scrollView:(LTInfiniteScrollView *)scrollView didScrollToIndex:(NSInteger)index{
-    NSLog(@"%ld",index);
+
+    if (index > _pageIndex) {
+     [_pageView setView:_viewArray[index] direction:LHPageViewDirectionReverse anime:YES];
+    }else if (index < _pageIndex){
+     [_pageView setView:_viewArray[index] direction:LHPageViewDirectionForward anime:YES];
+    }
+
+    _pageIndex = index;
+    [self setTitleLabelTextWithIndex:index];
+}
+
+
+#pragma mark - LHPageViewDataSource
+- (UIView *)pageView:(LHPageView *)pageView viewBeforeView:(UIView *)view{
+    NSInteger index = [_viewArray indexOfObject:view];
+    index--;
+    if (index >= 0) {
+        return _viewArray[index];
+    }
+    return nil;
+}
+- (UIView *)pageView:(LHPageView *)pageViewController viewAfterView:(UIView *)view{
+    NSInteger index = [_viewArray indexOfObject:view];
+    index++;
+    if (index < _viewArray.count) {
+        return _viewArray[index];
+    }
+    return nil;
+}
+#pragma mark - LHPageViewDelegate
+- (void)pageView:(LHPageView *)pageView didFinishAnimating:(BOOL)finished previousView:(UIView *)previousView transitionCompleted:(BOOL)completed{
+    NSInteger index = [_viewArray indexOfObject:previousView];
+     [self.LTScollView scrollToIndex:index animated:YES];
+     [self setTitleLabelTextWithIndex:index];
 }
 
 - (void)didReceiveMemoryWarning {

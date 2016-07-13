@@ -174,8 +174,7 @@
 
 -(void)loadData{
     __weak __typeof(self)weakSelf = self;
-    NSString *url = @"http://m.12365auto.com/server/forAppWebService.ashx?act=delComTypeList";
-    [HttpRequest GET:url success:^(id responseObject) {
+    [HttpRequest GET:[URLFile urlString_delComTypeList] success:^(id responseObject) {
         for (NSDictionary *dict in responseObject[@"rel"]) {
             [_dataArray addObject:dict];
         }
@@ -237,13 +236,17 @@
 -(void)submitData{
     if (!self.dictionary[keyId]) {
         [LHController alert:@"请选择处理结果"];
-    }else if ([self.dictionary[keyName] isEqualToString:@"其他"]
-              && [self hasChar:self.dictionary[keyOther]]==NO){
-       [LHController alert:@"请输入其他原因"];
-       
-    }else if ([self hasChar:self.dictionary[keyReason]]==NO){
+        return;
+    }else if ([self.dictionary[keyName] isEqualToString:@"其他"]){
+        if ([self hasChar:self.dictionary[keyOther]]==NO){
+             [LHController alert:@"请输入其他原因"];
+            return;
+        }
+
+    }else if ([self hasChar:self.dictionary[keyReason]] == NO){
          [LHController alert:@"请输入撤诉理由"];
-    }else{
+        return;
+    }
        
      
         NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
@@ -279,11 +282,12 @@
        } failure:^(NSError *error) {
            
        }];
-    }
 }
 
 -(BOOL)hasChar:(NSString *)string{
-  
+    if (string == nil) {
+        return NO;
+    }
     string = [string stringByReplacingOccurrencesOfString:@" " withString:@""];
     string = [string stringByReplacingOccurrencesOfString:@"\n" withString:@""];
  

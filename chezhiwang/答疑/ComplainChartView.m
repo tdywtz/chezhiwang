@@ -13,6 +13,7 @@
 @property (nonatomic,strong) UILabel *titleLabel;
 @property (nonatomic,strong) UIImageView *imageView;
 @property (nonatomic,copy) NSString *tid;//记录id
+@property (nonatomic,assign) BOOL initialSetUp;
 
 @end
 
@@ -22,6 +23,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        _initialSetUp = YES;//
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.textColor = [UIColor grayColor];
         _titleLabel.font = [UIFont systemFontOfSize:14];
@@ -59,7 +61,7 @@
 
 @implementation ComplainChartView
 
--(instancetype)initWithFrame:(CGRect)frame titles:(NSArray *)titles block:(void(^)(NSInteger index))block{
+-(instancetype)initWithFrame:(CGRect)frame titles:(NSArray *)titles block:(void(^)(NSInteger index, BOOL initialSetUp))block{
     self = [super initWithFrame:frame];
     if (self) {
         self.block = block;
@@ -99,15 +101,28 @@
 }
 
 -(void)tap:(UIGestureRecognizer *)tap{
-    NSInteger index = [self.toolBars indexOfObject:tap.view];
-    if (self.block) {
-        self.block(index);
+
+    ToolBar *btn = (ToolBar *)tap.view;
+     NSInteger index = [self.toolBars indexOfObject:tap.view];
+    if (btn.initialSetUp) {
+        if (self.block) {
+            self.block(index, YES);
+        }
+    }else{
+        btn.titleLabel.text = _titles[index];
+        btn.tid = @"";
+        btn.initialSetUp = YES;
+        if (self.block) {
+            self.block(index, NO);
+        }
     }
 }
+
 -(void)setTitle:(NSString *)title tid:(NSString *)tid index:(NSInteger)index{
     ToolBar *btn = self.toolBars[index];
     btn.titleLabel.text = title;
     btn.tid = tid;
+    btn.initialSetUp = NO;
     if (index == 0) {
          btn.titleLabel.font = [UIFont systemFontOfSize:12];
     }
@@ -116,6 +131,11 @@
 - (NSString *)gettidWithIndex:(NSInteger)index{
      ToolBar *btn = self.toolBars[index];
     return btn.tid;
+}
+
+- (void)hideBarWithIndex:(NSInteger)index{
+    ToolBar *bar = self.toolBars[index];
+    bar.hidden = YES;
 }
 
 -(NSMutableArray *)toolBars{

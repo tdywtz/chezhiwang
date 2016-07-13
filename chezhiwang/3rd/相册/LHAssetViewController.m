@@ -84,7 +84,7 @@
 
 
 -(void)createFootView{
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, myHeight-104, myWidth, 40)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, myHeight-40, myWidth, 40)];
     view.backgroundColor = [UIColor colorWithRed:100/255.0 green:100/255.0 blue:100/255.0 alpha:1];
     view.alpha = 0.8;
     [self.view addSubview:view];
@@ -142,7 +142,7 @@
 
     [layout setScrollDirection:UICollectionViewScrollDirectionVertical];
     
-    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, myWidth, myHeight-104) collectionViewLayout:layout];
+    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, myWidth, myHeight-40) collectionViewLayout:layout];
     _collectionView.delegate = self;
     _collectionView.dataSource = self;
     _collectionView.backgroundColor = [UIColor whiteColor];

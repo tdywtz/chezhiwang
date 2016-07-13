@@ -10,6 +10,7 @@
 #import "CommentListViewController.h"
 #import "CustomCommentView.h"
 #import "LoginViewController.h"
+#import "CZWShareViewController.h"
 
 @interface AnswerDetailsViewController ()
 {
@@ -52,11 +53,67 @@ NSString *url = [NSString stringWithFormat:[URLFile urlStringForGetZJDY],self.ci
 - (void)viewDidLoad {
     [super viewDidLoad];
     A = [LHController setFont];
-    
+
+    [self createRightItems];
     [self createScrollViewSubViews];
     [self createFootView];
-   [self loadDataOne];
+    [self loadDataOne];
 }
+
+
+-(void)createRightItems{
+    FmdbManager *fb = [FmdbManager shareManager];
+  
+    NSDictionary *dict = [fb selectFromCollectWithId:_cid andType:collectTypeAnswer];
+    BOOL isSelect = NO;
+    if ([dict allKeys].count > 0) {
+        isSelect = YES;
+    }
+
+    NSMutableArray *btnArray = [[NSMutableArray alloc] init];
+    for (int i = 0; i < 2; i ++) {
+        UIView *bg = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 20)];
+
+        UIButton *btn = [LHController createButtnFram:CGRectMake(5, 0, 20, 20) Target:self Action:@selector(rightItemClick:) Text:nil];
+        btn.tag = 100+i;
+        NSString *iamgeName = [NSString stringWithFormat:@"share%d",3-i];
+        [btn setBackgroundImage:[UIImage imageNamed:iamgeName] forState:UIControlStateNormal];
+        if (i == 1) {
+            btn.frame = CGRectMake(0, 0, 25, 25);
+            [btn setBackgroundImage:[UIImage imageNamed:@"xin"] forState:UIControlStateSelected];
+            btn.selected = isSelect;
+        }
+        [bg addSubview:btn];
+        btn.center = CGPointMake(bg.frame.size.width/2, bg.frame.size.height/2);
+        UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:bg];
+        [btnArray addObject:item];
+    }
+
+    self.navigationItem.rightBarButtonItems = btnArray;
+}
+
+-(void)rightItemClick:(UIButton *)btn{
+
+    if (btn.tag == 101) {
+        btn.selected = !btn.selected;
+        if (btn.selected) {
+            [self favorate];
+        }else{
+            [self deleteFavorate];
+        }
+    }else{
+        CZWShareViewController *share = [[CZWShareViewController alloc] initWithParentViewController:self];
+        share.shareUrl = self.dict[@"url"]== nil?self.dict[@"FilePath"]:self.dict[@"url"];
+        share.shareImage = [UIImage imageNamed:@"Icon-60"];
+        NSString *html = self.dict[@"content"] == nil?self.dict[@"Content"]:self.dict[@"content"];
+        if (html.length > 100) html = [html substringToIndex:99];
+        share.shareContent = html;
+        share.shareTitle = self.textTitle;
+        [share setBluffImageWithView:[UIApplication sharedApplication].keyWindow.rootViewController.view];
+        [self presentViewController:share animated:YES completion:nil];
+    }
+}
+
 
 #pragma mark - 数据显示
 -(void)createScrollViewSubViews{

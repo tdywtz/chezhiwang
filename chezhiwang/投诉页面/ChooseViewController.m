@@ -99,7 +99,7 @@ typedef enum {
 }
 
 -(void)createIndexView:(NSArray *)array{
-    AIMTableViewIndexBar *indexbar = [[AIMTableViewIndexBar alloc] initWithFrame:CGRectMake(WIDTH-30, 30, 25, _tableView.frame.size.height-60) andArray:array];
+    AIMTableViewIndexBar *indexbar = [[AIMTableViewIndexBar alloc] initWithFrame:CGRectMake(WIDTH-30, 64+30, 25, HEIGHT-60-64) andArray:array];
     indexbar.indexes = array;
     indexbar.delegate = self;
     [self.view addSubview:indexbar];
@@ -225,7 +225,7 @@ typedef enum {
 
 -(void)createTableView{
 
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT-64) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

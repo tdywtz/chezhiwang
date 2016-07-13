@@ -8,36 +8,37 @@
 
 #import "LHToolScrollView.h"
 
-@interface LHToolShadowView : UIView
 
-@end
-
-@implementation LHToolShadowView
-+ (Class)layerClass {
-    return [CAGradientLayer class];
-}
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        //self.backgroundColor = RGB_color(240, 240, 240, 1);
-        
-        self.backgroundColor = [UIColor clearColor];
-        CAGradientLayer *gradientLayer = (CAGradientLayer *)self.layer;
-        
-        gradientLayer.colors = @[(id)[UIColor colorWithRed:0 green:0 blue:0 alpha:1].CGColor,(id)[UIColor colorWithRed:1 green:1 blue:1 alpha:0].CGColor];
-        gradientLayer.transform = CATransform3DMakeRotation(M_PI_2, 0.0 , 0.0, 0.1);
-        //        CGRect newShadowFrame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
-        //        gradientLayer.frame = newShadowFrame;
-        
-    }
-    return self;
-}
--(void)layoutSubviews{
-    [super layoutSubviews];
-}
-
-@end
+//@interface LHToolShadowView : UIView
+//
+//@end
+//
+//@implementation LHToolShadowView
+//+ (Class)layerClass {
+//    return [CAGradientLayer class];
+//}
+//- (instancetype)initWithFrame:(CGRect)frame
+//{
+//    self = [super initWithFrame:frame];
+//    if (self) {
+//        //self.backgroundColor = RGB_color(240, 240, 240, 1);
+//        
+//        self.backgroundColor = [UIColor clearColor];
+//        CAGradientLayer *gradientLayer = (CAGradientLayer *)self.layer;
+//        
+//        gradientLayer.colors = @[(id)[UIColor colorWithRed:0 green:0 blue:0 alpha:1].CGColor,(id)[UIColor colorWithRed:1 green:1 blue:1 alpha:0].CGColor];
+//        gradientLayer.transform = CATransform3DMakeRotation(M_PI_2, 0.0 , 0.0, 0.1);
+//        //        CGRect newShadowFrame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+//        //        gradientLayer.frame = newShadowFrame;
+//        
+//    }
+//    return self;
+//}
+//-(void)layoutSubviews{
+//    [super layoutSubviews];
+//}
+//
+//@end
 
 @implementation LHToolButton
 
@@ -80,8 +81,11 @@
 
 
 #pragma mark - LHToolScrollView
-@interface LHToolScrollView ()
-
+@interface LHToolScrollView ()<UIScrollViewDelegate>
+{
+    UIImageView *leftView;
+    UIImageView *rightView;
+}
 @property (nonatomic,strong) UIScrollView *scrollView;
 @property (nonatomic,strong) UIView *contentView;
 @property (nonatomic,strong) UIView *moveView;//滑动条
@@ -99,9 +103,10 @@
         self.scrollView = [[UIScrollView alloc] initWithFrame:frame];
         self.scrollView.showsHorizontalScrollIndicator = NO;
         self.scrollView.scrollsToTop = NO;
+        self.scrollView.delegate = self;
         [self addSubview:self.scrollView];
         [self.scrollView makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(UIEdgeInsetsMake(0, 5, 0, 25));
+            make.edges.equalTo(UIEdgeInsetsMake(0, 10, 0, 25));
         }];
         
          self.contentView = [[UIView alloc] init];
@@ -116,23 +121,23 @@
             make.height.equalTo(self.frame.size.height);
         }];
         
-        UIImageView *leftView = [[UIImageView alloc] initWithFrame:CGRectZero];
-       // leftView.image = [UIImage imageNamed:@"bar_btn_icon_returntext"];
-        leftView.backgroundColor = colorLightBlue;;
-        leftView.layer.shadowColor = colorLightBlue.CGColor;
-        leftView.layer.shadowOpacity = 0.99;
-        leftView.layer.shadowOffset = CGSizeMake(10, 0);
-        leftView.layer.shadowRadius = 5;
-        
+        leftView = [[UIImageView alloc] initWithFrame:CGRectZero];
+        leftView.image = [UIImage imageNamed:@"bar_btn_icon_returntext"];
+//        leftView.backgroundColor = colorLightBlue;;
+//        leftView.layer.shadowColor = colorLightBlue.CGColor;
+//        leftView.layer.shadowOpacity = 0.99;
+//        leftView.layer.shadowOffset = CGSizeMake(10, 0);
+//        leftView.layer.shadowRadius = 5;
+
     
-        UIImageView *rightView = [[UIImageView alloc] initWithFrame:CGRectZero];
-       // rightView.image = [UIImage imageNamed:@"bar_btn_icon_returntext"];
-       // rightView.transform  = CGAffineTransformMakeRotation(M_PI);
-        rightView.backgroundColor = colorLightBlue;;
-        rightView.layer.shadowColor = colorLightBlue.CGColor;
-        rightView.layer.shadowOpacity = 0.99;
-        rightView.layer.shadowOffset = CGSizeMake(-10, 0);
-        rightView.layer.shadowRadius = 5;
+        rightView = [[UIImageView alloc] initWithFrame:CGRectZero];
+        rightView.image = [UIImage imageNamed:@"bar_btn_icon_returntext"];
+        rightView.transform  = CGAffineTransformMakeRotation(M_PI);
+//        rightView.backgroundColor = colorLightBlue;;
+//        rightView.layer.shadowColor = colorLightBlue.CGColor;
+//        rightView.layer.shadowOpacity = 0.99;
+//        rightView.layer.shadowOffset = CGSizeMake(-10, 0);
+//        rightView.layer.shadowRadius = 5;
 
         
         
@@ -142,13 +147,13 @@
         [leftView makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(0);
             make.centerY.equalTo(0);
-            make.size.equalTo(CGSizeMake(15, 30));
+           // make.size.equalTo(CGSizeMake(15, 30));
         }];
         
         [rightView makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(_scrollView.right);
             make.centerY.equalTo(0);
-            make.size.equalTo(CGSizeMake(15, 30));
+            //make.size.equalTo(CGSizeMake(15, 30));
         }];
         
         UIImageView *imageview = [[UIImageView alloc] init];
@@ -281,6 +286,24 @@
     }
     return _buttons;
 }
+
+
+
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    CGFloat _x = scrollView.contentOffset.x;
+    if (_x < 10) {
+        leftView.alpha = 0.5;
+    }else{
+        leftView.alpha = 1;
+    }
+    if (_x < scrollView.contentSize.width-scrollView.frame.size.width-15) {
+        rightView.alpha = 1;
+    }else{
+        rightView.alpha = 0.5;
+    }
+}
+
 /*
  // Only override drawRect: if you perform custom drawing.
  // An empty implementation adversely affects performance during animation.

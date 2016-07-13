@@ -129,7 +129,7 @@ static inline CGSize CTFramesetterSuggestFrameSizeForAttributedStringWithConstra
     self.backgroundColor = [UIColor clearColor];
     self.textInsets = UIEdgeInsetsZero;
    //添加手势
-    [self attachTapHandler];
+   // [self attachTapHandler];
 
 }
 #pragma mark - 菜单
@@ -180,6 +180,7 @@ static inline CGSize CTFramesetterSuggestFrameSizeForAttributedStringWithConstra
     [self setNeedsDisplay];
 }
 
+
 #pragma mark getters
 -(NSString *)text{
     if (!_text) {
@@ -188,12 +189,14 @@ static inline CGSize CTFramesetterSuggestFrameSizeForAttributedStringWithConstra
     return _text;
 }
 
+
 -(UIFont *)font{
     if (_font == nil) {
         _font = [UIFont systemFontOfSize:17];
     }
     return _font;
 }
+
 
 -(UIColor *)textColor{
     if (_textColor == nil) {
@@ -347,7 +350,7 @@ static inline CGSize CTFramesetterSuggestFrameSizeForAttributedStringWithConstra
             NSDictionary* attributes = (NSDictionary*)CTRunGetAttributes(run);
            LHTextStorage *storage = attributes[kTYTextRunAttributedName];
           
-            
+
             if (storage) {
                 CGFloat runWidth  = CTRunGetTypographicBounds(run, CFRangeMake(0,0), &runAscent, &runDescent, NULL);
                 

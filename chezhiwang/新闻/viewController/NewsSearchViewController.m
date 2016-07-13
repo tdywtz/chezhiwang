@@ -16,7 +16,7 @@
 @implementation NewsSearchViewController
 
 -(void)setUrlWith:(NSString *)string andP:(NSInteger)p andS:(NSInteger)s{
-    self.urlString = [NSString stringWithFormat:@"http://m.12365auto.com/server/forAppWebService.ashx?act=news&style=%@&title=%@&p=%ld&s=%ld",self.style,string,p,s];
+    self.urlString = [NSString stringWithFormat:[URLFile urlStringForNewsSearch],self.style,string,p,s];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

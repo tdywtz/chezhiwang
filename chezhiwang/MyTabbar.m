@@ -79,8 +79,6 @@
         [view pop_removeAnimationForKey:@"POPSpringAnimationKeyColor"];
         [view pop_addAnimation:textColorSpringAnimation forKey:@"POPSpringAnimationKeyColor"];
     });
-   
-
 }
 
 

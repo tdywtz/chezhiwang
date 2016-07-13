@@ -56,7 +56,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-  
+
     [self createItem];
     [self createTableView];
     [self reloadData];
@@ -71,6 +71,7 @@
    
     [self updateNumber];
     [self reloadData];
+
 }
 
 
@@ -225,9 +226,9 @@
             label.textColor = colorLightGray;
             label.tag = 100;
             [cell.contentView addSubview:label];
-            [UIFont asynchronouslySetFontName:[UIFont fontNameSTXingkai_SC_Bold] success:^(NSString *name) {
-                cell.textLabel.font = [UIFont fontWithName:name size:18];
-            }];
+//            [UIFont asynchronouslySetFontName:[UIFont fontNameSTXingkai_SC_Bold] success:^(NSString *name) {
+//                cell.textLabel.font = [UIFont fontWithName:name size:18];
+//            }];
             [label makeConstraints:^(MASConstraintMaker *make) {
                 make.right.equalTo(-4);
                 make.centerY.equalTo(0);

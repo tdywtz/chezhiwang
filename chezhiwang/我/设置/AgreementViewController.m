@@ -38,23 +38,6 @@
 }
 
 
-//- (void)webViewDidFinishLoad:(UIWebView *)webView{
-//    [activity viewstopAnimating];
-//}
-//- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
-//    [activity viewstopAnimating];
-//}
-//
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"PageOne"];
-}
-
--(void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"PageOne"];
-}
-
 /*
 #pragma mark - Navigation
 

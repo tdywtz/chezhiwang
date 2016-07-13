@@ -39,7 +39,7 @@
     }
     for (NSDictionary *dict in array) {
         ChartChooseModel * model = [[ChartChooseModel alloc] init];
-        model.tid = dict[titleKey];
+        model.tid = dict[tidKey];
         model.title = dict[titleKey];
         [marr addObject:model];
     }
@@ -82,13 +82,14 @@
             [self createTableView];
         }
         
-        [self loadData];
+        [self loadDataWithChartView];
     }
     return self;
 }
 
-- (void)loadData{
+- (void)loadDataWithChartView{
     [HttpRequest GET:[URLFile urlString_rankingAct] success:^(id responseObject) {
+
         if (self.type == ChartChooseTypeAttributeBrand) {
             _dataArray = [ChartChooseModel initWithArray:responseObject[@"R_brandAttr"] type:ChartChooseTypeAttributeBrand];
         }else if (self.type == ChartChooseTypeAttributeModel){
@@ -104,6 +105,27 @@
     } failure:^(NSError *error) {
         
     }];
+}
+
+- (void)loadDataWithTestView{
+
+//    [HttpRequest GET:[URLFile ] success:^(id responseObject) {
+//        if (self.type == ChartChooseTypeAttributeBrand) {
+//            _dataArray = [ChartChooseModel initWithArray:responseObject[@"R_brandAttr"] type:ChartChooseTypeAttributeBrand];
+//        }else if (self.type == ChartChooseTypeAttributeModel){
+//            _dataArray = [ChartChooseModel initWithArray:responseObject[@"R_modelAttr"] type:ChartChooseTypeAttributeBrand];
+//        }else if (self.type == ChartChooseTypeAttributeSeries){
+//            _dataArray = [ChartChooseModel initWithArray:responseObject[@"R_dep"] type:ChartChooseTypeAttributeBrand];
+//        }else if (self.type == ChartChooseTypeQuality){
+//            _dataArray = [ChartChooseModel initWithArray:responseObject[@"R_zlwt"] type:ChartChooseTypeAttributeBrand];
+//        }
+//
+//        [_tableView reloadData];
+//
+//    } failure:^(NSError *error) {
+//
+//    }];
+//
 }
 
 - (void)viewDidLoad {
@@ -296,8 +318,8 @@
         rect.origin.x = -WIDTH/2;
         _tableView.frame = rect;
         rect.origin.x = 0;
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.2*NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-            [UIView animateWithDuration:0.3 animations:^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.1*NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            [UIView animateWithDuration:0.2 animations:^{
                 _tableView.frame = rect;
             }];
         });
@@ -305,8 +327,8 @@
     }else{
         CGRect rect = _tableView.frame;
         rect.origin.x = WIDTH/2;
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.2*NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-            [UIView animateWithDuration:0.3 animations:^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.1*NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            [UIView animateWithDuration:0.2 animations:^{
                 _tableView.frame = rect;
             }];
         });
@@ -385,7 +407,8 @@
    
     if (self.chooseEnd) {
         ChartChooseModel *model = _dataArray[indexPath.row];
-        self.chooseEnd(model.tid,model.title);
+        self.chooseEnd(model.title,model.tid);
+
     }
     __weak __typeof(self)weakSelf = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

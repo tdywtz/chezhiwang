@@ -23,7 +23,6 @@
     UIScrollView *scrollView;
     CGFloat B;
     UIButton *button;
-    CGFloat _temp;
     CGFloat frame_y;//testfield纵坐标
 }
 @property (nonatomic,copy) NSString *code;
@@ -59,7 +58,9 @@
     if (gao > 0) {
         gao = 0;
     }
-    scrollView.frame = CGRectMake(0, 0, WIDTH, HEIGHT-64-height);
+    CGRect rect = self.view.frame;
+    rect.size.height -= height;
+    scrollView.frame = rect;
     [UIView animateWithDuration:0.2 animations:^{
         
         scrollView.contentOffset = CGPointMake(0, scrollView.contentOffset.y-gao);
@@ -69,13 +70,14 @@
 
 -(void)keyboardHide:(NSNotification *)notification
 {
-    [UIView animateWithDuration:0.1 animations:^{
-        scrollView.frame = CGRectMake(0, 0, WIDTH, HEIGHT-_temp-64);
-    }];
+
+    scrollView.frame = self.view.frame;
+
 }
 
 -(void)createScrollView{
-    scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT-_temp-64)];
+    scrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
+    scrollView.alwaysBounceVertical = YES;
     [self.view addSubview:scrollView];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
@@ -88,8 +90,7 @@
 -(void)createUI{
     UILabel *labelLeftTitle = [self createLabel:@"*" andFont:B andFram:CGRectMake(LEFT+10, 11.5, 10, H)];
     [scrollView addSubview:labelLeftTitle];
-    //    UILabel *labelRightTitle = [self createLabel:@"提问标题:" andFont:B andFram:CGRectMake(LEFT+10, SPACE, WIDTH-LEFT*2, H)];
-    //    [scrollView addSubview:labelRightTitle];
+
     
     titleField = [LHController createTextFieldWithFrame:CGRectMake(LEFT+20, 10, WIDTH-LEFT*2-20, H)  andBGImageName:nil andPlaceholder:@"输入标题(最多20个字)" andTextFont:B+1 andSmallImageName:nil andDelegate:self];
     [scrollView addSubview:titleField];
@@ -117,6 +118,8 @@
     [bgView addSubview:PlaceholderLebel];
     
     _testField = [LHController createTextFieldWithFrame:CGRectMake(LEFT, bgView.frame.origin.y+bgView.frame.size.height+30, 100, H)  andBGImageName:@"textView.png" andPlaceholder:@"输入验证码" andTextFont:B+1 andSmallImageName:nil andDelegate:self];
+    _testField.layer.borderWidth = 1;
+    _testField.layer.borderColor = colorLineGray.CGColor;
     [scrollView addSubview:_testField];
     
     textLabel = [self createLabel:nil andFont:B-4 andFram:CGRectMake(LEFT+105, _testField.frame.origin.y, 60, H)];

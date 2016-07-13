@@ -59,7 +59,7 @@
 #pragma mark - 下载用户数据
 -(void)loadDataCar{
     
-    NSString *url = [NSString stringWithFormat:@"http://m.12365auto.com/server/forAppWebService.ashx?act=getApplyOwner&uid=%@",[[NSUserDefaults standardUserDefaults] objectForKey:user_id]];
+    NSString *url = [NSString stringWithFormat:[URLFile urlString_getApplyOwner],[[NSUserDefaults standardUserDefaults] objectForKey:user_id]];
   [HttpRequest GET:url success:^(id responseObject) {
       [self setCar:responseObject[0]];
   } failure:^(NSError *error) {
@@ -656,15 +656,6 @@
     return YES;
 }
 
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"PageOne"];
-}
-
--(void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"PageOne"];
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

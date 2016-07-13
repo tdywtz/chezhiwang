@@ -676,6 +676,8 @@
     [moveBgView addSubview:lineView];
     //验证码
     test = [LHController createTextFieldWithFrame:CGRectMake(details.frame.origin.x, lineView.frame.origin.y+20, 80, 30) Placeholder:@"输入验证码" Font:B Delegate:self];
+    test.layer.borderColor = colorLineGray.CGColor;
+    test.layer.borderWidth = 1;
     UIImage *img = [UIImage imageNamed:@"textView"];
     img = [img stretchableImageWithLeftCapWidth:2 topCapHeight:2];
     [test setBackground:img];
@@ -889,7 +891,7 @@
 
     [superDict setObject:[[NSUserDefaults standardUserDefaults] objectForKey:user_id] forKey:@"User_ID"];
     
-    [superDict setObject:@"7" forKey:@"origin"];
+    [superDict setObject:appOrigin forKey:@"origin"];
     if (self.again) {
         [superDict setObject:@"again" forKey:@"again"];
     }else{

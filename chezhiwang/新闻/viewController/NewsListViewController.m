@@ -31,9 +31,10 @@
 @implementation NewsListViewController
 
 -(void)loadDataWithP:(NSInteger)p andS:(NSInteger)s{
-
+   
     NSString *url = [NSString stringWithFormat:_urlString,p,s];
   [HttpRequest GET:url success:^(id responseObject) {
+
       if (_count == 1) {
           
           footView.noData = NO;
@@ -80,6 +81,7 @@
     
     if (self.tableHeaderViewHave) {
           _tableHeaderView = [[NewsTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 114+207*(WIDTH/375))];
+        _tableHeaderView.backgroundColor = colorLineGray;
         __weak __typeof(self)weakSelf = self;
         _tableHeaderView.block = ^(NSString *ID, NSString *title){
             NewsDetailViewController *detail = [[NewsDetailViewController alloc] init];

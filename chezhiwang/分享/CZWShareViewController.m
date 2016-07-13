@@ -86,9 +86,18 @@
             
         case 3:
         {
-            NSString *urlSring = [NSString stringWithFormat:@"%@\n%@",self.shareTitle,self.shareUrl];
-            [[UMSocialControllerService defaultControllerService] setShareText:urlSring shareImage:self.shareImage socialUIDelegate:self.parentController];        //设置分享内容和回调对象
-            [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToSina].snsClickHandler(self.parentController,[UMSocialControllerService defaultControllerService],YES);
+
+            [UMSocialData defaultData].extConfig.sinaData.urlResource.url = self.shareUrl;
+            [UMSocialData defaultData].extConfig.sinaData.urlResource.resourceType = UMSocialUrlResourceTypeWeb;
+            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:self.shareContent image:self.shareImage location:nil urlResource:nil presentedController:self.parentController completion:^(UMSocialResponseEntity *response){
+                if (response.responseCode == UMSResponseCodeSuccess) {
+                }
+            }];
+            break;
+//
+//            NSString *urlSring = [NSString stringWithFormat:@"%@\n%@",self.shareTitle,self.shareUrl];
+//            [[UMSocialControllerService defaultControllerService] setShareText:urlSring shareImage:self.shareImage socialUIDelegate:self.parentController];        //设置分享内容和回调对象
+//            [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToSina].snsClickHandler(self.parentController,[UMSocialControllerService defaultControllerService],YES);
             //  isAhare = YES;
         }
             break;

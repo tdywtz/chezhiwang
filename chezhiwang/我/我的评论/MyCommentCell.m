@@ -44,7 +44,7 @@
     
     
     imageView = [[UIImageView alloc] initWithFrame:CGRectMake(WIDTH-25, 40, 15, 15)];
-    imageView.image = [UIImage imageNamed:@"top"];
+    imageView.image = [UIImage imageNamed:@"arrowu"];
     
     lineView = [[UIView alloc] init];
     lineView.backgroundColor = colorLineGray;

@@ -72,13 +72,13 @@
 }
 
 -(void)rightItemClick{
-    //    AnswerSearchViewController *search = [[AnswerSearchViewController alloc] init];
-    //    search.numType = 3;
-    //    search.hidesBottomBarWhenPushed = YES;
-    //    [self.navigationController pushViewController:search animated:YES];
-    ComplainChartViewController *chart = [[ComplainChartViewController alloc] init];
-    chart.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:chart animated:YES];
+        AnswerSearchViewController *search = [[AnswerSearchViewController alloc] init];
+        search.numType = 3;
+        search.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:search animated:YES];
+//    ComplainChartViewController *chart = [[ComplainChartViewController alloc] init];
+//    chart.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:chart animated:YES];
 }
 
 //左侧按钮
@@ -96,11 +96,11 @@
 }
 
 -(void)leftItemClick{
-    ContrastChartViewController *chart = [[ContrastChartViewController alloc] init];
-    chart.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:chart animated:YES];
-    return;
-    
+//    ContrastChartViewController *chart = [[ContrastChartViewController alloc] init];
+//    chart.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:chart animated:YES];
+//    return;
+
     if ([[NSUserDefaults standardUserDefaults] objectForKey:user_name]) {
         AskViewController *ask = [[AskViewController alloc] init];
         ask.hidesBottomBarWhenPushed = YES;

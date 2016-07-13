@@ -16,6 +16,7 @@
 }
 @property (nonatomic,strong) NSArray *imageNameArray;
 @end
+
 @implementation LHEmojiView
 
 - (instancetype)initWithFrame:(CGRect)frame

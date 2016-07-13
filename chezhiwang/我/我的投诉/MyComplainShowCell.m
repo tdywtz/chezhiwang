@@ -52,7 +52,7 @@
 @implementation MyComplainShowCell
 {
     UILabel *stateLabel;
-    LHLabel *stepLabel;
+    CZWLabel *stepLabel;
     ButtonView *btnView;
 }
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -72,7 +72,7 @@
     stateLabel.font = [UIFont systemFontOfSize:15];
     stateLabel.numberOfLines = 0;
     
-    stepLabel = [[LHLabel alloc] init];
+    stepLabel = [[CZWLabel alloc] init];
     stepLabel.textColor = colorDeepGray;
     stepLabel.font = [UIFont systemFontOfSize:12];
     stepLabel.paragraphSpacing = 4;

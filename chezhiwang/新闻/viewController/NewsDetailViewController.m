@@ -18,26 +18,19 @@
     UILabel *_titleLabel;
     UILabel *_infoLabel;
     UIWebView *_webView;
-    UIView *bgView;
-    
-    UIView *shareView;
-    
     CustomActivity *activity;
 }
 @property (nonatomic,strong) NSDictionary *dictionary;
 @end
 
 @implementation NewsDetailViewController
-- (void)dealloc
-{
-    [bgView removeFromSuperview];
-}
 
 -(void)loadData{
+
     NSString *url = [NSString stringWithFormat:[URLFile urlStringForNewsinfo],self.ID];
     if (self.invest) {
        // 调查页面过来的
-        url = [NSString stringWithFormat:@"http://m.12365auto.com/server/forAppWebService.ashx?act=carownerinfo&id=%@",self.ID];
+        url = [NSString stringWithFormat:[URLFile urlString_carownerinfo],self.ID];
     }
     [HttpRequest GET:url success:^(id responseObject) {
         
@@ -99,9 +92,7 @@
     [self createFootView];
     [self createActivity];
     [self loadData];
-    //                                    [LHController getCustomTabBar].hidden = YES;
     [self writeData];
-    [self createBGView];
 }
 
 
@@ -211,140 +202,6 @@
     [fb deleteFromCollectWithId:self.ID andType:collectTypeNews];
 }
 
-#pragma mark - 分享
--(void)createShare{
-    if (!shareView) {
-         [self createShareView];
-    }
-    
-    bgView.hidden = NO;
-    [UIView animateWithDuration:0.3 animations:^{
-        shareView.frame = CGRectMake(0, HEIGHT-260, WIDTH, 260);
-    }];
-}
-
--(void)createShareView{
-    shareView = [[UIView alloc] initWithFrame:CGRectMake(0, HEIGHT, WIDTH, 260)];
-    shareView.backgroundColor = [UIColor whiteColor];
-    [bgView addSubview:shareView];
-    
-    //NSArray *imageAray = @[];
-    NSArray *array = @[@"QQ好友",@"微信朋友圈",@"微信",@"新浪微博",@"QQ空间",@"复制链接"];
-    for (int i = 0; i < array.count; i ++) {
-        
-        UIButton *btn = [LHController createButtnFram:CGRectMake(15+WIDTH/3*(i%3), 15+110*(i/3), 80, 80) Target:self Action:@selector(shareClick:) Text:nil];
-        [btn setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"fenxiang%d",i+1]] forState:UIControlStateNormal];
-        btn.tag = 100+i;
-        [shareView addSubview:btn];
-        
-        UILabel *label = [LHController createLabelWithFrame:CGRectMake(15+WIDTH/3*(i%3), 15+110*(i/3)+80, 80, 20) Font:[LHController setFont]-4 Bold:NO TextColor:nil Text:array[i]];
-        label.textAlignment = NSTextAlignmentCenter;
-        [shareView addSubview:label];
-    }
-}
-
-
--(void)shareClick:(UIButton *)btn{
-    
-    NSString *urlString = [NSString stringWithFormat:@"%@\n%@",self.titleLabelText,self.dictionary[@"url"]];
-    UIImage *shareImage = [UIImage imageNamed:@"Icon-60"];
-    NSString *html = [_webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerText"];
-    if (html.length > 100) html = [html substringToIndex:99];
-    NSString *shareContent = html;
-    NSString *shareTitle = self.titleLabelText;
-    NSString *shareUrl = self.dictionary[@"url"];
-    switch (btn.tag) {
-        case 100:
-        {
-            [UMSocialData defaultData].extConfig.qqData.url = shareUrl;
-            [UMSocialData defaultData].extConfig.qqData.title =shareTitle;
-           // [UMSocialData defaultData].extConfig.qqData.qqMessageType = UMSocialQQMessageTypeImage;
-            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:shareContent image:shareImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-                if (response.responseCode == UMSResponseCodeSuccess) {
-                    //NSLog(@"分享成功！");
-                }
-            }];
-        }
-            break;
-            
-        case 101:
-        {
-            [UMSocialData defaultData].extConfig.wechatTimelineData.url = shareUrl;
-            //[UMSocialData defaultData].extConfig.wechatSessionData.shareText = @"dasfas";
-            [UMSocialData defaultData].extConfig.wechatTimelineData.title = shareTitle;
-            [UMSocialData defaultData].extConfig.wechatTimelineData.wxMessageType = UMSocialWXMessageTypeWeb;
-
-            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:shareContent image:shareImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-                if (response.responseCode == UMSResponseCodeSuccess) {
-                    //NSLog(@"分享成功！");
-                }
-            }];
-            
-        }
-            break;
-            
-        case 102:
-        {
-            [UMSocialData defaultData].extConfig.wechatSessionData.url = shareUrl;
-            //[UMSocialData defaultData].extConfig.wechatSessionData.shareText = @"dasfas";
-            [UMSocialData defaultData].extConfig.wechatSessionData.title = shareTitle;
-            [UMSocialData defaultData].extConfig.wechatSessionData.wxMessageType = UMSocialWXMessageTypeWeb;
-            
-            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:shareContent image:shareImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-                if (response.responseCode == UMSResponseCodeSuccess) {
-                }
-            }];
-        }
-            break;
-            
-        case 103:
-        {
-            
-            [[UMSocialControllerService defaultControllerService] setShareText:urlString shareImage:nil socialUIDelegate:self];        //设置分享内容和回调对象
-            [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToSina].snsClickHandler(self,[UMSocialControllerService defaultControllerService],YES);
-          //  isAhare = YES;
-        }
-            break;
-            
-        case 104:
-        {
-            [UMSocialData defaultData].extConfig.qzoneData.url = shareUrl;
-            [UMSocialData defaultData].extConfig.qzoneData.title = shareTitle;
-            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQzone] content:shareContent image:shareImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-                if (response.responseCode == UMSResponseCodeSuccess) {
-                    // NSLog(@"分享成功！");
-                }
-            }];
-            
-        }
-            break;
-            
-        case 105:
-        {
-            UIPasteboard *past = [UIPasteboard generalPasteboard];
-            past.string = self.dictionary[@"url"];
-            
-            UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"复制成功" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
-            [al show];
-            [UIView animateWithDuration:0.3 animations:^{
-                [al dismissWithClickedButtonIndex:0 animated:YES];
-            }];
-        }
-            break;
-            
-        default:
-            break;
-    }
-    
-    shareView.frame = CGRectMake(0, HEIGHT, WIDTH, 0);
-    double delayInSeconds = 0.5;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        bgView.hidden = YES;
-    });
-
-}
-
 
 #pragma mark - 底部视图
 -(void)createFootView{
@@ -425,12 +282,13 @@
     }
 
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-    [dict setObject:[[NSUserDefaults standardUserDefaults] objectForKey:user_id] forKey:@"uid"];
-    [dict setObject:@"0" forKey:@"fid"];
-    [dict setObject:content forKey:@"content"];
-    [dict setObject:self.ID forKey:@"tid"];
-    [dict setObject:@"1" forKey:@"type"];
+    [dict setObject:[[NSUserDefaults standardUserDefaults] objectForKey:user_id] forKey:@"uid"];//用户id
+    [dict setObject:@"0" forKey:@"fid"];//回复的评论对象id（若是回复当前新闻为0或不设置）
+    [dict setObject:content forKey:@"content"];//回复内容
+    [dict setObject:self.ID forKey:@"tid"];//回复新闻的id
+    [dict setObject:@"1" forKey:@"type"];//类型（新闻-1、投诉-2、答疑-3）
     [dict setObject:appOrigin forKey:@"origin"];
+    
     [HttpRequest POST:[URLFile urlStringForAddcomment] parameters:dict success:^(id responseObject) {
         if ([responseObject[@"result"] isEqualToString:@"success"]) {
             [LHController alert:@"评论成功"];
@@ -444,23 +302,6 @@
     }];
 }
 
-#pragma mark - 创建隔离背景
--(void)createBGView{
-    bgView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    bgView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
-    UIWindow *win = [UIApplication sharedApplication].keyWindow;
-    bgView.hidden = YES;
-    [win addSubview:bgView];
-    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
-    [bgView addGestureRecognizer:tap];
-}
-
-#pragma mark - 手势
--(void)tap:(UITapGestureRecognizer *)tap{
-    bgView.hidden = YES;
-    shareView.frame = CGRectMake(0, HEIGHT, WIDTH, 200);
-}
 
 #pragma mark - UIWebViewDelegate
 -(void)webViewDidFinishLoad:(UIWebView *)webView{

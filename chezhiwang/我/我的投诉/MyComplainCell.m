@@ -96,7 +96,13 @@
     if (_model != model) {
         _model = model;
     }
-    
+    if (_model.isOpen) {
+        lineView.backgroundColor = [UIColor whiteColor];
+        imageView.transform = CGAffineTransformMakeRotation(M_PI);
+    }else{
+        lineView.backgroundColor = colorLineGray;
+        imageView.transform = CGAffineTransformIdentity;
+    }
     titleLabel.text = _model.title;
     stateLabel.text = _model.status;
     timeLabel.text = _model.date;

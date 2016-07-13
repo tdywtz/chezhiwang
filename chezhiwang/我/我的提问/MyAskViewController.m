@@ -170,6 +170,7 @@
         if (!showCell) {
             showCell = [[MyAskShowCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"showCell"];
             showCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            showCell.contentView.backgroundColor = colorLineGray;
         }
         [showCell setModel:model];
         return showCell;
@@ -178,10 +179,13 @@
     MyAskCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ID"];
     if (!cell) {
         cell = [[MyAskCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ID"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     model.isOpen = NO;
+    cell.contentView.backgroundColor = [UIColor clearColor];
     if ([model isEqual:openModel]) {
         model.isOpen = YES;
+        cell.contentView.backgroundColor = colorLineGray;
     }
     cell.model = model;
     
@@ -216,7 +220,7 @@
         [_dataArray insertObject:self.model atIndex:indexPath.row+1];
     }else{
         if (index == indexPath.row) {
-            return;
+            [_dataArray removeObject:self.model];
         }else if (index == indexPath.row+1){
             [_dataArray removeObject:self.model];
         }else{
@@ -234,16 +238,17 @@
         }
     }
 
-    
-    NSUserDefaults *df = [NSUserDefaults standardUserDefaults];
-    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-    if ([df objectForKey:YorNO]) {
-        [dict setDictionary:[df objectForKey:YorNO]];
+    if (index != indexPath.row) {
+        NSUserDefaults *df = [NSUserDefaults standardUserDefaults];
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+        if ([df objectForKey:YorNO]) {
+            [dict setDictionary:[df objectForKey:YorNO]];
+        }
+        [dict setObject:@"1" forKeyedSubscript:model.cid];
+        [df setObject:dict forKey:YorNO];
+        [df synchronize];
     }
-    [dict setObject:@"1" forKeyedSubscript:model.cid];
-    [df setObject:dict forKey:YorNO];
-    [df synchronize];
-    
+
 
     [_tabelView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
 }

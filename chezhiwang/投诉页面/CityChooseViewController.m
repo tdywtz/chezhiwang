@@ -99,13 +99,13 @@
 
 -(void)createTableView{
 
-    _oneTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT-64) style:UITableViewStylePlain];
+    _oneTableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
     _oneTableView.delegate = self;
     _oneTableView.dataSource = self;
     _oneTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_oneTableView];
     
-    _twoSuperView = [[UIView alloc] initWithFrame:CGRectMake(WIDTH+10, 0, WIDTH/3*2, HEIGHT-64)];
+    _twoSuperView = [[UIView alloc] initWithFrame:CGRectMake(WIDTH+10, 64, WIDTH/3*2, HEIGHT-64)];
     _twoSuperView.layer.shadowColor = [UIColor blackColor].CGColor;
     _twoSuperView.layer.shadowOffset = CGSizeMake(-4, 0);
     _twoSuperView.layer.shadowOpacity = 0.5;
@@ -134,11 +134,11 @@
     if (pan.state == UIGestureRecognizerStateEnded) {
         if (pan.view.frame.origin.x< WIDTH/3+30) {
             [UIView animateWithDuration:0.3 animations:^{
-                pan.view.frame = CGRectMake(WIDTH/3, 0, WIDTH/3*2, HEIGHT-64);
+                pan.view.frame = CGRectMake(WIDTH/3, 64, WIDTH/3*2, HEIGHT-64);
             }];
         }else{
             [UIView animateWithDuration:0.3 animations:^{
-                pan.view.frame = CGRectMake(WIDTH+10, 0, WIDTH/3*2, HEIGHT-64);
+                pan.view.frame = CGRectMake(WIDTH+10, 64, WIDTH/3*2, HEIGHT-64);
             }];
         }
     }
@@ -226,7 +226,7 @@
         NSDictionary *dict = _oneDataArray[indexPath.row];
         if (![_pid isEqualToString:dict[@"Id"]]) {
             [self loadDataTwo:dict[@"Id"]];
-            _twoSuperView.frame = CGRectMake(WIDTH+10, 0, WIDTH/3*2, HEIGHT-64);
+            _twoSuperView.frame = CGRectMake(WIDTH+10, 64, WIDTH/3*2, HEIGHT-64);
             
             _pid = dict[@"Id"];
             _pName = dict[@"Name"];
@@ -240,7 +240,7 @@
             [_oneTableView reloadData];
         }
         [UIView animateWithDuration:0.3 animations:^{
-            _twoSuperView.frame = CGRectMake(WIDTH/3, 0, WIDTH/3*2, HEIGHT-64);
+            _twoSuperView.frame = CGRectMake(WIDTH/3, 64, WIDTH/3*2, HEIGHT-64);
         }];
     }else{
         NSDictionary *dict = _twoDataArray[indexPath.row];
