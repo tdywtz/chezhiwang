@@ -76,7 +76,7 @@ NSString *LINE_VERSION_URL = @"https://itunes.apple.com/cn/lookup?id=APP_ID";
         
         NSDictionary *dict = array[0];
 
-        if ([dict[@"version"] compare:auto_system_version] == NSOrderedDescending) {
+        if ([dict[@"version"] compare:auto_system_version] == NSOrderedDescending || 1) {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@版本更新",dict[@"version"]]
                                                                 message:dict[@"releaseNotes"]
                                                                delegate:weakSelf

@@ -37,6 +37,9 @@
 NSString *url = [NSString stringWithFormat:[URLFile urlStringForGetZJDY],self.cid];
    
   [HttpRequest GET:url success:^(id responseObject) {
+      if ([responseObject count] == 0) {
+          return ;
+      }
       self.dict = responseObject[0];
      
       questionContent.text = _dict[@"Content"];

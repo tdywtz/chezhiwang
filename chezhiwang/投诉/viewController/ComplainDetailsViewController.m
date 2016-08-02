@@ -47,7 +47,9 @@
     
     NSString *url = [NSString stringWithFormat:[URLFile urlStringForComplain],_cid];
    [HttpRequest GET:url success:^(id responseObject) {
- 
+       if ([responseObject count] == 0) {
+           return ;
+       }
        self.dict = responseObject[0];
        
        [self setData];
@@ -254,12 +256,13 @@
             text = [NSString stringWithFormat:@"%@\n%@",text,str];
         }
     }
+    
     parameterLabel.text = text;
     for (int i = 0; i < array.count; i ++) {
         NSString *str = array[i];
         [parameterLabel addColor:colorDeepGray range:[parameterLabel.text rangeOfString:str]];
     }
-    
+
     
     answerContent.text =  _dict[@"answer"];;
     
