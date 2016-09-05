@@ -25,15 +25,15 @@
 
 - (void)layoutSubviews{
     [super  layoutSubviews];
-    
+
     CGFloat width = self.frame.size.height-20;
     self.imageView.frame = CGRectMake(10, 10, width,width);
-   // self.imageView.contentMode = UIViewContentModeCenter;
-    
+    // self.imageView.contentMode = UIViewContentModeCenter;
+
     CGRect tmpFrame = self.textLabel.frame;
     tmpFrame.origin.x = 10+width+10;
     self.textLabel.frame = tmpFrame;
-    
+
     tmpFrame = self.detailTextLabel.frame;
     tmpFrame.origin.x = 10+width+10;
     self.detailTextLabel.frame = tmpFrame;
@@ -44,10 +44,10 @@
 
 @interface MyViewController ()<UIAlertViewDelegate,UITableViewDataSource,UITableViewDelegate>
 {
-    
+
     UITableView *_tableView;
     NSArray *_dataArray;
-    NSDictionary *numDictonary;
+    NSDictionary *numDictonary;//存放各类数量的字典
 }
 
 @end
@@ -64,11 +64,11 @@
 
 
 -(void)viewWillAppear:(BOOL)animated{
-    
+
     [super viewWillAppear:animated];
     //每次页面出现刷新页面数据
     [[SDImageCache sharedImageCache] removeImageForKey:[[NSUserDefaults standardUserDefaults] objectForKey:user_iconImage] fromDisk:YES];
-   
+
     [self updateNumber];
     [self reloadData];
 
@@ -108,10 +108,10 @@
         _tableView.tableFooterView.hidden = YES;
 
     }else{
-         _tableView.tableFooterView.hidden = NO;
+        _tableView.tableFooterView.hidden = NO;
         _dataArray = @[
                        @[
-                       @{@"class":@"MyCarViewController",@"title":@"",@"imageName":@"defaultImage_icon"}
+                           @{@"class":@"MyCarViewController",@"title":@"",@"imageName":@"defaultImage_icon"}
                            ],
                        @[
                            @{@"class":@"MyComplainViewController",@"title":@"我的投诉",@"imageName":@"center_complain"},
@@ -125,7 +125,7 @@
                        ];
 
     }
-    
+
     [_tableView reloadData];
 }
 
@@ -134,8 +134,8 @@
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
-    
-    
+
+
     UIView *tableFootView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 80)];
     UIButton *btn = [LHController createButtnFram:CGRectZero Target:self Action:@selector(logoutClick) Font:15 Text:@"退出登录"];
     [tableFootView addSubview:btn];
@@ -151,16 +151,16 @@
 -(void)updateNumber{
     NSString *url = [NSString stringWithFormat:[URLFile urlStringForPersonalCount],[[NSUserDefaults standardUserDefaults] objectForKey:user_name],[[NSUserDefaults standardUserDefaults] objectForKey:user_passWord]] ;
     url = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-   [HttpRequest GET:url success:^(id responseObject) {
-       NSDictionary *dict = responseObject[0];
-       if (dict[@"complain"]) {
-           numDictonary = dict;
-           [self reloadData];
-       }
+    [HttpRequest GET:url success:^(id responseObject) {
+        NSDictionary *dict = responseObject[0];
+        if (dict[@"complain"]) {
+            numDictonary = dict;
+            [self reloadData];
+        }
 
-   } failure:^(NSError *error) {
-       
-   }];
+    } failure:^(NSError *error) {
+
+    }];
 }
 
 
@@ -172,7 +172,7 @@
         [df removeObjectForKey:user_name];
         [df removeObjectForKey:user_id];
         [df synchronize];
-        
+
         [self reloadData];
     }
 }
@@ -186,22 +186,22 @@
     return _dataArray.count;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
+
     return [_dataArray[section] count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+
     if (indexPath.section == 0) {
         IconCell *cell = [tableView dequeueReusableCellWithIdentifier:@"iconCell"];
         if (!cell) {
             cell = [[IconCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"iconCell"];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            
+
         }
-        
+
         NSDictionary *dict = _dataArray[indexPath.section][indexPath.row];
         cell.imageView.image = [UIImage imageNamed:dict[@"imageName"]];
         cell.textLabel.text = dict[@"title"];
@@ -213,32 +213,32 @@
         }
         return cell;
     }
-    
-        
-        //
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"centerCell"];
-        if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"centerCell"];
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            UILabel *label = [[UILabel alloc ] init];
-            label.font = [UIFont systemFontOfSize:15];
-            label.textColor = colorLightGray;
-            label.tag = 100;
-            [cell.contentView addSubview:label];
-//            [UIFont asynchronouslySetFontName:[UIFont fontNameSTXingkai_SC_Bold] success:^(NSString *name) {
-//                cell.textLabel.font = [UIFont fontWithName:name size:18];
-//            }];
-            [label makeConstraints:^(MASConstraintMaker *make) {
-                make.right.equalTo(-4);
-                make.centerY.equalTo(0);
-            }];
-        }
-        NSDictionary *dict = _dataArray[indexPath.section][indexPath.row];
-        cell.imageView.image = [UIImage imageNamed:dict[@"imageName"]];
-        cell.textLabel.text = dict[@"title"];
-        
-        UILabel *label = (UILabel *)[cell.contentView viewWithTag:100];
+
+
+    //
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"centerCell"];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"centerCell"];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        UILabel *label = [[UILabel alloc ] init];
+        label.font = [UIFont systemFontOfSize:15];
+        label.textColor = colorLightGray;
+        label.tag = 100;
+        [cell.contentView addSubview:label];
+        //            [UIFont asynchronouslySetFontName:[UIFont fontNameSTXingkai_SC_Bold] success:^(NSString *name) {
+        //                cell.textLabel.font = [UIFont fontWithName:name size:18];
+        //            }];
+        [label makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(-4);
+            make.centerY.equalTo(0);
+        }];
+    }
+    NSDictionary *dict = _dataArray[indexPath.section][indexPath.row];
+    cell.imageView.image = [UIImage imageNamed:dict[@"imageName"]];
+    cell.textLabel.text = dict[@"title"];
+
+    UILabel *label = (UILabel *)[cell.contentView viewWithTag:100];
     if (indexPath.section == 1) {
         if (indexPath.row == 0) {
             label.text = numDictonary[@"complain"];
@@ -248,11 +248,11 @@
             label.text = numDictonary[@"discuss"];
         }else if (indexPath.row == 3){
             label.text = [NSString stringWithFormat:@"%ld",(long)[[FmdbManager shareManager] selectCollectNumber]];
-            
+
         }
     }
-    
-        return cell;
+
+    return cell;
 }
 
 - (void)logoutClick{
@@ -282,15 +282,15 @@
         if (![[NSUserDefaults standardUserDefaults] objectForKey:user_name]) {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                                message:@"您还未登陆，您可以登陆后进行操作"
+                                                                message:@"您还未登录，您可以登录后进行操作"
                                                                delegate:nil
                                                       cancelButtonTitle:nil
                                                       otherButtonTitles:@"确定", nil];
                 [alert show];
-               
+
 
             });
-             return;
+            return;
         }
     }
     Class cls = NSClassFromString(_dataArray[indexPath.section][indexPath.row][@"class"]);

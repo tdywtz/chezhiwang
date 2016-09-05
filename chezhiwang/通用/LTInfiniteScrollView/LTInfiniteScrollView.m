@@ -124,7 +124,7 @@
    
     [self updateSize];
     _currentIndex = initialIndex;
-    self.scrollView.contentOffset = CGPointMake(-125, 0);//[self contentOffsetForIndex:_currentIndex];
+    self.scrollView.contentOffset = [self contentOffsetForIndex:_currentIndex];
     [self reArrangeViews];
     [self updateProgress];
 }

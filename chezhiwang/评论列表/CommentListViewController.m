@@ -37,6 +37,7 @@ typedef enum {
     
     NSString *url = [NSString stringWithFormat:[URLFile urlStringForPL],_cid,self.type,(long)p,(long)s];
     [HttpRequest GET:url success:^(id responseObject) {
+        NSLog(@"%@",responseObject);
         for (NSDictionary *dic in responseObject[0][@"list"]) {
             if ([dic allKeys].count == 0) continue;
             [_dataArray addObject:dic];
@@ -129,7 +130,6 @@ typedef enum {
         
     }else{
         LoginViewController *my = [[LoginViewController alloc] init];
-        my.pushPop = pushTypePopView;
         [self.navigationController pushViewController:my animated:YES];
     }
 }
@@ -155,7 +155,7 @@ typedef enum {
     [dict setObject:content forKey:@"content"];
     [dict setObject:self.cid forKey:@"tid"];
     [dict setObject:self.type forKey:@"type"];
-    [dict setObject:@"7" forKey:@"origin"];
+    [dict setObject:appOrigin forKey:@"origin"];
     
     [HttpRequest POST:[URLFile urlStringForAddcomment] parameters:dict success:^(id responseObject) {
         if ([responseObject[@"result"] isEqualToString:@"success"]) {

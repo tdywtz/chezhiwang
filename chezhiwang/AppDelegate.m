@@ -25,12 +25,15 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+
+
+
     
     CZWAppPrompt *prompt = [CZWAppPrompt sharedInstance];
     prompt.appId = THE_APPID;
     [prompt shouAlert:AppPromptStyleScore];
     [prompt shouAlert:AppPromptStyleUpdate];
-    
+
     CustomTabBarController *cus = [[CustomTabBarController alloc] init];
     _window.rootViewController = cus;
     //电池条颜色

@@ -42,7 +42,7 @@
     
     markLabel = [LHController createLabelWithFrame:CGRectMake(100, 28, WIDTH-130, 18) Font:B-5 Bold:NO TextColor:colorDeepGray Text:nil];
     [self.contentView addSubview:markLabel];
-   
+
     verdictLabel = [LHController createLabelWithFrame:CGRectMake(100, 44, WIDTH-130, 40) Font:B-5 Bold:NO TextColor:colorDeepGray Text:nil];
     verdictLabel.numberOfLines = 0;
     [self.contentView addSubview:verdictLabel];

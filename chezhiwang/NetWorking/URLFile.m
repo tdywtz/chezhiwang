@@ -11,17 +11,31 @@
 @implementation URLFile
 
 + (NSString *)stringWithBasic:(NSString *)actString{
-    NSString *basicString;
 
-#if DEBUG
-   basicString = @"http://192.168.1.114:8888/server/forAppWebService.ashx?";
-#else
-   basicString = @"http://m.12365auto.com/server/forAppWebService.ashx?";
-#endif
-
-    return [NSString stringWithFormat:@"%@%@",basicString,actString];
+    return [self stringForAppWebServiceWithAct:actString];
 }
 
+/**车质网专用*/
++ (NSString *)stringForAppWebServiceWithAct:(NSString *)act{
+    return [NSString stringWithFormat:@"%@%@%@",[self prefixString],@"forAppWebService.ashx?",act];
+}
+
+/**公用*/
++ (NSString *)stringForCommonServiceWithAct:(NSString *)act{
+    return [NSString stringWithFormat:@"%@%@%@",[self prefixString],@"forCommonService.ashx?",act];
+}
+
+
+/**前缀*/
++ (NSString *)prefixString{
+#if DEBUG
+    return  @"http://192.168.1.114:8888/server/";
+#else
+    return  @"http://m.12365auto.com/server/";
+#endif
+}
+
+#pragma mark - 接口-——————————》》》》》
 /**登录*/
 + (NSString *)urlStringForLogin{
     return [self stringWithBasic:@"act=login&uname=%@&psw=%@"];
@@ -30,6 +44,24 @@
 /**注册*/
 + (NSString *)urlStringForRegister{
     return [self stringWithBasic:@"act=reg"];
+}
+
+#pragma mark- 车型图片
+/**车型图片*/
++ (NSString *)urlString_modelPlicList{
+    // attr 车型属性
+    // bid  品牌
+    // sid  车系
+    // mid  车型
+    return [self stringWithBasic:@"act=modelPicList"];
+}
+/**品牌大全*/
++ (NSString *)urlString_picBrand{
+    return [self stringWithBasic:@"act=picBrand"];
+}
+/*车系大全*/
++ (NSString *)urlString_picSeries{
+    return [self stringWithBasic:@"act=picSeries&bid=%@"];
 }
 
 #pragma mark - 新闻
@@ -94,7 +126,7 @@
 /**投诉排行列表*/
 + (NSString *)urlString_rankingList{
 
-    return   [self stringWithBasic:@"act=rankingList&startTime=%@&endTime=%@&modelAttr=%@&brandAttr=%@&dep=%@&zlwt=%@"];
+    return   [self stringWithBasic:@"act=rankingList&startTime=%@&endTime=%@&modelAttr=%@&brandAttr=%@&dep=%@&zlwt=%@&p=%ld&s=10"];
 }
 
 /**回复率列表*/
@@ -156,8 +188,8 @@
 
 /**经销商*/
 + (NSString *)urlStringForDis{
-    return  @"http://m.12365auto.com/server/forCommonService.ashx?act=dis&pid=%@&cid=%@&sid=%@";
-    //return [self stringWithBasic:@"act=dis&pid=%@&cid=%@&id=%@&bid=%@&sid=%@&name=%@&top=0"];
+  
+    return [self stringForCommonServiceWithAct:@"act=dis&pid=%@&cid=%@&sid=%@"];
 }
 
 
@@ -341,5 +373,16 @@
 + (NSString *)urlString_sendemail{
     return [self stringWithBasic:@"act=sendemail&username=%@&origin=%@"];
 }
-
+#pragma mark - 数据对比
+/**对比*/
++ (NSString *)urlString_mConfig{
+    //(车系id,车型id)sid=%@&mid=%@
+    //不传参数则为左侧第一列名称，传参数则为右边值
+    return [self stringForAppWebServiceWithAct:@"act=mConfig"];
+}
+/**头部概括信息*/
++ (NSString *)urlString_dbInfo{
+    //bid-品牌，sid-车系，mid-车型
+    return [self stringForAppWebServiceWithAct:@"act=dbInfo&bid=%@&sid=%@&mid=%@"];
+}
 @end

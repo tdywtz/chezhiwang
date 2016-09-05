@@ -17,15 +17,13 @@
 
     UITableView *_tabelView;
     NSMutableArray *_dataArray;
-    
+
     MyCommentModel *myModel;
     MyCommentModel *openModel;
-    
+
     MJRefreshHeaderView *headerView;
     MJRefreshFooterView *footView;
     NSInteger _count;
-    
-    CustomActivity *activity;
 }
 @end
 
@@ -54,33 +52,27 @@
         }
         [headerView endRefreshing];
         [footView endRefreshing];
-        [activity animationStoping];
         [_tabelView reloadData];
 
     } failure:^(NSError *error) {
         [headerView endRefreshing];
         [footView endRefreshing];
-        [activity animationStoping];
 
     }];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
- 
+
     self.navigationItem.title = @"我的评论";
     self.view.backgroundColor = [UIColor whiteColor];
-  
- 
-        [self createTabelView];
-        
-        activity = [[CustomActivity alloc] initWithCenter:CGPointMake(WIDTH/2, HEIGHT/2-64)];
-        [self.view addSubview:activity];
-        [activity animationStarting];
-        
-        [self loadDataWithP:1 andS:10];
-  
 
+
+    [self createTabelView];
+
+
+    [headerView beginRefreshing];
+    [self loadDataWithP:1 andS:10];
 }
 
 -(void)createTabelView{
@@ -93,7 +85,7 @@
     _tabelView.separatorStyle = UITableViewCellSeparatorStyleNone;
     //_tabelView.separatorInset = UIEdgeInsetsMake(0, -100, 0, 0);
     [self.view addSubview:_tabelView];
-    
+
     headerView = [[MJRefreshHeaderView alloc] initWithScrollView:_tabelView];
     footView = [[MJRefreshFooterView alloc] initWithScrollView:_tabelView];
     headerView.delegate = self;
@@ -104,18 +96,17 @@
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 140)];
     imageView.center = CGPointMake(WIDTH/2, HEIGHT/2-64);
     [self.view addSubview:imageView];
-    
+
     UIImageView *subImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
     subImageView.image = [UIImage imageNamed:@"90"];
     [imageView addSubview:subImageView];
-    
+
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, 100, 40)];
     label.text = @"您还没有评论暂无平论内容";
     label.numberOfLines = 0;
     label.textAlignment = NSTextAlignmentCenter;
     label.font = [UIFont systemFontOfSize:15];
     [imageView addSubview:label];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -130,13 +121,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _dataArray.count;
-    
+
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-     MyCommentModel *model = [_dataArray objectAtIndex:indexPath.row];
-  
+    MyCommentModel *model = [_dataArray objectAtIndex:indexPath.row];
+
     if ([model isEqual:myModel]) {
         MyCommentShowCell *showcell = [tableView dequeueReusableCellWithIdentifier:@"showcell"];
         if (!showcell) {
@@ -148,8 +139,8 @@
         showcell.model = model;
         return showcell;
     }
-   
-  
+
+
     MyCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ID"];
     if (!cell) {
         cell = [[MyCommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ID"];
@@ -172,15 +163,15 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-  
+
     MyCommentModel *model = _dataArray[indexPath.row];
-    
+
     openModel = nil;
-    
-    
+
+
 
     NSInteger index = [_dataArray indexOfObject:myModel];
-    
+
     if (index == NSNotFound) {
         openModel = model;
         myModel = [[MyCommentModel alloc] initWithDictionary:[model getDcitonary]];
@@ -191,15 +182,15 @@
         }else if (index == indexPath.row+1){
             [_dataArray removeObject:myModel];
         }else{
-            
+
             openModel = model;
-            
+
             MyCommentModel *obj = [[MyCommentModel alloc] initWithDictionary:[model getDcitonary]];
             [_dataArray insertObject:obj atIndex:indexPath.row+1];
             [_dataArray removeObject:myModel];
-           
+
             myModel = obj;
-            
+
         }
     }
 
@@ -222,13 +213,13 @@
 }
 
 /*
-#pragma mark - Navigation
+ #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

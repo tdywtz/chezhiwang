@@ -157,7 +157,8 @@
     NewsDetailViewController *detail = [[NewsDetailViewController alloc] init];
     NSDictionary *dict = _dataArray[indexPath.row];
     detail.ID = dict[@"id"];
-    detail.titleLabelText = dict[@"title"];
+    detail.titleLabelText = dict[@"models"];
+    NSLog(@"%@",dict);
 //    //改变颜色
 //    InvestigateListCell *cell = [tableView cellForRowAtIndexPath:indexPath];
 //    UILabel *title = (UILabel *)[cell valueForKey:@"titleLabel"];

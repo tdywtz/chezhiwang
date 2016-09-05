@@ -25,14 +25,14 @@
 @end
 
 @implementation CustomTabBarController
-//- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
-//    [self setValue:[[MyTabbar alloc] init] forKey:@"_tabBar"];
-//    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-//       
-//    }
-//    return self;
-//   
-//}
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
+    [self setValue:[[MyTabbar alloc] init] forKey:@"_tabBar"];
+    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+       
+    }
+    return self;
+   
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -51,8 +51,7 @@
     BasicNavigationController *n4 = [[BasicNavigationController alloc] initWithRootViewController:forum];
     BasicNavigationController *n5 = [[BasicNavigationController alloc] initWithRootViewController:my];
     
-    
-    
+
     news.title                 = @"新闻";
     complain.title             = @"投诉";
     answer.title               = @"答疑";
@@ -61,7 +60,6 @@
     self.viewControllers  = @[n1,n2,n3,n4,n5];
 
     [self createCustomTabBar];
-
     //NSSetUncaughtExceptionHandler(&UncaughtExceptionHandler(NSException *exception));
 }
 
@@ -99,6 +97,7 @@
     }
 }
 
+
 -(UIImage *)createImageWithName:(NSString *)imageName
 {
     //UIImage *image = [UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"%@%@",self.imagePath,imageName]];
@@ -115,6 +114,8 @@
     [UIView animateWithDuration:0.1 animations:^{
         custommoveView.frame = frame;
     }];
+
+    ((MyTabbar *)self.tabBar).theVC = viewController;
 }
 
 
@@ -145,6 +146,23 @@
       // 自定义tabbar时设置
    // [self.selectedViewController endAppearanceTransition];
 }
+
+
+//-(BOOL)shouldAutorotate
+//{
+//    return YES;
+//}
+//-(UIInterfaceOrientationMask)supportedInterfaceOrientations
+//{
+//    return UIInterfaceOrientationMaskAll;
+//    UINavigationController *nvc = (UINavigationController *)self.selectedViewController;
+//    return [nvc.viewControllers.lastObject supportedInterfaceOrientations];
+//}
+//-(UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+//{
+//
+//    return [self.viewControllers.lastObject preferredInterfaceOrientationForPresentation];
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

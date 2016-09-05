@@ -19,7 +19,6 @@
     if (self = [super init]) {
         NSArray *keys = [self getPropertyArray];
         for (NSString *key in keys) {
-            
             if(dictionary[key]) [self setValue:dictionary[key] forKey:key];
         }
     }
@@ -101,6 +100,12 @@
     return data;
 }
 
-
++ (NSArray *)arayWithArray:(NSArray *)array{
+    NSMutableArray *marray = [[NSMutableArray alloc] init];
+    for (NSDictionary *dict in array) {
+        [marray addObject:[[self alloc] initWithDictionary:dict]];
+    }
+    return [marray copy];
+}
 
 @end

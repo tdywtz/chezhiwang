@@ -54,7 +54,7 @@
             [array addObject:vc];
         }
     }
-    
+
     NewsInvestigateViewController *investigate = [[NewsInvestigateViewController alloc] init];
     [array addObject:investigate];
     
@@ -82,8 +82,6 @@
 
 #pragma mark - 搜索按钮
 -(void)searchClick{
-//    [self.navigationController pushViewController:[[NSClassFromString(@"SearchViewController") alloc] initWithSearchResultsController:nil] animated:YES];
-//    return;
 
     NSArray *typeArray = @[
                            @"0",@"1",@"5",@"14",@"4",@"15",@"2",@"13",

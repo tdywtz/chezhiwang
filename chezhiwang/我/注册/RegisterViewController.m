@@ -142,7 +142,7 @@
         return;
     }
     
-    NSDictionary *dict = @{@"uname":userNameTextField.text,@"psw":passwordTextField.text,@"email":addressTextFeild.text,@"origin":@"7"};
+    NSDictionary *dict = @{@"uname":userNameTextField.text,@"psw":passwordTextField.text,@"email":addressTextFeild.text,@"origin":appOrigin};
     
   [HttpRequest POST:[URLFile urlStringForRegister] parameters:dict success:^(id responseObject) {
       

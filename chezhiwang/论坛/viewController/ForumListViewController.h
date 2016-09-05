@@ -8,7 +8,7 @@
 
 #import "BasicViewController.h"
 /**
- *  论坛列表
+ *  论坛
  */
 @interface ForumListViewController : BasicViewController
 

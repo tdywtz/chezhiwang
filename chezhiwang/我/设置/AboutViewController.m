@@ -26,8 +26,6 @@
     self.view.backgroundColor = [UIColor whiteColor];
 
     [self createUI];
-//    UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, WIDTH,400)];
-//    [self.view addSubview:web];
 }
 
 -(void)createUI{
@@ -51,6 +49,7 @@
     }];
     
     NSString *text = @"车质网（www.12365auto.com）是国内领先的缺陷汽车产品信息和车主质量投诉信息收集平台，也是购买汽车的消费者了解相关车型品质状况的第三方优选媒介。\n“传递您的心声，解决您的难题”，车质网希望车主的抱怨在一个高效运转的通道里得到重视和解决，并致力于为改善车企的客户关系提供持续和全方位的服务。\n我们的目标是成为中国汽车质量第三方评价体系中更有力、更公正、更客观的声音和力量。";
+
     AttributStage *stage = [[AttributStage alloc] init];
     label1.attributedText = [NSMutableAttributedString attributedStringWithStage:stage string:text];
     

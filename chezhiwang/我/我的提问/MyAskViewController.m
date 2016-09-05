@@ -143,7 +143,6 @@
 
 -(void)rightItemClick{
     AskViewController *ask = [[AskViewController alloc] init];
-    ask.isMyAsk = YES;
     [self.navigationController pushViewController:ask animated:YES];
 }
 
@@ -197,6 +196,7 @@
 //}
 
 - (CGFloat) tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
+   
     if ([self.model isEqual:_dataArray[indexPath.row]]) {
         return 150;
     }

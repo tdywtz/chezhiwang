@@ -7,18 +7,8 @@
 //
 
 #import "BasicViewController.h"
-typedef enum {
-    pushTypeDefault,
-    pushTypePopView,
-    pushTypeToComplainView,
-    pushTypeToAsk
-}pushType;
 
 @interface LoginViewController : BasicViewController
 
-//@property (nonatomic,assign) id delegate;
-@property (nonatomic,assign) NSInteger num;
-@property (nonatomic,assign) BOOL isRoot;
-@property (nonatomic,assign) pushType pushPop;
 
 @end

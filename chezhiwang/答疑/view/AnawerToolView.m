@@ -27,7 +27,7 @@
         UIView *line = [[UIView alloc] init];
         line.backgroundColor = colorLineGray;
         self.moveView = [[UIView alloc] init];
-        self.moveView.backgroundColor = colorLightBlue;
+        self.moveView.backgroundColor = colorYellow;
         
         [self addSubview:line];
         [self addSubview:self.moveView];
@@ -94,8 +94,8 @@
        button.selected = YES;
  
     [button layoutIfNeeded];
-    CGRect rect = CGRectMake(0, 0, CGRectGetWidth(button.frame)+20, 2);
-    CGPoint center = CGPointMake(button.center.x, CGRectGetHeight(self.frame)-1);
+    CGRect rect = CGRectMake(0, 0, CGRectGetWidth(button.frame)+20, 3);
+    CGPoint center = CGPointMake(button.center.x, CGRectGetHeight(self.frame)-2);
     [UIView animateWithDuration:0.1 animations:^{
         self.moveView.frame = rect;
         self.moveView.center = center;

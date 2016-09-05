@@ -22,8 +22,6 @@ typedef enum {
 @interface PostViewController ()<UIWebViewDelegate,UIScrollViewDelegate>
 {
     UIWebView *_webOne;
-
-    CustomActivity *activity;
     NSString *webHttp;
 }
 
@@ -49,15 +47,11 @@ typedef enum {
     [self crateRigthItem];
     [self.view addSubview:[[UIView alloc] init]];
     [self createWebView];
-    [self createActivity];
+
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self loadData];
 }
 
--(void)createActivity{
-    activity = [[CustomActivity alloc] initWithCenter:CGPointMake(WIDTH/2, HEIGHT/2-64)];
-    [self.view addSubview:activity];
-    [activity animationStarting];
-}
 
 -(void)createWebView{
 
@@ -91,7 +85,6 @@ typedef enum {
 -(void)rightItemClick{
     if (![[NSUserDefaults standardUserDefaults] objectForKey:user_name]) {
         LoginViewController *login = [[LoginViewController alloc] init];
-        login.pushPop = pushTypePopView;
         [self.navigationController pushViewController:login animated:YES];
         return;
        
@@ -132,15 +125,19 @@ typedef enum {
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
- [activity animationStoping];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 
 #pragma mark - UIWebViewDelegate
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
-    
 
-    [activity animationStoping];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error{
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+}
+
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
     if (navigationType == UIWebViewNavigationTypeLinkClicked) {
@@ -170,7 +167,6 @@ typedef enum {
 -(void)clickWithTtpe:(clickType)type and:(NSString *)string{
     if (![[NSUserDefaults standardUserDefaults] objectForKey:user_name]) {
         LoginViewController *my = [[LoginViewController alloc] init];
-        my.pushPop = pushTypePopView;
         [self.navigationController pushViewController:my animated:YES];
         return;
     }

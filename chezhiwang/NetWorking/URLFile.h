@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-#define auto_car_brand @"http://m.12365auto.com/server/forCommonService.ashx?act=letter"
+//#define auto_car_brand @"http://m.12365auto.com/server/forCommonService.ashx?act=letter"
 //获取车系
-#define auto_car_series @"http://m.12365auto.com/server/forCommonService.ashx?act=serieslist&id=%@"
+#define auto_car_series @"http://m.12365auto.com/server/forCommonService.ashx?act=s_list&id=%@"
 //注册协议
 #define xieyi @"http://m.12365auto.com/user/agreeForIOS.shtml"
 
@@ -23,6 +23,15 @@
 /**注册*/
 + (NSString *)urlStringForRegister;
 /**注册协议*/
+
+#pragma mark- 车型图片
+/**车型图片列表*/
++ (NSString *)urlString_modelPlicList;
+/**品牌大全*/
++ (NSString *)urlString_picBrand;
+/**车系大全*/
++ (NSString *)urlString_picSeries;
+
 
 #pragma mark - 新闻
 /**新闻列表*/
@@ -176,5 +185,11 @@
 
 /** 找回密码*/
 + (NSString *)urlString_sendemail;
+
+#pragma mark - 数据对比
+/**对比*/
++ (NSString *)urlString_mConfig;
+/**头部概括信息*/
++ (NSString *)urlString_dbInfo;
 
 @end

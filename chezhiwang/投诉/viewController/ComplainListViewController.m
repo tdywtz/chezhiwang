@@ -23,7 +23,6 @@
     MJRefreshHeaderView *headerView;
     MJRefreshFooterView *footView;
     NSInteger _count;
-    CustomActivity *activity;
     
     FmdbManager *_fmdb;
 }
@@ -47,13 +46,10 @@
        [_tableView reloadData];
        [headerView endRefreshing];
        [footView endRefreshing];
-       [activity animationStoping];
 
    } failure:^(NSError *error) {
        [headerView endRefreshing];
        [footView endRefreshing];
-       [activity animationStoping];
-
    }];
 }
 
@@ -68,12 +64,10 @@
     [self createTableView];
     
     header = YES;
-    
- 
-        [self loadDataP:1 andS:10];
-        activity = [[CustomActivity alloc] initWithCenter:CGPointMake(WIDTH/2, HEIGHT/2-64)];
-        [self.view addSubview:activity];
-        [activity animationStarting];
+
+    [headerView beginRefreshing];
+    [self loadDataP:1 andS:10];
+
 }
 
 //初始化数据
@@ -94,7 +88,6 @@
         [self.navigationController pushViewController:complain animated:YES];
     }else{
         LoginViewController *my = [[LoginViewController alloc] init];
-        my.pushPop = pushTypeToComplainView;
         my.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:my animated:YES];
     }

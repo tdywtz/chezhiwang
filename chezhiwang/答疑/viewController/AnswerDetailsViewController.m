@@ -292,7 +292,6 @@ NSString *url = [NSString stringWithFormat:[URLFile urlStringForGetZJDY],self.ci
         }];
     }else{
         LoginViewController *my = [[LoginViewController alloc] init];
-        my.pushPop = pushTypePopView;
         [self.navigationController pushViewController:my animated:YES];
     }
 }

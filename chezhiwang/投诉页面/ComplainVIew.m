@@ -44,6 +44,7 @@
     UITextField *province;//省份简称
     UITextField *dateBuy;//购车日期
     UITextField *dateBreakdown;//问题日期
+    UITextField *mileage;//行驶里程
     UITextField *sheng_shi;
     UIButton *addImageButton;
     UIView *imageBGView;
@@ -57,7 +58,6 @@
 
     //三
     LHDatePickView *_datePicer;
-   // UIView *footView;
     UIView *threeView;
     UITextField *complainPart;//投诉部位
     UITextField *complainServer;//服务问题
@@ -259,8 +259,8 @@
 #pragma mark - 第二部分
 -(void)createTwo{
     
-    NSArray *array1 = @[@"投诉车型:",@"发动机号:",@"车架号:",@"车牌号:",@"购车日期:",@"出现问题日期:",@"经销商名称:"];
-    NSArray *array2 = @[@"",@"发动机号，可从您的行驶本上查找",@"车架号，可从您的行驶本上查找",@"请输入您的车牌号",@"选择购车日期",@"选择出问题日期",@""];
+    NSArray *array1 = @[@"投诉车型:",@"发动机号:",@"车架号:",@"车牌号:",@"购车日期:",@"出现问题日期:",@"已行驶里程(km):",@"经销商名称:"];
+    NSArray *array2 = @[@"",@"发动机号，可从您的行驶本上查找",@"车架号，可从您的行驶本上查找",@"请输入您的车牌号",@"选择购车日期",@"选择出问题日期",@"输入行驶里程",@""];
    
     for (int i = 0; i < array1.count; i ++) {
         UILabel *labelLeft = [LHController createLabelWithFrame:CGRectMake(LEFT, y+(SPACE+1)*i+3.5, 10, SPACE) Font:B Bold:NO TextColor:colorOrangeRed Text:@"*"];
@@ -303,7 +303,7 @@
                 else model = field;
             }
         }
-       else if (i > 0 && i < 6) {
+       else if (i > 0 && i < 7) {
            
             labelLeft.frame = CGRectMake(LEFT,  y+(SPACE+1)*i+(SPACE-5)*3+3.5, 10, SPACE);
             labelTitle.frame = CGRectMake(LEFT+20,  y+(SPACE+1)*i+(SPACE-5)*3, width, SPACE);
@@ -325,6 +325,10 @@
            }
            if (i == 4) dateBuy = textField;
            if (i == 5)dateBreakdown = textField;
+           if (i == 6){
+               mileage = textField;
+               textField.keyboardType = UIKeyboardTypeNumberPad;
+           }
           //虚线
            UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, labelTitle.frame.origin.y+labelTitle.frame.size.height, WIDTH, 1)];
            lineView.backgroundColor = colorLineGray;
@@ -754,24 +758,11 @@
 }
 
 
-#pragma mark - 返回
-
--(void)leftItemBackClick{
-    if (self.isLogoIn) {
-        UIViewController *controller = self.navigationController.viewControllers[self.viewIndex];
-        [self.navigationController popToViewController:controller animated:YES];
-    }else{
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-}
- 
 
 #pragma mark - 提交按钮,点击发布
 -(void)nextClick{
-    if (!([test.text caseInsensitiveCompare:self.code] == NSOrderedSame)) {
-        [self alertView:@"验证码不正确"];
-        
-    }else if ([LHController judegmentSpaceChar:nameTextField.text] == NO) {
+
+    if ([LHController judegmentSpaceChar:nameTextField.text] == NO) {
         [self alertView:@"名字不能为空"];
         
     }else if ([ageTextField.text integerValue] < 10){
@@ -805,15 +796,20 @@
     }else if (dateBreakdown.text.length == 0){
         [self alertView:@"出现故障日期不能为空"];
         
-    }else if([LHController judegmentSpaceChar:describe.text] == NO){
+    }else if (![NSString isDigital:mileage.text]){
+        [self alertView:@"行驶里程只能为数字，请重新输入"];
+    }
+    else if([LHController judegmentSpaceChar:describe.text] == NO){
         [self alertView:@"问题描述不能为空"];
         
     }else if ([LHController judegmentSpaceChar:details.text] == NO){
         [self alertView:@"投诉详情不能为空"];
     }else if (complainPart.text.length == 0 && complainServer.text.length == 0){
         [self alertView:@"请选择投诉类型"];
-    }
-    else{
+    }else if (!([test.text caseInsensitiveCompare:self.code] == NSOrderedSame)) {
+        [self alertView:@"验证码不正确"];
+
+    }else{
         if (![LHController judegmentCarNum:numberPlate.text] || numberPlate.text.length > 6 || ![LHController judegmentSpaceChar:numberPlate.text]) {
             [self alertView:@"车牌号只能是6位以内字母和数字组成的"];
             
@@ -870,6 +866,7 @@
     
     [superDict setObject:hideBusinessName .text forKey:@"Buyname"];
     [superDict setObject:businessName.text forKey:@"Disname"];
+    [superDict setObject:mileage.text forKey:@"mileage"];
     [superDict setObject:businessId forKey:@"Disid"];
     [superDict setObject:@"" forKey:@"Image"];
     
@@ -915,30 +912,15 @@
     
     [HttpRequest POST:[URLFile urlStringForProgressComplain] parameters:dic images:_imageArray success:^(id responseObject) {
         [act stopAnimating];
-        next.enabled = YES;
-        next.backgroundColor = [UIColor colorWithRed:254/255.0 green:153/255.0 blue:23/255.0 alpha:1];
-        [self onTapToGenerateCode:nil];
         if (self.updata) {
             self.updata();
         }
-        if (self.isMyComplainVC == YES) {
-            [self.navigationController popViewControllerAnimated:YES];
-        }else{
-            MyComplainViewController *mcc = [[MyComplainViewController alloc] init];
-            mcc.have = YES;
-            if (self.isLogoIn) {
-                mcc.viewIndex = self.viewIndex;
-            }else{
-                mcc.viewIndex = self.navigationController.viewControllers.count-2;
-            }
-            [self.navigationController pushViewController:mcc animated:YES];
-        }
+        [self.navigationController popViewControllerAnimated:YES];
 
     } failure:^(NSError *error) {
         [act stopAnimating];
         next.enabled = YES;
         next.backgroundColor = [UIColor colorWithRed:254/255.0 green:153/255.0 blue:23/255.0 alpha:1];
-        // NSLog(@"@%",error);
         [self alertView:@"上传失败"];
 
     }];
@@ -1498,6 +1480,7 @@
     
     dateBuy.text = _dictionary[@"buytime"];//购车
     dateBreakdown.text = _dictionary[@"issuetime"];
+    mileage.text = _dictionary[@"mileage"];
 
     if ([self.dictionary[@"lid"] length] > 0) {
         if ([_dictionary[@"pro"] isEqualToString:_dictionary[@"city"]]) {

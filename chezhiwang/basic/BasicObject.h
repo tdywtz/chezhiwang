@@ -33,4 +33,7 @@
  *  字典转换二进制
  */
 -(NSData*)returnDataWithDictionary:(NSDictionary*)dict;
+
+
++ (NSArray *)arayWithArray:(NSArray *)array;
 @end

@@ -78,9 +78,9 @@
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
         self.modalPresentationStyle = UIModalPresentationCustom;
         self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        _duration = 1.0;
+        _duration = 1.0/2;
         _beginTime = 0.042;
-        _itemSize = CGSizeMake(80, 80);
+        _itemSize = CGSizeMake(80, 100);
         _lineSpacing = 30;
        _queues = 3;
         NSMutableArray *marray = [NSMutableArray new];
@@ -98,13 +98,17 @@
     [super viewDidLoad];
 
     [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapOnBackground)]];
-    if ([UIDevice currentDevice].systemVersion.floatValue >= 8.0) {
-          [self addVisualEffectView];
-    }else{
-        UIImageView *iamgeView = [[UIImageView alloc] initWithFrame:self.view.frame];
-        iamgeView.image =  self.bluffImage;
-        [self.view insertSubview:iamgeView atIndex:0];
-    }
+//    if ([UIDevice currentDevice].systemVersion.floatValue >= 8.0) {
+//          [self addVisualEffectView];
+//    }else{
+//        UIImageView *iamgeView = [[UIImageView alloc] initWithFrame:self.view.frame];
+//        iamgeView.image =  self.bluffImage;
+//        [self.view insertSubview:iamgeView atIndex:0];
+//    }
+    self.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-300, CGRectGetWidth(self.view.frame), 300)];
+    [self.view addSubview:view];
+    view.backgroundColor = [UIColor whiteColor];
 
     [self setUpView];
     [self showItems];

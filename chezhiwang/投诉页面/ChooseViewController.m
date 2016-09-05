@@ -31,6 +31,7 @@ typedef enum {
 
 @implementation ChooseViewController
 
+
 - (instancetype)init
 {
     self = [super init];
@@ -74,7 +75,7 @@ typedef enum {
 
 -(void)downloadBrand{
     _activity = [self createActivity];
-   [HttpRequest GET:auto_car_brand success:^(id responseObject) {
+   [HttpRequest GET:[URLFile urlStringForLetter] success:^(id responseObject) {
        NSMutableArray *mArray = [[NSMutableArray alloc] init];
        NSMutableArray *letterArray = [[NSMutableArray alloc] init];
        for (NSDictionary *dict in responseObject) {
@@ -99,7 +100,7 @@ typedef enum {
 }
 
 -(void)createIndexView:(NSArray *)array{
-    AIMTableViewIndexBar *indexbar = [[AIMTableViewIndexBar alloc] initWithFrame:CGRectMake(WIDTH-30, 64+30, 25, HEIGHT-60-64) andArray:array];
+    AIMTableViewIndexBar *indexbar = [[AIMTableViewIndexBar alloc] initWithFrame:CGRectMake(WIDTH-30, 64+30, 30, HEIGHT-60-64) andArray:array];
     indexbar.indexes = array;
     indexbar.delegate = self;
     [self.view addSubview:indexbar];
@@ -110,8 +111,16 @@ typedef enum {
     NSString *urlString = [NSString stringWithFormat:auto_car_series,brandID];
     [HttpRequest GET:urlString success:^(id responseObject) {
         NSMutableArray *mArray = [[NSMutableArray alloc] init];
-        for (NSDictionary *dict in responseObject) {
-            [mArray addObject:@{@"id":dict[@"id"],@"title":dict[@"name"]}];
+        for (NSDictionary *dict in responseObject[@"rel"]) {
+            NSMutableDictionary *mDict = [[NSMutableDictionary alloc] init];
+            [mDict setObject:dict[@"brands"] forKey:@"section"];
+
+            NSMutableArray *marr = [[NSMutableArray alloc] init];
+            for (NSDictionary *subDict in dict[@"series"]) {
+                [marr addObject:@{@"id":subDict[@"id"],@"title":subDict[@"name"]}];
+            }
+            [mDict setObject:marr forKey:@"array"];
+            [mArray addObject:mDict];
         }
         _dataArray = mArray;
         [_tableView reloadData];
@@ -144,7 +153,7 @@ typedef enum {
     
     NSString *urlString = [NSString stringWithFormat:[URLFile urlStringForDis],provinceId,cityId,seriesId];
     [HttpRequest GET:urlString success:^(id responseObject) {
-        NSLog(@"%@",responseObject);
+
         NSMutableArray *mArray = [[NSMutableArray alloc] init];
         for (NSDictionary *dict in responseObject) {
             [mArray addObject:@{@"id":dict[@"Id"],@"title":dict[@"Name"]}];
@@ -179,6 +188,7 @@ typedef enum {
     }
     [self createTableView];
 }
+
 -(void)createLeftItem{
     UIButton *btn = [LHController createButtnFram:CGRectMake(0, 0, 40, 20) Target:self Action:@selector(leftItemClick) Text:@"取消"];
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -187,7 +197,9 @@ typedef enum {
 }
 
 -(void)leftItemClick{
+
     [self dismissViewControllerAnimated:YES completion:nil];
+
 }
 
 -(void)createRightItem{
@@ -246,7 +258,7 @@ typedef enum {
     }else if (_choosetype == chooseTypeSeries){
         self.title = @"车系";
         self.chooseNumbers = chooseNumberAlone;
-       // self.tabelViewStyle = UITableViewStyleGrouped;
+        self.tabelViewStyle = UITableViewStyleGrouped;
         [self downloadSeries:self.ID];
         
     }else if (_choosetype == chooseTypeModel){
@@ -334,7 +346,7 @@ typedef enum {
             }
         }
     }
-    
+  
     return cell;
 }
 
@@ -387,7 +399,7 @@ typedef enum {
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (self.tabelViewStyle == UITableViewStyleGrouped) {
-         return 30;
+         return 40;
     }
     return 0.0;
 }

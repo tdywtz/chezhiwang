@@ -130,11 +130,13 @@
         NSString *desc = [self.contentArray componentsJoinedByString:@"|"];
         [dict setObject:desc forKey:@"imgdesc"];
         [self submitData:dict];
+
     }
 }
 
 #pragma mark - 发布帖子
 -(void)submitData:(NSDictionary *)dict{
+  
     UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"正在上传"
                                                  message:nil
                                                 delegate:nil

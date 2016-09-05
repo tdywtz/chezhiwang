@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TransitionAnima.h"
 
 @interface UIViewController (LH)
 
--(void)viewApper;
--(void)viewDisappear;
+@property (nonatomic,assign) TransitionAnimaType transitionAnimaType;
+
+-(void)viewApper;//出现
+-(void)viewDisappear;//消失]
 
 @end

@@ -11,12 +11,13 @@
 #import "MyComplainModel.h"
 #import "MyComplainShowCell.h"
 #import "ComplainView.h"
+#import "MyComplainHeaderView.h"
 
 @interface MyComplainViewController ()<UITableViewDataSource,UITableViewDelegate,MJRefreshBaseViewDelegate>
 {
     NSMutableArray *_dataArray;
     UITableView *_tableView;
-    UIImageView *headerImageView;
+    MyComplainHeaderView *headerStepView;
 
     MyComplainModel *myModel;
     MyComplainModel *openModel;
@@ -26,7 +27,6 @@
 
     NSInteger _count;
     BOOL comont;
-    CustomActivity *activity;
 }
 @end
 
@@ -61,12 +61,10 @@
       [headerView endRefreshing];
       [footView endRefreshing];
       [_tableView reloadData];
-      [activity animationStoping];
 
   } failure:^(NSError *error) {
       [headerView endRefreshing];
       [footView endRefreshing];
-      [activity animationStoping];
 
   }];
 }
@@ -83,23 +81,21 @@
 
     
     [self createTableView];
-    
-    activity = [[CustomActivity alloc] initWithCenter:CGPointMake(WIDTH/2, HEIGHT/2-64)];
-    [self.view addSubview:activity];
-    [activity animationStarting];
-    
+
+
+    [headerView beginRefreshing];
     [self loadDataWithP:1 andS:10];
-    
-    
+
 }
 
 -(void)createTableView{
     
-    headerImageView = [LHController createImageViewWithFrame:CGRectMake(10, 15+64, WIDTH-20, 80*(WIDTH-20)/614.0) ImageName:nil];
-    headerImageView.image = [UIImage imageNamed:@"tous1.png"];
-    [self.view addSubview:headerImageView];
+    headerStepView = [[MyComplainHeaderView alloc] initWithFrame:CGRectMake(10, 15+64, WIDTH-20, 55)];
+    headerStepView.lightBackColor = RGB_color(0, 192, 155, 1);
+    headerStepView.backColor = RGB_color(229, 229, 229, 1);
+    [self.view addSubview:headerStepView];
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, headerImageView.frame.size.height+headerImageView.frame.origin.y+5, WIDTH, HEIGHT-64-headerImageView.frame.size.height-20) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.backgroundColor = [UIColor whiteColor];
     _tableView.delegate = self;
@@ -110,6 +106,11 @@
     footView = [[MJRefreshFooterView alloc] initWithScrollView:_tableView];
     headerView.delegate = self;
     footView.delegate = self;
+
+    [_tableView makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(0);
+        make.top.equalTo(headerStepView.bottom);
+    }];
 }
 
 -(void)createSpace{
@@ -159,7 +160,6 @@
     [cp notifacation:^{
         [self loadDataWithP:1 andS:10];
     }];
-    cp.isMyComplainVC = YES;
     [self.navigationController pushViewController:cp animated:YES];
 }
 
@@ -217,8 +217,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
  
     MyComplainModel *model = _dataArray[indexPath.row];
-    headerImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"tous%@",model.stepid]];
-    
+    headerStepView.current = [model.stepid integerValue]-1;
     openModel = nil;
     
     

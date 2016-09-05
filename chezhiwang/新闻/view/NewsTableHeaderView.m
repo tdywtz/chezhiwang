@@ -7,18 +7,37 @@
 //
 
 #import "NewsTableHeaderView.h"
+#import "LHPageView.h"
+#import "NewsDetailViewController.h"
+#import "ComplainDetailsViewController.h"
+#import "AnswerDetailsViewController.h"
+#import "AdvertisementViewController.h"
+#import <TTTAttributedLabel.h>
 
-@interface NewsTableHeaderView ()<UIScrollViewDelegate>
+@interface NewsTableHeaderImageView : UIImageView
+
+@property (nonatomic,strong) NSDictionary *dictionary;
+
+@end
+
+@implementation NewsTableHeaderImageView
+
+
+@end
+
+@interface NewsTableHeaderView ()<LHLabelDelegate,LHPageViewDataSource,LHPageViewDelegate>
 
 @property (nonatomic,strong) UIButton *buttonTop;
-@property (nonatomic,strong) UIButton *buttonLeft;
-@property (nonatomic,strong) UIButton *buttonRight;
-@property (nonatomic,strong) UIScrollView *scrollView;
+@property (nonatomic,strong) LHLabel  *toplabel;
+
 @property (nonatomic,strong) UIPageControl *pageControll;
+@property (nonatomic,strong) LHPageView *pageView;
+
 @property (nonatomic,strong) NSTimer *timer;
-@property (nonatomic,strong) UILabel *imageTitleLabel;
+@property (nonatomic,strong) TTTAttributedLabel *imageTitleLabel;
 @property (nonatomic,strong) NSArray *pointNews;
 @property (nonatomic,strong) NSArray *pointImages;
+@property (nonatomic,strong) NSMutableArray *imageViews;
 
 @end
 
@@ -29,7 +48,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self makeUI];
-        
+        [self  addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)]];
+
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.3*NSEC_PER_SEC), dispatch_get_main_queue(), ^{
              [self loadData];
         });
@@ -41,53 +61,46 @@
     __weak __typeof(self)weakSelf = self;
     [HttpRequest GET:[URLFile urlStringForFocusnews] success:^(id responseObject) {
         weakSelf.pointNews = responseObject;
-        for (int i = 0; i < [responseObject count]; i ++) {
-            NSDictionary *dict = responseObject[i];
-            if (i == 0) {
-                [weakSelf.buttonTop setTitle:dict[@"title"] forState:UIControlStateNormal];
-            }else if (i == 1){
-                [weakSelf.buttonLeft setTitle:dict[@"title"] forState:UIControlStateNormal];
-            }else if (i == 2){
-                [weakSelf.buttonRight setTitle:dict[@"title"] forState:UIControlStateNormal];
-            }
-        }
 
+        if ([responseObject count] >= 3) {
+
+            [weakSelf.buttonTop setTitle:responseObject[0][@"title"] forState:UIControlStateNormal];
+
+            NSString *text1 = responseObject[1][@"title"];
+            NSString *text2 = responseObject[2][@"title"];
+            NSString *text = [NSString stringWithFormat:@"[%@]    [%@]",text1,text2];
+            weakSelf.toplabel.text = text;
+            [weakSelf.toplabel addData:responseObject[1] range:[text rangeOfString:text1]];
+           [weakSelf.toplabel addData:responseObject[2] range:[text rangeOfString:text2]];
+        }
     } failure:^(NSError *error) {
         
     }];
 
     [HttpRequest GET:[URLFile urlStringForFocuspic] success:^(id responseObject) {
         weakSelf.pointImages = responseObject;
-        
-        for (UIView *view in weakSelf.scrollView.subviews) {
-            [view removeFromSuperview];
+
+        if (weakSelf.imageViews == nil) {
+            weakSelf.imageViews = [[NSMutableArray alloc] init];
         }
-        for (int i = 0; i < weakSelf.pointImages.count+2; i ++) {
-            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(WIDTH*i-WIDTH, 0, WIDTH, weakSelf.scrollView.frame.size.height)];
-            imageView.userInteractionEnabled = YES;
-            imageView.tag = 100+i;
-            [weakSelf.scrollView addSubview:imageView];
-            NSInteger index = i-1;
-            if (index == -1) {
-                index = weakSelf.pointImages.count-1;
-            }
-            if (index == weakSelf.pointImages.count){
-                index = 0;
-            }
-            NSDictionary *dict = weakSelf.pointImages[index];
-            //imageView.image = [UIImage imageNamed:@"新闻"];
-            
+        for (NSDictionary *dict in responseObject) {
+            NewsTableHeaderImageView *imageView = [[NewsTableHeaderImageView alloc] init];
             [imageView sd_setImageWithURL:[NSURL URLWithString:dict[@"image"]] placeholderImage:[UIImage imageNamed:@"defaultImage_icon"]];
-            
-            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
-            [imageView addGestureRecognizer:tap];
+            imageView.dictionary = dict;
+            imageView.userInteractionEnabled = YES;
+            imageView.backgroundColor = [UIColor orangeColor];
+            [imageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)]];
+            [weakSelf.imageViews addObject:imageView];
         }
-        weakSelf.scrollView.contentInset = UIEdgeInsetsMake(0, WIDTH, 0, WIDTH*self.pointImages.count+WIDTH);
-        weakSelf.pageControll.currentPage = 0;
-        weakSelf.pageControll.numberOfPages = weakSelf.pointImages.count;
-        if (weakSelf.timer == nil) {
-            weakSelf.timer = [NSTimer scheduledTimerWithTimeInterval:3 target:weakSelf selector:@selector(scrollPages) userInfo:nil repeats:YES];
+        if (weakSelf.imageViews.count) {
+            NewsTableHeaderImageView *imageView  = weakSelf.imageViews[0];
+            [weakSelf.pageView setView:imageView direction:0 anime:NO];
+            weakSelf.imageTitleLabel.text = imageView.dictionary[@"title"];
+            weakSelf.pageControll.numberOfPages = weakSelf.imageViews.count;
+            weakSelf.pageControll.currentPage = 0;
         }
+        [weakSelf scheduledTimer];
+
     } failure:^(NSError *error) {
         
     }];
@@ -97,85 +110,56 @@
 
 
     self.buttonTop   = [LHController createButtnFram:CGRectZero Target:self Action:@selector(buttonClick:) Text:nil];
-    self.buttonTop.titleLabel.font = [UIFont systemFontOfSize:15];
-    [self.buttonTop setTitleColor:colorOrangeRed forState:UIControlStateNormal];
+    self.buttonTop.titleLabel.font = [UIFont systemFontOfSize:17];
+    [self.buttonTop setTitleColor:RGB_color(237, 27, 36, 1) forState:UIControlStateNormal];
     
-    self.buttonLeft  = [LHController createButtnFram:CGRectZero Target:self Action:@selector(buttonClick:) Text:nil];
-    [self.buttonLeft setTitleColor:colorDeepGray forState:UIControlStateNormal];
-     self.buttonLeft.titleLabel.font = [UIFont systemFontOfSize:13];
 
-    self.buttonRight = [LHController createButtnFram:CGRectZero Target:self Action:@selector(buttonClick:) Text:nil];
-    [self.buttonRight setTitleColor:colorDeepGray forState:UIControlStateNormal];
-     self.buttonRight.titleLabel.font = [UIFont systemFontOfSize:13];
+    self.toplabel = [[LHLabel alloc] init];
+    self.toplabel.textAlignment = kCTTextAlignmentCenter;
+    self.toplabel.textColor = colorDeepGray;
+    self.toplabel.linkColor = colorDeepGray;
+    self.toplabel.numberOfLines = 1;
+    self.toplabel.preferredMaxLayoutWidth = WIDTH-20;
+    self.toplabel.font = [UIFont systemFontOfSize:13];
+    self.toplabel.delegate = self;
+
+
+    self.pageView = [[LHPageView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 0) space:0];
+    self.pageView.delegate = self;
+    self.pageView.dataSource = self;
+
     
-    self.scrollView  = [[UIScrollView alloc] initWithFrame:CGRectZero];
-    self.scrollView.delegate = self;
-    self.scrollView.pagingEnabled = YES;
-    self.scrollView.bounces = NO;
-    self.scrollView.scrollsToTop = NO;
-    
-    self.imageTitleLabel = [LHController createLabelWithFrame:CGRectZero Font:15 Bold:NO TextColor:colorLightBlue Text:nil];
-    self.imageTitleLabel.textAlignment = NSTextAlignmentCenter;
+    self.imageTitleLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
+    self.imageTitleLabel.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+    self.imageTitleLabel.textInsets = UIEdgeInsetsMake(0, 10, 0, 95);
+    self.imageTitleLabel.textColor = [UIColor whiteColor];
+    self.imageTitleLabel.textAlignment = kCTTextAlignmentLeft;
     
     self.pageControll = [[UIPageControl alloc] init];
     self.pageControll.pageIndicatorTintColor = [UIColor whiteColor];
     self.pageControll.currentPageIndicatorTintColor = [UIColor colorWithRed:204/255.0 green:5/255.0 blue:10/255.0 alpha:1];
 
-    UIView *lineView1 = [[UIView alloc] init];
-    lineView1.backgroundColor = [UIColor whiteColor];
-    UIView *lineView2 = [[UIView alloc] init];
-    lineView2.backgroundColor = [UIColor whiteColor];
-    UIView *lineView3 = [[UIView alloc] init];
-    lineView3.backgroundColor = colorLightGray;
     
     [self addSubview:self.buttonTop];
-    [self addSubview:self.buttonLeft];
-    [self addSubview:self.buttonRight];
-    [self addSubview:self.scrollView];
+    [self addSubview:self.toplabel];
+    [self addSubview:self.pageView];
     [self addSubview:self.imageTitleLabel];
     [self addSubview:self.pageControll];
 
-    [self addSubview:lineView1];
-     [self addSubview:lineView2];
-     [self addSubview:lineView3];
 
-    [lineView1 makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.equalTo(0);
-        make.height.equalTo(4);
-    }];
+
     [self.buttonTop makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(10);
         make.centerX.equalTo(0);
         make.size.lessThanOrEqualTo(CGSizeMake(WIDTH, 25));
     }];
     
-    [self.buttonLeft makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.buttonTop.bottom);
-        make.left.greaterThanOrEqualTo(10);
-        make.height.equalTo(25);
-        make.right.equalTo(-WIDTH/2-10);
-    }];
-    
-    [self.buttonRight makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.buttonLeft);
-        make.right.lessThanOrEqualTo(-10);
-        make.left.equalTo(self.buttonLeft.right).offset(10);
-        make.height.equalTo(self.buttonLeft);
-    }];
 
-    [lineView2 makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(0);
-        make.top.equalTo(self.buttonLeft.bottom).offset(4);
-        make.height.equalTo(lineView1);
+    [self.toplabel makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(0);
+        make.size.lessThanOrEqualTo(WIDTH-20);
+        make.top.equalTo(self.buttonTop.bottom).offset(5);
     }];
-
-    [self.scrollView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(lineView2.bottom);
-        make.left.equalTo(0);
-        make.right.equalTo(0);
-        make.bottom.equalTo(self.imageTitleLabel.top);
-    }];
-    
     
     [self.imageTitleLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(0);
@@ -185,43 +169,36 @@
     }];
     
     [self.pageControll makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(0);
-        make.right.equalTo(0);
-        make.bottom.equalTo(self.scrollView);
+
+        make.right.equalTo(-15);
+        make.centerY.equalTo(self.imageTitleLabel);
         make.height.equalTo(20);
     }];
 
-    [lineView3 makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.equalTo(0);
-        make.height.equalTo(1);
+    [self.pageView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.toplabel.bottom).offset(10);
+        make.left.equalTo(0);
+        make.right.equalTo(0);
+        make.bottom.equalTo(0);
     }];
+
 }
 
 
 
 -(void)buttonClick:(UIButton *)button{
-    NSInteger index = 0;
-    if (button == _buttonTop) {
-        index = 0;
-    }else if (button == _buttonLeft){
-        index = 1;
-    }else{
-        index = 2;
-    }
-    NSDictionary *dict = self.pointNews[index];
-    if (self.block) {
-        self.block(dict[@"id"],dict[@"title"]);
-    }
+
+    NSDictionary *dict = self.pointNews[0];
+    [self pushWithDict:dict];
 }
 
 #pragma mark - 图片手势
 -(void)tap:(UITapGestureRecognizer *)tap{
+
     NSInteger index = self.pageControll.currentPage;
     if (index >= 0 && index < self.pointImages.count) {
          NSDictionary *dict = self.pointImages[index];
-        if (self.block) {
-            self.block(dict[@"id"],dict[@"title"]);
-        }
+        [self pushWithDict:dict];
     }
 }
 
@@ -229,44 +206,127 @@
 #pragma mark - 定时切换图片
 -(void)scrollPages{
     
-    [UIView animateWithDuration:0.1 animations:^{
-        _scrollView.contentOffset = CGPointMake(WIDTH+_scrollView.contentOffset.x, 0);
-    }];
-    if (self.scrollView.contentOffset.x > self.pointImages.count*WIDTH-1) {
-        self.scrollView.contentOffset = CGPointMake(0, 0);
+    NSInteger index = [self.imageViews indexOfObject:_pageView.currentView];
+    index ++;
+    if (index >= self.imageViews.count) {
+        index = 0;
     }
-    if (self.scrollView.contentOffset.x < 0) {
-        self.scrollView.contentOffset = CGPointMake(WIDTH*self.pointImages.count-WIDTH, 0);
-    }
-    NSInteger index = self.scrollView.contentOffset.x/WIDTH;
-    self.pageControll.currentPage = index;
-    
-    self.imageTitleLabel.text = self.pointImages[index][@"title"];
+    [_pageView setView:self.imageViews[index] direction:LHPageViewDirectionReverse anime:YES];
 }
 
-#pragma mark - UIScrollViewDelegate
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-   
-    if (self.scrollView.contentOffset.x < 0) {
-        self.scrollView.contentOffset = CGPointMake(WIDTH*(self.pointImages.count-1), 0);
-    }
-    if (self.scrollView.contentOffset.x > WIDTH*self.pointImages.count-1) {
-        self.scrollView.contentOffset = CGPointMake(0, 0);
+- (void)scheduledTimer{
+    if (_timer) {
+         [self cancelTimer];
     }
 
-    NSInteger index = scrollView.contentOffset.x/WIDTH;
-    if(index >= 0 && index < self.pointImages.count){
-    
-        self.pageControll.currentPage = index;
-        self.imageTitleLabel.text = self.pointImages[index][@"title"];
-        _timer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(scrollPages) userInfo:nil repeats:YES];
-    }
+     _timer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(scrollPages) userInfo:nil repeats:YES];
 }
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-   
-    [self.timer invalidate];
-    self.timer = nil;
+- (void)cancelTimer{
+        [_timer invalidate];
+        _timer = nil;
+}
+
+#pragma mark - 页面跳转方法
+- (void)pushWithDict:(NSDictionary *)dict{
+
+    NSInteger type = [dict[@"type"] integerValue];
+    if (type == 1 || type == 0) {
+        //新闻
+        NewsDetailViewController *detail = [[NewsDetailViewController alloc] init];
+        detail.ID = dict[@"id"];
+        detail.titleLabelText = dict[@"title"];
+        detail.hidesBottomBarWhenPushed = YES;
+        [self.parentViewController.navigationController pushViewController:detail animated:YES];
+    }else if(type == 2){
+        //投诉
+        ComplainDetailsViewController *detail = [[ComplainDetailsViewController alloc] init];
+        detail.textTitle = dict[@"title"];
+        detail.cid = dict[@"id"];
+        detail.type = @"2";
+        detail.hidesBottomBarWhenPushed = YES;
+        [self.parentViewController.navigationController pushViewController:detail animated:YES];
+
+    }else if (type == 3){
+        //答疑
+        AnswerDetailsViewController *detail = [[AnswerDetailsViewController alloc] init];
+        detail.textTitle = dict[@"title"];
+        detail.cid = dict[@"id"];
+        detail.type = @"3";
+        detail.hidesBottomBarWhenPushed = YES;
+        [self.parentViewController.navigationController pushViewController:detail animated:YES];
+    }else if (type == 4){
+       //新车调查
+        NewsDetailViewController *detail = [[NewsDetailViewController alloc] init];
+        detail.ID = dict[@"id"];
+        detail.titleLabelText = dict[@"title"];
+        detail.invest = YES;
+        detail.type = dict[@"type"];
+        detail.hidesBottomBarWhenPushed = YES;
+        [self.parentViewController.navigationController pushViewController:detail animated:YES];
+
+    }else if (type == 99){
+        //广告
+        AdvertisementViewController *adver = [[AdvertisementViewController alloc] init];
+        adver.url = dict[@"url"];
+        adver.hidesBottomBarWhenPushed = YES;
+        [self.parentViewController.navigationController pushViewController:adver animated:YES];
+    }
+}
+#pragma mark - LHPageViewDataSource
+- (UIView *)pageView:(LHPageView *)pageView viewBeforeView:(UIView *)view{
+    NSInteger index = [self.imageViews indexOfObject:view];
+    //关闭
+    [self cancelTimer];
+    index--;
+    if (index < 0) {
+        index = self.imageViews.count-1;
+    }
+    if (index >= 0) {
+        return self.imageViews[index];
+    }
+    return nil;
+}
+- (UIView *)pageView:(LHPageView *)pageViewController viewAfterView:(UIView *)view{
+    NSInteger index = [self.imageViews indexOfObject:view];
+    index++;
+    //关闭
+    [self cancelTimer];
+    if (index >= self.imageViews.count) {
+        index = 0;
+    }
+    if (index < self.imageViews.count) {
+        return self.imageViews[index];
+    }
+    return nil;
+}
+
+- (NSInteger)presentationCountForPageView:(LHPageView *)pageView{
+    return self.imageViews.count;
+}
+- (NSInteger)presentationIndexForPageView:(LHPageView *)pageView{
+    return [self.imageViews indexOfObject:pageView.currentView];
+}
+
+#pragma mark - LHPageViewDelegate
+- (void)pageView:(LHPageView *)pageView didFinishAnimating:(BOOL)finished previousView:(UIView *)previousView transitionCompleted:(BOOL)completed{
+    if (completed) {
+        //是手势拖动，重新开启
+        [self scheduledTimer];
+    }
+  //设置page
+    self.pageControll.currentPage = [self.imageViews indexOfObject:previousView];
+    //设置title
+    NewsTableHeaderImageView *imageView = (NewsTableHeaderImageView *)previousView;
+    self.imageTitleLabel.text = imageView.dictionary[@"title"];
+}
+
+
+#pragma mark - LHLabelDelegate
+- (void)storage:(LHLabelTextStorage *)storage{
+
+    NSDictionary *dict = storage.returnData;
+    [self pushWithDict:dict];
 }
 
 /*

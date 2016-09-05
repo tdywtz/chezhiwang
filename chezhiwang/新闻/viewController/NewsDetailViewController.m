@@ -18,7 +18,6 @@
     UILabel *_titleLabel;
     UILabel *_infoLabel;
     UIWebView *_webView;
-    CustomActivity *activity;
 }
 @property (nonatomic,strong) NSDictionary *dictionary;
 @end
@@ -31,10 +30,16 @@
     if (self.invest) {
        // 调查页面过来的
         url = [NSString stringWithFormat:[URLFile urlString_carownerinfo],self.ID];
+        if (self.type) {
+            url = [NSString stringWithFormat:@"%@&type=%@",url,self.type];
+        }
     }
+
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
     [HttpRequest GET:url success:^(id responseObject) {
         
-        [activity animationStoping];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         if ([responseObject count] == 0) {
             return ;
         }
@@ -79,7 +84,7 @@
         }
         [_webView loadHTMLString:newsContentHTML baseURL:nil];
     } failure:^(NSError *error) {
-         [activity animationStoping];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
 }
 
@@ -90,16 +95,9 @@
     [self createRightItem];
     [self createContent];
     [self createFootView];
-    [self createActivity];
+
     [self loadData];
     [self writeData];
-}
-
-
--(void)createActivity{
-    activity = [[CustomActivity alloc] initWithCenter:CGPointMake(WIDTH/2, HEIGHT/2-64)];
-    [self.view addSubview:activity];
-    [activity animationStarting];
 }
 
 //浏览记录
@@ -268,7 +266,6 @@
         }];
     }else{
         LoginViewController *my = [[LoginViewController alloc] init];
-        my.pushPop = pushTypePopView;
         [self.navigationController pushViewController:my animated:YES];
     }
 }
@@ -308,7 +305,7 @@
     [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.webkitTextFillColor= '#333333'"];
     //[webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '330%'"];
     //[webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.background='#2E2E2E'"];
-    [activity animationStoping];
+
 }
 
 - (void)didReceiveMemoryWarning {

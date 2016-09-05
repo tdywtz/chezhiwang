@@ -10,5 +10,5 @@
 
 @interface MyTabbar : UITabBar
 
-
+@property (nonatomic,weak) UIViewController *theVC;
 @end

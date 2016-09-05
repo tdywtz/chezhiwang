@@ -29,8 +29,8 @@
         button.frame = CGRectMake(100, -100, 100, 200);
         [self addSubview:button];
         button.backgroundColor = [UIColor redColor];
-        [button addTarget:self action:@selector(button) forControlEvents:UIControlEventTouchUpInside];
-       
+       // [button addTarget:self action:@selector(button) forControlEvents:UIControlEventTouchUpInside];
+        [self makeUI];
     }
     return self;
 }
@@ -49,10 +49,12 @@
 }
 
 -(void)button{
-    UILabel *view = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
     [self addSubview:view];
-    view.text = @"asfasdfa";
     view.backgroundColor = [UIColor orangeColor];
+
+
+
     POPSpringAnimation *springAnimation = [POPSpringAnimation animation];
     springAnimation.property = [POPAnimatableProperty propertyWithName:kPOPViewFrame];
     springAnimation.removedOnCompletion = YES;
@@ -81,6 +83,47 @@
     });
 }
 
+- (void)makeUI{
+    NSArray *titles = @[@"汽车图片",@"对比",@"排行榜",@"html5"];
+    for (int i = 0; i < titles.count; i ++) {
+          UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btn setTitle:titles[i] forState:UIControlStateNormal];
+        btn.frame = CGRectMake(0, 20*i, button.frame.size.width, 20);
+        [button addSubview:btn];
+        [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
+    }
+
+
+}
+
+- (void)btnClick:(UIButton *)btn{
+   
+    if ([btn.titleLabel.text isEqualToString:@"汽车图片"]) {
+            UIViewController *vc = [[NSClassFromString(@"VehicleImageViewController") alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [(UINavigationController *)self.theVC pushViewController:vc animated:YES];
+         
+    }else if ([btn.titleLabel.text isEqualToString:@"对比"]){
+            UIViewController *chart = [[NSClassFromString(@"ContrastChartViewController") alloc] init];
+            chart.hidesBottomBarWhenPushed = YES;
+            [(UINavigationController *)self.theVC pushViewController:chart animated:YES];
+
+
+    }else if ([btn.titleLabel.text isEqualToString:@"排行榜"]){
+
+        Class cls = NSClassFromString(@"ComplainChartViewController");
+        UIViewController *chart = [[cls alloc] init];
+        chart.hidesBottomBarWhenPushed = YES;
+        [(UINavigationController *)self.theVC pushViewController:chart animated:YES];
+
+    }else if ([btn.titleLabel.text isEqualToString:@"html5"]){
+
+        Class cls = NSClassFromString(@"Html5ViewController");
+        UIViewController *chart = [[cls alloc] init];
+        chart.hidesBottomBarWhenPushed = YES;
+        [(UINavigationController *)self.theVC pushViewController:chart animated:YES];
+    }
+}
 
 //超视界响应
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
@@ -91,7 +134,17 @@
         if (CGRectContainsPoint(button.bounds, tempoint))
         {
             view = button;
+
+            for (UIView *vi in button.subviews) {
+
+                if (CGRectContainsPoint(vi.frame, tempoint))
+                {
+                    return vi;
+                }
+                
+            }
         }
+
     }
     return view;
 }

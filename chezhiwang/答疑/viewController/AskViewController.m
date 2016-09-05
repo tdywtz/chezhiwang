@@ -192,14 +192,9 @@
         if ([dict[@"success"] isEqualToString:@"1"]) {
             
             [self onTapToGenerateCode:nil];
-            if (self.isMyAsk) {
-                [self.navigationController popViewControllerAnimated:YES];
-            }else{
-                MyAskViewController *mvc = [[MyAskViewController alloc] init];
-                mvc.viewIndex = self.viewIndex;
-                mvc.isRoot = YES;
-                [self.navigationController pushViewController:mvc animated:YES];
-            }
+
+            [self.navigationController popViewControllerAnimated:YES];
+
         }else{
             [self alert:@"提交失败"];
         }
@@ -219,19 +214,6 @@
     label.textColor = RGB_color(255, 84, 0, 1);
     label.font = [UIFont boldSystemFontOfSize:size];
     return label;
-}
-
-
-#pragma mark - 返回
--(void)leftItemBackClick{
-    
-    if (self.isLogoIn) {
-        UIViewController *vc  = self.navigationController.viewControllers[self.navigationController.viewControllers.count-3];
-        [self.navigationController popToViewController:vc animated:YES];
-    }else{
-        
-        [self.navigationController popViewControllerAnimated:YES];
-    }
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -342,24 +324,6 @@
     self.code = str;
     str = nil;
     
-    //    // 干扰线
-    //    CGContextRef context = UIGraphicsGetCurrentContext();
-    //    CGContextSetLineWidth(context, 1.0);
-    //    for(int i = 0; i < count; i++) {
-    //        red = arc4random() % 100 / 100.0;
-    //        green = arc4random() % 100 / 100.0;
-    //        blue = arc4random() % 100 / 100.0;
-    //        color = [UIColor colorWithRed:red green:green blue:blue alpha:1.0];
-    //        CGContextSetStrokeColorWithColor(context, [color CGColor]);
-    //        pX = arc4random() % (int)textLabel.frame.size.width;
-    //        pY = arc4random() % (int)textLabel.frame.size.height;
-    //        CGContextMoveToPoint(context, pX, pY);
-    //        pX = arc4random() % (int)textLabel.frame.size.width;
-    //        pY = arc4random() % (int)textLabel.frame.size.height;
-    //        CGContextAddLineToPoint(context, pX, pY);
-    //        CGContextStrokePath(context);
-    //    }
-    // NSLog(@"%@",text);
     return;
 }
 

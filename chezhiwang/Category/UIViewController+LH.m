@@ -7,6 +7,7 @@
 //
 
 #import "UIViewController+LH.h"
+#import <objc/runtime.h>
 
 @implementation UIViewController (LH)
 
@@ -18,4 +19,12 @@
     
 }
 
+
+- (void)setTransitionAnimaType:(TransitionAnimaType)transitionAnimaType{
+    objc_setAssociatedObject(self, @"transitionAnimaType", @(transitionAnimaType), OBJC_ASSOCIATION_COPY);
+}
+
+- (TransitionAnimaType)transitionAnimaType{
+  return   [objc_getAssociatedObject(self, @"transitionAnimaType") integerValue];
+}
 @end

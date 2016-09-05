@@ -29,7 +29,7 @@
         [view removeFromSuperview];
     }
     for (int i = 0; i < _titles.count; i ++) {
-        UIButton *button = [LHController createButtnFram:CGRectMake(100*i, 0, 80, 30) Target:self Action:@selector(buttonClick:) Font:15 Text:_titles[i]];
+        UIButton *button = [LHController createButtnFram:CGRectMake(120*i, 0, 80, 30) Target:self Action:@selector(buttonClick:) Font:15 Text:_titles[i]];
         [self addSubview:button];
         if (i == _titles.count-1) {
             self.bounds = CGRectMake(0, 0, button.frame.origin.x+button.frame.size.width, button.frame.size.height);
@@ -96,7 +96,6 @@
         }else{
             ComplainView *cp2 = [[ComplainView alloc] init];
             cp2.siChange = YES;
-            cp2.isMyComplainVC = YES;
             cp2.Cpid = strongSelf.model.Cpid;
             if ([title isEqualToString:@"再次投诉"]) {
                 cp2.again = YES;

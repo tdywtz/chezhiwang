@@ -125,7 +125,6 @@
         [self presentViewController:nvc animated:YES completion:nil];
     }else{
         LoginViewController *my = [[LoginViewController alloc] init];
-        my.pushPop = pushTypePopView;
         [self.navigationController pushViewController:my animated:YES];
     }
 }
@@ -217,12 +216,7 @@
     fg1.backgroundColor = colorLineGray;
     [view addSubview:fg1];
     
-//    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 61, WIDTH, 36)];
-//    bgView.backgroundColor = [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1];
-//    [view addSubview:bgView];
-    //    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 36)];
-    //    view.backgroundColor = [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1];
-    
+
     NSArray *array1 = @[@"全部",@"精华"];
     NSArray *array2 = @[@"最新回复",@"最新发布"];
     UISegmentedControl *sge1 = [[UISegmentedControl alloc] initWithItems:array1];
@@ -256,7 +250,6 @@
         [self.navigationController pushViewController:apply animated:YES];
     }else{
         LoginViewController *my = [[LoginViewController alloc] init];
-        my.pushPop = pushTypePopView;
         [self.navigationController pushViewController:my animated:YES];
     }
 }
@@ -363,7 +356,6 @@
         [self.navigationController pushViewController:write animated:YES];
     }else{
         LoginViewController *my = [[LoginViewController alloc] init];
-        my.pushPop = pushTypePopView;
         [self.navigationController pushViewController:my animated:YES];
         
     }

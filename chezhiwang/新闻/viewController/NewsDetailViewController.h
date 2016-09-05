@@ -8,11 +8,12 @@
 
 #import "BasicViewController.h"
 /**
- *  新闻-评测
+ *  新闻详情
  */
 @interface NewsDetailViewController : BasicViewController
 
 @property (nonatomic,copy) NSString *ID;
 @property (nonatomic,copy) NSString *titleLabelText;
-@property (nonatomic,assign) BOOL invest;
+@property (nonatomic,assign) BOOL invest;//是否新车调查
+@property (nonatomic,copy) NSString *type;//当点击首页头部焦点新闻为“新车调查”时需传入
 @end

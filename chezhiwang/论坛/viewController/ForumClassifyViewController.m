@@ -28,14 +28,11 @@
 -(void)readData{
 
 
-    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeGradient];
-    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleLight];
-    [SVProgressHUD setDefaultAnimationType:SVProgressHUDAnimationTypeNative];
-    [SVProgressHUD setInfoImage:[UIImage imageNamed:@"auto_toolbarRightTriangle@2x"]];
-    [SVProgressHUD showWithStatus:@"正在加载..."];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
     NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
     [HttpRequest GET:[URLFile urlStringForOtherSeries] policy:NSURLRequestReturnCacheDataElseLoad success:^(id responseObject) {
-        [SVProgressHUD dismiss];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         for (NSDictionary *dict in responseObject) {
           
             NSString *key = dict[@"letter"];
@@ -61,7 +58,7 @@
         [_tableView reloadData];
 
     } failure:^(NSError *error) {
-        [SVProgressHUD dismiss];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
 }
 

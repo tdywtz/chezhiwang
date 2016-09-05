@@ -237,13 +237,15 @@
     if (!self.dictionary[keyId]) {
         [LHController alert:@"请选择处理结果"];
         return;
-    }else if ([self.dictionary[keyName] isEqualToString:@"其他"]){
-        if ([self hasChar:self.dictionary[keyOther]]==NO){
+    }
+    if ([self.dictionary[keyName] isEqualToString:@"其他"]){
+        if ([self hasChar:self.dictionary[keyOther]]== NO){
              [LHController alert:@"请输入其他原因"];
             return;
         }
 
-    }else if ([self hasChar:self.dictionary[keyReason]] == NO){
+    }
+    if ([self hasChar:self.dictionary[keyReason]] == NO){
          [LHController alert:@"请输入撤诉理由"];
         return;
     }
@@ -281,7 +283,7 @@
 
        } failure:^(NSError *error) {
            
-       }];
+       }]; 
 }
 
 -(BOOL)hasChar:(NSString *)string{

@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+/**
+ *  回复输入框
+ */
 @interface CustomCommentView : UIView
 
 @property (nonatomic,copy) void(^sendBlick)(NSString *content);

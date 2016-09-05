@@ -13,11 +13,10 @@
 #import "ForumClassifyTwoController.h"
 #import "MyViewController.h"
 
-@interface ForumListViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,MJRefreshBaseViewDelegate>
+@interface ForumListViewController ()<UITableViewDataSource,UITableViewDelegate,MJRefreshBaseViewDelegate>
 {
     UITableView *_tableView;
     NSMutableArray *_dataArray;
-    UIScrollView *_scrollView;
     UITableView *twoTableView;
     NSArray *_twoDataArray;
     
@@ -27,10 +26,10 @@
     NSInteger orderType;
     NSInteger topicType;
     NSInteger _count;
-    BOOL header;
+
     MJRefreshHeaderView *headerView;
     MJRefreshFooterView *footView;
-    CustomActivity *activity;
+
 }
 @property (nonatomic,strong) NSArray *readArray;
 @end
@@ -42,7 +41,6 @@
     [HttpRequest GET:url success:^(id responseObject) {
         if (_count == 1) {
             [_dataArray removeAllObjects];
-            [[NSUserDefaults standardUserDefaults] setObject:responseObject forKey:@"论坛无网络缓存"];
         }
         for (NSDictionary *dict in responseObject) {
             [_dataArray addObject:dict];
@@ -51,21 +49,12 @@
         [_tableView reloadData];
         [headerView endRefreshing];
         [footView endRefreshing];
-        [activity animationStoping];
+
     } failure:^(NSError *error) {
         [headerView endRefreshing];
         [footView endRefreshing];
-        [activity animationStoping];
-    }];
-}
 
--(void)readData{
-    NSArray *array = [[NSUserDefaults standardUserDefaults] objectForKey:@"论坛无网络缓存"];
-  
-    for (NSDictionary *dict in array) {
-        [_dataArray addObject:dict];
-    }
-    [_tableView reloadData];
+    }];
 }
 
 - (void)viewDidLoad {
@@ -77,8 +66,6 @@
     self.readArray = [[FmdbManager shareManager] selectAllFromReadHistory:ReadHistoryTypeForum];
     
     [self createCustomTitleView];
-    //[self createRightItem];
-  
     
     orderType = 0;
     topicType = 0;
@@ -90,11 +77,9 @@
         [weakSelf createTableHeaderView];
        
     });
-    
-    [self loadDataWithP:_count  andS:10];
-    activity = [[CustomActivity alloc] initWithCenter:CGPointMake(WIDTH/2, HEIGHT/2-64)];
-    [self.view addSubview:activity];
-    [activity animationStarting];
+
+    [headerView beginRefreshing];
+    [self loadDataWithP:1 andS:10];
 
 }
 
@@ -124,7 +109,12 @@
     btn.selected = YES;
     if (btn.tag == 100) {
         [UIView animateWithDuration:0.1 animations:^{
-            _scrollView.contentOffset = CGPointZero;
+            CGRect rect1 = _tableView.frame;
+            CGRect rect2 = twoTableView.frame;
+            rect1.origin.x = 0;
+            rect2.origin.x = WIDTH;
+            _tableView.frame = rect1;
+            twoTableView.frame = rect2;
             _moveView.frame = CGRectMake(btn.frame.origin.x, _moveView.frame.origin.y, btn.frame.size.width, _moveView.frame.size.height);
         }];
         
@@ -132,7 +122,12 @@
         button.selected = NO;
     }else{
         [UIView animateWithDuration:0.1 animations:^{
-           _scrollView.contentOffset = CGPointMake(WIDTH, 0);
+            CGRect rect1 = _tableView.frame;
+            CGRect rect2 = twoTableView.frame;
+            rect1.origin.x = -WIDTH;
+            rect2.origin.x = 0;
+            _tableView.frame = rect1;
+            twoTableView.frame = rect2;
            _moveView.frame = CGRectMake(btn.frame.origin.x, _moveView.frame.origin.y, btn.frame.size.width, _moveView.frame.size.height);
         }];
         
@@ -143,31 +138,26 @@
 }
 
 -(void)createTableView{
-    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, WIDTH, HEIGHT-64)];
-    _scrollView.contentSize = CGSizeMake(WIDTH*2, 0);
-    _scrollView.showsHorizontalScrollIndicator = NO;
-    _scrollView.pagingEnabled = YES;
-    _scrollView.delegate = self;
-    [self.view addSubview:_scrollView];
-    
- 
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT-64)];
+
+    [self.view addSubview:[[UIView alloc] init]];
+
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, WIDTH, HEIGHT-64)];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle =  UITableViewCellSeparatorStyleNone;
-    [_scrollView addSubview:_tableView];
+    [self.view addSubview:_tableView];
     
     headerView = [[MJRefreshHeaderView alloc] initWithScrollView:_tableView];
     footView = [[MJRefreshFooterView alloc] initWithScrollView:_tableView];
     headerView.delegate = self;
     footView.delegate = self;
     
-    twoTableView = [[UITableView alloc] initWithFrame:CGRectMake(WIDTH, 0, WIDTH, HEIGHT-64-49) style:UITableViewStyleGrouped];
+    twoTableView = [[UITableView alloc] initWithFrame:CGRectMake(WIDTH, 64, WIDTH, HEIGHT-64) style:UITableViewStyleGrouped];
     twoTableView.delegate = self;
     twoTableView.dataSource = self;
     twoTableView.separatorStyle =  UITableViewCellSeparatorStyleNone;
-    [_scrollView addSubview:twoTableView];
-    _scrollView.backgroundColor = [UIColor orangeColor];
+    [self.view addSubview:twoTableView];
+
     [_tableView setContentOffset:CGPointMake(0, 0) animated:YES];
 }
 
@@ -215,7 +205,6 @@
     }
     
     _count = 1;
-    header = YES;
     [self loadDataWithP:_count andS:10];
 }
 
@@ -237,7 +226,6 @@
     }
     
     _count = 1;
-    header = YES;
     [self loadDataWithP:_count andS:10];
 }
 
@@ -322,19 +310,11 @@
     }
 }
 
-#pragma mark - UIScrollViewDelegate
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    if (scrollView == _scrollView) {
-        NSInteger index = _scrollView.contentOffset.x/WIDTH;
-        UIButton *btn = (UIButton *)[_titleView viewWithTag:100+index];
-        [self titleClick:btn];
-    }
-}
 
 #pragma mark - MJRefreshBaseViewDelegate
 - (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView{
     if (refreshView == headerView) {
-        header = YES;
+
         _count = 1;
     }else{
         if (_count < 1) {
@@ -343,13 +323,6 @@
         _count ++;
     }
     [self loadDataWithP:_count andS:10];
-}
-
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-
-     UIButton *btn = (UIButton *)[_titleView viewWithTag:100];
-    [self titleClick:btn];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -18,6 +18,7 @@
     UITextField *_userName;
     UITextField *_passWord;
     UIScrollView *_scrollView;
+    UIButton *logoin;
     CGFloat B;
 }
 @end
@@ -87,7 +88,7 @@
 
 #pragma mark - createLogoin
 -(void)createLogoin{
-    UIButton *logoin =  [LHController createButtnFram:CGRectMake(10, _passWord.frame.origin.y+_passWord.frame.size.height+60, WIDTH-20, 40) Target:self Action:@selector(logoinClick) Font:B Text:@"点击登录"];
+    logoin =  [LHController createButtnFram:CGRectMake(10, _passWord.frame.origin.y+_passWord.frame.size.height+60, WIDTH-20, 40) Target:self Action:@selector(logoinClick) Font:B Text:@"点击登录"];
     
     [_scrollView addSubview:logoin];
     
@@ -116,7 +117,10 @@
         [al show];
         [al dismissWithClickedButtonIndex:0 animated:YES];
     }else{
-        [self submitNmae:_userName.text andPassword:_passWord.text];
+        logoin.enabled = NO;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self submitNmae:_userName.text andPassword:_passWord.text];
+        });
     }
 }
 
@@ -147,45 +151,17 @@
            [df setObject:dic[@"userid"] forKey:user_id];
            
            [self saveTime];
-            [self.navigationController popViewControllerAnimated:YES];
-           return ;
-           switch (self.pushPop) {
-               case pushTypeDefault:
-               {
-                   
-                   break;
-               }
-                   
-               case pushTypePopView:
-               {
-                   [self.navigationController popViewControllerAnimated:YES];
-                   break;
-               }
-                   
-               case pushTypeToComplainView:
-               {
-                   ComplainView *complain = [[ComplainView alloc] init];
-                   complain.isLogoIn = YES;
-                   [self.navigationController pushViewController:complain animated:YES];
-                   break;
-               }
-                   
-               case pushTypeToAsk:
-               {
-                   AskViewController *ask = [[AskViewController alloc] init];
-                   ask.isLogoIn = YES;
-                   ask.viewIndex = self.navigationController.viewControllers.count-2;
-                   [self.navigationController pushViewController:ask animated:YES];
-                   break;
-               }
-                   
-               default:
-                   break;
+           if (self.navigationController.viewControllers.count == 1){
+               [self dismissViewControllerAnimated:YES completion:nil];
+           }else{
+               [self.navigationController popViewControllerAnimated:YES];
            }
        }
+       logoin.enabled = YES;
 
    } failure:^(NSError *error) {
        
+       logoin.enabled = YES;
        UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"网络请求失败" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
        [al show];
        [UIView animateWithDuration:0.3 animations:^{

@@ -55,7 +55,7 @@
         _dict = responseObject;
         
         NSArray *arr1 = @[@"uname",@"age",@"sex",@"mobile",@"email",@"phone",@"address",@"occ"];
-        NSArray *arr2 = @[@"brand",@"series",@"model",@"engine",@"carriage",@"sign",@"buytime",@"lname",@"issuetime"];
+        NSArray *arr2 = @[@"brand",@"series",@"model",@"engine",@"carriage",@"sign",@"buytime",@"lname",@"issuetime",@"mileage"];
         NSArray *arr3 = @[@"type",@"attribute",@"question",@"content"];
         _oneArray = [[NSMutableArray alloc] init];
         _twoArray = [[NSMutableArray alloc] init];
@@ -498,7 +498,7 @@
    
     
     NSArray *noeArray = @[@"姓名:",@"年龄:",@"性别:",@"移动电话:",@"电子邮箱:",@"固定电话:",@"通讯地址:",@"车主职业:"];
-    NSArray *twoArray = @[@"投诉品牌:",@"车系:",@"车型:",@"发动机号:",@"车架号:",@"车牌号:",@"购车日期:",@"经销商名称:",@"问题日期:"];
+    NSArray *twoArray = @[@"投诉品牌:",@"车系:",@"车型:",@"发动机号:",@"车架号:",@"车牌号:",@"购车日期:",@"经销商名称:",@"问题日期:",@"已行驶里程(km):"];
     NSArray *threeArray = @[@"投诉类型:",@"投诉属性:",@"问题描述:",@"投诉详情:"];
  
     UIImageView *oneImgeView = [LHController createImageViewWithFrame:CGRectMake(L, 20, 20, 20) ImageName:@"tss_07.gif"];
@@ -520,18 +520,24 @@
     UILabel *twoLabel = [LHController createLabelWithFrame:CGRectMake(L+35, space*8+70, 80, 20) Font:B-1 Bold:NO TextColor:nil Text:@"车辆信息"];
     [rightView addSubview:twoLabel];
     
-    for (int i = 0; i < 9; i ++) {
+    for (int i = 0; i < twoArray.count; i ++) {
         UILabel *gray = [self createGrayColocLabelWithFrame:CGRectMake(10, twoLabel.frame.origin.y+twoLabel.frame.size.height+10+space*i, 70, 20) andText:twoArray[i]];
        UILabel *black = [self createBlackLabelWithFrmae:CGRectMake(80, gray.frame.origin.y, WIDTH-90, 20) andText:_twoArray[i]];
         if (i == 7) {
             gray.frame = CGRectMake(10, gray.frame.origin.y, 85, 20);
             black.frame = CGRectMake(95, gray.frame.origin.y, WIDTH-90, 20);
+        }else if (i == 9){
+            gray.frame = CGRectMake(10, gray.frame.origin.y, 110, 20);
+            black.frame = CGRectMake(120, gray.frame.origin.y, WIDTH-125, 20);
+            if ([_twoArray[i] length] == 0) {
+                black.text = @"0";
+            }
         }
     }
     
-    UIImageView *threeImageView = [LHController createImageViewWithFrame:CGRectMake(L, space*18+100, 20, 20) ImageName:@"tss_10.gif"];
+    UIImageView *threeImageView = [LHController createImageViewWithFrame:CGRectMake(L, space*19+100, 20, 20) ImageName:@"tss_10.gif"];
     [rightView addSubview:threeImageView];
-    UILabel *threeLabel = [LHController createLabelWithFrame:CGRectMake(L+25, space*18+100, 80, 20) Font:B-1 Bold:NO TextColor:nil Text:@"投诉内容"];
+    UILabel *threeLabel = [LHController createLabelWithFrame:CGRectMake(L+25, space*19+100, 80, 20) Font:B-1 Bold:NO TextColor:nil Text:@"投诉内容"];
     [rightView addSubview:threeLabel];
     
     for (int i = 0; i < 4; i ++) {

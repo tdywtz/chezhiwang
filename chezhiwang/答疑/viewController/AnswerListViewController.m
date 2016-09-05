@@ -23,7 +23,6 @@
     MJRefreshHeaderView *headerView;
     MJRefreshFooterView *footView;
     NSInteger _count;
-    CustomActivity *activity;
 }
 @property (nonatomic,strong) NSArray *readArray;
 @end
@@ -53,12 +52,10 @@
         [headerView endRefreshing];
         [footView endRefreshing];
         [_tableView reloadData];
-        [activity animationStoping];
 
     } failure:^(NSError *error) {
         [headerView endRefreshing];
         [footView endRefreshing];
-        [activity animationStoping];
 
     }];
 }
@@ -76,9 +73,7 @@
 
     [self createTableView];
     [self loadData];
-    activity = [[CustomActivity alloc] initWithCenter:CGPointMake(WIDTH/2, HEIGHT/2-64)];
-    [self.view addSubview:activity];
-    [activity animationStarting];
+    [headerView beginRefreshing];
 }
 
 //tableview

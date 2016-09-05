@@ -10,6 +10,7 @@
 
 @interface NewsTableHeaderView : UIView
 
+@property (nonatomic,weak) UIViewController *parentViewController;
 @property (nonatomic,copy) void(^block)(NSString *ID, NSString *title);
 
 -(void)loadData;

@@ -44,7 +44,7 @@
         [self addSubview:line];
         _currant = 0;
         
-        moveView = [[UIView alloc] initWithFrame:CGRectMake(10, CGRectGetHeight(frame)-2, 70, 2)];
+        moveView = [[UIView alloc] initWithFrame:CGRectMake(10, CGRectGetHeight(frame)-3, 70, 3)];
         moveView.backgroundColor = colorYellow;
         [self addSubview:moveView];
 
@@ -130,14 +130,15 @@
             [testTableView setScrollToTop:NO];
         }
     }];
-    [self.view addSubview:toolView];
+ //   [self.view addSubview:toolView];
     
     testTableView = [[NewsTestTableView alloc] initWithFrame:CGRectMake(0, toolView.frame.origin.y+CGRectGetHeight(toolView.frame), WIDTH, HEIGHT-49-64-40) parentViewController:self];
-    [self.view addSubview:testTableView];
+  //  [self.view addSubview:testTableView];
     
-    _tableView = [[UITableView alloc] initWithFrame:testTableView.frame style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, WIDTH, HEIGHT-64-49) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
+    [self.view addSubview:_tableView];
     
     MJheaderView = [[MJRefreshHeaderView alloc] initWithScrollView:_tableView];
     footView = [[MJRefreshFooterView alloc] initWithScrollView:_tableView];

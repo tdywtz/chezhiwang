@@ -7,6 +7,7 @@
 //
 
 #import "BasicNavigationController.h"
+#import "UIViewController+LH.h"
 
 @interface BasicNavigationController ()<UIGestureRecognizerDelegate,UINavigationControllerDelegate>
 
@@ -76,6 +77,23 @@
     }];
 }
 
+
+
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
+    if (viewController.transitionAnimaType != TransitionAnimaNomal) {
+         [self.view.layer addAnimation:[TransitionAnima transitionAnimationWithType:viewController.transitionAnimaType] forKey:@"push"];
+    }
+
+    [super pushViewController:viewController animated:animated];
+}
+
+- (UIViewController *)popViewControllerAnimated:(BOOL)animated{
+    UIViewController *viewController = [super popViewControllerAnimated:animated];
+    if (viewController.transitionAnimaType != TransitionAnimaNomal) {
+        [self.view.layer addAnimation:[TransitionAnima transitionAnimationWithType:viewController.transitionAnimaType] forKey:@"pop"];
+    }
+   return  viewController;
+}
 
 
 - (void)didReceiveMemoryWarning {

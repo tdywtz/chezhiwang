@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "AttributStage.h"
-
+/**
+ * 
+ */
 @interface NSMutableAttributedString (CZWMutableAttributedString)
 
 //插入图片

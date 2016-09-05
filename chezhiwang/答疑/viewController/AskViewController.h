@@ -10,9 +10,6 @@
 
 @interface AskViewController : BasicViewController
 
-@property (nonatomic,assign) BOOL isLogoIn;//是否从主界面过来
-@property (nonatomic,assign) NSInteger viewIndex;
-@property (nonatomic,assign) BOOL isMyAsk;
 @property (nonatomic,copy) void(^refresh)();
 
 -(void)notifactionRefresh:(void(^)())block;

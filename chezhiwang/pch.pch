@@ -9,13 +9,14 @@
 #ifdef __OBJC__
 
 #import "LHController.h"
-#import "CustomActivity.h"
 #import "NSMutableAttributedString+CZWMutableAttributedString.h"
 #import "HttpRequest.h"
 #import "UrlFile.h"
 #import "LHLabel.h"
 #import "CZWLabel.h"
 #import "UIFont+LH.h"
+#import "UIViewController+LH.h"
+#import "NSString-Helper.h"
 //友盟统计
 #import "MobClick.h"
 //pop动画库
@@ -29,7 +30,6 @@
 //网络请求
 #import "AFNetworking.h"
 //加载提示
-#import "SVProgressHUD.h"
 #import <MBProgressHUD.h>
 
 //autolayout适配
@@ -39,10 +39,10 @@
 #define MAS_SHORTHAND_GLOBALS
 #import "Masonry.h"
 
-//#ifndef DEBUG
-//#undef NSLog
-//#define NSLog(args, ...)
-//#endif
+#ifndef DEBUG
+#undef NSLog
+#define NSLog(args, ...)
+#endif
 
 #define appOrigin @"7"//APP标识
 #define THE_APPID @"1059672225"//AppStore

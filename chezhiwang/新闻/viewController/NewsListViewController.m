@@ -68,6 +68,8 @@
     _count = 1;
     _tableView.contentOffset = CGPointZero;
     [self loadDataWithP:_count andS:10];
+
+     //_tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
 }
 
 
@@ -77,11 +79,13 @@
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+
     [self.view addSubview:_tableView];
-    
+
+  
     if (self.tableHeaderViewHave) {
-          _tableHeaderView = [[NewsTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 114+207*(WIDTH/375))];
-        _tableHeaderView.backgroundColor = colorLineGray;
+        _tableHeaderView = [[NewsTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 69+207*(WIDTH/375))];
+        _tableHeaderView.parentViewController = self;
         __weak __typeof(self)weakSelf = self;
         _tableHeaderView.block = ^(NSString *ID, NSString *title){
             NewsDetailViewController *detail = [[NewsDetailViewController alloc] init];
@@ -145,6 +149,7 @@
         NSDictionary *dict = _dataArray[indexPath.row];
         detail.ID = dict[@"id"];
         detail.titleLabelText = dict[@"title"];
+    
         //改变颜色
         NewsListCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         UILabel *title = (UILabel *)[cell valueForKey:@"titleLabel"];
