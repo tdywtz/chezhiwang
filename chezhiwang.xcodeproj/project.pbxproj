@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15B3E1681D9D669C00A64BEC /* BasicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B3E1671D9D669C00A64BEC /* BasicTableViewCell.m */; };
 		4D0069071B9D891400BA0CA1 /* CustomTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D0069061B9D891400BA0CA1 /* CustomTabBarController.m */; };
 		4D04B7021D01118400D1DB97 /* MyTabbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D04B7011D01118400D1DB97 /* MyTabbar.m */; };
 		4D0A8EE21CF2D695001BC612 /* BasicNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D0A8EDF1CF2D695001BC612 /* BasicNavigationController.m */; };
@@ -509,6 +510,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		15B3E1661D9D669C00A64BEC /* BasicTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicTableViewCell.h; sourceTree = "<group>"; };
+		15B3E1671D9D669C00A64BEC /* BasicTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicTableViewCell.m; sourceTree = "<group>"; };
 		2F0BC95EA4231E56D1C74FBB /* libPods-chezhiwang.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-chezhiwang.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		451C11368C978A7EE2F94243 /* Pods-chezhiwang.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chezhiwang.debug.xcconfig"; path = "Pods/Target Support Files/Pods-chezhiwang/Pods-chezhiwang.debug.xcconfig"; sourceTree = "<group>"; };
 		4D0069051B9D891400BA0CA1 /* CustomTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTabBarController.h; sourceTree = "<group>"; };
@@ -1413,6 +1416,8 @@
 				4D0A8EDF1CF2D695001BC612 /* BasicNavigationController.m */,
 				4D0A8EE01CF2D695001BC612 /* BasicViewController.h */,
 				4D0A8EE11CF2D695001BC612 /* BasicViewController.m */,
+				15B3E1661D9D669C00A64BEC /* BasicTableViewCell.h */,
+				15B3E1671D9D669C00A64BEC /* BasicTableViewCell.m */,
 				4DD0CE9C1CF68D0E00CB7B7B /* BasicObject.h */,
 				4DD0CE9D1CF68D0E00CB7B7B /* BasicObject.m */,
 				4DD335521D6430580037F2D2 /* TransitionAnima.h */,
@@ -2902,12 +2907,12 @@
 			children = (
 				4DF75F341D9CE5E800FB882E /* HomepageNewsTextCell.h */,
 				4DF75F351D9CE5E800FB882E /* HomepageNewsTextCell.m */,
-				4DF75F371D9CE5FC00FB882E /* HomepageNewsImageCell.h */,
 				4DF75F381D9CE5FC00FB882E /* HomepageNewsImageCell.m */,
 				4DF75F3A1D9CE61F00FB882E /* HomepageComplainCell.h */,
 				4DF75F3B1D9CE61F00FB882E /* HomepageComplainCell.m */,
 				4DF75F3D1D9CE64500FB882E /* HomepageResearchCell.h */,
 				4DF75F3E1D9CE64500FB882E /* HomepageResearchCell.m */,
+				4DF75F371D9CE5FC00FB882E /* HomepageNewsImageCell.h */,
 				4DF75F401D9CE65E00FB882E /* HomepageAnswerCell.h */,
 				4DF75F411D9CE65E00FB882E /* HomepageAnswerCell.m */,
 				4DF75F431D9CE67A00FB882E /* HomepageForumCell.h */,
@@ -3632,6 +3637,7 @@
 				4D41862F1D0FF66500C9802C /* POPVector.mm in Sources */,
 				4D4186221D0FF66500C9802C /* POPAnimationExtras.mm in Sources */,
 				4DC407291BB12D40004079A8 /* LHPreViewCell.m in Sources */,
+				15B3E1681D9D669C00A64BEC /* BasicTableViewCell.m in Sources */,
 				4DD335841D6453880037F2D2 /* ContrastChartViewController.m in Sources */,
 				4D11D2F81D22262D00BBB172 /* AnswerListModel.m in Sources */,
 				4D9A3F421B9E7252008805E4 /* SDWebImageDownloaderOperation.m in Sources */,
