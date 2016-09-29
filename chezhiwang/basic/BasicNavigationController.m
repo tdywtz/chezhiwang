@@ -32,7 +32,7 @@
         self.alphaView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height+20)];
         self.alphaView.backgroundColor = colorLightBlue;
         [self.view insertSubview:self.alphaView belowSubview:self.navigationBar];
-        [self.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsCompact];
+        [self.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
         // [UIImage imageNamed:@"bigShadow.png"]
    
         self.navigationBar.layer.masksToBounds = YES;

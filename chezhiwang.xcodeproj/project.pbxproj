@@ -1780,6 +1780,8 @@
 		4D7E723A1B9D5CD10048F221 /* chezhiwang */ = {
 			isa = PBXGroup;
 			children = (
+				4DF75ECB1D9CE27900FB882E /* Homepage */,
+				4DF75EC71D9CE25A00FB882E /* Find */,
 				4D555FB11D10F0300091ED2E /* 分享 */,
 				4D0A8EDD1CF2D695001BC612 /* basic */,
 				4DCAD2CE1CEC372900A539B2 /* NetWorking */,
@@ -2713,6 +2715,68 @@
 				4D1D3A211D5329F900B0D452 /* Wechat */,
 			);
 			path = UMSocial_Sdk_Extra_Frameworks;
+			sourceTree = "<group>";
+		};
+		4DF75EC71D9CE25A00FB882E /* Find */ = {
+			isa = PBXGroup;
+			children = (
+				4DF75EC81D9CE25A00FB882E /* model */,
+				4DF75EC91D9CE25A00FB882E /* view */,
+				4DF75ECA1D9CE25A00FB882E /* viewController */,
+			);
+			path = Find;
+			sourceTree = "<group>";
+		};
+		4DF75EC81D9CE25A00FB882E /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		4DF75EC91D9CE25A00FB882E /* view */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		4DF75ECA1D9CE25A00FB882E /* viewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = viewController;
+			sourceTree = "<group>";
+		};
+		4DF75ECB1D9CE27900FB882E /* Homepage */ = {
+			isa = PBXGroup;
+			children = (
+				4DF75ECC1D9CE27900FB882E /* model */,
+				4DF75ECD1D9CE27900FB882E /* view */,
+				4DF75ECE1D9CE27900FB882E /* viewController */,
+			);
+			path = Homepage;
+			sourceTree = "<group>";
+		};
+		4DF75ECC1D9CE27900FB882E /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		4DF75ECD1D9CE27900FB882E /* view */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		4DF75ECE1D9CE27900FB882E /* viewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = viewController;
 			sourceTree = "<group>";
 		};
 		E7E9CC83DA760D7642B01800 /* Pods */ = {

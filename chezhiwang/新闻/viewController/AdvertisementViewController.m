@@ -31,7 +31,7 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error{
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
     [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 

@@ -708,7 +708,7 @@ static inline CGSize CTFramesetterSuggestFrameSizeForAttributedStringWithConstra
 }
 
 
-- (void)touchesCancelled:(nullable NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event{
+- (void)touchesCancelled:( NSSet<UITouch *> *)touches withEvent:( UIEvent *)event{
 
     self.touchedStorage = nil;
    [self setNeedsDisplay];
