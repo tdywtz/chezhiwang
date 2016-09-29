@@ -32,6 +32,9 @@
 /**车系大全*/
 + (NSString *)urlString_picSeries;
 
+#pragma mark - homepage
+/**首页*/
++ (NSString *)urlStringForLogin_index;
 
 #pragma mark - 新闻
 /**新闻列表*/

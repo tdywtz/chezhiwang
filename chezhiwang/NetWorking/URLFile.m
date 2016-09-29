@@ -17,21 +17,24 @@
 
 /**车质网专用*/
 + (NSString *)stringForAppWebServiceWithAct:(NSString *)act{
-    return [NSString stringWithFormat:@"%@%@%@",[self prefixString],@"forAppWebService.ashx?",act];
+    return [NSString stringWithFormat:@"%@%@%@",[self prefixString],@"server/forAppWebService.ashx?",act];
+}
++ (NSString *)stringForCZWServiceWithAct:(NSString *)act{
+    return [NSString stringWithFormat:@"%@%@%@",[self prefixString],@"AppServer/forCZWService.ashx?",act];
 }
 
 /**公用*/
 + (NSString *)stringForCommonServiceWithAct:(NSString *)act{
-    return [NSString stringWithFormat:@"%@%@%@",[self prefixString],@"forCommonService.ashx?",act];
+    return [NSString stringWithFormat:@"%@%@%@",[self prefixString],@"server/forCommonService.ashx?",act];
 }
 
 
 /**前缀*/
 + (NSString *)prefixString{
 #if DEBUG
-    return  @"http://192.168.1.114:8888/server/";
+    return  @"http://192.168.1.114:8888/";
 #else
-    return  @"http://m.12365auto.com/server/";
+    return  @"http://m.12365auto.com/";
 #endif
 }
 
@@ -62,6 +65,12 @@
 /*车系大全*/
 + (NSString *)urlString_picSeries{
     return [self stringWithBasic:@"act=picSeries&bid=%@"];
+}
+
+#pragma mark - homepage
+/**首页*/
++ (NSString *)urlStringForLogin_index{
+    return [self stringForCZWServiceWithAct:@"act=index"];
 }
 
 #pragma mark - 新闻

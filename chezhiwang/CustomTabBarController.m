@@ -14,8 +14,7 @@
 #import "MyViewController.h"
 #import "BasicNavigationController.h"
 
-#import "MyTabbar.h"
-
+#import "HomepageTableViewController.h"
 
 
 @interface CustomTabBarController ()<UITabBarControllerDelegate>
@@ -25,21 +24,13 @@
 @end
 
 @implementation CustomTabBarController
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
-    [self setValue:[[MyTabbar alloc] init] forKey:@"_tabBar"];
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-       
-    }
-    return self;
-   
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.delegate = self;
     
-    NewsViewController             *news = [[NewsViewController alloc] init];
+    HomepageTableViewController             *news = [HomepageTableViewController  init];
     ComplainListViewController *complain = [[ComplainListViewController alloc] init];
     AnswerViewController         *answer = [[AnswerViewController alloc] init];
     ForumListViewController       *forum = [[ForumListViewController alloc] init];
@@ -114,8 +105,6 @@
     [UIView animateWithDuration:0.1 animations:^{
         custommoveView.frame = frame;
     }];
-
-    ((MyTabbar *)self.tabBar).theVC = viewController;
 }
 
 

@@ -50,7 +50,9 @@
 #define SYSTEM_VERSION_GREATER_THAN(V)  [[[UIDevice currentDevice] systemVersion]floatValue]>V||[[[UIDevice currentDevice] systemVersion]floatValue]==V
 #define WIDTH  [[UIScreen mainScreen] bounds].size.width
 #define HEIGHT [[UIScreen mainScreen] bounds].size.height
-
+//
+#define PT_FROM_PX(px) (72.0/96)*px
+//
 #define RGB_color(r,g,b,a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
 
 #define colorBlack RGB_color(51,51,51,1)//标题浅黑
