@@ -11,7 +11,7 @@
 @implementation HomepageNewsImageCell
 {
     UILabel *titleLabel;
-    UILabel *stylenamelabel;
+    TTTAttributedLabel *stylenamelabel;
     UILabel *dateLabel;
     UIImageView *imageView1;
     UIImageView *imageView2;
@@ -20,6 +20,7 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self makeUI];
     }
 
@@ -30,8 +31,10 @@
     titleLabel = [[UILabel alloc] init];
     titleLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(23)];
     titleLabel.textColor = RGB_color(17, 17, 17, 1);
-
-    stylenamelabel = [[UILabel alloc] init];
+    titleLabel.numberOfLines = 2;
+    
+    stylenamelabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
+    stylenamelabel.textInsets = UIEdgeInsetsMake(1, 3, 1, 3);
     stylenamelabel.font = [UIFont systemFontOfSize:PT_FROM_PX(16.5)];
     stylenamelabel.textColor = RGB_color(237, 27, 36, 1);
     stylenamelabel.layer.cornerRadius = 3;
@@ -59,7 +62,7 @@
         make.right.equalTo(-10);
     }];
 
-    CGFloat width = (WIDTH-30)/3;
+    CGFloat width = (WIDTH-40)/3;
     CGFloat height = width/1.4;
     [imageView1 makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(10);

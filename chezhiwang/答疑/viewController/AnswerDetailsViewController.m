@@ -21,7 +21,7 @@
     CZWLabel *titleLabel;//标题
     UILabel *questionDate;//问题时间
     CZWLabel *questionContent;//问题内容
-    
+
     CZWLabel *answerContent;//回复内容
     UILabel *answerDate;//回复时间
 }
@@ -33,30 +33,30 @@
 @implementation AnswerDetailsViewController
 -(void)loadDataOne{
 
-   
-NSString *url = [NSString stringWithFormat:[URLFile urlStringForGetZJDY],self.cid];
-   
-  [HttpRequest GET:url success:^(id responseObject) {
-      if ([responseObject count] == 0) {
-          return ;
-      }
-      self.dict = responseObject[0];
-     
-      questionContent.text = _dict[@"Content"];
-      questionDate.text = _dict[@"IssueDate"];
-      answerContent.text = _dict[@"Answer"];
-      answerDate.text = _dict[@"AnswerTime"];
 
-   
-  } failure:^(NSError *error) {
-   
-  }];
+    NSString *url = [NSString stringWithFormat:[URLFile urlStringForGetZJDY],self.cid];
+
+    [HttpRequest GET:url success:^(id responseObject) {
+        if ([responseObject count] == 0) {
+            return ;
+        }
+        self.dict = responseObject[0];
+
+        questionContent.text = _dict[@"Content"];
+        questionDate.text = _dict[@"IssueDate"];
+        answerContent.text = _dict[@"Answer"];
+        answerDate.text = _dict[@"AnswerTime"];
+
+
+    } failure:^(NSError *error) {
+
+    }];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     A = [LHController setFont];
-
+    self.type = @"3";
     [self createRightItems];
     [self createScrollViewSubViews];
     [self createFootView];
@@ -66,7 +66,7 @@ NSString *url = [NSString stringWithFormat:[URLFile urlStringForGetZJDY],self.ci
 
 -(void)createRightItems{
     FmdbManager *fb = [FmdbManager shareManager];
-  
+
     NSDictionary *dict = [fb selectFromCollectWithId:_cid andType:collectTypeAnswer];
     BOOL isSelect = NO;
     if ([dict allKeys].count > 0) {
@@ -131,36 +131,36 @@ NSString *url = [NSString stringWithFormat:[URLFile urlStringForGetZJDY],self.ci
         make.edges.equalTo(UIEdgeInsetsZero);
         make.width.equalTo(WIDTH);
     }];
-    
+
     titleLabel = [[CZWLabel alloc] init];
     titleLabel.font = [UIFont systemFontOfSize:17];
     titleLabel.text = self.textTitle;
-   
-    
+
+
 
     UILabel *questionTitle = [LHController createLabelWithFrame:CGRectZero Font:A-3 Bold:NO TextColor:colorLightGray Text:@"网友提问："];
-    
+
     questionContent = [[CZWLabel alloc] init];
     questionContent.linesSpacing = 3;
     questionContent.firstLineHeadIndent = 28;
     questionContent.textColor = colorDeepGray;
     questionContent.font = [UIFont systemFontOfSize:14];
-    
+
     questionDate = [LHController createLabelWithFrame:CGRectZero Font:13 Bold:NO TextColor:colorLightGray Text:nil];
-    
+
     UIView *lineView = [[UIView alloc] init];
     lineView.backgroundColor = colorLineGray;
-    
+
     UILabel *answerTitle = [LHController createLabelWithFrame:CGRectZero Font:A-3 Bold:NO TextColor:colorLightGray Text:@"专家答复："];
-    
+
     answerContent = [[CZWLabel alloc] init];
     answerContent.linesSpacing = 3;
     answerContent.firstLineHeadIndent = 28;
     answerContent.textColor = colorDeepGray;
     answerContent.font = [UIFont systemFontOfSize:14];
-    
+
     answerDate = [LHController createLabelWithFrame:CGRectZero Font:13 Bold:NO TextColor:colorLightGray Text:nil];
-    
+
     [self.contentView addSubview:titleLabel];
     [self.contentView addSubview:questionTitle];
     [self.contentView addSubview:questionContent];
@@ -170,50 +170,50 @@ NSString *url = [NSString stringWithFormat:[URLFile urlStringForGetZJDY],self.ci
     [self.contentView addSubview:answerContent];
     [self.contentView addSubview:answerDate];
 
-   [titleLabel makeConstraints:^(MASConstraintMaker *make) {
-       make.centerX.equalTo(0);
-       make.top.equalTo(20);
-       make.width.lessThanOrEqualTo(WIDTH-30);
-   }];
+    [titleLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(0);
+        make.top.equalTo(20);
+        make.width.lessThanOrEqualTo(WIDTH-30);
+    }];
     [questionTitle makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(15);
         make.top.equalTo(titleLabel.bottom).offset(10);
     }];
-    
+
     [questionContent makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(questionTitle.bottom).offset(10);
         make.left.equalTo(questionTitle);
         make.right.equalTo(-15);
     }];
-    
+
     [questionDate makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(questionContent.bottom).offset(10);
         make.right.equalTo(-15);
     }];
-    
+
     [lineView makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(0);
         make.top.equalTo(questionDate.bottom).offset(10);
         make.height.equalTo(1);
     }];
-    
+
     [answerTitle makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(lineView.bottom).offset(10);
         make.left.equalTo(15);
     }];
-    
+
     [answerContent makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(15);
         make.top.equalTo(answerTitle.bottom).offset(10);
         make.right.equalTo(-15);
     }];
-    
+
     [answerDate makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(answerContent.bottom).offset(10);
         make.right.equalTo(-15);
         make.bottom.equalTo(-20);
     }];
-    
+
 }
 
 
@@ -334,12 +334,12 @@ NSString *url = [NSString stringWithFormat:[URLFile urlStringForGetZJDY],self.ci
 //-(void)viewWillAppear:(BOOL)animated{
 //    [super viewWillAppear:animated];
 //    [MobClick beginLogPageView:@"PageOne"];
-//    
+//
 //    [LHController getCustomTabBar].hidden = YES;
 //
 //    FmdbManager *fb = [FmdbManager shareManager];
 //    NSDictionary *dict = [fb selectFromCollectWithId:self.cid andType:collectTypeAnswer];
-//    
+//
 //    if ([dict allKeys].count > 0) {
 //        UIButton *btn = (UIButton *)[self.view viewWithTag:201];
 //        btn.selected = YES;
@@ -351,13 +351,13 @@ NSString *url = [NSString stringWithFormat:[URLFile urlStringForGetZJDY],self.ci
 //    [MobClick endLogPageView:@"PageOne"];
 //}
 /*
-#pragma mark - Navigation
+ #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

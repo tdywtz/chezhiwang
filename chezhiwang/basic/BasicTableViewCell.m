@@ -12,7 +12,15 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        
+        self.lineView = [[UIView alloc] init];
+        self.lineView.backgroundColor = RGB_color(221, 221, 221, 1);
+        [self.contentView addSubview:self.lineView];
+
+        [self.lineView makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.equalTo(0);
+            make.bottom.equalTo(0.5);
+            make.height.equalTo(1);
+        }];
     }
     return self;
 }

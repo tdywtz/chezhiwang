@@ -6,10 +6,10 @@
 //  Copyright © 2016年 车质网. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BasicTableViewCell.h"
 #import "HomepageNewsModel.h"
 
-@interface HomepageNewsTextCell : UITableViewCell
+@interface HomepageNewsTextCell : BasicTableViewCell
 
 @property (nonatomic,strong) HomepageNewsModel *newsModel;
 

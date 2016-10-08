@@ -19,10 +19,17 @@
 
 #import "HomepageSectionHeaderView.h"
 #import "HomepageSectionFooterView.h"
+#import "NewsTableHeaderView.h"
+
+#import "NewsDetailViewController.h"
+#import "ComplainDetailsViewController.h"
+#import "AnswerDetailsViewController.h"
+#import "PostViewController.h"
 
 @interface HomepageTableViewController ()
 {
     NSArray *_dataArray;
+    NewsTableHeaderView *hearView;
 }
 @end
 
@@ -42,7 +49,12 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     self.tableView.estimatedRowHeight = 80;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = [UIColor whiteColor];
+    hearView = [[NewsTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 69+207*(WIDTH/375))];
+    hearView.parentViewController = self;
+    self.tableView.tableHeaderView = hearView;
+    
     [self loadData];
 }
 
@@ -50,6 +62,8 @@
     __weak __typeof(self)weakSelf  = self;
     [HttpRequest GET:[URLFile urlStringForLogin_index] success:^(id responseObject) {
 
+        hearView.pointImages = responseObject[@"focuspic"];
+        hearView.pointNews = responseObject[@"headlines"];
         _dataArray = [HomepageSectionModel arrryWithDictionary:responseObject];
         [weakSelf.tableView reloadData];
 
@@ -70,7 +84,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
- HomepageSectionModel *sectionModel = _dataArray[section];
+    HomepageSectionModel *sectionModel = _dataArray[section];
     return sectionModel.rowModels.count;
 }
 
@@ -157,8 +171,48 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     HomepageSectionFooterView *view = [[HomepageSectionFooterView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 40)];
-        view.sectionModel = _dataArray[section];
+    HomepageSectionModel *sectionModel = _dataArray[section];
+    sectionModel.section = section;
+    view.parentVC = self;
+        view.sectionModel = sectionModel;
         return view;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    HomepageSectionModel *sectionModel = _dataArray[indexPath.section];
+    BasicObject *obj = sectionModel.rowModels[indexPath.row];
+    if ([obj isKindOfClass:[HomepageNewsModel class]]) {
+        NewsDetailViewController *detail = [[NewsDetailViewController alloc] init];
+        detail.ID = ((HomepageNewsModel *)obj).ID;
+        detail.invest = NO;
+        detail.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:detail animated:YES];
+
+    }else if ([obj isKindOfClass:[HomepageComplainModel class]]) {
+        ComplainDetailsViewController *detail = [[ComplainDetailsViewController alloc] init];
+        detail.cid = ((HomepageComplainModel *)obj).cpid;
+        detail.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:detail animated:YES];
+
+    }else if ([obj isKindOfClass:[HomepageResearchModel class]]) {
+        NewsDetailViewController *detail = [[NewsDetailViewController alloc] init];
+        detail.ID = ((HomepageNewsModel *)obj).ID;
+        detail.invest = YES;
+        detail.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:detail animated:YES];
+
+    }else if ([obj isKindOfClass:[HomepageAnswerModel class]]) {
+        AnswerDetailsViewController *detail = [[AnswerDetailsViewController alloc] init];
+        detail.cid = ((HomepageAnswerModel *)obj).ID;
+        detail.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:detail animated:YES];
+
+    }else if ([obj isKindOfClass:[HomepageForumModel class]]){
+        PostViewController *post = [[PostViewController alloc] init];
+        post.tid = ((HomepageForumModel *)obj).tid;
+        post.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:post animated:YES];
+    }
 }
 
 /*

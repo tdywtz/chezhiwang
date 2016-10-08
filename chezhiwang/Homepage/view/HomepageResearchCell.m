@@ -14,10 +14,11 @@
     UIImageView *hottypeImageView;
     UILabel *modelLabel;
     UILabel *scoreLabel;
-    UILabel *contentLabel;
+    TTTAttributedLabel *contentLabel;
 }
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self makeUI];
     }
     return self;
@@ -27,14 +28,18 @@
     iconImageView = [[UIImageView alloc] init];
     iconImageView.contentMode = UIViewContentModeScaleAspectFit;
 
-    hottypeImageView = [[UIImageView alloc] init];
+    hottypeImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"推荐购买"]];
     hottypeImageView.contentMode = UIViewContentModeScaleAspectFit;
 
     modelLabel = [[UILabel alloc] init];
 
     scoreLabel = [[UILabel alloc] init];
 
-    contentLabel = [[UILabel alloc] init];
+    contentLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
+    contentLabel.numberOfLines = 2;
+    contentLabel.lineSpacing = 3;
+    contentLabel.textInsets = UIEdgeInsetsMake(10, 10, 10, 10);
+    contentLabel.backgroundColor = RGB_color(240, 240, 240, 1);
 
     [self.contentView addSubview:iconImageView];
     [self.contentView addSubview:hottypeImageView];
@@ -44,14 +49,14 @@
 
     [iconImageView makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(15);
-        make.top.equalTo(25);
+        make.top.equalTo(20);
         make.size.equalTo(CGSizeMake(100, 100/1.4));
     }];
 
     [hottypeImageView makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(10);
         make.top.equalTo(10);
-        make.size.equalTo(CGSizeMake(25, 25));
+        make.size.equalTo(CGSizeMake(30, 30));
     }];
 
     [modelLabel makeConstraints:^(MASConstraintMaker *make) {
@@ -65,8 +70,8 @@
     }];
 
     [contentLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(10);
-        make.right.equalTo(-10);
+        make.left.equalTo(0);
+        make.right.equalTo(0);
         make.bottom.equalTo(0);
         make.top.equalTo(iconImageView.bottom).offset(10);
     }];
@@ -79,6 +84,8 @@
 
 - (void)setData{
     [iconImageView sd_setImageWithURL:[NSURL URLWithString:self.researchModel.image] placeholderImage:[UIImage imageNamed:@""]];
+
+    hottypeImageView.hidden = !self.researchModel.hottype;
 
     modelLabel.attributedText = [self attributed:@"调查车型：" font1:[UIFont systemFontOfSize:PT_FROM_PX(18)] color1:RGB_color(153, 153, 153, 1) stirng2:self.researchModel.models font2:[UIFont systemFontOfSize:PT_FROM_PX(23)] color2:RGB_color(17, 27, 36, 1)];
      scoreLabel.attributedText = [self attributed:@"调查车型：" font1:[UIFont systemFontOfSize:PT_FROM_PX(18)] color1:RGB_color(153, 153, 153, 1) stirng2:self.researchModel.score font2:[UIFont systemFontOfSize:PT_FROM_PX(23)] color2:RGB_color(237, 17, 17, 1)];

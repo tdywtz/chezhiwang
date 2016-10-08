@@ -10,14 +10,16 @@
 
 @interface HomepageNewsModel : BasicObject
 
+
+/** 日期 */
 @property (nonatomic,copy) NSString *date;
-
+/***/
 @property (nonatomic,copy) NSString *ID;
-
+/** 图片链接 */
 @property (nonatomic,copy) NSString *image;
-
+/** 类型 */
 @property (nonatomic,copy) NSString *stylename;
-
+/** 标题*/
 @property (nonatomic,copy) NSString *title;
 
 

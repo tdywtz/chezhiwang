@@ -6,10 +6,10 @@
 //  Copyright © 2016年 车质网. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BasicTableViewCell.h"
 #import "HomepageAnswerModel.h"
 
-@interface HomepageAnswerCell : UITableViewCell
+@interface HomepageAnswerCell : BasicTableViewCell
 
 
 @property (nonatomic,strong) HomepageAnswerModel *answerModel;

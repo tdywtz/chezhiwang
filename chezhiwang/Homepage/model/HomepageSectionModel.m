@@ -26,7 +26,7 @@
 
     HomepageSectionModel *newsSectionModel = [[HomepageSectionModel alloc] init];
     newsSectionModel.headTitle = @"新闻";
-    newsSectionModel.headImageName = @"";
+    newsSectionModel.headImageName = @"新闻";
     newsSectionModel.footTitle = @"=更多新闻";
     newsSectionModel.headLineColor = RGB_color(0, 159, 251, 1);
     for (NSDictionary *dict in dictionary[@"news"]) {
@@ -36,7 +36,7 @@
 
     HomepageSectionModel *complainSectionModel = [[HomepageSectionModel alloc] init];
     complainSectionModel.headTitle = @"投诉";
-    complainSectionModel.headImageName = @"";
+    complainSectionModel.headImageName = @"投诉";
     complainSectionModel.footTitle = @"更多投诉";
     complainSectionModel.headLineColor = RGB_color(247, 162, 0, 1);
     for (NSDictionary *dict in dictionary[@"complain"]) {
@@ -46,7 +46,7 @@
 
     HomepageSectionModel *researchSectionModel = [[HomepageSectionModel alloc] init];
     researchSectionModel.headTitle = @"调查";
-    researchSectionModel.headImageName =@"";
+    researchSectionModel.headImageName =@"调查";
     researchSectionModel.footTitle = @"更多调查";
     researchSectionModel.headLineColor = RGB_color(239, 95, 96, 1);
     for (NSDictionary *dict in dictionary[@"report"]) {
@@ -56,7 +56,7 @@
 
     HomepageSectionModel *answerSectionModel = [[HomepageSectionModel alloc] init];
     answerSectionModel.headTitle = @"答疑";
-    answerSectionModel.headImageName = @"";
+    answerSectionModel.headImageName = @"答疑";
     answerSectionModel.footTitle = @"更多答疑";
     answerSectionModel.headLineColor = RGB_color(0, 169, 75, 1);
     for (NSDictionary *dict in dictionary[@"zjdy"]) {
@@ -66,7 +66,7 @@
 
     HomepageSectionModel *forumSectionModel = [[HomepageSectionModel alloc] init];
     forumSectionModel.headTitle = @"论坛";
-    forumSectionModel.headImageName = @"";
+    forumSectionModel.headImageName = @"论坛";
     forumSectionModel.footTitle = @"更多论坛";
     forumSectionModel.headLineColor = RGB_color(0, 159, 251, 1);
     for (NSDictionary *dict in dictionary[@"bbs"]) {

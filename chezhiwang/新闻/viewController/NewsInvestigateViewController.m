@@ -7,19 +7,17 @@
 //
 
 #import "NewsInvestigateViewController.h"
-#import "InvestigateListCell.h"
+#import "HomepageResearchCell.h"
 #import "NewsDetailViewController.h"
 #import "InvestigateChangeViewController.h"
 
-@interface NewsInvestigateViewController ()<UITableViewDataSource,UITableViewDelegate,MJRefreshBaseViewDelegate>
+@interface NewsInvestigateViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     UITableView *_tableView;
     NSMutableArray *_dataArray;
     
     UILabel *titleLabel;
-    
-    MJRefreshHeaderView * MJheaderView;
-    MJRefreshFooterView *footView;
+
     NSInteger _count;
 
 }
@@ -32,26 +30,20 @@
     NSString *url = [NSString stringWithFormat:self.urlString,_count];
     [HttpRequest GET:url success:^(id responseObject) {
         if (_count == 1) {
-            
-            footView.noData = NO;
+
             [_dataArray removeAllObjects];
         }else{
             if ([responseObject count] == 0) {
-                footView.noData = YES;
+
             }
         }
         
-        for (NSDictionary *dict in responseObject) {
-            [_dataArray addObject:dict];
-        }
+        [_dataArray addObjectsFromArray:[HomepageResearchModel arayWithArray:responseObject]];
         
         [_tableView reloadData];
-        [MJheaderView endRefreshing];
-        [footView endRefreshing];
 
     } failure:^(NSError *error) {
-        [MJheaderView endRefreshing];
-        [footView endRefreshing];
+
 
     }];
 }
@@ -71,6 +63,7 @@
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, WIDTH, HEIGHT-64-49) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
+    _tableView.estimatedRowHeight = 100;
      _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
     
@@ -84,12 +77,7 @@
     titleLabel.attributedText = [self attWithString:@"不限" frame:CGRectMake(0, -3, 16, 16)];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(xuanzheClick)];
     [titleLabel addGestureRecognizer:tap];
-    
-    
-    MJheaderView = [[MJRefreshHeaderView alloc] initWithScrollView:_tableView];
-    footView = [[MJRefreshFooterView alloc] initWithScrollView:_tableView];
-    MJheaderView.delegate = self;
-    footView.delegate = self;
+
 }
 
 -(void)xuanzheClick{
@@ -134,53 +122,27 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    InvestigateListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if (!cell) {
-        cell = [[InvestigateListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
+    HomepageResearchModel *model = _dataArray[indexPath.row];
+    HomepageResearchCell *researchCell = [tableView dequeueReusableCellWithIdentifier:@"researchCell"];
+    if (!researchCell) {
+        researchCell = [[HomepageResearchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"researchCell"];
     }
-    //cell.readArray = self.readArray;
-    cell.dictionary = _dataArray[indexPath.row];
-    return cell;
+    researchCell.researchModel = model;
+    return researchCell;
+
 }
 
 #pragma mark - UITableViewDelegate
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-
-    return 90;
-}
-
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+
+    HomepageResearchModel *model = _dataArray[indexPath.row];
     NewsDetailViewController *detail = [[NewsDetailViewController alloc] init];
-    NSDictionary *dict = _dataArray[indexPath.row];
-    detail.ID = dict[@"id"];
-    detail.titleLabelText = dict[@"models"];
-    NSLog(@"%@",dict);
-//    //改变颜色
-//    InvestigateListCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-//    UILabel *title = (UILabel *)[cell valueForKey:@"titleLabel"];
-//    title.textColor = colorDeepGray;
-    //存储数据库
-    [[FmdbManager shareManager] insertIntoReadHistoryWithId: detail.ID andTitle:detail.titleLabelText andType:ReadHistoryTypeNews];
+    detail.ID = model.ID;
+    detail.titleLabelText = model.models;
     detail.invest = YES;
     detail.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detail animated:YES];
-}
-
-#pragma mark - MJRefreshBaseViewDelegate
-- (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView{
-    if (refreshView == MJheaderView) {
-        _count = 1;
-        
-    }else{
-        if (_count < 1) _count = 1;
-        
-        _count ++;
-    }
-    [self loadData];
 }
 
 

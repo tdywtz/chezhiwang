@@ -10,5 +10,5 @@
 
 @interface LoginViewController : BasicViewController
 
-
++ (UINavigationController *)instance;
 @end

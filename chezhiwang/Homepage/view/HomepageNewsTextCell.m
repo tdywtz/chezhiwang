@@ -11,13 +11,14 @@
 @implementation HomepageNewsTextCell
 {
     UILabel *titleLabel;
-    UILabel *stylenamelabel;
+    TTTAttributedLabel *stylenamelabel;
     UILabel *dateLabel;
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self makeUI];
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
 
     return self;
@@ -27,8 +28,10 @@
     titleLabel = [[UILabel alloc] init];
     titleLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(23)];
     titleLabel.textColor = RGB_color(17, 17, 17, 1);
+    titleLabel.numberOfLines = 2;
 
-    stylenamelabel = [[UILabel alloc] init];
+    stylenamelabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
+    stylenamelabel.textInsets = UIEdgeInsetsMake(1, 3, 1, 3);
     stylenamelabel.font = [UIFont systemFontOfSize:PT_FROM_PX(16.5)];
     stylenamelabel.textColor = RGB_color(237, 27, 36, 1);
     stylenamelabel.layer.cornerRadius = 3;

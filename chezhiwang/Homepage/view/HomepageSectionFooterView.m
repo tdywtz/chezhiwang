@@ -9,6 +9,12 @@
 #import "HomepageSectionFooterView.h"
 #import "HomepageSectionModel.h"
 
+#import "NewsViewController.h"
+#import "ComplainListViewController.h"
+#import "NewsInvestigateViewController.h"
+#import "AnswerListViewController.h"
+#import "ForumClassifyListViewController.h"
+
 @implementation HomepageSectionFooterView
 {
     UIButton *pushButton;
@@ -22,6 +28,7 @@
         pushButton.titleLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(19)];
         [pushButton setTitleColor:RGB_color(154, 154, 154, 1) forState:UIControlStateNormal];
         pushButton.backgroundColor = RGB_color(240, 240, 240, 1);
+        [pushButton addTarget:self action:@selector(pushClick) forControlEvents:UIControlEventTouchUpInside];
 
         imageView = [[UIImageView alloc] init];
         imageView.image = [UIImage imageNamed:@"arrow"];
@@ -39,6 +46,14 @@
         }];
     }
     return self;
+}
+
+- (void)pushClick{
+    NSArray *array = @[@"NewsViewController",@"ComplainListViewController",@"NewsInvestigateViewController",@"AnswerListViewController",@"ForumClassifyListViewController"];
+    UIViewController *VC = [[NSClassFromString(array[_sectionModel.section]) alloc] init];
+    VC.hidesBottomBarWhenPushed = YES;
+    [self.parentVC.navigationController pushViewController:VC animated:YES];
+
 }
 
 - (void)setSectionModel:(HomepageSectionModel *)sectionModel{

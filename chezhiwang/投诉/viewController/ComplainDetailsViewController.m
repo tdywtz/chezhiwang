@@ -66,6 +66,7 @@
 
     B = [LHController setFont];
     http = @"";
+    self.type = @"2";
 
     [self createRightItems];
     [self createBgView];
@@ -242,6 +243,7 @@
 
 
 - (void)setData{
+
     titleLabel.text = _textTitle;
 
     NSArray *array = @[@"投诉编号：",@"投诉品牌：",@"投诉车系：",@"投诉车型：",@"投诉时间："];

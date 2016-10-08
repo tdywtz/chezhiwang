@@ -26,8 +26,6 @@
     // Override point for customization after application launch.
     _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
-
-
     
     CZWAppPrompt *prompt = [CZWAppPrompt sharedInstance];
     prompt.appId = THE_APPID;

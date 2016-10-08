@@ -6,10 +6,10 @@
 //  Copyright © 2016年 车质网. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BasicTableViewCell.h"
 #import "HomepageComplainModel.h"
 
-@interface HomepageComplainCell : UITableViewCell
+@interface HomepageComplainCell : BasicTableViewCell
 
 
 @property (nonatomic,strong) HomepageComplainModel *complainModel;

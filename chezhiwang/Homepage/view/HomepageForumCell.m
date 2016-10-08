@@ -13,10 +13,12 @@
     UILabel *titleLabel;
     UILabel *nameLabel;
     UILabel *dateLabel;
-    UILabel *contentLabel;
+    UILabel *replycountLabel;
+    UILabel *viewcountLabel;
 }
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self makeUI];
     }
     return self;
@@ -25,6 +27,7 @@
 - (void)makeUI{
     titleLabel = [[UILabel alloc] init];
     titleLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(23)];
+    titleLabel.numberOfLines = 2;
     titleLabel.textColor = RGB_color(17, 17, 17, 1);
     
     nameLabel = [[UILabel alloc] init];
@@ -35,14 +38,27 @@
     dateLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(18)];
     dateLabel.textColor = RGB_color(153, 153, 153, 1);
     
-    contentLabel = [[UILabel alloc] init];
-    contentLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(19)];
-    contentLabel.textColor = RGB_color(119, 119, 119, 1);
-    
+    replycountLabel = [[UILabel alloc] init];
+    replycountLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(19)];
+    replycountLabel.textColor = RGB_color(100, 100, 100, 1);
+
+    viewcountLabel = [[UILabel alloc] init];
+    viewcountLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(19)];
+    viewcountLabel.textColor = RGB_color(100, 100, 100, 1);
+
+    UIImageView *replyImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"留言"]];
+    replyImageView.contentMode = UIViewContentModeScaleAspectFit;
+
+    UIImageView *viewImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"查看"]];
+    viewImageView.contentMode = UIViewContentModeScaleAspectFit;
+
     [self.contentView addSubview:titleLabel];
     [self.contentView addSubview:dateLabel];
     [self.contentView addSubview:nameLabel];
-    [self.contentView addSubview:contentLabel];
+    [self.contentView addSubview:replycountLabel];
+    [self.contentView addSubview:replyImageView];
+    [self.contentView addSubview:viewcountLabel];
+    [self.contentView addSubview:viewImageView];
     
     [titleLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(10);
@@ -53,6 +69,7 @@
     [nameLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(10);
         make.top.equalTo(titleLabel.bottom).offset(10);
+        make.bottom.equalTo(-10);
     }];
     
     [dateLabel makeConstraints:^(MASConstraintMaker *make) {
@@ -60,10 +77,64 @@
         make.bottom.equalTo(nameLabel);
     }];
     
-    [contentLabel makeConstraints:^(MASConstraintMaker *make) {
+    [viewcountLabel makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(-10);
         make.bottom.equalTo(nameLabel);
     }];
+
+    [viewImageView makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(viewcountLabel.left).offset(-5);
+        make.centerY.equalTo(viewcountLabel);
+    }];
+
+    [replycountLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(viewImageView.left).offset(-8);
+        make.centerY.equalTo(viewcountLabel);
+    }];
+
+    [replyImageView makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(replycountLabel.left).offset(-5);
+        make.centerY.equalTo(viewcountLabel);
+    }];
+}
+
+- (void)setForumModel:(HomepageForumModel *)forumModel{
+    _forumModel = forumModel;
+    [self setData];
+}
+
+
+- (void)setData{
+    titleLabel.attributedText = [self attributedTitle];
+    nameLabel.text = _forumModel.username;
+    dateLabel.text = _forumModel.date;
+    replycountLabel.text = _forumModel.replycount;
+    viewcountLabel.text = _forumModel.viewcount;
+
+}
+
+- (NSMutableAttributedString *)attributedTitle{
+    NSMutableAttributedString *attributed = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@",_forumModel.title]];
+
+    NSTextAttachment *achment = [[NSTextAttachment alloc] init];
+    if ([_forumModel.type integerValue] == 1) {
+        achment.image = [UIImage imageNamed:@"auto_forumCell_image"];
+    }else{
+        achment.image = [UIImage imageNamed:@"auto_forumCell_image"];
+    }
+    achment.bounds = CGRectMake(0, -1, 15, 15);
+    [attributed insertAttributedString:[NSAttributedString attributedStringWithAttachment:achment] atIndex:0];
+
+    if (_forumModel.essence) {
+        //精华
+        NSTextAttachment *jinghua = [[NSTextAttachment alloc] init];
+        jinghua.image = [UIImage imageNamed:@"auto_forumCell_image"];
+        jinghua.bounds = CGRectMake(0, -1, 15, 15);
+
+        [attributed insertAttributedString:[[NSAttributedString alloc] initWithString:@" "] atIndex:0];
+        [attributed insertAttributedString:[NSAttributedString attributedStringWithAttachment:jinghua] atIndex:0];
+    }
+    return attributed;
 }
 
 - (void)awakeFromNib {

@@ -93,13 +93,13 @@
 
 /**新闻详情*/
 + (NSString *)urlStringForNewsinfo{
-    return [self stringWithBasic:@"act=newsinfo&id=%@"];
+    return [self stringForCZWServiceWithAct:@"act=newsinfo&id=%@&type=%@"];
 }
 
-/**新闻详情（新车调查）*/
-+ (NSString *)urlString_carownerinfo{
-    return [self stringWithBasic:@"act=carownerinfo&id=%@"];
-}
+///**新闻详情（新车调查）*/
+//+ (NSString *)urlString_carownerinfo{
+//    return [self stringWithBasic:@"act=carownerinfo&id=%@"];
+//}
 
 /**精品试驾list*/
 + (NSString *)urlString_testDrive{

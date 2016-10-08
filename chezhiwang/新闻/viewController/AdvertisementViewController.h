@@ -8,6 +8,7 @@
 
 #import "BasicViewController.h"
 
+/**广告*/
 @interface AdvertisementViewController : BasicViewController
 
 

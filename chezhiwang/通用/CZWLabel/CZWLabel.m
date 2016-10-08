@@ -34,12 +34,12 @@
 
 -(void)setUp{
     self.numberOfLines = 0;
-    self.lineBreakMode = NSLineBreakByCharWrapping;
+    self.lineBreakMode = NSLineBreakByTruncatingTail;
     self.textAlignment = NSTextAlignmentLeft;
     self.backgroundColor = [UIColor clearColor];
     self.textInsets = UIEdgeInsetsZero;
    //添加手势
-    [self attachTapHandler];
+  //  [self attachTapHandler];
 }
 
 #pragma mark - 菜单
@@ -84,8 +84,11 @@
 
 #pragma mark - sets
 -(void)setText:(NSString *)text{
+    if (text == nil) {
+        text = @"";
+    }
     [super setText:text];
-  
+
     _attributeString = nil;
     [self addattributeName];
     self.attributedText = self.attributeString;

@@ -11,6 +11,7 @@
 #import "ComplainView.h"
 #import "RegisterViewController.h"
 #import "AskViewController.h"
+#import "BasicNavigationController.h"
 #import "LookPasswordViewController.h"
 
 @interface LoginViewController ()<UITextFieldDelegate>
@@ -25,10 +26,17 @@
 
 @implementation LoginViewController
 
++ (UINavigationController *)instance{
+    LoginViewController *login = [[LoginViewController alloc] init];
+    BasicNavigationController *nvc = [[BasicNavigationController alloc] initWithRootViewController:login];
+    return nvc;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
-    self.view.backgroundColor = colorLineGray;
+
+    [self createLeftItemBack];
+    self.view.backgroundColor = RGB_color(240, 240, 240, 1);
     B = [LHController setFont];
     self.navigationItem.title = @"登录";
     [self createScrollView];
@@ -66,23 +74,31 @@
 }
 
 -(void)createField{
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 160)];
+    imageView.image = [UIImage imageNamed:@"defaultImage_icon"];
+    [_scrollView addSubview:imageView];
+
     UIImageView *userNameImageView =[LHController createImageViewWithFrame:CGRectMake(10, 8, 20, 20) ImageName:@"userName.png"];
     UIImageView *tempUserNameImageView = [LHController createImageViewWithFrame:CGRectMake(0, 0, 40, 40) ImageName:nil];
     [tempUserNameImageView addSubview:userNameImageView];
     
-    _userName = [LHController createTextFieldWithFrame:CGRectMake(10, 60, WIDTH-20, 50) Placeholder:@"用户名" Font:15  Delegate:self];
+    _userName = [LHController createTextFieldWithFrame:CGRectMake(10, 160, WIDTH-20, 50) Placeholder:@"用户名" Font:15  Delegate:self];
     _userName.leftView = tempUserNameImageView;
     _userName.backgroundColor = [UIColor whiteColor];
+    _userName.layer.borderColor = RGB_color(221, 221, 221, 1).CGColor;
+    _userName.layer.borderWidth = 1;
     [_scrollView addSubview:_userName];
     
-    UIImageView *passwordImageView =[LHController createImageViewWithFrame:CGRectMake(10, 8, 20, 20) ImageName:@"password"];
+    UIImageView *passwordImageView =[LHController createImageViewWithFrame:CGRectMake(10, 8, 20, 20) ImageName:@"user_password"];
     UIImageView *tempPasswordImageView = [LHController createImageViewWithFrame:CGRectMake(0, 0, 40, 40) ImageName:nil];
     [tempPasswordImageView addSubview:passwordImageView];
     
-    _passWord = [LHController createTextFieldWithFrame:CGRectMake(10, _userName.frame.origin.y+_userName.frame.size.height+1, WIDTH-20, 50) Placeholder:@"密码" Font:15  Delegate:self];
+    _passWord = [LHController createTextFieldWithFrame:CGRectMake(10, _userName.frame.origin.y+_userName.frame.size.height-1, WIDTH-20, 50) Placeholder:@"密码" Font:15  Delegate:self];
     _passWord.leftView = tempPasswordImageView;
     _passWord.secureTextEntry = YES;
     _passWord.backgroundColor = [UIColor whiteColor];
+    _passWord.layer.borderColor = RGB_color(221, 221, 221, 1).CGColor;
+    _passWord.layer.borderWidth = 1;
     [_scrollView addSubview:_passWord];
 }
 
@@ -143,6 +159,7 @@
                [LHController alert:@"因发布非法信息，您的账号已封停"];
            }
        }else{
+           [[CZWManager manager] loginWithDictionary:[responseObject firstObject]];
            NSDictionary *dic = [responseObject firstObject];
            NSUserDefaults *df = [NSUserDefaults standardUserDefaults];
            [df setObject:dic[@"name"] forKey:user_name];
@@ -151,10 +168,11 @@
            [df setObject:dic[@"userid"] forKey:user_id];
            
            [self saveTime];
-           if (self.navigationController.viewControllers.count == 1){
-               [self dismissViewControllerAnimated:YES completion:nil];
+           if (self.navigationController.viewControllers.count > 1){
+                [self.navigationController popViewControllerAnimated:YES];
+
            }else{
-               [self.navigationController popViewControllerAnimated:YES];
+[self dismissViewControllerAnimated:YES completion:nil];
            }
        }
        logoin.enabled = YES;

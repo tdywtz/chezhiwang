@@ -13,15 +13,13 @@
 #import "ComplainView.h"
 #import "LoginViewController.h"
 
-@interface ComplainListViewController ()<UITableViewDataSource,UITableViewDelegate,MJRefreshBaseViewDelegate>
+@interface ComplainListViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     UITableView *_tableView;
     NSMutableArray *_dataArray;
     BOOL header;
     CGFloat cellheight;
-    
-    MJRefreshHeaderView *headerView;
-    MJRefreshFooterView *footView;
+
     NSInteger _count;
     
     FmdbManager *_fmdb;
@@ -44,12 +42,10 @@
        }
        self.readArray = [_fmdb selectAllFromReadHistory:ReadHistoryTypeComplain];
        [_tableView reloadData];
-       [headerView endRefreshing];
-       [footView endRefreshing];
+
 
    } failure:^(NSError *error) {
-       [headerView endRefreshing];
-       [footView endRefreshing];
+
    }];
 }
 
@@ -65,7 +61,6 @@
     
     header = YES;
 
-    [headerView beginRefreshing];
     [self loadDataP:1 andS:10];
 
 }
@@ -104,11 +99,6 @@
     [_tableView makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(UIEdgeInsetsZero);
     }];
-    
-    headerView = [[MJRefreshHeaderView alloc] initWithScrollView:_tableView];
-    headerView.delegate = self;
-    footView = [[MJRefreshFooterView alloc] initWithScrollView:_tableView];
-    footView.delegate = self;
 }
 
 -(void)createRightItem{
@@ -175,20 +165,6 @@
     [_fmdb insertIntoReadHistoryWithId:dict[@"cpid"] andTitle:dict[@"question"] andType:ReadHistoryTypeComplain];
     detail.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detail animated:YES];
-}
-
-#pragma mark - MJRefreshBaseViewDelegate
-- (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView{
-    if (refreshView == headerView) {
-        header = YES;
-        _count = 1;
-    }else{
-        if (_count < 1) {
-            _count = 1;
-        }
-        _count ++;
-    }
-    [self loadDataP:_count andS:10];
 }
 
 - (void)didReceiveMemoryWarning {

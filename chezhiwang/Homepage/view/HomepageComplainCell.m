@@ -171,6 +171,7 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self makeUI];
     }
     return self;
@@ -180,6 +181,8 @@
     titleLabel = [[UILabel alloc] init];
     titleLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(23)];
     titleLabel.textColor = RGB_color(17, 17, 17, 1);
+    titleLabel.numberOfLines = 2;
+    
 
     cpidLabel = [[UILabel alloc] init];
     cpidLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(18)];

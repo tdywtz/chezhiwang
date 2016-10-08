@@ -18,6 +18,8 @@
 
 @property (nonatomic,strong) NSMutableArray *rowModels;
 
+@property (nonatomic,assign) NSInteger section;
+
 + (NSArray *)arrryWithDictionary:(NSDictionary *)dictionary;
 
 @end

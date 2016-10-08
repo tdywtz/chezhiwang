@@ -7,106 +7,67 @@
 //
 
 #import "CustomTabBarController.h"
-#import "NewsViewController.h"
-#import "ComplainListViewController.h"
-#import "AnswerViewController.h"
-#import "ForumListViewController.h"
-#import "MyViewController.h"
+
 #import "BasicNavigationController.h"
 
+#import "MyViewController.h"
 #import "HomepageTableViewController.h"
-
+#import "FindCollectionViewController.h"
 
 @interface CustomTabBarController ()<UITabBarControllerDelegate>
-{
-    UIView *custommoveView;
-}
+
 @end
 
 @implementation CustomTabBarController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    self.delegate = self;
+  
+    HomepageTableViewController      *homepage = [HomepageTableViewController  init];
+    FindCollectionViewController     *find     = [FindCollectionViewController init];
+    MyViewController                 *my       = [[MyViewController alloc] init];
     
-    HomepageTableViewController             *news = [HomepageTableViewController  init];
-    ComplainListViewController *complain = [[ComplainListViewController alloc] init];
-    AnswerViewController         *answer = [[AnswerViewController alloc] init];
-    ForumListViewController       *forum = [[ForumListViewController alloc] init];
-    MyViewController                 *my = [[MyViewController alloc] init];
-    
-    BasicNavigationController *n1 = [[BasicNavigationController alloc] initWithRootViewController:news];
-    BasicNavigationController *n2 = [[BasicNavigationController alloc] initWithRootViewController:complain];
-    BasicNavigationController *n3 = [[BasicNavigationController alloc] initWithRootViewController:answer];
-    BasicNavigationController *n4 = [[BasicNavigationController alloc] initWithRootViewController:forum];
-    BasicNavigationController *n5 = [[BasicNavigationController alloc] initWithRootViewController:my];
+    BasicNavigationController *n1 = [[BasicNavigationController alloc] initWithRootViewController:homepage];
+    BasicNavigationController *n2 = [[BasicNavigationController alloc] initWithRootViewController:find];
+    BasicNavigationController *n3 = [[BasicNavigationController alloc] initWithRootViewController:my];
+
     
 
-    news.title                 = @"新闻";
-    complain.title             = @"投诉";
-    answer.title               = @"答疑";
-    n4.navigationItem.title    = @"论坛";
-    my.title                   = @"我";
-    self.viewControllers  = @[n1,n2,n3,n4,n5];
+    homepage.title   = @"首页";
+    find.title       = @"发现";
+
+    self.viewControllers  = @[n1,n2,n3];
 
     [self createCustomTabBar];
-    //NSSetUncaughtExceptionHandler(&UncaughtExceptionHandler(NSException *exception));
 }
 
-//void UncaughtExceptionHandler(NSException *exception) {
-//
-//    　　NSArray *arr = [exception callStackSymbols];//得到当前调用栈信息
-//
-//    　　NSString *reason = [exception reason];//非常重要，就是崩溃的原因
-//
-//    　　NSString *name = [exception name];//异常类型
-//
-//    　　NSLog(@"exception type : %@ n crash reason : %@ n call stack info : %@", name, reason, arr);
-//    
-//    　　}
 
 //处理 UITabBarItem
 -(void)createCustomTabBar{
-    self.tabBar.barTintColor = colorLightBlue;
-    
-    custommoveView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tabBar.bounds.size.width/self.viewControllers.count, self.tabBar.bounds.size.height)];
-    custommoveView.backgroundColor  = colorDeepBlue;
-    [self.tabBar addSubview:custommoveView];
-    
-    NSArray *array = @[@"新闻",@"投诉",@"答疑",@"论坛",@"我"];
-    NSArray *imageArray = @[@"news",@"complain",@"answer",@"forum",@"my"];
+
+    NSArray *array = @[@"首页",@"发现",@"我"];
+    NSArray *grays = @[@"tabbar_home_gray",@"tabbar_find_gray",@"tabbar_my_gray"];
+    NSArray *brights = @[@"tabbar_home_bright",@"tabbar_find_bright",@"tabbar_my_bright"];
     for (int i = 0; i  < self.tabBar.items.count; i ++) {
         
         UITabBarItem *item = self.tabBar.items[i];
-        item = [item initWithTitle:array[i] image:[self createImageWithName:imageArray[i]] selectedImage:[self createImageWithName:imageArray[i]]];
+        item = [item initWithTitle:array[i] image:[self createImageWithName:grays[i]] selectedImage:[self createImageWithName:brights[i]]];
         
         //设置item字体颜色
-        [item setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
+        [item setTitleTextAttributes:@{NSForegroundColorAttributeName:RGB_color(153, 153, 153, 1)} forState:UIControlStateNormal];
         //选中颜色
-        [item setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateSelected];
+        [item setTitleTextAttributes:@{NSForegroundColorAttributeName:colorLightBlue} forState:UIControlStateSelected];
     }
 }
 
 
 -(UIImage *)createImageWithName:(NSString *)imageName
 {
-    //UIImage *image = [UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"%@%@",self.imagePath,imageName]];
     UIImage *image = [UIImage imageNamed:imageName];
     //需要对图片进行特殊处理
     image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     return image;
 }
-
-#pragma mark - UITabBarControllerDelegate
-- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
-    CGRect frame = custommoveView.frame;
-    frame.origin.x = self.tabBar.bounds.size.width/self.viewControllers.count *tabBarController.selectedIndex;
-    [UIView animateWithDuration:0.1 animations:^{
-        custommoveView.frame = frame;
-    }];
-}
-
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];

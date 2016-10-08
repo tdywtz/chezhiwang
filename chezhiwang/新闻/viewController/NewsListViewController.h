@@ -14,5 +14,4 @@
 
 @property (nonatomic,copy) NSString *urlString;
 //**列表是否有头部视图*/
-@property (nonatomic,assign) BOOL tableHeaderViewHave;
 @end

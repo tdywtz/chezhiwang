@@ -47,8 +47,8 @@
 + (NSString *)urlStringForReport;
 /**新闻详情*/
 + (NSString *)urlStringForNewsinfo;
-/**新闻详情（新车调查）*/
-+ (NSString *)urlString_carownerinfo;
+///**新闻详情（新车调查）*/
+//+ (NSString *)urlString_carownerinfo;
 /**精品试list*/
 + (NSString *)urlString_testDrive;
 /**新闻搜索*/

@@ -81,11 +81,8 @@
 
 
 #pragma mark - LHToolScrollView
-@interface LHToolScrollView ()<UIScrollViewDelegate>
-{
-    UIImageView *leftView;
-    UIImageView *rightView;
-}
+@interface LHToolScrollView ()
+
 @property (nonatomic,strong) UIScrollView *scrollView;
 @property (nonatomic,strong) UIView *contentView;
 @property (nonatomic,strong) UIView *moveView;//滑动条
@@ -103,7 +100,6 @@
         self.scrollView = [[UIScrollView alloc] initWithFrame:frame];
         self.scrollView.showsHorizontalScrollIndicator = NO;
         self.scrollView.scrollsToTop = NO;
-        self.scrollView.delegate = self;
         [self addSubview:self.scrollView];
         [self.scrollView makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(UIEdgeInsetsMake(0, 10, 0, 25));
@@ -121,48 +117,19 @@
             make.height.equalTo(self.frame.size.height);
         }];
         
-        leftView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        leftView.image = [UIImage imageNamed:@"bar_btn_icon_returntext"];
+
 //        leftView.backgroundColor = colorLightBlue;;
 //        leftView.layer.shadowColor = colorLightBlue.CGColor;
 //        leftView.layer.shadowOpacity = 0.99;
 //        leftView.layer.shadowOffset = CGSizeMake(10, 0);
 //        leftView.layer.shadowRadius = 5;
 
-    
-        rightView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        rightView.image = [UIImage imageNamed:@"bar_btn_icon_returntext"];
-        rightView.transform  = CGAffineTransformMakeRotation(M_PI);
+
 //        rightView.backgroundColor = colorLightBlue;;
 //        rightView.layer.shadowColor = colorLightBlue.CGColor;
 //        rightView.layer.shadowOpacity = 0.99;
 //        rightView.layer.shadowOffset = CGSizeMake(-10, 0);
 //        rightView.layer.shadowRadius = 5;
-
-        
-        
-        [self addSubview:leftView];
-        [self addSubview:rightView];
-        
-        [leftView makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(0);
-            make.centerY.equalTo(0);
-           // make.size.equalTo(CGSizeMake(15, 30));
-        }];
-        
-        [rightView makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(_scrollView.right);
-            make.centerY.equalTo(0);
-            //make.size.equalTo(CGSizeMake(15, 30));
-        }];
-        
-        UIImageView *imageview = [[UIImageView alloc] init];
-        imageview.image = [UIImage imageNamed:@"navigation_fg"];
-        [self addSubview:imageview];
-        [imageview makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(0);
-            make.centerY.equalTo(0);
-        }];
     }
     return self;
 }
@@ -285,23 +252,6 @@
         _buttons = [[NSMutableArray alloc] init];
     }
     return _buttons;
-}
-
-
-
-#pragma mark - UIScrollViewDelegate
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    CGFloat _x = scrollView.contentOffset.x;
-    if (_x < 10) {
-        leftView.alpha = 0.5;
-    }else{
-        leftView.alpha = 1;
-    }
-    if (_x < scrollView.contentSize.width-scrollView.frame.size.width-15) {
-        rightView.alpha = 1;
-    }else{
-        rightView.alpha = 0.5;
-    }
 }
 
 /*

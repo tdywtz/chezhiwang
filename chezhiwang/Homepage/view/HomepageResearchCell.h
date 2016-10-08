@@ -6,10 +6,10 @@
 //  Copyright © 2016年 车质网. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BasicTableViewCell.h"
 #import "HomepageResearchModel.h"
 
-@interface HomepageResearchCell : UITableViewCell
+@interface HomepageResearchCell : BasicTableViewCell
 
 
 @property (nonatomic,strong) HomepageResearchModel *researchModel;

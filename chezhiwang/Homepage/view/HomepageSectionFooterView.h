@@ -12,6 +12,6 @@
 @interface HomepageSectionFooterView : UIView
 
 @property (nonatomic,strong) HomepageSectionModel *sectionModel;
-
+@property (nonatomic,weak) UIViewController *parentVC;
 
 @end

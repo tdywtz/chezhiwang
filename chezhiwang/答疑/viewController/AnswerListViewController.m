@@ -12,16 +12,14 @@
 #import "AnswerDetailsViewController.h"
 
 
-@interface AnswerListViewController ()<UITableViewDataSource,UITableViewDelegate,MJRefreshBaseViewDelegate>
+@interface AnswerListViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     UIView *_headerView;
     UITableView *_tableView;
     NSMutableArray *_dataArray;
 
     CGFloat B;
-    
-    MJRefreshHeaderView *headerView;
-    MJRefreshFooterView *footView;
+
     NSInteger _count;
 }
 @property (nonatomic,strong) NSArray *readArray;
@@ -49,13 +47,11 @@
             [_dataArray addObject:model];
         }
         self.readArray = [[FmdbManager shareManager] selectAllFromReadHistory:ReadHistoryTypeAnswer];
-        [headerView endRefreshing];
-        [footView endRefreshing];
+
         [_tableView reloadData];
 
     } failure:^(NSError *error) {
-        [headerView endRefreshing];
-        [footView endRefreshing];
+
 
     }];
 }
@@ -73,7 +69,6 @@
 
     [self createTableView];
     [self loadData];
-    [headerView beginRefreshing];
 }
 
 //tableview
@@ -83,11 +78,6 @@
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
-    
-    headerView = [[MJRefreshHeaderView alloc] initWithScrollView:_tableView];
-    headerView.delegate = self;
-    footView = [[MJRefreshFooterView alloc] initWithScrollView:_tableView];
-    footView.delegate = self;
 }
 
 
@@ -134,20 +124,6 @@
     [[FmdbManager shareManager] insertIntoReadHistoryWithId:mdoel.uid andTitle:mdoel.question andType:ReadHistoryTypeAnswer];
     detail.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detail animated:YES];
-}
-
-#pragma mark - MJRefreshBaseViewDelegate
-- (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView{
-    if (refreshView == headerView) {
-    
-        _count = 1;
-    }else{
-        if (_count < 1) {
-            _count = 1;
-        }
-        _count ++;
-    }
-    [self loadData];
 }
 
 - (void)didReceiveMemoryWarning {

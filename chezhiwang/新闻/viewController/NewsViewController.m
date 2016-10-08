@@ -7,7 +7,6 @@
 //
 
 #import "NewsViewController.h"
-#import "NewsInvestigateViewController.h"
 #import "NewsListViewController.h"
 #import "LHPageViewcontroller.h"
 #import "LHToolScrollView.h"
@@ -40,24 +39,18 @@
     NSMutableArray *array = [[NSMutableArray alloc] init];
      NSArray *typeArray = @[
                             @"0",@"1",@"5",@"14",@"4",@"15",@"2",@"13",
-                            @"6",@"9",@"16",@"17",@"18",@"19",@""
+                            @"6",@"9",@"16",@"17",@"18",@"19"
                             ];
-    for (int i = 0; i < toolView.titles.count-1;  i ++) {
+    for (int i = 0; i < toolView.titles.count;  i ++) {
         if ([toolView.titles[i] isEqualToString:@"评测"]) {
             [array addObject:[[NewsTestViewController alloc] init]];
         }else{
             NewsListViewController *vc = [[NewsListViewController alloc] init];
-            if (i == 0) {
-                vc.tableHeaderViewHave = YES;
-            }
             vc.urlString =  [NSString stringWithFormat:[URLFile urlStringForNewsList],typeArray[i],@"&p=%ld&s=%ld"];
             [array addObject:vc];
         }
     }
 
-    NewsInvestigateViewController *investigate = [[NewsInvestigateViewController alloc] init];
-    [array addObject:investigate];
-    
     newsView = [LHPageViewcontroller initWithSpace:0 withParentViewController:self];
     newsView.LHDelegate = self;
     newsView.controllers = array;

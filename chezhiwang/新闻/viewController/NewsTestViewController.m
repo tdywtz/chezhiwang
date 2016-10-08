@@ -9,7 +9,8 @@
 
 #import "NewsTestViewController.h"
 #import "NewsTestTableView.h"
-#import "NewsListCell.h"
+#import "HomepageNewsImageCell.h"
+#import "HomepageNewsTextCell.h"
 #import "NewsDetailViewController.h"
 
 @interface TestToolView : UIView
@@ -98,9 +99,7 @@
             }
         }
         
-        for (NSDictionary *dict in responseObject) {
-            [_dataArray addObject:dict];
-        }
+        [_dataArray addObjectsFromArray:[HomepageNewsModel arayWithArray:responseObject]];
         
         [_tableView reloadData];
         [MJheaderView endRefreshing];
@@ -138,6 +137,7 @@
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, WIDTH, HEIGHT-64-49) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
+    _tableView.estimatedRowHeight = 80;
     [self.view addSubview:_tableView];
     
     MJheaderView = [[MJRefreshHeaderView alloc] initWithScrollView:_tableView];
@@ -181,42 +181,37 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
-    NewsListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if (!cell) {
-        cell = [[NewsListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    HomepageNewsModel *model = _dataArray[indexPath.row];
+    //有图
+    if (model.image.length) {
+        HomepageNewsImageCell *newsImageCell = [tableView dequeueReusableCellWithIdentifier:@"newsImageCell"];
+        if (!newsImageCell) {
+            newsImageCell = [[HomepageNewsImageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"newsImageCell"];
+        }
+        newsImageCell.newsModel = model;
+        return newsImageCell;
     }
-    //cell.readArray = self.readArray;
-    cell.dictionary = _dataArray[indexPath.row];
-    return cell;
-    
+
+    //无图
+    HomepageNewsTextCell *newsTextCell = [tableView dequeueReusableCellWithIdentifier:@"newsTextCell"];
+    if (!newsTextCell) {
+        newsTextCell = [[HomepageNewsTextCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"newsTextCell"];
+    }
+    newsTextCell.newsModel = model;
+    return newsTextCell;
+
 }
 
 #pragma mark - UITableViewDelegate
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    NSDictionary *dict = _dataArray[indexPath.row];
-    if ([dict[@"image"] length] == 0) {
-        return 65;
-    }
-    return 130;
-}
-
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
-    
+
+    HomepageNewsModel *model = _dataArray[indexPath.row];
+
     NewsDetailViewController *detail = [[NewsDetailViewController alloc] init];
-    NSDictionary *dict = _dataArray[indexPath.row];
-    detail.ID = dict[@"id"];
-    detail.titleLabelText = dict[@"title"];
-    //改变颜色
-    NewsListCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    UILabel *title = (UILabel *)[cell valueForKey:@"titleLabel"];
-    title.textColor = colorDeepGray;
-    //存储数据库
-    [[FmdbManager shareManager] insertIntoReadHistoryWithId: detail.ID andTitle:detail.titleLabelText andType:ReadHistoryTypeNews];
+    detail.ID = model.ID;
+    detail.titleLabelText = model.title;
     detail.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detail animated:YES];
 }

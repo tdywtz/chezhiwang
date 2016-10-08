@@ -14,8 +14,9 @@
 #import "FavouriteViewController.h"
 #import "PasswordViewController.h"
 #import "MyCarViewController.h"
-#import "LoginViewController.h"
 
+#import "MyHeaderView.h"
+#import "BasicNavigationController.h"
 
 @interface IconCell : UITableViewCell
 
@@ -48,6 +49,7 @@
     UITableView *_tableView;
     NSArray *_dataArray;
     NSDictionary *numDictonary;//存放各类数量的字典
+    MyHeaderView *headerView;
 }
 
 @end
@@ -57,6 +59,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    [self.view addSubview:[UIView new]];
+    
     [self createItem];
     [self createTableView];
     [self reloadData];
@@ -72,8 +76,15 @@
     [self updateNumber];
     [self reloadData];
 
+    BasicNavigationController *nvc = (BasicNavigationController *)self.navigationController;
+    [nvc bengingAlph];
 }
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
 
+    BasicNavigationController *nvc = (BasicNavigationController *)self.navigationController;
+    [nvc endAlph];
+}
 
 #pragma mark - 设置
 -(void)createItem{
@@ -96,37 +107,35 @@
         numDictonary = nil;
         _dataArray = @[
                        @[
-                           @{@"class":@"LoginViewController",@"title":@"登录|注册",@"imageName":@"defaultImage_icon"}
-                           ],
-                       @[
-                           @{@"class":@"MyComplainViewController",@"title":@"我的投诉",@"imageName":@"center_complain"},
-                           @{@"class":@"MyAskViewController",@"title":@"我的提问",@"imageName":@"center_answer"},
-                           @{@"class":@"MyCommentViewController",@"title":@"我的评论",@"imageName":@"center_comment"},
-                           @{@"class":@"FavouriteViewController",@"title":@"我的收藏",@"imageName":@"center_favorite"}
+                           @{@"class":@"MyComplainViewController",@"title":@"我的投诉",@"imageName":@"centre_complain"},
+                           @{@"class":@"MyAskViewController",@"title":@"我的提问",@"imageName":@"centre_answer"},
+                           @{@"class":@"MyCommentViewController",@"title":@"我的评论",@"imageName":@"centre_comment"},
+                           @{@"class":@"FavouriteViewController",@"title":@"我的收藏",@"imageName":@"centre_favorite"}
                            ],
                        ];
         _tableView.tableFooterView.hidden = YES;
+        [headerView setTitle:@"  登录/注册  " imageUrl:nil login:NO];
 
     }else{
         _tableView.tableFooterView.hidden = NO;
+         [headerView setTitle:[[NSUserDefaults standardUserDefaults] objectForKey:user_name] imageUrl:[[NSUserDefaults standardUserDefaults] objectForKey:user_iconImage] login:YES];
         _dataArray = @[
                        @[
-                           @{@"class":@"MyCarViewController",@"title":@"",@"imageName":@"defaultImage_icon"}
+                           @{@"class":@"MyComplainViewController",@"title":@"我的投诉",@"imageName":@"centre_complain"},
+                           @{@"class":@"MyAskViewController",@"title":@"我的提问",@"imageName":@"centre_answer"},
+                           @{@"class":@"MyCommentViewController",@"title":@"我的评论",@"imageName":@"centre_comment"},
+                           @{@"class":@"FavouriteViewController",@"title":@"我的收藏",@"imageName":@"centre_favorite"}
                            ],
                        @[
-                           @{@"class":@"MyComplainViewController",@"title":@"我的投诉",@"imageName":@"center_complain"},
-                           @{@"class":@"MyAskViewController",@"title":@"我的提问",@"imageName":@"center_answer"},
-                           @{@"class":@"MyCommentViewController",@"title":@"我的评论",@"imageName":@"center_comment"},
-                           @{@"class":@"FavouriteViewController",@"title":@"我的收藏",@"imageName":@"center_favorite"}
-                           ],
-                       @[
-                           @{@"class":@"PasswordViewController",@"title":@"密码修改",@"imageName":@"center_password"}
+                           @{@"class":@"PasswordViewController",@"title":@"密码修改",@"imageName":@"centre_password"}
                            ],
                        ];
+
 
     }
 
     [_tableView reloadData];
+
 }
 
 - (void)createTableView{
@@ -136,13 +145,26 @@
     [self.view addSubview:_tableView];
 
 
+    headerView = [[MyHeaderView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 230)];
+    headerView.parentVC = self;
+    _tableView.tableHeaderView = headerView;
+
     UIView *tableFootView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 80)];
-    UIButton *btn = [LHController createButtnFram:CGRectZero Target:self Action:@selector(logoutClick) Font:15 Text:@"退出登录"];
-    [tableFootView addSubview:btn];
-    [btn makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(UIEdgeInsetsMake(20, 15, 20, 15));
-    }];
     _tableView.tableFooterView = tableFootView;
+
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn addTarget:self action:@selector(logoutClick) forControlEvents:UIControlEventTouchUpInside];
+     btn.backgroundColor = [UIColor whiteColor];
+    [btn setTitle:@"退出登录" forState:UIControlStateNormal];
+    [btn setTitleColor:colorOrangeRed forState:UIControlStateNormal];
+    [tableFootView addSubview:btn];
+
+    [btn makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(0);
+        make.top.equalTo(20);
+        make.height.equalTo(40);
+    }];
+
 }
 
 
@@ -193,29 +215,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 
-    if (indexPath.section == 0) {
-        IconCell *cell = [tableView dequeueReusableCellWithIdentifier:@"iconCell"];
-        if (!cell) {
-            cell = [[IconCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"iconCell"];
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-        }
-
-        NSDictionary *dict = _dataArray[indexPath.section][indexPath.row];
-        cell.imageView.image = [UIImage imageNamed:dict[@"imageName"]];
-        cell.textLabel.text = dict[@"title"];
-        if ([[NSUserDefaults standardUserDefaults] objectForKey:user_name]) {
-            [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[[NSUserDefaults standardUserDefaults] objectForKey:user_iconImage]] placeholderImage:[UIImage imageNamed:dict[@"imageName"]]];
-        }
-        if ([[NSUserDefaults standardUserDefaults] objectForKey:user_name]) {
-            cell.textLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:user_name];
-        }
-        return cell;
-    }
-
-
-    //
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"centerCell"];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"centerCell"];
@@ -226,9 +225,7 @@
         label.textColor = colorLightGray;
         label.tag = 100;
         [cell.contentView addSubview:label];
-        //            [UIFont asynchronouslySetFontName:[UIFont fontNameSTXingkai_SC_Bold] success:^(NSString *name) {
-        //                cell.textLabel.font = [UIFont fontWithName:name size:18];
-        //            }];
+
         [label makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(-4);
             make.centerY.equalTo(0);
@@ -239,7 +236,7 @@
     cell.textLabel.text = dict[@"title"];
 
     UILabel *label = (UILabel *)[cell.contentView viewWithTag:100];
-    if (indexPath.section == 1) {
+    if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             label.text = numDictonary[@"complain"];
         }else if (indexPath.row == 1){
@@ -263,13 +260,12 @@
 
 #pragma mark - UITableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 0) {
-        return 90;
-    }
-    return 44;
+
+    return 55;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+
     return 0.1;
 }
 
@@ -278,7 +274,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section != 0) {
+
         if (![[NSUserDefaults standardUserDefaults] objectForKey:user_name]) {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
@@ -292,7 +288,7 @@
             });
             return;
         }
-    }
+    
     Class cls = NSClassFromString(_dataArray[indexPath.section][indexPath.row][@"class"]);
     if (!cls) {
         return;

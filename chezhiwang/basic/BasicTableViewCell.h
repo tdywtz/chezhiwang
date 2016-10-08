@@ -13,6 +13,6 @@
 @property (nonatomic,strong) UILabel *titleLabel;//标题
 @property (nonatomic,strong) UILabel *dateLabel;//日期
 @property (nonatomic,strong) UILabel *content;//内容
-//@property (nonatomic,strong) UILabel *titleLabel;
+@property (nonatomic,strong) UIView *lineView;
 
 @end
