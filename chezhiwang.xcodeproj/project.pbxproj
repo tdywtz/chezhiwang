@@ -657,7 +657,6 @@
 		4D97FC901BAF94DC0089C684 /* MyCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCommentCell.m; sourceTree = "<group>"; };
 		4D97FC911BAF94DC0089C684 /* MyCommentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCommentModel.h; sourceTree = "<group>"; };
 		4D97FC921BAF94DC0089C684 /* MyCommentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCommentModel.m; sourceTree = "<group>"; };
-		4D97FC971BAF94E50089C684 /* MyComplainDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyComplainDetailsViewController.h; sourceTree = "<group>"; };
 		4D97FC981BAF94E50089C684 /* MyComplainDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyComplainDetailsViewController.m; sourceTree = "<group>"; };
 		4D97FC991BAF94E50089C684 /* MyComplainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyComplainViewController.h; sourceTree = "<group>"; };
 		4D97FC9A1BAF94E50089C684 /* MyComplainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyComplainViewController.m; sourceTree = "<group>"; };
@@ -684,6 +683,7 @@
 		4DA1A0C21BD5DE4D00D61D54 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
 		4DA1A0C31BD5DE4D00D61D54 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		4DA1A0C41BD5DE4D00D61D54 /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
+		4DC208DE1DA9D17A00344E55 /* MyComplainDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyComplainDetailsViewController.h; sourceTree = "<group>"; };
 		4DC407091BB10638004079A8 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		4DC4070A1BB10638004079A8 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		4DC4070C1BB11A50004079A8 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
@@ -1623,8 +1623,8 @@
 				4D0C32421D6C4C8500A780ED /* model */,
 				4D0C32411D6C4C7F00A780ED /* view */,
 				4D0C32401D6C4C7900A780ED /* viewController */,
-				4D97FC971BAF94E50089C684 /* MyComplainDetailsViewController.h */,
 				4D97FC981BAF94E50089C684 /* MyComplainDetailsViewController.m */,
+				4DC208DE1DA9D17A00344E55 /* MyComplainDetailsViewController.h */,
 				4D2DE5411CDB2AAA001B7B86 /* RevokeComplainViewController.h */,
 				4D2DE5421CDB2AAA001B7B86 /* RevokeComplainViewController.m */,
 				4D97FC991BAF94E50089C684 /* MyComplainViewController.h */,

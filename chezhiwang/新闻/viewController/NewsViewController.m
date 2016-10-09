@@ -51,6 +51,15 @@
         }
     }
 
+
+file:///Users/bangong/Desktop/%E9%A1%B9%E7%9B%AE%E7%BB%84/%E8%BD%A6%E8%B4%A8%E7%BD%91/chezhiwang/chezhiwang/%E6%96%B0%E9%97%BB/view/HomepageSectionFootView.h: warning: Missing file: /Users/bangong/Desktop/项目组/车质网/chezhiwang/chezhiwang/新闻/view/HomepageSectionFootView.h is missing from working copy
+
+
+
+
+
+
+
     newsView = [LHPageViewcontroller initWithSpace:0 withParentViewController:self];
     newsView.LHDelegate = self;
     newsView.controllers = array;

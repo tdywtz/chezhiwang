@@ -18,6 +18,7 @@
     UILabel *nameLabel;
 }
 - (void)awakeFromNib {
+    [super awakeFromNib];
     // Initialization code
 }
 

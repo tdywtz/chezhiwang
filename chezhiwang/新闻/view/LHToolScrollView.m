@@ -56,25 +56,25 @@
 - (void)setScale:(CGFloat)scale
 {
     _scale = scale;
-    return;
-    //    NSLog(@"scale is %f", _scale);
-    [self setTitleColor:[UIColor colorWithRed:(scale * (221.0 - 104.0) + 104.0)/255 green:(scale * (50.0 - 104.0) + 104.0)/255 blue:(scale * (55.0 - 104.0) + 104.0)/255 alpha:1] forState:UIControlStateNormal];
-    //    NSLog(@"\ncolor is %@", self.titleLabel.textColor);
-    //self.titleLabel.font = [UIFont systemFontOfSize:14 * (1 + 0.3 * scale)];
-    self.transform = CGAffineTransformMakeScale(1+scale/5, 1+scale/5);
+//
+//    //    NSLog(@"scale is %f", _scale);
+//    [self setTitleColor:[UIColor colorWithRed:(scale * (221.0 - 104.0) + 104.0)/255 green:(scale * (50.0 - 104.0) + 104.0)/255 blue:(scale * (55.0 - 104.0) + 104.0)/255 alpha:1] forState:UIControlStateNormal];
+//    //    NSLog(@"\ncolor is %@", self.titleLabel.textColor);
+//    //self.titleLabel.font = [UIFont systemFontOfSize:14 * (1 + 0.3 * scale)];
+//    self.transform = CGAffineTransformMakeScale(1+scale/5, 1+scale/5);
 }
 
 -(void)setScale:(CGFloat)scale anima:(BOOL)boll{
     _scale = scale;
-    return;
-    if (boll) {
-        __weak __typeof(self)weakSelf = self;
-        [UIView animateWithDuration:0.3 animations:^{
-            [weakSelf setTitleColor:[UIColor colorWithRed:(scale * (221.0 - 104.0) + 104.0)/255 green:(scale * (50.0 - 104.0) + 104.0)/255 blue:(scale * (55.0 - 104.0) + 104.0)/255 alpha:1] forState:UIControlStateNormal];
-            weakSelf.transform = CGAffineTransformMakeScale(1+scale/5, 1+scale/5);
-            
-        }];
-    }
+
+//    if (boll) {
+//        __weak __typeof(self)weakSelf = self;
+//        [UIView animateWithDuration:0.3 animations:^{
+//            [weakSelf setTitleColor:[UIColor colorWithRed:(scale * (221.0 - 104.0) + 104.0)/255 green:(scale * (50.0 - 104.0) + 104.0)/255 blue:(scale * (55.0 - 104.0) + 104.0)/255 alpha:1] forState:UIControlStateNormal];
+//            weakSelf.transform = CGAffineTransformMakeScale(1+scale/5, 1+scale/5);
+//            
+//        }];
+//    }
 }
 
 @end

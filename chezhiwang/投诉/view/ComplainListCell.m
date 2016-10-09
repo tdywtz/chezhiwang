@@ -268,6 +268,7 @@
     return att;
 }
 - (void)awakeFromNib {
+    [super awakeFromNib];
     // Initialization code
 }
 
