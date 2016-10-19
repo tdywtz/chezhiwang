@@ -70,7 +70,7 @@
 #pragma mark - 下载用户数据
 -(void)loadCar{
     
-    NSString *url = [NSString stringWithFormat:[URLFile urlStringForUser],[[NSUserDefaults standardUserDefaults] objectForKey:user_id]];
+    NSString *url = [NSString stringWithFormat:[URLFile urlStringForUser],[CZWManager manager].userID];
   [HttpRequest GET:url success:^(id responseObject) {
       if (responseObject) {
           [dicData setDictionary:responseObject];
@@ -325,7 +325,7 @@
         }
     }
     
-    NSString *url = [NSString stringWithFormat:[URLFile urlStringForpersonalInfo],[[NSUserDefaults standardUserDefaults] objectForKey:user_id],dicData[@"rname"],dicData[@"sex"],dicData[@"birth"],dicData[@"email"],dicData[@"mobile"],dicData[@"qq"],dicData[@"phone"],brandId,brandName.text,seriesId,seriesName.text,modelId,modelName.text];
+    NSString *url = [NSString stringWithFormat:[URLFile urlStringForpersonalInfo],[CZWManager manager].userID,dicData[@"rname"],dicData[@"sex"],dicData[@"birth"],dicData[@"email"],dicData[@"mobile"],dicData[@"qq"],dicData[@"phone"],brandId,brandName.text,seriesId,seriesName.text,modelId,modelName.text];
   [HttpRequest GET:url success:^(id responseObject) {
         [self alert:@"保存成功"];
   } failure:^(NSError *error) {
@@ -748,7 +748,7 @@
 #pragma mark - 上传头像
 -(void)postImage:(UIImage *)image{
   // uploadAvatar
-    NSString *url = [NSString stringWithFormat:[URLFile urlStringForUploadAvatar],[[NSUserDefaults standardUserDefaults] objectForKey:user_id]];
+    NSString *url = [NSString stringWithFormat:[URLFile urlStringForUploadAvatar],[CZWManager manager].userID];
    [HttpRequest POSTImage:image url:url fileName:@"touxiang" parameters:nil success:^(id responseObject) {
          [self loadCar];
    } failure:^(NSError *error) {

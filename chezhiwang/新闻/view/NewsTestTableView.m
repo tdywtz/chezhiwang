@@ -14,14 +14,12 @@
 #import "NewsTestTableViewModel.h"
 #import "NewsDetailViewController.h"
 
-@interface NewsTestTableView ()<UITableViewDelegate,UITableViewDataSource,MJRefreshBaseViewDelegate>
+@interface NewsTestTableView ()<UITableViewDelegate,UITableViewDataSource>
 {
     NSMutableArray *_dataArray;
     UITableView *_tableView;
     ComplainChartView *_chart;//头部选择数据
     NSInteger _count;
-    MJRefreshHeaderView *headerView;
-    MJRefreshFooterView *footView;
 }
 @property (nonatomic,weak) UIViewController *parentViewController;
 @end
@@ -101,11 +99,7 @@
         _tableView.estimatedRowHeight = 200;
         [self addSubview:_tableView];
 
-        headerView = [[MJRefreshHeaderView alloc] initWithScrollView:_tableView];
-        footView = [[MJRefreshFooterView alloc] initWithScrollView:_tableView];
-        headerView.delegate = self;
-        footView.delegate = self;
-        
+     
         [_tableView makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(_chart.bottom);
             make.left.and.right.equalTo(0);
@@ -135,12 +129,10 @@
             NewsTestTableViewModel *model = [[NewsTestTableViewModel alloc] initWithDictionary:dict];
             [_dataArray addObject:model];
         }
-        [headerView endRefreshing];
-        [footView endRefreshing];
+
         [_tableView reloadData];
     } failure:^(NSError *error) {
-        [headerView endRefreshing];
-        [footView endRefreshing];
+
     }];
 }
 /**
@@ -183,19 +175,8 @@
     NewsTestTableViewModel *model = _dataArray[indexPath.row];
     NewsDetailViewController *details = [[NewsDetailViewController alloc] init];
     details.ID = model.ID;
-    details.titleLabelText = model.title;
     details.hidesBottomBarWhenPushed = YES;
     [self.parentViewController.navigationController pushViewController:details animated:YES];
-}
-
-#pragma mark - MJRefreshBaseViewDelegate
-- (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView{
-    if (refreshView == headerView) {
-        _count = 1;
-    }else{
-        _count ++;
-    }
-    [self loadData];
 }
 
 //- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

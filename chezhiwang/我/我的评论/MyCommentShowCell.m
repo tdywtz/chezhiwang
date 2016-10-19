@@ -94,16 +94,14 @@
 - (void)buttonClick{
     if ([self.model.type isEqualToString:@"3"]) {
         AnswerDetailsViewController *an = [[AnswerDetailsViewController alloc] init];
-        an.textTitle = self.model.title;
+    
         an.cid = self.model.ID;
-        an.type = self.model.type;
+
         [self.parentViewController.navigationController pushViewController:an animated:YES];
         
     }else{
         ComplainDetailsViewController *user = [[ComplainDetailsViewController alloc] init];
-        user.textTitle = self.model.title;
         user.cid = self.model.ID;
-        user.type = self.model.type;
         [self.parentViewController.navigationController pushViewController:user animated:YES];
     }
 }

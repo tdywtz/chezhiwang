@@ -1270,9 +1270,10 @@ afterInheritingLabelAttributesAndConfiguringWithBlock:(NSMutableAttributedString
     CGRect insetRect = UIEdgeInsetsInsetRect(rect, self.textInsets);
     if (!self.attributedText) {
         [super drawTextInRect:insetRect];
+    
         return;
     }
-
+    
     NSAttributedString *originalAttributedText = nil;
 
     // Adjust the font size to fit width, if necessarry

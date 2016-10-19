@@ -44,7 +44,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 -(void)loadData{
-    NSString *url = [NSString stringWithFormat:[URLFile urlStringForGetPersonalAddress],[[NSUserDefaults standardUserDefaults] objectForKey:user_id]];
+    NSString *url = [NSString stringWithFormat:[URLFile urlStringForGetPersonalAddress],[CZWManager manager].userID];
     [HttpRequest GET:url success:^(id responseObject) {
         self.dictionary = [responseObject objectAtIndex:0];
         [self setData];
@@ -153,7 +153,7 @@
 -(void)getData:(NSDictionary *)dict{
 
 
-    NSString *url = [NSString stringWithFormat:[URLFile urlStringForUpdatePersonalAddress],[[NSUserDefaults standardUserDefaults] objectForKey:user_id],self.name,pId,cId,aId,pName,cName,aName,jiedao.text,postcode.text];
+    NSString *url = [NSString stringWithFormat:[URLFile urlStringForUpdatePersonalAddress],[CZWManager manager].userID,self.name,pId,cId,aId,pName,cName,aName,jiedao.text,postcode.text];
     [HttpRequest GET:url success:^(id responseObject) {
         [self.navigationController popViewControllerAnimated:YES];
     } failure:^(NSError *error) {

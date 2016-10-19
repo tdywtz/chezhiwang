@@ -18,30 +18,6 @@
 #import "MyHeaderView.h"
 #import "BasicNavigationController.h"
 
-@interface IconCell : UITableViewCell
-
-@end
-
-@implementation IconCell
-
-- (void)layoutSubviews{
-    [super  layoutSubviews];
-
-    CGFloat width = self.frame.size.height-20;
-    self.imageView.frame = CGRectMake(10, 10, width,width);
-    // self.imageView.contentMode = UIViewContentModeCenter;
-
-    CGRect tmpFrame = self.textLabel.frame;
-    tmpFrame.origin.x = 10+width+10;
-    self.textLabel.frame = tmpFrame;
-
-    tmpFrame = self.detailTextLabel.frame;
-    tmpFrame.origin.x = 10+width+10;
-    self.detailTextLabel.frame = tmpFrame;
-}
-
-@end
-
 
 @interface MyViewController ()<UIAlertViewDelegate,UITableViewDataSource,UITableViewDelegate>
 {
@@ -70,11 +46,14 @@
 -(void)viewWillAppear:(BOOL)animated{
 
     [super viewWillAppear:animated];
-    //每次页面出现刷新页面数据
-    [[SDImageCache sharedImageCache] removeImageForKey:[[NSUserDefaults standardUserDefaults] objectForKey:user_iconImage] fromDisk:YES];
 
-    [self updateNumber];
-    [self reloadData];
+    if([CZWManager manager].isLogin){
+        //每次页面出现刷新页面数据
+        [[SDImageCache sharedImageCache] removeImageForKey:[CZWManager manager].iconUrl fromDisk:YES];
+
+        [self updateNumber];
+        [self reloadData];
+    }
 
     BasicNavigationController *nvc = (BasicNavigationController *)self.navigationController;
     [nvc bengingAlph];
@@ -85,6 +64,7 @@
     BasicNavigationController *nvc = (BasicNavigationController *)self.navigationController;
     [nvc endAlph];
 }
+
 
 #pragma mark - 设置
 -(void)createItem{
@@ -102,7 +82,7 @@
 
 
 - (void)reloadData{
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:user_name]) {
+    if (![CZWManager manager].isLogin) {
         //数量字典置空
         numDictonary = nil;
         _dataArray = @[
@@ -118,7 +98,7 @@
 
     }else{
         _tableView.tableFooterView.hidden = NO;
-         [headerView setTitle:[[NSUserDefaults standardUserDefaults] objectForKey:user_name] imageUrl:[[NSUserDefaults standardUserDefaults] objectForKey:user_iconImage] login:YES];
+         [headerView setTitle:[CZWManager manager].userName imageUrl:[CZWManager manager].iconUrl login:YES];
         _dataArray = @[
                        @[
                            @{@"class":@"MyComplainViewController",@"title":@"我的投诉",@"imageName":@"centre_complain"},
@@ -167,12 +147,20 @@
 
 }
 
+- (void)logoutClick{
+   UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"是否确定退出当前账号？"
+                                                message:nil
+                                               delegate:self
+                                      cancelButtonTitle:@"取消"
+                                      otherButtonTitles:@"确定", nil];
+    al.delegate = self;
+    [al show];
+}
 
 
 #pragma mark -更新数目
 -(void)updateNumber{
-    NSString *url = [NSString stringWithFormat:[URLFile urlStringForPersonalCount],[[NSUserDefaults standardUserDefaults] objectForKey:user_name],[[NSUserDefaults standardUserDefaults] objectForKey:user_passWord]] ;
-    url = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *url = [NSString stringWithFormat:[URLFile urlStringForPersonalCount],[CZWManager manager].userName,[CZWManager manager].password];
     [HttpRequest GET:url success:^(id responseObject) {
         NSDictionary *dict = responseObject[0];
         if (dict[@"complain"]) {
@@ -190,11 +178,7 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 1) {
-        NSUserDefaults *df = [NSUserDefaults standardUserDefaults];
-        [df removeObjectForKey:user_name];
-        [df removeObjectForKey:user_id];
-        [df synchronize];
-
+        [[CZWManager manager] logoutAccount];
         [self reloadData];
     }
 }
@@ -252,12 +236,6 @@
     return cell;
 }
 
-- (void)logoutClick{
-    [[NSUserDefaults standardUserDefaults]  removeObjectForKey:user_name];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    [self reloadData];
-}
-
 #pragma mark - UITableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
 
@@ -275,7 +253,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
-        if (![[NSUserDefaults standardUserDefaults] objectForKey:user_name]) {
+        if (![CZWManager manager].isLogin) {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
                                                                 message:@"您还未登录，您可以登录后进行操作"

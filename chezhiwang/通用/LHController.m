@@ -202,7 +202,7 @@
     return label;
 }
 
-#define mark - 创建图片控制器
+#pragma mark - 创建图片控制器
 +(UIImageView *)createImageViewWithFrame:(CGRect)frame ImageName:(NSString *)name{
     UIImageView *iamgeView = [[UIImageView alloc] initWithFrame:frame];
     iamgeView.image = [UIImage imageNamed:name];
@@ -228,14 +228,17 @@
 
 #pragma mark - alertview
 +(void)alert:(NSString *)str{
-    UIAlertView *al = [[UIAlertView alloc] initWithTitle:str message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
-    [al show];
-    
-    double delayInSeconds = 1.5;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-    
-           [al dismissWithClickedButtonIndex:0 animated:YES];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        UIAlertView *al = [[UIAlertView alloc] initWithTitle:str message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
+        [al show];
+
+        double delayInSeconds = 1.0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+
+            [al dismissWithClickedButtonIndex:0 animated:YES];
+        });
+
     });
 }
 

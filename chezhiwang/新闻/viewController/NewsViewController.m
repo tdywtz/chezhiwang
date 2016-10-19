@@ -26,16 +26,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    self.title = @"新闻";
    
-    toolView = [[LHToolScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 44)];
+    toolView = [[LHToolScrollView alloc] initWithFrame:CGRectMake(0, 64, WIDTH, 44)];
     toolView.LHDelegate = self;
     toolView.titles =  @[@"最新",@"行业",@"新车",@"谍照",@"评测",@"导购",@"召回",
                          @"用车",@"零部件",@"缺陷报道",@"分析报告",@"投诉销量比",
-                         @"可靠性调查",@"满意度调查",@"新车调查"];
+                         @"可靠性调查",@"满意度调查"];
     toolView.current = 0;
-    self.navigationItem.titleView = toolView;
-    
-    
+    toolView.backgroundColor = [UIColor whiteColor];
+
+
     NSMutableArray *array = [[NSMutableArray alloc] init];
      NSArray *typeArray = @[
                             @"0",@"1",@"5",@"14",@"4",@"15",@"2",@"13",
@@ -52,19 +54,15 @@
     }
 
 
-file:///Users/bangong/Desktop/%E9%A1%B9%E7%9B%AE%E7%BB%84/%E8%BD%A6%E8%B4%A8%E7%BD%91/chezhiwang/chezhiwang/%E6%96%B0%E9%97%BB/view/HomepageSectionFootView.h: warning: Missing file: /Users/bangong/Desktop/项目组/车质网/chezhiwang/chezhiwang/新闻/view/HomepageSectionFootView.h is missing from working copy
-
-
-
-
-
-
-
     newsView = [LHPageViewcontroller initWithSpace:0 withParentViewController:self];
     newsView.LHDelegate = self;
     newsView.controllers = array;
     [newsView setViewControllerWithCurrent:0];
-    
+    [self.view addSubview:newsView.view];
+    [self addChildViewController:newsView];
+
+    [self.view addSubview:toolView];
+
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(0, 0, 20, 20);

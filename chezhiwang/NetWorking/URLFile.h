@@ -15,8 +15,6 @@
 #define xieyi @"http://m.12365auto.com/user/agreeForIOS.shtml"
 
 @interface URLFile : NSObject
-//
-+ (NSString *)stringWithBasic:(NSString *)actString;
 
 /**登录*/
 + (NSString *)urlStringForLogin;
@@ -39,10 +37,6 @@
 #pragma mark - 新闻
 /**新闻列表*/
 + (NSString *)urlStringForNewsList;
-/**焦点图片*/
-+ (NSString *)urlStringForFocuspic;
-/**焦点新闻*/
-+ (NSString *)urlStringForFocusnews;
 /**新闻-调查*/
 + (NSString *)urlStringForReport;
 /**新闻详情*/

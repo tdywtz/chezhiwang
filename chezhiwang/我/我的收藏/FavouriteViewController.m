@@ -133,19 +133,14 @@
     if ([dict[@"type"] intValue] == collectTypeCompalin) {
         ComplainDetailsViewController *user = [[ComplainDetailsViewController alloc] init];
         user.cid = dict[@"id"];
-        user.textTitle = dict[@"title"];
-        user.type = @"2";
         [self.navigationController pushViewController:user animated:YES];
     }else if ([dict[@"type"] intValue] == collectTypeAnswer){
         AnswerDetailsViewController *answer = [[AnswerDetailsViewController alloc] init];
         answer.cid = dict[@"id"];
-        answer.type = @"3";
-        answer.textTitle = dict[@"title"];
         [self.navigationController pushViewController:answer animated:YES];
     }else{
         NewsDetailViewController *news = [[NewsDetailViewController alloc] init];
         news.ID = dict[@"id"];
-        news.titleLabelText = dict[@"title"];
         [self.navigationController pushViewController:news animated:YES];
     }
 }

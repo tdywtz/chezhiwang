@@ -51,58 +51,6 @@
     return self;
 }
 
--(void)loadData{
-    __weak __typeof(self)weakSelf = self;
-    [HttpRequest GET:[URLFile urlStringForFocusnews] success:^(id responseObject) {
-        weakSelf.pointNews = responseObject;
-
-        if ([responseObject count] >= 3) {
-
-            [weakSelf.buttonTop setTitle:responseObject[0][@"title"] forState:UIControlStateNormal];
-
-            NSString *text1 = responseObject[1][@"title"];
-            NSString *text2 = responseObject[2][@"title"];
-            NSString *text = [NSString stringWithFormat:@"[%@]    [%@]",text1,text2];
-            weakSelf.toplabel.text = text;
-            [weakSelf.toplabel addData:responseObject[1] range:[text rangeOfString:text1]];
-           [weakSelf.toplabel addData:responseObject[2] range:[text rangeOfString:text2]];
-        }
-    } failure:^(NSError *error) {
-        
-    }];
-
-    [HttpRequest GET:[URLFile urlStringForFocuspic] success:^(id responseObject) {
-        weakSelf.pointImages = responseObject;
-
-
-        NSMutableArray *imageViews = [[NSMutableArray alloc] init];
-
-        for (NSDictionary *dict in responseObject) {
-            NewsTableHeaderImageView *imageView = [[NewsTableHeaderImageView alloc] init];
-            [imageView sd_setImageWithURL:[NSURL URLWithString:dict[@"image"]] placeholderImage:[UIImage imageNamed:@"defaultImage_icon"]];
-            imageView.dictionary = dict;
-            imageView.userInteractionEnabled = YES;
-            imageView.backgroundColor = [UIColor orangeColor];
-            [imageView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)]];
-            [imageViews addObject:imageView];
-        }
-
-        weakSelf.imageViews = imageViews;
-
-        if (weakSelf.imageViews.count) {
-            NewsTableHeaderImageView *imageView  = weakSelf.imageViews[0];
-            [weakSelf.pageView setView:imageView direction:0 anime:NO];
-            weakSelf.imageTitleLabel.text = imageView.dictionary[@"title"];
-            weakSelf.pageControll.numberOfPages = weakSelf.imageViews.count;
-            weakSelf.pageControll.currentPage = 0;
-        }
-        [weakSelf scheduledTimer];
-
-    } failure:^(NSError *error) {
-        
-    }];
-}
-
 -(void)makeUI{
 
 
@@ -278,31 +226,28 @@
         //新闻
         NewsDetailViewController *detail = [[NewsDetailViewController alloc] init];
         detail.ID = dict[@"id"];
-        detail.titleLabelText = dict[@"title"];
         detail.hidesBottomBarWhenPushed = YES;
         [self.parentViewController.navigationController pushViewController:detail animated:YES];
     }else if(type == 2){
         //投诉
         ComplainDetailsViewController *detail = [[ComplainDetailsViewController alloc] init];
-        detail.textTitle = dict[@"title"];
         detail.cid = dict[@"id"];
-        detail.type = @"2";
         detail.hidesBottomBarWhenPushed = YES;
         [self.parentViewController.navigationController pushViewController:detail animated:YES];
 
     }else if (type == 3){
         //答疑
         AnswerDetailsViewController *detail = [[AnswerDetailsViewController alloc] init];
-        detail.textTitle = dict[@"title"];
+      
         detail.cid = dict[@"id"];
-        detail.type = @"3";
+
         detail.hidesBottomBarWhenPushed = YES;
         [self.parentViewController.navigationController pushViewController:detail animated:YES];
     }else if (type == 4){
        //新车调查
         NewsDetailViewController *detail = [[NewsDetailViewController alloc] init];
         detail.ID = dict[@"id"];
-        detail.titleLabelText = dict[@"title"];
+
         detail.invest = YES;
         detail.type = dict[@"type"];
         detail.hidesBottomBarWhenPushed = YES;

@@ -13,7 +13,7 @@
 #import "ForumClassifyTwoController.h"
 #import "MyViewController.h"
 
-@interface ForumListViewController ()<UITableViewDataSource,UITableViewDelegate,MJRefreshBaseViewDelegate>
+@interface ForumListViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     UITableView *_tableView;
     NSMutableArray *_dataArray;
@@ -26,12 +26,7 @@
     NSInteger orderType;
     NSInteger topicType;
     NSInteger _count;
-
-    MJRefreshHeaderView *headerView;
-    MJRefreshFooterView *footView;
-
 }
-@property (nonatomic,strong) NSArray *readArray;
 @end
 
 @implementation ForumListViewController
@@ -45,14 +40,11 @@
         for (NSDictionary *dict in responseObject) {
             [_dataArray addObject:dict];
         }
-        self.readArray = [[FmdbManager shareManager] selectAllFromReadHistory:ReadHistoryTypeForum];
+
         [_tableView reloadData];
-        [headerView endRefreshing];
-        [footView endRefreshing];
 
     } failure:^(NSError *error) {
-        [headerView endRefreshing];
-        [footView endRefreshing];
+
 
     }];
 }
@@ -63,8 +55,7 @@
     _dataArray = [[NSMutableArray alloc] init];
     _twoDataArray = @[@"品牌论坛",@"栏目论坛"];
    
-    self.readArray = [[FmdbManager shareManager] selectAllFromReadHistory:ReadHistoryTypeForum];
-    
+  
     [self createCustomTitleView];
     
     orderType = 0;
@@ -78,7 +69,6 @@
        
     });
 
-    [headerView beginRefreshing];
     [self loadDataWithP:1 andS:10];
 
 }
@@ -146,11 +136,7 @@
     _tableView.dataSource = self;
     _tableView.separatorStyle =  UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
-    
-    headerView = [[MJRefreshHeaderView alloc] initWithScrollView:_tableView];
-    footView = [[MJRefreshFooterView alloc] initWithScrollView:_tableView];
-    headerView.delegate = self;
-    footView.delegate = self;
+
     
     twoTableView = [[UITableView alloc] initWithFrame:CGRectMake(WIDTH, 64, WIDTH, HEIGHT-64) style:UITableViewStyleGrouped];
     twoTableView.delegate = self;
@@ -270,7 +256,6 @@
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    cell.readArray = self.readArray;
     cell.dictionary = _dataArray[indexPath.row];
     return cell;
 }
@@ -311,19 +296,6 @@
 }
 
 
-#pragma mark - MJRefreshBaseViewDelegate
-- (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView{
-    if (refreshView == headerView) {
-
-        _count = 1;
-    }else{
-        if (_count < 1) {
-            _count = 1;
-        }
-        _count ++;
-    }
-    [self loadDataWithP:_count andS:10];
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

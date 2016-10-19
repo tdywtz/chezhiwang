@@ -15,12 +15,11 @@
 #import "BrandCollectionView.h"
 #import "VehicleSeriesImageViewController.h"
 
-@interface VehicleImageViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,MJRefreshBaseViewDelegate>
+@interface VehicleImageViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 {
     UICollectionView *_collectionView;
     NSMutableArray   *_dataArray;
     NSInteger         _count;
-    MJRefreshFooterView *refreshFooter;
 
     BrandCollectionView *_brandColectionView;
 
@@ -129,11 +128,10 @@
         }
 
         [_collectionView reloadData];
-        [refreshFooter endRefreshing];
 
     } failure:^(NSError *error) {
 
-        [refreshFooter endRefreshing];
+
     }];
 }
 
@@ -157,8 +155,6 @@
 
     [_collectionView registerClass:[VehicleImageCell class] forCellWithReuseIdentifier:@"cellName"];
 
-    refreshFooter = [[MJRefreshFooterView alloc] initWithScrollView:_collectionView];
-    refreshFooter.delegate = self;
 
     UICollectionViewFlowLayout *layoutTwo= [[UICollectionViewFlowLayout alloc] init];
     layoutTwo.scrollDirection = UICollectionViewScrollDirectionVertical;
@@ -220,11 +216,7 @@
 }
 
 
-#pragma mark - MJRefreshBaseViewDelegate
-- (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView{
-    _count ++;
-    [self loadData];
-}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

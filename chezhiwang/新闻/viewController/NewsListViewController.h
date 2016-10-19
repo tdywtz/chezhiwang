@@ -13,5 +13,5 @@
 @interface NewsListViewController : BasicViewController
 
 @property (nonatomic,copy) NSString *urlString;
-//**列表是否有头部视图*/
+
 @end

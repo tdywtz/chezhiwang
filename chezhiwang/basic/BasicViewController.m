@@ -13,6 +13,10 @@
 @end
 
 @implementation BasicViewController
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -45,6 +49,22 @@
      [MobClick endLogPageView:@"PageOne"];
 }
 
+#pragma mark - 注册通知
+-(void)keyboardNotificaion{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+-(void)keyboardShow:(NSNotification *)notification
+{
+
+}
+
+-(void)keyboardHide:(NSNotification *)notification
+{
+
+}
+
 -(void)createLeftItemBack{
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -74,13 +94,25 @@
 
 -(UIScrollView *)scrollView{
     if (_scrollView == nil) {
-        _scrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
+        _scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
         _scrollView.alwaysBounceVertical = YES;
+        _scrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
         [self.view addSubview:_scrollView];
     }
     return _scrollView;
 }
 
+- (UIView *)contentView{
+    if (_contentView == nil) {
+        _contentView = [[UIView alloc] init];
+        [self.scrollView addSubview:_contentView];
+        [_contentView makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(UIEdgeInsetsZero);
+            make.width.equalTo(WIDTH);
+        }];
+    }
+    return _contentView;
+}
 
 - (UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleLightContent;

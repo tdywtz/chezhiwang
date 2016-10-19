@@ -71,14 +71,12 @@
 
 #pragma mark - NewsTestViewController
 
-@interface NewsTestViewController ()<UITableViewDataSource,UITableViewDelegate,MJRefreshBaseViewDelegate>
+@interface NewsTestViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     TestToolView *toolView;
     NewsTestTableView *testTableView;
     UITableView *_tableView;
     NSMutableArray *_dataArray;
-    MJRefreshHeaderView * MJheaderView;
-    MJRefreshFooterView *footView;
     NSInteger _count;
 }
 @end
@@ -90,23 +88,20 @@
     url = [NSString stringWithFormat:url,_count];
     [HttpRequest GET:url success:^(id responseObject) {
         if (_count == 1) {
-            
-            footView.noData = NO;
+
             [_dataArray removeAllObjects];
         }else{
             if ([responseObject count] == 0) {
-                footView.noData = YES;
+
             }
         }
         
-        [_dataArray addObjectsFromArray:[HomepageNewsModel arayWithArray:responseObject]];
+        [_dataArray addObjectsFromArray:[HomepageNewsModel arayWithArray:responseObject[@"rel"]]];
         
         [_tableView reloadData];
-        [MJheaderView endRefreshing];
-        [footView endRefreshing];
+
     } failure:^(NSError *error) {
-        [MJheaderView endRefreshing];
-        [footView endRefreshing];
+
         
     }];
 
@@ -114,36 +109,34 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    
-    __weak  __typeof(self)weakself = self;
-    toolView = [[TestToolView alloc] initWithFrame:CGRectMake(0, 64, WIDTH, 40) titles:@[@"精品试驾",@"全部文章"] block:^(NSInteger index) {
+
+    toolView = [[TestToolView alloc] initWithFrame:CGRectMake(0, 64+44, WIDTH, 40) titles:@[@"精品试驾",@"全部文章"] block:^(NSInteger index) {
         if (index == 0) {
-            [_tableView removeFromSuperview];
-            [weakself.view addSubview:testTableView];
+            testTableView.hidden = NO;
+            _tableView.hidden = YES;
             _tableView.scrollsToTop = NO;
             [testTableView setScrollToTop:YES];
         }else{
-            [testTableView removeFromSuperview];
-            [weakself.view addSubview:_tableView];
+            testTableView.hidden = YES;
+            _tableView.hidden = NO;
             _tableView.scrollsToTop = YES;
             [testTableView setScrollToTop:NO];
         }
     }];
- //   [self.view addSubview:toolView];
+    [self.view addSubview:toolView];
+
+    CGFloat frame_y = toolView.frame.origin.y+CGRectGetHeight(toolView.frame);
+    testTableView = [[NewsTestTableView alloc] initWithFrame:CGRectMake(0, frame_y, WIDTH, HEIGHT-frame_y) parentViewController:self];
+    [self.view addSubview:testTableView];
+
     
-    testTableView = [[NewsTestTableView alloc] initWithFrame:CGRectMake(0, toolView.frame.origin.y+CGRectGetHeight(toolView.frame), WIDTH, HEIGHT-49-64-40) parentViewController:self];
-  //  [self.view addSubview:testTableView];
-    
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, WIDTH, HEIGHT-64-49) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, frame_y, WIDTH, HEIGHT-frame_y) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.estimatedRowHeight = 80;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _tableView.hidden = YES;
     [self.view addSubview:_tableView];
-    
-    MJheaderView = [[MJRefreshHeaderView alloc] initWithScrollView:_tableView];
-    footView = [[MJRefreshFooterView alloc] initWithScrollView:_tableView];
-    MJheaderView.delegate = self;
-    footView.delegate = self;
 
     
     _count = 1;
@@ -211,24 +204,10 @@
 
     NewsDetailViewController *detail = [[NewsDetailViewController alloc] init];
     detail.ID = model.ID;
-    detail.titleLabelText = model.title;
     detail.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detail animated:YES];
 }
 
-
-#pragma mark - MJRefreshBaseViewDelegate
-- (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView{
-    if (refreshView == MJheaderView) {
-        _count = 1;
-       
-    }else{
-        if (_count < 1) _count = 1;
-        
-        _count ++;
-    }
-    [self loadData];
-}
 
 
 @end

@@ -2,9 +2,10 @@ platform:ios,'8.0'
 target "chezhiwang" do
 pod 'MBProgressHUD', '~> 0.9.2'
 pod 'TTTAttributedLabel'
-pod 'Masonry', '~> 1.0.1'
+pod 'Masonry', '~> 1.0.2'
 pod 'MJNIndexView', '~> 0.0.1'
 pod 'pop', '~> 1.0.9'
 pod 'AFNetworking', '~> 3.1.0'
 pod 'SDWebImage', '~> 3.8.1'
+pod 'MJRefresh', '~> 3.1.12'
 end

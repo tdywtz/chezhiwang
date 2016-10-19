@@ -12,38 +12,34 @@
 #import "MyAskModel.h"
 #import "MyAskShowCell.h"
 
-@interface MyAskViewController ()<UITableViewDataSource,UITableViewDelegate,MJRefreshBaseViewDelegate>
+@interface MyAskViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     UITableView *_tabelView;
     NSMutableArray *_dataArray;
     
     MyAskModel *openModel;
     
-    MJRefreshHeaderView *headerView;
-    MJRefreshFooterView *footView;
+
     NSInteger _count;
 }
 @property (nonatomic,strong) MyAskModel *model;
 @end
 
 @implementation MyAskViewController
-- (void)dealloc
-{
-    [headerView removeFromSuperview];
-    [footView removeFromSuperview];
-}
 
 -(void)loadDataWithP:(NSInteger)p andS:(NSInteger)s{
-    NSString *url = [NSString stringWithFormat:[URLFile urlStringFor_myZJDY],[[NSUserDefaults standardUserDefaults] objectForKey:user_id],p,s];
+    NSString *url = [NSString stringWithFormat:[URLFile urlStringFor_myZJDY],[CZWManager manager].userID,p,s];
     
     
     [HttpRequest GET:url success:^(id responseObject) {
         if (_count == 1) {
 
             [_dataArray removeAllObjects];
-            footView.noData = NO;
+
         }
-        if ([responseObject count] == 0) footView.noData = YES;
+        if ([responseObject count] == 0){
+
+        }
 
         for (NSDictionary *dict in responseObject) {
             
@@ -57,13 +53,11 @@
             model.answerdate = dict[@"answerdate"];
             [_dataArray addObject:model];
         }
-        [headerView endRefreshing];
-        [footView endRefreshing];
+
         [_tabelView reloadData];
         
     } failure:^(NSError *error) {
-        [headerView endRefreshing];
-        [footView endRefreshing];
+
     }];
 }
 
@@ -90,11 +84,7 @@
     _tabelView.dataSource = self;
     _tabelView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tabelView];
-    
-    headerView = [[MJRefreshHeaderView alloc] initWithScrollView:_tabelView];
-    footView = [[MJRefreshFooterView alloc] initWithScrollView:_tabelView];
-    headerView.delegate = self;
-    footView.delegate = self;
+
 }
 
 -(void)createSpace{
@@ -253,20 +243,7 @@
     [_tabelView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
-#pragma mark - MJRefreshBaseViewDelegate
--(void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView
-{
-    if (refreshView == headerView){
-    
-        _count = 1;
-    }else{
-        if (_count < 1) {
-            _count = 1;
-        }
-        _count ++;
-    }
-    [self loadDataWithP:_count andS:10];
-}
+
 
 /*
  #pragma mark - Navigation

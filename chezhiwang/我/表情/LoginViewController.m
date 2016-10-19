@@ -18,7 +18,6 @@
 {
     UITextField *_userName;
     UITextField *_passWord;
-    UIScrollView *_scrollView;
     UIButton *logoin;
     CGFloat B;
 }
@@ -39,18 +38,27 @@
     self.view.backgroundColor = RGB_color(240, 240, 240, 1);
     B = [LHController setFont];
     self.navigationItem.title = @"登录";
-    [self createScrollView];
- 
+
     [self createRightItem];
     [self createField];
     [self createLogoin];
-    [self createNotification];
+    [self keyboardNotificaion];
 }
 
--(void)createScrollView{
-    _scrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
-    _scrollView.alwaysBounceVertical = YES;
-    [self.view addSubview:_scrollView];
+- (void)viewDidLayoutSubviews{
+    self.scrollView.contentSize = CGSizeMake(0, logoin.frame.origin.y+100);
+}
+- (void)keyboardHide:(NSNotification *)notification{
+    self.scrollView.frame = self.view.frame;
+}
+
+- (void)keyboardShow:(NSNotification *)notification{
+    //读取键盘高度
+    CGFloat height = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
+
+    CGRect frame = self.view.frame;
+    frame.size.height -= height;
+    self.scrollView.frame = frame;
 }
 
 #pragma mark - 注册按钮
@@ -76,7 +84,7 @@
 -(void)createField{
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 160)];
     imageView.image = [UIImage imageNamed:@"defaultImage_icon"];
-    [_scrollView addSubview:imageView];
+    [self.scrollView addSubview:imageView];
 
     UIImageView *userNameImageView =[LHController createImageViewWithFrame:CGRectMake(10, 8, 20, 20) ImageName:@"userName.png"];
     UIImageView *tempUserNameImageView = [LHController createImageViewWithFrame:CGRectMake(0, 0, 40, 40) ImageName:nil];
@@ -87,7 +95,7 @@
     _userName.backgroundColor = [UIColor whiteColor];
     _userName.layer.borderColor = RGB_color(221, 221, 221, 1).CGColor;
     _userName.layer.borderWidth = 1;
-    [_scrollView addSubview:_userName];
+    [self.scrollView addSubview:_userName];
     
     UIImageView *passwordImageView =[LHController createImageViewWithFrame:CGRectMake(10, 8, 20, 20) ImageName:@"user_password"];
     UIImageView *tempPasswordImageView = [LHController createImageViewWithFrame:CGRectMake(0, 0, 40, 40) ImageName:nil];
@@ -99,19 +107,19 @@
     _passWord.backgroundColor = [UIColor whiteColor];
     _passWord.layer.borderColor = RGB_color(221, 221, 221, 1).CGColor;
     _passWord.layer.borderWidth = 1;
-    [_scrollView addSubview:_passWord];
+    [self.scrollView addSubview:_passWord];
 }
 
 #pragma mark - createLogoin
 -(void)createLogoin{
     logoin =  [LHController createButtnFram:CGRectMake(10, _passWord.frame.origin.y+_passWord.frame.size.height+60, WIDTH-20, 40) Target:self Action:@selector(logoinClick) Font:B Text:@"点击登录"];
     
-    [_scrollView addSubview:logoin];
+    [self.scrollView addSubview:logoin];
     
     UIButton *button = [LHController createButtnFram:CGRectMake(0, 300, 30, 30) Target:self Action:@selector(buttonClick) Text:@"找回密码"];
     button.titleLabel.font = [UIFont systemFontOfSize:B];
     [button setTitleColor:[UIColor colorWithRed:6/255.0 green:143/255.0 blue:207/255.0 alpha:1] forState:UIControlStateNormal];
-    [_scrollView addSubview:button];
+    [self.scrollView addSubview:button];
     
    [button makeConstraints:^(MASConstraintMaker *make) {
        make.top.equalTo(logoin.bottom).offset(20);
@@ -134,7 +142,10 @@
         [al dismissWithClickedButtonIndex:0 animated:YES];
     }else{
         logoin.enabled = NO;
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [_userName resignFirstResponder];
+        [_passWord resignFirstResponder];
+        [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self submitNmae:_userName.text andPassword:_passWord.text];
         });
     }
@@ -143,49 +154,42 @@
 #pragma mark 提交登录
 -(void)submitNmae:(NSString *)name andPassword:(NSString *)pass{
 
-    NSString *url = [NSString stringWithFormat:[URLFile urlStringForLogin],name,pass];
-   [HttpRequest GET:url success:^(id responseObject) {
-       NSString *str = [responseObject firstObject][@"error"];
-       if (str != nil) {
-           if ([str isEqualToString:@"1"]) {
-               [LHController alert:@"用户名或密码错误"];
-           }else if([str isEqualToString:@"2"]){
-               [LHController alert:@"密码错误"];
-               
-           }else if ([str isEqualToString:@"3"]){
-               [LHController alert:@"用户名不存在"];
-           }
-           else{
-               [LHController alert:@"因发布非法信息，您的账号已封停"];
-           }
-       }else{
-           [[CZWManager manager] loginWithDictionary:[responseObject firstObject]];
-           NSDictionary *dic = [responseObject firstObject];
-           NSUserDefaults *df = [NSUserDefaults standardUserDefaults];
-           [df setObject:dic[@"name"] forKey:user_name];
-           [df setObject:dic[@"path"] forKey:user_iconImage];
-           [df setObject:_passWord.text forKey:user_passWord];
-           [df setObject:dic[@"userid"] forKey:user_id];
-           
-           [self saveTime];
-           if (self.navigationController.viewControllers.count > 1){
-                [self.navigationController popViewControllerAnimated:YES];
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+    dict[@"uname"] = name;
+    dict[@"psw"] = pass;
+    [HttpRequest POST:[URLFile urlStringForLogin] parameters:dict success:^(id responseObject) {
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
 
-           }else{
-[self dismissViewControllerAnimated:YES completion:nil];
-           }
-       }
-       logoin.enabled = YES;
+        NSString *str = responseObject[@"error"];
+        if (str != nil) {
+            if ([str isEqualToString:@"1"]) {
+                [LHController alert:@"用户名或密码错误"];
+            }else if([str isEqualToString:@"2"]){
+                [LHController alert:@"密码错误"];
 
-   } failure:^(NSError *error) {
-       
-       logoin.enabled = YES;
-       UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"网络请求失败" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
-       [al show];
-       [UIView animateWithDuration:0.3 animations:^{
-           [al dismissWithClickedButtonIndex:0 animated:YES];
-       }];
-   }];
+            }else if ([str isEqualToString:@"3"]){
+                [LHController alert:@"用户名不存在"];
+            }
+            else{
+                [LHController alert:@"因发布非法信息，您的账号已封停"];
+            }
+        }else{
+            [[CZWManager manager] loginWithDictionary:responseObject];
+            [self saveTime];
+            [self dismissViewControllerAnimated:YES completion:nil];
+
+        }
+        logoin.enabled = YES;
+    } failure:^(NSError *error) {
+         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+         logoin.enabled = YES;
+        UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"网络请求失败" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
+        [al show];
+        [UIView animateWithDuration:0.3 animations:^{
+            [al dismissWithClickedButtonIndex:0 animated:YES];
+        }];
+
+    }];
 }
 
 #pragma mark - 提示语
@@ -205,24 +209,6 @@
     return YES;
 }
 
-#pragma mark - 通知
--(void)createNotification{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];
-}
-
--(void)keyboardShow:(NSNotification *)notification
-{
-    //读取键盘高度
-    CGFloat height = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
-    _scrollView.frame = CGRectMake(0, 0, WIDTH, HEIGHT-64-height);
-}
-
--(void)keyboardHide:(NSNotification *)notification
-{
-    _scrollView.frame = CGRectMake(0, 0, WIDTH, HEIGHT-64);
-    _scrollView.contentOffset = CGPointMake(0, 0);
-}
 
 
 - (void)didReceiveMemoryWarning {

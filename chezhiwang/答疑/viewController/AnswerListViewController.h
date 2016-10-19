@@ -13,6 +13,5 @@
 @property (nonatomic,copy) NSString *urlString;
 @property (nonatomic,copy) NSString *type;
 @property (nonatomic,copy) NSString *cid;
-@property (nonatomic,strong) NSMutableArray *cidArray;
 
 @end

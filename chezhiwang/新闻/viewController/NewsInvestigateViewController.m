@@ -60,7 +60,7 @@
 
 -(void)createTableView{
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, WIDTH, HEIGHT-64-49) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.estimatedRowHeight = 100;
@@ -139,7 +139,6 @@
     HomepageResearchModel *model = _dataArray[indexPath.row];
     NewsDetailViewController *detail = [[NewsDetailViewController alloc] init];
     detail.ID = model.ID;
-    detail.titleLabelText = model.models;
     detail.invest = YES;
     detail.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detail animated:YES];

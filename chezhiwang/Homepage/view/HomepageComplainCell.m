@@ -265,6 +265,7 @@
 }
 
 - (void)setComplainModel:(HomepageComplainModel *)complainModel{
+    
     _complainModel = complainModel;
 
     [self setData];
@@ -277,10 +278,12 @@
     dateLabel.text = self.complainModel.date;
     brandNameLabel.attributedText = [self attributedWithString1:@"品牌：" string2:self.complainModel.brandname];
     seriesNameLabel.attributedText = [self attributedWithString1:@"车系：" string2:self.complainModel.seriesname];
-    modelNameLabel.attributedText = [self attributedWithString1:@"车系：" string2:self.complainModel.modelsname];
+    modelNameLabel.attributedText = [self attributedWithString1:@"车型：" string2:self.complainModel.modelsname];
 
     NSArray *fwtd = [self.complainModel.fwtd componentsSeparatedByString:@","];
-    [showView setTsbw:self.complainModel.tsbw fwtd:fwtd];
+    NSMutableArray *mfwtd = [fwtd mutableCopy];
+    [mfwtd removeObject:@""];
+    [showView setTsbw:self.complainModel.tsbw fwtd:mfwtd];
     CGFloat height = [showView viewHeight];
     [showView updateConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(height);

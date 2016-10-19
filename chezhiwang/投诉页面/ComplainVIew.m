@@ -886,7 +886,7 @@
     [superDict setObject:complainServer.text forKey:@"C_Tsfw"];
  
 
-    [superDict setObject:[[NSUserDefaults standardUserDefaults] objectForKey:user_id] forKey:@"User_ID"];
+    [superDict setObject:[CZWManager manager].userID forKey:@"User_ID"];
     
     [superDict setObject:appOrigin forKey:@"origin"];
     if (self.again) {
@@ -1443,7 +1443,7 @@
 #pragma mark - 下载用户数据
 -(void)loadCar{
     
-    NSString *url = [NSString stringWithFormat:[URLFile urlStringForUser],[[NSUserDefaults standardUserDefaults] objectForKey:user_id]];
+    NSString *url = [NSString stringWithFormat:[URLFile urlStringForUser],[CZWManager manager].userID];
     [HttpRequest GET:url success:^(id responseObject) {
          [self usercar:responseObject];
     } failure:^(NSError *error) {

@@ -31,9 +31,7 @@
     NSDictionary *dic = self.dataArray[indexPath.row];
     AnswerDetailsViewController *user = [[AnswerDetailsViewController alloc] init];
     user.cid = dic[@"id"];
-    user.type = @"3";
-    user.textTitle = dic[@"question"];
-    
+ 
     [self.navigationController pushViewController:user animated:YES];
 }
 

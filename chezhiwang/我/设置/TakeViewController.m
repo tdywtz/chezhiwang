@@ -84,7 +84,6 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NewsDetailViewController *details = [[NewsDetailViewController alloc] init];
     details.ID = _dataArray[indexPath.row][@"id"];
-    details.titleLabelText = _dataArray[indexPath.row][@"title"];
     [self.navigationController pushViewController:details animated:YES];
 }
 

@@ -15,7 +15,6 @@
 
 @interface NewsListViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,UISearchDisplayDelegate,UISearchBarDelegate>
 {
-    CGFloat xx;
     UITableView *_tableView;
     NSMutableArray *_dataArray;
 
@@ -25,28 +24,31 @@
 
 @implementation NewsListViewController
 
--(void)loadDataWithP:(NSInteger)p andS:(NSInteger)s{
-   
-    NSString *url = [NSString stringWithFormat:_urlString,p,s];
-  [HttpRequest GET:url success:^(id responseObject) {
+-(void)loadData{
 
-      if (_count == 1) {
-          
+    NSString *url = [NSString stringWithFormat:_urlString,_count,10];
+    [HttpRequest GET:url success:^(id responseObject) {
 
-          [_dataArray removeAllObjects];
-      }else{
-          if ([responseObject count] == 0) {
+        if (_count == 1) {
 
-          }
-      }
-      [_dataArray addObjectsFromArray:[HomepageNewsModel arayWithArray:responseObject]];
-   
-      [_tableView reloadData];
+            [_dataArray removeAllObjects];
+        }
+        if ([responseObject[@"rel"] count] == 0) {
+            [_tableView.mj_footer endRefreshingWithNoMoreData];
+        }else{
+            [_tableView.mj_footer endRefreshing];
+        }
 
-  } failure:^(NSError *error) {
+        [_dataArray addObjectsFromArray:[HomepageNewsModel arayWithArray:responseObject[@"rel"]]];
 
+        [_tableView reloadData];
+        [_tableView.mj_header endRefreshing];
 
-  }];
+    } failure:^(NSError *error) {
+        [_tableView.mj_header endRefreshing];
+        [_tableView.mj_footer endRefreshing];
+
+    }];
 }
 
 
@@ -54,34 +56,44 @@
     [super viewDidLoad];
 
     _dataArray = [[NSMutableArray alloc] init];
-    [self createTableView];
     _count = 1;
-    _tableView.contentOffset = CGPointZero;
-    [self loadDataWithP:_count andS:10];
-
-     //_tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+    [self createTableView];
 }
 
 
 -(void)createTableView{
 
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, WIDTH, HEIGHT-64-49) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.estimatedRowHeight = 80;
+    _tableView.contentOffset = CGPointZero;
+    _tableView.contentInset = UIEdgeInsetsMake(64+44, 0, 0, 0);
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-
     [self.view addSubview:_tableView];
+
+    __weak __typeof(self)weakSelf = self;
+    _tableView.mj_header = [MJChiBaoZiHeader headerWithRefreshingBlock:^{
+        _count = 1;
+        [weakSelf loadData];
+    }];
+    [_tableView.mj_header beginRefreshing];
+
+    _tableView.mj_footer = [MJDIYAutoFooter footerWithRefreshingBlock:^{
+        _count ++;
+        [weakSelf loadData];
+    }];
+    _tableView.mj_footer.automaticallyHidden = YES;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
- 
+
     // Dispose of any resources that can be recreated.
 }
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-   
+
     return 1;
 }
 
@@ -115,13 +127,12 @@
 #pragma mark - UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
-     HomepageNewsModel *model = _dataArray[indexPath.row];
+    HomepageNewsModel *model = _dataArray[indexPath.row];
 
-        NewsDetailViewController *detail = [[NewsDetailViewController alloc] init];
-        detail.ID = model.ID;
-        detail.titleLabelText = model.title;
-        detail.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:detail animated:YES];
+    NewsDetailViewController *detail = [[NewsDetailViewController alloc] init];
+    detail.ID = model.ID;
+    detail.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:detail animated:YES];
 }
 
 
@@ -136,13 +147,13 @@
 
 
 /*
-#pragma mark - Navigation
+ #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

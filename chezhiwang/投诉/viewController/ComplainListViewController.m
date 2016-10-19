@@ -7,24 +7,23 @@
 //
 
 #import "ComplainListViewController.h"
-#import "ComplainListCell.h"
+#import "HomepageComplainCell.h"
 #import "ComplainDetailsViewController.h"
 #import "ComplainSearchViewController.h"
 #import "ComplainView.h"
 #import "LoginViewController.h"
 
+
 @interface ComplainListViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     UITableView *_tableView;
     NSMutableArray *_dataArray;
-    BOOL header;
     CGFloat cellheight;
 
     NSInteger _count;
     
     FmdbManager *_fmdb;
 }
-@property (nonatomic,strong) NSArray *readArray;
 @end
 
 @implementation ComplainListViewController
@@ -32,15 +31,14 @@
 -(void)loadDataP:(NSInteger)p andS:(NSInteger)s{
     NSString *url = [NSString stringWithFormat:[URLFile urlStringForZLTS],p,s];
    [HttpRequest GET:url success:^(id responseObject) {
+
        if (_count == 1) {
            [_dataArray removeAllObjects];
            
        }
-       for (NSDictionary *dict in responseObject) {
-           
-           [_dataArray addObject:dict];
-       }
-       self.readArray = [_fmdb selectAllFromReadHistory:ReadHistoryTypeComplain];
+
+     [_dataArray addObjectsFromArray:[HomepageComplainModel arayWithArray:responseObject[@"rel"]]];
+
        [_tableView reloadData];
 
 
@@ -56,11 +54,8 @@
     
     [self dataInitialization];
     [self createLeftItem];
-    [self createRightItem];
+    //[self createRightItem];
     [self createTableView];
-    
-    header = YES;
-
     [self loadDataP:1 andS:10];
 
 }
@@ -69,22 +64,20 @@
 -(void)dataInitialization{
     _dataArray = [[NSMutableArray alloc] init];
     _fmdb = [FmdbManager shareManager];
-    self.readArray = [_fmdb selectAllFromReadHistory:ReadHistoryTypeComplain];
 }
 
 -(void)createLeftItem{
-       self.navigationItem.leftBarButtonItem = [LHController createComplainItemWthFrame:CGRectMake(0, 0, 90, 20) Target:self Action:@selector(leftItemClick)];
+       self.navigationItem.rightBarButtonItem = [LHController createComplainItemWthFrame:CGRectMake(0, 0, 90, 20) Target:self Action:@selector(leftItemClick)];
 }
 
 -(void)leftItemClick{
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:user_name]) {
+    if ([CZWManager manager].isLogin) {
         ComplainView *complain = [[ComplainView alloc] init];
         complain.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:complain animated:YES];
     }else{
-        LoginViewController *my = [[LoginViewController alloc] init];
-        my.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:my animated:YES];
+
+        [self presentViewController:[LoginViewController instance] animated:YES completion:nil];
     }
 }
 
@@ -93,6 +86,7 @@
     _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
     _tableView.delegate   = self;
     _tableView.dataSource = self;
+    _tableView.estimatedRowHeight = 100;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
     
@@ -126,44 +120,24 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    ComplainListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    HomepageComplainCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (!cell) {
-        cell = [[ComplainListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell = [[HomepageComplainCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
-    [cell setCellHeight:^(CGFloat gao) {
-        cellheight = gao;
-    }];
-    cell.readArray = self.readArray;
-    cell.dictionary = _dataArray[indexPath.row];
+
+    cell.complainModel =  _dataArray[indexPath.row];
     
     return cell;
 }
 
 #pragma mark - UITableViewDelegate
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-
-    if (SYSTEM_VERSION_GREATER_THAN(8.0)) {
-        return cellheight;
-    }
-    
-    return [ComplainListCell returnCellHeight:_dataArray[indexPath.row]];
-}
-
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    HomepageComplainModel *model = _dataArray[indexPath.row];
     ComplainDetailsViewController *detail = [[ComplainDetailsViewController alloc] init];
-    NSDictionary *dict = _dataArray[indexPath.row];
-    detail.textTitle = dict[@"question"];
-    detail.cid = dict[@"cpid"];
-    detail.type = @"2";
-//改变颜色
-    ComplainListCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    UILabel *title = (UILabel *)[cell valueForKey:@"questionLable"];
-    title.textColor = colorDeepGray;
+    detail.cid = model.cpid;
+  
 //存储数据库
-    [_fmdb insertIntoReadHistoryWithId:dict[@"cpid"] andTitle:dict[@"question"] andType:ReadHistoryTypeComplain];
-    detail.hidesBottomBarWhenPushed = YES;
+    [_fmdb insertIntoReadHistoryWithId:model.cpid andTitle:model.question andType:ReadHistoryTypeComplain];
     [self.navigationController pushViewController:detail animated:YES];
 }
 

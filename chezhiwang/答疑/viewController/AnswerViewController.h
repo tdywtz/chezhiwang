@@ -6,9 +6,9 @@
 //  Copyright (c) 2015年 车质网. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BasicViewController.h"
 
-@interface AnswerViewController : UIViewController
+@interface AnswerViewController : BasicViewController
 
 @property (nonatomic,copy) NSString *cid;//根据车系
 @end

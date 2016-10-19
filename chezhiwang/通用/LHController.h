@@ -37,7 +37,7 @@
 
 /** - --创建Label*/
 +(UILabel*)createLabelWithFrame:(CGRect)frame Font:(CGFloat)font Bold:(BOOL)bold TextColor:(UIColor *)color Text:(NSString*)text;
-#define mark - 创建图片控制器
+#pragma mark - 创建图片控制器
 +(UIImageView *)createImageViewWithFrame:(CGRect)frame ImageName:(NSString *)name;
 
 #pragma mark - 邮箱格式验证

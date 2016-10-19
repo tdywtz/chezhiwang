@@ -13,7 +13,7 @@
 #import "ApplyModeratorsViewController.h"
 #import "LoginViewController.h"
 
-@interface ForumClassifyListViewController ()<UITableViewDataSource,UITableViewDelegate,MJRefreshBaseViewDelegate>
+@interface ForumClassifyListViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     UITableView *_tableView;
     NSMutableArray *_dataArray;
@@ -22,20 +22,13 @@
     
     NSString *_urlString;
     NSInteger _count;
-    BOOL header;
-    MJRefreshHeaderView *headerView;
-    MJRefreshFooterView *footView;
 }
 
 @property (nonatomic,strong) NSDictionary *dictionary;
 @end
 
 @implementation ForumClassifyListViewController
-- (void)dealloc
-{
-    [headerView removeFromSuperview];
-    [footView removeFromSuperview];
-}
+
 -(void)loadDataWithP:(NSInteger)p andS:(NSInteger)s{
     NSString *url = [NSString stringWithFormat:_urlString,self.sid,orderType,topicType,p,s];
     [HttpRequest GET:url success:^(id responseObject) {
@@ -44,18 +37,15 @@
             [_dataArray removeAllObjects];
         }
         if ([responseObject count] == 0) {
-            footView.noData = YES;
+
         }
         for (NSDictionary *dict in responseObject) {
             [_dataArray addObject:dict];
         }
         [_tableView reloadData];
-        [headerView endRefreshing];
-        [footView endRefreshing];
 
     } failure:^(NSError *error) {
-        [headerView endRefreshing];
-        [footView endRefreshing];
+
     }];
 }
 
@@ -112,7 +102,7 @@
 }
 
 -(void)rightItemClick{
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:user_name]){
+    if ([CZWManager manager].isLogin){
         WritePostViewController *write = [[WritePostViewController alloc] init];
         UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:write];
         nvc.navigationBar.barStyle = UIBarStyleBlack;
@@ -125,7 +115,7 @@
         [self presentViewController:nvc animated:YES completion:nil];
     }else{
         LoginViewController *my = [[LoginViewController alloc] init];
-        [self.navigationController pushViewController:my animated:YES];
+        [self presentViewController:my animated:YES completion:nil];
     }
 }
 
@@ -136,11 +126,7 @@
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
-    
-    headerView = [[MJRefreshHeaderView alloc] initWithScrollView:_tableView];
-    footView = [[MJRefreshFooterView alloc] initWithScrollView:_tableView];
-    headerView.delegate = self;
-    footView.delegate = self;
+
 }
 
 #pragma mark - 创建列表headerView
@@ -244,13 +230,13 @@
 
 #pragma mark - 点击申请版主按钮响应方法
 -(void)applicationClick{
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:user_name]) {
+    if ([CZWManager manager].isLogin) {
         ApplyModeratorsViewController *apply = [[ApplyModeratorsViewController alloc] init];
         apply.dict = self.dictionary;
         [self.navigationController pushViewController:apply animated:YES];
     }else{
         LoginViewController *my = [[LoginViewController alloc] init];
-        [self.navigationController pushViewController:my animated:YES];
+        [self presentViewController:my animated:YES completion:nil];
     }
 }
 
@@ -308,7 +294,6 @@
     }
     
     _count = 1;
-    header = YES;
     [self loadDataWithP:_count andS:10];
 }
 
@@ -330,7 +315,6 @@
     }
     
     _count = 1;
-    header = YES;
     [self loadDataWithP:_count andS:10];
 }
 
@@ -346,7 +330,7 @@
 }
 
 -(void)footBtnCLick{
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:user_name]){
+    if ([CZWManager manager].isLogin){
         WritePostViewController *write = [[WritePostViewController alloc] init];
         if (self.forumType == forumClassifyBrand) {
             write.sid = self.sid;
@@ -356,7 +340,7 @@
         [self.navigationController pushViewController:write animated:YES];
     }else{
         LoginViewController *my = [[LoginViewController alloc] init];
-        [self.navigationController pushViewController:my animated:YES];
+        [self presentViewController:my animated:YES completion:nil];
         
     }
 }
@@ -398,20 +382,6 @@
 }
 
 
-#pragma mark - MJRefreshBaseViewDelegate
-- (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView{
-    if (refreshView == headerView) {
-        header = YES;
-        _count = 1;
-        footView.noData = NO;
-    }else{
-        if (_count < 1) {
-            _count = 1;
-        }
-        _count ++;
-    }
-    [self loadDataWithP:_count andS:10];
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

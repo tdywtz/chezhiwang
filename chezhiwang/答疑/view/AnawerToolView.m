@@ -53,30 +53,28 @@
     }
     
     NSString *string = [_titleArray componentsJoinedByString:@""];
-    CGFloat spaceWidth = (WIDTH-[string boundingRectWithSize:CGSizeMake(1000, 20) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil].size.width)/_titleArray.count;
+  CGFloat spaceWidth = (WIDTH-[string boundingRectWithSize:CGSizeMake(1000, 20) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17]} context:nil].size.width)/_titleArray.count;
     for (int i = 0; i < _titleArray.count; i ++) {
  
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setTitleColor:colorBlack forState:UIControlStateNormal];
-        [button setTitleColor:colorLightBlue forState:UIControlStateSelected];
+        [button setTitleColor:colorYellow forState:UIControlStateSelected];
         [button setTitle:_titleArray[i] forState:UIControlStateNormal];
-        button.titleLabel.font = [UIFont systemFontOfSize:15];
+        button.titleLabel.font = [UIFont systemFontOfSize:17];
         button.tag = 100+i;
         [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:button];
-        CGFloat width = [_titleArray[i] boundingRectWithSize:CGSizeMake(1000, 20) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:button.titleLabel.font} context:nil].size.width;
+
         if (temp) {
             [button makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(temp.right).offset(spaceWidth);
                 make.centerY.equalTo(0);
-                make.size.equalTo(CGSizeMake(width, 25));
             }];
             
         }else{
             [button makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(spaceWidth/2);
                 make.centerY.equalTo(0);
-               make.size.equalTo(CGSizeMake(width, 25));
             }];
         }
         temp = button;
@@ -85,34 +83,41 @@
 }
 
 -(void)buttonClick:(UIButton *)button{
-  
-        for (UIButton *btn in self.items) {
-            btn.selected = NO;
-            
-        }
-    
-       button.selected = YES;
- 
-    [button layoutIfNeeded];
-    CGRect rect = CGRectMake(0, 0, CGRectGetWidth(button.frame)+20, 3);
-    CGPoint center = CGPointMake(button.center.x, CGRectGetHeight(self.frame)-2);
-    [UIView animateWithDuration:0.1 animations:^{
-        self.moveView.frame = rect;
-        self.moveView.center = center;
-    }];
+
+    [self updateCurrent:button];
 
     if ([self.delegate respondsToSelector:@selector(selectedButton:)]) {
         [self.delegate selectedButton:button.tag-100];
     }
 }
 
+- (void)updateCurrent:(UIButton *)button{
+    for (UIButton *btn in self.items) {
+        btn.selected = NO;
+
+    }
+    button.selected = YES;
+    
+    CGFloat witdh = CGRectGetWidth(button.frame);
+    CGFloat centreX = button.center.x;
+    if (witdh < 10) {
+        witdh = 32;
+        centreX = 31;
+    }
+    CGRect rect = CGRectMake(0, 0,witdh + 20, 3);
+    CGPoint center = CGPointMake(centreX, CGRectGetHeight(self.frame)-2);
+    [UIView animateWithDuration:0.1 animations:^{
+        self.moveView.frame = rect;
+        self.moveView.center = center;
+    }];
+}
+
 -(void)setCurrentIndex:(NSInteger)currentIndex{
     _currentIndex = currentIndex;
  
     if (_currentIndex >= 0 && _currentIndex < self.items.count) {
-    
-        UIButton *bt = self.items[_currentIndex];
-        [self buttonClick:bt];
+
+        [self updateCurrent:self.items[_currentIndex]];
     }
 }
 

@@ -120,8 +120,8 @@
         [LHController alert:@"内容不能为空"];
     }else{
         NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-        [dict setObject:[[NSUserDefaults standardUserDefaults] objectForKey:user_id] forKey:@"uid"];
-        [dict setObject:[[NSUserDefaults standardUserDefaults] objectForKey:user_name] forKey:@"username"];
+        [dict setObject:[CZWManager manager].userID forKey:@"uid"];
+        [dict setObject:[CZWManager manager].userName forKey:@"username"];
         [dict setObject:_titleTextField.text forKey:@"title"];
         [dict setObject:_contentTextView.text forKey:@"content"];
         [dict setObject:self.sid forKey:@"sid"];

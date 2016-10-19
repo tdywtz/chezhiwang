@@ -116,7 +116,7 @@
 }
 -(void)updatePassword{
     
-    NSString *url = [NSString stringWithFormat:[URLFile urlStringForUpdatePWD],[[NSUserDefaults standardUserDefaults] objectForKey:user_id],oldPassword.text,newPassword.text];
+    NSString *url = [NSString stringWithFormat:[URLFile urlStringForUpdatePWD],[CZWManager manager].userID,oldPassword.text,newPassword.text];
    [HttpRequest GET:url success:^(id responseObject) {
        NSString *str = [[responseObject objectAtIndex:0] objectForKey:@"result"];
        [self alert:str];

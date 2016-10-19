@@ -17,31 +17,32 @@
 
 /**车质网专用*/
 + (NSString *)stringForAppWebServiceWithAct:(NSString *)act{
-    return [NSString stringWithFormat:@"%@%@%@",[self prefixString],@"server/forAppWebService.ashx?",act];
+    return [NSString stringWithFormat:@"%@%@%@",[self prefixString],@"/AppServer/forAppWebService.ashx?",act];
 }
+
 + (NSString *)stringForCZWServiceWithAct:(NSString *)act{
-    return [NSString stringWithFormat:@"%@%@%@",[self prefixString],@"AppServer/forCZWService.ashx?",act];
+    return [NSString stringWithFormat:@"%@%@%@",[self prefixString],@"/AppServer/forCZWService.ashx?",act];
 }
 
 /**公用*/
 + (NSString *)stringForCommonServiceWithAct:(NSString *)act{
-    return [NSString stringWithFormat:@"%@%@%@",[self prefixString],@"server/forCommonService.ashx?",act];
+    return [NSString stringWithFormat:@"%@%@%@",[self prefixString],@"/AppServer/forCommonService.ashx?",act];
 }
 
 
 /**前缀*/
 + (NSString *)prefixString{
 #if DEBUG
-    return  @"http://192.168.1.114:8888/";
+    return  @"http://192.168.1.114:8888";
 #else
-    return  @"http://m.12365auto.com/";
+    return  @"http://m.12365auto.com";
 #endif
 }
 
 #pragma mark - 接口-——————————》》》》》
 /**登录*/
 + (NSString *)urlStringForLogin{
-    return [self stringWithBasic:@"act=login&uname=%@&psw=%@"];
+    return [self stringForCommonServiceWithAct:@"act=login"];
 }
 
 /**注册*/
@@ -76,16 +77,9 @@
 #pragma mark - 新闻
 /**新闻列表*/
 + (NSString *)urlStringForNewsList{
-    return [self stringWithBasic:@"act=news&style=%@%@"];
+    return [self stringForCZWServiceWithAct:@"act=newslist&style=%@%@"];
 }
-/**焦点图片*/
-+ (NSString *)urlStringForFocuspic{
-    return [self stringWithBasic:@"act=focuspic"];
-}
-/**焦点新闻*/
-+ (NSString *)urlStringForFocusnews{
-    return [self stringWithBasic:@"act=focusnews"];
-}
+
 /**新闻-调查*/
 + (NSString *)urlStringForReport{
     return  [self stringWithBasic:@"act=report&t=%@%@"];
@@ -148,22 +142,22 @@
 #pragma mark -投诉
 /**投诉列表*/
 + (NSString *)urlStringForZLTS{
-    return [self stringWithBasic:@"act=zlts&p=%ld&s=%ld"];
+    return [self stringForCommonServiceWithAct:@"act=complainlist&p=%ld&s=10"];
 }
 
 /**投诉搜索*/
 + (NSString *)urlStringForZLTSWithSearch{
-    return [self  stringWithBasic:@"act=zlts&title=%@&p=%ld&s=%ld"];
+    return [self  stringForCommonServiceWithAct:@"act=complainlist&title=%@&p=%ld&s=%ld"];
 }
 
 /**投诉列表->投诉详情*/
 + (NSString *)urlStringForComplain{
-    return [self stringWithBasic:@"act=complain&id=%@"];
+    return [self stringForCommonServiceWithAct:@"act=complaininfo&id=%@"];
 }
 
 /**评论列表*/
 + (NSString *)urlStringForPL{
-    return [self stringWithBasic:@"act=pl&id=%@&type=%@&p=%ld&s=%ld"];
+    return [self stringForCommonServiceWithAct:@"act=pl&id=%@&type=%@&p=%ld&s=10"];
 }
 
 /**评论总数*/
@@ -210,11 +204,11 @@
 #pragma mark -答疑
 /**答疑列表*/
 + (NSString *)urlStringForZJDY{
-    return [self stringWithBasic:@"act=zjdy&t=%@&p=%ld&s=%ld"];
+    return [self stringForCommonServiceWithAct:@"act=zjdylist&t=%@&p=%ld&s=10"];
 }
 /**答疑搜索*/
 + (NSString *)urlStringForZJDYSearch{
-    return [self stringWithBasic:@"act=zjdy&title=%@&p=%ld&s=%ld"];
+    return [self stringForCommonServiceWithAct:@"act=zjdylist&title=%@&p=%ld&s=%ld"];
 }
 /**我要提问*/
 + (NSString *)urlStringForEditZJDY{
@@ -222,7 +216,7 @@
 }
 /**答疑详情*/
 + (NSString *)urlStringForGetZJDY{
-    return [self stringWithBasic:@"act=getzjdy&id=%@"];
+    return [self stringForCommonServiceWithAct:@"act=zjdyinfo&id=%@"];
 }
 
 #pragma mark - 论坛

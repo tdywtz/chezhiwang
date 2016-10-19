@@ -13,7 +13,7 @@
 #import "ComplainView.h"
 #import "MyComplainHeaderView.h"
 
-@interface MyComplainViewController ()<UITableViewDataSource,UITableViewDelegate,MJRefreshBaseViewDelegate>
+@interface MyComplainViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     NSMutableArray *_dataArray;
     UITableView *_tableView;
@@ -22,31 +22,24 @@
     MyComplainModel *myModel;
     MyComplainModel *openModel;
 
-    MJRefreshHeaderView *headerView;
-    MJRefreshFooterView *footView;
-
     NSInteger _count;
     BOOL comont;
 }
 @end
 
 @implementation MyComplainViewController
-- (void)dealloc
-{
-    [headerView removeFromSuperview];
-    [footView removeFromSuperview];
-}
+
 
 -(void)loadDataWithP:(NSInteger)p andS:(NSInteger)s{
-    NSString *url  = [NSString stringWithFormat:[URLFile urlStringForMyTS],[[NSUserDefaults standardUserDefaults] objectForKey:user_id],p,(long)s];
+    NSString *url  = [NSString stringWithFormat:[URLFile urlStringForMyTS],[CZWManager manager].userID,p,(long)s];
  
   [HttpRequest GET:url success:^(id responseObject) {
       if ([responseObject count] == 0) {
-          footView.noData = YES;
+
           
       }
       if (_count == 1) {
-          footView.noData = NO;
+
           [_dataArray removeAllObjects];
       }
      
@@ -58,13 +51,11 @@
       if (_dataArray.count == 0) {
           [self createSpace];
       }
-      [headerView endRefreshing];
-      [footView endRefreshing];
+
       [_tableView reloadData];
 
   } failure:^(NSError *error) {
-      [headerView endRefreshing];
-      [footView endRefreshing];
+
 
   }];
 }
@@ -83,7 +74,7 @@
     [self createTableView];
 
 
-    [headerView beginRefreshing];
+ 
     [self loadDataWithP:1 andS:10];
 
 }
@@ -101,11 +92,7 @@
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
-    
-    headerView = [[MJRefreshHeaderView alloc] initWithScrollView:_tableView];
-    footView = [[MJRefreshFooterView alloc] initWithScrollView:_tableView];
-    headerView.delegate = self;
-    footView.delegate = self;
+
 
     [_tableView makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(0);
@@ -250,21 +237,6 @@
     
 }
 
-#pragma mark - MJRefreshBaseViewDelegate
--(void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView
-{
-    if (refreshView == headerView) {
-        _count = 1;
-        
-    }else if (refreshView == footView){
-        
-        if (_count < 1) {
-            _count = 1;
-        }
-        _count ++;
-    }
-     [self loadDataWithP:_count andS:10];
-}
 
 
 -(void)viewWillAppear:(BOOL)animated{

@@ -12,9 +12,8 @@
  */
 @interface ComplainDetailsViewController : BasicViewController
 
-@property (nonatomic,copy) NSString *cid;
-@property (nonatomic,copy) NSString *textTitle;
-@property (nonatomic,copy) NSString *type;
-@property (nonatomic,strong) NSDictionary *dict;
+@property (nonatomic,copy) NSString *cid;//投诉编号
+
+
 
 @end

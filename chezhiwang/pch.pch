@@ -23,7 +23,9 @@
 //pop动画库
 #import "POP.h"
 //加载刷新库
-#import "MJRefresh.h"
+#import "MJChiBaoZiHeader.h"
+#import "MJDIYAutoFooter.h"
+
 //sqlit
 #import "FmdbManager.h"
 //图片下载
@@ -33,6 +35,7 @@
 //加载提示
 #import <MBProgressHUD.h>
 #import <TTTAttributedLabel.h>
+#import "YYText.h"
 
 //autolayout适配
 //define this constant if you want to use Masonry without the 'mas_' prefix
@@ -77,13 +80,6 @@ typedef enum {
     classifyNextPop
 }classifyNext;
 
-
-
 #define LEFT 15
-//用户信息
-#define user_id @"user_id"
-#define user_name @"user_name"
-#define user_passWord @"user_passWord"
-#define user_iconImage @"user_iconImage"
 #define YorNO @"YorNO"//判断提问是否有回复
 #endif

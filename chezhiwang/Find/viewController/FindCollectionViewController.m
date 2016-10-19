@@ -49,7 +49,7 @@ static NSString * const reuseIdentifier = @"Cell";
                   [[FindModel alloc] initWithTitle:@"新闻" imageName:@"论坛" aClass:@"NewsViewController"],
                   [[FindModel alloc] initWithTitle:@"投诉" imageName:@"论坛" aClass:@"ComplainListViewController"],
                   [[FindModel alloc] initWithTitle:@"调查" imageName:@"论坛" aClass:@"NewsInvestigateViewController"],
-                  [[FindModel alloc] initWithTitle:@"答疑" imageName:@"论坛" aClass:@"AnswerListViewController"],
+                  [[FindModel alloc] initWithTitle:@"答疑" imageName:@"论坛" aClass:@"AnswerViewController"],
                   [[FindModel alloc] initWithTitle:@"排行榜" imageName:@"论坛" aClass:@"ComplainChartViewController"],
                   [[FindModel alloc] initWithTitle:@"找车" imageName:@"论坛" aClass:@"VehicleImageViewController"],
                   [[FindModel alloc] initWithTitle:@"车型对比" imageName:@"论坛" aClass:@"ContrastChartViewController"],

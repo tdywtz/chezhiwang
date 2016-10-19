@@ -18,6 +18,9 @@
 
 @property (nonatomic,weak) id<FootCommentViewDelegate> delegate;
 
+- (void)oneButton;
+
 - (void)setReplyConut:(NSString *)replyCount;
+- (void)addReplyCont;
 
 @end

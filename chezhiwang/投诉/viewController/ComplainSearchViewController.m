@@ -10,7 +10,7 @@
 #import "ComplainDetailsViewController.h"
 #import "SearchHistoryView.h"
 
-@interface ComplainSearchViewController ()<UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate,MJRefreshBaseViewDelegate>
+@interface ComplainSearchViewController ()<UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate>
 {
     UITableView *_tableView;
     UIView *noView;
@@ -18,7 +18,7 @@
     
     NSInteger _count;
     NSInteger _number;
-    MJRefreshFooterView *footView;
+
     BOOL isOne;
     SearchHistoryView *_historyView;
     NSString * _searchText;
@@ -26,21 +26,18 @@
 @end
 
 @implementation ComplainSearchViewController
-- (void)dealloc
-{
-    [footView removeFromSuperview];
-}
+
 #pragma mark 请求数据
 -(void)loadData{
     //处理汉字
    
     [HttpRequest GET:self.urlString success:^(id responseObject) {
         if (_count == 1) {
-            footView.noData = NO;
+
             [_dataArray removeAllObjects];
         }
         if ([responseObject count] == 0) {
-            footView.noData = YES;
+
         }
         for (NSDictionary *dict in responseObject) {
             NSString *ID = dict[@"id"]?dict[@"id"]:dict[@"cpid"];
@@ -54,10 +51,10 @@
         }else{
             noView.hidden = YES;
         }
-        [footView endRefreshing];
+
 
     } failure:^(NSError *error) {
-         [footView endRefreshing];
+
     }];
 }
 
@@ -136,9 +133,7 @@
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
-    
-    footView = [[MJRefreshFooterView alloc] initWithScrollView:_tableView];
-    footView.delegate = self;
+
 }
 
 -(void)createTitleView{
@@ -259,32 +254,30 @@
     NSDictionary *dic = _dataArray[indexPath.row];
     ComplainDetailsViewController *user = [[ComplainDetailsViewController alloc] init];
     user.cid = dic[@"id"];
-    user.type = @"2";
-    user.textTitle = dic[@"question"];
     [self.navigationController pushViewController:user animated:YES];
  
 }
 
-#pragma mark - MJRefreshBaseViewDelegate
--(void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView
-{
-    //    if (refreshView == headerView) {
-    //
-    //        self.header = YES;
-    //
-    //        [self setUrlWithP:1 andS:_number];
-    //        [self loadData];
-    //        _count = 1;
-    //    }else if (refreshView == footView){
-    
-    if (_count < 1) {
-        _count = 1;
-    }
-    _count ++;
-    [self setUrlWith:_searchBar.text andP:_count andS:_number];
-    [self loadData];
-    // }
-}
+//#pragma mark - MJRefreshBaseViewDelegate
+//-(void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView
+//{
+//    //    if (refreshView == headerView) {
+//    //
+//    //        self.header = YES;
+//    //
+//    //        [self setUrlWithP:1 andS:_number];
+//    //        [self loadData];
+//    //        _count = 1;
+//    //    }else if (refreshView == footView){
+//    
+//    if (_count < 1) {
+//        _count = 1;
+//    }
+//    _count ++;
+//    [self setUrlWith:_searchBar.text andP:_count andS:_number];
+//    [self loadData];
+//    // }
+//}
 
 
 /*

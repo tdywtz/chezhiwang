@@ -14,9 +14,10 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - Masonry (1.0.1)
+  - Masonry (1.0.2)
   - MBProgressHUD (0.9.2)
   - MJNIndexView (0.0.1)
+  - MJRefresh (3.1.12)
   - pop (1.0.9)
   - SDWebImage (3.8.1):
     - SDWebImage/Core (= 3.8.1)
@@ -25,22 +26,24 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 3.1.0)
-  - Masonry (~> 1.0.1)
+  - Masonry (~> 1.0.2)
   - MBProgressHUD (~> 0.9.2)
   - MJNIndexView (~> 0.0.1)
+  - MJRefresh (~> 3.1.12)
   - pop (~> 1.0.9)
   - SDWebImage (~> 3.8.1)
   - TTTAttributedLabel
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  Masonry: a1a931a0d08870ed8ae415a2ea5ea68ebcac77df
+  Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MJNIndexView: 6186c3ea302624ed5c008dba8a178677a7523cab
+  MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
 
-PODFILE CHECKSUM: 3cf3182d5ab98139681a4ce8437a1689ffc59062
+PODFILE CHECKSUM: 46509521d4b41d1c64bc508082cc9f82fea8d2a7
 
 COCOAPODS: 1.0.1

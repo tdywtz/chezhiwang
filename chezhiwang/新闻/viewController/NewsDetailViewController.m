@@ -9,7 +9,7 @@
 #import "NewsDetailViewController.h"
 #import "LoginViewController.h"
 #import "CommentListViewController.h"
-#import "CustomCommentView.h"
+#import "WriteViewController.h"
 #import "FootCommentView.h"
 #import "CZWShareViewController.h"//分享
 
@@ -151,7 +151,7 @@
 
 //浏览记录
 -(void)writeData{
-    NSString *str = self.titleLabelText == nil?@"":self.titleLabelText;
+    NSString *str = self.dictionary[@"title"] == nil?@"":self.dictionary[@"title"];
     FmdbManager *manager = [FmdbManager shareManager];
     [manager insertIntoReadHistoryWithId:self.ID andTitle:str andType:ReadHistoryTypeNews];
 }
@@ -202,13 +202,17 @@
         UIView *bg = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 20)];
 
         UIButton *btn = [LHController createButtnFram:CGRectMake(5, 0, 20, 20) Target:self Action:@selector(rightItemClick:) Text:nil];
+        btn.contentMode = UIViewContentModeScaleAspectFit;
         btn.tag = 100+i;
-        NSString *iamgeName = [NSString stringWithFormat:@"share%d",3-i];
-        [btn setBackgroundImage:[UIImage imageNamed:iamgeName] forState:UIControlStateNormal];
+
         if (i == 1) {
-            btn.frame = CGRectMake(0, 0, 25, 25);
-            [btn setBackgroundImage:[UIImage imageNamed:@"xin"] forState:UIControlStateSelected];
+            btn.frame = CGRectMake(0, 0, 23, 23);
+            [btn setBackgroundImage:[UIImage imageNamed:@"comment_收藏"] forState:UIControlStateNormal];
+            [btn setBackgroundImage:[UIImage imageNamed:@"comment_收藏_yes"] forState:UIControlStateSelected];
             btn.selected = isSelect;
+        }else{
+
+            [btn setBackgroundImage:[UIImage imageNamed:@"comment_转发"] forState:UIControlStateNormal];
         }
         [bg addSubview:btn];
         UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:bg];
@@ -228,7 +232,7 @@
         NSString *html = [_webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerText"];
         if (html.length > 100) html = [html substringToIndex:99];
         share.shareContent = html;
-        share.shareTitle = self.titleLabelText;
+        share.shareTitle = self.dictionary[@"title"];
         [share setBluffImageWithView:[UIApplication sharedApplication].keyWindow.rootViewController.view];
         [self presentViewController:share animated:YES completion:nil];
 
@@ -245,9 +249,9 @@
 #pragma mark - 收藏
 -(void)favorate{
 
-    if (self.titleLabelText && self.dictionary[@"date"] && self.ID) {
+    if (self.dictionary[@"title"] && self.dictionary[@"date"] && self.ID) {
         FmdbManager *fb = [FmdbManager shareManager];
-        [fb insertIntoCollectWithId:self.ID andTime:self.dictionary[@"date"] andTitle:self.titleLabelText andType:collectTypeNews];
+        [fb insertIntoCollectWithId:self.ID andTime:self.dictionary[@"date"] andTitle:self.dictionary[@"title"] andType:collectTypeNews];
     }
 }
 
@@ -266,8 +270,8 @@
     }
 
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-    [dict setObject:[[NSUserDefaults standardUserDefaults] objectForKey:user_id] forKey:@"uid"];//用户id
-    [dict setObject:@"0" forKey:@"fid"];//回复的评论对象id（若是回复当前新闻为0或不设置）
+    dict[@"uid"] = [CZWManager manager].userID;//用户id
+    dict[@"fid"] = @"0";//回复的评论对象id（若是回复当前新闻为0或不设置）
     [dict setObject:content forKey:@"content"];//回复内容
     [dict setObject:self.ID forKey:@"tid"];//回复新闻的id
     [dict setObject:@"1" forKey:@"type"];//类型（新闻-1、投诉-2、答疑-3）
@@ -296,19 +300,21 @@
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
-[MBProgressHUD hideHUDForView:self.view animated:YES];
+      [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 
 
 #pragma mark - FootCommentViewDelegate
 - (void)clickButton:(NSInteger)slected{
     if (slected == 0) {
+
         if ([CZWManager manager].isLogin) {
-            CustomCommentView *commentView = [[CustomCommentView alloc] init];
-            [commentView show];
+            WriteViewController *commentView = [[WriteViewController alloc] init];
             [commentView send:^(NSString *content) {
                 [self submitComment:content];
             }];
+     
+            [self presentViewController:commentView animated:YES completion:nil];
         }else{
 
             [self presentViewController:[LoginViewController instance] animated:YES completion:nil];

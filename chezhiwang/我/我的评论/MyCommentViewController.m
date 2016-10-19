@@ -12,7 +12,7 @@
 
 #import "MyCommentShowCell.h"
 
-@interface MyCommentViewController ()<UITableViewDelegate,UITableViewDataSource,MJRefreshBaseViewDelegate>
+@interface MyCommentViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
 
     UITableView *_tabelView;
@@ -21,42 +21,33 @@
     MyCommentModel *myModel;
     MyCommentModel *openModel;
 
-    MJRefreshHeaderView *headerView;
-    MJRefreshFooterView *footView;
     NSInteger _count;
 }
 @end
 
 @implementation MyCommentViewController
 
-- (void)dealloc
-{
-    [headerView removeFromSuperview];
-    [footView removeFromSuperview];
-}
 
 -(void)loadDataWithP:(NSInteger)p andS:(NSInteger)s{
-    NSString *url = [NSString stringWithFormat:[URLFile urlStringForDiscuss],[[NSUserDefaults standardUserDefaults] objectForKey:user_id],p,s];
+    NSString *url = [NSString stringWithFormat:[URLFile urlStringForDiscuss],[CZWManager manager].userID,p,s];
     [HttpRequest GET:url success:^(id responseObject) {
         if (_count == 1) {
-            footView.noData = NO;
+
             [_dataArray removeAllObjects];
         }
         NSArray *array = responseObject;
         if ([responseObject count] == 0) {
-            footView.noData = YES;
+
         }
         for (NSDictionary *dict in array) {
             MyCommentModel *model = [[MyCommentModel alloc] initWithDictionary:dict];
             [_dataArray addObject:model];
         }
-        [headerView endRefreshing];
-        [footView endRefreshing];
+
         [_tabelView reloadData];
 
     } failure:^(NSError *error) {
-        [headerView endRefreshing];
-        [footView endRefreshing];
+
 
     }];
 }
@@ -70,8 +61,6 @@
 
     [self createTabelView];
 
-
-    [headerView beginRefreshing];
     [self loadDataWithP:1 andS:10];
 }
 
@@ -86,10 +75,6 @@
     //_tabelView.separatorInset = UIEdgeInsetsMake(0, -100, 0, 0);
     [self.view addSubview:_tabelView];
 
-    headerView = [[MJRefreshHeaderView alloc] initWithScrollView:_tabelView];
-    footView = [[MJRefreshFooterView alloc] initWithScrollView:_tabelView];
-    headerView.delegate = self;
-    footView.delegate = self;
 }
 
 -(void)createSpace{
@@ -197,20 +182,6 @@
     [_tabelView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
-
-#pragma mark - MJRefreshBaseViewDelegate
--(void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView
-{
-    if (refreshView == headerView) {
-        _count = 1;
-    }else{
-        if (_count < 0) {
-            _count = 1;
-        }
-        _count ++;
-    }
-    [self loadDataWithP:_count andS:10];
-}
 
 /*
  #pragma mark - Navigation

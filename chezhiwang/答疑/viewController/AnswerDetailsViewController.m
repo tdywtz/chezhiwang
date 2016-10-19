@@ -11,21 +11,22 @@
 #import "CustomCommentView.h"
 #import "LoginViewController.h"
 #import "CZWShareViewController.h"
+#import "FootCommentView.h"
 
-@interface AnswerDetailsViewController ()
+@interface AnswerDetailsViewController ()<FootCommentViewDelegate>
 {
     CGFloat A;
 
-    UILabel *numLabel;
     CustomCommentView *_commentView;
-    CZWLabel *titleLabel;//标题
+    TTTAttributedLabel *titleLabel;//标题
     UILabel *questionDate;//问题时间
     CZWLabel *questionContent;//问题内容
-
     CZWLabel *answerContent;//回复内容
     UILabel *answerDate;//回复时间
+
+    FootCommentView *footView;
 }
-@property (strong,nonatomic) UIView *contentView;
+@property (nonatomic,assign) NewsType type;
 @property (nonatomic,strong) NSDictionary *dict;
 
 @end
@@ -37,16 +38,15 @@
     NSString *url = [NSString stringWithFormat:[URLFile urlStringForGetZJDY],self.cid];
 
     [HttpRequest GET:url success:^(id responseObject) {
-        if ([responseObject count] == 0) {
-            return ;
-        }
-        self.dict = responseObject[0];
 
-        questionContent.text = _dict[@"Content"];
-        questionDate.text = _dict[@"IssueDate"];
-        answerContent.text = _dict[@"Answer"];
-        answerDate.text = _dict[@"AnswerTime"];
+        self.dict = [responseObject copy];
 
+        titleLabel.text = responseObject[@"question"];
+        questionContent.text = _dict[@"content"];
+        questionDate.text = _dict[@"date"];
+        answerContent.text = _dict[@"answer"];
+        answerDate.text = _dict[@"answertime"];
+        [footView setReplyConut:responseObject[@"replycount"]];
 
     } failure:^(NSError *error) {
 
@@ -56,7 +56,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     A = [LHController setFont];
-    self.type = @"3";
+    self.type = NewsTypeAnswer;
     [self createRightItems];
     [self createScrollViewSubViews];
     [self createFootView];
@@ -79,12 +79,14 @@
 
         UIButton *btn = [LHController createButtnFram:CGRectMake(5, 0, 20, 20) Target:self Action:@selector(rightItemClick:) Text:nil];
         btn.tag = 100+i;
-        NSString *iamgeName = [NSString stringWithFormat:@"share%d",3-i];
-        [btn setBackgroundImage:[UIImage imageNamed:iamgeName] forState:UIControlStateNormal];
         if (i == 1) {
-            btn.frame = CGRectMake(0, 0, 25, 25);
-            [btn setBackgroundImage:[UIImage imageNamed:@"xin"] forState:UIControlStateSelected];
+            btn.frame = CGRectMake(0, 0, 23, 23);
+            [btn setBackgroundImage:[UIImage imageNamed:@"comment_收藏"] forState:UIControlStateNormal];
+            [btn setBackgroundImage:[UIImage imageNamed:@"comment_收藏_yes"] forState:UIControlStateSelected];
             btn.selected = isSelect;
+        }else{
+
+            [btn setBackgroundImage:[UIImage imageNamed:@"comment_转发"] forState:UIControlStateNormal];
         }
         [bg addSubview:btn];
         btn.center = CGPointMake(bg.frame.size.width/2, bg.frame.size.height/2);
@@ -111,7 +113,7 @@
         NSString *html = self.dict[@"content"] == nil?self.dict[@"Content"]:self.dict[@"content"];
         if (html.length > 100) html = [html substringToIndex:99];
         share.shareContent = html;
-        share.shareTitle = self.textTitle;
+        share.shareTitle = self.dict[@"question"];
         [share setBluffImageWithView:[UIApplication sharedApplication].keyWindow.rootViewController.view];
         [self presentViewController:share animated:YES completion:nil];
     }
@@ -132,34 +134,45 @@
         make.width.equalTo(WIDTH);
     }];
 
-    titleLabel = [[CZWLabel alloc] init];
+    titleLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
     titleLabel.font = [UIFont systemFontOfSize:17];
-    titleLabel.text = self.textTitle;
+    titleLabel.numberOfLines = 0;
+    titleLabel.preferredMaxLayoutWidth = WIDTH-30;
 
+    CZWLabel *questionTitle = [[CZWLabel alloc] init];
+    questionTitle.font = [UIFont systemFontOfSize:A-3];
+    questionTitle.textColor = colorLightGray;
+    questionTitle.text = @"  网友提问：";
+    UIImage *questionImage = [UIImage imageNamed:@"答疑"];
+    [questionTitle insertImage:questionImage frame:CGRectMake(0, -3, 17, 17) index:0];
 
-
-    UILabel *questionTitle = [LHController createLabelWithFrame:CGRectZero Font:A-3 Bold:NO TextColor:colorLightGray Text:@"网友提问："];
 
     questionContent = [[CZWLabel alloc] init];
     questionContent.linesSpacing = 3;
-    questionContent.firstLineHeadIndent = 28;
     questionContent.textColor = colorDeepGray;
     questionContent.font = [UIFont systemFontOfSize:14];
 
     questionDate = [LHController createLabelWithFrame:CGRectZero Font:13 Bold:NO TextColor:colorLightGray Text:nil];
 
     UIView *lineView = [[UIView alloc] init];
-    lineView.backgroundColor = colorLineGray;
+    lineView.backgroundColor = RGB_color(240, 240, 240, 1);
 
-    UILabel *answerTitle = [LHController createLabelWithFrame:CGRectZero Font:A-3 Bold:NO TextColor:colorLightGray Text:@"专家答复："];
+    CZWLabel *answerTitle = [[CZWLabel alloc] init];
+    answerTitle.font = [UIFont systemFontOfSize:A-3];
+    answerTitle.textColor = colorLightGray;
+    answerTitle.text = @"  专家答复：";
+    UIImage *answerTitleImage = [UIImage imageNamed:@"答疑"];
+    [answerTitle insertImage:answerTitleImage frame:CGRectMake(0, -3, 17, 17) index:0];
 
     answerContent = [[CZWLabel alloc] init];
     answerContent.linesSpacing = 3;
-    answerContent.firstLineHeadIndent = 28;
     answerContent.textColor = colorDeepGray;
     answerContent.font = [UIFont systemFontOfSize:14];
 
     answerDate = [LHController createLabelWithFrame:CGRectZero Font:13 Bold:NO TextColor:colorLightGray Text:nil];
+
+    UIView *lineView2 = [[UIView alloc] init];
+    lineView2.backgroundColor = colorLineGray;
 
     [self.contentView addSubview:titleLabel];
     [self.contentView addSubview:questionTitle];
@@ -169,11 +182,12 @@
     [self.contentView addSubview:answerTitle];
     [self.contentView addSubview:answerContent];
     [self.contentView addSubview:answerDate];
+    [self.contentView addSubview:lineView2];
 
     [titleLabel makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(0);
         make.top.equalTo(20);
-        make.width.lessThanOrEqualTo(WIDTH-30);
+        //make.width.lessThanOrEqualTo(WIDTH-30);
     }];
     [questionTitle makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(15);
@@ -194,7 +208,7 @@
     [lineView makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(0);
         make.top.equalTo(questionDate.bottom).offset(10);
-        make.height.equalTo(1);
+        make.height.equalTo(10);
     }];
 
     [answerTitle makeConstraints:^(MASConstraintMaker *make) {
@@ -214,44 +228,23 @@
         make.bottom.equalTo(-20);
     }];
 
+    [lineView2 makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(0);
+        make.height.equalTo(10);
+    }];
+
 }
 
 
 #pragma mark - 底部横条
 -(void)createFootView{
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, HEIGHT-49, WIDTH, 49)];
-    view.backgroundColor = [UIColor colorWithRed:0/255.0 green:126/255.0 blue:184/255.0 alpha:1];
-    [self.view addSubview:view];
+    footView = [[FootCommentView alloc] initWithFrame:CGRectZero];
+    footView.delegate = self;
+    [self.view addSubview:footView];
 
-    UIButton *write =  [LHController createButtnFram:CGRectMake(10, 10,WIDTH-80, 28) Target:self Action:@selector(writeClick) Text:nil];
-    write.backgroundColor = [UIColor whiteColor];
-    [view addSubview:write];
-
-    [write setImage:[UIImage imageNamed:@"pen"] forState:UIControlStateNormal];
-    [write setTitle:@"写评论" forState:UIControlStateNormal];
-    [write setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    [write setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
-    write.titleLabel.font = [UIFont systemFontOfSize:14];
-
-    UIButton *btn = [LHController createButtnFram:CGRectMake(write.frame.origin.x+write.frame.size.width+10, 9, 30, 30) Target:self Action:@selector(btnClick:) Text:nil];
-    [btn setImage:[UIImage imageNamed:@"share1"] forState:UIControlStateNormal];
-    [view addSubview:btn];
-    numLabel = [LHController createLabelWithFrame:CGRectMake(btn.frame.origin.x+btn.frame.size.width, btn.frame.origin.y, 20, 30) Font:A-3 Bold:NO TextColor:[UIColor whiteColor] Text:nil];
-    numLabel.textColor = [UIColor whiteColor];
-    [view addSubview:numLabel];
-    [self loadDataTotal];
-}
-//
-
-
-#pragma mark - 取得总评论数
--(void)loadDataTotal{
-    NSString *url = [NSString stringWithFormat:[URLFile urlStringForPL_total],_cid,self.type];
-    [HttpRequest GET:url success:^(id responseObject) {
-        NSDictionary *dict = responseObject[0];
-        numLabel.text = dict[@"count"] == nil?@"0":dict[@"count"];
-    } failure:^(NSError *error) {
-        NSLog(@"%@",error);
+    [footView makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(0);
+        make.height.equalTo(49);
     }];
 }
 
@@ -269,9 +262,10 @@
 #pragma  mark - 收藏
 -(void)favorate{
 
-    if (self.textTitle && self.dict[@"IssueDate"] && self.cid) {
+    if (titleLabel.text && questionDate.text && self.cid) {
         FmdbManager *fb = [FmdbManager shareManager];
-        [fb insertIntoCollectWithId:self.cid andTime:self.dict[@"IssueDate"] andTitle:self.textTitle andType:collectTypeAnswer];
+        [fb insertIntoCollectWithId:self.cid andTime:questionDate.text andTitle:titleLabel.text andType:collectTypeAnswer];
+    
     }
 }
 
@@ -279,21 +273,6 @@
 -(void)deleteFavorate{
     FmdbManager *fb = [FmdbManager shareManager];
     [fb deleteFromCollectWithId:self.cid andType:collectTypeAnswer];
-}
-
-
-#pragma mark - 点击评论按钮
--(void)writeClick{
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:user_name]) {
-        _commentView = [[CustomCommentView alloc] init];
-        [_commentView show];
-        [_commentView send:^(NSString *content) {
-            [self submitComment:content];
-        }];
-    }else{
-        LoginViewController *my = [[LoginViewController alloc] init];
-        [self.navigationController pushViewController:my animated:YES];
-    }
 }
 
 
@@ -305,18 +284,18 @@
     }
 
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-    [dict setObject:[[NSUserDefaults standardUserDefaults] objectForKey:user_id] forKey:@"uid"];
+    [dict setObject:[CZWManager manager].userID forKey:@"uid"];
     [dict setObject:@"0" forKey:@"fid"];
     [dict setObject:content forKey:@"content"];
     [dict setObject:self.cid forKey:@"tid"];
-    [dict setObject:self.type forKey:@"type"];
+    dict[@"type"] = [NSString stringWithFormat:@"%ld",self.type];
     [dict setObject:appOrigin forKey:@"origin"];
 
     [HttpRequest POST:[URLFile urlStringForAddcomment] parameters:dict success:^(id responseObject) {
-        [self loadDataTotal];
+
         if ([responseObject[@"result"] isEqualToString:@"success"]) {
             [LHController alert:@"评论成功"];
-            [self loadDataTotal];
+            [footView addReplyCont];
         }else{
             [LHController alert:@"评论失败"];
         }
@@ -326,30 +305,32 @@
     }];
 }
 
+#pragma mark - FootCommentViewDelegate
+- (void)clickButton:(NSInteger)slected{
+    if (slected == 0) {
+        if ([CZWManager manager].isLogin) {
+            CustomCommentView *commentView = [[CustomCommentView alloc] init];
+            [commentView show];
+            [commentView send:^(NSString *content) {
+                [self submitComment:content];
+            }];
+        }else{
+
+            [self presentViewController:[LoginViewController instance] animated:YES completion:nil];
+        }
+    }else{
+        CommentListViewController *comment = [[CommentListViewController alloc] init];
+        comment.type = self.type;
+        comment.cid = self.cid;
+        [self.navigationController pushViewController:comment animated:YES];
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-//-(void)viewWillAppear:(BOOL)animated{
-//    [super viewWillAppear:animated];
-//    [MobClick beginLogPageView:@"PageOne"];
-//
-//    [LHController getCustomTabBar].hidden = YES;
-//
-//    FmdbManager *fb = [FmdbManager shareManager];
-//    NSDictionary *dict = [fb selectFromCollectWithId:self.cid andType:collectTypeAnswer];
-//
-//    if ([dict allKeys].count > 0) {
-//        UIButton *btn = (UIButton *)[self.view viewWithTag:201];
-//        btn.selected = YES;
-//    }
-//}
-//
-//-(void)viewWillDisappear:(BOOL)animated{
-//    [super viewWillDisappear:animated];
-//    [MobClick endLogPageView:@"PageOne"];
-//}
 /*
  #pragma mark - Navigation
 

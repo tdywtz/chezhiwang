@@ -52,12 +52,6 @@
                                            secret:@"b79a37a46aae4533c30204781a11ae24"
                                       RedirectURL:@"http://sns.whalecloud.com/sina2/callback"];
 
-     [HttpRequest GET:@"http://m.12365auto.com/server/forAppWebService.ashx?act=zlcti" success:^(id responseObject) {
-         [[FmdbManager shareManager] createQuestion:responseObject];
-
-     } failure:^(NSError *error) {
-         
-     }];
     [HttpRequest downloadProvince];
   
     _window.backgroundColor = [UIColor whiteColor];

@@ -27,7 +27,7 @@
     HomepageSectionModel *newsSectionModel = [[HomepageSectionModel alloc] init];
     newsSectionModel.headTitle = @"新闻";
     newsSectionModel.headImageName = @"新闻";
-    newsSectionModel.footTitle = @"=更多新闻";
+    newsSectionModel.footTitle = @"更多新闻";
     newsSectionModel.headLineColor = RGB_color(0, 159, 251, 1);
     for (NSDictionary *dict in dictionary[@"news"]) {
         HomepageNewsModel * Model = [[HomepageNewsModel alloc] initWithDictionary:dict];

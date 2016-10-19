@@ -55,12 +55,10 @@
 
 - (void)loginClick{
 
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:user_name]) {
+    if ([CZWManager manager].isLogin) {
         return;
     }
-    LoginViewController *login = [[LoginViewController alloc] init];
-    BasicNavigationController *nvc = [[BasicNavigationController alloc] initWithRootViewController:login];
-    [self.parentVC presentViewController:nvc animated:YES completion:nil];
+    [self.parentVC presentViewController:[LoginViewController instance] animated:YES completion:nil];
 }
 
 - (void)setTitle:(NSString *)title imageUrl:(NSString *)imageUrl login:(BOOL)login{

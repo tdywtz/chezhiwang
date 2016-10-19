@@ -12,6 +12,8 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+
         self.lineView = [[UIView alloc] init];
         self.lineView.backgroundColor = RGB_color(221, 221, 221, 1);
         [self.contentView addSubview:self.lineView];

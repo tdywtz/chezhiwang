@@ -17,7 +17,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = RGB_color(249, 247, 246, 1);
+        self.backgroundColor = RGB_color(245, 247, 249, 1);
         
         writeButton = [UIButton buttonWithType:UIButtonTypeCustom];
         writeButton.layer.borderWidth = 1;
@@ -25,7 +25,7 @@
         [writeButton addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
 
         replyCountButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [replyCountButton setImage:[UIImage imageNamed:@"答疑"] forState:UIControlStateNormal];
+        [replyCountButton setImage:[UIImage imageNamed:@"comment_评论"] forState:UIControlStateNormal];
         [replyCountButton setTitle:@"0" forState:UIControlStateNormal];
         [replyCountButton setTitleColor:colorLightBlue forState:UIControlStateNormal];
         [replyCountButton setImageEdgeInsets:UIEdgeInsetsMake(0, -8, 0, 10)];
@@ -44,7 +44,7 @@
         }];
 
     //写评论按钮上的UI
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pen"]];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"comment_写评论"]];
 
         UILabel *label = [[UILabel alloc] init];
         label.text = @"写评论";
@@ -66,6 +66,13 @@
     return self;
 }
 
+- (void)oneButton{
+    [replyCountButton removeFromSuperview];
+ [writeButton remakeConstraints:^(MASConstraintMaker *make) {
+    make.edges.equalTo(UIEdgeInsetsMake(7, 10, 7, 10));
+ }];
+}
+
 - (void)buttonClick:(UIButton *)btn{
     NSInteger slected = 0;
     if (btn == replyCountButton) {
@@ -82,6 +89,13 @@
     [replyCountButton setTitle:replyCount forState:UIControlStateNormal];
 }
 
+- (void)addReplyCont{
+    NSInteger num = [replyCountButton.titleLabel.text integerValue];
+    num += 1;
+    NSString *text = [NSString stringWithFormat:@"%ld",num];
+
+    [self setReplyConut:text];
+}
 
 - (void)drawRect:(CGRect)rect{
     [super drawRect:rect];

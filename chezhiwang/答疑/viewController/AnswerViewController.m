@@ -28,10 +28,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self createLeftItem];
+
+    self.title = @"答疑";
+   // [self createLeftItem];
     [self createRightItem]; 
-    
     
     AnswerListViewController *answer1 = [[AnswerListViewController alloc] init];
     AnswerListViewController *answer2 = [[AnswerListViewController alloc] init];
@@ -45,6 +45,10 @@
     answer2.cid = self.cid;
     answer3.cid = self.cid;
     answer4.cid = self.cid;
+    answer1.tableView.contentInset = UIEdgeInsetsMake(40+64, 0, 0, 0);
+    answer2.tableView.contentInset = UIEdgeInsetsMake(40+64, 0, 0, 0);
+    answer3.tableView.contentInset = UIEdgeInsetsMake(40+64, 0, 0, 0);
+    answer4.tableView.contentInset = UIEdgeInsetsMake(40+64, 0, 0, 0);
     
     newsView = [LHPageViewcontroller initWithSpace:0 withParentViewController:self];
     newsView.LHDelegate = self;
@@ -62,46 +66,64 @@
 }
 //右侧按钮
 -(void)createRightItem{
-    
-    UIButton *btn = [LHController createButtnFram:CGRectMake(0, 0, 20, 20) Target:self Action:@selector(rightItemClick) Text:nil];
-    [btn setImage:[UIImage imageNamed:@"search"] forState:UIControlStateNormal];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
-}
-
--(void)rightItemClick{
-        AnswerSearchViewController *search = [[AnswerSearchViewController alloc] init];
-        search.numType = 3;
-        search.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:search animated:YES];
-
-}
-
-//左侧按钮
--(void)createLeftItem{
-    UIButton *btn = [LHController createButtnFram:CGRectMake(0, 0, 90, 20) Target:self Action:@selector(leftItemClick) Text:@"我要提问"];
+    UIButton *btn = [LHController createButtnFram:CGRectMake(0, 0, 90, 20) Target:self Action:@selector(rightItemClick) Text:@"我要提问"];
     btn.titleLabel.font = [UIFont systemFontOfSize:[LHController setFont]-2];
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 3, 16, 14)];
     imageView.image = [UIImage imageNamed:@"answer_question_left"];
     [btn addSubview:imageView];
-    
+
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
-    self.navigationItem.leftBarButtonItem = item;
+    self.navigationItem.rightBarButtonItem = item;
+
+//    UIButton *btn = [LHController createButtnFram:CGRectMake(0, 0, 20, 20) Target:self Action:@selector(rightItemClick) Text:nil];
+//    [btn setImage:[UIImage imageNamed:@"search"] forState:UIControlStateNormal];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
 }
 
--(void)leftItemClick{
-
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:user_name]) {
+-(void)rightItemClick{
+    if ([CZWManager manager].isLogin) {
         AskViewController *ask = [[AskViewController alloc] init];
         ask.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:ask animated:YES];
     }else{
-        LoginViewController *my = [[LoginViewController alloc] init];
-        my.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:my animated:YES];
+
+        [self presentViewController:[LoginViewController instance] animated:YES completion:nil];
     }
+
+//        AnswerSearchViewController *search = [[AnswerSearchViewController alloc] init];
+//        search.numType = 3;
+//        search.hidesBottomBarWhenPushed = YES;
+//        [self.navigationController pushViewController:search animated:YES];
+
 }
+
+//左侧按钮
+//-(void)createLeftItem{
+//    UIButton *btn = [LHController createButtnFram:CGRectMake(0, 0, 90, 20) Target:self Action:@selector(leftItemClick) Text:@"我要提问"];
+//    btn.titleLabel.font = [UIFont systemFontOfSize:[LHController setFont]-2];
+//    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//    [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
+//    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 3, 16, 14)];
+//    imageView.image = [UIImage imageNamed:@"answer_question_left"];
+//    [btn addSubview:imageView];
+//    
+//    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
+//    self.navigationItem.leftBarButtonItem = item;
+//}
+
+//-(void)leftItemClick{
+//
+//    if ([CZWManager manager].isLogin) {
+//        AskViewController *ask = [[AskViewController alloc] init];
+//        ask.hidesBottomBarWhenPushed = YES;
+//        [self.navigationController pushViewController:ask animated:YES];
+//    }else{
+//        
+//        [self presentViewController:[LoginViewController instance] animated:YES completion:nil];
+//    }
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

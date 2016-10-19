@@ -129,15 +129,19 @@
     
     [self.attributeString addAttribute:NSParagraphStyleAttributeName value:self.parapgStyle range:range];
     [_attributeString endEditing];
-
 }
 
 #pragma mark - views
-
+//layout布局
 -(CGSize)intrinsicContentSize{
     CGSize size = [super intrinsicContentSize];
-  
     return CGSizeMake(size.width+self.textInsets.left+self.textInsets.right, size.height+self.textInsets.top+self.textInsets.bottom);
+}
+
+//frame布局
+- (CGSize)sizeThatFits:(CGSize)size{
+    CGSize sizeInitial = [super sizeThatFits:size];
+     return CGSizeMake(sizeInitial.width+self.textInsets.left+self.textInsets.right, sizeInitial.height+self.textInsets.top+self.textInsets.bottom);
 }
 
 - (void)drawTextInRect:(CGRect)rect{
@@ -146,18 +150,22 @@
     //绘画选择区域背景
 }
 
--(void)addColor:(UIColor *)color range:(NSRange)range{
-    [self.attributeString addAttribute:NSForegroundColorAttributeName value:color range:range];
+- (void)addAttributes:(NSDictionary<NSString *, id> *)attrs range:(NSRange)range{
+    [self.attributeString addAttributes:attrs range:range];
     self.attributedText = self.attributeString;
 }
 
 - (void)insertImage:(UIImage *)image size:(CGSize)size index:(NSInteger)index{
+    [self insertImage:image frame:CGRectMake(0, 0, size.width, size.height) index:index];
+}
+
+- (void)insertImage:(UIImage *)image frame:(CGRect)frame index:(NSInteger)index{
     NSTextAttachment *achment = [[NSTextAttachment alloc] init];
     achment.image = image;
-    achment.bounds = CGRectMake(0, 0, size.width, size.height);
+    achment.bounds = frame;
     NSAttributedString *att = [NSAttributedString attributedStringWithAttachment:achment];
     [self.attributeString insertAttributedString:att atIndex:index];
-     self.attributedText = self.attributeString;
+    self.attributedText = self.attributeString;
 }
 
 - (void)addImage:(UIImage *)image size:(CGSize)size range:(NSRange)range{

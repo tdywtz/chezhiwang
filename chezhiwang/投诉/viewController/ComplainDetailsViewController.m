@@ -11,27 +11,29 @@
 #import "LoginViewController.h"
 #import "CustomCommentView.h"
 #import "CZWShareViewController.h"
+#import "FootCommentView.h"
 
-
-@interface ComplainDetailsViewController ()
+@interface ComplainDetailsViewController ()<FootCommentViewDelegate>
 {
-    UIScrollView *scrollView;
     UIView *sview;
     CustomCommentView *_commentView;
-
-    UILabel *numLabel;
-    NSString *http;
-    BOOL isAhare;
 
     CGFloat B;
 
     CZWLabel *titleLabel;//标题
-    CZWLabel *parameterLabel;//参数
+    //参数
+    UILabel  *idLabel;
+    UILabel  *brandLabel;
+    UILabel  *seriesLabel;
+    UILabel  *modelLabel;
+    UILabel  *dateLabel;
     CZWLabel *questionContent;//问题内容
     CZWLabel *answerContent;//回复内容
-}
-@property (strong,nonatomic) UIView *contentView;
 
+    FootCommentView *footView;
+}
+@property (nonatomic,assign) NewsType type;//类型
+@property (nonatomic,strong) NSDictionary *dict;
 @end
 
 @implementation ComplainDetailsViewController
@@ -49,10 +51,8 @@
     [HttpRequest GET:url success:^(id responseObject) {
 
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-        if ([responseObject count] == 0) {
-            return ;
-        }
-        self.dict = responseObject[0];
+
+        self.dict = responseObject;
 
         [self setData];
 
@@ -65,12 +65,14 @@
     [super viewDidLoad];
 
     B = [LHController setFont];
-    http = @"";
-    self.type = @"2";
+
+    self.type = NewsTypeComplain;
+    [self.scrollView makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(UIEdgeInsetsMake(0, 0, 49, 0));
+    }];
 
     [self createRightItems];
     [self createBgView];
-    [self createScrollView];
     [self createScrollViewSubViews];
     [self createFootView];
 
@@ -94,13 +96,7 @@
 
 -(void)createRightItems{
     FmdbManager *fb = [FmdbManager shareManager];
-    collectType type;
-    if ([self.type isEqualToString:@"2"]) {
-        type = collectTypeCompalin;
-    }else{
-        type = collectTypeAnswer;
-    }
-    NSDictionary *dict = [fb selectFromCollectWithId:_cid andType:type];
+    NSDictionary *dict = [fb selectFromCollectWithId:_cid andType:collectTypeCompalin];
     BOOL isSelect = NO;
     if ([dict allKeys].count > 0) {
         isSelect = YES;
@@ -112,12 +108,14 @@
 
         UIButton *btn = [LHController createButtnFram:CGRectMake(5, 0, 20, 20) Target:self Action:@selector(rightItemClick:) Text:nil];
         btn.tag = 100+i;
-        NSString *iamgeName = [NSString stringWithFormat:@"share%d",3-i];
-        [btn setBackgroundImage:[UIImage imageNamed:iamgeName] forState:UIControlStateNormal];
         if (i == 1) {
-            btn.frame = CGRectMake(0, 0, 25, 25);
-            [btn setBackgroundImage:[UIImage imageNamed:@"xin"] forState:UIControlStateSelected];
+            btn.frame = CGRectMake(0, 0, 23, 23);
+            [btn setBackgroundImage:[UIImage imageNamed:@"comment_收藏"] forState:UIControlStateNormal];
+            [btn setBackgroundImage:[UIImage imageNamed:@"comment_收藏_yes"] forState:UIControlStateSelected];
             btn.selected = isSelect;
+        }else{
+
+            [btn setBackgroundImage:[UIImage imageNamed:@"comment_转发"] forState:UIControlStateNormal];
         }
         [bg addSubview:btn];
         btn.center = CGPointMake(bg.frame.size.width/2, bg.frame.size.height/2);
@@ -144,64 +142,113 @@
         NSString *html = self.dict[@"content"] == nil?self.dict[@"Content"]:self.dict[@"content"];
         if (html.length > 100) html = [html substringToIndex:99];
         share.shareContent = html;
-        share.shareTitle = self.textTitle;
+        share.shareTitle = self.dict[@"title"];
         [share setBluffImageWithView:[UIApplication sharedApplication].keyWindow.rootViewController.view];
         [self presentViewController:share animated:YES completion:nil];
     }
 }
 
-#pragma mark - 滚动视图
--(void)createScrollView{
-
-    scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT-49)];
-    scrollView.backgroundColor = [UIColor whiteColor];
-    scrollView.bounces = YES;
-    [self.view addSubview:scrollView];
-}
-
 #pragma mark -
 -(void)createScrollViewSubViews{
 
-    self.contentView = [[UIView alloc] init];
-    [scrollView addSubview:self.contentView];
-    [self.contentView makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(UIEdgeInsetsZero);
-        make.width.equalTo(WIDTH);
-    }];
-
     titleLabel = [[CZWLabel alloc] init];
+    titleLabel.numberOfLines = 0;
     titleLabel.font = [UIFont systemFontOfSize:17];
+    [self.contentView addSubview:titleLabel];
 
-    parameterLabel = [[CZWLabel alloc] init];
-    parameterLabel.font = [UIFont systemFontOfSize:13];
-    parameterLabel.textColor = colorLightGray;
-    parameterLabel.backgroundColor = colorLineGray;
-    parameterLabel.linesSpacing = 4;
-    parameterLabel.textInsets = UIEdgeInsetsMake(10, 5, 10, 5);
+    NSArray *leftTitles = @[@"投诉编号：",@"投诉品牌：",@"投诉车系：",@"投诉车型：",@"投诉时间："];
 
-    UILabel *complainTitle = [LHController createLabelWithFrame:CGRectZero Font:B-3 Bold:NO TextColor:colorLightGray Text:@"投诉内容："];
+    NSArray *objectsString = @[@"idLabel",@"brandLabel",@"seriesLabel",@"modelLabel",@"dateLabel"];
+
+    UIView *temp;
+    for (int i = 0; i < 5; i ++) {
+        UILabel *leftLabel = [[UILabel alloc] init];
+        leftLabel.font = [UIFont systemFontOfSize:13];
+        leftLabel.text = leftTitles[i];
+        leftLabel.textColor = colorLightGray;
+
+        UILabel *rightLabel = [[UILabel alloc] init];
+        rightLabel.font = [UIFont systemFontOfSize:13];
+        rightLabel.textColor = colorDeepGray;
+
+        [self setValue:rightLabel forKey:objectsString[i]];
+
+        UIView *lineView = [[UIView alloc] init];
+        lineView.backgroundColor = RGB_color(240, 240, 240, 1);
+
+        [self.contentView addSubview:leftLabel];
+        [self.contentView addSubview:rightLabel];
+        [self.contentView addSubview:lineView];
+        
+        if (temp == nil) {
+            [leftLabel makeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(titleLabel.bottom).offset(30);
+                make.left.equalTo(10);
+            }];
+        }else{
+            [leftLabel makeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(temp.bottom).offset(15);
+                make.left.equalTo(10);
+            }];
+        }
+
+        [rightLabel makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(leftLabel.right).offset(10);
+            make.top.equalTo(leftLabel);
+        }];
+
+        [lineView makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.equalTo(0);
+            make.top.equalTo(leftLabel.bottom).offset(7);
+            make.height.equalTo(1);
+        }];
+        if (i == 4) {
+            [lineView updateConstraints:^(MASConstraintMaker *make) {
+                make.height.equalTo(5);
+            }];
+        }
+
+        temp = leftLabel;
+    }
+
+    CZWLabel *complainTitle = [[CZWLabel alloc] init];
+    complainTitle.font = [UIFont systemFontOfSize:14];
+    complainTitle.textColor = colorLightGray;
+    complainTitle.text = @"  投诉内容：";
+    UIImage *acomplainTitleImage = [UIImage imageNamed:@"答疑"];
+    [complainTitle insertImage:acomplainTitleImage frame:CGRectMake(0, -3, 17, 17) index:0];
 
     questionContent = [[CZWLabel alloc] init];
-    questionContent.firstLineHeadIndent = 28;
     questionContent.textColor = colorDeepGray;
     questionContent.linesSpacing = 4;
     questionContent.font = [UIFont systemFontOfSize:14];
 
-    UILabel *answerTitle = [LHController createLabelWithFrame:CGRectZero Font:B-3 Bold:NO TextColor:colorLightGray Text:@"投诉回复："];
+    
+    CZWLabel *answerTitle = [[CZWLabel alloc] init];
+    answerTitle.font = [UIFont systemFontOfSize:14];
+    answerTitle.textColor = colorLightGray;
+    answerTitle.text = @"  投诉回复：";
+    UIImage *answerTitleImage = [UIImage imageNamed:@"答疑"];
+    [answerTitle insertImage:answerTitleImage frame:CGRectMake(0, -3, 17, 17) index:0];
+
+    UIView *lineView2 = [UIView new];
+    lineView2.backgroundColor = RGB_color(240, 240, 240, 1);
+
+    UIView *lineView3 = [UIView new];
+    lineView3.backgroundColor = RGB_color(240, 240, 240, 1);
+
 
     answerContent = [[CZWLabel alloc] init];
     answerContent.linesSpacing = 4;
-    answerContent.firstLineHeadIndent = 28;
     answerContent.textColor = colorDeepGray;
     answerContent.font = [UIFont systemFontOfSize:14];
 
-    [self.contentView addSubview:titleLabel];
-    [self.contentView addSubview:parameterLabel];
     [self.contentView addSubview:complainTitle];
     [self.contentView addSubview:questionContent];
     [self.contentView addSubview:answerTitle];
     [self.contentView addSubview:answerContent];
-
+    [self.contentView addSubview:lineView2];
+    [self.contentView addSubview:lineView3];
 
     [titleLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(20);
@@ -209,63 +256,52 @@
         make.width.lessThanOrEqualTo(WIDTH-30);
     }];
 
-
-    [parameterLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(titleLabel.bottom).offset(20);
-        make.left.equalTo(15);
-        make.right.equalTo(-15);
-    }];
-
     [complainTitle makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(parameterLabel);
-        make.top.equalTo(parameterLabel.bottom).offset(20);
+        make.left.equalTo(10);
+        make.top.equalTo(temp.bottom).offset(40);
     }];
 
     [questionContent makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(15);
+        make.left.equalTo(10);
         make.top.equalTo(complainTitle.bottom).offset(10);
-        make.right.equalTo(-15);
+        make.right.equalTo(-10);
+    }];
+
+    [lineView2 makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(0);
+        make.top.equalTo(questionContent.bottom).offset(20);
+        make.height.equalTo(5);
     }];
 
     [answerTitle makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(15);
-        make.top.equalTo(questionContent.bottom).offset(20);
+        make.left.equalTo(10);
+        make.top.equalTo(lineView2.bottom).offset(20);
     }];
 
     [answerContent makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(15);
+        make.left.equalTo(10);
         make.top.equalTo(answerTitle.bottom).offset(10);
-        make.right.equalTo(-15);
-        make.bottom.equalTo(-20);
+        make.right.equalTo(-10);
     }];
 
+    [lineView3 makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(0);
+        make.top.equalTo(answerContent.bottom).offset(20);
+        make.height.equalTo(5);
+        make.bottom.equalTo(0);
+    }];
 }
 
 
 - (void)setData{
 
-    titleLabel.text = _textTitle;
+    titleLabel.text = self.dict[@""];
 
-    NSArray *array = @[@"投诉编号：",@"投诉品牌：",@"投诉车系：",@"投诉车型：",@"投诉时间："];
-    NSArray *arr = @[@"id",@"brand",@"series",@"model",@"date"];
-
-    NSString *text = nil;
-    for (int i = 0; i < arr.count; i ++) {
-        NSString *str = _dict[arr[i]];
-        if (i == 0) {
-            str = [NSString stringWithFormat:@"[%@]",str];
-            text = [NSString stringWithFormat:@"%@%@",array[i],str];
-        }else{
-            str = [NSString stringWithFormat:@"%@%@",array[i],str];
-            text = [NSString stringWithFormat:@"%@\n%@",text,str];
-        }
-    }
-
-    parameterLabel.text = text;
-    for (int i = 0; i < array.count; i ++) {
-        NSString *str = array[i];
-        [parameterLabel addColor:colorDeepGray range:[parameterLabel.text rangeOfString:str]];
-    }
+    idLabel.text = self.dict[@"id"];
+     brandLabel.text = self.dict[@"brand"];
+     seriesLabel.text = self.dict[@"series"];
+     modelLabel.text = self.dict[@"model"];
+     dateLabel.text = self.dict[@"date"];
 
 
     answerContent.text =  _dict[@"answer"];;
@@ -324,41 +360,16 @@
 
 #pragma mark - 底部横条
 -(void)createFootView{
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, HEIGHT-49, WIDTH, 49)];
-    view.backgroundColor = [UIColor colorWithRed:0/255.0 green:126/255.0 blue:184/255.0 alpha:1];
-    [self.view addSubview:view];
+    footView = [[FootCommentView alloc] initWithFrame:CGRectZero];
+    footView.delegate = self;
+    [self.view addSubview:footView];
 
-    UIButton *write =  [LHController createButtnFram:CGRectMake(10, 10,WIDTH-80, 28) Target:self Action:@selector(writeClick) Text:nil];
-    write.backgroundColor = [UIColor whiteColor];
-    [view addSubview:write];
-
-    [write setImage:[UIImage imageNamed:@"pen"] forState:UIControlStateNormal];
-    [write setTitle:@"写评论" forState:UIControlStateNormal];
-    [write setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    [write setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
-    write.titleLabel.font = [UIFont systemFontOfSize:14];
-
-    UIButton *btn = [LHController createButtnFram:CGRectMake(write.frame.origin.x+write.frame.size.width+10, 9, 30, 30) Target:self Action:@selector(btnClick:) Text:nil];
-    [btn setImage:[UIImage imageNamed:@"share1"] forState:UIControlStateNormal];
-    [view addSubview:btn];
-    numLabel = [LHController createLabelWithFrame:CGRectMake(btn.frame.origin.x+btn.frame.size.width, btn.frame.origin.y, 20, 30) Font:B-3 Bold:NO TextColor:[UIColor whiteColor] Text:nil];
-    numLabel.textColor = [UIColor whiteColor];
-    [view addSubview:numLabel];
-    [self loadDataTotal];
-}
-//
-
-
-#pragma mark - 取得总评论数
--(void)loadDataTotal{
-    NSString *url = [NSString stringWithFormat:[URLFile urlStringForPL_total],_cid,self.type];
-    [HttpRequest GET:url success:^(id responseObject) {
-        NSDictionary *dict = responseObject[0];
-        numLabel.text = dict[@"count"] == nil?@"0":dict[@"count"];
-    } failure:^(NSError *error) {
-        NSLog(@"%@",error);
+    [footView makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(0);
+        make.height.equalTo(49);
     }];
 }
+
 
 #pragma mark - 底部右侧按钮响应方法
 -(void)btnClick:(UIButton *)btn{
@@ -374,9 +385,9 @@
 #pragma mark - 收藏
 -(void)favorate{
 
-    if (self.textTitle && self.dict[@"date"] && self.cid) {
+    if (titleLabel.text && dateLabel.text && self.cid) {
         FmdbManager *fb = [FmdbManager shareManager];
-        [fb insertIntoCollectWithId:self.cid andTime:self.dict[@"date"] andTitle:self.textTitle andType:collectTypeCompalin];
+        [fb insertIntoCollectWithId:self.cid andTime:dateLabel.text andTitle:titleLabel.text andType:collectTypeCompalin];
     }
 }
 
@@ -388,7 +399,7 @@
 
 #pragma mark - 点击评论按钮
 -(void)writeClick{
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:user_name]) {
+    if ([CZWManager manager].isLogin) {
         _commentView = [[CustomCommentView alloc] init];
         [_commentView show];
         [_commentView send:^(NSString *content) {
@@ -396,7 +407,7 @@
         }];
     }else{
         LoginViewController *my = [[LoginViewController alloc] init];
-        [self.navigationController pushViewController:my animated:YES];
+        [self presentViewController:my animated:YES completion:nil];
     }
 }
 
@@ -409,18 +420,18 @@
     }
 
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-    [dict setObject:[[NSUserDefaults standardUserDefaults] objectForKey:user_id] forKey:@"uid"];
+    [dict setObject:[CZWManager manager].userID forKey:@"uid"];
     [dict setObject:@"0" forKey:@"fid"];
     [dict setObject:content forKey:@"content"];
     [dict setObject:self.cid forKey:@"tid"];
-    [dict setObject:self.type forKey:@"type"];
+    dict[@"type"] = [NSString stringWithFormat:@"%ld",self.type];
     [dict setObject:appOrigin forKey:@"origin"];
 
     [HttpRequest POST:[URLFile urlStringForAddcomment] parameters:dict success:^(id responseObject) {
-        [self loadDataTotal];
+
         if ([responseObject[@"result"] isEqualToString:@"success"]) {
             [LHController alert:@"评论成功"];
-            [self loadDataTotal];
+            [footView addReplyCont];
         }else{
             [LHController alert:@"评论失败"];
         }
@@ -428,6 +439,27 @@
     } failure:^(NSError *error) {
         [LHController alert:@"评论失败"];
     }];
+}
+
+#pragma mark - FootCommentViewDelegate
+- (void)clickButton:(NSInteger)slected{
+    if (slected == 0) {
+        if ([CZWManager manager].isLogin) {
+            CustomCommentView *commentView = [[CustomCommentView alloc] init];
+            [commentView show];
+            [commentView send:^(NSString *content) {
+                [self submitComment:content];
+            }];
+        }else{
+
+            [self presentViewController:[LoginViewController instance] animated:YES completion:nil];
+        }
+    }else{
+        CommentListViewController *comment = [[CommentListViewController alloc] init];
+        comment.type = self.type;
+        comment.cid = self.cid;
+        [self.navigationController pushViewController:comment animated:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

@@ -184,7 +184,7 @@
 #pragma mark - 提交数据
 -(void)submitData{
     
-    NSDictionary *dict = @{@"id":@"0",@"uid":[[NSUserDefaults standardUserDefaults] objectForKey:user_id],@"title":titleField.text,@"content":contentView.text,@"origin":@"7"};
+    NSDictionary *dict = @{@"id":@"0",@"uid":[CZWManager manager].userID,@"title":titleField.text,@"content":contentView.text,@"origin":@"7"};
     [HttpRequest POST:[URLFile urlStringForEditZJDY] parameters:dict success:^(id responseObject) {
         button.enabled = YES;
         [button setBackgroundColor:[UIColor colorWithRed:254/255.0 green:153/255.0 blue:23/255.0 alpha:1]];

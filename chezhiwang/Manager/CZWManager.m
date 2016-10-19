@@ -15,6 +15,7 @@
 static NSString *userName = @"userName";
 static NSString *userID = @"userId";
 static NSString *iconUrl = @"iconUrl";
+static NSString *password = @"password";
 
 + (instancetype)manager{
     static CZWManager *myManager = nil;
@@ -42,12 +43,14 @@ static NSString *iconUrl = @"iconUrl";
     _userName = [defaults objectForKey:userName];
     _userID = [defaults objectForKey:userID];
     _iconUrl = [defaults objectForKey:iconUrl];
+    _password = [defaults objectForKey:password];
 }
 
 - (void)loginWithDictionary:(NSDictionary *)dictionary{
     [defaults setObject:dictionary[@"name"] forKey:userName];
     [defaults setObject:dictionary[@"path"] forKey:iconUrl];
     [defaults setObject:dictionary[@"userid"] forKey:userID];
+    [defaults setObject:dictionary[@"password"] forKey:password];
     [defaults synchronize];
 
     [self updateInfo];
@@ -58,8 +61,14 @@ static NSString *iconUrl = @"iconUrl";
     [defaults removeObjectForKey:userName];
     [defaults removeObjectForKey:userID];
     [defaults removeObjectForKey:iconUrl];
+    [defaults removeObjectForKey:password];
     [defaults synchronize];
 
     [self updateInfo];
+}
+
+#pragma mark - class method
++ (UIImage *)defaultIconImage{
+    return [UIImage imageNamed:@"defaultImage_icon"];
 }
 @end

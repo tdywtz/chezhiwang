@@ -101,11 +101,14 @@
 }
 
 + (NSArray *)arayWithArray:(NSArray *)array{
+    if (![array isKindOfClass:[NSArray class]]) {
+        return nil;
+    }
     NSMutableArray *marray = [[NSMutableArray alloc] init];
     for (NSDictionary *dict in array) {
         [marray addObject:[[self alloc] initWithDictionary:dict]];
     }
-    return [marray copy];
+    return marray;
 }
 
 @end

@@ -13,7 +13,5 @@
 @interface AnswerDetailsViewController : BasicViewController
 
 @property (nonatomic,copy) NSString *cid;
-@property (nonatomic,copy) NSString *textTitle;
-@property (nonatomic,copy) NSString *type;
 
 @end

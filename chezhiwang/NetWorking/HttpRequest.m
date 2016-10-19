@@ -52,7 +52,7 @@
 + (NSURLSessionDataTask *)GET:(NSString *)URLString
                       success:(void (^)(id responseObject))success
                       failure:(void (^)(NSError * error))failure{
-//NSLog(@"%@",URLString);
+NSLog(@"%@",URLString);
     //汉子编码处理
     URLString = [URLString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     //默认的缓存策略， 如果缓存不存在，直接从服务端获取。如果缓存存在，会根据response中的Cache-Control字段判断下一步操作，如: Cache-Control字段为must-revalidata, 则询问服务端该数据是否有更新，无更新的话直接返回给用户缓存数据，若已更新，则请求服务端.
@@ -100,7 +100,7 @@
                     parameters:(NSDictionary *)parameters
                        success:(void (^)(id responseObject))success
                        failure:(void (^)(NSError * error))failure{
-    
+  
     NSURLSessionDataTask *task = [[self sessionManager] POST:URLString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

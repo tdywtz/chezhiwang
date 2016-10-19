@@ -7,48 +7,40 @@
 //
 
 #import "AnswerListViewController.h"
-#import "AnswerListModel.h"
-#import "AnswerListCell.h"
+#import "HomepageAnswerCell.h"
 #import "AnswerDetailsViewController.h"
 
 
 @interface AnswerListViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
-    UIView *_headerView;
-    UITableView *_tableView;
     NSMutableArray *_dataArray;
-
-    CGFloat B;
-
     NSInteger _count;
 }
-@property (nonatomic,strong) NSArray *readArray;
 @end
 
 @implementation AnswerListViewController
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _type = @"0";
+    }
+    return self;
+}
 -(void)loadData{
    
-    NSString *url = [NSString stringWithFormat:[URLFile urlStringForZJDY],self.type,_count,10];
+    NSString *url = [NSString stringWithFormat:[URLFile urlStringForZJDY],self.type,_count];
+    __weak __typeof(self)weakSelf = self;
     [HttpRequest GET:url success:^(id responseObject) {
         
         if (_count == 1) {
 
             [_dataArray removeAllObjects];
         }
-        for (NSDictionary *subDic in responseObject) {
-            AnswerListModel *model = [[AnswerListModel alloc] init];
-            model.question = [subDic objectForKey:@"question"];
-            model.answer = [subDic objectForKey:@"answer"];
-            model.uid = [subDic objectForKey:@"id"];
-            model.date = [subDic objectForKey:@"date"];
-            model.type = [subDic objectForKey:@"type"];
-            
-            [_dataArray addObject:model];
-        }
-        self.readArray = [[FmdbManager shareManager] selectAllFromReadHistory:ReadHistoryTypeAnswer];
+        [_dataArray addObjectsFromArray:[HomepageAnswerModel arayWithArray:responseObject[@"rel"]]];
 
-        [_tableView reloadData];
+        [weakSelf.tableView reloadData];
 
     } failure:^(NSError *error) {
 
@@ -58,26 +50,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
-    _count = 1;
-    B = [LHController setFont];
-    self.cidArray = [[NSMutableArray alloc] init];
-    [self createTableView];
-    _dataArray = [[NSMutableArray alloc] init];
-    self.readArray = [[FmdbManager shareManager] selectAllFromReadHistory:ReadHistoryTypeAnswer];
-    
 
-    [self createTableView];
+    _count = 1;
+    _dataArray = [[NSMutableArray alloc] init];
     [self loadData];
 }
 
-//tableview
--(void)createTableView{
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 40+64, WIDTH, HEIGHT-49-40-64) style:UITableViewStylePlain];
-    _tableView.delegate = self;
-    _tableView.dataSource = self;
-    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.view addSubview:_tableView];
+- (UITableView *)tableView{
+    if (_tableView == nil) {
+        _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.estimatedRowHeight = 80;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [self.view addSubview:_tableView];
+    }
+    return _tableView;
 }
 
 
@@ -92,36 +80,22 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 
-    AnswerListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    HomepageAnswerCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (!cell) {
-        cell = [[AnswerListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell = [[HomepageAnswerCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
-    cell.readArray = self.readArray;
-    cell.model = _dataArray[indexPath.row];
+    cell.answerModel = _dataArray[indexPath.row];
     return cell;
 }
 
 #pragma mark - UITableViewDelegate
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-   
-    return 125;
-}
-
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     AnswerDetailsViewController *detail = [[AnswerDetailsViewController alloc] init];
-    AnswerListModel *mdoel = _dataArray[indexPath.row];
-    detail.textTitle = mdoel.question;
-    detail.cid = mdoel.uid;
-    detail.type = @"3";
-    
-    //改变颜色
-    AnswerListCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    UILabel *title = (UILabel *)[cell valueForKey:@"questionLabel"];
-    title.textColor = colorDeepGray;
+    HomepageAnswerModel *model = _dataArray[indexPath.row];
+    detail.cid = model.ID;
+
     //存储数据库
-    [[FmdbManager shareManager] insertIntoReadHistoryWithId:mdoel.uid andTitle:mdoel.question andType:ReadHistoryTypeAnswer];
+    [[FmdbManager shareManager] insertIntoReadHistoryWithId:model.ID andTitle:model.question andType:ReadHistoryTypeAnswer];
     detail.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detail animated:YES];
 }

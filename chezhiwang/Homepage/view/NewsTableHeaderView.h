@@ -15,5 +15,4 @@
 @property (nonatomic,strong) NSArray *pointNews;
 @property (nonatomic,strong) NSArray *pointImages;
 
--(void)loadData;
 @end

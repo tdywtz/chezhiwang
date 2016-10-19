@@ -7,8 +7,188 @@
 //
 
 #import "NewsTestTableViewCell.h"
-#import "TestCellIntroduceView.h"
 #import "ImageShowViewController.h"
+
+#pragma mark - 精品试驾cell右侧展示视图文字展示框
+@implementation TestLabel
+
+-(void)setDraw_x:(CGFloat)draw_x{
+    if (_draw_x != draw_x) {
+        _draw_x = draw_x;
+        // [self setNeedsDisplay];
+    }
+}
+
+- (void)drawRect:(CGRect)rect{
+    [super drawRect:rect];
+    rect.size.height -= 6;
+    rect.size.width -= 4;
+    //框
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    //    CGContextSetTextMatrix(context, CGAffineTransformIdentity);
+    //    CGContextTranslateCTM(context, -self.textInsets.left, rect.size.height+self.textInsets.top);
+    //  CGContextScaleCTM(context, 1.0, -1.0);
+
+    //CGContextSetRGBStrokeColor(context, 255/255.0,  147/255.0, 4/255.0, 1);//线条颜色
+    CGContextSetStrokeColorWithColor(context, RGB_color(231, 212, 183, 1).CGColor);
+    //CGContextSetRGBFillColor(context, 0.2, 0.3, 0.8, 0.5);
+    //CGContextMoveToPoint(context, 1, 10);
+    CGContextMoveToPoint(context, self.draw_x-5, 10);
+    CGContextAddLineToPoint(context, self.draw_x, 5);
+    CGContextAddLineToPoint(context, self.draw_x+5, 10);
+    CGContextAddArcToPoint(context, rect.size.width-1, 10, rect.size.width-1, rect.size.height-1, self.cornerRadius);
+    CGContextAddArcToPoint(context, rect.size.width-1, rect.size.height-1, 1, rect.size.height-1, self.cornerRadius);
+    CGContextAddArcToPoint(context, 1, rect.size.height-1, 1, 10, self.cornerRadius);
+    CGContextAddArcToPoint(context, 1, 10, self.draw_x-5, 10, self.cornerRadius);
+
+    CGContextClosePath(context);
+    CGContextDrawPath(context, kCGPathStroke);
+
+    //三角
+    CGContextRef jiantou = UIGraphicsGetCurrentContext();
+    CGContextSetRGBStrokeColor(jiantou, 220/255.0,  220/255.0, 220/255.0, 1);//线条颜色
+    CGFloat tox = rect.size.width-self.textInsets.right+10;
+    CGFloat cy = rect.size.height/2+5;
+    CGContextMoveToPoint(jiantou, tox, cy-8);
+    CGContextAddLineToPoint(jiantou, tox+7, cy);
+    CGContextAddLineToPoint(jiantou, tox, cy+8);
+    CGContextStrokePath(jiantou);
+}
+@end
+
+#pragma mark - 精品试驾cell右侧展示视图上自定义button
+@implementation TestCustonBtn
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        _customImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(frame), CGRectGetWidth(frame))];
+        _customTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,frame.size.height-17, frame.size.width, 17)];
+        _customTitleLabel.font = [UIFont systemFontOfSize:15];
+        _customTitleLabel.textAlignment = NSTextAlignmentCenter;
+
+        [self addSubview:_customImageView];
+        [self addSubview:_customTitleLabel];
+    }
+
+    return self;
+}
+
+//设置选中view的背景颜色和标题颜色
+- (void)setCustomBarTitleColor:(UIColor *)color{
+    _customTitleLabel.textColor = [UIColor colorWithCGColor:color.CGColor];
+    //_customImageView.backgroundColor = [UIColor colorWithCGColor:color.CGColor];
+}
+@end
+
+#pragma mark - 精品试驾cell右侧展示视图
+@implementation TestCellIntroduceView
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+
+
+        _buttons = [[NSMutableArray alloc] init];
+        NSArray *titles = @[@"外观",@"内饰",@"性能",@"空间",@"安全"];
+        CGFloat btnWidth = 35;
+        if (WIDTH > 330 ) {
+            btnWidth = 40;
+        }
+        CGFloat space = (WIDTH-130-btnWidth*titles.count)/(titles.count-1);
+        for (int i = 0; i < titles.count; i ++) {
+            TestCustonBtn *btn = [[TestCustonBtn alloc] initWithFrame:CGRectMake((btnWidth+space)*i, 0, btnWidth, btnWidth+21)];
+            btn.customTitleLabel.text = titles[i];
+            [btn addTarget:self action:@selector(titleClick:) forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:btn];
+            [_buttons addObject:btn];
+            if (i == 0) {
+                //设置选中颜色
+                [btn setCustomBarTitleColor:colorYellow];
+            }else{
+                //未选中颜色
+                [btn setCustomBarTitleColor:colorLightBlue];
+            }
+        }
+
+        TestCustonBtn *btn = _buttons[0];
+        _contentLabel = [[TestLabel alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(btn.frame), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)-btn.frame.size.height)];
+        _contentLabel.backgroundColor = [UIColor clearColor];
+        _contentLabel.cornerRadius = 2;
+        _contentLabel.lineBreakMode = kCTLineBreakByTruncatingTail;
+        _contentLabel.numberOfLines = 2;
+        _contentLabel.textAlignment = kCTTextAlignmentJustified;
+        _contentLabel.textInsets = UIEdgeInsetsMake(15, 5, 5, 25);
+        _contentLabel.draw_x = btnWidth/2;
+        _contentLabel.font = [UIFont systemFontOfSize:12];
+        _contentLabel.textColor = colorLightGray;
+        _contentLabel.lineSpacing = 1;
+        _contentLabel.userInteractionEnabled = NO;
+        //_contentLabel.firstLineHeadIndent = 20;
+        [self addSubview:_contentLabel];
+        // _contentLabel.backgroundColor = [UIColor redColor];
+    }
+
+    return self;
+}
+
+-(void)titleClick:(TestCustonBtn *)btn{
+    if (btn.gray) {
+        return;
+    }
+    _contentLabel.draw_x = btn.center.x;
+
+    NSInteger index = [self.buttons indexOfObject:btn];
+    _model.descCurrent = index;
+    if (index < self.buttons.count) {
+        _contentLabel.text = _descArray[index][@"font"];//描述内容
+    }else{
+        _contentLabel.text = @"";
+    }
+
+    NSArray *imageNames   = @[@"pc_wg",@"pc_ns",@"pc_xn",@"pc_kj",@"pc_aq"];
+    NSArray *imageNames_h = @[@"pc_wg_h",@"pc_ns_h",@"pc_xn_h",@"pc_kj_h",@"pc_aq_h"];
+
+    for (int i = 0; i < self.buttons.count; i ++) {
+        TestCustonBtn *testBtn = self.buttons[i];
+        testBtn.gray = NO;
+        if ([testBtn isEqual:btn]) {
+
+            [testBtn setCustomBarTitleColor:RGB_color(218, 165, 101, 1)];
+            testBtn.customImageView.image = [UIImage imageNamed:imageNames_h[i]];
+
+        }else{
+            [testBtn setCustomBarTitleColor:RGB_color(102, 160, 178, 1)];
+            testBtn.customImageView.image = [UIImage imageNamed:imageNames[i]];
+        }
+    }
+    [self setGray];
+}
+
+- (void)setDescArray:(NSArray *)descArray{
+    _descArray = descArray;
+    [self titleClick:self.buttons[_model.descCurrent]];
+}
+
+- (void)setModel:(NewsTestTableViewModel *)model{
+    _model = model;
+}
+
+- (void)setGray{
+    NSInteger index = [_model.gray integerValue];
+    index--;
+
+    if (index > 0 && index < 5) {
+        TestCustonBtn *btn = self.buttons[index];
+        btn.gray = YES;
+        NSArray *imageNames_g = @[@"pc_wg_g",@"pc_ns_g",@"pc_xn_g",@"pc_kj_g",@"pc_aq_g"];
+        btn.customTitleLabel.textColor = colorLineGray;
+        btn.customImageView.image = [UIImage imageNamed:imageNames_g[index]];
+    }
+}
+@end
 
 #pragma mark - 实拍图片
 @interface TimeShowImageView : UIView

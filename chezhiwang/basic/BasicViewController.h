@@ -11,7 +11,15 @@
 @interface BasicViewController : UIViewController
 
 @property (nonatomic,strong) UIScrollView *scrollView;
+@property (nonatomic,strong) UIView *contentView;
 
 -(void)createLeftItemBack;
+
+/**
+ 注册键盘通知
+ */
+-(void)keyboardNotificaion;
+-(void)keyboardShow:(NSNotification *)notification;
+-(void)keyboardHide:(NSNotification *)notification;
 
 @end

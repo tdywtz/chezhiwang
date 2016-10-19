@@ -8,10 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSInteger, NewsType) {
+    NewsTypeNews = 1,//新闻
+    NewsTypeComplain = 3,//投诉
+    NewsTypeAnswer = 2,//答疑
+    NewsTypeForum//论坛
+};
+
 @interface CZWManager : NSObject
 
 @property (nonatomic,assign,readonly) BOOL isLogin;
 @property (nonatomic,copy,readonly) NSString *userName;
+@property (nonatomic,copy,readonly) NSString *password;
 @property (nonatomic,copy,readonly) NSString *userID;
 @property (nonatomic,copy,readonly) NSString *iconUrl;
 
@@ -22,4 +30,5 @@
 
 + (instancetype)manager;
 
++ (UIImage *)defaultIconImage;
 @end

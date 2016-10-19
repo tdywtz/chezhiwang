@@ -23,7 +23,6 @@
     NSDictionary *dic = self.dataArray[indexPath.row];
     NewsDetailViewController *detail = [[NewsDetailViewController alloc] init];
     detail.ID = dic[@"id"];
-    detail.titleLabelText = dic[@"question"];
     
     [self.navigationController pushViewController:detail animated:YES];
 }

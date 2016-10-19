@@ -83,9 +83,9 @@ typedef enum {
 }
 
 -(void)rightItemClick{
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:user_name]) {
-        LoginViewController *login = [[LoginViewController alloc] init];
-        [self.navigationController pushViewController:login animated:YES];
+    if (![CZWManager manager].isLogin) {
+        LoginViewController *login = [LoginViewController  init];
+        [self presentViewController:login animated:YES completion:nil];
         return;
        
     }
@@ -165,9 +165,9 @@ typedef enum {
 }
 
 -(void)clickWithTtpe:(clickType)type and:(NSString *)string{
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:user_name]) {
-        LoginViewController *my = [[LoginViewController alloc] init];
-        [self.navigationController pushViewController:my animated:YES];
+    if (![CZWManager manager].isLogin) {
+        LoginViewController *my = [LoginViewController init];
+        [self presentViewController:my animated:YES completion:nil];
         return;
     }
     
