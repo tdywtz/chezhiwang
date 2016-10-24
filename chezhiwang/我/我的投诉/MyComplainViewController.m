@@ -30,19 +30,22 @@
 @implementation MyComplainViewController
 
 
--(void)loadDataWithP:(NSInteger)p andS:(NSInteger)s{
-    NSString *url  = [NSString stringWithFormat:[URLFile urlStringForMyTS],[CZWManager manager].userID,p,(long)s];
+-(void)loadData{
+    NSString *url  = [NSString stringWithFormat:[URLFile urlStringForMyTS],[CZWManager manager].userID,_count];
  
   [HttpRequest GET:url success:^(id responseObject) {
-      if ([responseObject count] == 0) {
 
-          
-      }
       if (_count == 1) {
 
           [_dataArray removeAllObjects];
       }
-     
+      [_tableView.mj_header endRefreshing];
+      if ([responseObject count] == 0) {
+          [_tableView.mj_footer endRefreshingWithNoMoreData];
+      }else{
+          [_tableView.mj_footer endRefreshing];
+      }
+
       for (NSDictionary *dict in responseObject) {
           MyComplainModel *model = [[MyComplainModel alloc] initWithDictionary:dict];
        
@@ -55,7 +58,8 @@
       [_tableView reloadData];
 
   } failure:^(NSError *error) {
-
+      [_tableView.mj_header endRefreshing];
+      [_tableView.mj_footer endRefreshing];
 
   }];
 }
@@ -63,6 +67,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    _count = 1;
     self.navigationItem.title = @"我的投诉";
     self.view.backgroundColor = [UIColor whiteColor];
 
@@ -72,11 +77,6 @@
 
     
     [self createTableView];
-
-
- 
-    [self loadDataWithP:1 andS:10];
-
 }
 
 -(void)createTableView{
@@ -98,13 +98,27 @@
         make.left.right.bottom.equalTo(0);
         make.top.equalTo(headerStepView.bottom);
     }];
+
+    __weak __typeof(self)weakSelf = self;
+    _tableView.mj_header = [MJChiBaoZiHeader headerWithRefreshingBlock:^{
+        _count = 1;
+        [weakSelf loadData];
+    }];
+
+    [_tableView.mj_header beginRefreshing];
+
+    _tableView.mj_footer = [MJDIYAutoFooter footerWithRefreshingBlock:^{
+        _count ++;
+        [weakSelf loadData];
+    }];
+    _tableView.mj_footer.automaticallyHidden = YES;
 }
 
 -(void)createSpace{
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 140)];
     imageView.center = CGPointMake(WIDTH/2, HEIGHT/2-64);
     [self.view addSubview:imageView];
-    
+
     UIImageView *subImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
     subImageView.image = [UIImage imageNamed:@"90"];
     [imageView addSubview:subImageView];
@@ -145,7 +159,8 @@
 -(void)rightItemClick{
     ComplainView *cp =[[ComplainView alloc] init];
     [cp notifacation:^{
-        [self loadDataWithP:1 andS:10];
+        _count = 1;
+        [self loadData];
     }];
     [self.navigationController pushViewController:cp animated:YES];
 }
@@ -244,7 +259,7 @@
 
     if (comont == YES) {
         _count = 1;
-        [self loadDataWithP:1 andS:10];
+        [self loadData];
     }
 }
 

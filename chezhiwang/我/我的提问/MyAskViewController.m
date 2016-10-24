@@ -14,7 +14,7 @@
 
 @interface MyAskViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
-    UITableView *_tabelView;
+    UITableView *_tableView;
     NSMutableArray *_dataArray;
     
     MyAskModel *openModel;
@@ -27,8 +27,8 @@
 
 @implementation MyAskViewController
 
--(void)loadDataWithP:(NSInteger)p andS:(NSInteger)s{
-    NSString *url = [NSString stringWithFormat:[URLFile urlStringFor_myZJDY],[CZWManager manager].userID,p,s];
+-(void)loadData{
+    NSString *url = [NSString stringWithFormat:[URLFile urlStringFor_myZJDY],[CZWManager manager].userID,_count];
     
     
     [HttpRequest GET:url success:^(id responseObject) {
@@ -37,8 +37,11 @@
             [_dataArray removeAllObjects];
 
         }
+        [_tableView.mj_header endRefreshing];
         if ([responseObject count] == 0){
-
+            [_tableView.mj_footer endRefreshingWithNoMoreData];
+        }else{
+            [_tableView.mj_footer endRefreshing];
         }
 
         for (NSDictionary *dict in responseObject) {
@@ -54,10 +57,11 @@
             [_dataArray addObject:model];
         }
 
-        [_tabelView reloadData];
+        [_tableView reloadData];
         
     } failure:^(NSError *error) {
-
+        [_tableView.mj_header endRefreshing];
+        [_tableView.mj_footer endRefreshing];
     }];
 }
 
@@ -67,23 +71,36 @@
     self.navigationItem.title = @"我的提问";
     self.view.backgroundColor = [UIColor whiteColor];
     self.model = [[MyAskModel alloc] init];
-    
-   
+
     [self createRightItem];
-  
     [self createTabelView];
-    [self loadDataWithP:1 andS:10];
+
 }
 
 
 -(void)createTabelView{
     _dataArray = [[NSMutableArray alloc] init];
     
-    _tabelView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT) style:UITableViewStylePlain];
-    _tabelView.delegate = self;
-    _tabelView.dataSource = self;
-    _tabelView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.view addSubview:_tabelView];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT) style:UITableViewStylePlain];
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.view addSubview:_tableView];
+
+    __weak __typeof(self)weakSelf = self;
+    _tableView.mj_header = [MJChiBaoZiHeader headerWithRefreshingBlock:^{
+        _count = 1;
+        [weakSelf loadData];
+    }];
+
+    _count = 1;
+    [_tableView.mj_header beginRefreshing];
+
+    _tableView.mj_footer = [MJDIYAutoFooter footerWithRefreshingBlock:^{
+        _count ++;
+        [weakSelf loadData];
+    }];
+    _tableView.mj_footer.automaticallyHidden = YES;
 
 }
 
@@ -155,7 +172,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MyAskModel *model = _dataArray[indexPath.row];
     if ([model isEqual:self.model]) {
-        MyAskShowCell *showCell = [_tabelView dequeueReusableCellWithIdentifier:@"showCell"];
+        MyAskShowCell *showCell = [_tableView dequeueReusableCellWithIdentifier:@"showCell"];
         if (!showCell) {
             showCell = [[MyAskShowCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"showCell"];
             showCell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -240,7 +257,7 @@
     }
 
 
-    [_tabelView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [_tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 

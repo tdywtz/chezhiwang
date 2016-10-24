@@ -59,16 +59,18 @@
 }
 
 - (void)loadData{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+
     __weak __typeof(self)weakSelf  = self;
     [HttpRequest GET:[URLFile urlStringForLogin_index] success:^(id responseObject) {
-
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         hearView.pointImages = responseObject[@"focuspic"];
         hearView.pointNews = responseObject[@"headlines"];
         _dataArray = [HomepageSectionModel arrryWithDictionary:responseObject];
         [weakSelf.tableView reloadData];
 
     } failure:^(NSError *error) {
-
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
 }
 - (void)didReceiveMemoryWarning {

@@ -32,6 +32,7 @@
 
         self.titleLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
         self.titleLabel.lineSpacing = 4;
+        self.titleLabel.numberOfLines = 0;
         self.titleLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(25)];
 
         self.dateLabel = [[UILabel alloc] init];
@@ -224,11 +225,10 @@
 
 -(void)rightItemClick:(UIButton *)btn{
     if (btn.tag == 100) {
-        //[self createShare];
-
+       
         CZWShareViewController *share = [[CZWShareViewController alloc] initWithParentViewController:self];
         share.shareUrl = self.dictionary[@"url"];
-        share.shareImage = [UIImage imageNamed:@"Icon-60"];
+        share.shareImage = nil;
         NSString *html = [_webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerText"];
         if (html.length > 100) html = [html substringToIndex:99];
         share.shareContent = html;
@@ -321,7 +321,7 @@
         }
     }else{
         CommentListViewController *comment = [[CommentListViewController alloc] init];
-        comment.type = @"1";
+        comment.type = NewsTypeNews;
         comment.cid = self.ID;
         [self.navigationController pushViewController:comment animated:YES];
     }

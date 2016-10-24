@@ -23,6 +23,7 @@ PODS:
     - SDWebImage/Core (= 3.8.1)
   - SDWebImage/Core (3.8.1)
   - TTTAttributedLabel (1.13.4)
+  - UMengAnalytics-NO-IDFA (4.1.1)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.1.0)
@@ -33,6 +34,7 @@ DEPENDENCIES:
   - pop (~> 1.0.9)
   - SDWebImage (~> 3.8.1)
   - TTTAttributedLabel
+  - UMengAnalytics-NO-IDFA (~> 4.1.1)
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -43,7 +45,8 @@ SPEC CHECKSUMS:
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
+  UMengAnalytics-NO-IDFA: 1064992c1b7aaa22823179c0b33a664813fd7a85
 
-PODFILE CHECKSUM: 46509521d4b41d1c64bc508082cc9f82fea8d2a7
+PODFILE CHECKSUM: 02c8d6dbed3e18de5550dd4f7cd100255badee2e
 
 COCOAPODS: 1.0.1

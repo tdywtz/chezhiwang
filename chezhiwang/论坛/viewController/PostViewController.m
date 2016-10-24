@@ -76,7 +76,7 @@ typedef enum {
     UIBarButtonItem *item1 = [[UIBarButtonItem alloc] initWithCustomView:view];
     
     UIButton *share = [LHController createButtnFram:CGRectMake(0, 0 , 20, 20) Target:self Action:@selector(rightItemClickShare) Text:nil];
-    [share setBackgroundImage:[UIImage imageNamed:@"share3"] forState:UIControlStateNormal];
+    [share setBackgroundImage:[UIImage imageNamed:@"comment_转发"] forState:UIControlStateNormal];
     UIBarButtonItem *item2 = [[UIBarButtonItem alloc] initWithCustomView:share];
     
     self.navigationItem.rightBarButtonItems = @[item2,item1];
@@ -107,8 +107,7 @@ typedef enum {
     NSString *html = @"";
     if (html.length > 100) html = [html substringToIndex:99];
     share.shareContent = html;
-    share.shareTitle = self.titleText;
-    [share setBluffImageWithView:[UIApplication sharedApplication].keyWindow.rootViewController.view];
+    share.shareTitle = [_webOne stringByEvaluatingJavaScriptFromString:@"document.title"];
     [self presentViewController:share animated:YES completion:nil];
 }
 
@@ -132,6 +131,23 @@ typedef enum {
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
 
     [MBProgressHUD hideHUDForView:self.view animated:YES];
+
+    //这里是js，主要目的实现对url的获取
+    NSString *  jsGetImages =
+    @"function getImages(){\
+    var objs = document.getElementsByTagName(\"img\");\
+    var imgScr = '';\
+    for(var i=0;i<objs.length;i++){\
+    imgScr = imgScr + objs[i].src + '+';\
+    };\
+    return imgScr;\
+    };";
+    [webView stringByEvaluatingJavaScriptFromString:jsGetImages];//注入js方法
+    NSString *urlResurlt = [webView stringByEvaluatingJavaScriptFromString:@"getImages()"];
+   NSArray *array = [urlResurlt componentsSeparatedByString:@"+"];
+
+    NSLog(@"%@",array);
+    NSLog(@"%@", [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerHTML"]);
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{

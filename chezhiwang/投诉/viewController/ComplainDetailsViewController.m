@@ -137,13 +137,12 @@
         }
     }else{
         CZWShareViewController *share = [[CZWShareViewController alloc] initWithParentViewController:self];
-        share.shareUrl = self.dict[@"url"]== nil?self.dict[@"FilePath"]:self.dict[@"url"];
+        share.shareUrl = self.dict[@"filepath"];
         share.shareImage = [UIImage imageNamed:@"Icon-60"];
-        NSString *html = self.dict[@"content"] == nil?self.dict[@"Content"]:self.dict[@"content"];
+        NSString *html = self.dict[@"content"];
         if (html.length > 100) html = [html substringToIndex:99];
         share.shareContent = html;
         share.shareTitle = self.dict[@"title"];
-        [share setBluffImageWithView:[UIApplication sharedApplication].keyWindow.rootViewController.view];
         [self presentViewController:share animated:YES completion:nil];
     }
 }
@@ -295,8 +294,7 @@
 
 - (void)setData{
 
-    titleLabel.text = self.dict[@""];
-
+    titleLabel.text = self.dict[@"title"];
     idLabel.text = self.dict[@"id"];
      brandLabel.text = self.dict[@"brand"];
      seriesLabel.text = self.dict[@"series"];

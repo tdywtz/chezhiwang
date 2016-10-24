@@ -90,10 +90,13 @@
         if (_count == 1) {
 
             [_dataArray removeAllObjects];
-        }else{
-            if ([responseObject count] == 0) {
+        }
 
-            }
+        [_tableView.mj_header endRefreshing];
+        if ([responseObject[@"rel"] count] == 0) {
+            [_tableView.mj_footer endRefreshingWithNoMoreData];
+        }else{
+            [_tableView.mj_footer endRefreshing];
         }
         
         [_dataArray addObjectsFromArray:[HomepageNewsModel arayWithArray:responseObject[@"rel"]]];
@@ -101,7 +104,8 @@
         [_tableView reloadData];
 
     } failure:^(NSError *error) {
-
+        [_tableView.mj_header endRefreshing];
+        [_tableView.mj_footer endRefreshing];
         
     }];
 
@@ -109,6 +113,7 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
+ _dataArray = [[NSMutableArray alloc] init];
 
     toolView = [[TestToolView alloc] initWithFrame:CGRectMake(0, 64+44, WIDTH, 40) titles:@[@"精品试驾",@"全部文章"] block:^(NSInteger index) {
         if (index == 0) {
@@ -138,10 +143,19 @@
     _tableView.hidden = YES;
     [self.view addSubview:_tableView];
 
-    
-    _count = 1;
-    _dataArray = [[NSMutableArray alloc] init];
-    [self loadData];
+    __weak __typeof(self)weakSelf = self;
+    _tableView.mj_header = [MJChiBaoZiHeader headerWithRefreshingBlock:^{
+        _count = 1;
+        [weakSelf loadData];
+    }];
+    [_tableView.mj_header beginRefreshing];
+
+    _tableView.mj_footer = [MJDIYAutoFooter footerWithRefreshingBlock:^{
+        _count ++;
+        [weakSelf loadData];
+    }];
+    _tableView.mj_footer.automaticallyHidden = YES;
+
 }
 
 -(void)viewApper{

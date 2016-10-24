@@ -74,4 +74,13 @@
         [self.delegate hideButtonClick:hideButton.selected];
     }
 }
+
+- (BOOL)highlight{
+    return hideButton.selected;
+}
+
+- (void)resetButton{
+    highlightButton.selected = NO;
+    hideButton.selected = NO;
+}
 @end

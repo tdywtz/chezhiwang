@@ -15,6 +15,8 @@
     UIButton *brandUIButton;
     UIButton *seriesUIButton;
     UIButton *modelUIButton;
+
+    UIButton *cancelButton;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -80,8 +82,35 @@
             make.height.equalTo(30);
         }];
 
+
+        cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        cancelButton.backgroundColor = [UIColor redColor];
+        [cancelButton addTarget:self action:@selector(cancelButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+        cancelButton.hidden = YES;
+        [self.contentView addSubview:cancelButton];
+
+        [cancelButton makeConstraints:^(MASConstraintMaker *make) {
+            make.top.right.equalTo(0);
+            make.size.equalTo(CGSizeMake(20, 20));
+        }];
+
+
     }
     return self;
+}
+
+- (void)cancelButtonClicked{
+    self.topModel.brandName = @"选择品牌";
+    self.topModel.brandId = @"";
+    self.topModel.seriesName = @"选择车系";
+    self.topModel.seriesId = @"";
+    self.topModel.modelName = @"选择车型";
+    self.topModel.modelId = @"";
+    [self setData:self.topModel];
+    if (self.cancel) {
+        //取消选择
+        self.cancel(self.topModel);
+    }
 }
 
 - (void)btnClick:(UIButton *)btn{
@@ -157,11 +186,12 @@
     seriesUIButton.selected = NO;
     modelUIButton.enabled = NO;
     modelUIButton.selected = NO;
+    cancelButton.hidden = YES;
 
     if ([topModel.brandId integerValue] > 0) {
         seriesUIButton.enabled = YES;
         seriesUIButton.selected = YES;
-
+        cancelButton.hidden = NO;
         if ([topModel.seriesId integerValue] > 0) {
             modelUIButton.enabled = YES;
             modelUIButton.selected = YES;
@@ -169,8 +199,13 @@
     }
 }
 
+/**选择车型信息*/
 - (void)ruturnModel:(void(^)(TopCollectionViewModel *topModel))block{
     self.block = block;
 }
 
+/**取消选择*/
+- (void)cancel:(void (^)(TopCollectionViewModel *topModel))cancel{
+    self.cancel = cancel;
+}
 @end

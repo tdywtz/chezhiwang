@@ -14,4 +14,5 @@
 - (UIImage *)scaleToSize:(CGSize)size;
 
 - (UIImage*)getSubImageWithCGRect:(CGRect)mCGRect centerBool:(BOOL)centerBool;
+
 @end

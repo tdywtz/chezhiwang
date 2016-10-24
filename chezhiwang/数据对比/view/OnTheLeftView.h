@@ -22,4 +22,8 @@
 
 @property (nonatomic,weak) id <OnTheLeftViewDelegate> delegate;
 
+- (BOOL)highlight;
+
+- (void)resetButton;
+
 @end

@@ -66,7 +66,7 @@
     if (open) {
         return;
     }
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ComplainChartViewControllerthePageOpend"];
+
     BezierPathView *view = [[BezierPathView alloc] initWithFrame:self.view.frame bezierRect:CGRectMake(20, 69, 100, 25) radius:5];
     [self.view addSubview:view];
 }
@@ -85,7 +85,10 @@
     
     __weak __typeof(self)weakSelf = self;
     _headerView = [[ComplainChartView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 44) titles:@[@"时间",@"车型属性",@"品牌属性",@"系别",@"质量问题"] block:^(NSInteger index, BOOL initialSetUp) {
-
+        if (index == 0) {
+            //已经选择过时间，标记下一次进入页面不在弹出提示
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ComplainChartViewControllerthePageOpend"];
+        }
         if (!initialSetUp) {
             _count = 1;//重置页码
             [weakSelf loadDataRankingList];

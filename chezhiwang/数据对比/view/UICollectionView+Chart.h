@@ -10,8 +10,9 @@
 
 @interface UICollectionView (Chart)
 
-@property (nonatomic,assign) CGFloat theCellHeight;
+@property (nonatomic,assign) CGFloat theCellHeight;//行高
+@property (nonatomic,strong) NSArray *itemModels;//当前行items数组
+@property (nonatomic,strong) UIColor *rowTextColor;
 
-@property (nonatomic,strong) NSArray *itemModels;
-
+@property (nonatomic,weak) NSIndexPath *path;//当前分组
 @end

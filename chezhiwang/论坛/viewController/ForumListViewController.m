@@ -31,12 +31,19 @@
 
 @implementation ForumListViewController
 
--(void)loadDataWithP:(NSInteger)p andS:(NSInteger)s{
-    NSString *url = [NSString stringWithFormat:[URLFile urlStringForPostList],orderType,topicType,p,s];
+-(void)loadData{
+    NSString *url = [NSString stringWithFormat:[URLFile urlStringForPostList],orderType,topicType,_count];
     [HttpRequest GET:url success:^(id responseObject) {
         if (_count == 1) {
             [_dataArray removeAllObjects];
         }
+        [_tableView.mj_header endRefreshing];
+        if ([responseObject count] == 0) {
+            [_tableView.mj_footer endRefreshingWithNoMoreData];
+        }else{
+            [_tableView.mj_footer endRefreshing];
+        }
+
         for (NSDictionary *dict in responseObject) {
             [_dataArray addObject:dict];
         }
@@ -44,7 +51,8 @@
         [_tableView reloadData];
 
     } failure:^(NSError *error) {
-
+        [_tableView.mj_header endRefreshing];
+        [_tableView.mj_footer endRefreshing];
 
     }];
 }
@@ -68,9 +76,6 @@
         [weakSelf createTableHeaderView];
        
     });
-
-    [self loadDataWithP:1 andS:10];
-
 }
 
 -(void)createCustomTitleView{
@@ -137,6 +142,19 @@
     _tableView.separatorStyle =  UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
 
+    __weak __typeof(self)weakSelf = self;
+    _tableView.mj_header = [MJChiBaoZiHeader headerWithRefreshingBlock:^{
+        _count = 1;
+        [weakSelf loadData];
+    }];
+    [_tableView.mj_header beginRefreshing];
+
+    _tableView.mj_footer = [MJDIYAutoFooter footerWithRefreshingBlock:^{
+        _count ++;
+        [weakSelf loadData];
+    }];
+    _tableView.mj_footer.automaticallyHidden = YES;
+
     
     twoTableView = [[UITableView alloc] initWithFrame:CGRectMake(WIDTH, 64, WIDTH, HEIGHT-64) style:UITableViewStyleGrouped];
     twoTableView.delegate = self;
@@ -191,7 +209,7 @@
     }
     
     _count = 1;
-    [self loadDataWithP:_count andS:10];
+    [self loadData];
 }
 
 -(void)segmentActionTwo:(UISegmentedControl *)Seg{
@@ -212,7 +230,7 @@
     }
     
     _count = 1;
-    [self loadDataWithP:_count andS:10];
+    [self loadData];
 }
 
 

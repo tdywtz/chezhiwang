@@ -45,10 +45,10 @@
     answer2.cid = self.cid;
     answer3.cid = self.cid;
     answer4.cid = self.cid;
-    answer1.tableView.contentInset = UIEdgeInsetsMake(40+64, 0, 0, 0);
-    answer2.tableView.contentInset = UIEdgeInsetsMake(40+64, 0, 0, 0);
-    answer3.tableView.contentInset = UIEdgeInsetsMake(40+64, 0, 0, 0);
-    answer4.tableView.contentInset = UIEdgeInsetsMake(40+64, 0, 0, 0);
+//    answer1.tableView.contentInset = UIEdgeInsetsMake(40+64, 0, 0, 0);
+//    answer2.tableView.contentInset = UIEdgeInsetsMake(40+64, 0, 0, 0);
+//    answer3.tableView.contentInset = UIEdgeInsetsMake(40+64, 0, 0, 0);
+//    answer4.tableView.contentInset = UIEdgeInsetsMake(40+64, 0, 0, 0);
     
     newsView = [LHPageViewcontroller initWithSpace:0 withParentViewController:self];
     newsView.LHDelegate = self;
@@ -61,6 +61,7 @@
     toolView.delegate = self;
     toolView.titleArray = @[@"全部",@"维修保养",@"买车咨询",@"政策法规"];
     toolView.currentIndex = 0;
+    toolView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:toolView];
 
 }
@@ -69,9 +70,9 @@
     UIButton *btn = [LHController createButtnFram:CGRectMake(0, 0, 90, 20) Target:self Action:@selector(rightItemClick) Text:@"我要提问"];
     btn.titleLabel.font = [UIFont systemFontOfSize:[LHController setFont]-2];
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 3, 16, 14)];
-    imageView.image = [UIImage imageNamed:@"answer_question_left"];
+    [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(90-16, 3, 16, 14)];
+    imageView.image = [UIImage imageNamed:@"answer_question_right"];
     [btn addSubview:imageView];
 
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];

@@ -19,7 +19,7 @@
 #import "NSString-Helper.h"
 #import "CZWManager.h"
 //友盟统计
-#import "MobClick.h"
+#import <UMMobClick/MobClick.h>
 //pop动画库
 #import "POP.h"
 //加载刷新库
@@ -35,7 +35,7 @@
 //加载提示
 #import <MBProgressHUD.h>
 #import <TTTAttributedLabel.h>
-#import "YYText.h"
+
 
 //autolayout适配
 //define this constant if you want to use Masonry without the 'mas_' prefix

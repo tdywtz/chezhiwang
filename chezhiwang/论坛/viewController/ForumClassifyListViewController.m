@@ -29,15 +29,19 @@
 
 @implementation ForumClassifyListViewController
 
--(void)loadDataWithP:(NSInteger)p andS:(NSInteger)s{
-    NSString *url = [NSString stringWithFormat:_urlString,self.sid,orderType,topicType,p,s];
+-(void)loadData{
+    NSString *url = [NSString stringWithFormat:_urlString,self.sid,orderType,topicType,_count,10];
     [HttpRequest GET:url success:^(id responseObject) {
         if (_count == 1) {
             
             [_dataArray removeAllObjects];
         }
-        if ([responseObject count] == 0) {
 
+        [_tableView.mj_header endRefreshing];
+        if ([responseObject count] == 0) {
+            [_tableView.mj_footer endRefreshingWithNoMoreData];
+        }else{
+            [_tableView.mj_footer endRefreshing];
         }
         for (NSDictionary *dict in responseObject) {
             [_dataArray addObject:dict];
@@ -45,7 +49,8 @@
         [_tableView reloadData];
 
     } failure:^(NSError *error) {
-
+        [_tableView.mj_header endRefreshing];
+        [_tableView.mj_footer endRefreshing];
     }];
 }
 
@@ -86,13 +91,11 @@
 
     [self createRightItem];
     [self createTableView];
-    //[self createFootView];
     [self loadDataHeader];
     orderType = 0;
     topicType = 0;
     _count = 1;
     [self setUrl];
-    [self loadDataWithP:_count  andS:10];
 }
 
 -(void)createRightItem{
@@ -126,6 +129,20 @@
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
+
+
+    __weak __typeof(self)weakSelf = self;
+    _tableView.mj_header = [MJChiBaoZiHeader headerWithRefreshingBlock:^{
+        _count = 1;
+        [weakSelf loadData];
+    }];
+    [_tableView.mj_header beginRefreshing];
+
+    _tableView.mj_footer = [MJDIYAutoFooter footerWithRefreshingBlock:^{
+        _count ++;
+        [weakSelf loadData];
+    }];
+    _tableView.mj_footer.automaticallyHidden = YES;
 
 }
 
@@ -294,7 +311,7 @@
     }
     
     _count = 1;
-    [self loadDataWithP:_count andS:10];
+    [self loadData];
 }
 
 -(void)segmentActionTwo:(UISegmentedControl *)Seg{
@@ -315,7 +332,7 @@
     }
     
     _count = 1;
-    [self loadDataWithP:_count andS:10];
+    [self loadData];
 }
 
 -(void)createFootView{

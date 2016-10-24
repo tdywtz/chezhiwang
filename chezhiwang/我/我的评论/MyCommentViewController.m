@@ -15,7 +15,7 @@
 @interface MyCommentViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
 
-    UITableView *_tabelView;
+    UITableView *_tableView;
     NSMutableArray *_dataArray;
 
     MyCommentModel *myModel;
@@ -28,26 +28,29 @@
 @implementation MyCommentViewController
 
 
--(void)loadDataWithP:(NSInteger)p andS:(NSInteger)s{
-    NSString *url = [NSString stringWithFormat:[URLFile urlStringForDiscuss],[CZWManager manager].userID,p,s];
+-(void)loadData{
+    NSString *url = [NSString stringWithFormat:[URLFile urlStringForDiscuss],[CZWManager manager].userID,_count];
     [HttpRequest GET:url success:^(id responseObject) {
         if (_count == 1) {
 
             [_dataArray removeAllObjects];
         }
-        NSArray *array = responseObject;
+        [_tableView.mj_header endRefreshing];
         if ([responseObject count] == 0) {
-
+            [_tableView.mj_footer endRefreshingWithNoMoreData];
+        }else{
+            [_tableView.mj_footer endRefreshing];
         }
-        for (NSDictionary *dict in array) {
+        for (NSDictionary *dict in responseObject) {
             MyCommentModel *model = [[MyCommentModel alloc] initWithDictionary:dict];
             [_dataArray addObject:model];
         }
 
-        [_tabelView reloadData];
+        [_tableView reloadData];
 
     } failure:^(NSError *error) {
-
+        [_tableView.mj_header endRefreshing];
+        [_tableView.mj_footer endRefreshing];
 
     }];
 }
@@ -58,22 +61,36 @@
     self.navigationItem.title = @"我的评论";
     self.view.backgroundColor = [UIColor whiteColor];
 
-
     [self createTabelView];
 
-    [self loadDataWithP:1 andS:10];
 }
 
 -(void)createTabelView{
     _dataArray = [[NSMutableArray alloc] init];
 
     self.navigationController.modalPresentationCapturesStatusBarAppearance = NO;
-    _tabelView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
-    _tabelView.delegate = self;
-    _tabelView.dataSource = self;
-    _tabelView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     //_tabelView.separatorInset = UIEdgeInsetsMake(0, -100, 0, 0);
-    [self.view addSubview:_tabelView];
+    [self.view addSubview:_tableView];
+
+
+    __weak __typeof(self)weakSelf = self;
+    _tableView.mj_header = [MJChiBaoZiHeader headerWithRefreshingBlock:^{
+        _count = 1;
+        [weakSelf loadData];
+    }];
+
+    _count = 1;
+    [_tableView.mj_header beginRefreshing];
+
+    _tableView.mj_footer = [MJDIYAutoFooter footerWithRefreshingBlock:^{
+        _count ++;
+        [weakSelf loadData];
+    }];
+    _tableView.mj_footer.automaticallyHidden = YES;
 
 }
 
@@ -179,7 +196,7 @@
         }
     }
 
-    [_tabelView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [_tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 

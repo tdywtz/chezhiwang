@@ -29,4 +29,21 @@
 - (NSArray *)itemModels{
     return objc_getAssociatedObject(self, @"itemModels");
 }
+
+
+- (void)setRowTextColor:(UIColor *)rowTextColor{
+     objc_setAssociatedObject(self, @"rowTextColor", rowTextColor, OBJC_ASSOCIATION_RETAIN);
+}
+
+- (UIColor *)rowTextColor{
+    return objc_getAssociatedObject(self, @"rowTextColor");
+}
+
+- (void)setPath:(NSIndexPath *)path{
+    objc_setAssociatedObject(self, @"path", path, OBJC_ASSOCIATION_RETAIN);
+}
+
+- (NSIndexPath *)path{
+    return objc_getAssociatedObject(self, @"path");
+}
 @end

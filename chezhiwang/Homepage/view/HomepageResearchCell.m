@@ -83,7 +83,7 @@
 }
 
 - (void)setData{
-    [iconImageView sd_setImageWithURL:[NSURL URLWithString:self.researchModel.image] placeholderImage:[UIImage imageNamed:@""]];
+    [iconImageView sd_setImageWithURL:[NSURL URLWithString:self.researchModel.image] placeholderImage:[CZWManager defaultIconImage]];
 
     hottypeImageView.hidden = !self.researchModel.hottype;
 

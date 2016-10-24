@@ -32,30 +32,33 @@
         if (_count == 1) {
 
             [_dataArray removeAllObjects];
-        }else{
-            if ([responseObject count] == 0) {
-
-            }
         }
-        
-        [_dataArray addObjectsFromArray:[HomepageResearchModel arayWithArray:responseObject]];
+
+        [_tableView.mj_header endRefreshing];
+        if ([responseObject[@"rel"] count] == 0) {
+            [_tableView.mj_footer endRefreshingWithNoMoreData];
+        }else{
+            [_tableView.mj_footer endRefreshing];
+        }
+
+        [_dataArray addObjectsFromArray:[HomepageResearchModel arayWithArray:responseObject[@"rel"]]];
         
         [_tableView reloadData];
 
     } failure:^(NSError *error) {
-
+        [_tableView.mj_header endRefreshing];
+        [_tableView.mj_footer endRefreshing];
 
     }];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"调查";
     _dataArray = [[NSMutableArray alloc] init];
     _count = 1;
     self.urlString = [NSString stringWithFormat:[URLFile urlStringForReport],@"0",@"&p=%ld&s=10"];
-
     [self createTableView];
-    [self loadData];
 }
 
 -(void)createTableView{
@@ -67,6 +70,19 @@
      _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
     
+    __weak __typeof(self)weakSelf = self;
+    _tableView.mj_header = [MJChiBaoZiHeader headerWithRefreshingBlock:^{
+        _count = 1;
+        [weakSelf loadData];
+    }];
+    [_tableView.mj_header beginRefreshing];
+
+    _tableView.mj_footer = [MJDIYAutoFooter footerWithRefreshingBlock:^{
+        _count ++;
+        [weakSelf loadData];
+    }];
+    _tableView.mj_footer.automaticallyHidden = YES;
+
     
     titleLabel= [[UILabel alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 40)];
     titleLabel.backgroundColor = [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1];

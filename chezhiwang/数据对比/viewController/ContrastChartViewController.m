@@ -8,6 +8,8 @@
 
 #import "ContrastChartViewController.h"
 #import "ChartView.h"
+#import "StarView.h"
+#import "LHLabel.h"
 
 @interface ContrastChartViewController ()
 {
@@ -22,7 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self createLeftItemBack];
-
+    //第一分组
     sectionModelArray = [[NSMutableArray alloc] init];
     NSArray *array = @[@"车型信息",@"投诉数量",@"厂家回复率",@"用户满意度",@"典型故障"];
     NSMutableArray *rows = [[NSMutableArray alloc] init];
@@ -45,12 +47,12 @@
 
 
     _chartView = [[ChartView alloc] initWithFrame:CGRectMake(0, 64, WIDTH, HEIGHT-64)];
-    _chartView.itemWidth = 100;
+    _chartView.itemWidth = 120;
     _chartView.parentViewController = self;
     [self.view addSubview:_chartView];
     __weak __typeof(self)weakSelf = self;
     [_chartView ruturnModel:^(TopCollectionViewModel *topModel) {
-       // [weakSelf releaesItemDataWithQueue:topModel.index];
+        [weakSelf releaesItemDataWithQueue:topModel.index];
         [weakSelf loadSectionOneValueListWithBrandId:topModel.brandId seriesId:topModel.seriesId modelId:topModel.modelId queue:topModel.index];
         if ([topModel.modelId integerValue]) {
             [weakSelf loadDataValueListWithSeriesId:topModel.seriesId modelId:topModel.brandId queue:topModel.index];
@@ -59,21 +61,20 @@
     }];
 
 
-  [_chartView makeConstraints:^(MASConstraintMaker *make) {
-      make.edges.equalTo(UIEdgeInsetsMake(64, 0, 0, 0));
-  }];
+    [_chartView makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(UIEdgeInsetsMake(64, 0, 0, 0));
+    }];
 
     [self loadDataNameList];
 }
 
 
--(void)viewWillDisappear:(BOOL)animated{
-    [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithInteger:0] forKey:@"forCellWithReuseIdentifier"];
-}
-
 //清除列数据
 - (void)releaesItemDataWithQueue:(NSInteger)queue{
     for (int i = 0; i < _chartView.sectionModels.count; i ++) {
+        if (i == 0) {
+            continue;
+        }
         ChartSectionModel *sectionModel = _chartView.sectionModels[i];
 
         for (int j = 0; j < sectionModel.rowModels.count; j ++) {
@@ -84,10 +85,9 @@
             [itemModel releaseData];
         }
     }
-    [_chartView reloadData];
 }
 
-//加载第一列数据
+//加载第一列数据(参数名)
 - (void)loadDataNameList{
 
     [HttpRequest GET:[URLFile urlString_mConfig] success:^(id responseObject) {
@@ -98,6 +98,7 @@
             sectionModel.name = superDict[@"name"];
             int temp = 0;
             if (i == 0) {
+                //基本参数数组前两个数据剔除，从第三个开始取值
                 temp = 2;
             }
             NSMutableArray *rows = [[NSMutableArray alloc] init];
@@ -124,7 +125,7 @@
     } failure:^(NSError *error) {
 
     }];
-   //表格头部数据
+    //表格头部数据
     NSArray *arr = [[NSArray alloc] initWithObjects:[[TopCollectionViewModel alloc] init],[[TopCollectionViewModel alloc] init],[[TopCollectionViewModel alloc] init],[[TopCollectionViewModel alloc] init], nil];
     [_chartView setTopModels:arr];
 }
@@ -134,8 +135,9 @@
     NSString *url = [NSString stringWithFormat:@"%@&sid=%@&mid=%@",[URLFile urlString_mConfig],seriesId,modeId];
     [HttpRequest GET:url success:^(id responseObject) {
         NSArray *array = responseObject[@"rel"];
-        for (int i = 1; i < _chartView.sectionModels.count; i ++) {
-            ChartSectionModel *sectionModel = _chartView.sectionModels[i];
+//从第二分组开始
+        for (int i = 1; i < sectionModelArray.count; i ++) {
+            ChartSectionModel *sectionModel = sectionModelArray[i];
             //如果 下标 大于 越界，跳出循环
             if (i-1 > array.count-1) {
                 break;
@@ -165,6 +167,7 @@
                 itemModel.name = itemDict[@"value"];
             }
         }
+        _chartView.sectionModels = sectionModelArray;
         [_chartView reloadData];
 
     } failure:^(NSError *error) {
@@ -183,35 +186,146 @@
     NSString *url = [NSString stringWithFormat:[URLFile urlString_dbInfo],brandId,seriesId,modeId];
     __weak __typeof(self)weakSelf = self;
     [HttpRequest GET:url success:^(id responseObject) {
-        NSLog(@"%@",responseObject);
+        ChartSectionModel *sectionModel = sectionModelArray[0];
+        for (int i = 0; i < sectionModel.rowModels.count; i ++) {
+            ChartRowModel *rowModel = sectionModel.rowModels[i];
+            ChartItemModel *itemModel = rowModel.itemModels[queue];
+            if (i == 0) {
+                itemModel.name = @"待定";
+            }else if (i == 1){
+                itemModel.attribute = [weakSelf attributeLeft:responseObject[@"Count"] right:@"条" star:NO];
+            }else if (i == 2){
+                itemModel.attribute = [weakSelf attributeLeft:responseObject[@"HFL"] right:@"%" star:NO];
+            }else if ( i == 3){
+                itemModel.attribute = [weakSelf attributeLeft:responseObject[@"AVG"] right:@"星" star:YES];
+            }else if (i == 4){
+                itemModel.attribute = [weakSelf attribute:responseObject[@"dxgz"]];
+            }
+            rowModel.cellHeight = (NSInteger)[rowModel getCellHeight];
+        }
+        _chartView.sectionModels = sectionModelArray;
+        [_chartView reloadData];
+
     } failure:^(NSError *error) {
 
     }];
 }
 
+- (NSAttributedString *)attributeLeft:(NSString *)left right:(NSString *)right star:(BOOL)start{
+    NSString *string = [NSString stringWithFormat:@"%@%@",left,right];
+    NSMutableAttributedString *matt = [[NSMutableAttributedString alloc] initWithString:string];
+    [matt addAttribute:NSForegroundColorAttributeName value:colorOrangeRed range:NSMakeRange(0, left.length)];
+    if (start) {
+        //[matt insertAttributedString:[[NSAttributedString alloc] initWithString:@"  "] atIndex:0];
+
+        NSTextAttachment *achment = [[NSTextAttachment alloc] init];
+        achment.image = [self starIamge:[left floatValue]];
+        CGFloat height = 22;
+        CGFloat width = achment.image.size.width*(height/achment.image.size.height);
+        achment.bounds = CGRectMake(0, -6,width , height);
+        [matt insertAttributedString:[NSAttributedString attributedStringWithAttachment:achment] atIndex:0];
+    }
+    return matt;
+}
+
+- (UIImage *)starIamge:(CGFloat)star{
+    StarView *starView = [[StarView alloc] initWithFrame:CGRectMake(0, 0, 75, 23)];
+    starView.backgroundColor = [UIColor whiteColor];
+    [starView setStar:star];
+    UIImage *image = [self imageWithView:starView];
+
+    return image;
+}
+
+- (UIImage *)imageWithView:(UIView *)view{
+    CGFloat width = view.frame.size.width;
+    CGFloat height = view.frame.size.height;
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(width, height), NO, 0.0);
+    //设置截屏大小
+    [[view layer] renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return viewImage;
+}
+
+- (NSAttributedString *)attribute:(NSArray *)arrray{
+    if ([arrray isKindOfClass:[NSArray class]] == NO) {
+        return nil;
+    }
+
+    NSMutableAttributedString *mAtt = [[NSMutableAttributedString alloc] init];
+    for (int i = 0; i < arrray.count; i ++) {
+        NSDictionary *dict = arrray[i];
+        [mAtt appendAttributedString:[self textAchment:dict[@"parentTitle"] textColor:[UIColor whiteColor] backColor:RGB_color(172, 92, 158, 1)]];
+        [mAtt appendAttributedString:[self blankAttrubute]];
+        [mAtt appendAttributedString:[self textAchment:dict[@"title"] textColor:RGB_color(172, 92, 158, 1) backColor:[UIColor whiteColor]]];
+        [mAtt appendAttributedString:[self blankAttrubute]];
+        [mAtt appendAttributedString:[self textAchment:[NSString stringWithFormat:@"%@个",dict[@"count"]] textColor:colorOrangeRed backColor:[UIColor whiteColor]]];
+        if (i < arrray.count - 1) {
+            [mAtt appendAttributedString:[[NSAttributedString alloc] initWithString:@" " attributes:@{NSForegroundColorAttributeName:[UIColor clearColor]}]];
+
+        }
+    }
+
+    return mAtt;
+}
+
+- (NSAttributedString *)blankAttrubute{
+    unichar objectReplacementChar           = 0xFFFC;
+    NSString *objectReplacementString       = [NSString stringWithCharacters:&objectReplacementChar length:1];
+    return [[NSAttributedString alloc] initWithString:objectReplacementString];
+}
+
+- (NSAttributedString *)textAchment:(NSString *)text textColor:(UIColor *)textColor backColor:(UIColor *)backColor{
+
+    NSTextAttachment *achment = [[NSTextAttachment alloc] init];
+    UIImage *image = [self imageWithView:[self LabelWithText:text textColor:textColor backColor:backColor]];
+    achment.image = image;
+    achment.bounds = CGRectMake(0, 0, image.size.width, image.size.height);
+
+    NSAttributedString *att = [NSAttributedString attributedStringWithAttachment:achment];
+
+    return att;
+}
 
 
--(UIInterfaceOrientationMask)supportedInterfaceOrientations
-{
-    return UIInterfaceOrientationMaskAll;
+
+- (UIView *)LabelWithText:(NSString *)text textColor:(UIColor *)textColor backColor:(UIColor *)backColor{
+
+    CZWLabel *label = [[CZWLabel alloc] initWithFrame:CGRectMake(0, 0, 1000, 10)];
+    label.textInsets = UIEdgeInsetsMake(1, 3, 1, 3);
+    label.textColor = textColor;
+    label.backgroundColor = backColor;
+    label.font = [UIFont systemFontOfSize:12];
+    label.layer.borderColor = RGB_color(172, 92, 158, 1).CGColor;
+    label.layer.borderWidth = 1;
+    label.text = text;
+    [label sizeToFit];
+
+    return label;
 }
-- (BOOL)shouldAutorotate
-{
-    return YES;
-}
--(UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
-{
-    return UIInterfaceOrientationLandscapeLeft|UIInterfaceOrientationLandscapeRight|UIInterfaceOrientationPortraitUpsideDown;
-}
+
+//-(UIInterfaceOrientationMask)supportedInterfaceOrientations
+//{
+//    return UIInterfaceOrientationMaskAll;
+//}
+//- (BOOL)shouldAutorotate
+//{
+//    return YES;
+//}
+//-(UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+//{
+//    return UIInterfaceOrientationLandscapeLeft|UIInterfaceOrientationLandscapeRight|UIInterfaceOrientationPortraitUpsideDown;
+//}
 
 /*
-#pragma mark - Navigation
+ #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

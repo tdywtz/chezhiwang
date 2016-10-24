@@ -8,10 +8,7 @@
 
 #import "AppDelegate.h"
 #import "CustomTabBarController.h"
-#import "UMSocial.h"
-#import "UMSocialQQHandler.h"
-#import "UMSocialWechatHandler.h"
-#import "UMSocialSinaSSOHandler.h"
+#import <UMSocialCore/UMSocialCore.h>
 #import "CZWAppPrompt.h"
 
 
@@ -37,20 +34,13 @@
     //电池条颜色
    // [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     //
-    //[[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navigation"] forBarMetrics:UIBarMetricsDefault];
+   // [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navigation"] forBarMetrics:UIBarMetricsDefault];
 
-    [UMSocialData setAppKey:@"55f8e766e0f55a5cb5001444"];
 
-    [MobClick startWithAppkey:@"55f8e766e0f55a5cb5001444" reportPolicy:BATCH channelId:@""];
-    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-    [MobClick setAppVersion:version];
-
-    [UMSocialQQHandler setQQWithAppId:@"1104889760" appKey:@"UKjSmfNFesY8GrPx" url:@"http://www.12365auto.com"];
-    [UMSocialWechatHandler setWXAppId:@"wxfdc8e48568025b98" appSecret:@"2a61fc9735d8fbd1dbd946e8fb6b14ce" url:@"http://www.12365auto.com"];
-    
-    [UMSocialSinaSSOHandler openNewSinaSSOWithAppKey:@"2288638211"
-                                           secret:@"b79a37a46aae4533c30204781a11ae24"
-                                      RedirectURL:@"http://sns.whalecloud.com/sina2/callback"];
+    //友盟统计
+    [self um_analyics];
+    //友盟分享
+    [self um_social];
 
     [HttpRequest downloadProvince];
   
@@ -62,12 +52,20 @@
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
-    return  [UMSocialSnsService handleOpenURL:url];
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
+    if (!result) {
+        // 其他如支付等SDK的回调
+    }
+    return result;
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    return  [UMSocialSnsService handleOpenURL:url];
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
+    if (!result) {
+        // 其他如支付等SDK的回调
+    }
+    return result;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -90,6 +88,38 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+/**友盟统计*/
+- (void)um_analyics{
+    UMConfigInstance.appKey = @"55f8e766e0f55a5cb5001444";
+    UMConfigInstance.channelId = @"";
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    [MobClick setAppVersion:version];
+    [MobClick startWithConfigure:UMConfigInstance];
+}
+
+/**友盟分享*/
+- (void)um_social{
+;
+    [[UMSocialManager defaultManager] setUmSocialAppkey:@"55f8e766e0f55a5cb5001444"];
+    //QQ
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"1104889760" appSecret:nil redirectURL:@"http://www.12365auto.com"];
+    //微信
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatTimeLine appKey:@"wxfdc8e48568025b98" appSecret:@"2a61fc9735d8fbd1dbd946e8fb6b14ce" redirectURL:@"http://www.12365auto.com"];
+       //新浪微博
+     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:@"2288638211" appSecret:@"b79a37a46aae4533c30204781a11ae24" redirectURL:@"http://sns.whalecloud.com/sina2/callback"];
+
+
+
+    //[UMSocialData setAppKey:@"55f8e766e0f55a5cb5001444"]
+      // [UMSocialQQHandler setQQWithAppId:@"1104889760" appKey:@"UKjSmfNFesY8GrPx" url:@"http://www.12365auto.com"];
+    //[UMSocialWechatHandler setWXAppId:@"wxfdc8e48568025b98" appSecret:@"2a61fc9735d8fbd1dbd946e8fb6b14ce" url:@"http://www.12365auto.com"];
+
+//    [UMSocialSinaSSOHandler openNewSinaSSOWithAppKey:@"2288638211"
+//                                              secret:@"b79a37a46aae4533c30204781a11ae24"
+//                                         RedirectURL:@"http://sns.whalecloud.com/sina2/callback"];
+
 }
 
 @end

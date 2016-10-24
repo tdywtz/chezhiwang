@@ -396,7 +396,9 @@
         
     }else if([_model.stepid integerValue] == 4){
         [self createStarView:label2.frame.origin.y+label2.frame.size.height+10];
-        
+        CGRect frame = leftView.frame;
+        frame.size.height += 100;
+        leftView.frame = frame;
     }else if([_model.stepid integerValue] == 5){
         for (int i = 0; i < 5; i ++) {
             UIImageView *im = [LHController createImageViewWithFrame:CGRectMake(35+i*40, label2.frame.origin.y+label2.frame.size.height+10 , 30, 30) ImageName:@"star"];
@@ -455,10 +457,10 @@
 #pragma mark - 提交评分
 -(void)starClick{
     [starButton setTitle:@"正在提交" forState:UIControlStateNormal];
-    //starButton.backgroundColor = [UIColor grayColor];
+   // starButton.backgroundColor = [UIColor grayColor];
     starButton.enabled = NO;
     [self createHeader];
-    
+
     NSString *url = [NSString stringWithFormat:[URLFile urlStringForComplainScore],_model.Cpid,star+1];
     [HttpRequest GET:url success:^(id responseObject) {
         [starButton removeFromSuperview];
@@ -466,7 +468,7 @@
         if (self.commont) {
             self.commont(YES);
         }
-        starButton.enabled = YES;
+       // starButton.enabled = YES;
         [starButton setTitle:@"提交完成" forState:UIControlStateNormal];
     } failure:^(NSError *error) {
         starButton.enabled = YES;

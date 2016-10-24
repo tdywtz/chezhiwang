@@ -12,5 +12,6 @@
 
 - (void)releaseData{
     _name = nil;
+    _attribute = nil;
 }
 @end

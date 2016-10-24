@@ -123,6 +123,13 @@
             [_dataArray removeAllObjects];
         }
 
+        [_collectionView.mj_header endRefreshing];
+        if ([responseObject[@"rel"] count] == 0) {
+            [_collectionView.mj_footer endRefreshingWithNoMoreData];
+        }else{
+            [_collectionView.mj_footer endRefreshing];
+        }
+
         for (NSDictionary *dict in responseObject[@"rel"]) {
             [_dataArray addObject:dict];
         }
@@ -131,7 +138,8 @@
 
     } failure:^(NSError *error) {
 
-
+        [_collectionView.mj_header endRefreshing];
+        [_collectionView.mj_footer endRefreshing];
     }];
 }
 
@@ -154,6 +162,23 @@
 
 
     [_collectionView registerClass:[VehicleImageCell class] forCellWithReuseIdentifier:@"cellName"];
+
+    __weak __typeof(self)weakSelf = self;
+//    _collectionView.mj_header = [MJChiBaoZiHeader headerWithRefreshingBlock:^{
+//        _count = 1;
+//        [weakSelf loadData];
+//    }];
+//
+//    _count = 1;
+//    [_collectionView.mj_header beginRefreshing];
+
+    _collectionView.mj_footer = [MJDIYAutoFooter footerWithRefreshingBlock:^{
+        _count ++;
+        [weakSelf loadData];
+    }];
+    _collectionView.mj_footer.automaticallyHidden = YES;
+
+
 
 
     UICollectionViewFlowLayout *layoutTwo= [[UICollectionViewFlowLayout alloc] init];

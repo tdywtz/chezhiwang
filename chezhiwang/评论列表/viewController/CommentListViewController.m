@@ -20,9 +20,10 @@ typedef enum {
 
 @interface CommentListViewController ()<UITableViewDataSource,UITableViewDelegate,FootCommentViewDelegate>
 {
-    UITableView *_tabelView;
+    UITableView *_tableView;
     NSMutableArray *_dataArray;
-
+    NSInteger _count;
+    
     CGFloat _height;
     NSString *_fid;//被回复id
     CGFloat B;
@@ -36,11 +37,17 @@ typedef enum {
 
 @implementation CommentListViewController
 
--(void)loadDataWithP:(NSInteger)p{
+-(void)loadData{
 
-    NSString *url = [NSString stringWithFormat:[URLFile urlStringForPL],_cid,self.type,(long)p];
+    NSString *url = [NSString stringWithFormat:[URLFile urlStringForPL],_cid,[NSString stringWithFormat:@"%ld",self.type],_count];
     [HttpRequest GET:url success:^(id responseObject) {
-       
+
+        [_tableView.mj_header endRefreshing];
+        if ([responseObject[@"rel"] count] == 0) {
+            [_tableView.mj_footer endRefreshingWithNoMoreData];
+        }else{
+            [_tableView.mj_footer endRefreshing];
+        }
         for (NSDictionary *dic in responseObject[@"rel"]) {
             CommentListModel *model = [[CommentListModel alloc] initWithDictionary:dic[@"huifu"]];
             CommentListInitialModel *initialModel = [[CommentListInitialModel alloc] initWithDictionary:dic];
@@ -55,9 +62,10 @@ typedef enum {
         }else{
             spaceView.hidden = YES;
         }
-        [_tabelView reloadData];
+        [_tableView reloadData];
     } failure:^(NSError *error) {
-        
+        [_tableView.mj_header endRefreshing];
+        [_tableView.mj_footer endRefreshing];
     }];
 }
 
@@ -71,8 +79,6 @@ typedef enum {
 
     [self createTableView];
     [self createFootView];
-    
-    [self loadDataWithP:1];
 }
 
 
@@ -100,13 +106,29 @@ typedef enum {
 //tabelview
 -(void)createTableView{
     
-    _tabelView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
-    _tabelView.delegate = self;
-    _tabelView.dataSource = self;
-    _tabelView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _tabelView.backgroundColor = [UIColor whiteColor];
-    _tabelView.estimatedRowHeight = 100;
-    [self.view addSubview:_tabelView];
+    _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _tableView.backgroundColor = [UIColor whiteColor];
+    _tableView.estimatedRowHeight = 100;
+    [self.view addSubview:_tableView];
+
+    __weak __typeof(self)weakSelf = self;
+    _tableView.mj_header = [MJChiBaoZiHeader headerWithRefreshingBlock:^{
+        _count = 1;
+        [weakSelf loadData];
+    }];
+
+    _count = 1;
+    [_tableView.mj_header beginRefreshing];
+
+    _tableView.mj_footer = [MJDIYAutoFooter footerWithRefreshingBlock:^{
+        _count ++;
+        [weakSelf loadData];
+    }];
+    _tableView.mj_footer.automaticallyHidden = YES;
+
 }
 
 #pragma mark - 底部横条
@@ -151,7 +173,8 @@ typedef enum {
         if ([responseObject[@"result"] isEqualToString:@"success"]) {
             [LHController alert:@"评论成功"];
             //刷新数据
-            [self loadDataWithP:1];
+            _count = 1;
+            [self loadData];
         }
         
     } failure:^(NSError *error) {

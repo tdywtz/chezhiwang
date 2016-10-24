@@ -49,7 +49,7 @@
 }
 
 - (void)pushClick{
-    NSArray *array = @[@"NewsViewController",@"ComplainListViewController",@"NewsInvestigateViewController",@"AnswerViewController",@"ForumClassifyListViewController"];
+    NSArray *array = @[@"NewsViewController",@"ComplainListViewController",@"NewsInvestigateViewController",@"AnswerViewController",@"ForumListViewController"];
     UIViewController *VC = [[NSClassFromString(array[_sectionModel.section]) alloc] init];
     VC.hidesBottomBarWhenPushed = YES;
     [self.parentVC.navigationController pushViewController:VC animated:YES];

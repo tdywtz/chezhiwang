@@ -175,6 +175,7 @@
             }
         }else{
             [[CZWManager manager] loginWithDictionary:responseObject];
+            [[CZWManager manager] storagePassword:pass];
             [self saveTime];
             [self dismissViewControllerAnimated:YES completion:nil];
 

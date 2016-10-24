@@ -74,12 +74,16 @@
         _percentageLabel.text = model.percentage;
         if ([model.number integerValue] == 1) {
             bgView.backgroundColor = RGB_color(229, 0, 18, 1);
+            _chartLabel.textColor = [UIColor whiteColor];
         }else if ([model.number integerValue] == 2){
-            bgView.backgroundColor = RGB_color(242, 172, 2, 1);;
+            bgView.backgroundColor = RGB_color(242, 172, 2, 1);
+            _chartLabel.textColor = [UIColor whiteColor];
         }else if ([model.number integerValue] == 3){
             bgView.backgroundColor = RGB_color(190, 191, 192, 1);
+            _chartLabel.textColor = [UIColor whiteColor];
         }else{
             bgView.backgroundColor = [UIColor clearColor];
+            _chartLabel.textColor = colorDeepGray;
         }
     }else{
         _chartLabel.text = @"--";

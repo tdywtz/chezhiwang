@@ -28,8 +28,14 @@
     return self;
 }
 
+
+/**选择车型信息*/
 - (void)ruturnModel:(void(^)(TopCollectionViewModel *topModel))block{
     self.block = block;
+}
+/**取消选择*/
+- (void)cancel:(void (^)(TopCollectionViewModel *topModel))cancel{
+    self.cancel = cancel;
 }
 
 #pragma mark -
@@ -54,11 +60,8 @@
     cell.topModel = self.topModels[indexPath.row];
     cell.topModel.index = indexPath.row;
     //回调数据
-    __weak __typeof(self)weakSelf = self;
-   [cell ruturnModel:^(TopCollectionViewModel *topModel) {
-       __strong __typeof(weakSelf)strongSelf = weakSelf;
-       strongSelf.block(topModel);
-   }];
+    [cell ruturnModel:self.block];
+    [cell cancel:self.cancel];
     return cell;
 }
 

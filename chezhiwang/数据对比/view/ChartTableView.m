@@ -50,8 +50,8 @@
 {
     if (scrollView == self) {
 
-        //通知lefTableView滑动
-       // [self setValue:[NSValue valueWithCGPoint:scrollView.contentOffset] forKey:Excel_contentTableViewContentOffset];
+        //当前tableview滑动
+        [self setValue:[NSValue valueWithCGPoint:scrollView.contentOffset] forKey:Excel_contentTableViewContentOffset];
     }
     if ([scrollView isKindOfClass:[UICollectionView class]]) {
         if (scrollView.contentOffset.y != 0) {
@@ -101,12 +101,15 @@
     ChartSectionModel *sectionModel = self.sectionModels[indexPath.section];
     ChartRowModel *rowModel = sectionModel.rowModels[indexPath.row];
     cell.collectionView.itemModels = rowModel.itemModels;
+    cell.collectionView.path = indexPath;
    //重新设置collectionView滑动坐标
     cell.collectionView.contentOffset = collectionViewContentSize;
     cell.collectionView.theCellHeight = rowModel.cellHeight;
+    cell.collectionView.rowTextColor = rowModel.textColor;
     [cell.collectionView reloadData];
 
     cell.nameLabel.text = rowModel.name;
+    cell.nameLabel.textColor = rowModel.textColor;
 
     return cell;
 
@@ -168,12 +171,25 @@
         label.tag = 100;
         label.textAlignment = NSTextAlignmentCenter;
         label.textColor = colorDeepGray;
+        label.numberOfLines = 0;
         label.font = [UIFont systemFontOfSize:12];
         [cell.contentView addSubview:label];
+        [label makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(UIEdgeInsetsMake(0, 5, 0, 5));
+        }];
     }
+    label.textColor = collectionView.rowTextColor;
     ChartItemModel *itemModel = collectionView.itemModels[indexPath.row];
+    label.textAlignment =  NSTextAlignmentCenter;
+    if (collectionView.path.section == 0 && collectionView.path.row == 4) {
+        label.textAlignment = NSTextAlignmentLeft;
+    }
+    if (itemModel.attribute) {
+        label.attributedText = itemModel.attribute;
 
-    label.text = itemModel.name;
+    }else{
+        label.text = itemModel.name;
+    }
 
     return cell;
 }

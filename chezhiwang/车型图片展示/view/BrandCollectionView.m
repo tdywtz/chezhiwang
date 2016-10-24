@@ -28,6 +28,7 @@
         self.dataSource = self;
         [self registerClass:[VehicleImageCell class] forCellWithReuseIdentifier:@"cellName"];
         [self registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headerName"];
+        
     }
     return self;
 }

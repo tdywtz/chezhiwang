@@ -28,13 +28,19 @@
 
 @implementation ComplainListViewController
 
--(void)loadDataP:(NSInteger)p andS:(NSInteger)s{
-    NSString *url = [NSString stringWithFormat:[URLFile urlStringForZLTS],p,s];
+-(void)loadData{
+
+    NSString *url = [NSString stringWithFormat:[URLFile urlStringForZLTS],_count,10];
    [HttpRequest GET:url success:^(id responseObject) {
 
        if (_count == 1) {
            [_dataArray removeAllObjects];
-           
+       }
+       [_tableView.mj_header endRefreshing];
+       if ([responseObject[@"rel"] count] == 0) {
+           [_tableView.mj_footer endRefreshingWithNoMoreData];
+       }else{
+           [_tableView.mj_footer endRefreshing];
        }
 
      [_dataArray addObjectsFromArray:[HomepageComplainModel arayWithArray:responseObject[@"rel"]]];
@@ -43,20 +49,20 @@
 
 
    } failure:^(NSError *error) {
-
+       [_tableView.mj_header endRefreshing];
+       [_tableView.mj_footer endRefreshing];
    }];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
+
+    self.title = @"投诉";
+    _count = 1;
     
     [self dataInitialization];
-    [self createLeftItem];
-    //[self createRightItem];
+    [self creaRightItem];
     [self createTableView];
-    [self loadDataP:1 andS:10];
 
 }
 
@@ -66,11 +72,21 @@
     _fmdb = [FmdbManager shareManager];
 }
 
--(void)createLeftItem{
-       self.navigationItem.rightBarButtonItem = [LHController createComplainItemWthFrame:CGRectMake(0, 0, 90, 20) Target:self Action:@selector(leftItemClick)];
+#pragma mark - 我要投诉
+-(void)creaRightItem{
+    UIButton *btn = [LHController createButtnFram:CGRectMake(0, 0, 90, 20) Target:self Action:@selector(rightItemClick) Text:@"我要投诉"];
+    btn.titleLabel.font = [UIFont systemFontOfSize:[LHController setFont]-2];
+    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(90-16, 3, 16, 14)];
+    imageView.image = [UIImage imageNamed:@"complain_complain"];
+    [btn addSubview:imageView];
+
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    self.navigationItem.rightBarButtonItem = item;
 }
 
--(void)leftItemClick{
+-(void)rightItemClick{
     if ([CZWManager manager].isLogin) {
         ComplainView *complain = [[ComplainView alloc] init];
         complain.hidesBottomBarWhenPushed = YES;
@@ -93,6 +109,19 @@
     [_tableView makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(UIEdgeInsetsZero);
     }];
+
+    __weak __typeof(self)weakSelf = self;
+    _tableView.mj_header = [MJChiBaoZiHeader headerWithRefreshingBlock:^{
+        _count = 1;
+        [weakSelf loadData];
+    }];
+    [_tableView.mj_header beginRefreshing];
+
+    _tableView.mj_footer = [MJDIYAutoFooter footerWithRefreshingBlock:^{
+        _count ++;
+        [weakSelf loadData];
+    }];
+    _tableView.mj_footer.automaticallyHidden = YES;
 }
 
 -(void)createRightItem{

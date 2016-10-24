@@ -41,7 +41,8 @@
                 if (index == 0) {
                     [_chart setTitle:@"车系" tid:@"" index:1];
                 }
-                [wealself loadData];
+                //刷新数据
+                [_tableView.mj_header beginRefreshing];
                 return ;
             }
             
@@ -85,7 +86,8 @@
                 }else if (chooseType == ChartChooseTypeAttributeSeries){
 
                 }
-                 [wealself loadData];
+                //刷新数据
+                [_tableView.mj_header beginRefreshing];
             };
             [wealself.parentViewController presentViewController:choose animated:NO completion:nil];
         }];
@@ -106,7 +108,20 @@
             make.bottom.equalTo(0);
         }];
 
-        [self loadData];
+
+        __weak __typeof(self)weakSelf = self;
+        _tableView.mj_header = [MJChiBaoZiHeader headerWithRefreshingBlock:^{
+            _count = 1;
+            [weakSelf loadData];
+        }];
+        [_tableView.mj_header beginRefreshing];
+
+        _tableView.mj_footer = [MJDIYAutoFooter footerWithRefreshingBlock:^{
+            _count ++;
+            [weakSelf loadData];
+        }];
+        _tableView.mj_footer.automaticallyHidden = YES;
+
     }
     
     return self;
@@ -125,6 +140,14 @@
         if (_count == 1) {
             [_dataArray removeAllObjects];
         }
+
+        [_tableView.mj_header endRefreshing];
+        if ([responseObject[@"rel"] count] == 0) {
+            [_tableView.mj_footer endRefreshingWithNoMoreData];
+        }else{
+            [_tableView.mj_footer endRefreshing];
+        }
+
         for (NSDictionary *dict in responseObject[@"rel"]) {
             NewsTestTableViewModel *model = [[NewsTestTableViewModel alloc] initWithDictionary:dict];
             [_dataArray addObject:model];
@@ -132,7 +155,8 @@
 
         [_tableView reloadData];
     } failure:^(NSError *error) {
-
+        [_tableView.mj_header endRefreshing];
+        [_tableView.mj_footer endRefreshing];
     }];
 }
 /**

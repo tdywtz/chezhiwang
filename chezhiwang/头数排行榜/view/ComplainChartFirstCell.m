@@ -83,12 +83,16 @@
     NSInteger rank = _chartLabel.text.integerValue;
     if (rank == 1) {
         bgView.backgroundColor = RGB_color(229, 0, 18, 1);
+        _chartLabel.textColor = [UIColor whiteColor];
     }else if (rank == 2){
         bgView.backgroundColor = RGB_color(242, 172, 2, 1);
+        _chartLabel.textColor = [UIColor whiteColor];
     }else if (rank == 3){
         bgView.backgroundColor = RGB_color(190, 191, 192, 1);
+        _chartLabel.textColor = [UIColor whiteColor];
     }else{
         bgView.backgroundColor = [UIColor clearColor];
+        _chartLabel.textColor = colorDeepGray;
     }
 
     if (self.draw) {

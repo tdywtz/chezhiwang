@@ -11,6 +11,7 @@
 @interface ChartItemModel : NSObject
 
 @property (nonatomic,copy) NSString *name;
+@property (nonatomic,copy) NSAttributedString *attribute;
 
 - (void)releaseData;
 @end
