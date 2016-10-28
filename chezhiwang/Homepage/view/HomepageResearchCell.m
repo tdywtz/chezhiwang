@@ -89,10 +89,15 @@
 
     modelLabel.attributedText = [self attributed:@"调查车型：" font1:[UIFont systemFontOfSize:PT_FROM_PX(18)] color1:RGB_color(153, 153, 153, 1) stirng2:self.researchModel.models font2:[UIFont systemFontOfSize:PT_FROM_PX(23)] color2:RGB_color(17, 27, 36, 1)];
      scoreLabel.attributedText = [self attributed:@"综合评分：" font1:[UIFont systemFontOfSize:PT_FROM_PX(18)] color1:RGB_color(153, 153, 153, 1) stirng2:self.researchModel.score font2:[UIFont systemFontOfSize:PT_FROM_PX(23)] color2:RGB_color(237, 17, 17, 1)];
-     contentLabel.attributedText = [self attributed:@"调查结论：" font1:[UIFont systemFontOfSize:PT_FROM_PX(19)] color1:RGB_color(153, 153, 153, 1) stirng2:self.researchModel.content font2:[UIFont systemFontOfSize:PT_FROM_PX(19)] color2:RGB_color(68, 68, 68, 1)];
+
+    NSMutableAttributedString *result = [self attributed:@"调查结论：" font1:[UIFont systemFontOfSize:PT_FROM_PX(19)] color1:RGB_color(153, 153, 153, 1) stirng2:self.researchModel.content font2:[UIFont systemFontOfSize:PT_FROM_PX(19)] color2:RGB_color(68, 68, 68, 1)];
+    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+    style.lineSpacing = 4;
+    [result addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, result.length)];
+    contentLabel.attributedText = result;
 }
 
-- (NSAttributedString *)attributed:(NSString *)string1 font1:(UIFont *)font1 color1:(UIColor *)color1 stirng2:(NSString *)string2 font2:(UIFont *)font2 color2:(UIColor *)color2{
+- (NSMutableAttributedString *)attributed:(NSString *)string1 font1:(UIFont *)font1 color1:(UIColor *)color1 stirng2:(NSString *)string2 font2:(UIFont *)font2 color2:(UIColor *)color2{
     if (string2 == nil) {
         string2 = @"";
     }

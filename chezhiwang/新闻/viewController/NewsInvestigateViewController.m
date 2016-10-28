@@ -155,7 +155,10 @@
     HomepageResearchModel *model = _dataArray[indexPath.row];
     NewsDetailViewController *detail = [[NewsDetailViewController alloc] init];
     detail.ID = model.ID;
+    //设置分享图片链接
+    detail.shareImageUrl = model.image;
     detail.invest = YES;
+
     detail.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detail animated:YES];
 }

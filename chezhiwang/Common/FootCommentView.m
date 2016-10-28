@@ -17,7 +17,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = RGB_color(245, 247, 249, 1);
+        self.backgroundColor = RGB_color(255, 255, 255, 1);
         
         writeButton = [UIButton buttonWithType:UIButtonTypeCustom];
         writeButton.layer.borderWidth = 1;
@@ -27,7 +27,7 @@
         replyCountButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [replyCountButton setImage:[UIImage imageNamed:@"comment_评论"] forState:UIControlStateNormal];
         [replyCountButton setTitle:@"0" forState:UIControlStateNormal];
-        [replyCountButton setTitleColor:colorLightBlue forState:UIControlStateNormal];
+        [replyCountButton setTitleColor:RGB_color(64, 124, 207, 1) forState:UIControlStateNormal];
         [replyCountButton setImageEdgeInsets:UIEdgeInsetsMake(0, -8, 0, 10)];
         [replyCountButton addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
 

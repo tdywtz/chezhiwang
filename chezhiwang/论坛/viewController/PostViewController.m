@@ -132,22 +132,22 @@ typedef enum {
 
     [MBProgressHUD hideHUDForView:self.view animated:YES];
 
-    //这里是js，主要目的实现对url的获取
-    NSString *  jsGetImages =
-    @"function getImages(){\
-    var objs = document.getElementsByTagName(\"img\");\
-    var imgScr = '';\
-    for(var i=0;i<objs.length;i++){\
-    imgScr = imgScr + objs[i].src + '+';\
-    };\
-    return imgScr;\
-    };";
-    [webView stringByEvaluatingJavaScriptFromString:jsGetImages];//注入js方法
-    NSString *urlResurlt = [webView stringByEvaluatingJavaScriptFromString:@"getImages()"];
-   NSArray *array = [urlResurlt componentsSeparatedByString:@"+"];
-
-    NSLog(@"%@",array);
-    NSLog(@"%@", [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerHTML"]);
+//    //这里是js，主要目的实现对url的获取
+//    NSString *  jsGetImages =
+//    @"function getImages(){\
+//    var objs = document.getElementsByTagName(\"img\");\
+//    var imgScr = '';\
+//    for(var i=0;i<objs.length;i++){\
+//    imgScr = imgScr + objs[i].src + '+';\
+//    };\
+//    return imgScr;\
+//    };";
+//    [webView stringByEvaluatingJavaScriptFromString:jsGetImages];//注入js方法
+//    NSString *urlResurlt = [webView stringByEvaluatingJavaScriptFromString:@"getImages()"];
+//   NSArray *array = [urlResurlt componentsSeparatedByString:@"+"];
+//
+//    NSLog(@"%@",array);
+//    NSLog(@"%@", [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerHTML"]);
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{

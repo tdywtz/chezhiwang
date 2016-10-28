@@ -95,9 +95,9 @@
             return ;
         }
         DirectionStyle direction = DirectionRight;
-        if (index == 2) {
-            direction = DirectionLeft;
-        }
+//        if (index == 2) {
+//            direction = DirectionLeft;
+//        }
         ChartChooseListViewController *chart = [[ChartChooseListViewController alloc] initWithType:index direction:direction];
         //返回名和id
         chart.chooseEnd = ^(NSString *title , NSString *tid){
@@ -125,7 +125,7 @@
 - (void)loadDataRankingBotm{
       [HttpRequest GET:[URLFile urlString_rankingBotm] success:^(id responseObject) {
 
-          //厂家满意
+          //厂家回复率
           NSMutableArray *arrayOne = [[NSMutableArray alloc] init];
           for (NSDictionary *dict in responseObject[@"CJHFL"]) {
               ComplainChartSecondModel *model = [[ComplainChartSecondModel alloc] init];
@@ -134,30 +134,29 @@
               model.percentage = dict[@"HFL"];
               [arrayOne addObject:model];
           }
-          //车主满意
+          //车主满意度
           NSMutableArray *arrayTwo = [[NSMutableArray alloc] init];
-          for (NSDictionary *dict in responseObject[@"CZDCPH"]) {
-              ComplainChartSecondModel *model = [[ComplainChartSecondModel alloc] init];
-              model.number = dict[@"num"];
-              model.brandName = dict[@"brandName"];
-              model.percentage = dict[@"PF"];
-              [arrayTwo addObject:model];
-          }
-          //新车调查排行
-          NSMutableArray *arrayThree = [[NSMutableArray alloc] init];
           for (NSDictionary *dict in responseObject[@"PPMYD"]) {
               ComplainChartSecondModel *model = [[ComplainChartSecondModel alloc] init];
               model.number = dict[@"num"];
               model.brandName = dict[@"brandName"];
               model.percentage = dict[@"MYD"];
+              [arrayTwo addObject:model];
+          }
+          //新车调查排行
+          NSMutableArray *arrayThree = [[NSMutableArray alloc] init];
+          for (NSDictionary *dict in responseObject[@"CZDCPH"]) {
+              ComplainChartSecondModel *model = [[ComplainChartSecondModel alloc] init];
+              model.number = dict[@"num"];
+              model.brandName = dict[@"brandName"];
+              model.percentage = dict[@"PF"];
               [arrayThree addObject:model];
           }
           [_secondArrayDictionary setObject:arrayOne forKey:@"0"];
           [_secondArrayDictionary setObject:arrayTwo forKey:@"1"];
           [_secondArrayDictionary setObject:arrayThree forKey:@"2"];
           
-          
-           _secondArray = [arrayOne copy];
+           _secondArray = arrayOne;
           [_tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
 
       } failure:^(NSError *error) {
@@ -167,20 +166,27 @@
 
 //加载投诉排行数据
 - (void)loadDataRankingList{
-    
+    if (_count == 1) {
+        moreButton.hidden = NO;
+    }
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     NSString *url = [NSString stringWithFormat:[URLFile urlString_rankingList],_headerView.beginDate,_headerView.endDate,[_headerView gettidWithIndex:1],[_headerView gettidWithIndex:2],[_headerView gettidWithIndex:3],[_headerView gettidWithIndex:4],_count];
     [HttpRequest GET:url success:^(id responseObject) {
        // NSLog(@"%@",responseObject);
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-        if (_count == 1) {
-              [_firstArray removeAllObjects];
-        }
 
+
+        [_firstArray removeAllObjects];
+
+        NSInteger count = 0;
         for (NSDictionary *dict in responseObject[@"rel"]) {
-
+            count ++;
             [_firstArray addObject:dict];
+            if (_count == 1 && count == 1) {
+                _object =  [[NSObject alloc] init];
+                [_firstArray addObject:_object];
+            }
         }
       
         [_tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
@@ -272,6 +278,7 @@
         [_tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0 ){
         if ([_firstArray[indexPath.row] isMemberOfClass:[NSObject class]]) {
@@ -289,7 +296,7 @@
     if (section == 0) {
        return  35;
     }
-    return 80;
+    return 100;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     if (section == 0) {
@@ -328,7 +335,7 @@
     
     if (_secondHeaderView == nil) {
         __weak __typeof(self)weakSelf = self;
-        _secondHeaderView = [[ComplainChartSecondHeaderView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 88)];
+        _secondHeaderView = [[ComplainChartSecondHeaderView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 100)];
         _secondHeaderView.click = ^(NSInteger index){
             NSString *str = [NSString stringWithFormat:@"%ld",index];
             _secondArray = _secondArrayDictionary[str];
@@ -357,7 +364,14 @@
 }
 
 - (void)loadClick{
+
+    if (_count >= 5) {
+        return;
+    }
     _count ++;
+    if (_count == 5) {
+        moreButton.hidden = YES;
+    }
     [self loadDataRankingList];
 }
 

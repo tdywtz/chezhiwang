@@ -12,12 +12,13 @@
 #import "LHToolScrollView.h"
 #import "NewsSearchViewController.h"
 #import "NewsTestViewController.h"
+#import "LHNewsChooseView.h"
 
-@interface NewsViewController ()<LHPageViewcontrollerDelegate,LHToolScrollViewDelegate>
+@interface NewsViewController ()<LHPageViewcontrollerDelegate,LHToolScrollViewDelegate,LHNewsChooseViewDelegate>
 {
     LHPageViewcontroller *newsView;
     LHToolScrollView *toolView;
-
+    LHNewsChooseView *chooseView;
     NSInteger _searchIndex;
 }
 @end
@@ -31,7 +32,7 @@
    
     toolView = [[LHToolScrollView alloc] initWithFrame:CGRectMake(0, 64, WIDTH, 44)];
     toolView.LHDelegate = self;
-    toolView.titles =  @[@"最新",@"行业",@"新车",@"谍照",@"评测",@"导购",@"召回",
+    toolView.titles =  @[@"全部",@"行业",@"新车",@"谍照",@"评测",@"导购",@"召回",
                          @"用车",@"零部件",@"缺陷报道",@"分析报告",@"投诉销量比",
                          @"可靠性调查",@"满意度调查"];
     toolView.current = 0;
@@ -63,7 +64,16 @@
 
     [self.view addSubview:toolView];
 
-    
+
+    chooseView = [[LHNewsChooseView alloc] initWithFrame:CGRectZero];
+    chooseView.delegate = self;
+    [self.view addSubview:chooseView];
+
+    [chooseView makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(UIEdgeInsetsMake(64, 0, 0, 0));
+    }];
+
+
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(0, 0, 20, 20);
     [btn setImage:[UIImage imageNamed:@"search"] forState:UIControlStateNormal];
@@ -71,13 +81,6 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
 
 
-
-    LHLabel *label = [[LHLabel alloc] initWithFrame:CGRectMake(100, 100, 200, 200)];
-    label.preferredMaxLayoutWidth = 200;
-    [self.view addSubview:label];
-    [label makeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(CGPointZero);
-    }];
 }
 
 #pragma mark - 搜索按钮
@@ -108,12 +111,12 @@
     _searchIndex = current;
 }
 //滑动进度
--(void)scrollViewDidScrollLeft:(CGFloat)leftProgress{
-    [toolView setProgressLeft:leftProgress];
-}
--(void)scrollViewDidScrollRight:(CGFloat)rightProgress{
-    [toolView setProgressRight:rightProgress];
-}
+//-(void)scrollViewDidScrollLeft:(CGFloat)leftProgress{
+//    [toolView setProgressLeft:leftProgress];
+//}
+//-(void)scrollViewDidScrollRight:(CGFloat)rightProgress{
+//    [toolView setProgressRight:rightProgress];
+//}
 
 #pragma mark - LHToolScrollViewDelegate
 -(void)clickLeft:(NSInteger)index{
@@ -125,6 +128,18 @@
     [newsView setViewControllerWithCurrent:index];
 }
 
+- (void)chooseButtonClick:(BOOL)open{
+
+    [chooseView show];
+
+}
+
+#pragma mark - LHToolScrollViewDelegate
+- (void)clickItem:(NSInteger)index{
+     toolView.current = index;
+     [newsView setViewControllerWithCurrent:index];
+     [chooseView dismiss];
+}
 
 /*
 #pragma mark - Navigation

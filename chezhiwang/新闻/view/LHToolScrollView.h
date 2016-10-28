@@ -14,6 +14,9 @@
 -(void)clickLeft:(NSInteger)index;
 -(void)clickRight:(NSInteger)index;
 
+@optional
+- (void)chooseButtonClick:(BOOL)open;
+
 @end
 
 

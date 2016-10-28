@@ -24,7 +24,7 @@
         imageView.contentMode = UIViewContentModeScaleAspectFit;
 
         titleLabel = [[UILabel alloc] init];
-        titleLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(27)];
+        titleLabel.font = [UIFont boldSystemFontOfSize:PT_FROM_PX(27)];
         titleLabel.textColor = RGB_color(51, 51, 51, 1);
 
         lineView = [[UIView alloc] init];

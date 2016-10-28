@@ -284,6 +284,7 @@
 		4DE8256F1D6D64EA00823E10 /* ChartRowModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DE8256E1D6D64EA00823E10 /* ChartRowModel.m */; };
 		4DE8257A1D6D73FD00823E10 /* ChartItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DE825791D6D73FD00823E10 /* ChartItemModel.m */; };
 		4DEE9EB91DA88DDF00E0ABAC /* NewsTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DEE9EB81DA88DDF00E0ABAC /* NewsTableHeaderView.m */; };
+		4DF012A21DC18AD800556132 /* LHNewsChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF012A11DC18AD800556132 /* LHNewsChooseView.m */; };
 		4DF0EA631DBDA4FF00EFAE58 /* CZWManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF0EA601DBDA4FF00EFAE58 /* CZWManager.m */; };
 		4DF0EA641DBDA4FF00EFAE58 /* FmdbManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF0EA621DBDA4FF00EFAE58 /* FmdbManager.m */; };
 		4DF0EA6A1DBDA58500EFAE58 /* HttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF0EA671DBDA58500EFAE58 /* HttpRequest.m */; };
@@ -293,6 +294,8 @@
 		4DF0EA791DBDA5AD00EFAE58 /* BasicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF0EA721DBDA5AD00EFAE58 /* BasicTableViewCell.m */; };
 		4DF0EA7A1DBDA5AD00EFAE58 /* BasicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF0EA741DBDA5AD00EFAE58 /* BasicViewController.m */; };
 		4DF0EA7B1DBDA5AD00EFAE58 /* TransitionAnima.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF0EA761DBDA5AD00EFAE58 /* TransitionAnima.m */; };
+		4DF0EA7F1DBE0E9400EFAE58 /* UIScrollView+TwitterCover.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF0EA7E1DBE0E9400EFAE58 /* UIScrollView+TwitterCover.m */; };
+		4DF0EA811DBE0EB900EFAE58 /* cover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DF0EA801DBE0EB900EFAE58 /* cover@2x.png */; };
 		4DF2AAAD1D62D2AD006F8D30 /* MoreImagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF2AAAC1D62D2AD006F8D30 /* MoreImagesViewController.m */; };
 		4DF2AAB01D62DBDD006F8D30 /* LHLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF2AAAF1D62DBDD006F8D30 /* LHLabel.m */; };
 		4DF75F211D9CE46100FB882E /* HomepageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF75F201D9CE46100FB882E /* HomepageTableViewController.m */; };
@@ -791,6 +794,8 @@
 		4DE825791D6D73FD00823E10 /* ChartItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartItemModel.m; sourceTree = "<group>"; };
 		4DEE9EB71DA88DDF00E0ABAC /* NewsTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsTableHeaderView.h; sourceTree = "<group>"; };
 		4DEE9EB81DA88DDF00E0ABAC /* NewsTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsTableHeaderView.m; sourceTree = "<group>"; };
+		4DF012A01DC18AD800556132 /* LHNewsChooseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHNewsChooseView.h; sourceTree = "<group>"; };
+		4DF012A11DC18AD800556132 /* LHNewsChooseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHNewsChooseView.m; sourceTree = "<group>"; };
 		4DF0EA5F1DBDA4FF00EFAE58 /* CZWManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZWManager.h; sourceTree = "<group>"; };
 		4DF0EA601DBDA4FF00EFAE58 /* CZWManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZWManager.m; sourceTree = "<group>"; };
 		4DF0EA611DBDA4FF00EFAE58 /* FmdbManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FmdbManager.h; sourceTree = "<group>"; };
@@ -809,6 +814,9 @@
 		4DF0EA741DBDA5AD00EFAE58 /* BasicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicViewController.m; sourceTree = "<group>"; };
 		4DF0EA751DBDA5AD00EFAE58 /* TransitionAnima.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransitionAnima.h; sourceTree = "<group>"; };
 		4DF0EA761DBDA5AD00EFAE58 /* TransitionAnima.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransitionAnima.m; sourceTree = "<group>"; };
+		4DF0EA7D1DBE0E9400EFAE58 /* UIScrollView+TwitterCover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TwitterCover.h"; sourceTree = "<group>"; };
+		4DF0EA7E1DBE0E9400EFAE58 /* UIScrollView+TwitterCover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TwitterCover.m"; sourceTree = "<group>"; };
+		4DF0EA801DBE0EB900EFAE58 /* cover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cover@2x.png"; sourceTree = "<group>"; };
 		4DF2AAAB1D62D2AD006F8D30 /* MoreImagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreImagesViewController.h; sourceTree = "<group>"; };
 		4DF2AAAC1D62D2AD006F8D30 /* MoreImagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreImagesViewController.m; sourceTree = "<group>"; };
 		4DF2AAAE1D62DBDD006F8D30 /* LHLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHLabel.h; sourceTree = "<group>"; };
@@ -955,6 +963,7 @@
 				4D97FC651BAF94730089C684 /* 密码修改 */,
 				4D79792F1BA9699200DC147D /* MyViewController.h */,
 				4D84E6551BF33B4800F901BF /* MyViewController.m */,
+				4DF0EA801DBE0EB900EFAE58 /* cover@2x.png */,
 				4DCDDE6A1D9E0FDB00AE4446 /* MyHeaderView.h */,
 				4DCDDE6B1D9E0FDB00AE4446 /* MyHeaderView.m */,
 			);
@@ -1754,6 +1763,7 @@
 		4DCDDE6D1D9E3AA900AE4446 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				4DF0EA7C1DBE0E9400EFAE58 /* TwitterCover */,
 				4DF0EA6C1DBDA5AD00EFAE58 /* basic */,
 				4DF0EA651DBDA58500EFAE58 /* NetWorking */,
 				4DF0EA5E1DBDA4FF00EFAE58 /* Manager */,
@@ -1800,6 +1810,8 @@
 				4DD30C701D20C0F4009C3B05 /* ChangeView.m */,
 				4DD30C731D20C0F4009C3B05 /* LHToolScrollView.h */,
 				4DD30C741D20C0F4009C3B05 /* LHToolScrollView.m */,
+				4DF012A01DC18AD800556132 /* LHNewsChooseView.h */,
+				4DF012A11DC18AD800556132 /* LHNewsChooseView.m */,
 				4DD30C791D20C0F4009C3B05 /* NewsTestTableView.h */,
 				4DD30C7A1D20C0F4009C3B05 /* NewsTestTableView.m */,
 				4D11BEA91D54745500482F8F /* NewsTestTableViewCell.h */,
@@ -2000,6 +2012,15 @@
 				4DF0EA761DBDA5AD00EFAE58 /* TransitionAnima.m */,
 			);
 			path = basic;
+			sourceTree = "<group>";
+		};
+		4DF0EA7C1DBE0E9400EFAE58 /* TwitterCover */ = {
+			isa = PBXGroup;
+			children = (
+				4DF0EA7D1DBE0E9400EFAE58 /* UIScrollView+TwitterCover.h */,
+				4DF0EA7E1DBE0E9400EFAE58 /* UIScrollView+TwitterCover.m */,
+			);
+			path = TwitterCover;
 			sourceTree = "<group>";
 		};
 		4DF75EC71D9CE25A00FB882E /* Find */ = {
@@ -2315,6 +2336,7 @@
 				4D952D161BF0886C000F26C0 /* 飞吻.gif in Resources */,
 				4D952CB81BF0886C000F26C0 /* 傲慢.gif in Resources */,
 				4D952CC71BF0886C000F26C0 /* 呲牙.gif in Resources */,
+				4DF0EA811DBE0EB900EFAE58 /* cover@2x.png in Resources */,
 				4D952CFF1BF0886C000F26C0 /* 睡.gif in Resources */,
 				4DFFA5051DB77308003B6178 /* StarsBackgroundBig@2x.png in Resources */,
 				4D952CED1BF0886C000F26C0 /* 擦汗.gif in Resources */,
@@ -2616,6 +2638,7 @@
 				4DFBFA351CE56F110069F229 /* CZWAppPrompt.m in Sources */,
 				4D373B5F1DB4CF4E00D31455 /* MJDIYBackFooter.m in Sources */,
 				4DD335741D6453570037F2D2 /* ComplainChartFirstCell.m in Sources */,
+				4DF012A21DC18AD800556132 /* LHNewsChooseView.m in Sources */,
 				4D11BEC71D5484F700482F8F /* LHLabelTextStorage.m in Sources */,
 				4D373B601DB4CF4E00D31455 /* MJDIYHeader.m in Sources */,
 				4DE825691D6D49B200823E10 /* ChartTableViewCell.m in Sources */,
@@ -2666,6 +2689,7 @@
 				4D17D8BE1D29ED79002E2B94 /* PostViewController.m in Sources */,
 				4D753CE91BF56ADA00D3232D /* LoginViewController.m in Sources */,
 				4DF75F241D9CE48A00FB882E /* HomepageSectionModel.m in Sources */,
+				4DF0EA7F1DBE0E9400EFAE58 /* UIScrollView+TwitterCover.m in Sources */,
 				4D11BEC81D5484F700482F8F /* NSMutableAttributedString+LH.m in Sources */,
 				4DF75F3C1D9CE61F00FB882E /* HomepageComplainCell.m in Sources */,
 				4DF0EA6A1DBDA58500EFAE58 /* HttpRequest.m in Sources */,

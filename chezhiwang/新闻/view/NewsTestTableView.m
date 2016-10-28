@@ -40,6 +40,7 @@
 
                 if (index == 0) {
                     [_chart setTitle:@"车系" tid:@"" index:1];
+                    [_chart setEnable:NO index:1];
                 }
                 //刷新数据
                 [_tableView.mj_header beginRefreshing];
@@ -61,9 +62,9 @@
                  chooseType = ChartChooseTypeAttributeSeries;
             }
             DirectionStyle style = DirectionRight;
-            if ((index+1)%3 == 0) {
-                style = DirectionLeft;
-            }
+//            if ((index+1)%3 == 0) {
+//                style = DirectionLeft;
+//            }
     
             ChartChooseListViewController *choose = [[ChartChooseListViewController alloc] initWithType:chooseType direction:style];
 
@@ -73,25 +74,28 @@
             choose.chooseEnd = ^(NSString *title , NSString *tid){
                 [_chart setTitle:title tid:tid index:index];
                 _count = 1;
-    
-
-                if (chooseType == ChartChooseTypeBrand) {
-                    [_chart setTitle:@"车系" tid:@"" index:1];
-                }else if (chooseType == ChartChooseTypeSeries){
-
-                }else if (chooseType == ChartChooseTypeAttributeModel){
-
-                }else if (chooseType == ChartChooseTypeAttributeBrand){
-
-                }else if (chooseType == ChartChooseTypeAttributeSeries){
-
+                if (index == 0) {
+                    [_chart setEnable:YES index:1];
                 }
+//
+//                if (chooseType == ChartChooseTypeBrand) {
+//                    [_chart setTitle:@"车系" tid:@"" index:1];
+//                }else if (chooseType == ChartChooseTypeSeries){
+//
+//                }else if (chooseType == ChartChooseTypeAttributeModel){
+//
+//                }else if (chooseType == ChartChooseTypeAttributeBrand){
+//
+//                }else if (chooseType == ChartChooseTypeAttributeSeries){
+//
+//                }
                 //刷新数据
                 [_tableView.mj_header beginRefreshing];
             };
             [wealself.parentViewController presentViewController:choose animated:NO completion:nil];
         }];
         [_chart hideBarWithIndex:2];//隐藏第三个按钮
+        [_chart setEnable:NO index:1];
         [self addSubview:_chart];
     
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(_chart.frame)+10, CGRectGetWidth(frame), CGRectGetHeight(frame)-CGRectGetHeight(_chart.frame)) style:UITableViewStylePlain];

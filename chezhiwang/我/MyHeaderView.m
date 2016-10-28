@@ -48,7 +48,6 @@
             make.height.equalTo(30);
         }];
 
-        self.backgroundColor = colorLightBlue;
     }
     return self;
 }

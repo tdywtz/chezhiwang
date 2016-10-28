@@ -27,7 +27,7 @@
     titleLabel = [[UILabel alloc] init];
     titleLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(23)];
     titleLabel.textColor = RGB_color(17, 17, 17, 1);
-    titleLabel.numberOfLines = 2;
+    titleLabel.numberOfLines = 1;
     
     typeLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
     typeLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(16)];
@@ -86,15 +86,15 @@
     answerLabel.text = _answerModel.answer;
 
     NSInteger type = [_answerModel.type integerValue];
-    if (type == 0) {
+    if (type == 1) {
         typeLabel.textColor = RGB_color(78, 191, 243, 1);
         typeLabel.text = @"维修保养";
 
-    }else if (type == 1){
+    }else if (type == 2){
         typeLabel.textColor = RGB_color(255, 147, 4, 1);
         typeLabel.text = @"买车咨询";
 
-    }else{
+    }else if(type == 3){
         typeLabel.textColor = RGB_color(27, 188, 157, 1);
         typeLabel.text = @"政策法规";
     }

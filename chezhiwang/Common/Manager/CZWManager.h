@@ -14,9 +14,10 @@
  */
 typedef NS_ENUM(NSInteger, NewsType) {
     NewsTypeNews = 1,//新闻
-    NewsTypeComplain = 3,//投诉
-    NewsTypeAnswer = 2,//答疑
-    NewsTypeForum//论坛
+    NewsTypeComplain = 2,//投诉
+    NewsTypeAnswer = 3,//答疑
+    NewsTypeForu,//论坛
+    NewsTypeResearch = 5//新车调查
 };
 
 #define CZWManagerInstance [CZWManager manager]

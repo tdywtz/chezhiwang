@@ -181,7 +181,7 @@
     titleLabel = [[UILabel alloc] init];
     titleLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(23)];
     titleLabel.textColor = RGB_color(17, 17, 17, 1);
-    titleLabel.numberOfLines = 2;
+    titleLabel.numberOfLines = 1;
     
 
     cpidLabel = [[UILabel alloc] init];
@@ -241,7 +241,7 @@
     }];
 
     [seriesNameLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(brandNameLabel.right).offset(10);
+        make.left.equalTo(dateLabel);
         make.top.equalTo(brandNameLabel);
     }];
 
@@ -274,7 +274,10 @@
 - (void)setData{
     titleLabel.text = self.complainModel.question;
 
-    cpidLabel.attributedText = [self attributedWithString1:@"编号：" string2:[NSString stringWithFormat:@"【%@】",self.complainModel.cpid]];
+    NSMutableAttributedString *matt = [self attributedWithString1:@"编号：" string2:[NSString stringWithFormat:@"【%@】",self.complainModel.cpid]];
+    [matt addAttribute:NSKernAttributeName value:@(-3.2) range:NSMakeRange(2, 1)];
+    cpidLabel.attributedText = matt;
+
     dateLabel.text = self.complainModel.date;
     brandNameLabel.attributedText = [self attributedWithString1:@"品牌：" string2:self.complainModel.brandname];
     seriesNameLabel.attributedText = [self attributedWithString1:@"车系：" string2:self.complainModel.seriesname];
@@ -290,7 +293,7 @@
     }];
 }
 
-- (NSAttributedString *)attributedWithString1:(NSString *)string1 string2:(NSString *)string2{
+- (NSMutableAttributedString *)attributedWithString1:(NSString *)string1 string2:(NSString *)string2{
     if (string2 == nil) {
         string2 = @"";
     }

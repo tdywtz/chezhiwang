@@ -84,14 +84,14 @@
 
 
         cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        cancelButton.backgroundColor = [UIColor redColor];
+        [cancelButton setImage:[UIImage imageNamed:@"车型对比-删除"] forState:UIControlStateNormal];
         [cancelButton addTarget:self action:@selector(cancelButtonClicked) forControlEvents:UIControlEventTouchUpInside];
         cancelButton.hidden = YES;
         [self.contentView addSubview:cancelButton];
 
         [cancelButton makeConstraints:^(MASConstraintMaker *make) {
             make.top.right.equalTo(0);
-            make.size.equalTo(CGSizeMake(20, 20));
+            make.size.equalTo(CGSizeMake(25, 25));
         }];
 
 
@@ -161,10 +161,10 @@
     if (type == chooseTypeSeries){
         chose.ID = self.topModel.brandId;
     }else if (type == chooseTypeModel){
-        chose.ID = self.topModel.brandId;
-        chose.seriesId = self.topModel.seriesId;
+        chose.ID = self.topModel.seriesId;
+     
     }
-    
+
     chose.choosetype = type;
 
     [self.parentViewController presentViewController:nvc animated:YES completion:nil];

@@ -191,7 +191,7 @@
             ChartRowModel *rowModel = sectionModel.rowModels[i];
             ChartItemModel *itemModel = rowModel.itemModels[queue];
             if (i == 0) {
-                itemModel.name = @"待定";
+                itemModel.name = responseObject[@"CarInfo"];
             }else if (i == 1){
                 itemModel.attribute = [weakSelf attributeLeft:responseObject[@"Count"] right:@"条" star:NO];
             }else if (i == 2){

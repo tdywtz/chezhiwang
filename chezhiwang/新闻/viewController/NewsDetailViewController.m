@@ -33,14 +33,14 @@
         self.titleLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
         self.titleLabel.lineSpacing = 4;
         self.titleLabel.numberOfLines = 0;
-        self.titleLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(25)];
+        self.titleLabel.font = [UIFont boldSystemFontOfSize:PT_FROM_PX(26.5)];
 
         self.dateLabel = [[UILabel alloc] init];
-        self.dateLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(18)];
+        self.dateLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(17)];
         self.dateLabel.textColor = RGB_color(153, 153, 153, 1);
 
         self.editorLabel = [[UILabel alloc] init];
-        self.editorLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(18)];
+        self.editorLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(17)];
         self.editorLabel.textColor = RGB_color(153, 153, 153, 1);
 
         [self addSubview:self.titleLabel];
@@ -49,18 +49,20 @@
 
         [self.titleLabel makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(0);
-            make.width.lessThanOrEqualTo(WIDTH-20);
+            make.width.lessThanOrEqualTo(WIDTH-26);
             make.top.equalTo(20);
         }];
 
         [self.dateLabel makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.titleLabel.bottom).offset(20);
-            make.left.equalTo(10);
+            make.right.equalTo(-13);
             make.bottom.equalTo(0);
+
         }];
 
         [self.editorLabel makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(-10);
+
+            make.left.equalTo(13);
             make.bottom.equalTo(self.dateLabel);
         }];
 
@@ -83,6 +85,8 @@
     NewsDetailHeaderView *headerView;
     UIWebView *_webView;
     FootCommentView *footView;
+
+    UIImage *shareImage;
 }
 
 @property (nonatomic,strong) NSDictionary *dictionary;
@@ -107,8 +111,13 @@
         self.dictionary = [responseObject copy];
 
         headerView.titleLabel.text = responseObject[@"title"];
-        headerView.dateLabel.text = [NSString stringWithFormat:@"车质网    %@",responseObject[@"date"]];
-        headerView.editorLabel.text = [NSString stringWithFormat:@"编辑：%@",responseObject[@"author"]];
+        headerView.dateLabel.text = responseObject[@"date"];
+        if ([responseObject[@"author"] length]) {
+             headerView.editorLabel.text = [NSString stringWithFormat:@"%@   编辑：%@",responseObject[@"source"],responseObject[@"author"]];
+        }else{
+            headerView.editorLabel.text = responseObject[@"source"]; 
+        }
+
         [footView setReplyConut:responseObject[@"replycount"]];
 //重置头部位置
         CGFloat height = [headerView viewHeight];
@@ -118,6 +127,7 @@
         }];
 
         NSMutableString *newsContentHTML = [NSMutableString stringWithFormat:@"<style>body{padding:0 5px;}</style>%@",responseObject[@"content"]];
+
 
         NSRange range = range = [newsContentHTML rangeOfString:@"src=\"/"];
         while (range.length != 0) {
@@ -142,12 +152,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.title = @"新闻";
     self.view.backgroundColor = [UIColor whiteColor];
     [self createRightItem];
     [self createContent];
 
     [self loadData];
     [self writeData];
+}
+
+- (void)setShareImageUrl:(NSString *)shareImageUrl{
+    _shareImageUrl = shareImageUrl;
+
+    [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:shareImageUrl] options:SDWebImageDownloaderUseNSURLCache progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+
+    } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+
+        shareImage = image;
+    }];
 }
 
 //浏览记录
@@ -228,12 +250,12 @@
        
         CZWShareViewController *share = [[CZWShareViewController alloc] initWithParentViewController:self];
         share.shareUrl = self.dictionary[@"url"];
-        share.shareImage = nil;
+        share.shareImage = shareImage;
         NSString *html = [_webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerText"];
         if (html.length > 100) html = [html substringToIndex:99];
         share.shareContent = html;
         share.shareTitle = self.dictionary[@"title"];
-        [share setBluffImageWithView:[UIApplication sharedApplication].keyWindow.rootViewController.view];
+        NSLog(@"%@",shareImage);
         [self presentViewController:share animated:YES completion:nil];
 
     }else{
@@ -252,6 +274,7 @@
     if (self.dictionary[@"title"] && self.dictionary[@"date"] && self.ID) {
         FmdbManager *fb = [FmdbManager shareManager];
         [fb insertIntoCollectWithId:self.ID andTime:self.dictionary[@"date"] andTitle:self.dictionary[@"title"] andType:collectTypeNews];
+        [LHController alert:@"收藏成功"];
     }
 }
 
@@ -259,6 +282,7 @@
 -(void)deleteFavorate{
     FmdbManager *fb = [FmdbManager shareManager];
     [fb deleteFromCollectWithId:self.ID andType:collectTypeNews];
+     [LHController alert:@"取消收藏成功"];
 }
 
 
@@ -274,12 +298,20 @@
     dict[@"fid"] = @"0";//回复的评论对象id（若是回复当前新闻为0或不设置）
     [dict setObject:content forKey:@"content"];//回复内容
     [dict setObject:self.ID forKey:@"tid"];//回复新闻的id
-    [dict setObject:@"1" forKey:@"type"];//类型（新闻-1、投诉-2、答疑-3）
+    //类型（新闻-1、投诉-2、答疑-3,调查-5）
+    if (self.invest) {
+        dict[@"type"] = @"5";
+    }else{
+        dict[@"type"] = @"1";
+    }
+
     [dict setObject:appOrigin forKey:@"origin"];
 
     [HttpRequest POST:[URLFile urlStringForAddcomment] parameters:dict success:^(id responseObject) {
-        if ([responseObject[@"result"] isEqualToString:@"success"]) {
-            [LHController alert:@"评论成功"];
+
+        if (responseObject[@"success"]) {
+            [LHController alert:responseObject[@"success"]];
+            [footView addReplyCont];
 
         }else{
             [LHController alert:@"评论失败"];
@@ -321,7 +353,7 @@
         }
     }else{
         CommentListViewController *comment = [[CommentListViewController alloc] init];
-        comment.type = NewsTypeNews;
+        comment.type = self.invest?NewsTypeResearch:NewsTypeNews;
         comment.cid = self.ID;
         [self.navigationController pushViewController:comment animated:YES];
     }

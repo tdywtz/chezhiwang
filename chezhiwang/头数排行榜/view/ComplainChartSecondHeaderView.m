@@ -11,6 +11,8 @@
 @interface ComplainChartSecondHeaderView ()
 {
     UIView *moveView;
+    UILabel *brandSeriesLabel;
+    UILabel *percentageLabel;//百分比
 }
 @end
 
@@ -30,13 +32,13 @@
     topLine.backgroundColor = RGB_color(237, 238, 239, 1);
     [self addSubview:topLine];
     
-    NSArray *array = @[@"  厂家满意度  ",@"  车主满意度  ",@"  新车调查排行  "];
+    NSArray *array = @[@" 厂家回复率 ",@" 车主满意度 ",@" 新车调查排行 "];
     UIButton *temp = nil;
     for (int i = 0; i < array.count; i ++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setTitle:array[i] forState:UIControlStateNormal];
         button.tag = 100+i;
-        button.titleLabel.font = [UIFont systemFontOfSize:14];
+        button.titleLabel.font = [UIFont systemFontOfSize:16];
         [button setTitleColor:colorDeepGray forState:UIControlStateNormal];
         [button setTitleColor:colorLightBlue forState:UIControlStateSelected];
         [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -46,14 +48,14 @@
             [button makeConstraints:^(MASConstraintMaker *make) {
                 make.top.equalTo(7);
                 make.left.equalTo(10);
-                make.height.equalTo(CGRectGetHeight(self.frame)/2-7);
+                make.height.equalTo(CGRectGetHeight(self.frame)-42);
             }];
             button.selected = YES;
         }else{
             [button makeConstraints:^(MASConstraintMaker *make) {
                 make.top.equalTo(7);
-                make.left.equalTo(temp.right);
-                make.height.equalTo(CGRectGetHeight(self.frame)/2-7);
+                make.left.equalTo(temp.right).offset(10);
+                make.height.equalTo(CGRectGetHeight(self.frame)-42);
             
             }];
         }
@@ -70,19 +72,19 @@
     
     [line makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(10);
-        make.top.equalTo(CGRectGetHeight(self.frame)/2-1);
+        make.bottom.equalTo(-35);
         make.height.equalTo(2);
         make.width.equalTo(CGRectGetWidth(self.frame)-20);
     }];
    
     [moveView makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(10);
-        make.top.equalTo(CGRectGetHeight(self.frame)/2-2);
+        make.bottom.equalTo(-36);
         make.height.equalTo(2);
         make.width.equalTo(temp).offset(-12);
     }];
     
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(10, CGRectGetHeight(self.frame)/2, CGRectGetWidth(self.frame)-20, 35)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(10, CGRectGetHeight(self.frame)-35, CGRectGetWidth(self.frame)-20, 35)];
     view.backgroundColor = RGB_color(237, 238, 239, 1); 
     [self addSubview:view];
     for (int i = 0; i < 3; i ++) {
@@ -97,12 +99,14 @@
                 make.centerY.equalTo(0);
             }];
         }else if (i == 1){
+            brandSeriesLabel = label;
             label.text = @"品牌";
             [label makeConstraints:^(MASConstraintMaker *make) {
                 make.center.equalTo(CGPointZero);
             }];
 
         }else{
+            percentageLabel = label;
             label.text = @"回复率";
             [label makeConstraints:^(MASConstraintMaker *make) {
                 make.right.equalTo(-10);
@@ -117,7 +121,17 @@
 -(void)buttonClick:(UIButton *)button{
     
     _current = button.tag-100;
-    
+    if (_current == 0) {
+        brandSeriesLabel.text = @"品牌";
+        percentageLabel.text = @"回复率";
+    }else if (_current == 1){
+        brandSeriesLabel.text = @"品牌";
+        percentageLabel.text = @"满意度";
+    }else if (_current == 2){
+        brandSeriesLabel.text = @"调查车型";
+        percentageLabel.text = @"综合评分";
+    }
+
     for (int i = 0; i < 3; i ++) {
         UIButton *btn = (UIButton *)[self viewWithTag:100+i];
         if ([btn isEqual:button]) {
@@ -126,7 +140,7 @@
             [UIView animateWithDuration:0.2 animations:^{
                 [moveView remakeConstraints:^(MASConstraintMaker *make) {
                     make.left.equalTo(btn.left);
-                    make.top.equalTo(CGRectGetHeight(self.frame)/2-2);
+                    make.bottom.equalTo(-36);
                     make.height.equalTo(2);
                     make.width.equalTo(btn.width);
                 }];

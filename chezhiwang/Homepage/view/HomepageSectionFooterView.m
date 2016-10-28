@@ -28,6 +28,7 @@
         pushButton.titleLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(19)];
         [pushButton setTitleColor:RGB_color(154, 154, 154, 1) forState:UIControlStateNormal];
         pushButton.backgroundColor = RGB_color(240, 240, 240, 1);
+        [pushButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 20)];
         [pushButton addTarget:self action:@selector(pushClick) forControlEvents:UIControlEventTouchUpInside];
 
         imageView = [[UIImageView alloc] init];
@@ -41,7 +42,7 @@
         }];
 
         [imageView makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(50);
+            make.centerX.equalTo(40);
             make.centerY.equalTo(pushButton);
         }];
     }

@@ -75,14 +75,14 @@
 
     
     self.imageTitleLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
-    self.imageTitleLabel.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+    self.imageTitleLabel.backgroundColor = RGB_color(0, 0, 0, 0.6);
     self.imageTitleLabel.textInsets = UIEdgeInsetsMake(0, 10, 0, 95);
     self.imageTitleLabel.textColor = [UIColor whiteColor];
     self.imageTitleLabel.textAlignment = kCTTextAlignmentLeft;
     
     self.pageControll = [[UIPageControl alloc] init];
-    self.pageControll.pageIndicatorTintColor = [UIColor whiteColor];
-    self.pageControll.currentPageIndicatorTintColor = [UIColor colorWithRed:204/255.0 green:5/255.0 blue:10/255.0 alpha:1];
+    self.pageControll.pageIndicatorTintColor = RGB_color(149, 149, 149, 1);
+    self.pageControll.currentPageIndicatorTintColor = RGB_color(246, 162, 3, 1);
 
     
     [self addSubview:self.buttonTop];

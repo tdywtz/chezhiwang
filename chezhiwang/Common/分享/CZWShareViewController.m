@@ -68,6 +68,11 @@
         {
             UIPasteboard *pboard = [UIPasteboard generalPasteboard];
             pboard.string = self.shareUrl;
+            UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"复制成功" message:nil preferredStyle:UIAlertControllerStyleAlert];
+            [self.parentController presentViewController:ac animated:YES completion:nil];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [ac dismissViewControllerAnimated:YES completion:nil];
+            });
         }
             break;
             

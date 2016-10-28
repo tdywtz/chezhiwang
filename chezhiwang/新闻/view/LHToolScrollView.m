@@ -50,13 +50,13 @@
 
 @end
 
-#pragma mark - 
+#pragma mark -
 
-@interface shadowView : UIView
+@interface LHToolChooseView : UIView
 
 @end
 
-@implementation shadowView
+@implementation LHToolChooseView
 
 
 @end
@@ -68,6 +68,7 @@
 @property (nonatomic,strong) UIView *contentView;
 @property (nonatomic,strong) UIView *moveView;//滑动条
 @property (nonatomic,strong) NSMutableArray<__kindof LHToolButton *> *buttons;
+@property (nonatomic,strong) LHToolChooseView *chooseView;//选择
 
 @end
 
@@ -112,12 +113,23 @@
         self.moveView.backgroundColor = colorYellow;
         [self.contentView addSubview:self.moveView];
 
+//
+//        UIButton *chooseButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [chooseButton addTarget:self action:@selector(chooseClick:) forControlEvents:UIControlEventTouchUpInside];
+//        chooseButton.backgroundColor = [UIColor redColor];
 
         UIView *leftView = [[UIView alloc] init];
         UIView *rightView = [[UIView alloc] init];
 
+      //  [self addSubview:chooseButton];
         [self addSubview:leftView];
         [self addSubview:rightView];
+
+//        [chooseButton makeConstraints:^(MASConstraintMaker *make) {
+//            make.right.equalTo(0);
+//            make.top.equalTo(0);
+//            make.size.equalTo(CGSizeMake(40, 40));
+//        }];
 
         [leftView makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(0);
@@ -139,7 +151,7 @@
         [leftView.layer addSublayer:gradientLayer];
 
         CAGradientLayer *rightGradientLayer = [[CAGradientLayer alloc] init];
-        rightGradientLayer.colors = @[(__bridge id)RGB_color(1, 255, 255, 1).CGColor,(__bridge id)RGB_color(255, 255, 255, 0.6).CGColor];
+        rightGradientLayer.colors = @[(__bridge id)RGB_color(255, 255, 255, 1).CGColor,(__bridge id)RGB_color(255, 255, 255, 0.6).CGColor];
         rightGradientLayer.startPoint = CGPointMake(1, 0.5);
         rightGradientLayer.endPoint = CGPointMake(0, 0.5);
         rightGradientLayer.frame = CGRectMake(0, 0, 10, frame.size.height-4);
@@ -150,6 +162,13 @@
     return self;
 }
 
+//弹出选择页面
+- (void)chooseClick:(UIButton *)btn{
+    btn.selected = !btn.selected;
+    if ([self.LHDelegate respondsToSelector:@selector(chooseButtonClick:)]) {
+        [self.LHDelegate chooseButtonClick:btn.selected];
+    }
+}
 
 -(void)createButtons{
     LHToolButton *temp = nil;

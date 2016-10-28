@@ -27,7 +27,7 @@
 - (void)makeUI{
     titleLabel = [[UILabel alloc] init];
     titleLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(23)];
-    titleLabel.numberOfLines = 2;
+    titleLabel.numberOfLines = 1;
     titleLabel.textColor = RGB_color(17, 17, 17, 1);
     
     nameLabel = [[UILabel alloc] init];
@@ -114,24 +114,30 @@
 }
 
 - (NSMutableAttributedString *)attributedTitle{
-    NSMutableAttributedString *attributed = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@" %@",_forumModel.title]];
+    NSMutableAttributedString *attributed = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",_forumModel.title]];
 
-    NSTextAttachment *achment = [[NSTextAttachment alloc] init];
-    if ([_forumModel.type integerValue] == 1) {
+
+    if ([_forumModel.type integerValue] == 3) {
+        //内容有图片
+         [attributed insertAttributedString:[[NSAttributedString alloc] initWithString:@" "] atIndex:0];
+
+        NSTextAttachment *achment = [[NSTextAttachment alloc] init];
         achment.image = [UIImage imageNamed:@"auto_forumCell_image"];
-    }else{
-        achment.image = [UIImage imageNamed:@"auto_forumCell_image"];
+        achment.bounds = CGRectMake(0, -1, 15, 15);
+        [attributed insertAttributedString:[NSAttributedString attributedStringWithAttachment:achment] atIndex:0];
+    }else if([_forumModel.type integerValue] == 2){
+        //内容没图片
     }
-    achment.bounds = CGRectMake(0, -1, 15, 15);
-    [attributed insertAttributedString:[NSAttributedString attributedStringWithAttachment:achment] atIndex:0];
+
 
     if (_forumModel.essence) {
         //精华
         NSTextAttachment *jinghua = [[NSTextAttachment alloc] init];
-        jinghua.image = [UIImage imageNamed:@"auto_forumCell_image"];
+        jinghua.image = [UIImage imageNamed:@"forum_jing"];
         jinghua.bounds = CGRectMake(0, -1, 15, 15);
 
         [attributed insertAttributedString:[[NSAttributedString alloc] initWithString:@" "] atIndex:0];
+        
         [attributed insertAttributedString:[NSAttributedString attributedStringWithAttachment:jinghua] atIndex:0];
     }
     return attributed;

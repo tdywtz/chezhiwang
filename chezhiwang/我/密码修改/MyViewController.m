@@ -16,6 +16,7 @@
 #import "MyCarViewController.h"
 
 #import "MyHeaderView.h"
+#import "UIScrollView+TwitterCover.h"
 #import "BasicNavigationController.h"
 
 
@@ -40,6 +41,9 @@
     [self createItem];
     [self createTableView];
     [self reloadData];
+
+
+   // [_tableView addTwitterCoverWithImage:[UIImage imageNamed:@"cover.png"] withTopView:nil];
 }
 
 
@@ -127,6 +131,7 @@
 
     headerView = [[MyHeaderView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 230)];
     headerView.parentVC = self;
+    headerView.backgroundColor = colorLightBlue;
     _tableView.tableHeaderView = headerView;
 
     UIView *tableFootView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 80)];

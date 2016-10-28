@@ -16,6 +16,7 @@
 
 @interface URLFile : NSObject
 
+
 /**登录*/
 + (NSString *)urlStringForLogin;
 /**注册*/
@@ -29,6 +30,8 @@
 + (NSString *)urlString_picBrand;
 /**车系大全*/
 + (NSString *)urlString_picSeries;
+
+
 
 #pragma mark - homepage
 /**首页*/
@@ -69,8 +72,8 @@
 
 /**评论列表*/
 + (NSString *)urlStringForPL;
-/**评论总数*/
-+ (NSString *)urlStringForPL_total;
+///**评论总数*/
+//+ (NSString *)urlStringForPL_total;
 /**提交评论*/
 + (NSString *)urlStringForAddcomment;
 

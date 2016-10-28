@@ -15,7 +15,7 @@
 @property (nonatomic,copy) NSString *date;
 /***/
 @property (nonatomic,copy) NSString *ID;
-/** 图片链接 */
+/** 图片链接(用‘|’拼接的) */
 @property (nonatomic,copy) NSString *image;
 /** 类型 */
 @property (nonatomic,copy) NSString *stylename;

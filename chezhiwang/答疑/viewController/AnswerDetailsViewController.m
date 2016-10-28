@@ -55,6 +55,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"答疑";
     A = [LHController setFont];
     self.type = NewsTypeAnswer;
     [self createRightItems];
@@ -109,7 +110,6 @@
     }else{
         CZWShareViewController *share = [[CZWShareViewController alloc] initWithParentViewController:self];
         share.shareUrl = self.dict[@"filepath"];
-        share.shareImage = [UIImage imageNamed:@"Icon-60"];
         NSString *html = self.dict[@"content"];
         if (html.length > 100) html = [html substringToIndex:99];
         share.shareContent = html;
@@ -134,41 +134,41 @@
     }];
 
     titleLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
-    titleLabel.font = [UIFont systemFontOfSize:17];
+    titleLabel.font = [UIFont boldSystemFontOfSize:20];
     titleLabel.numberOfLines = 0;
     titleLabel.preferredMaxLayoutWidth = WIDTH-30;
 
     CZWLabel *questionTitle = [[CZWLabel alloc] init];
-    questionTitle.font = [UIFont systemFontOfSize:A-3];
+    questionTitle.font = [UIFont systemFontOfSize:16];
     questionTitle.textColor = colorLightGray;
     questionTitle.text = @"  网友提问：";
-    UIImage *questionImage = [UIImage imageNamed:@"答疑"];
+    UIImage *questionImage = [UIImage imageNamed:@"auto_answerDetail_question"];
     [questionTitle insertImage:questionImage frame:CGRectMake(0, -3, 17, 17) index:0];
 
 
     questionContent = [[CZWLabel alloc] init];
     questionContent.linesSpacing = 3;
     questionContent.textColor = colorDeepGray;
-    questionContent.font = [UIFont systemFontOfSize:14];
+    questionContent.font = [UIFont systemFontOfSize:16];
 
-    questionDate = [LHController createLabelWithFrame:CGRectZero Font:13 Bold:NO TextColor:colorLightGray Text:nil];
+    questionDate = [LHController createLabelWithFrame:CGRectZero Font:14 Bold:NO TextColor:colorLightGray Text:nil];
 
     UIView *lineView = [[UIView alloc] init];
     lineView.backgroundColor = RGB_color(240, 240, 240, 1);
 
     CZWLabel *answerTitle = [[CZWLabel alloc] init];
-    answerTitle.font = [UIFont systemFontOfSize:A-3];
+    answerTitle.font = [UIFont systemFontOfSize:16];
     answerTitle.textColor = colorLightGray;
     answerTitle.text = @"  专家答复：";
-    UIImage *answerTitleImage = [UIImage imageNamed:@"答疑"];
+    UIImage *answerTitleImage = [UIImage imageNamed:@"auto_answerDetail_answer"];
     [answerTitle insertImage:answerTitleImage frame:CGRectMake(0, -3, 17, 17) index:0];
 
     answerContent = [[CZWLabel alloc] init];
     answerContent.linesSpacing = 3;
     answerContent.textColor = colorDeepGray;
-    answerContent.font = [UIFont systemFontOfSize:14];
+    answerContent.font = [UIFont systemFontOfSize:16];
 
-    answerDate = [LHController createLabelWithFrame:CGRectZero Font:13 Bold:NO TextColor:colorLightGray Text:nil];
+    answerDate = [LHController createLabelWithFrame:CGRectZero Font:14 Bold:NO TextColor:colorLightGray Text:nil];
 
     UIView *lineView2 = [[UIView alloc] init];
     lineView2.backgroundColor = colorLineGray;
@@ -185,16 +185,16 @@
 
     [titleLabel makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(0);
-        make.top.equalTo(20);
+        make.top.equalTo(23);
         //make.width.lessThanOrEqualTo(WIDTH-30);
     }];
     [questionTitle makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(15);
-        make.top.equalTo(titleLabel.bottom).offset(10);
+        make.top.equalTo(titleLabel.bottom).offset(23);
     }];
 
     [questionContent makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(questionTitle.bottom).offset(10);
+        make.top.equalTo(questionTitle.bottom).offset(15);
         make.left.equalTo(questionTitle);
         make.right.equalTo(-15);
     }];
@@ -211,13 +211,13 @@
     }];
 
     [answerTitle makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(lineView.bottom).offset(10);
+        make.top.equalTo(lineView.bottom).offset(20);
         make.left.equalTo(15);
     }];
 
     [answerContent makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(15);
-        make.top.equalTo(answerTitle.bottom).offset(10);
+        make.top.equalTo(answerTitle.bottom).offset(12);
         make.right.equalTo(-15);
     }];
 
@@ -264,7 +264,7 @@
     if (titleLabel.text && questionDate.text && self.cid) {
         FmdbManager *fb = [FmdbManager shareManager];
         [fb insertIntoCollectWithId:self.cid andTime:questionDate.text andTitle:titleLabel.text andType:collectTypeAnswer];
-    
+     [LHController alert:@"收藏成功"];
     }
 }
 
@@ -272,6 +272,7 @@
 -(void)deleteFavorate{
     FmdbManager *fb = [FmdbManager shareManager];
     [fb deleteFromCollectWithId:self.cid andType:collectTypeAnswer];
+     [LHController alert:@"取消收藏成功"];
 }
 
 
@@ -292,9 +293,10 @@
 
     [HttpRequest POST:[URLFile urlStringForAddcomment] parameters:dict success:^(id responseObject) {
 
-        if ([responseObject[@"result"] isEqualToString:@"success"]) {
-            [LHController alert:@"评论成功"];
+        if (responseObject[@"success"]) {
+            [LHController alert:responseObject[@"success"]];
             [footView addReplyCont];
+
         }else{
             [LHController alert:@"评论失败"];
         }

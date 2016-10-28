@@ -119,25 +119,6 @@
     
     timeLabel.text = _model.date;
     titleLabel.text = _model.question;
-
-    NSUserDefaults *df = [NSUserDefaults standardUserDefaults];
-    NSDictionary *dic = [df objectForKey:YorNO];
-    if (![dic[_model.cid] isEqualToString:@"1"]) {
-        UIView *viv = [self.contentView viewWithTag:100];
-        if (viv == nil) {
-            [timeLabel layoutIfNeeded];
-            UIView *redView = [[UIView alloc] initWithFrame:CGRectMake(titleLabel.frame.origin.x+titleLabel.frame.size.width, titleLabel.frame.origin.y+8, 6, 6)];
-            
-            redView.backgroundColor = [UIColor redColor];
-            redView.tag = 100;
-            redView.layer.cornerRadius = 3;
-            redView.layer.masksToBounds = YES;
-            [self.contentView addSubview:redView];
-        }
-    }else{
-        UIView *viv = [self.contentView viewWithTag:100];
-        [viv removeFromSuperview];
-    }
 }
 
 

@@ -11,10 +11,11 @@
 @implementation CommentListCell
 {
     UIImageView *iconImageView;
-    UILabel *nameLabel;
-    UILabel *contentLabel;
-    UILabel *dateLabel;
-    UIButton *button;
+    UILabel *nameLabel;//用户名
+    UILabel *floorLabel;//楼层
+    UILabel *contentLabel;//评论内容
+    UILabel *dateLabel;//日期
+    UIButton *button;//回复按钮
 }
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -35,18 +36,23 @@
 
     nameLabel = [LHController createLabelWithFrame:CGRectZero Font:PT_FROM_PX(23) Bold:NO TextColor:colorLightBlue Text:nil];
 
+    floorLabel = [LHController createLabelWithFrame:CGRectZero Font:PT_FROM_PX(18) Bold:NO TextColor:colorLightGray Text:nil];
+
     contentLabel = [LHController createLabelWithFrame:CGRectZero Font:PT_FROM_PX(19) Bold:NO TextColor:nil Text:nil];
     contentLabel.numberOfLines = 0;
 
     dateLabel = [LHController createLabelWithFrame:CGRectZero Font:PT_FROM_PX(18) Bold:NO TextColor:nil Text:nil];
     dateLabel.textColor = [UIColor grayColor];
 
-    button = [LHController createButtnFram:CGRectZero Target:self Action:@selector(btnClick) Text:@"回复"];
+    button = [LHController createButtnFram:CGRectZero Target:self Action:@selector(btnClick) Text:@" 回复"];
+  //  [button setImageEdgeInsets:UIEdgeInsetsMake(1, 0, -1, 0)];
+    [button setImage:[UIImage imageNamed:@"auto_回复列表_回复"] forState:UIControlStateNormal];
     [button setTitleColor:colorLightBlue forState:UIControlStateNormal];
     button.titleLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(18)];
 
     [self.contentView addSubview:iconImageView];
     [self.contentView addSubview:nameLabel];
+    [self.contentView addSubview:floorLabel];
     [self.contentView addSubview:contentLabel];
     [self.contentView addSubview:dateLabel];
     [self.contentView addSubview:button];
@@ -60,6 +66,11 @@
     [nameLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(iconImageView.right).offset(10);
         make.centerY.equalTo(iconImageView);
+    }];
+
+    [floorLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(-10);
+        make.top.equalTo(nameLabel.top);
     }];
 
     [contentLabel makeConstraints:^(MASConstraintMaker *make) {
@@ -82,21 +93,18 @@
 //回复按钮
 -(void)btnClick{
     if (self.getpid != nil) {
-        self.getpid(_model.h_id);
+        self.getpid(_model.p_id);
     }
 }
 
 -(void)setModel:(CommentListModel *)model{
     _model = model;
 
-    [iconImageView sd_setImageWithURL:[NSURL URLWithString:_model.h_logo] placeholderImage:[CZWManager defaultIconImage]];
-    nameLabel.text = _model.h_uname;
-    contentLabel.text = _model.h_content;
-    dateLabel.text = model.h_time;
-
-    nameLabel.text = @"kasjfgkldgjdfklgjfdlkgjfl";
-    contentLabel.text = @"垃圾分类及规范吉林省的感觉扩散到了刚好是联合范吉林省的感觉扩散到了刚好是联合范吉林省的感觉扩散到了刚好是联合国看电视法规或打开了刚好是工行了";
-    dateLabel.text = @"456456";
+    [iconImageView sd_setImageWithURL:[NSURL URLWithString:_model.p_logo] placeholderImage:[CZWManager defaultIconImage]];
+    nameLabel.text = _model.p_uname;
+    floorLabel.text = [NSString stringWithFormat:@"%@楼",_model.p_floor];;
+    contentLabel.text = _model.p_content;
+    dateLabel.text = model.p_time;
 }
 
 

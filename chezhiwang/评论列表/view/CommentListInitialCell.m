@@ -12,10 +12,11 @@
 @implementation CommentListInitialCell
 {
     UIImageView *iconImageView;
-    UILabel *nameLabel;
-    CZWLabel *contentLabel;
-    UILabel *dateLabel;
-    UIButton *button;
+    UILabel *nameLabel;//用户名
+    UILabel *floorLabel;//楼层
+    CZWLabel *contentLabel;//内容
+    UILabel *dateLabel; //日期
+    UIButton *button;//回复按钮
 
     CZWLabel *initialLabel;//原评论
 }
@@ -38,6 +39,9 @@
 
     nameLabel = [LHController createLabelWithFrame:CGRectZero Font:PT_FROM_PX(23) Bold:NO TextColor:colorLightBlue Text:nil];
 
+    floorLabel = [LHController createLabelWithFrame:CGRectZero Font:PT_FROM_PX(18) Bold:NO TextColor:colorLightGray Text:nil];
+
+
     contentLabel = [[CZWLabel alloc] init];
     contentLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(19)];
     contentLabel.linesSpacing = 4;
@@ -55,12 +59,15 @@
     dateLabel = [LHController createLabelWithFrame:CGRectZero Font:PT_FROM_PX(18) Bold:NO TextColor:nil Text:nil];
     dateLabel.textColor = [UIColor grayColor];
 
-    button = [LHController createButtnFram:CGRectZero Target:self Action:@selector(btnClick) Text:@"回复"];
+    button = [LHController createButtnFram:CGRectZero Target:self Action:@selector(btnClick) Text:@" 回复"];
+     [button setImage:[UIImage imageNamed:@"auto_回复列表_回复"] forState:UIControlStateNormal];
+    //[button setImageEdgeInsets:UIEdgeInsetsMake(2, 0, -2, 0)];
     [button setTitleColor:colorLightBlue forState:UIControlStateNormal];
     button.titleLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(18)];
 
     [self.contentView addSubview:iconImageView];
     [self.contentView addSubview:nameLabel];
+    [self.contentView addSubview:floorLabel];
     [self.contentView addSubview:contentLabel];
     [self.contentView addSubview:initialLabel];
     [self.contentView addSubview:dateLabel];
@@ -77,6 +84,11 @@
         make.centerY.equalTo(iconImageView);
     }];
 
+    [floorLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(-10);
+        make.top.equalTo(nameLabel.top);
+    }];
+    
     [contentLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(nameLabel);
         make.top.equalTo(iconImageView.bottom).offset(10);
@@ -105,21 +117,22 @@
 //回复按钮
 -(void)btnClick{
     if (self.getPid != nil) {
-        self.getPid(_model.h_id);
+        self.getPid(_model.p_id);
     }
 }
 
 -(void)setModel:(CommentListModel *)model{
     _model = model;
 
-    [iconImageView sd_setImageWithURL:[NSURL URLWithString:_model.h_logo] placeholderImage:[CZWManager defaultIconImage]];
-    nameLabel.text =@"nasdhkg";// _model.h_uname;
-    contentLabel.text =@"sag;fdkfdlhkfghlf\ndskghfighfighfihgfdkhfgdihgfihjfgkhgfhgkfhfgdkjhfdgkhjfdghjkgf";// _model.h_content;
-    dateLabel.text = @"4454654564";//_model.h_time;
+    [iconImageView sd_setImageWithURL:[NSURL URLWithString:_model.p_logo] placeholderImage:[CZWManager defaultIconImage]];
+    nameLabel.text =  _model.p_uname;
+    floorLabel.text = [NSString stringWithFormat:@"%@楼",_model.p_floor];
+    contentLabel.text = _model.p_content;
+    dateLabel.text =  _model.p_time;
 
 
-    initialLabel.text = [NSString stringWithFormat:@"%@\n%@",_model.initialModel.p_uname,_model.initialModel.p_content];
-    [initialLabel addAttributes:@{NSForegroundColorAttributeName:colorLightBlue} range:NSMakeRange(0, _model.initialModel.p_uname.length)];
+    initialLabel.text = [NSString stringWithFormat:@"%@\n%@",_model.initialModel.h_uname,_model.initialModel.h_content];
+    [initialLabel addAttributes:@{NSForegroundColorAttributeName:colorLightBlue} range:NSMakeRange(0, _model.initialModel.h_uname.length)];
 
 }
 

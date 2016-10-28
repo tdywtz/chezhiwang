@@ -31,7 +31,7 @@
     titleLabel = [[UILabel alloc] init];
     titleLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(23)];
     titleLabel.textColor = RGB_color(17, 17, 17, 1);
-    titleLabel.numberOfLines = 2;
+    titleLabel.numberOfLines = 1;
     
     stylenamelabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
     stylenamelabel.textInsets = UIEdgeInsetsMake(1, 3, 1, 3);
@@ -111,13 +111,13 @@
     NSArray *array = [self.newsModel.image componentsSeparatedByString:@","];
     for (int i = 0; i < array.count; i ++) {
         if (i == 0) {
-            [imageView1 sd_setImageWithURL:[NSURL URLWithString:array[i]] placeholderImage:[UIImage imageNamed:@"defaultImage_icon"]];
+            [imageView1 sd_setImageWithURL:[NSURL URLWithString:array[i]] placeholderImage:[CZWManager defaultIconImage]];
         }
         if (i == 1) {
-             [imageView2 sd_setImageWithURL:[NSURL URLWithString:array[i]] placeholderImage:[UIImage imageNamed:@"defaultImage_icon"]];
+             [imageView2 sd_setImageWithURL:[NSURL URLWithString:array[i]] placeholderImage:[CZWManager defaultIconImage]];
         }
         if (i == 2) {
-             [imageView3 sd_setImageWithURL:[NSURL URLWithString:array[i]] placeholderImage:[UIImage imageNamed:@"defaultImage_icon"]];
+             [imageView3 sd_setImageWithURL:[NSURL URLWithString:array[i]] placeholderImage:[CZWManager defaultIconImage]];
         }
     }
 }

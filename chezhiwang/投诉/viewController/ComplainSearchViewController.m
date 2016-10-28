@@ -15,7 +15,7 @@
     UITableView *_tableView;
     UIView *noView;
     CGFloat B;
-    
+
     NSInteger _count;
     NSInteger _number;
 
@@ -30,7 +30,7 @@
 #pragma mark 请求数据
 -(void)loadData{
     //处理汉字
-   
+
     [HttpRequest GET:self.urlString success:^(id responseObject) {
         if (_count == 1) {
 
@@ -39,23 +39,30 @@
         if ([responseObject count] == 0) {
 
         }
-        for (NSDictionary *dict in responseObject) {
-            NSString *ID = dict[@"id"]?dict[@"id"]:dict[@"cpid"];
-            NSString *question = dict[@"question"]?dict[@"question"]:dict[@"title"];
-            [_dataArray addObject:@{@"id":ID,@"question":question}];
-        }
+      [_dataArray addObjectsFromArray:[self arrayWithResponseObject:responseObject]];
         [_tableView reloadData];
-        
+
         if ([_dataArray count] == 0) {
             noView.hidden = NO;
         }else{
             noView.hidden = YES;
         }
 
-
+        [_tableView.mj_footer endRefreshing];
     } failure:^(NSError *error) {
-
+        [_tableView.mj_footer endRefreshing];
     }];
+}
+
+- (NSArray *)arrayWithResponseObject:(id)responseObject{
+    NSMutableArray *marr = [[NSMutableArray alloc] init];
+    for (NSDictionary *dict in responseObject) {
+        NSString *ID = dict[@"id"]?dict[@"id"]:dict[@"cpid"];
+        NSString *question = dict[@"question"]?dict[@"question"]:dict[@"title"];
+        [marr addObject:@{@"id":ID,@"question":question}];
+    }
+
+    return marr;
 }
 
 -(void)setUrlWith:(NSString *)string andP:(NSInteger)p andS:(NSInteger)s{
@@ -74,7 +81,7 @@
         _number = 12;
     }
     if (HEIGHT == 667) {
-        
+
     }
     B = [LHController setFont];
     [self createLeftItem];
@@ -112,17 +119,17 @@
 -(void)createNoView{
     noView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, WIDTH, HEIGHT-64)];
     [self.view addSubview:noView];
-    
+
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 130, 130)];
     imageView.image = [UIImage imageNamed:@"90"];
     imageView.center = CGPointMake(WIDTH/2, HEIGHT/2-150);
     [noView addSubview:imageView];
-    
+
     UILabel *label = [LHController createLabelWithFrame:CGRectMake(0, 0, 180, 20) Font:B Bold:NO TextColor:[UIColor blackColor] Text:@"没有搜索到结果"];
     label.textAlignment = NSTextAlignmentCenter;
     label.center = CGPointMake(WIDTH/2, imageView.frame.origin.y+imageView.frame.size.height+20);
     [noView addSubview:label];
-    
+
     noView.hidden = YES;
 }
 
@@ -134,6 +141,10 @@
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
 
+    _tableView.mj_footer = [MJDIYAutoFooter footerWithRefreshingBlock:^{
+        _count ++;
+        [self loadData];
+    }];
 }
 
 -(void)createTitleView{
@@ -141,7 +152,7 @@
     self.navigationItem.titleView = self.searchBar;
     self.searchBar.delegate = self;
     self.searchBar.placeholder = @"请输入关键字";
-    
+
     [self.searchBar becomeFirstResponder];
 }
 
@@ -158,12 +169,12 @@
 
 -(void)rightitemClick{
     [self.searchBar endEditing:YES];
-    
+
     double delayInSeconds = 0.2;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        
-       [self.navigationController popViewControllerAnimated:YES];
+
+        [self.navigationController popViewControllerAnimated:YES];
     });
 }
 
@@ -175,7 +186,7 @@
 
 #pragma mark - UISearchResultsDelegate
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
-    
+
     self.header = YES;
     _count = 1;
     _searchText = self.searchBar.text;
@@ -205,7 +216,7 @@
 
 #pragma mark - 属性化字符串
 -(NSAttributedString *)attributeSize:(NSString *)str searchStr:(NSString *)search{
-    
+
     NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:str];
     [att addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:B] range:NSMakeRange(0, att.length)];
     for (int i = 0; i < search.length; i ++) {
@@ -214,8 +225,8 @@
         NSRange range = [str rangeOfString:sub];
         [att addAttribute:NSForegroundColorAttributeName value:[UIColor orangeColor] range:range];
     }
-    
-    
+
+
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
     [style setLineSpacing:5];
     //[style setLineBreakMode:NSLineBreakByWordWrapping];
@@ -238,11 +249,11 @@
         view.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0  blue:245/255.0  alpha:1];
         [cell.contentView addSubview:view];
     }
-    
+
     NSDictionary *dict = _dataArray[indexPath.row];
     cell.textLabel.attributedText = [self attributeSize:dict[@"question"] searchStr:_searchText];
-    
-    
+
+
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
@@ -255,7 +266,7 @@
     ComplainDetailsViewController *user = [[ComplainDetailsViewController alloc] init];
     user.cid = dic[@"id"];
     [self.navigationController pushViewController:user animated:YES];
- 
+
 }
 
 //#pragma mark - MJRefreshBaseViewDelegate
@@ -269,7 +280,7 @@
 //    //        [self loadData];
 //    //        _count = 1;
 //    //    }else if (refreshView == footView){
-//    
+//
 //    if (_count < 1) {
 //        _count = 1;
 //    }
@@ -281,13 +292,13 @@
 
 
 /*
-#pragma mark - Navigation
+ #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

@@ -42,13 +42,12 @@
 
 - (void)createSubView{
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pc"]];
-    [self addSubview:imageView];
     imageView.tag = 101;
-    [imageView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_rect.origin.y+_rect.size.height/2);
-        make.left.equalTo(_rect.size.width/2+_rect.origin.x);
-    }];
-    
+
+
+    UILabel *label = [[UILabel alloc] init];
+    label.text = @"请选择时间";
+    label.textColor = [UIColor whiteColor];
     
     UIButton  *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn setTitle:@"我知道了" forState:UIControlStateNormal];
@@ -57,8 +56,21 @@
     btn.layer.borderWidth = 1;
     btn.layer.borderColor = [UIColor whiteColor].CGColor;
     [btn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
+
+    [self addSubview:imageView];
+    [self addSubview:label];
     [self addSubview:btn];
-    
+
+    [imageView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_rect.origin.y+_rect.size.height/2);
+        make.left.equalTo(_rect.size.width/2+_rect.origin.x);
+    }];
+
+    [label makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(imageView.bottom).offset(10);
+        make.centerX.equalTo(0);
+    }];
+
     [btn makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(0);
         make.bottom.equalTo(-100);

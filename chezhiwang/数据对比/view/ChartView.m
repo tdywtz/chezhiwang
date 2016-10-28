@@ -169,8 +169,11 @@
         scrollToTopButton = [UIButton buttonWithType:UIButtonTypeCustom];
         scrollToTopButton.layer.cornerRadius = 15;
         scrollToTopButton.layer.masksToBounds = YES;
-        scrollToTopButton.backgroundColor = [UIColor grayColor];
+        scrollToTopButton.backgroundColor = [UIColor lightGrayColor];
         scrollToTopButton.hidden = YES;
+        UIImage *image = [UIImage imageNamed:@"bar_btn_icon_returntext"];
+        image = [UIImage imageWithCGImage:image.CGImage scale:2.0 orientation:UIImageOrientationRight];
+        [scrollToTopButton setImage:image forState:UIControlStateNormal];
         [scrollToTopButton addTarget:self action:@selector(scrollToTopClick) forControlEvents:UIControlEventTouchUpInside];
 
         menuButton = [UIButton buttonWithType:UIButtonTypeCustom];

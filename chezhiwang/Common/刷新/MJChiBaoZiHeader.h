@@ -7,7 +7,7 @@
 //  吃包子效果的头部控件
 
 #import "MJRefreshGifHeader.h"
-
-@interface MJChiBaoZiHeader : MJRefreshGifHeader
+#import <MJRefresh/MJRefreshNormalHeader.h>
+@interface MJChiBaoZiHeader : MJRefreshNormalHeader
 
 @end

@@ -23,8 +23,8 @@
         highlightButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [highlightButton setTitle:@"高亮差异参数" forState:UIControlStateNormal];
         [highlightButton setTitleColor:colorBlack forState:UIControlStateNormal];
-        [highlightButton setTitleColor:colorYellow forState:UIControlStateSelected];
-        [highlightButton setBackgroundImage:[UIImage imageNamed:@"kk(1)"] forState:UIControlStateSelected];
+        [highlightButton setTitleColor:colorLightBlue forState:UIControlStateSelected];
+       // [highlightButton setBackgroundImage:[UIImage imageNamed:@"kk(1)"] forState:UIControlStateSelected];
         highlightButton.titleLabel.font = [UIFont systemFontOfSize:12];
         highlightButton.layer.cornerRadius = 3;
         highlightButton.layer.masksToBounds = YES;
@@ -35,8 +35,8 @@
         hideButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [hideButton setTitle:@"隐藏相同参数" forState:UIControlStateNormal];
         [hideButton setTitleColor:colorBlack forState:UIControlStateNormal];
-        [hideButton setTitleColor:colorYellow forState:UIControlStateSelected];
-        [hideButton setBackgroundImage:[UIImage imageNamed:@"kk(1)"] forState:UIControlStateSelected];
+        [hideButton setTitleColor:colorLightBlue forState:UIControlStateSelected];
+      //  [hideButton setBackgroundImage:[UIImage imageNamed:@"kk(1)"] forState:UIControlStateSelected];
         hideButton.titleLabel.font = [UIFont systemFontOfSize:12];
         hideButton.layer.cornerRadius = 3;
         hideButton.layer.masksToBounds = YES;
@@ -66,6 +66,7 @@
     if ([self.delegate respondsToSelector:@selector(highlightButtonClick:)]) {
         [self.delegate highlightButtonClick:highlightButton.selected];
     }
+    [self resetBordColor];
 }
 
 - (void)hideButtonClick{
@@ -73,6 +74,7 @@
     if ([self.delegate respondsToSelector:@selector(hideButtonClick:)]) {
         [self.delegate hideButtonClick:hideButton.selected];
     }
+    [self resetBordColor];
 }
 
 - (BOOL)highlight{
@@ -82,5 +84,20 @@
 - (void)resetButton{
     highlightButton.selected = NO;
     hideButton.selected = NO;
+    [self resetBordColor];
+}
+
+- (void)resetBordColor{
+    if (hideButton.selected) {
+        hideButton.layer.borderColor = colorLightBlue.CGColor;
+    }else{
+        hideButton.layer.borderColor = RGB_color(230, 230, 230, 1).CGColor;
+    }
+
+    if (highlightButton.selected) {
+        highlightButton.layer.borderColor = colorLightBlue.CGColor;
+    }else{
+    highlightButton.layer.borderColor = RGB_color(230, 230, 230, 1).CGColor;
+    }
 }
 @end

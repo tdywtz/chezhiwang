@@ -31,6 +31,7 @@
     CZWLabel *answerContent;//回复内容
 
     FootCommentView *footView;
+    UIImage *shareImage;
 }
 @property (nonatomic,assign) NewsType type;//类型
 @property (nonatomic,strong) NSDictionary *dict;
@@ -64,6 +65,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.title = @"投诉";
     B = [LHController setFont];
 
     self.type = NewsTypeComplain;
@@ -138,7 +140,7 @@
     }else{
         CZWShareViewController *share = [[CZWShareViewController alloc] initWithParentViewController:self];
         share.shareUrl = self.dict[@"filepath"];
-        share.shareImage = [UIImage imageNamed:@"Icon-60"];
+        share.shareImage = shareImage;
         NSString *html = self.dict[@"content"];
         if (html.length > 100) html = [html substringToIndex:99];
         share.shareContent = html;
@@ -152,7 +154,7 @@
 
     titleLabel = [[CZWLabel alloc] init];
     titleLabel.numberOfLines = 0;
-    titleLabel.font = [UIFont systemFontOfSize:17];
+    titleLabel.font = [UIFont boldSystemFontOfSize:19];
     [self.contentView addSubview:titleLabel];
 
     NSArray *leftTitles = @[@"投诉编号：",@"投诉品牌：",@"投诉车系：",@"投诉车型：",@"投诉时间："];
@@ -183,11 +185,13 @@
             [leftLabel makeConstraints:^(MASConstraintMaker *make) {
                 make.top.equalTo(titleLabel.bottom).offset(30);
                 make.left.equalTo(10);
+                make.height.lessThanOrEqualTo(20);
             }];
         }else{
             [leftLabel makeConstraints:^(MASConstraintMaker *make) {
                 make.top.equalTo(temp.bottom).offset(15);
                 make.left.equalTo(10);
+                make.height.lessThanOrEqualTo(20);
             }];
         }
 
@@ -214,7 +218,7 @@
     complainTitle.font = [UIFont systemFontOfSize:14];
     complainTitle.textColor = colorLightGray;
     complainTitle.text = @"  投诉内容：";
-    UIImage *acomplainTitleImage = [UIImage imageNamed:@"答疑"];
+    UIImage *acomplainTitleImage = [UIImage imageNamed:@"auto_投诉详情_提问"];
     [complainTitle insertImage:acomplainTitleImage frame:CGRectMake(0, -3, 17, 17) index:0];
 
     questionContent = [[CZWLabel alloc] init];
@@ -227,7 +231,7 @@
     answerTitle.font = [UIFont systemFontOfSize:14];
     answerTitle.textColor = colorLightGray;
     answerTitle.text = @"  投诉回复：";
-    UIImage *answerTitleImage = [UIImage imageNamed:@"答疑"];
+    UIImage *answerTitleImage = [UIImage imageNamed:@"auto_answerDetail_answer"];
     [answerTitle insertImage:answerTitleImage frame:CGRectMake(0, -3, 17, 17) index:0];
 
     UIView *lineView2 = [UIView new];
@@ -329,7 +333,9 @@
         [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[self urlString:imageArray[i]] options:SDWebImageDownloaderUseNSURLCache progress:^(NSInteger receivedSize, NSInteger expectedSize) {
 
         } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
-
+            if (i == 0) {
+                shareImage = image;
+            }
             if (image) {
                 dispatch_sync(dispatch_get_main_queue(), ^{
 
@@ -386,6 +392,7 @@
     if (titleLabel.text && dateLabel.text && self.cid) {
         FmdbManager *fb = [FmdbManager shareManager];
         [fb insertIntoCollectWithId:self.cid andTime:dateLabel.text andTitle:titleLabel.text andType:collectTypeCompalin];
+         [LHController alert:@"收藏成功"];
     }
 }
 
@@ -393,6 +400,7 @@
 -(void)deleteFavorate{
     FmdbManager *fb = [FmdbManager shareManager];
     [fb deleteFromCollectWithId:_cid andType:collectTypeCompalin];
+     [LHController alert:@"取消收藏成功"];
 }
 
 #pragma mark - 点击评论按钮
@@ -427,9 +435,10 @@
 
     [HttpRequest POST:[URLFile urlStringForAddcomment] parameters:dict success:^(id responseObject) {
 
-        if ([responseObject[@"result"] isEqualToString:@"success"]) {
-            [LHController alert:@"评论成功"];
+        if (responseObject[@"success"]) {
+            [LHController alert:responseObject[@"success"]];
             [footView addReplyCont];
+
         }else{
             [LHController alert:@"评论失败"];
         }

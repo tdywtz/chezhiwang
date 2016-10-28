@@ -20,6 +20,7 @@
     return [NSString stringWithFormat:@"%@%@%@",[self prefixString],@"/server/forAppWebService.ashx?",act];
 }
 
+
 + (NSString *)stringForCZWServiceWithAct:(NSString *)act{
     return [NSString stringWithFormat:@"%@%@%@",[self prefixString],@"/AppServer/forCZWService.ashx?",act];
 }
@@ -61,12 +62,14 @@
 }
 /**品牌大全*/
 + (NSString *)urlString_picBrand{
-    return [self stringWithBasic:@"act=picBrand"];
+    return [self stringForCommonServiceWithAct:@"act=brandlist"];
 }
 /*车系大全*/
 + (NSString *)urlString_picSeries{
-    return [self stringWithBasic:@"act=picSeries&bid=%@"];
+    return [self stringForCommonServiceWithAct:@"act=picSeries&bid=%@"];
 }
+
+
 
 #pragma mark - homepage
 /**首页*/
@@ -102,7 +105,7 @@
 
 /**新闻搜索*/
 + (NSString *)urlStringForNewsSearch{
-    return [self stringForCZWServiceWithAct:@"act=news&style=%@&title=%@&p=%ld&s=%ld"];
+    return [self stringForCZWServiceWithAct:@"act=newslist&style=%@&title=%@&p=%ld&s=%ld"];
 }
 
 #pragma mark - 投诉
@@ -118,7 +121,6 @@
 }
 
 
-
 #pragma mark - 投诉排行
 /**选择*/
 + (NSString *)urlString_rankingAct{
@@ -129,7 +131,7 @@
 /**投诉排行列表*/
 + (NSString *)urlString_rankingList{
 
-    return   [self stringForCZWServiceWithAct:@"act=rankingList&startTime=%@&endTime=%@&modelAttr=%@&brandAttr=%@&dep=%@&zlwt=%@&p=%ld&s=10"];
+    return   [self stringForCZWServiceWithAct:@"act=rankingList&startTime=%@&endTime=%@&modelAttr=%@&brandAttr=%@&dep=%@&zlwt=%@&p=%ld"];
 }
 
 /**回复率列表*/
@@ -160,41 +162,36 @@
     return [self stringForCommonServiceWithAct:@"act=pl&id=%@&type=%@&p=%ld&s=10"];
 }
 
-/**评论总数*/
-+ (NSString *)urlStringForPL_total{
-    return [self stringWithBasic:@"act=pl&id=%@&type=%@"];
-}
+///**评论总数*/
+//+ (NSString *)urlStringForPL_total{
+//    return [self stringWithBasic:@"act=pl&id=%@&type=%@"];
+//}
 
 /**提交评论*/
 + (NSString *)urlStringForAddcomment{
-    return [self stringWithBasic:@"act=addcomment"];
+    return [self stringForCommonServiceWithAct:@"act=addpl"];
 }
-
 
 /**车型*/
 + (NSString *)urlStringForModelList{
     return [self stringWithBasic:@"act=modellist&sid=%@"];
 }
 
-
 /**省份*/
 + (NSString *)urlStringForPro{
     return [self stringWithBasic:@"act=pro"];
 }
-
 
 /**城市*/
 + (NSString *)urlStringForDisCity{
     return [self stringWithBasic:@"act=discity&pid=%@"];
 }
 
-
 /**经销商*/
 + (NSString *)urlStringForDis{
   
     return [self stringForCommonServiceWithAct:@"act=dis&pid=%@&cid=%@&sid=%@"];
 }
-
 
 /**投诉*/
 + (NSString *)urlStringForProgressComplain{

@@ -156,7 +156,10 @@ typedef enum {
 
         NSMutableArray *mArray = [[NSMutableArray alloc] init];
         for (NSDictionary *dict in responseObject) {
-            [mArray addObject:@{@"id":dict[@"Id"],@"title":dict[@"Name"]}];
+            NSMutableDictionary *newdict = [[NSMutableDictionary alloc] init];
+            newdict[@"id"] = dict[@"Id"];
+            newdict[@"title"] = dict[@"Name"];
+            [mArray addObject:newdict];
         }
         _dataArray = mArray;
         [_tableView reloadData];

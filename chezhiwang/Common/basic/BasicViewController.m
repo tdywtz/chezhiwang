@@ -68,16 +68,10 @@
 -(void)createLeftItemBack{
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(0, 0, 50, 40);
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(-5, 10, 10.5, 20)];
-    UIImage*leftImage=[UIImage imageNamed:@"bar_btn_icon_returntext"];
-    
-    imageView.image = leftImage;
-    [button addSubview:imageView];
-    
-    [button setTitle:@"返回" forState:UIControlStateNormal];
-    button.titleLabel.font = [UIFont systemFontOfSize:15];
-    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    button.frame = CGRectMake(0, 0, 20, 40);
+    UIImage *leftImage = [UIImage imageNamed:@"bar_btn_icon_returntext"];
+    [button setImage:leftImage forState:UIControlStateNormal];
+    [button setImageEdgeInsets:UIEdgeInsetsMake(0, -15, 0, 0)];
     [button addTarget:self action:@selector(leftItemBackClick) forControlEvents:UIControlEventTouchUpInside];
 
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];

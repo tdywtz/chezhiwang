@@ -131,6 +131,15 @@
 
     NewsDetailViewController *detail = [[NewsDetailViewController alloc] init];
     detail.ID = model.ID;
+    NSString *url = model.image;
+    //如果有图片链接，设置分享图片链接为第一个
+    if (url.length > 1) {
+        NSArray *urls = [url componentsSeparatedByString:@","];
+        if (urls.count) {
+            detail.shareImageUrl = urls[0];
+        }
+    }
+
     detail.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detail animated:YES];
 }

@@ -28,7 +28,7 @@
     titleLabel = [[UILabel alloc] init];
     titleLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(23)];
     titleLabel.textColor = RGB_color(17, 17, 17, 1);
-    titleLabel.numberOfLines = 2;
+    titleLabel.numberOfLines = 1;
 
     stylenamelabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
     stylenamelabel.textInsets = UIEdgeInsetsMake(1, 3, 1, 3);

@@ -245,18 +245,6 @@
         }
     }
 
-    if (index != indexPath.row) {
-        NSUserDefaults *df = [NSUserDefaults standardUserDefaults];
-        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-        if ([df objectForKey:YorNO]) {
-            [dict setDictionary:[df objectForKey:YorNO]];
-        }
-        [dict setObject:@"1" forKeyedSubscript:model.cid];
-        [df setObject:dict forKey:YorNO];
-        [df synchronize];
-    }
-
-
     [_tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 

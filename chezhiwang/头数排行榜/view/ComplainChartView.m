@@ -13,7 +13,7 @@
 @property (nonatomic,strong) UILabel *titleLabel;
 @property (nonatomic,strong) UIImageView *imageView;
 @property (nonatomic,copy) NSString *tid;//记录id
-@property (nonatomic,assign) BOOL initialSetUp;
+@property (nonatomic,assign) BOOL initialSetUp;//是否被被赋值
 
 @end
 
@@ -79,7 +79,7 @@
     CGFloat space = 10.0;
     CGFloat width = (CGRectGetWidth(self.frame)-space*4)/3;
     for (int i = 0; i < _titles.count; i ++) {
-        ToolBar *btn = [[ToolBar alloc] initWithFrame:CGRectMake(space+(width+space)*(i%3), 30*(i/3), width, 30)];
+        ToolBar *btn = [[ToolBar alloc] initWithFrame:CGRectMake(space+(width+space)*(i%3), 35*(i/3), width, 35)];
         btn.titleLabel.text = _titles[i];
         //若是时间，换行
         if (i == 0) {
@@ -115,11 +115,13 @@
         btn.titleLabel.text = _titles[index];
         btn.tid = @"";
         btn.initialSetUp = YES;
-        if (self.block) {
-            self.block(index, NO);
-        }
         if (index == 0) {
             btn.titleLabel.font = [UIFont systemFontOfSize:14];
+            _beginDate = @"";
+            _endDate = @"";
+        }
+        if (self.block) {
+            self.block(index, NO);
         }
     }
 }
@@ -139,6 +141,7 @@
 - (void)setEnable:(BOOL)enble index:(NSInteger)index{
     ToolBar *bar = self.toolBars[index];
     bar.userInteractionEnabled = enble;
+    bar.initialSetUp = YES;
     if (enble) {
         bar.alpha = 1;
     }else{

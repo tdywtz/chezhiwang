@@ -81,5 +81,5 @@ typedef enum {
 }classifyNext;
 
 #define LEFT 15
-#define YorNO @"YorNO"//判断提问是否有回复
+
 #endif

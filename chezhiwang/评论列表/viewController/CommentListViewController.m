@@ -18,6 +18,42 @@ typedef enum {
     commentTypeAnswer = 2//回复
 }commentType;
 
+
+
+@interface CommentHeadView : UIView
+
+@property (nonatomic,strong) UILabel *numLabel;
+@end
+
+@implementation CommentHeadView
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        _numLabel = [[UILabel alloc] init];
+        _numLabel.textColor = RGB_color(239, 95, 96, 1);
+        _numLabel.font = [UIFont boldSystemFontOfSize:14];
+        [self addSubview:_numLabel];
+
+        [_numLabel makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(10);
+            make.centerY.equalTo(0);
+        }];
+
+        UIView *lineView = [[UIView alloc] init];
+        lineView.backgroundColor = RGB_color(240, 240, 240, 1);
+        [self addSubview:lineView];
+        [lineView makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.equalTo(0);
+            make.height.equalTo(1);
+        }];
+    }
+    return self;
+}
+
+@end
+
 @interface CommentListViewController ()<UITableViewDataSource,UITableViewDelegate,FootCommentViewDelegate>
 {
     UITableView *_tableView;
@@ -28,6 +64,7 @@ typedef enum {
     NSString *_fid;//被回复id
     CGFloat B;
     commentType commentORanswer;
+    CommentHeadView *headerView;
     
     UIView *spaceView;
      FootCommentView *footView;
@@ -41,7 +78,13 @@ typedef enum {
 
     NSString *url = [NSString stringWithFormat:[URLFile urlStringForPL],_cid,[NSString stringWithFormat:@"%ld",self.type],_count];
     [HttpRequest GET:url success:^(id responseObject) {
+        if (responseObject[@"count"]) {
+            headerView.numLabel.text = [NSString stringWithFormat:@"全部评论（%@）",responseObject[@"count"]];
+        }
 
+        if (_count == 1) {
+            [_dataArray removeAllObjects];
+        }
         [_tableView.mj_header endRefreshing];
         if ([responseObject[@"rel"] count] == 0) {
             [_tableView.mj_footer endRefreshingWithNoMoreData];
@@ -49,9 +92,9 @@ typedef enum {
             [_tableView.mj_footer endRefreshing];
         }
         for (NSDictionary *dic in responseObject[@"rel"]) {
-            CommentListModel *model = [[CommentListModel alloc] initWithDictionary:dic[@"huifu"]];
-            CommentListInitialModel *initialModel = [[CommentListInitialModel alloc] initWithDictionary:dic];
-            if (initialModel.p_uid) {
+            CommentListModel *model = [[CommentListModel alloc] initWithDictionary:dic];
+            CommentListInitialModel *initialModel = [[CommentListInitialModel alloc] initWithDictionary:dic[@"huifu"]];
+            if (initialModel.h_id.length) {
                 //有数据，赋值
                 model.initialModel = initialModel;
             }
@@ -114,6 +157,9 @@ typedef enum {
     _tableView.estimatedRowHeight = 100;
     [self.view addSubview:_tableView];
 
+    headerView = [[CommentHeadView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 40)];
+    _tableView.tableHeaderView = headerView;
+
     __weak __typeof(self)weakSelf = self;
     _tableView.mj_header = [MJChiBaoZiHeader headerWithRefreshingBlock:^{
         _count = 1;
@@ -162,7 +208,7 @@ typedef enum {
     if (commentORanswer == commentTypeComment) {
         [dict setObject:@"0" forKey:@"fid"];
     }else if (commentORanswer == commentTypeAnswer){
-        [dict setObject:_fid forKey:@"fid"];
+        dict[@"fid"] =_fid;
     }
     [dict setObject:content forKey:@"content"];
     [dict setObject:self.cid forKey:@"tid"];
@@ -170,8 +216,9 @@ typedef enum {
     [dict setObject:appOrigin forKey:@"origin"];
     
     [HttpRequest POST:[URLFile urlStringForAddcomment] parameters:dict success:^(id responseObject) {
-        if ([responseObject[@"result"] isEqualToString:@"success"]) {
-            [LHController alert:@"评论成功"];
+
+        if (responseObject[@"success"]) {
+            [LHController alert:responseObject[@"success"]];
             //刷新数据
             _count = 1;
             [self loadData];
@@ -239,6 +286,7 @@ typedef enum {
 
 - (void)pushComment:(NSString *)pid{
     _fid = pid;
+    NSLog(@"%@",pid);
     commentORanswer = commentTypeAnswer;
     WriteViewController *comment = [[WriteViewController alloc] init];
     comment.title = @"回复";

@@ -26,8 +26,8 @@
     
     // 添加label
     UILabel *label = [[UILabel alloc] init];
-    label.textColor = [UIColor colorWithRed:1.0 green:0.5 blue:0.0 alpha:1.0];
-    label.font = [UIFont boldSystemFontOfSize:16];
+    label.textColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:1.0];
+    label.font = [UIFont boldSystemFontOfSize:13];
     label.textAlignment = NSTextAlignmentCenter;
     [self addSubview:label];
     self.label = label;
@@ -51,7 +51,7 @@
     self.label.frame = self.bounds;
     //self.s.center = CGPointMake(self.mj_w - 20, self.mj_h - 20);
     
-    self.loading.center = CGPointMake(30, self.mj_h * 0.5);
+    self.loading.center = CGPointMake(50, self.mj_h * 0.5);
 }
 
 #pragma mark 监听scrollView的contentOffset改变
@@ -82,7 +82,7 @@
     
     switch (state) {
         case MJRefreshStateIdle:
-            self.label.text = @"赶紧上拉吖";
+            self.label.text = @"";
             [self.loading stopAnimating];
            // [self.s setOn:NO animated:YES];
             break;

@@ -10,6 +10,17 @@
 
 @interface CommentListInitialModel : BasicObject
 
+@property (nonatomic,copy) NSString *h_content;
+@property (nonatomic,copy) NSString *h_id;
+@property (nonatomic,copy) NSString *h_logo;
+@property (nonatomic,copy) NSString *h_time;
+@property (nonatomic,copy) NSString *h_uid;
+@property (nonatomic,copy) NSString *h_uname;
+
+@end
+
+@interface CommentListModel : BasicObject
+
 @property (nonatomic,copy) NSString *p_content;
 @property (nonatomic,copy) NSString *p_floor;
 @property (nonatomic,copy) NSString *p_id;
@@ -18,16 +29,6 @@
 @property (nonatomic,copy) NSString *p_uid;
 @property (nonatomic,copy) NSString *p_uname;
 
-@end
-
-@interface CommentListModel : BasicObject
-
-@property (nonatomic,copy) NSString *h_content;
-@property (nonatomic,copy) NSString *h_id;
-@property (nonatomic,copy) NSString *h_logo;
-@property (nonatomic,copy) NSString *h_time;
-@property (nonatomic,copy) NSString *h_uid;
-@property (nonatomic,copy) NSString *h_uname;
 @property (nonatomic,strong) CommentListInitialModel *initialModel;//原始评论
 
 @end

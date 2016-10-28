@@ -277,11 +277,27 @@
 
 
 - (void)finishButtonClick{
+    if ([beginDateLabel.text floatValue] < 100) {
+        UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"请选择开始时间" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        [self presentViewController:ac animated:YES completion:nil];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [ac dismissViewControllerAnimated:YES completion:nil];
+        });
+        return;
+    }else if ([endDateLabel.text floatValue] < 100){
+        UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"请选择结束时间" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        [self presentViewController:ac animated:YES completion:nil];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [ac dismissViewControllerAnimated:YES completion:nil];
+        });
+        return;
+    }
     if ([endDateLabel.text integerValue] > 100 && [beginDateLabel.text integerValue] > 100) {
         if (self.chooseDeate) {
             self.chooseDeate(beginDateLabel.text,endDateLabel.text);
         }
     }
+
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

@@ -9,7 +9,7 @@
 #import "BasicTableViewCell.h"
 @class CommentListModel;
 /**
- 带有初始评论的
+ 有回复和评论
  */
 @interface CommentListInitialCell : BasicTableViewCell
 

@@ -19,6 +19,19 @@
     self.urlString = [NSString stringWithFormat:[URLFile urlStringForNewsSearch],self.style,string,p,s];
 }
 
+- (NSArray *)arrayWithResponseObject:(id)responseObject{
+    NSMutableArray *marr = [[NSMutableArray alloc] init];
+    for (NSDictionary *dict in responseObject[@"rel"]) {
+        NSString *ID = dict[@"id"];
+        NSString *question = dict[@"title"];
+        if (!ID || !question) {
+            continue;
+        }
+        [marr addObject:@{@"id":ID,@"question":question}];
+    }
+    return marr;
+}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSDictionary *dic = self.dataArray[indexPath.row];
     NewsDetailViewController *detail = [[NewsDetailViewController alloc] init];
