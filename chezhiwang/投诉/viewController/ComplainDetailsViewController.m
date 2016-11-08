@@ -256,7 +256,7 @@
     [titleLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(20);
         make.centerX.equalTo(0);
-        make.width.lessThanOrEqualTo(WIDTH-30);
+        make.width.lessThanOrEqualTo(WIDTH-20);
     }];
 
     [complainTitle makeConstraints:^(MASConstraintMaker *make) {
@@ -304,7 +304,7 @@
      seriesLabel.text = self.dict[@"series"];
      modelLabel.text = self.dict[@"model"];
      dateLabel.text = self.dict[@"date"];
-
+    [footView setReplyConut:self.dict[@"replycount"]];
 
     answerContent.text =  _dict[@"answer"];;
 

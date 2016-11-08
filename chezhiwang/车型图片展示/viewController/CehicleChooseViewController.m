@@ -32,9 +32,9 @@
             NSMutableArray *mArray = [[NSMutableArray alloc] init];
             for (NSDictionary *dict in responseObject[@"rel"]) {
                 NSMutableArray *subArray = [[NSMutableArray alloc] init];
-                for (NSDictionary *subDict in dict[@"brandlist"]) {
+                for (NSDictionary *subDict in dict[@"brand"]) {
                     ChartChooseModel * model = [[ChartChooseModel alloc] init];
-                    model.tid = subDict[@"bid"];
+                    model.tid = subDict[@"id"];
                     model.title = subDict[@"name"];
                     [subArray addObject:model];
                 }

@@ -26,31 +26,30 @@
 #import "AnswerDetailsViewController.h"
 #import "PostViewController.h"
 
-@interface HomepageTableViewController ()
+#import "AdvertisementView.h"
+
+@interface HomepageTableViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     NSArray *_dataArray;
     NewsTableHeaderView *hearView;
 }
+@property (nonatomic,strong) UITableView *tableView;
+@property (nonatomic,strong) AdvertisementView *advertisement;
 @end
 
 @implementation HomepageTableViewController
 
-+ (instancetype)init{
-
-    return [[self alloc] initWithStyle:UITableViewStyleGrouped];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStyleGrouped];
     self.tableView.estimatedRowHeight = 80;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = [UIColor whiteColor];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    [self.view addSubview:self.tableView];
+
     hearView = [[NewsTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 69+207*(WIDTH/375))];
     hearView.parentViewController = self;
     self.tableView.tableHeaderView = hearView;
@@ -60,6 +59,33 @@
         [self loadData];
     }];
     [self.tableView.mj_header beginRefreshing];
+
+    self.advertisement = [[AdvertisementView alloc] init];
+    self.advertisement.prasentViewController = self;
+    [self.view addSubview:self.advertisement];
+
+    self.advertisement.lh_top = 64;
+    self.advertisement.lh_left = 0;
+    self.advertisement.backgroundColor = [UIColor whiteColor];
+
+    [self.tableView makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0));
+    }];
+
+    [self loadData];
+    [self.advertisement loadGifImage];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.advertisement reloadData];
+}
+
+- (void)showAdvertisementView{
+    self.advertisement.lh_size = CGSizeMake(WIDTH, 1.0/7.0*WIDTH);
+    [self.tableView updateConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(1.0/7.0*WIDTH);
+    }];
 }
 
 - (void)loadData{

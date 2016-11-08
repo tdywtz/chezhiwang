@@ -33,7 +33,7 @@
     _dataAray = @[
                   @[
                       @{@"title":@"清除缓存",@"class":@""},
-                      @{@"title":@"浏览记录",@"class":@"TakeViewController"},
+                     // @{@"title":@"浏览记录",@"class":@"TakeViewController"},
                       @{@"title":@"用户服务协议",@"class":@"AgreementViewController"}
                       ],
                   @[

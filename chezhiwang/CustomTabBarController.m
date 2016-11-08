@@ -23,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
   
-    HomepageTableViewController      *homepage = [HomepageTableViewController  init];
+    HomepageTableViewController      *homepage = [[HomepageTableViewController  alloc] init];
     FindCollectionViewController     *find     = [FindCollectionViewController init];
     MyViewController                 *my       = [[MyViewController alloc] init];
     
@@ -31,23 +31,20 @@
     BasicNavigationController *n2 = [[BasicNavigationController alloc] initWithRootViewController:find];
     BasicNavigationController *n3 = [[BasicNavigationController alloc] initWithRootViewController:my];
 
-    
 
     homepage.title   = @"首页";
     find.title       = @"发现";
 
     self.viewControllers  = @[n1,n2,n3];
-
     [self createCustomTabBar];
 }
-
 
 //处理 UITabBarItem
 -(void)createCustomTabBar{
 
     NSArray *array = @[@"首页",@"发现",@"我"];
-    NSArray *grays = @[@"tabbar_home_gray",@"tabbar_find_gray",@"tabbar_my_gray"];
-    NSArray *brights = @[@"tabbar_home_bright",@"tabbar_find_bright",@"tabbar_my_bright"];
+    NSArray *grays = @[@"auto_tabbar_home_gray",@"auto_tabbar_find_gray",@"auto_tabbar_my_gray"];
+    NSArray *brights = @[@"auto_tabbar_home_bright",@"auto_tabbar_find_bright",@"auto_tabbar_my_bright"];
     for (int i = 0; i  < self.tabBar.items.count; i ++) {
         
         UITabBarItem *item = self.tabBar.items[i];

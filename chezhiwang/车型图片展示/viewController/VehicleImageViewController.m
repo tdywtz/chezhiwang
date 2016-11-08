@@ -66,15 +66,14 @@
 
         }else{
             ChartChooseType type = ChartChooseTypeAttributeModel;
-            DirectionStyle direction = DirectionRight;
+
             if (index == 1) {
                 type = ChartChooseTypeBrand;
 
             }else if (index == 2){
                 type = ChartChooseTypeSeries;
-                direction = DirectionLeft;
             }
-            CehicleChooseViewController *chart = [[CehicleChooseViewController alloc] initWithType:type direction:direction];
+            CehicleChooseViewController *chart = [[CehicleChooseViewController alloc] initWithType:type direction:DirectionRight];
             chart.brandId = [choosView gettidWithIndex:1];
             chart.chooseEnd = ^(NSString *title , NSString *tid){
                 if (index == 2) {

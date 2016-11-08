@@ -169,11 +169,11 @@
         }
     }
     stepLabel.text = text;
-    if ([model.stepid integerValue] == 5) {
-        btnView.titles = @[@"查看详情",@"再次投诉"];
-        
-    }else if([model.show integerValue] == 0){
+    if([model.show integerValue] == 0 && [model.stepid integerValue] == 1){
         btnView.titles = @[@"查看详情",@"修  改"];
+
+    }else if ([model.stepid integerValue] == 5) {
+        btnView.titles = @[@"查看详情",@"再次投诉"];
         
     }else{
         btnView.titles = @[@"查看详情"];

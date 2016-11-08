@@ -51,6 +51,7 @@
     [super viewDidLoad];
  
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    self.navigationController.navigationBar.barTintColor = colorLightBlue;
     self .title = @"省、市";
     self.view.backgroundColor = [UIColor whiteColor];
     [self createLeftItem];

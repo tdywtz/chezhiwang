@@ -160,7 +160,7 @@
             testBtn.customImageView.image = [UIImage imageNamed:imageNames_h[i]];
 
         }else{
-            [testBtn setCustomBarTitleColor:RGB_color(102, 160, 178, 1)];
+            [testBtn setCustomBarTitleColor:colorLightBlue];
             testBtn.customImageView.image = [UIImage imageNamed:imageNames[i]];
         }
     }

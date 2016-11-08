@@ -183,7 +183,10 @@
 
 #pragma mark - 提交数据
 -(void)submitData{
-    
+
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.labelText = @"正在提交...";
     NSDictionary *dict = @{@"id":@"0",@"uid":[CZWManager manager].userID,@"title":titleField.text,@"content":contentView.text,@"origin":@"7"};
     [HttpRequest POST:[URLFile urlStringForEditZJDY] parameters:dict success:^(id responseObject) {
         button.enabled = YES;
@@ -192,11 +195,19 @@
         if ([dict[@"success"] isEqualToString:@"1"]) {
             
             [self onTapToGenerateCode:nil];
-
-            [self.navigationController popViewControllerAnimated:YES];
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = @"提交成功";
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                 [self.navigationController popViewControllerAnimated:YES];
+            });
 
         }else{
-            [self alert:@"提交失败"];
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = @"提交失败";
+            [self onTapToGenerateCode:nil];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+            });
         }
         
     } failure:^(NSError *error) {

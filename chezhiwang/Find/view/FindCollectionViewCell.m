@@ -30,12 +30,12 @@
         [self.imageView makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(0);
             make.centerY.equalTo(-20);
-            make.width.equalTo(25);
+            make.width.equalTo(35);
 
         }];
          [self.titleLabel makeConstraints:^(MASConstraintMaker *make) {
              make.centerX.equalTo(0);
-             make.centerY.equalTo(20);
+             make.centerY.equalTo(25);
          }];
     }
     return self;

@@ -145,6 +145,13 @@
     titleLabel.textColor = colorBlack;
     [view addSubview:titleLabel];
 
+    UILabel *zhushiLabel = [[UILabel alloc] initWithFrame:CGRectMake(WIDTH-200, 0, 180, 30)];
+    zhushiLabel.font = [UIFont systemFontOfSize:13];
+    zhushiLabel.textColor = colorLightGray;
+    zhushiLabel.textAlignment = NSTextAlignmentRight;
+    zhushiLabel.text = @"● 标配 ○ 选配 - 无";
+    [view addSubview:zhushiLabel];
+
     ChartSectionModel *sectionMdoel = self.sectionModels[section];
     titleLabel.text = sectionMdoel.name;
     return view;

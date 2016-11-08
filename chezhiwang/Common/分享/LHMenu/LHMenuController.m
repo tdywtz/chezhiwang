@@ -80,7 +80,7 @@
         self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         _duration = 1.0/2;
         _beginTime = 0.042;
-        _itemSize = CGSizeMake(80, 100);
+        _itemSize = CGSizeMake(80, 60);
         _lineSpacing = 30;
        _queues = 3;
         NSMutableArray *marray = [NSMutableArray new];

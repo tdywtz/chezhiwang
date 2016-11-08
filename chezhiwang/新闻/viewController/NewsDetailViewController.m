@@ -13,76 +13,9 @@
 #import "FootCommentView.h"
 #import "CZWShareViewController.h"//分享
 
-@interface NewsDetailHeaderView : UIView
-
-@property (nonatomic,strong) TTTAttributedLabel *titleLabel;
-@property (nonatomic,strong) UILabel *dateLabel;
-@property (nonatomic,strong) UILabel *editorLabel;
-
-- (CGFloat)viewHeight;
-
-@end
-
-@implementation NewsDetailHeaderView
-
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-
-        self.titleLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
-        self.titleLabel.lineSpacing = 4;
-        self.titleLabel.numberOfLines = 0;
-        self.titleLabel.font = [UIFont boldSystemFontOfSize:PT_FROM_PX(26.5)];
-
-        self.dateLabel = [[UILabel alloc] init];
-        self.dateLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(17)];
-        self.dateLabel.textColor = RGB_color(153, 153, 153, 1);
-
-        self.editorLabel = [[UILabel alloc] init];
-        self.editorLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(17)];
-        self.editorLabel.textColor = RGB_color(153, 153, 153, 1);
-
-        [self addSubview:self.titleLabel];
-        [self addSubview:self.dateLabel];
-        [self addSubview:self.editorLabel];
-
-        [self.titleLabel makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(0);
-            make.width.lessThanOrEqualTo(WIDTH-26);
-            make.top.equalTo(20);
-        }];
-
-        [self.dateLabel makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.titleLabel.bottom).offset(20);
-            make.right.equalTo(-13);
-            make.bottom.equalTo(0);
-
-        }];
-
-        [self.editorLabel makeConstraints:^(MASConstraintMaker *make) {
-
-            make.left.equalTo(13);
-            make.bottom.equalTo(self.dateLabel);
-        }];
-
-    }
-    return self;
-}
-
-- (CGFloat)viewHeight{
-    [self.dateLabel setNeedsLayout];
-    [self.dateLabel layoutIfNeeded];
-
-    return (self.dateLabel.frame.size.height+self.dateLabel.frame.origin.y+40);
-}
-@end
-
-#pragma mark - &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 @interface NewsDetailViewController ()<UIWebViewDelegate,FootCommentViewDelegate>
 {
-    NewsDetailHeaderView *headerView;
     UIWebView *_webView;
     FootCommentView *footView;
 
@@ -110,21 +43,8 @@
 
         self.dictionary = [responseObject copy];
 
-        headerView.titleLabel.text = responseObject[@"title"];
-        headerView.dateLabel.text = responseObject[@"date"];
-        if ([responseObject[@"author"] length]) {
-             headerView.editorLabel.text = [NSString stringWithFormat:@"%@   编辑：%@",responseObject[@"source"],responseObject[@"author"]];
-        }else{
-            headerView.editorLabel.text = responseObject[@"source"]; 
-        }
-
         [footView setReplyConut:responseObject[@"replycount"]];
-//重置头部位置
-        CGFloat height = [headerView viewHeight];
-        _webView.scrollView.contentInset = UIEdgeInsetsMake(height, 0, 0, 0);
-        [headerView updateConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(-height);
-        }];
+
 
         NSMutableString *newsContentHTML = [NSMutableString stringWithFormat:@"<style>body{padding:0 5px;}</style>%@",responseObject[@"content"]];
 
@@ -142,6 +62,15 @@
          NSRange tempRange = NSMakeRange(range.location+range.length, newsContentHTML.length-range.location-range.length);
           range = [newsContentHTML rangeOfString:@"<IMG" options:NSCaseInsensitiveSearch range:tempRange];
         }
+        range = [newsContentHTML rangeOfString:@"<img" options:NSCaseInsensitiveSearch range:NSMakeRange(0, newsContentHTML.length)];
+        while (range.length != 0) {
+            [newsContentHTML insertString:width atIndex:range.location+range.length];
+            NSRange tempRange = NSMakeRange(range.location+range.length, newsContentHTML.length-range.location-range.length);
+            range = [newsContentHTML rangeOfString:@"<img" options:NSCaseInsensitiveSearch range:tempRange];
+        }
+
+
+
         [_webView loadHTMLString:newsContentHTML baseURL:nil];
 
     } failure:^(NSError *error) {
@@ -183,7 +112,6 @@
 
     _webView = [[UIWebView alloc] initWithFrame:CGRectZero];
     _webView.backgroundColor = [UIColor whiteColor];
-    _webView.scrollView.contentInset = UIEdgeInsetsMake(60, 0, 0, 0);
     _webView.delegate = self;
 
     footView = [[FootCommentView alloc] initWithFrame:CGRectZero];
@@ -194,21 +122,12 @@
 
 
     [_webView makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(UIEdgeInsetsMake(64, 0, 49, 0));
+        make.edges.equalTo(UIEdgeInsetsMake(0, 0, 49, 0));
     }];
 
     [footView makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(0);
         make.height.equalTo(49);
-    }];
-
-//头部标题
-    headerView = [[NewsDetailHeaderView alloc] initWithFrame:CGRectZero];
-    [_webView.scrollView addSubview:headerView];
-    [headerView makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(0);
-        make.top.equalTo(0);
-        make.width.equalTo(WIDTH);
     }];
 }
 
@@ -255,7 +174,7 @@
         if (html.length > 100) html = [html substringToIndex:99];
         share.shareContent = html;
         share.shareTitle = self.dictionary[@"title"];
-        NSLog(@"%@",shareImage);
+
         [self presentViewController:share animated:YES completion:nil];
 
     }else{
@@ -326,9 +245,11 @@
 #pragma mark - UIWebViewDelegate
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
     [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.webkitTextFillColor= '#333333'"];
+    [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByName('hscolor')[0].style.webkitTextFillColor='#999'"];
+     [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByName('divmargin')[0].style.marginBottom='70px'"];
     //[webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '330%'"];
     //[webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.background='#2E2E2E'"];
- [MBProgressHUD hideHUDForView:self.view animated:YES];
+   [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{

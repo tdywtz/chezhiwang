@@ -27,7 +27,7 @@
 {
     self = [super init];
     if (self) {
-         self.transitionAnimaType = TransitionAnimaRippleEffect;
+        // self.transitionAnimaType = TransitionAnimaRippleEffect;
     }
     return self;
 }

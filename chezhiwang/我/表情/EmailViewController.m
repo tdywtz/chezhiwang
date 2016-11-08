@@ -53,7 +53,7 @@
     [self.view addSubview:button];
     
     [self.promptLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(30);
+        make.top.equalTo(94);
         make.left.equalTo(10);
         make.right.equalTo(-10);
     }];

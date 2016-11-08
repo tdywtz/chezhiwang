@@ -106,11 +106,12 @@
     self.topModel.seriesId = @"";
     self.topModel.modelName = @"选择车型";
     self.topModel.modelId = @"";
-    [self setData:self.topModel];
     if (self.cancel) {
         //取消选择
         self.cancel(self.topModel);
     }
+    [self setData:self.topModel];
+
 }
 
 - (void)btnClick:(UIButton *)btn{

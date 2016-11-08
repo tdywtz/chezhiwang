@@ -501,7 +501,7 @@ static inline CGSize CTFramesetterSuggestFrameSizeForAttributedStringWithConstra
         else if (selectionStartPosition < range.location && [self isPosition:selectionEndPosition inRange:range]) {
             CGFloat ascent, descent, leading, width, offset;
             offset = CTLineGetOffsetForStringIndex(line, selectionEndPosition, NULL);
-            width = CTLineGetTypographicBounds(line, &ascent, &descent, &leading);
+         //   width = CTLineGetTypographicBounds(line, &ascent, &descent, &leading);
             CGRect lineRect = CGRectMake(linePoint.x, linePoint.y - descent, offset, ascent + descent);
             [self fillSelectionAreaInRect:lineRect bgColor:bgColor];
         }

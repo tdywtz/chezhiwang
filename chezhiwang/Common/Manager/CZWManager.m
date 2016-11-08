@@ -61,6 +61,12 @@ NSString *const userPassword = @"userPassword";
     [self updateInfo];
 }
 
+- (void)updateIconUrl:(NSString *)url{
+    _iconUrl = url;
+    [defaults setObject:url forKey:iconUrl];
+    [defaults synchronize];
+}
+
 - (void)logoutAccount{
 
     [defaults removeObjectForKey:userName];

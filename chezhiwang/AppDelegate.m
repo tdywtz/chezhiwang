@@ -23,7 +23,23 @@
     // Override point for customization after application launch.
     _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
-    
+
+   
+    // 快捷方式获得session对象
+ //   NSURLSession *session = [NSURLSession sharedSession];
+//    NSURL *url = [NSURL URLWithString:@"http://m.12365auto.com/SERVER/forCommonService.ashx?act=brandlist"];
+//    // 通过URL初始化task,在block内部可以直接对返回的数据进行处理
+//    NSURLSessionTask *task = [session dataTaskWithURL:url
+//                                    completionHandler:^(NSData *data, NSURLResponse *response, NSError * error) {
+//                                        NSObject *obj = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+//                                       // NSLog(@"%@",obj );
+//
+//
+//                                    }];
+//    
+//    // 启动任务
+//    [task resume];
+//  
     CZWAppPrompt *prompt = [CZWAppPrompt sharedInstance];
     prompt.appId = THE_APPID;
     [prompt shouAlert:AppPromptStyleScore];
@@ -101,7 +117,7 @@
 
 /**友盟分享*/
 - (void)um_social{
-;
+
     [[UMSocialManager defaultManager] setUmSocialAppkey:@"55f8e766e0f55a5cb5001444"];
     //QQ
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"1104889760" appSecret:nil redirectURL:@"http://www.12365auto.com"];
@@ -109,16 +125,6 @@
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatTimeLine appKey:@"wxfdc8e48568025b98" appSecret:@"2a61fc9735d8fbd1dbd946e8fb6b14ce" redirectURL:@"http://www.12365auto.com"];
        //新浪微博
      [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:@"2288638211" appSecret:@"b79a37a46aae4533c30204781a11ae24" redirectURL:@"http://sns.whalecloud.com/sina2/callback"];
-
-
-
-    //[UMSocialData setAppKey:@"55f8e766e0f55a5cb5001444"]
-      // [UMSocialQQHandler setQQWithAppId:@"1104889760" appKey:@"UKjSmfNFesY8GrPx" url:@"http://www.12365auto.com"];
-    //[UMSocialWechatHandler setWXAppId:@"wxfdc8e48568025b98" appSecret:@"2a61fc9735d8fbd1dbd946e8fb6b14ce" url:@"http://www.12365auto.com"];
-
-//    [UMSocialSinaSSOHandler openNewSinaSSOWithAppKey:@"2288638211"
-//                                              secret:@"b79a37a46aae4533c30204781a11ae24"
-//                                         RedirectURL:@"http://sns.whalecloud.com/sina2/callback"];
 
 }
 

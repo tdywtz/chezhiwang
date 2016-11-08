@@ -21,6 +21,14 @@ typedef enum {
 typedef void(^returnResult)(NSString *title, NSString *ID);
 
 
+@interface ChooseViewModel : NSObject
+
+@property (nonatomic, copy) NSString *ID;
+@property (nonatomic, copy) NSString *name;
+
+@end
+
+
 @interface ChooseViewController : BasicViewController
 
 @property (nonatomic,assign) chooseType choosetype;

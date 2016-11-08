@@ -32,7 +32,7 @@
     _scrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
     [self.view addSubview:_scrollView];
     
-    UIImageView *imageView = [LHController createImageViewWithFrame:CGRectMake(0, 0, 150*xs, 150*xs) ImageName:@"Icon-60"];
+    UIImageView *imageView = [LHController createImageViewWithFrame:CGRectMake(0, 0, 150*xs, 150*xs) ImageName:@"auto_appIcon"];
     imageView.center = CGPointMake(WIDTH/2, 110*xs);
     [_scrollView addSubview:imageView];
     

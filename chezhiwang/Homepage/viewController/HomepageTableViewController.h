@@ -6,10 +6,10 @@
 //  Copyright © 2016年 车质网. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BasicViewController.h"
 
-@interface HomepageTableViewController : UITableViewController
+@interface HomepageTableViewController : BasicViewController
 
-+ (instancetype)init;
+- (void)showAdvertisementView;
 
 @end

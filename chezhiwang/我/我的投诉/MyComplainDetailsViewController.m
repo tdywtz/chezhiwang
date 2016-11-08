@@ -188,7 +188,7 @@
     
     UIButton *btn;
     UIButton *freeBtn;
-    if ([_model.show integerValue] == 0) {
+    if ([_model.show integerValue] == 0 && [_model.stepid integerValue] == 1) {
         btn = [LHController createButtnFram:CGRectMake(WIDTH/2-30, headerView.frame.size.height-30, 100, 30) Target:self Action:@selector(changeClick:) Font:B+2 Text:@"修  改"];
         [headerView addSubview:btn];
     }else if([_model.stepid integerValue] == 5){
@@ -253,7 +253,7 @@
     [btnLeft setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     btnLeft.titleLabel.font = [UIFont boldSystemFontOfSize:B];
     [scrollView addSubview:btnLeft];
-    
+   
     UIButton *btnRight = [LHController createButtnFram:CGRectMake(WIDTH/2, y, WIDTH/2, 20) Target:self Action:@selector(btnClick:) Text:@"投诉详情"];
     [btnRight setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     btnRight.titleLabel.font = [UIFont boldSystemFontOfSize:B];

@@ -34,7 +34,7 @@
         layout.minimumLineSpacing = 5;
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(frame), CGRectGetHeight(frame)) collectionViewLayout:layout];
         _collectionView.backgroundColor = [UIColor clearColor];
-        _collectionView.contentInset = UIEdgeInsetsMake(5, 20, 5, 10);
+        _collectionView.contentInset = UIEdgeInsetsMake(10, 20, 10, 10);
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
 
@@ -52,7 +52,7 @@
     __weak __typeof(self)weakSelf = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         CGRect frame = weakSelf.frame;
-        frame.size.height = _collectionView.contentSize.height+10;
+        frame.size.height = _collectionView.contentSize.height+20;
         weakSelf.frame = frame;
         [weakSelf setNeedsDisplay];
     });
@@ -86,7 +86,6 @@
     CGContextAddLineToPoint(context, 10, height/2-5);
     CGContextClosePath(context);
     CGContextDrawPath(context, kCGPathFillStroke);
-
 
 }
 

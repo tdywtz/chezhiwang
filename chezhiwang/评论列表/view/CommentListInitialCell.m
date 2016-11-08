@@ -62,7 +62,7 @@
     button = [LHController createButtnFram:CGRectZero Target:self Action:@selector(btnClick) Text:@" 回复"];
      [button setImage:[UIImage imageNamed:@"auto_回复列表_回复"] forState:UIControlStateNormal];
     //[button setImageEdgeInsets:UIEdgeInsetsMake(2, 0, -2, 0)];
-    [button setTitleColor:colorLightBlue forState:UIControlStateNormal];
+    [button setTitleColor:RGB_color(64, 124, 207, 1) forState:UIControlStateNormal];
     button.titleLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(18)];
 
     [self.contentView addSubview:iconImageView];

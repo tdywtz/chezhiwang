@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		4D0069071B9D891400BA0CA1 /* CustomTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D0069061B9D891400BA0CA1 /* CustomTabBarController.m */; };
+		4D0B0E661DCB1D3A00C41984 /* CZWAdvertisementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D0B0E651DCB1D3A00C41984 /* CZWAdvertisementViewController.m */; };
+		4D0B0E691DCB1D4100C41984 /* AdvertisementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D0B0E681DCB1D4100C41984 /* AdvertisementView.m */; };
+		4D10D8781DD19C72000AF2AC /* ChartDateChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D10D8771DD19C72000AF2AC /* ChartDateChooseViewController.m */; };
 		4D11BEAB1D54745500482F8F /* NewsTestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D11BEAA1D54745500482F8F /* NewsTestTableViewCell.m */; };
 		4D11BEB81D54781400482F8F /* NewsTestTableViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D11BEB71D54781400482F8F /* NewsTestTableViewModel.m */; };
 		4D11BEC71D5484F700482F8F /* LHLabelTextStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D11BEC21D5484F700482F8F /* LHLabelTextStorage.m */; };
@@ -283,6 +286,9 @@
 		4DE8256C1D6D647700823E10 /* ChartSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DE8256B1D6D647700823E10 /* ChartSectionModel.m */; };
 		4DE8256F1D6D64EA00823E10 /* ChartRowModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DE8256E1D6D64EA00823E10 /* ChartRowModel.m */; };
 		4DE8257A1D6D73FD00823E10 /* ChartItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DE825791D6D73FD00823E10 /* ChartItemModel.m */; };
+		4DEAE34A1DC986C900D43D7B /* NSMutableAttributedString+LH.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DEAE3491DC986C900D43D7B /* NSMutableAttributedString+LH.m */; };
+		4DEAE3501DC98F3300D43D7B /* ChartDateChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DEAE34F1DC98F3300D43D7B /* ChartDateChooseView.m */; };
+		4DEAE3531DC9A89E00D43D7B /* UIView+LH.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DEAE3521DC9A89E00D43D7B /* UIView+LH.m */; };
 		4DEE9EB91DA88DDF00E0ABAC /* NewsTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DEE9EB81DA88DDF00E0ABAC /* NewsTableHeaderView.m */; };
 		4DF012A21DC18AD800556132 /* LHNewsChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF012A11DC18AD800556132 /* LHNewsChooseView.m */; };
 		4DF0EA631DBDA4FF00EFAE58 /* CZWManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF0EA601DBDA4FF00EFAE58 /* CZWManager.m */; };
@@ -356,6 +362,12 @@
 		451C11368C978A7EE2F94243 /* Pods-chezhiwang.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chezhiwang.debug.xcconfig"; path = "Pods/Target Support Files/Pods-chezhiwang/Pods-chezhiwang.debug.xcconfig"; sourceTree = "<group>"; };
 		4D0069051B9D891400BA0CA1 /* CustomTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTabBarController.h; sourceTree = "<group>"; };
 		4D0069061B9D891400BA0CA1 /* CustomTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTabBarController.m; sourceTree = "<group>"; };
+		4D0B0E641DCB1D3A00C41984 /* CZWAdvertisementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZWAdvertisementViewController.h; sourceTree = "<group>"; };
+		4D0B0E651DCB1D3A00C41984 /* CZWAdvertisementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZWAdvertisementViewController.m; sourceTree = "<group>"; };
+		4D0B0E671DCB1D4100C41984 /* AdvertisementView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvertisementView.h; sourceTree = "<group>"; };
+		4D0B0E681DCB1D4100C41984 /* AdvertisementView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvertisementView.m; sourceTree = "<group>"; };
+		4D10D8761DD19C72000AF2AC /* ChartDateChooseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartDateChooseViewController.h; sourceTree = "<group>"; };
+		4D10D8771DD19C72000AF2AC /* ChartDateChooseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartDateChooseViewController.m; sourceTree = "<group>"; };
 		4D11BEA91D54745500482F8F /* NewsTestTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsTestTableViewCell.h; sourceTree = "<group>"; };
 		4D11BEAA1D54745500482F8F /* NewsTestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsTestTableViewCell.m; sourceTree = "<group>"; };
 		4D11BEB61D54781400482F8F /* NewsTestTableViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsTestTableViewModel.h; sourceTree = "<group>"; };
@@ -792,6 +804,12 @@
 		4DE8256E1D6D64EA00823E10 /* ChartRowModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartRowModel.m; sourceTree = "<group>"; };
 		4DE825781D6D73FD00823E10 /* ChartItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartItemModel.h; sourceTree = "<group>"; };
 		4DE825791D6D73FD00823E10 /* ChartItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartItemModel.m; sourceTree = "<group>"; };
+		4DEAE3481DC986C900D43D7B /* NSMutableAttributedString+LH.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+LH.h"; sourceTree = "<group>"; };
+		4DEAE3491DC986C900D43D7B /* NSMutableAttributedString+LH.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+LH.m"; sourceTree = "<group>"; };
+		4DEAE34E1DC98F3300D43D7B /* ChartDateChooseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartDateChooseView.h; sourceTree = "<group>"; };
+		4DEAE34F1DC98F3300D43D7B /* ChartDateChooseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartDateChooseView.m; sourceTree = "<group>"; };
+		4DEAE3511DC9A89E00D43D7B /* UIView+LH.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LH.h"; sourceTree = "<group>"; };
+		4DEAE3521DC9A89E00D43D7B /* UIView+LH.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LH.m"; sourceTree = "<group>"; };
 		4DEE9EB71DA88DDF00E0ABAC /* NewsTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsTableHeaderView.h; sourceTree = "<group>"; };
 		4DEE9EB81DA88DDF00E0ABAC /* NewsTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsTableHeaderView.m; sourceTree = "<group>"; };
 		4DF012A01DC18AD800556132 /* LHNewsChooseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHNewsChooseView.h; sourceTree = "<group>"; };
@@ -1713,6 +1731,10 @@
 				4DCAD2CC1CEC2A8E00A539B2 /* UIViewController+LH.m */,
 				4DDD33451D1A623800F52C0C /* UIFont+LH.h */,
 				4DDD33461D1A623800F52C0C /* UIFont+LH.m */,
+				4DEAE3481DC986C900D43D7B /* NSMutableAttributedString+LH.h */,
+				4DEAE3491DC986C900D43D7B /* NSMutableAttributedString+LH.m */,
+				4DEAE3511DC9A89E00D43D7B /* UIView+LH.h */,
+				4DEAE3521DC9A89E00D43D7B /* UIView+LH.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1901,6 +1923,8 @@
 			children = (
 				4DD335791D64536B0037F2D2 /* ChartChooseListViewController.h */,
 				4DD3357A1D64536B0037F2D2 /* ChartChooseListViewController.m */,
+				4D10D8761DD19C72000AF2AC /* ChartDateChooseViewController.h */,
+				4D10D8771DD19C72000AF2AC /* ChartDateChooseViewController.m */,
 				4DD3357B1D64536B0037F2D2 /* ComplainChartViewController.h */,
 				4DD3357C1D64536B0037F2D2 /* ComplainChartViewController.m */,
 			);
@@ -1922,6 +1946,8 @@
 				4DD335701D6453570037F2D2 /* ComplainChartSecondHeaderView.m */,
 				4DD335711D6453570037F2D2 /* ComplainChartView.h */,
 				4DD335721D6453570037F2D2 /* ComplainChartView.m */,
+				4DEAE34E1DC98F3300D43D7B /* ChartDateChooseView.h */,
+				4DEAE34F1DC98F3300D43D7B /* ChartDateChooseView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -2110,6 +2136,8 @@
 				4DF75F4A1D9CEF3000FB882E /* HomepageSectionFooterView.m */,
 				4DEE9EB71DA88DDF00E0ABAC /* NewsTableHeaderView.h */,
 				4DEE9EB81DA88DDF00E0ABAC /* NewsTableHeaderView.m */,
+				4D0B0E671DCB1D4100C41984 /* AdvertisementView.h */,
+				4D0B0E681DCB1D4100C41984 /* AdvertisementView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -2119,6 +2147,8 @@
 			children = (
 				4DF75F1F1D9CE46100FB882E /* HomepageTableViewController.h */,
 				4DF75F201D9CE46100FB882E /* HomepageTableViewController.m */,
+				4D0B0E641DCB1D3A00C41984 /* CZWAdvertisementViewController.h */,
+				4D0B0E651DCB1D3A00C41984 /* CZWAdvertisementViewController.m */,
 			);
 			path = viewController;
 			sourceTree = "<group>";
@@ -2300,9 +2330,11 @@
 					4D7E72371B9D5CD10048F221 = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = MFH5RT668M;
+						ProvisioningStyle = Manual;
 					};
 					4D7E72501B9D5CD10048F221 = {
 						CreatedOnToolsVersion = 6.4;
+						ProvisioningStyle = Manual;
 						TestTargetID = 4D7E72371B9D5CD10048F221;
 					};
 				};
@@ -2550,6 +2582,7 @@
 				4DD30C6A1D20C0E7009C3B05 /* NewsInvestigateViewController.m in Sources */,
 				4DCDDE661D9E00C200AE4446 /* FindCollectionViewCell.m in Sources */,
 				4DE8256F1D6D64EA00823E10 /* ChartRowModel.m in Sources */,
+				4D0B0E661DCB1D3A00C41984 /* CZWAdvertisementViewController.m in Sources */,
 				4DDD33471D1A623800F52C0C /* UIFont+LH.m in Sources */,
 				4DF0EA6B1DBDA58500EFAE58 /* URLFile.m in Sources */,
 				4D2DE5431CDB2AAA001B7B86 /* RevokeComplainViewController.m in Sources */,
@@ -2606,12 +2639,14 @@
 				4DCDDE6C1D9E0FDB00AE4446 /* MyHeaderView.m in Sources */,
 				4DF75F301D9CE56B00FB882E /* HomepageAnswerModel.m in Sources */,
 				4DE0D2BF1D6EDE6D0051FDA2 /* ChartView.m in Sources */,
+				4DEAE3531DC9A89E00D43D7B /* UIView+LH.m in Sources */,
 				4DF75F271D9CE4A600FB882E /* HomepageNewsModel.m in Sources */,
 				4DF75F481D9CEF0B00FB882E /* HomepageSectionHeaderView.m in Sources */,
 				4D87CE551C0324BD00466A97 /* CityChooseViewController.m in Sources */,
 				4DE0D2C21D6EECC80051FDA2 /* UICollectionView+Chart.m in Sources */,
 				4DF75F391D9CE5FC00FB882E /* HomepageNewsImageCell.m in Sources */,
 				4DC4070E1BB11A50004079A8 /* RegisterViewController.m in Sources */,
+				4DEAE3501DC98F3300D43D7B /* ChartDateChooseView.m in Sources */,
 				4D17D8BD1D29ED79002E2B94 /* ForumListViewController.m in Sources */,
 				4DF75F4B1D9CEF3000FB882E /* HomepageSectionFooterView.m in Sources */,
 				4D97FC811BAF94B70089C684 /* FavouriteViewController.m in Sources */,
@@ -2649,6 +2684,7 @@
 				4DCB175C1D5C5D0A005C2E76 /* BrandCollectionView.m in Sources */,
 				4D17D8C71D29ED82002E2B94 /* EditCell.m in Sources */,
 				4DF75F361D9CE5E800FB882E /* HomepageNewsTextCell.m in Sources */,
+				4DEAE34A1DC986C900D43D7B /* NSMutableAttributedString+LH.m in Sources */,
 				4DD3357E1D64536B0037F2D2 /* ComplainChartViewController.m in Sources */,
 				4DCDDE701D9E3B5B00AE4446 /* FootCommentView.m in Sources */,
 				4D11BEAB1D54745500482F8F /* NewsTestTableViewCell.m in Sources */,
@@ -2664,7 +2700,9 @@
 				4DD9DCB71D6FDE2300BA8C1F /* TopCollectionViewModel.m in Sources */,
 				4D97FC701BAF949B0089C684 /* AboutViewController.m in Sources */,
 				4DFFA4F81DB72F9A003B6178 /* UMSocialUIManager.m in Sources */,
+				4D0B0E691DCB1D4100C41984 /* AdvertisementView.m in Sources */,
 				4D6CD69B1D9E62420038D5E5 /* MyComplainHeaderView.m in Sources */,
+				4D10D8781DD19C72000AF2AC /* ChartDateChooseViewController.m in Sources */,
 				4DFFA4F61DB72F9A003B6178 /* UMShareMenuSelectionView.m in Sources */,
 				4D87CE571C0324BD00466A97 /* EditImageViewController.m in Sources */,
 				4DCAD2CD1CEC2A8E00A539B2 /* UIViewController+LH.m in Sources */,
@@ -2870,7 +2908,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "0eb72660-4ec9-45a6-8b0d-577e26472081";
-				"PROVISIONING_PROFILE[sdk=*]" = "";
+				"PROVISIONING_PROFILE[sdk=*]" = "0eb72660-4ec9-45a6-8b0d-577e26472081";
 				PROVISIONING_PROFILE_SPECIFIER = CZWDevelopment;
 				SWIFT_OBJC_BRIDGING_HEADER = "chezhiwang/新闻/model/chezhiwang-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2886,8 +2924,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Chezhi Network Information Technology Co., Ltd (MFH5RT668M)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Chezhi Network Information Technology Co., Ltd (MFH5RT668M)";
 				DEVELOPMENT_TEAM = MFH5RT668M;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2927,6 +2965,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xi Li (CU2ZGKMYY2)";
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -2938,6 +2978,8 @@
 				INFOPLIST_FILE = chezhiwangTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/chezhiwang.app/chezhiwang";
 			};
 			name = Debug;
@@ -2946,6 +2988,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = MFH5RT668M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -2953,6 +2997,8 @@
 				INFOPLIST_FILE = chezhiwangTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/chezhiwang.app/chezhiwang";
 			};
 			name = Release;

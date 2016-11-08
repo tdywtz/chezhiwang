@@ -14,6 +14,26 @@ typedef enum {
     chooseNumberMany//多选
 }chooseNumber;
 
+#pragma mark - class - ChooseSectionModel
+@interface ChooseSectionModel : NSObject
+
+@property (nonatomic,strong) NSArray <ChooseViewModel *> *rowModels;
+
+@end
+
+@implementation ChooseSectionModel
+
+
+@end
+
+#pragma mark - class - ChooseViewModel
+@implementation ChooseViewModel
+
+
+@end
+
+#pragma mark - class - 
+
 @interface ChooseViewController ()<UITableViewDataSource,UITableViewDelegate,AIMTableViewIndexBarDelegate>
 {
     UIButton *rightItemButton;
@@ -157,6 +177,7 @@ typedef enum {
         NSMutableArray *mArray = [[NSMutableArray alloc] init];
         for (NSDictionary *dict in responseObject) {
             NSMutableDictionary *newdict = [[NSMutableDictionary alloc] init];
+          
             newdict[@"id"] = dict[@"Id"];
             newdict[@"title"] = dict[@"Name"];
             [mArray addObject:newdict];
@@ -184,7 +205,9 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
- 
+
+    self.navigationController.navigationBar.barTintColor = colorLightBlue;
+    
     [self createLeftItem];
     if (self.chooseNumbers == chooseNumberMany) {
         [self createRightItem];

@@ -69,8 +69,8 @@
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     btn .titleLabel.font = [UIFont boldSystemFontOfSize:B-1];
     [btn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
-    
-    
+
+
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
 }
 -(void)btnClick{
@@ -82,26 +82,27 @@
 }
 
 -(void)createField{
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 160)];
-    imageView.image = [UIImage imageNamed:@"defaultImage_icon"];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 20, WIDTH, 80)];
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    imageView.image = [UIImage imageNamed:@"auto_logo"];
     [self.scrollView addSubview:imageView];
 
     UIImageView *userNameImageView =[LHController createImageViewWithFrame:CGRectMake(10, 8, 20, 20) ImageName:@"userName.png"];
     UIImageView *tempUserNameImageView = [LHController createImageViewWithFrame:CGRectMake(0, 0, 40, 40) ImageName:nil];
     [tempUserNameImageView addSubview:userNameImageView];
-    
-    _userName = [LHController createTextFieldWithFrame:CGRectMake(10, 160, WIDTH-20, 50) Placeholder:@"用户名" Font:15  Delegate:self];
+
+    _userName = [LHController createTextFieldWithFrame:CGRectMake(10, imageView.frame.size.height+imageView.frame.origin.y+20, WIDTH-20, 50) Placeholder:@"用户名" Font:17  Delegate:self];
     _userName.leftView = tempUserNameImageView;
     _userName.backgroundColor = [UIColor whiteColor];
     _userName.layer.borderColor = RGB_color(221, 221, 221, 1).CGColor;
     _userName.layer.borderWidth = 1;
     [self.scrollView addSubview:_userName];
-    
+
     UIImageView *passwordImageView =[LHController createImageViewWithFrame:CGRectMake(10, 8, 20, 20) ImageName:@"user_password"];
     UIImageView *tempPasswordImageView = [LHController createImageViewWithFrame:CGRectMake(0, 0, 40, 40) ImageName:nil];
     [tempPasswordImageView addSubview:passwordImageView];
-    
-    _passWord = [LHController createTextFieldWithFrame:CGRectMake(10, _userName.frame.origin.y+_userName.frame.size.height-1, WIDTH-20, 50) Placeholder:@"密码" Font:15  Delegate:self];
+
+    _passWord = [LHController createTextFieldWithFrame:CGRectMake(10, _userName.frame.origin.y+_userName.frame.size.height-1, WIDTH-20, 50) Placeholder:@"密码" Font:17  Delegate:self];
     _passWord.leftView = tempPasswordImageView;
     _passWord.secureTextEntry = YES;
     _passWord.backgroundColor = [UIColor whiteColor];
@@ -113,19 +114,19 @@
 #pragma mark - createLogoin
 -(void)createLogoin{
     logoin =  [LHController createButtnFram:CGRectMake(10, _passWord.frame.origin.y+_passWord.frame.size.height+60, WIDTH-20, 40) Target:self Action:@selector(logoinClick) Font:B Text:@"点击登录"];
-    
+
     [self.scrollView addSubview:logoin];
-    
+
     UIButton *button = [LHController createButtnFram:CGRectMake(0, 300, 30, 30) Target:self Action:@selector(buttonClick) Text:@"找回密码"];
     button.titleLabel.font = [UIFont systemFontOfSize:B];
     [button setTitleColor:[UIColor colorWithRed:6/255.0 green:143/255.0 blue:207/255.0 alpha:1] forState:UIControlStateNormal];
     [self.scrollView addSubview:button];
-    
-   [button makeConstraints:^(MASConstraintMaker *make) {
-       make.top.equalTo(logoin.bottom).offset(20);
-       make.right.equalTo(logoin);
-       make.height.equalTo(30);
-   }];
+
+    [button makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(logoin.bottom).offset(20);
+        make.right.equalTo(logoin);
+        make.height.equalTo(30);
+    }];
 }
 
 -(void)buttonClick{
@@ -135,7 +136,7 @@
 
 #pragma mark - 登录响应按钮
 -(void)logoinClick{
-    
+
     if(_userName.text.length == 0 || _passWord.text.length == 0){
         UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"用户名或密码不能为空" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
         [al show];
@@ -161,7 +162,9 @@
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
 
         NSString *str = responseObject[@"error"];
-        if (str != nil) {
+        if (responseObject == nil) {
+            [LHController alert:@"登录失败"];
+        }else if (str != nil){
             if ([str isEqualToString:@"1"]) {
                 [LHController alert:@"用户名或密码错误"];
             }else if([str isEqualToString:@"2"]){
@@ -182,11 +185,12 @@
         }
         logoin.enabled = YES;
     } failure:^(NSError *error) {
-         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
-         logoin.enabled = YES;
-        UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"网络请求失败" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
+
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+        logoin.enabled = YES;
+        UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"登录失败" message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
         [al show];
-        [UIView animateWithDuration:0.3 animations:^{
+        [UIView animateWithDuration:1.0 animations:^{
             [al dismissWithClickedButtonIndex:0 animated:YES];
         }];
 
@@ -198,7 +202,7 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     //
-   // NSString *str = [formatter stringFromDate:[NSDate date]];
+    // NSString *str = [formatter stringFromDate:[NSDate date]];
     //[[NSUserDefaults standardUserDefaults] setObject:str forKey:inDate];
 }
 
@@ -218,13 +222,13 @@
 }
 
 /*
-#pragma mark - Navigation
+ #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

@@ -38,9 +38,7 @@
     NSMutableArray *_brandArray;
     NSMutableArray *_seriesArray;
     NSMutableArray *_modelArray;
-  //  UITextField *firstResponderTextField;
-   // UIButton *doneBt;//数字键盘return
-    
+
     CGPoint _point;
     CGFloat height;
     CGFloat B;
@@ -77,6 +75,7 @@
           [self createData:dicData];
           
           [_tabelView reloadData];
+          [[CZWManager manager] updateIconUrl:responseObject[@"img"]];
           //加载大品牌数据
           [self loadDataOfPickView:1];
       }

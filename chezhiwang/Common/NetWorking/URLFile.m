@@ -29,11 +29,15 @@
 + (NSString *)stringForCommonServiceWithAct:(NSString *)act{
     return [NSString stringWithFormat:@"%@%@%@",[self prefixString],@"/AppServer/forCommonService.ashx?",act];
 }
++ (NSString *)stringForCommon:(NSString *)act{
+    return [NSString stringWithFormat:@"%@%@%@",[self prefixString],@"/server/forCommonService.ashx?",act];
+}
 
 
 /**前缀*/
 + (NSString *)prefixString{
 #if DEBUG
+return  @"http://m.12365auto.com";
     return  @"http://192.168.1.114:8888";
 #else
     return  @"http://m.12365auto.com";
@@ -41,8 +45,20 @@
 }
 
 #pragma mark - 接口-——————————》》》》》
+/**注册协议*/
++ (NSString *)urlStringRegistrationAgreement{
+    return [NSString stringWithFormat:@"%@%@",[self prefixString],@"/user/agreeForIOS.shtml"];
+
+}
+
+//广告
++ (NSString *)url_DTopAdv{
+    return [NSString stringWithFormat:@"%@%@",[self prefixString],@"/AppServer/forAdvService.ashx?act=czw_dt"];
+}
+
 /**登录*/
 + (NSString *)urlStringForLogin{
+    
     return [self stringForCommonServiceWithAct:@"act=login"];
 }
 
@@ -66,10 +82,8 @@
 }
 /*车系大全*/
 + (NSString *)urlString_picSeries{
-    return [self stringForCommonServiceWithAct:@"act=picSeries&bid=%@"];
+    return [self stringForAppWebServiceWithAct:@"act=picSeries&bid=%@"];
 }
-
-
 
 #pragma mark - homepage
 /**首页*/
@@ -189,8 +203,7 @@
 
 /**经销商*/
 + (NSString *)urlStringForDis{
-  
-    return [self stringForCommonServiceWithAct:@"act=dis&pid=%@&cid=%@&sid=%@"];
+    return  [self stringForAppWebServiceWithAct:@"act=dis&pid=%@&cid=%@&sid=%@"];
 }
 
 /**投诉*/
@@ -371,7 +384,7 @@
 
 /** 找回密码*/
 + (NSString *)urlString_sendemail{
-    return [self stringWithBasic:@"act=sendemail&username=%@&origin=%@"];
+    return [self stringForCommon:@"act=sendemail&username=%@&origin=%@"];
 }
 #pragma mark - 数据对比
 /**对比*/

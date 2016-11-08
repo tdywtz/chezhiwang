@@ -25,6 +25,27 @@
     return self;
 }
 
+-(instancetype)initWithDictionary:(NSDictionary *)dictionary keyDict:(NSDictionary *)keyDict{
+
+    if (self = [super init]) {
+        NSArray *keys = [self getPropertyArray];
+        NSArray *tempKeys = [keyDict allKeys];
+        for (NSString *key in keys) {
+            if(dictionary[key]){
+              [self setValue:dictionary[key] forKey:key];
+            }else{
+                for (NSString *tempKey in tempKeys) {
+                    if ([key isEqualToString:dictionary[keyDict[tempKey]]]) {
+                        [self setValue:dictionary[keyDict[tempKeys]] forKey:key];
+                        break;
+                    }
+                }
+            }
+
+        }
+    }
+    return self;
+}
 
 /**
  *  获取属性名数组

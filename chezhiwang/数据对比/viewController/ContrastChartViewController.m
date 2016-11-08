@@ -23,10 +23,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"对比";
+    
     [self createLeftItemBack];
     //第一分组
     sectionModelArray = [[NSMutableArray alloc] init];
-    NSArray *array = @[@"车型信息",@"投诉数量",@"厂家回复率",@"用户满意度",@"典型故障"];
+    NSArray *array = @[@"车型信息",@"投诉数量",@"厂家回复率",@"用户满意度",@"典型问题"];
     NSMutableArray *rows = [[NSMutableArray alloc] init];
     for (int i = 0; i < array.count; i ++) {
         ChartRowModel *rowModel = [[ChartRowModel alloc] init];
@@ -53,11 +55,11 @@
     __weak __typeof(self)weakSelf = self;
     [_chartView ruturnModel:^(TopCollectionViewModel *topModel) {
         [weakSelf releaesItemDataWithQueue:topModel.index];
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [weakSelf loadSectionOneValueListWithBrandId:topModel.brandId seriesId:topModel.seriesId modelId:topModel.modelId queue:topModel.index];
         if ([topModel.modelId integerValue]) {
             [weakSelf loadDataValueListWithSeriesId:topModel.seriesId modelId:topModel.brandId queue:topModel.index];
         }
-
     }];
 
 
@@ -89,7 +91,7 @@
 
 //加载第一列数据(参数名)
 - (void)loadDataNameList{
-
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [HttpRequest GET:[URLFile urlString_mConfig] success:^(id responseObject) {
         for (int i = 0; i <  [responseObject[@"rel"] count]; i ++) {
             NSDictionary *superDict = responseObject[@"rel"][i];
@@ -121,9 +123,9 @@
         }
         _chartView.sectionModels = sectionModelArray;
         [_chartView reloadData];
-
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     } failure:^(NSError *error) {
-
+         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
     //表格头部数据
     NSArray *arr = [[NSArray alloc] initWithObjects:[[TopCollectionViewModel alloc] init],[[TopCollectionViewModel alloc] init],[[TopCollectionViewModel alloc] init],[[TopCollectionViewModel alloc] init], nil];
@@ -164,14 +166,14 @@
 
                 ChartItemModel *itemModel = rowModel.itemModels[queue];
                 NSDictionary *itemDict = rowDict[@"valueitems"][0];
-                itemModel.name = itemDict[@"value"];
+                itemModel.name = [itemDict[@"value"] stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
             }
         }
         _chartView.sectionModels = sectionModelArray;
         [_chartView reloadData];
-
+       [MBProgressHUD hideHUDForView:self.view animated:YES];
     } failure:^(NSError *error) {
-
+       [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
 }
 
@@ -205,9 +207,9 @@
         }
         _chartView.sectionModels = sectionModelArray;
         [_chartView reloadData];
-
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     } failure:^(NSError *error) {
-
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
 }
 

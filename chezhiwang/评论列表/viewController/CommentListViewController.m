@@ -33,7 +33,7 @@ typedef enum {
     if (self) {
         _numLabel = [[UILabel alloc] init];
         _numLabel.textColor = RGB_color(239, 95, 96, 1);
-        _numLabel.font = [UIFont boldSystemFontOfSize:14];
+        _numLabel.font = [UIFont boldSystemFontOfSize:16];
         [self addSubview:_numLabel];
 
         [_numLabel makeConstraints:^(MASConstraintMaker *make) {
@@ -264,7 +264,11 @@ typedef enum {
         }
         __weak __typeof(self)weakSelf = self;
         [initialCell getPid:^(NSString *pid) {
-            [weakSelf pushComment:pid];
+            if ([CZWManager manager].isLogin) {
+                [weakSelf pushComment:pid];
+            }else{
+                [weakSelf presentViewController:[LoginViewController instance] animated:YES completion:nil];
+            }
         }];
         initialCell.model = model;
         return initialCell;
@@ -276,9 +280,13 @@ typedef enum {
 
     __weak __typeof(self)weakSelf = self;
     [cell getPid:^(NSString *pid) {
-        [weakSelf pushComment:pid];
-    }];
-    
+        if ([CZWManager manager].isLogin) {
+            [weakSelf pushComment:pid];
+        }else{
+            [weakSelf presentViewController:[LoginViewController instance] animated:YES completion:nil];
+        }
+     }];
+
     cell.model = model;
 
     return cell;
@@ -286,7 +294,7 @@ typedef enum {
 
 - (void)pushComment:(NSString *)pid{
     _fid = pid;
-    NSLog(@"%@",pid);
+
     commentORanswer = commentTypeAnswer;
     WriteViewController *comment = [[WriteViewController alloc] init];
     comment.title = @"回复";

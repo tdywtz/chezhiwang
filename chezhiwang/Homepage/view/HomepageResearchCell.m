@@ -56,7 +56,7 @@
     [hottypeImageView makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(10);
         make.top.equalTo(10);
-        make.size.equalTo(CGSizeMake(30, 30));
+        make.size.equalTo(CGSizeMake(40, 40));
     }];
 
     [modelLabel makeConstraints:^(MASConstraintMaker *make) {

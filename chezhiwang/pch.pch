@@ -18,6 +18,7 @@
 #import "UIViewController+LH.h"
 #import "NSString-Helper.h"
 #import "CZWManager.h"
+#import "UIView+LH.h"
 //友盟统计
 #import <UMMobClick/MobClick.h>
 //pop动画库

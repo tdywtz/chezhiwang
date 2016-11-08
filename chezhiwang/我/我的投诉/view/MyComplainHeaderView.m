@@ -77,7 +77,7 @@
 
         CGSize size = [self sizeWith:text size:CGSizeMake(textWidth*2, rect.size.height)];
         CGRect drawFrame  = [self centreFrame:frame size:size];
-        if (i == _current) {
+        if (i <= _current) {
             CGContextSetFillColorWithColor(context, _lightBackColor.CGColor);
         }else{
             CGContextSetFillColorWithColor(context,_backColor.CGColor);

@@ -21,6 +21,8 @@
     self = [super init];
     if (self) {
         [self setUp];
+        
+        
     }
     return self;
 }

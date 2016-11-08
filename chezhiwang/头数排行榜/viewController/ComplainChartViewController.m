@@ -14,6 +14,7 @@
 #import "ChartChooseListViewController.h"
 #import "BezierPathView.h"
 #import "ComplainChartFirstShowCell.h"
+#import "ChartDateChooseViewController.h"
 
 @interface ComplainChartViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
@@ -58,7 +59,6 @@
     [self createTableView];
     [self loadDataRankingBotm];
     [self createBezier];
-
 }
 
 - (void)createBezier{
@@ -88,33 +88,38 @@
         if (index == 0) {
             //已经选择过时间，标记下一次进入页面不在弹出提示
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ComplainChartViewControllerthePageOpend"];
+            if (initialSetUp) {
+                //选择时间
+                ChartDateChooseViewController *choose = [[ChartDateChooseViewController alloc] initWithChooseDeate:^(NSString *beginDate, NSString *endDate) {
+                    //返回时间
+
+                    NSString *date = [NSString stringWithFormat:@"%@\n%@",beginDate,endDate];
+                    [_headerView setTitle:date tid:nil index:0];
+                    _headerView.beginDate = beginDate;
+                    _headerView.endDate = endDate;
+                    _count = 1;//重置页码
+                    [weakSelf loadDataRankingList];
+                }];
+                [weakSelf.navigationController pushViewController:choose animated:YES];
+            }else{
+                _count = 1;//重置页码
+                [weakSelf loadDataRankingList];
+            }
+            return ;
         }
         if (!initialSetUp) {
             _count = 1;//重置页码
             [weakSelf loadDataRankingList];
             return ;
         }
-        DirectionStyle direction = DirectionRight;
-//        if (index == 2) {
-//            direction = DirectionLeft;
-//        }
-        ChartChooseListViewController *chart = [[ChartChooseListViewController alloc] initWithType:index direction:direction];
+
+        ChartChooseListViewController *chart = [[ChartChooseListViewController alloc] initWithType:index direction:DirectionRight];
         //返回名和id
         chart.chooseEnd = ^(NSString *title , NSString *tid){
             [_headerView setTitle:title tid:tid index:index];
             _count = 1;//重置页码
             [weakSelf loadDataRankingList];
         };
-       //返回时间
-        chart.chooseDeate = ^(NSString * beginDate , NSString * endDate){
-            NSString *date = [NSString stringWithFormat:@"%@\n%@",beginDate,endDate];
-            [_headerView setTitle:date tid:nil index:index];
-            _headerView.beginDate = beginDate;
-            _headerView.endDate = endDate;
-            _count = 1;//重置页码
-            [weakSelf loadDataRankingList];
-        };
-        
         [weakSelf presentViewController:chart animated:YES completion:nil];
     }];
     _headerView.backgroundColor = [UIColor whiteColor];

@@ -37,10 +37,10 @@
     if (array.count == 0) return;
 
     UIImageView  *carImageView = [[UIImageView alloc] initWithFrame:CGRectMake(_point.x, _point.y, 20, 20)];
-    carImageView.image = [UIImage imageNamed:@"zl.png"];
+    carImageView.image = [UIImage imageNamed:@"auto_complain_quality"];
     [self addSubview:carImageView];
 
-    _point = CGPointMake(30, _point.y);
+    _point = CGPointMake(25, _point.y);
     for (int i = 0; i < array.count; i ++) {
 
         NSDictionary *ceDic = array[i];
@@ -49,45 +49,34 @@
         CGFloat length1 = [self getStr:str1 andFont:PT_FROM_PX(16)];
         [self upDataPint:length1];
 
-        UIImageView *immageView1 = [[UIImageView alloc] initWithFrame:CGRectMake(_point.x, _point.y, length1+20, 20)];
-        UIImage *image1 = [UIImage imageNamed:@"kk(1)"];
 
-        image1 = [image1 stretchableImageWithLeftCapWidth:15 topCapHeight:9];
-        immageView1.image=image1;
-        immageView1.userInteractionEnabled = YES;
-        [self addSubview:immageView1];
-
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, length1+20, 20)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(_point.x, _point.y, length1+20, 20)];
         label.text = str1;
         label.textAlignment = NSTextAlignmentCenter;
-        label.textColor = colorDeepBlue;
+        label.textColor = [UIColor whiteColor];
+        label.backgroundColor = RGB_color(172, 92, 158, 1);
         label.font = [UIFont systemFontOfSize:PT_FROM_PX(16)];
 
-        [immageView1 addSubview:label];
-        _point = CGPointMake(immageView1.frame.size.width+immageView1.frame.origin.x, _point.y);
+        [self addSubview:label];
+        _point = CGPointMake(label.frame.size.width+label.frame.origin.x-1, _point.y);
 
         //
         NSString *str2 = ceDic[@"ques"];
         CGFloat length2 = [self getStr:str2 andFont:PT_FROM_PX(16)];
         [self upDataPint:length2];
 
-        UIImageView *immageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(_point.x-5, _point.y, length2+20, 20)];
-        UIImage* img=[UIImage imageNamed:@"kk1(2)"];//原图
 
-        img = [img stretchableImageWithLeftCapWidth:15 topCapHeight:9];
-        immageView2.image=img;
-        immageView2.userInteractionEnabled = YES;
-        [self addSubview:immageView2];
-
-        UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, length2+20, 20)];
+        UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(_point.x, _point.y, length2+20, 20)];
         label2.text = str2;
-        label2.textColor = colorDeepBlue;
+        label2.textColor = RGB_color(172, 92, 158, 1);
         label2.textAlignment = NSTextAlignmentCenter;
         label2.font = [UIFont systemFontOfSize:PT_FROM_PX(16)];
+        label2.layer.borderColor = RGB_color(172, 92, 158, 1).CGColor;
+        label2.layer.borderWidth = 1;
 
-        [immageView2 addSubview:label2];
+        [self addSubview:label2];
 
-        _point = CGPointMake(immageView2.frame.size.width+immageView2.frame.origin.x+5,_point.y);
+        _point = CGPointMake(label2.frame.size.width+label2.frame.origin.x+5,_point.y);
     }
 }
 
@@ -108,7 +97,7 @@
     }
 
     UIImageView *questionImageView = [[UIImageView alloc] initWithFrame:CGRectMake(x, _point.y, 20, 20)];
-    questionImageView.image = [UIImage imageNamed:@"fw.png"];
+    questionImageView.image = [UIImage imageNamed:@"auto_complain_serve"];
     [self addSubview:questionImageView];
     _point = CGPointMake(questionImageView.frame.origin.x+questionImageView.frame.size.width+5, _point.y);
 
@@ -122,10 +111,9 @@
 
 
         UILabel *labelServer = [LHController createLabelWithFrame:CGRectMake(_point.x, _point.y, w+20, 20) Font:PT_FROM_PX(16) Bold:NO TextColor:nil Text:fwtd[i]];
-        labelServer.textColor = colorYellow;
+        labelServer.textColor = [UIColor whiteColor];
+        labelServer.backgroundColor = RGB_color(29, 188, 158, 1);
         labelServer.textAlignment = NSTextAlignmentCenter;
-        labelServer.layer.borderColor = labelServer.textColor.CGColor;
-        labelServer.layer.borderWidth = 1;
         [self addSubview:labelServer];
 
         _point = CGPointMake(labelServer.frame.origin.x+labelServer.frame.size.width+5, labelServer.frame.origin.y);
@@ -140,7 +128,7 @@
 
 #pragma mark - 计算坐标
 -(void)upDataPint:(CGFloat)length{
-    if (length+_point.x > WIDTH-20) {
+    if (length+_point.x > WIDTH-30) {
         _point = CGPointMake(0, _point.y+25);
     }
 }

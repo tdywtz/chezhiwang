@@ -9,6 +9,7 @@
 #import "MyHeaderView.h"
 #import "LoginViewController.h"
 #import "BasicNavigationController.h"
+#import "MyCarViewController.h"
 
 @interface MyHeaderView ()
 
@@ -23,6 +24,9 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+
+        [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapClick:)]];
+
         self.imageView = [[UIImageView alloc] init];
         self.imageView.layer.cornerRadius = 40;
         self.imageView.layer.masksToBounds = YES;
@@ -44,7 +48,7 @@
         }];
         [self.nameButton makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(0);
-            make.bottom.equalTo(-30);
+            make.bottom.equalTo(-20);
             make.height.equalTo(30);
         }];
 
@@ -52,25 +56,41 @@
     return self;
 }
 
+- (void)tapClick:(UITapGestureRecognizer *)tap{
+    if ([CZWManager manager].isLogin) {
+        MyCarViewController *car = [[MyCarViewController alloc] init];
+        car.hidesBottomBarWhenPushed = YES;
+        [self.parentVC.navigationController pushViewController:car animated:YES];
+
+    }
+}
+
 - (void)loginClick{
 
     if ([CZWManager manager].isLogin) {
+        MyCarViewController *car = [[MyCarViewController alloc] init];
+        car.hidesBottomBarWhenPushed = YES;
+        [self.parentVC.navigationController pushViewController:car animated:YES];
         return;
+
+    }else{
+        [self.parentVC presentViewController:[LoginViewController instance] animated:YES completion:nil];
     }
-    [self.parentVC presentViewController:[LoginViewController instance] animated:YES completion:nil];
+ 
 }
 
 - (void)setTitle:(NSString *)title imageUrl:(NSString *)imageUrl login:(BOOL)login{
     if (login) {
-          [self.imageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"defaultImage_icon"]];
+          [self.imageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[CZWManager defaultIconImage]];
         [self.nameButton setTitle:title forState:UIControlStateNormal];
         self.nameButton.layer.borderColor = [UIColor clearColor].CGColor;
     }else{
-        self.imageView.image = [UIImage imageNamed:@"defaultImage_icon"];
+        self.imageView.image = [CZWManager defaultIconImage];
         [self.nameButton setTitle:title forState:UIControlStateNormal];
          self.nameButton.layer.borderColor = [UIColor whiteColor].CGColor;
     }
 }
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

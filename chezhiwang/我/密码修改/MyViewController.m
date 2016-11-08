@@ -53,20 +53,22 @@
 
     if([CZWManager manager].isLogin){
         //每次页面出现刷新页面数据
-        [[SDImageCache sharedImageCache] removeImageForKey:[CZWManager manager].iconUrl fromDisk:YES];
-
         [self updateNumber];
         [self reloadData];
     }
-
-    BasicNavigationController *nvc = (BasicNavigationController *)self.navigationController;
-    [nvc bengingAlph];
 }
+
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
 
     BasicNavigationController *nvc = (BasicNavigationController *)self.navigationController;
     [nvc endAlph];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    BasicNavigationController *nvc = (BasicNavigationController *)self.navigationController;
+    [nvc bengingAlph];
 }
 
 
@@ -129,7 +131,7 @@
     [self.view addSubview:_tableView];
 
 
-    headerView = [[MyHeaderView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 230)];
+    headerView = [[MyHeaderView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 210)];
     headerView.parentVC = self;
     headerView.backgroundColor = colorLightBlue;
     _tableView.tableHeaderView = headerView;

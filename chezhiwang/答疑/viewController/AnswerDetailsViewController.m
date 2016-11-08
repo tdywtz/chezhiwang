@@ -136,7 +136,7 @@
     titleLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
     titleLabel.font = [UIFont boldSystemFontOfSize:20];
     titleLabel.numberOfLines = 0;
-    titleLabel.preferredMaxLayoutWidth = WIDTH-30;
+    titleLabel.preferredMaxLayoutWidth = WIDTH-20;
 
     CZWLabel *questionTitle = [[CZWLabel alloc] init];
     questionTitle.font = [UIFont systemFontOfSize:16];
@@ -264,7 +264,7 @@
     if (titleLabel.text && questionDate.text && self.cid) {
         FmdbManager *fb = [FmdbManager shareManager];
         [fb insertIntoCollectWithId:self.cid andTime:questionDate.text andTitle:titleLabel.text andType:collectTypeAnswer];
-     [LHController alert:@"收藏成功"];
+        [LHController alert:@"收藏成功"];
     }
 }
 
@@ -272,7 +272,7 @@
 -(void)deleteFavorate{
     FmdbManager *fb = [FmdbManager shareManager];
     [fb deleteFromCollectWithId:self.cid andType:collectTypeAnswer];
-     [LHController alert:@"取消收藏成功"];
+    [LHController alert:@"取消收藏成功"];
 }
 
 

@@ -903,26 +903,28 @@
 
 #pragma mark - 提交数据
 -(void)postData:(NSDictionary *)dic{
-    UIActivityIndicatorView *act= [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    //设置中心点为view的中心点
-    act.frame = CGRectMake(0, 0, 15, 15);
-    act.color = [UIColor grayColor];
-    [next addSubview:act];
-    [act startAnimating];
-    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = @"正在提交...";
+
     [HttpRequest POST:[URLFile urlStringForProgressComplain] parameters:dic images:_imageArray success:^(id responseObject) {
-        [act stopAnimating];
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"提交成功";
         if (self.updata) {
             self.updata();
         }
-        [self.navigationController popViewControllerAnimated:YES];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+             [self.navigationController popViewControllerAnimated:YES];
+        });
 
     } failure:^(NSError *error) {
-        [act stopAnimating];
+
         next.enabled = YES;
         next.backgroundColor = [UIColor colorWithRed:254/255.0 green:153/255.0 blue:23/255.0 alpha:1];
-        [self alertView:@"上传失败"];
-
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"提交失败";
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        });
     }];
 }
 
@@ -1519,19 +1521,27 @@
     
     if (str.length < 1) return;
     NSArray *array = [str componentsSeparatedByString:@"||"];
+
+    __weak __typeof(self)weakSelf = self;
     for (int i = 0; i < array.count; i ++) {
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 80,80)];
-        [self.view insertSubview:imageView belowSubview:scrollView];
-        [imageView sd_setImageWithURL:[NSURL URLWithString:array[i]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//        UIImageView *imageView;
+//        [imageView sd_setImageWithURL:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//
+//        }];
+        [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:array[i]] options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+
+        } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+
             if (image) {
-                [_imageArray addObject:image];
-                [self showImage];
-                [imageView removeFromSuperview];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [_imageArray addObject:image];
+                    [weakSelf showImage];
+                });
+
             }
         }];
     }
 }
-
 
 -( NSString *)age:(NSString *)str{
   

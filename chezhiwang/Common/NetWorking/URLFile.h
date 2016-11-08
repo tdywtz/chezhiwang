@@ -11,12 +11,14 @@
 //#define auto_car_brand @"http://m.12365auto.com/server/forCommonService.ashx?act=letter"
 //获取车系
 #define auto_car_series @"http://m.12365auto.com/server/forCommonService.ashx?act=s_list&id=%@"
-//注册协议
-#define xieyi @"http://m.12365auto.com/user/agreeForIOS.shtml"
+
 
 @interface URLFile : NSObject
 
-
+/**注册协议*/
++ (NSString *)urlStringRegistrationAgreement;
+//广告
++ (NSString *)url_DTopAdv;
 /**登录*/
 + (NSString *)urlStringForLogin;
 /**注册*/

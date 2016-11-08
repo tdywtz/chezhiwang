@@ -33,6 +33,8 @@ typedef NS_ENUM(NSInteger, NewsType) {
 - (void)loginWithDictionary:(NSDictionary *)dictionary;
 /**存储密码*/
 - (void)storagePassword:(NSString *)password;
+/**更新头像地址*/
+- (void)updateIconUrl:(NSString *)url;
 /**退出账号*/
 - (void)logoutAccount;
 

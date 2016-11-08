@@ -33,25 +33,38 @@
    
     [self createTExtField];
     
-    // NSString *str = [LHController deviceIPAdress];
+    [self keyboardNotificaion];
     
 }
 
+- (void)keyboardHide:(NSNotification *)notification{
+    scrollView.frame = self.view.frame;
+}
+
+- (void)keyboardShow:(NSNotification *)notification{
+    //读取键盘高度
+    CGFloat height = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
+
+    CGRect frame = self.view.frame;
+    frame.size.height -= height;
+    scrollView.frame = frame;
+}
+
+
 -(void)createTExtField{
-
-
 
     scrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
     scrollView.alwaysBounceVertical = YES;
     scrollView.backgroundColor = RGB_color(240, 240, 240, 1);
     [self.view addSubview:scrollView];
 
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 160)];
-    imageView.image = [UIImage imageNamed:@"defaultImage_icon"];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 20, WIDTH, 80)];
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    imageView.image = [UIImage imageNamed:@"auto_logo"];
     [scrollView addSubview:imageView];
 
     
-    userNameTextField = [LHController createTextFieldWithFrame:CGRectMake(10, 160, WIDTH-20, 45) Placeholder:@"用户名" Font:15  Delegate:self];
+    userNameTextField = [LHController createTextFieldWithFrame:CGRectMake(10, imageView.frame.size.height+imageView.frame.origin.y+20, WIDTH-20, 45) Placeholder:@"用户名" Font:17  Delegate:self];
     userNameTextField.autocapitalizationType = NO;
     userNameTextField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
     userNameTextField.backgroundColor = [UIColor whiteColor];
@@ -59,7 +72,7 @@
     userNameTextField.layer.borderColor = RGB_color(221, 221, 221, 1).CGColor;
     [scrollView addSubview:userNameTextField];
     
-    passwordTextField = [LHController createTextFieldWithFrame:CGRectMake(10, userNameTextField.frame.origin.y+userNameTextField.frame.size.height-1, WIDTH-20, 45) Placeholder:@"密码" Font:15  Delegate:self];
+    passwordTextField = [LHController createTextFieldWithFrame:CGRectMake(10, userNameTextField.frame.origin.y+userNameTextField.frame.size.height-1, WIDTH-20, 45) Placeholder:@"密码" Font:17  Delegate:self];
     passwordTextField.autocapitalizationType = YES;
     passwordTextField.secureTextEntry = YES;
     passwordTextField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
@@ -68,7 +81,7 @@
     passwordTextField.layer.borderColor = RGB_color(221, 221, 221, 1).CGColor;
     [scrollView addSubview:passwordTextField];
     
-    certainPassword = [LHController createTextFieldWithFrame:CGRectMake(10, passwordTextField.frame.origin.y+passwordTextField.frame.size.height-1, WIDTH-20, 45) Placeholder:@"确认密码" Font:15  Delegate:self];
+    certainPassword = [LHController createTextFieldWithFrame:CGRectMake(10, passwordTextField.frame.origin.y+passwordTextField.frame.size.height-1, WIDTH-20, 45) Placeholder:@"确认密码" Font:17  Delegate:self];
     certainPassword.autocapitalizationType = YES;
     certainPassword.secureTextEntry = YES;
     certainPassword.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
@@ -77,7 +90,7 @@
     certainPassword.layer.borderColor = RGB_color(221, 221, 221, 1).CGColor;
     [scrollView addSubview:certainPassword];
     
-    addressTextFeild = [LHController createTextFieldWithFrame:CGRectMake(10, certainPassword.frame.origin.y+certainPassword.frame.size.height-1, WIDTH-20, 45) Placeholder:@"电子邮箱" Font:15  Delegate:self];
+    addressTextFeild = [LHController createTextFieldWithFrame:CGRectMake(10, certainPassword.frame.origin.y+certainPassword.frame.size.height-1, WIDTH-20, 45) Placeholder:@"电子邮箱" Font:17  Delegate:self];
     addressTextFeild.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
     addressTextFeild.backgroundColor = [UIColor whiteColor];
     addressTextFeild.layer.borderWidth = 1;
@@ -216,7 +229,7 @@
         UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(10, 40, WIDTH-20, serverView.frame.size.height-100)];
         webView.delegate = self;
         
-        NSURL *url = [NSURL URLWithString:xieyi];
+        NSURL *url = [NSURL URLWithString:[URLFile urlStringRegistrationAgreement]];
         [ webView setScalesPageToFit:YES];
         webView.pageLength = 10;
         

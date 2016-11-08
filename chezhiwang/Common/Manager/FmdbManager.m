@@ -19,6 +19,8 @@
     if (!manager) {
         manager = [[FmdbManager alloc] init];
     }
+    [manager createTableCollect];
+    [manager createTableReadHistory];
     return manager;
 }
 
@@ -29,9 +31,6 @@
        NSString *Path = [NSHomeDirectory() stringByAppendingString:@"/Documents/user.db"];
         _dataBase = [[FMDatabase alloc] initWithPath:Path];
        // NSLog(@"%@",Path);
-
-        [self createTableCollect];
-        [self createTableReadHistory];
     }
     return self;
 }

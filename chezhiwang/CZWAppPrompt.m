@@ -75,14 +75,35 @@ NSString *LINE_VERSION_URL = @"https://itunes.apple.com/cn/lookup?id=APP_ID";
 
     __weak __typeof(self)weakSelf = self;
     NSString *url = [LINE_VERSION_URL stringByReplacingOccurrencesOfString:@"APP_ID" withString:self.appId];
-  // url = @"http://m.12365auto.com/version/12365auto.xml";
 
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable connectionError) {
-        id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+    [HttpRequest GET:url success:^(id responseObject) {
+        NSArray *array = responseObject[@"results"];
+        if(array.count == 0)return ;
+        NSDictionary *dict = array[0];
+        NSString *versionAppStore = dict[@"version"];
+
+        if ([versionAppStore compare:auto_system_version] == NSOrderedDescending) {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@版本更新",dict[@"version"]]
+                                                                message:dict[@"releaseNotes"]
+                                                               delegate:weakSelf
+                                                      cancelButtonTitle:@"下次再说"
+                                                      otherButtonTitles:@"现在就去", nil];
+            alertView.tag = 100;
+            [alertView show];
+        }
+        
+    } failure:^(NSError *error) {
+        
+    }];
 
 
-        //创建sax解析的工具类对象
+//
+//    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+//    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable connectionError) {
+//        id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+//
+//
+//        //创建sax解析的工具类对象
  //       NSXMLParser *saxParser = [[NSXMLParser alloc] initWithData:data];
         //指定代理
 //        saxParser.delegate = self;
@@ -95,23 +116,9 @@ NSString *LINE_VERSION_URL = @"https://itunes.apple.com/cn/lookup?id=APP_ID";
 //            NSLog(@"解析失败");
 //        }
 //        NSLog(@"我是在解析结束下面");
-
-
-        NSArray *array = jsonObject[@"results"];
-        if(array.count == 0)return ;
-        NSDictionary *dict = array[0];
-        NSString *versionAppStore = dict[@"version"];
-       
-        if ([versionAppStore compare:auto_system_version] == NSOrderedDescending) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@版本更新",dict[@"version"]]
-                                                                message:dict[@"releaseNotes"]
-                                                               delegate:weakSelf
-                                                      cancelButtonTitle:@"下次再说"
-                                                      otherButtonTitles:@"现在就去", nil];
-            alertView.tag = 100;
-            [alertView show];
-        }
-    }];
+//
+//
+//           }];
 }
 
 
