@@ -28,7 +28,7 @@
         [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapClick:)]];
 
         self.imageView = [[UIImageView alloc] init];
-        self.imageView.layer.cornerRadius = 40;
+        self.imageView.layer.cornerRadius = 45;
         self.imageView.layer.masksToBounds = YES;
         self.imageView.layer.borderWidth = 2;
         self.imageView.layer.borderColor = [UIColor whiteColor].CGColor;
@@ -44,7 +44,7 @@
         [self.imageView makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(0);
             make.top.equalTo(60);
-            make.size.equalTo(CGSizeMake(80, 80));
+            make.size.equalTo(CGSizeMake(90, 90));
         }];
         [self.nameButton makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(0);

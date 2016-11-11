@@ -10,7 +10,7 @@
 #import "MyComplainCell.h"
 #import "MyComplainModel.h"
 #import "MyComplainShowCell.h"
-#import "ComplainView.h"
+#import "ComplainViewController.h"
 #import "MyComplainHeaderView.h"
 
 @interface MyComplainViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -157,12 +157,8 @@
 }
 //投诉
 -(void)rightItemClick{
-    ComplainView *cp =[[ComplainView alloc] init];
-    [cp notifacation:^{
-        _count = 1;
-        [self loadData];
-    }];
-    [self.navigationController pushViewController:cp animated:YES];
+    ComplainViewController *complain =[[ComplainViewController alloc] init];
+    [self.navigationController pushViewController:complain animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -10,7 +10,7 @@
 #import "MyComplainShowCell.h"
 #import "MyComplainViewController.h"
 #import "MyComplainDetailsViewController.h"
-#import "ComplainView.h"
+#import "ComplainViewController.h"
 
 #pragma mark - buttonView
 
@@ -94,13 +94,13 @@
 //            }];
             [strongSelf.parentController.navigationController pushViewController:cp animated:YES];
         }else{
-            ComplainView *cp2 = [[ComplainView alloc] init];
-            cp2.siChange = YES;
-            cp2.Cpid = strongSelf.model.Cpid;
+            ComplainViewController *complain = [[ComplainViewController alloc] init];
+            complain.siChange = YES;
+            complain.Cpid = strongSelf.model.Cpid;
             if ([title isEqualToString:@"再次投诉"]) {
-                cp2.again = YES;
+                complain.again = YES;
             }
-            [strongSelf.parentController.navigationController pushViewController:cp2 animated:YES];
+            [strongSelf.parentController.navigationController pushViewController:complain animated:YES];
         }
     };
 

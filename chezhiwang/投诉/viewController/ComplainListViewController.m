@@ -10,7 +10,7 @@
 #import "HomepageComplainCell.h"
 #import "ComplainDetailsViewController.h"
 #import "ComplainSearchViewController.h"
-#import "ComplainView.h"
+#import "ComplainViewController.h"
 #import "LoginViewController.h"
 
 
@@ -87,8 +87,9 @@
 }
 
 -(void)rightItemClick{
+    
     if ([CZWManager manager].isLogin) {
-        ComplainView *complain = [[ComplainView alloc] init];
+        ComplainViewController *complain = [[ComplainViewController alloc] init];
         complain.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:complain animated:YES];
     }else{

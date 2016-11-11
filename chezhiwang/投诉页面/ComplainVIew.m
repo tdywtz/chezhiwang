@@ -864,7 +864,7 @@
     [superDict setObject:dateBuy.text forKey:@"Buyautotime"];
     [superDict setObject:dateBreakdown.text forKey:@"Questiontime"];
     
-    [superDict setObject:hideBusinessName .text forKey:@"Buyname"];
+    [superDict setObject:hideBusinessName.text forKey:@"Buyname"];
     [superDict setObject:businessName.text forKey:@"Disname"];
     [superDict setObject:mileage.text forKey:@"mileage"];
     [superDict setObject:businessId forKey:@"Disid"];

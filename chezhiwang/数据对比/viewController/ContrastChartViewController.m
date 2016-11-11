@@ -199,7 +199,7 @@
             }else if (i == 2){
                 itemModel.attribute = [weakSelf attributeLeft:responseObject[@"HFL"] right:@"%" star:NO];
             }else if ( i == 3){
-                itemModel.attribute = [weakSelf attributeLeft:responseObject[@"AVG"] right:@"星" star:YES];
+                itemModel.attribute = [weakSelf attributeLeft:responseObject[@"AVG"] right:@"星" star:NO];
             }else if (i == 4){
                 itemModel.attribute = [weakSelf attribute:responseObject[@"dxgz"]];
             }

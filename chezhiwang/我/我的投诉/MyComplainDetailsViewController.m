@@ -7,7 +7,7 @@
 //
 
 #import "MyComplainDetailsViewController.h"
-#import "ComplainView.h"
+#import "ComplainViewController.h"
 #import "RevokeComplainViewController.h"
 
 #define L 10
@@ -265,12 +265,13 @@
 #pragma mark - 点击修改/再次投诉按钮
 -(void)changeClick:(UIButton *)btn{
  
-    ComplainView *cp2 =[[ComplainView alloc] init];
-    cp2.dictionary = _dict;
+    ComplainViewController *complain =[[ComplainViewController alloc] init];
+    complain.Cpid = self.model.Cpid;
     if ([btn.titleLabel.text isEqualToString:@"再次投诉"]) {
-        cp2.siChange = NO;
-        cp2.again = YES;
-        [self.navigationController pushViewController:cp2 animated:YES];
+        complain.siChange = NO;
+        complain.again = YES;
+
+        [self.navigationController pushViewController:complain animated:YES];
     }else if([btn.titleLabel.text isEqualToString:@"申请撤诉"]){
     
        // [self createWriteView];
@@ -297,8 +298,8 @@
         }];
     }
     else{
-        cp2.siChange = YES;
-        [self.navigationController pushViewController:cp2 animated:YES];
+        complain.siChange = YES;
+        [self.navigationController pushViewController:complain animated:YES];
     }
 }
 

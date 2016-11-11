@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface BasicObject : NSObject
+
+@property (nonatomic,assign) CGFloat cellHeight;
+
 /**
  *  数据字典转换数据模型
  */
