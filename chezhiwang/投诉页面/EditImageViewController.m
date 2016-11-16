@@ -23,6 +23,7 @@
     [super viewDidLoad];
    
     self.view.backgroundColor  = [UIColor whiteColor];
+    [self.view addSubview:[UIView new]];
 
     [self createRightItem];
     [self createCollcetionView];
@@ -68,7 +69,7 @@
     
     [layout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     
-    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT-15) collectionViewLayout:layout];
+    _collectionView = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:layout];
     _collectionView.delegate = self;
     _collectionView.dataSource = self;
     _collectionView.pagingEnabled = YES;
@@ -104,7 +105,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    return CGSizeMake(WIDTH, HEIGHT-64);
+    return collectionView.frame.size;
 }
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
     

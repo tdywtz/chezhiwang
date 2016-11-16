@@ -24,6 +24,7 @@
     if (self) {
         self.assetArray = [[NSMutableArray alloc] init];
     }
+
     return self;
 }
 

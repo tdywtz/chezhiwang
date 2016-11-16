@@ -47,7 +47,7 @@
       }
 
       for (NSDictionary *dict in responseObject) {
-          MyComplainModel *model = [[MyComplainModel alloc] initWithDictionary:dict];
+          MyComplainModel *model = [MyComplainModel mj_objectWithKeyValues:dict];
        
           [_dataArray addObject:model];
       }
@@ -223,7 +223,7 @@
     
     if (index == NSNotFound) {
         openModel = model;
-        myModel = [[MyComplainModel alloc] initWithDictionary:[model getDcitonary]];
+        myModel = [MyComplainModel mj_objectWithKeyValues:model.mj_keyValues];
         [_dataArray insertObject:myModel atIndex:indexPath.row+1];
     }else{
 
@@ -236,7 +236,7 @@
             
             openModel = model;
             
-            MyComplainModel *obj = [[MyComplainModel alloc] initWithDictionary:[model getDcitonary]];
+            MyComplainModel *obj = [MyComplainModel mj_objectWithKeyValues:model.mj_keyValues];
             [_dataArray insertObject:obj atIndex:indexPath.row+1];
             [_dataArray removeObject:myModel];
             

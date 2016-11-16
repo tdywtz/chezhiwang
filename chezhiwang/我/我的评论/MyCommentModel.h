@@ -6,9 +6,9 @@
 //  Copyright (c) 2015年 车质网. All rights reserved.
 //
 
-#import "BasicObject.h"
+#import <Foundation/Foundation.h>
 
-@interface MyCommentModel : BasicObject
+@interface MyCommentModel : NSObject
 
 @property (nonatomic,copy) NSString *content;
 @property (nonatomic,copy) NSString *issuedate;//提问时间

@@ -18,7 +18,7 @@
         _placeholder = placeholder;
         _value = value;
         _name = name;
-        _style = ComplainCellStyleNomal;
+        _style = style;
     }
     return self;
 }
@@ -189,15 +189,10 @@
                        [[ComplainModel alloc] initWithKey:@"AutoSign" placeholder:@"请输入你的车牌号" text:@"" name:@"车牌号" style:ComplainCellStyleNomal],
                        [[ComplainModel alloc] initWithKey:@"Buyautotime" placeholder:@"选择购车日期" text:@"" name:@"购车日期" style:ComplainCellStyleBeginDate],
                        [[ComplainModel alloc] initWithKey:@"Questiontime" placeholder:@"选择出现问题日期" text:@"" name:@"出现问题日期" style:ComplainCellStyleEndDate],
-                       [[ComplainModel alloc] initWithKey:@"mileage" placeholder:@"输入行驶里程" text:@"" name:@"已行驶里程" style:ComplainCellStyleNomal],
+                       [[ComplainModel alloc] initWithKey:@"mileage" placeholder:@"输入行驶里程" text:@"" name:@"已行驶里程(km)" style:ComplainCellStyleNomal],
                        [[ComplainBusinessModel alloc] init],
                        [[ComplainImageModel alloc] init]
                        ];
-    ComplainModel *model = array[4];
-    model.style = ComplainCellStyleBeginDate;
-
-    model = array[5];
-    model.style = ComplainCellStyleEndDate;
     
     return array;
 

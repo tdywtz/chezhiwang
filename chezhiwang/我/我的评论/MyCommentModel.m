@@ -9,21 +9,9 @@
 #import "MyCommentModel.h"
 
 @implementation MyCommentModel
-/**
- *  数据字典转换数据模型
- */
--(instancetype)initWithDictionary:(NSDictionary *)dictionary{
-    if (self = [super init]) {
-        NSArray *keys = [self getPropertyArray];
-        for (NSString *key in keys) {
-            
-            if(dictionary[key]) [self setValue:dictionary[key] forKey:key];
-        }
-        if (dictionary[@"id"]) {
-             _ID = dictionary[@"id"];
-        }
-    }
-    return self;
+
++ (NSDictionary *)mj_replacedKeyFromPropertyName{
+    return @{@"ID":@"id"};
 }
 
 @end

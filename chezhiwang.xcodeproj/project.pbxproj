@@ -25,14 +25,11 @@
 		4D17D8B81D29ED79002E2B94 /* ApplyModeratorsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D17D8A71D29ED79002E2B94 /* ApplyModeratorsViewController.m */; };
 		4D17D8B91D29ED79002E2B94 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D17D8A91D29ED79002E2B94 /* EditViewController.m */; };
 		4D17D8BA1D29ED79002E2B94 /* ForumClassifyListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D17D8AB1D29ED79002E2B94 /* ForumClassifyListViewController.m */; };
-		4D17D8BB1D29ED79002E2B94 /* ForumClassifyTwoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D17D8AD1D29ED79002E2B94 /* ForumClassifyTwoController.m */; };
-		4D17D8BC1D29ED79002E2B94 /* ForumClassifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D17D8AF1D29ED79002E2B94 /* ForumClassifyViewController.m */; };
 		4D17D8BD1D29ED79002E2B94 /* ForumListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D17D8B11D29ED79002E2B94 /* ForumListViewController.m */; };
 		4D17D8BE1D29ED79002E2B94 /* PostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D17D8B31D29ED79002E2B94 /* PostViewController.m */; };
 		4D17D8BF1D29ED79002E2B94 /* ReplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D17D8B51D29ED79002E2B94 /* ReplyViewController.m */; };
 		4D17D8C01D29ED79002E2B94 /* WritePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D17D8B71D29ED79002E2B94 /* WritePostViewController.m */; };
 		4D17D8C71D29ED82002E2B94 /* EditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D17D8C21D29ED82002E2B94 /* EditCell.m */; };
-		4D17D8C81D29ED82002E2B94 /* ForumListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D17D8C41D29ED82002E2B94 /* ForumListCell.m */; };
 		4D17D8C91D29ED82002E2B94 /* WritePostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D17D8C61D29ED82002E2B94 /* WritePostCell.m */; };
 		4D1B4BB31D7409C500476F5D /* AdvertisementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D1B4BB21D7409C500476F5D /* AdvertisementViewController.m */; };
 		4D2578DE1DD404AB007FC971 /* ComplainImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2578DD1DD404AB007FC971 /* ComplainImageCell.m */; };
@@ -60,6 +57,9 @@
 		4D3A1ED61DACBA8A00A9144B /* CommentListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D3A1ED51DACBA8A00A9144B /* CommentListModel.m */; };
 		4D3A1ED91DACD9C700A9144B /* CommentListInitialCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D3A1ED81DACD9C700A9144B /* CommentListInitialCell.m */; };
 		4D50795A1C45E38200656CA8 /* CustomCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5079591C45E38200656CA8 /* CustomCommentView.m */; };
+		4D5204671DD99276001587DB /* ForumHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5204661DD99276001587DB /* ForumHeaderView.m */; };
+		4D52046A1DD99B0E001587DB /* ForumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5204691DD99B0E001587DB /* ForumViewController.m */; };
+		4D5204701DD99EC2001587DB /* ForumCatalogueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D52046F1DD99EC2001587DB /* ForumCatalogueViewController.m */; };
 		4D555FC01D1146720091ED2E /* CZWLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D555FBF1D1146720091ED2E /* CZWLabel.m */; };
 		4D6CD69B1D9E62420038D5E5 /* MyComplainHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D6CD69A1D9E62420038D5E5 /* MyComplainHeaderView.m */; };
 		4D753CE91BF56ADA00D3232D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D753CE81BF56ADA00D3232D /* LoginViewController.m */; };
@@ -223,6 +223,9 @@
 		4D9E73601BD080F50003AA48 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D9E735F1BD080F50003AA48 /* libsqlite3.tbd */; };
 		4D9E73621BD081000003AA48 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D9E73611BD081000003AA48 /* libiconv.tbd */; };
 		4D9E73661BD081140003AA48 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D9E73651BD081140003AA48 /* libz.tbd */; };
+		4DC0B1CE1DDACCC2006E7BBD /* ForumCatalogueSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC0B1CD1DDACCC2006E7BBD /* ForumCatalogueSectionModel.m */; };
+		4DC0B1D11DDAD506006E7BBD /* ForumCatalogueSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC0B1D01DDAD506006E7BBD /* ForumCatalogueSliderView.m */; };
+		4DC0B1D41DDAE11E006E7BBD /* ForumCatalogueHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC0B1D31DDAE11E006E7BBD /* ForumCatalogueHeaderView.m */; };
 		4DC2BF6A1DD57E810006E8D5 /* ChooseSexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC2BF691DD57E810006E8D5 /* ChooseSexViewController.m */; };
 		4DC2BF6D1DD5872A0006E8D5 /* ChooseDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC2BF6C1DD5872A0006E8D5 /* ChooseDateViewController.m */; };
 		4DC4070B1BB10638004079A8 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC4070A1BB10638004079A8 /* SettingViewController.m */; };
@@ -280,6 +283,10 @@
 		4DD9DCB11D6FDBA100BA8C1F /* OnTheLeftView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DD9DCB01D6FDBA100BA8C1F /* OnTheLeftView.m */; };
 		4DD9DCB41D6FDD7A00BA8C1F /* TopCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DD9DCB31D6FDD7A00BA8C1F /* TopCollectionViewCell.m */; };
 		4DD9DCB71D6FDE2300BA8C1F /* TopCollectionViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DD9DCB61D6FDE2300BA8C1F /* TopCollectionViewModel.m */; };
+		4DDD16E41DDBF3920084AA3F /* ForumCatalogueCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD16E31DDBF3920084AA3F /* ForumCatalogueCell.m */; };
+		4DDD16E71DDC27310084AA3F /* ForumListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD16E61DDC27310084AA3F /* ForumListCell.m */; };
+		4DDD16EC1DDC28050084AA3F /* ForumClassifyTwoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD16E91DDC28050084AA3F /* ForumClassifyTwoController.m */; };
+		4DDD16ED1DDC28050084AA3F /* ForumClassifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD16EB1DDC28050084AA3F /* ForumClassifyViewController.m */; };
 		4DDD33471D1A623800F52C0C /* UIFont+LH.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD33461D1A623800F52C0C /* UIFont+LH.m */; };
 		4DDD46021D2F88C3000BEC9C /* LHPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD46011D2F88C3000BEC9C /* LHPageView.m */; };
 		4DDD46051D2F8D79000BEC9C /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD46041D2F8D79000BEC9C /* SearchViewController.m */; };
@@ -303,13 +310,14 @@
 		4DEAE3501DC98F3300D43D7B /* ChartDateChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DEAE34F1DC98F3300D43D7B /* ChartDateChooseView.m */; };
 		4DEAE3531DC9A89E00D43D7B /* UIView+LH.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DEAE3521DC9A89E00D43D7B /* UIView+LH.m */; };
 		4DEE9EB91DA88DDF00E0ABAC /* NewsTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DEE9EB81DA88DDF00E0ABAC /* NewsTableHeaderView.m */; };
+		4DEF32E31DD9764A0043A411 /* TransitionSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEF32E01DD9764A0043A411 /* TransitionSegmentView.swift */; };
+		4DEF32E41DD9764A0043A411 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEF32E11DD9764A0043A411 /* UIView+Extension.swift */; };
 		4DF012A21DC18AD800556132 /* LHNewsChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF012A11DC18AD800556132 /* LHNewsChooseView.m */; };
 		4DF0EA631DBDA4FF00EFAE58 /* CZWManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF0EA601DBDA4FF00EFAE58 /* CZWManager.m */; };
 		4DF0EA641DBDA4FF00EFAE58 /* FmdbManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF0EA621DBDA4FF00EFAE58 /* FmdbManager.m */; };
 		4DF0EA6A1DBDA58500EFAE58 /* HttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF0EA671DBDA58500EFAE58 /* HttpRequest.m */; };
 		4DF0EA6B1DBDA58500EFAE58 /* URLFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF0EA691DBDA58500EFAE58 /* URLFile.m */; };
 		4DF0EA771DBDA5AD00EFAE58 /* BasicNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF0EA6E1DBDA5AD00EFAE58 /* BasicNavigationController.m */; };
-		4DF0EA781DBDA5AD00EFAE58 /* BasicObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF0EA701DBDA5AD00EFAE58 /* BasicObject.m */; };
 		4DF0EA791DBDA5AD00EFAE58 /* BasicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF0EA721DBDA5AD00EFAE58 /* BasicTableViewCell.m */; };
 		4DF0EA7A1DBDA5AD00EFAE58 /* BasicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF0EA741DBDA5AD00EFAE58 /* BasicViewController.m */; };
 		4DF0EA7B1DBDA5AD00EFAE58 /* TransitionAnima.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF0EA761DBDA5AD00EFAE58 /* TransitionAnima.m */; };
@@ -409,10 +417,6 @@
 		4D17D8A91D29ED79002E2B94 /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
 		4D17D8AA1D29ED79002E2B94 /* ForumClassifyListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumClassifyListViewController.h; sourceTree = "<group>"; };
 		4D17D8AB1D29ED79002E2B94 /* ForumClassifyListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumClassifyListViewController.m; sourceTree = "<group>"; };
-		4D17D8AC1D29ED79002E2B94 /* ForumClassifyTwoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumClassifyTwoController.h; sourceTree = "<group>"; };
-		4D17D8AD1D29ED79002E2B94 /* ForumClassifyTwoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumClassifyTwoController.m; sourceTree = "<group>"; };
-		4D17D8AE1D29ED79002E2B94 /* ForumClassifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumClassifyViewController.h; sourceTree = "<group>"; };
-		4D17D8AF1D29ED79002E2B94 /* ForumClassifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumClassifyViewController.m; sourceTree = "<group>"; };
 		4D17D8B01D29ED79002E2B94 /* ForumListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumListViewController.h; sourceTree = "<group>"; };
 		4D17D8B11D29ED79002E2B94 /* ForumListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumListViewController.m; sourceTree = "<group>"; };
 		4D17D8B21D29ED79002E2B94 /* PostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostViewController.h; sourceTree = "<group>"; };
@@ -423,8 +427,6 @@
 		4D17D8B71D29ED79002E2B94 /* WritePostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WritePostViewController.m; sourceTree = "<group>"; };
 		4D17D8C11D29ED82002E2B94 /* EditCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditCell.h; sourceTree = "<group>"; };
 		4D17D8C21D29ED82002E2B94 /* EditCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditCell.m; sourceTree = "<group>"; };
-		4D17D8C31D29ED82002E2B94 /* ForumListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumListCell.h; sourceTree = "<group>"; };
-		4D17D8C41D29ED82002E2B94 /* ForumListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumListCell.m; sourceTree = "<group>"; };
 		4D17D8C51D29ED82002E2B94 /* WritePostCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WritePostCell.h; sourceTree = "<group>"; };
 		4D17D8C61D29ED82002E2B94 /* WritePostCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WritePostCell.m; sourceTree = "<group>"; };
 		4D1B4BB11D7409C500476F5D /* AdvertisementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvertisementViewController.h; sourceTree = "<group>"; };
@@ -479,6 +481,12 @@
 		4D3A1ED81DACD9C700A9144B /* CommentListInitialCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentListInitialCell.m; sourceTree = "<group>"; };
 		4D5079581C45E38200656CA8 /* CustomCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCommentView.h; sourceTree = "<group>"; };
 		4D5079591C45E38200656CA8 /* CustomCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCommentView.m; sourceTree = "<group>"; };
+		4D5204651DD99276001587DB /* ForumHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumHeaderView.h; sourceTree = "<group>"; };
+		4D5204661DD99276001587DB /* ForumHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumHeaderView.m; sourceTree = "<group>"; };
+		4D5204681DD99B0E001587DB /* ForumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumViewController.h; sourceTree = "<group>"; };
+		4D5204691DD99B0E001587DB /* ForumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumViewController.m; sourceTree = "<group>"; };
+		4D52046E1DD99EC2001587DB /* ForumCatalogueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumCatalogueViewController.h; sourceTree = "<group>"; };
+		4D52046F1DD99EC2001587DB /* ForumCatalogueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumCatalogueViewController.m; sourceTree = "<group>"; };
 		4D555FBE1D1146720091ED2E /* CZWLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZWLabel.h; sourceTree = "<group>"; };
 		4D555FBF1D1146720091ED2E /* CZWLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZWLabel.m; sourceTree = "<group>"; };
 		4D6CD6991D9E62420038D5E5 /* MyComplainHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyComplainHeaderView.h; sourceTree = "<group>"; };
@@ -693,6 +701,12 @@
 		4D9E73611BD081000003AA48 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		4D9E73631BD0810C0003AA48 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		4D9E73651BD081140003AA48 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		4DC0B1CC1DDACCC2006E7BBD /* ForumCatalogueSectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumCatalogueSectionModel.h; sourceTree = "<group>"; };
+		4DC0B1CD1DDACCC2006E7BBD /* ForumCatalogueSectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumCatalogueSectionModel.m; sourceTree = "<group>"; };
+		4DC0B1CF1DDAD506006E7BBD /* ForumCatalogueSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumCatalogueSliderView.h; sourceTree = "<group>"; };
+		4DC0B1D01DDAD506006E7BBD /* ForumCatalogueSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumCatalogueSliderView.m; sourceTree = "<group>"; };
+		4DC0B1D21DDAE11E006E7BBD /* ForumCatalogueHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumCatalogueHeaderView.h; sourceTree = "<group>"; };
+		4DC0B1D31DDAE11E006E7BBD /* ForumCatalogueHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumCatalogueHeaderView.m; sourceTree = "<group>"; };
 		4DC208DE1DA9D17A00344E55 /* MyComplainDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyComplainDetailsViewController.h; sourceTree = "<group>"; };
 		4DC2BF681DD57E810006E8D5 /* ChooseSexViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSexViewController.h; sourceTree = "<group>"; };
 		4DC2BF691DD57E810006E8D5 /* ChooseSexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseSexViewController.m; sourceTree = "<group>"; };
@@ -805,6 +819,14 @@
 		4DD9DCB31D6FDD7A00BA8C1F /* TopCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopCollectionViewCell.m; sourceTree = "<group>"; };
 		4DD9DCB51D6FDE2300BA8C1F /* TopCollectionViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopCollectionViewModel.h; sourceTree = "<group>"; };
 		4DD9DCB61D6FDE2300BA8C1F /* TopCollectionViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopCollectionViewModel.m; sourceTree = "<group>"; };
+		4DDD16E21DDBF3920084AA3F /* ForumCatalogueCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumCatalogueCell.h; sourceTree = "<group>"; };
+		4DDD16E31DDBF3920084AA3F /* ForumCatalogueCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumCatalogueCell.m; sourceTree = "<group>"; };
+		4DDD16E51DDC27310084AA3F /* ForumListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumListCell.h; sourceTree = "<group>"; };
+		4DDD16E61DDC27310084AA3F /* ForumListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumListCell.m; sourceTree = "<group>"; };
+		4DDD16E81DDC28050084AA3F /* ForumClassifyTwoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumClassifyTwoController.h; sourceTree = "<group>"; };
+		4DDD16E91DDC28050084AA3F /* ForumClassifyTwoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumClassifyTwoController.m; sourceTree = "<group>"; };
+		4DDD16EA1DDC28050084AA3F /* ForumClassifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumClassifyViewController.h; sourceTree = "<group>"; };
+		4DDD16EB1DDC28050084AA3F /* ForumClassifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumClassifyViewController.m; sourceTree = "<group>"; };
 		4DDD33451D1A623800F52C0C /* UIFont+LH.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+LH.h"; sourceTree = "<group>"; };
 		4DDD33461D1A623800F52C0C /* UIFont+LH.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+LH.m"; sourceTree = "<group>"; };
 		4DDD46001D2F88C3000BEC9C /* LHPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHPageView.h; sourceTree = "<group>"; };
@@ -851,6 +873,8 @@
 		4DEAE3521DC9A89E00D43D7B /* UIView+LH.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LH.m"; sourceTree = "<group>"; };
 		4DEE9EB71DA88DDF00E0ABAC /* NewsTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsTableHeaderView.h; sourceTree = "<group>"; };
 		4DEE9EB81DA88DDF00E0ABAC /* NewsTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsTableHeaderView.m; sourceTree = "<group>"; };
+		4DEF32E01DD9764A0043A411 /* TransitionSegmentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionSegmentView.swift; sourceTree = "<group>"; };
+		4DEF32E11DD9764A0043A411 /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		4DF012A01DC18AD800556132 /* LHNewsChooseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHNewsChooseView.h; sourceTree = "<group>"; };
 		4DF012A11DC18AD800556132 /* LHNewsChooseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHNewsChooseView.m; sourceTree = "<group>"; };
 		4DF0EA5F1DBDA4FF00EFAE58 /* CZWManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZWManager.h; sourceTree = "<group>"; };
@@ -863,8 +887,6 @@
 		4DF0EA691DBDA58500EFAE58 /* URLFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLFile.m; sourceTree = "<group>"; };
 		4DF0EA6D1DBDA5AD00EFAE58 /* BasicNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicNavigationController.h; sourceTree = "<group>"; };
 		4DF0EA6E1DBDA5AD00EFAE58 /* BasicNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicNavigationController.m; sourceTree = "<group>"; };
-		4DF0EA6F1DBDA5AD00EFAE58 /* BasicObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicObject.h; sourceTree = "<group>"; };
-		4DF0EA701DBDA5AD00EFAE58 /* BasicObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicObject.m; sourceTree = "<group>"; };
 		4DF0EA711DBDA5AD00EFAE58 /* BasicTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicTableViewCell.h; sourceTree = "<group>"; };
 		4DF0EA721DBDA5AD00EFAE58 /* BasicTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicTableViewCell.m; sourceTree = "<group>"; };
 		4DF0EA731DBDA5AD00EFAE58 /* BasicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicViewController.h; sourceTree = "<group>"; };
@@ -1030,6 +1052,7 @@
 		4D0069091B9D90C800BA0CA1 /* 论坛 */ = {
 			isa = PBXGroup;
 			children = (
+				4DC0B1C81DDACC72006E7BBD /* model */,
 				4D17D8A51D29ECCC002E2B94 /* view */,
 				4D17D8A41D29ECC9002E2B94 /* viewController */,
 			);
@@ -1168,12 +1191,16 @@
 				4D17D8A91D29ED79002E2B94 /* EditViewController.m */,
 				4D17D8AA1D29ED79002E2B94 /* ForumClassifyListViewController.h */,
 				4D17D8AB1D29ED79002E2B94 /* ForumClassifyListViewController.m */,
-				4D17D8AC1D29ED79002E2B94 /* ForumClassifyTwoController.h */,
-				4D17D8AD1D29ED79002E2B94 /* ForumClassifyTwoController.m */,
-				4D17D8AE1D29ED79002E2B94 /* ForumClassifyViewController.h */,
-				4D17D8AF1D29ED79002E2B94 /* ForumClassifyViewController.m */,
+				4DDD16E81DDC28050084AA3F /* ForumClassifyTwoController.h */,
+				4DDD16E91DDC28050084AA3F /* ForumClassifyTwoController.m */,
+				4DDD16EA1DDC28050084AA3F /* ForumClassifyViewController.h */,
+				4DDD16EB1DDC28050084AA3F /* ForumClassifyViewController.m */,
 				4D17D8B01D29ED79002E2B94 /* ForumListViewController.h */,
 				4D17D8B11D29ED79002E2B94 /* ForumListViewController.m */,
+				4D52046E1DD99EC2001587DB /* ForumCatalogueViewController.h */,
+				4D52046F1DD99EC2001587DB /* ForumCatalogueViewController.m */,
+				4D5204681DD99B0E001587DB /* ForumViewController.h */,
+				4D5204691DD99B0E001587DB /* ForumViewController.m */,
 				4D17D8B21D29ED79002E2B94 /* PostViewController.h */,
 				4D17D8B31D29ED79002E2B94 /* PostViewController.m */,
 				4D17D8B41D29ED79002E2B94 /* ReplyViewController.h */,
@@ -1189,10 +1216,18 @@
 			children = (
 				4D17D8C11D29ED82002E2B94 /* EditCell.h */,
 				4D17D8C21D29ED82002E2B94 /* EditCell.m */,
-				4D17D8C31D29ED82002E2B94 /* ForumListCell.h */,
-				4D17D8C41D29ED82002E2B94 /* ForumListCell.m */,
+				4DDD16E51DDC27310084AA3F /* ForumListCell.h */,
+				4DDD16E61DDC27310084AA3F /* ForumListCell.m */,
 				4D17D8C51D29ED82002E2B94 /* WritePostCell.h */,
 				4D17D8C61D29ED82002E2B94 /* WritePostCell.m */,
+				4DDD16E21DDBF3920084AA3F /* ForumCatalogueCell.h */,
+				4DDD16E31DDBF3920084AA3F /* ForumCatalogueCell.m */,
+				4D5204651DD99276001587DB /* ForumHeaderView.h */,
+				4D5204661DD99276001587DB /* ForumHeaderView.m */,
+				4DC0B1CF1DDAD506006E7BBD /* ForumCatalogueSliderView.h */,
+				4DC0B1D01DDAD506006E7BBD /* ForumCatalogueSliderView.m */,
+				4DC0B1D21DDAE11E006E7BBD /* ForumCatalogueHeaderView.h */,
+				4DC0B1D31DDAE11E006E7BBD /* ForumCatalogueHeaderView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1755,6 +1790,15 @@
 			path = "车型图片展示";
 			sourceTree = "<group>";
 		};
+		4DC0B1C81DDACC72006E7BBD /* model */ = {
+			isa = PBXGroup;
+			children = (
+				4DC0B1CC1DDACCC2006E7BBD /* ForumCatalogueSectionModel.h */,
+				4DC0B1CD1DDACCC2006E7BBD /* ForumCatalogueSectionModel.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
 		4DC4070F1BB11E64004079A8 /* 投诉页面 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1874,6 +1918,7 @@
 		4DCDDE6D1D9E3AA900AE4446 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				4DEF32DE1DD9764A0043A411 /* TransitionSegmentView */,
 				4DF0EA7C1DBE0E9400EFAE58 /* TwitterCover */,
 				4DF0EA6C1DBDA5AD00EFAE58 /* basic */,
 				4DF0EA651DBDA58500EFAE58 /* NetWorking */,
@@ -2090,6 +2135,15 @@
 			path = model;
 			sourceTree = "<group>";
 		};
+		4DEF32DE1DD9764A0043A411 /* TransitionSegmentView */ = {
+			isa = PBXGroup;
+			children = (
+				4DEF32E01DD9764A0043A411 /* TransitionSegmentView.swift */,
+				4DEF32E11DD9764A0043A411 /* UIView+Extension.swift */,
+			);
+			path = TransitionSegmentView;
+			sourceTree = "<group>";
+		};
 		4DF0EA5E1DBDA4FF00EFAE58 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -2117,8 +2171,6 @@
 			children = (
 				4DF0EA6D1DBDA5AD00EFAE58 /* BasicNavigationController.h */,
 				4DF0EA6E1DBDA5AD00EFAE58 /* BasicNavigationController.m */,
-				4DF0EA6F1DBDA5AD00EFAE58 /* BasicObject.h */,
-				4DF0EA701DBDA5AD00EFAE58 /* BasicObject.m */,
 				4DF0EA711DBDA5AD00EFAE58 /* BasicTableViewCell.h */,
 				4DF0EA721DBDA5AD00EFAE58 /* BasicTableViewCell.m */,
 				4DF0EA731DBDA5AD00EFAE58 /* BasicViewController.h */,
@@ -2419,10 +2471,12 @@
 					4D7E72371B9D5CD10048F221 = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = MFH5RT668M;
+						LastSwiftMigration = 0810;
 						ProvisioningStyle = Manual;
 					};
 					4D7E72501B9D5CD10048F221 = {
 						CreatedOnToolsVersion = 6.4;
+						LastSwiftMigration = 0810;
 						ProvisioningStyle = Manual;
 						TestTargetID = 4D7E72371B9D5CD10048F221;
 					};
@@ -2654,16 +2708,19 @@
 				4D87CE581C0324BD00466A97 /* EditImageCell.m in Sources */,
 				4DF0EA791DBDA5AD00EFAE58 /* BasicTableViewCell.m in Sources */,
 				4DD3357D1D64536B0037F2D2 /* ChartChooseListViewController.m in Sources */,
+				4DDD16E71DDC27310084AA3F /* ForumListCell.m in Sources */,
 				4DF75F2A1D9CE4E000FB882E /* HomepageComplainModel.m in Sources */,
 				4DD30C801D20C0F4009C3B05 /* NewsTestTableView.m in Sources */,
 				4D97FC7A1BAF94A40089C684 /* AreaViewController.m in Sources */,
 				4DF75F211D9CE46100FB882E /* HomepageTableViewController.m in Sources */,
+				4DC0B1D11DDAD506006E7BBD /* ForumCatalogueSliderView.m in Sources */,
 				4D87CE611C0324E000466A97 /* LHDatePickView.m in Sources */,
 				4D967DCF1DD2F3CF00C1B255 /* ComplainSectionHeaderView.m in Sources */,
 				4DFFA5081DB77308003B6178 /* StarView.m in Sources */,
 				4D87CE621C0324E000466A97 /* LHPickerView.m in Sources */,
 				4DCB17541D5C5CFD005C2E76 /* CehicleChooseViewController.m in Sources */,
 				4DF0EA631DBDA4FF00EFAE58 /* CZWManager.m in Sources */,
+				4D52046A1DD99B0E001587DB /* ForumViewController.m in Sources */,
 				4D9A3F571B9E7255008805E4 /* FMDatabase.m in Sources */,
 				4DE8257A1D6D73FD00823E10 /* ChartItemModel.m in Sources */,
 				4DE825661D6D48F800823E10 /* ChartTableView.m in Sources */,
@@ -2679,12 +2736,14 @@
 				4D2DE5431CDB2AAA001B7B86 /* RevokeComplainViewController.m in Sources */,
 				4DC2BF6D1DD5872A0006E8D5 /* ChooseDateViewController.m in Sources */,
 				4DDD46051D2F8D79000BEC9C /* SearchViewController.m in Sources */,
+				4DEF32E31DD9764A0043A411 /* TransitionSegmentView.swift in Sources */,
 				4D3A1EC81DAC8EB400A9144B /* CZWShareViewController.m in Sources */,
 				4D7E72411B9D5CD10048F221 /* AppDelegate.m in Sources */,
 				4DCB17661D5C67C0005C2E76 /* VehicleSeriesModel.m in Sources */,
 				4D952C451BF0876D000F26C0 /* LHEmojiView.m in Sources */,
 				4D967DBD1DD2E12C00C1B255 /* ComplainViewController.m in Sources */,
 				4D3A1ED31DACBA4B00A9144B /* CommentListViewController.m in Sources */,
+				4D5204701DD99EC2001587DB /* ForumCatalogueViewController.m in Sources */,
 				4DF75F451D9CE67A00FB882E /* HomepageForumCell.m in Sources */,
 				4DDDBCAE1D24BAF800FC6081 /* ComplainSearchViewController.m in Sources */,
 				4D11BEB81D54781400482F8F /* NewsTestTableViewModel.m in Sources */,
@@ -2698,7 +2757,7 @@
 				4DC407271BB12D40004079A8 /* LHAssetViewCell.m in Sources */,
 				4D3A1ED61DACBA8A00A9144B /* CommentListModel.m in Sources */,
 				4D97FC9F1BAF94E50089C684 /* MyComplainDetailsViewController.m in Sources */,
-				4DF0EA781DBDA5AD00EFAE58 /* BasicObject.m in Sources */,
+				4DDD16E41DDBF3920084AA3F /* ForumCatalogueCell.m in Sources */,
 				4DF75F421D9CE65E00FB882E /* HomepageAnswerCell.m in Sources */,
 				4D8DD0B31B9EB54C00619923 /* LHController.m in Sources */,
 				4D97FC8A1BAF94C40089C684 /* MyAskModel.m in Sources */,
@@ -2747,12 +2806,14 @@
 				4D17D8BD1D29ED79002E2B94 /* ForumListViewController.m in Sources */,
 				4DF75F4B1D9CEF3000FB882E /* HomepageSectionFooterView.m in Sources */,
 				4D97FC811BAF94B70089C684 /* FavouriteViewController.m in Sources */,
+				4DDD16ED1DDC28050084AA3F /* ForumClassifyViewController.m in Sources */,
 				4DD335751D6453570037F2D2 /* ComplainChartFirstShowCell.m in Sources */,
 				4D97FC7B1BAF94A40089C684 /* MyCarCell.m in Sources */,
 				4D97FC941BAF94DC0089C684 /* MyCommentCell.m in Sources */,
 				4DD30C681D20C0E7009C3B05 /* LHPageViewcontroller.m in Sources */,
 				4DD30C6E1D20C0E7009C3B05 /* NewsViewController.m in Sources */,
 				4D94C2901BCCA7CD0042C22D /* AIMTableViewIndexBar.m in Sources */,
+				4D5204671DD99276001587DB /* ForumHeaderView.m in Sources */,
 				4DD30C6D1D20C0E7009C3B05 /* NewsTestViewController.m in Sources */,
 				4D2578EA1DD436B9007FC971 /* CZWShowImageView.m in Sources */,
 				4D2ABA3A1CFC17A8003F72BA /* MyAskShowCell.m in Sources */,
@@ -2764,6 +2825,7 @@
 				4D8243771CA50EA100E6C332 /* LookPasswordViewController.m in Sources */,
 				4DF75F3F1D9CE64500FB882E /* HomepageResearchCell.m in Sources */,
 				4DEE9EB91DA88DDF00E0ABAC /* NewsTableHeaderView.m in Sources */,
+				4DC0B1D41DDAE11E006E7BBD /* ForumCatalogueHeaderView.m in Sources */,
 				4DD30C691D20C0E7009C3B05 /* NewsDetailViewController.m in Sources */,
 				4D11D30C1D22356A00BBB172 /* AnswerViewController.m in Sources */,
 				4DCB17551D5C5CFD005C2E76 /* ImageShowViewController.m in Sources */,
@@ -2798,6 +2860,7 @@
 				4D8243781CA50EA200E6C332 /* EmailViewController.m in Sources */,
 				4DD9DCB71D6FDE2300BA8C1F /* TopCollectionViewModel.m in Sources */,
 				4D97FC701BAF949B0089C684 /* AboutViewController.m in Sources */,
+				4DDD16EC1DDC28050084AA3F /* ForumClassifyTwoController.m in Sources */,
 				4DFFA4F81DB72F9A003B6178 /* UMSocialUIManager.m in Sources */,
 				4D0B0E691DCB1D4100C41984 /* AdvertisementView.m in Sources */,
 				4D6CD69B1D9E62420038D5E5 /* MyComplainHeaderView.m in Sources */,
@@ -2812,7 +2875,6 @@
 				4DD335781D6453570037F2D2 /* ComplainChartView.m in Sources */,
 				4D373B5E1DB4CF4E00D31455 /* MJDIYAutoFooter.m in Sources */,
 				4DD30C6B1D20C0E7009C3B05 /* NewsListViewController.m in Sources */,
-				4D17D8BB1D29ED79002E2B94 /* ForumClassifyTwoController.m in Sources */,
 				4DF2AAB01D62DBDD006F8D30 /* LHLabel.m in Sources */,
 				4D3A1ED01DACBA4000A9144B /* CommentListCell.m in Sources */,
 				4D84E6561BF33B4800F901BF /* MyViewController.m in Sources */,
@@ -2829,6 +2891,7 @@
 				4D753CE91BF56ADA00D3232D /* LoginViewController.m in Sources */,
 				4DF75F241D9CE48A00FB882E /* HomepageSectionModel.m in Sources */,
 				4DF0EA7F1DBE0E9400EFAE58 /* UIScrollView+TwitterCover.m in Sources */,
+				4DEF32E41DD9764A0043A411 /* UIView+Extension.swift in Sources */,
 				4D11BEC81D5484F700482F8F /* NSMutableAttributedString+LH.m in Sources */,
 				4DF75F3C1D9CE61F00FB882E /* HomepageComplainCell.m in Sources */,
 				4DF0EA6A1DBDA58500EFAE58 /* HttpRequest.m in Sources */,
@@ -2838,17 +2901,16 @@
 				4D3A1EC01DAC8E3000A9144B /* WriteViewController.m in Sources */,
 				4DC407291BB12D40004079A8 /* LHPreViewCell.m in Sources */,
 				4DD335841D6453880037F2D2 /* ContrastChartViewController.m in Sources */,
+				4DC0B1CE1DDACCC2006E7BBD /* ForumCatalogueSectionModel.m in Sources */,
 				4D11D30B1D22356A00BBB172 /* AnswerSearchViewController.m in Sources */,
 				4D97FC7C1BAF94A40089C684 /* MyCarViewController.m in Sources */,
 				4DF0EA641DBDA4FF00EFAE58 /* FmdbManager.m in Sources */,
 				4DCDDE631D9E009100AE4446 /* FindCollectionViewController.m in Sources */,
-				4D17D8C81D29ED82002E2B94 /* ForumListCell.m in Sources */,
 				4D2578E11DD40D20007FC971 /* ComplainBusinessCell.m in Sources */,
 				4DE1C7F41CAA1ABE008B0A8A /* NSMutableAttributedString+CZWMutableAttributedString.m in Sources */,
 				4D9A3F591B9E7255008805E4 /* FMDatabasePool.m in Sources */,
 				4DF0EA771DBDA5AD00EFAE58 /* BasicNavigationController.m in Sources */,
 				4DD30D161D20ECD7009C3B05 /* LTInfiniteScrollView.m in Sources */,
-				4D17D8BC1D29ED79002E2B94 /* ForumClassifyViewController.m in Sources */,
 				4D97FC931BAF94DC0089C684 /* MyCommentViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2981,6 +3043,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = MFH5RT668M;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3012,8 +3075,9 @@
 				PROVISIONING_PROFILE = "0eb72660-4ec9-45a6-8b0d-577e26472081";
 				"PROVISIONING_PROFILE[sdk=*]" = "0eb72660-4ec9-45a6-8b0d-577e26472081";
 				PROVISIONING_PROFILE_SPECIFIER = CZWDevelopment;
-				SWIFT_OBJC_BRIDGING_HEADER = "chezhiwang/新闻/model/chezhiwang-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "chezhiwang/chezhiwang-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
@@ -3028,6 +3092,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Chezhi Network Information Technology Co., Ltd (MFH5RT668M)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Chezhi Network Information Technology Co., Ltd (MFH5RT668M)";
+				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = MFH5RT668M;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3058,7 +3123,8 @@
 				PROVISIONING_PROFILE = "b8ade865-eb92-4860-b50c-c83a85fa3e8e";
 				"PROVISIONING_PROFILE[sdk=*]" = "b8ade865-eb92-4860-b50c-c83a85fa3e8e";
 				PROVISIONING_PROFILE_SPECIFIER = chezhiwang;
-				SWIFT_OBJC_BRIDGING_HEADER = "chezhiwang/新闻/model/chezhiwang-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "chezhiwang/chezhiwang-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;
@@ -3066,6 +3132,7 @@
 		4D7E725F1B9D5CD10048F221 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xi Li (CU2ZGKMYY2)";
 				DEVELOPMENT_TEAM = "";
@@ -3082,6 +3149,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/chezhiwang.app/chezhiwang";
 			};
 			name = Debug;
@@ -3089,6 +3157,7 @@
 		4D7E72601B9D5CD10048F221 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = MFH5RT668M;
@@ -3101,6 +3170,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/chezhiwang.app/chezhiwang";
 			};
 			name = Release;

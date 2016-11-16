@@ -57,7 +57,8 @@
     }];
 
     [contentTextView makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(0);
+        make.left.equalTo(4);
+        make.right.equalTo(0);
         make.bottom.equalTo(-5);
         make.height.equalTo(60);
     }];
@@ -72,9 +73,9 @@
 }
 
 - (void)resetting{
-    nameLabel.lh_left = 5;
-    nameLabel.lh_top = 0;
-    nameLabel.lh_size = CGSizeMake(100, 30);
+    nameLabel.lh_left = 10;
+    nameLabel.lh_top = 10;
+    nameLabel.lh_size = CGSizeMake(100, 20);
 
      nameLabel.text = _model.name;
 
@@ -96,11 +97,6 @@
         contentTextView.text = _model.value;
         contentTextView.hidden = NO;
         describeTextField.hidden = YES;
-
-        contentTextView.lh_left = 10;
-        contentTextView.lh_top = nameLabel.lh_bottom;
-        contentTextView.lh_width = WIDTH-20;
-        contentTextView.lh_height = 50;
 
         contentTextView.placeHolder = _model.placeholder;
         contentTextView.text = _model.value;

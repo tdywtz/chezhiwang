@@ -140,6 +140,7 @@
         [proButton setTitle:textArray[0] forState:UIControlStateNormal];
          _textField.text = textArray[1];
     }
+
 }
 
 
@@ -147,7 +148,9 @@
 
 #pragma mark - cell
 @interface ComplainTableViewCell ()<UITextFieldDelegate>
-
+{
+    UIImageView *rightImageView;
+}
 @end
 
 @implementation ComplainTableViewCell
@@ -184,15 +187,25 @@
     _lineView = [[UIView alloc] init];
     _lineView.backgroundColor = RGB_color(240, 240, 240, 1);
 
+    rightImageView = [[UIImageView alloc] init];
+    rightImageView.contentMode = UIViewContentModeScaleAspectFit;
+    rightImageView.image = [UIImage imageNamed:@"top"];
+
     [self.contentView addSubview:_nameLabel];
     [self.contentView addSubview:_textField];
     [self.contentView addSubview:_lineView];
+    [self.contentView addSubview:rightImageView];
 
 
     [_lineView makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(0);
         make.bottom.equalTo(0);
         make.height.equalTo(1);
+    }];
+
+    [rightImageView makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(-10);
+        make.centerY.equalTo(0);
     }];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textChange:) name:UITextFieldTextDidChangeNotification object:nil];
@@ -206,6 +219,12 @@
     _nameLabel.text = _model.name;
     _textField.placeholder = _model.placeholder;
     _textField.text = _model.value;
+
+    if (_model.style == ComplainCellStyleSex || _model.style == ComplainCellStyleBeginDate || _model.style == ComplainCellStyleEndDate) {
+        rightImageView.hidden = NO;
+    }else{
+        rightImageView.hidden = YES;
+    }
 
     [_nameLabel sizeToFit];
     _nameLabel.lh_left = 10;

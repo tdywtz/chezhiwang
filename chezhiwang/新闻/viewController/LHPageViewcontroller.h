@@ -21,6 +21,9 @@
 -(void)scrollViewDidScrollLeft:(CGFloat)leftProgress;
 -(void)scrollViewDidScrollRight:(CGFloat)rightProgress;
 
+- (void)didScroll:(UIScrollView *)scrollView;
+- (void)DidEndDecelerating:(UIScrollView *)scrollView;
+- (void)DidEndScrollingAnimation:(UIScrollView *)scrollView;
 
 @end
 

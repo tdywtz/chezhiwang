@@ -6,10 +6,10 @@
 //  Copyright © 2016年 车质网. All rights reserved.
 //
 
-#import "BasicObject.h"
+#import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSInteger, ComplainCellStyle) {
-    ComplainCellStyleNomal,
+    ComplainCellStyleNomal = 0,
     ComplainCellStyleAge,
     ComplainCellStyleSex,
     ComplainCellStylePhone,
@@ -18,7 +18,7 @@ typedef NS_ENUM(NSInteger, ComplainCellStyle) {
     ComplainCellStyleEndDate
 };
 #pragma mark - 模型一
-@interface ComplainModel : BasicObject
+@interface ComplainModel : NSObject
 /**上传数据key*/
 @property (nonatomic,copy) NSString *key;
 /**textfiled背景文字*/
@@ -30,13 +30,14 @@ typedef NS_ENUM(NSInteger, ComplainCellStyle) {
 /**描述？详情？*/
 @property (nonatomic,assign) NSInteger desOrDetail;
 @property (nonatomic,assign) ComplainCellStyle style;
+@property (nonatomic,assign) CGFloat cellHeight;
 
 - (instancetype)initWithKey:(NSString *)key placeholder:(NSString *)placeholder text:(NSString *)value name:(NSString *)name style:(ComplainCellStyle)style;
 - (NSString *)assertString;
 @end
 
 #pragma mark - 图片
-@interface ComplainImageModel : BasicObject
+@interface ComplainImageModel : NSObject
 
 /**上传数据key*/
 @property (nonatomic,copy) NSString *key;
@@ -44,11 +45,12 @@ typedef NS_ENUM(NSInteger, ComplainCellStyle) {
 @property (nonatomic,copy) NSString *name;
 @property (nonatomic,strong) NSMutableArray *imageArray;
 @property (nonatomic,strong) NSArray *imageUrlArray;
+@property (nonatomic,assign) CGFloat cellHeight;
 
 @end
 
 #pragma mark - 经销商
-@interface ComplainBusinessModel : BasicObject
+@interface ComplainBusinessModel : NSObject
 
 /**左侧文字*/
 @property (nonatomic,copy) NSString *name;
@@ -73,12 +75,13 @@ typedef NS_ENUM(NSInteger, ComplainCellStyle) {
 @property (nonatomic,copy) NSString *seriesId;
 
 @property (nonatomic,assign) BOOL custom;//自定义
+@property (nonatomic,assign) CGFloat cellHeight;
 
 
 @end
 
 #pragma mark -选择车型模型
-@interface ComplainBrandModel : BasicObject
+@interface ComplainBrandModel : NSObject
 
 @property (nonatomic,copy) NSString *brandName;
 @property (nonatomic,copy) NSString *seriesName;
@@ -99,11 +102,12 @@ typedef NS_ENUM(NSInteger, ComplainCellStyle) {
 @property (nonatomic,assign) BOOL brandSelected;
 @property (nonatomic,assign) BOOL seriesSelected;
 @property (nonatomic,assign) BOOL modelSelected;
+@property (nonatomic,assign) CGFloat cellHeight;
 
 @end
 
 #pragma mark - 投诉类型
-@interface ComplainTypeModel : BasicObject
+@interface ComplainTypeModel : NSObject
 
 @property (nonatomic,copy) NSString *key;//投诉类型
 @property (nonatomic,copy) NSString *type;//投诉类型
@@ -111,7 +115,7 @@ typedef NS_ENUM(NSInteger, ComplainCellStyle) {
 @property (nonatomic,copy) NSString *qualityValue;//质量
 @property (nonatomic,copy) NSString *servekey;//服务
 @property (nonatomic,copy) NSString *serveValue;//服务
-
+@property (nonatomic,assign) CGFloat cellHeight;
 
 - (instancetype)initWithKey:(NSString *)key type:(NSString *)type;
 
@@ -119,7 +123,7 @@ typedef NS_ENUM(NSInteger, ComplainCellStyle) {
 
 
 #pragma mark - section
-@interface ComplainSectionModel : BasicObject
+@interface ComplainSectionModel : NSObject
 /**图片*/
 @property (nonatomic,strong) UIImage *image;
 /**描述*/

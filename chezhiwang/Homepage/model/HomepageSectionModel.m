@@ -30,7 +30,8 @@
     newsSectionModel.footTitle = @"更多新闻";
     newsSectionModel.headLineColor = RGB_color(0, 159, 251, 1);
     for (NSDictionary *dict in dictionary[@"news"]) {
-        HomepageNewsModel * Model = [[HomepageNewsModel alloc] initWithDictionary:dict];
+        HomepageNewsModel * Model = [HomepageNewsModel mj_objectWithKeyValues:dict];
+
         [newsSectionModel.rowModels addObject:Model];
     }
 
@@ -40,7 +41,7 @@
     complainSectionModel.footTitle = @"更多投诉";
     complainSectionModel.headLineColor = RGB_color(247, 162, 0, 1);
     for (NSDictionary *dict in dictionary[@"complain"]) {
-        HomepageComplainModel * Model = [[HomepageComplainModel alloc] initWithDictionary:dict];
+        HomepageComplainModel * Model = [HomepageComplainModel mj_objectWithKeyValues:dict];
         [complainSectionModel.rowModels addObject:Model];
     }
 
@@ -50,7 +51,7 @@
     researchSectionModel.footTitle = @"更多调查";
     researchSectionModel.headLineColor = RGB_color(239, 95, 96, 1);
     for (NSDictionary *dict in dictionary[@"report"]) {
-        HomepageResearchModel * Model = [[HomepageResearchModel alloc] initWithDictionary:dict];
+        HomepageResearchModel * Model = [HomepageResearchModel mj_objectWithKeyValues:dict];
         [researchSectionModel.rowModels addObject:Model];
     }
 
@@ -60,7 +61,7 @@
     answerSectionModel.footTitle = @"更多答疑";
     answerSectionModel.headLineColor = RGB_color(0, 169, 75, 1);
     for (NSDictionary *dict in dictionary[@"zjdy"]) {
-        HomepageAnswerModel * Model = [[HomepageAnswerModel alloc] initWithDictionary:dict];
+        HomepageAnswerModel * Model = [HomepageAnswerModel mj_objectWithKeyValues:dict];
         [answerSectionModel.rowModels addObject:Model];
     }
 
@@ -70,7 +71,7 @@
     forumSectionModel.footTitle = @"更多论坛";
     forumSectionModel.headLineColor = RGB_color(0, 159, 251, 1);
     for (NSDictionary *dict in dictionary[@"bbs"]) {
-        HomepageForumModel * Model = [[HomepageForumModel alloc] initWithDictionary:dict];
+        HomepageForumModel * Model = [HomepageForumModel mj_objectWithKeyValues:dict];
         [forumSectionModel.rowModels addObject:Model];
     }
 

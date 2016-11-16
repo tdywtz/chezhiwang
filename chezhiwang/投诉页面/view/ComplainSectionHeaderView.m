@@ -26,7 +26,7 @@
 - (void)makeUI{
 
     _nameLabel = [[UILabel alloc] init];
-    _nameLabel.textColor = colorBlack;
+    _nameLabel.textColor = colorLightGray;
     _nameLabel.font = [UIFont systemFontOfSize:15];
 
 

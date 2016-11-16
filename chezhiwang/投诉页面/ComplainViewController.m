@@ -41,6 +41,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.title = @"我要投诉";
     _dataDictionary = [[NSMutableDictionary alloc] init];
 
     [self createLeftItemBack];
@@ -83,18 +84,18 @@
 
 #pragma mark - 下载用户数据
 -(void)loadUserInfo{
-
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSString *url = [NSString stringWithFormat:[URLFile urlStringForUser],[CZWManager manager].userID];
 
     [HttpRequest GET:url success:^(id responseObject) {
-
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         for (int i  = 0; i < _dataArray.count; i ++) {
             if (i != 0 && i != 2) {
                 continue;
             }
             ComplainSectionModel *sectionModel = _dataArray[i];
             for (int j = 0; j < sectionModel.rowModels.count; j ++) {
-                BasicObject *rowModel = sectionModel.rowModels[j];
+                NSObject *rowModel = sectionModel.rowModels[j];
                 if (i == 0) {
                     ComplainModel *model = (ComplainModel *)rowModel;
                     if (j == 0) {
@@ -132,27 +133,22 @@
         }
         [_tableView reloadData];
     } failure:^(NSError *error) {
-
+[MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
 }
 
 - (void)loadDataUpdate{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     __weak __typeof(self)weakSelf = self;
-    NSString *url = [NSString stringWithFormat:[URLFile urlStringForDetail],@"166224"];
+    NSString *url = [NSString stringWithFormat:[URLFile urlStringForDetail],self.Cpid];
     [HttpRequest GET:url success:^(id responseObject) {
+     [MBProgressHUD hideHUDForView:self.view animated:YES];
 
-   dispatch_async(dispatch_get_main_queue(),^{
        [weakSelf setDateInfo:responseObject];
        [_tableView reloadData];
-   });
-
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0),^{
-//
-//   });
-
 
     } failure:^(NSError *error) {
-
+       [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
 
 }
@@ -161,7 +157,7 @@
     for (int i  = 0; i < _dataArray.count; i ++) {
         ComplainSectionModel *sectionModel = _dataArray[i];
         for (int j = 0; j < sectionModel.rowModels.count; j ++) {
-            BasicObject *rowModel = sectionModel.rowModels[j];
+            NSObject *rowModel = sectionModel.rowModels[j];
             if (i == 0) {
                 ComplainModel *model = (ComplainModel *)rowModel;
                 if (j == 0) {
@@ -599,8 +595,24 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     ComplainSectionModel *sectionModel = _dataArray[indexPath.section];
-    BasicObject *rowModel = sectionModel.rowModels[indexPath.row];
-    return rowModel.cellHeight;
+    NSObject *rowModel = sectionModel.rowModels[indexPath.row];
+    if ([rowModel isKindOfClass:[ComplainModel class]]) {
+        return ((ComplainModel *)rowModel).cellHeight;
+
+    }else if ([rowModel isKindOfClass:[ComplainTypeModel class]]) {
+        return ((ComplainTypeModel *)rowModel).cellHeight;
+
+    }else if ([rowModel isKindOfClass:[ComplainBrandModel class]]) {
+        return ((ComplainBrandModel *)rowModel).cellHeight;
+
+    }else if ([rowModel isKindOfClass:[ComplainImageModel class]]) {
+        return ((ComplainImageModel *)rowModel).cellHeight;
+
+    }else if ([rowModel isKindOfClass:[ComplainBusinessModel class]]) {
+        return ((ComplainBusinessModel *)rowModel).cellHeight;
+
+    }
+    return 50;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{

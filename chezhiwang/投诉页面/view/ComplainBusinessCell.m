@@ -14,6 +14,8 @@
 @interface ComplainBusinessCell ()<UITextFieldDelegate>
 {
     UIButton *button;
+    UIImageView *proImageView;
+    UIImageView *businessImageView;
 }
 @property (nonatomic,strong) UILabel *nameLabel;
 @property (nonatomic,strong) UITextField *proTextField;
@@ -53,6 +55,7 @@
     _proTextField.leftView = [self leftLabelWithText:@"省、市"];
     _proTextField.delegate = self;
 
+
     _businessTextField = [[UITextField alloc] init];
     _businessTextField = [[UITextField alloc] init];
     _businessTextField.font = [UIFont systemFontOfSize:15];
@@ -61,13 +64,16 @@
     _businessTextField.delegate = self;
 
     _lineView1 = [[UIView alloc] init];
-     _lineView1.backgroundColor = RGB_color(240, 240, 240, 1);
+    _lineView1.backgroundColor = RGB_color(240, 240, 240, 1);
 
     _lineView2 = [[UIView alloc] init];
-     _lineView2.backgroundColor = RGB_color(240, 240, 240, 1);
+    _lineView2.backgroundColor = RGB_color(240, 240, 240, 1);
 
     _lineView3 = [[UIView alloc] init];
-     _lineView3.backgroundColor = RGB_color(240, 240, 240, 1);
+    _lineView3.backgroundColor = RGB_color(240, 240, 240, 1);
+
+    proImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"top"]];
+    businessImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"top"]];
 
     [self.contentView addSubview:_nameLabel];
     [self.contentView addSubview:button];
@@ -76,6 +82,8 @@
     [self.contentView addSubview:_lineView1];
     [self.contentView addSubview:_lineView2];
     [self.contentView addSubview:_lineView3];
+    [self.contentView addSubview:proImageView];
+    [self.contentView addSubview:businessImageView];
 
     [button makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(-10);
@@ -122,6 +130,9 @@
         _lineView2.hidden = YES;
         _proTextField.hidden = YES;
 
+        proImageView.hidden = YES;
+        businessImageView.hidden = YES;
+
         _businessTextField.lh_left = 20;
         _businessTextField.lh_top = _lineView1.lh_bottom;
         _businessTextField.lh_height = 50;
@@ -132,11 +143,16 @@
         _lineView2.hidden = NO;
         _proTextField.hidden = NO;
 
+        proImageView.hidden = NO;
+        businessImageView.hidden = NO;
+
         _proTextField.lh_left = 20;
         _proTextField.lh_top = _lineView1.lh_bottom;
         _proTextField.lh_height = 50;
-        _proTextField.lh_width = self.contentView.frame.size.width - 20;
+        _proTextField.lh_width = self.contentView.frame.size.width - 40;
 
+        proImageView.lh_centerY = _proTextField.lh_centerY;
+        proImageView.lh_right = WIDTH - 10;
 
         _lineView2.lh_left = 0;
         _lineView2.lh_top = _proTextField.lh_bottom;
@@ -145,6 +161,9 @@
         _businessTextField.lh_left = _proTextField.lh_left;
         _businessTextField.lh_top = _lineView2.lh_bottom;
         _businessTextField.lh_size = _proTextField.lh_size;
+
+        businessImageView.lh_centerY = _businessTextField.lh_centerY;
+        businessImageView.lh_right = proImageView.lh_right;
     }
 }
 

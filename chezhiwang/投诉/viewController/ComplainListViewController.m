@@ -42,8 +42,9 @@
        }else{
            [_tableView.mj_footer endRefreshing];
        }
-
-     [_dataArray addObjectsFromArray:[HomepageComplainModel arayWithArray:responseObject[@"rel"]]];
+       for (NSDictionary *dict in responseObject[@"rel"]) {
+           [_dataArray addObject:[HomepageComplainModel mj_objectWithKeyValues:dict]];
+       }
 
        [_tableView reloadData];
 

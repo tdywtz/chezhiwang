@@ -98,8 +98,9 @@
         }else{
             [_tableView.mj_footer endRefreshing];
         }
-        
-        [_dataArray addObjectsFromArray:[HomepageNewsModel arayWithArray:responseObject[@"rel"]]];
+        for (NSDictionary *dict in responseObject[@"rel"]) {
+            [_dataArray addObject:[HomepageNewsModel mj_objectWithKeyValues:dict]];
+        }
         
         [_tableView reloadData];
 

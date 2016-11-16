@@ -10,10 +10,8 @@
 
 @implementation VehicleSeriesSctionModel
 
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary{
-    if (self = [super initWithDictionary:dictionary]) {
-        self.typeName = dictionary[@"typename"];
-    }
-    return self;
++ (NSDictionary *)mj_replacedKeyFromPropertyName{
+    return @{@"typeName":@"typename"};
 }
+
 @end

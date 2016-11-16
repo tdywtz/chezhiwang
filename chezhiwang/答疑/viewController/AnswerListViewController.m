@@ -45,7 +45,7 @@
             [_tableView.mj_footer endRefreshing];
         }
 
-        [_dataArray addObjectsFromArray:[HomepageAnswerModel arayWithArray:responseObject[@"rel"]]];
+        [_dataArray addObjectsFromArray:[HomepageAnswerModel mj_objectArrayWithKeyValuesArray:responseObject[@"rel"]]];
 
         [weakSelf.tableView reloadData];
 

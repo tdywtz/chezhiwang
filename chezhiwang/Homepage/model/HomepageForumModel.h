@@ -6,9 +6,9 @@
 //  Copyright © 2016年 车质网. All rights reserved.
 //
 
-#import "BasicObject.h"
+#import <Foundation/Foundation.h>
 
-@interface HomepageForumModel : BasicObject
+@interface HomepageForumModel : NSObject
 
 @property (nonatomic,copy) NSString *date;
 @property (nonatomic,assign) BOOL essence;//是否精华

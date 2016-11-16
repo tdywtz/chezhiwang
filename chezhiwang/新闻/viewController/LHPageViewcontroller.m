@@ -64,6 +64,7 @@
     if (current < self.current) {
         Direction = UIPageViewControllerNavigationDirectionReverse;
     }
+
     __weak __typeof(self)weakSelf = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.2f*NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [weakSelf setViewControllers:@[weakSelf.controllers[current
@@ -85,24 +86,35 @@
 
 
 #pragma mark - UIScrollViewDelegate
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    if (_current > 0 && _current < self.controllers.count-1) {
+        self.beginScrollProgress = YES;
+    }
+}
+
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if ([self.LHDelegate respondsToSelector:@selector(didScroll:)]) {
+        [self.LHDelegate didScroll:scrollView];
+    }
+
     CGFloat width = self.view.frame.size.width;
     CGFloat contentOffX = scrollView.contentOffset.x;
    // NSLog(@"%f",scrollView.contentOffset.x);
     //CGFloat mainProgress = contentOffX
-    if (self.beginScrollProgress) {
-        if (scrollView.contentOffset.x <= width) {
-          
-            if ([self.LHDelegate respondsToSelector:@selector(scrollViewDidScrollLeft:)]) {
-                [self.LHDelegate scrollViewDidScrollLeft:(1-contentOffX/width)];
-            }
-        }else if (scrollView.contentOffset.x >= width+self.space*2){
-           
-            if ([self.LHDelegate respondsToSelector:@selector(scrollViewDidScrollRight:)]) {
-                [self.LHDelegate scrollViewDidScrollRight:(contentOffX-width-self.space*2)/width];
-            }
-        }
+ 
+    if (self.beginScrollProgress && self.controllers.count) {
 
+            if (scrollView.contentOffset.x <= width && _current > 0) {
+
+                if ([self.LHDelegate respondsToSelector:@selector(scrollViewDidScrollLeft:)]) {
+                    [self.LHDelegate scrollViewDidScrollLeft:(1-contentOffX/width)];
+                }
+            }else if (scrollView.contentOffset.x >= width+self.space*2 && _current < self.controllers.count-1){
+
+                if ([self.LHDelegate respondsToSelector:@selector(scrollViewDidScrollRight:)]) {
+                    [self.LHDelegate scrollViewDidScrollRight:(contentOffX-width-self.space*2)/width];
+                }
+            }
     }
     
     if (scrollView.dragging) {
@@ -123,7 +135,18 @@
     }else{
         self.toLeftAndRgiht = 0;
     }
-    
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    if ([self.LHDelegate respondsToSelector:@selector(DidEndDecelerating:)]) {
+        [self.LHDelegate DidEndDecelerating:scrollView];
+    }
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
+    if ([self.LHDelegate respondsToSelector:@selector(DidEndScrollingAnimation:)]) {
+        [self.LHDelegate DidEndScrollingAnimation:scrollView];
+    }
 }
 
 #pragma mark - UIPageViewControllerDataSource
@@ -136,19 +159,21 @@
         
         return self.controllers[index+1];
     }
+
      self.beginScrollProgress = NO;
     return nil;
 }
 
 -(UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
 {
- 
+
     NSInteger index = [self.controllers indexOfObject:viewController];
     
     if (index-1 >= 0) {
      
         return self.controllers[index-1];
     }
+
      self.beginScrollProgress = NO;
     return nil;
 }

@@ -6,11 +6,11 @@
 //  Copyright © 2016年 车质网. All rights reserved.
 //
 
-#import "BasicObject.h"
+#import <Foundation/Foundation.h>
 /**
  *  车系图片section模型
  */
-@interface VehicleSeriesSctionModel : BasicObject
+@interface VehicleSeriesSctionModel : NSObject
 //第一组
 @property (nonatomic,assign) NSInteger selectRow;//选择哪一行
 @property (nonatomic,strong) NSArray  *serieslist;//车型数组

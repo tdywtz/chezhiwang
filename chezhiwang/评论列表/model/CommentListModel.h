@@ -6,9 +6,9 @@
 //  Copyright © 2016年 车质网. All rights reserved.
 //
 
-#import "BasicObject.h"
+#import <Foundation/Foundation.h>
 
-@interface CommentListInitialModel : BasicObject
+@interface CommentListInitialModel : NSObject
 
 @property (nonatomic,copy) NSString *h_content;
 @property (nonatomic,copy) NSString *h_id;
@@ -19,7 +19,7 @@
 
 @end
 
-@interface CommentListModel : BasicObject
+@interface CommentListModel : NSObject
 
 @property (nonatomic,copy) NSString *p_content;
 @property (nonatomic,copy) NSString *p_floor;

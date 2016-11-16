@@ -6,9 +6,9 @@
 //  Copyright © 2016年 车质网. All rights reserved.
 //
 
-#import "BasicObject.h"
+#import <Foundation/Foundation.h>
 
-@interface HomepageComplainModel : BasicObject
+@interface HomepageComplainModel : NSObject
 
 @property (nonatomic,copy) NSString *brandname;
 @property (nonatomic,copy) NSString *bw;

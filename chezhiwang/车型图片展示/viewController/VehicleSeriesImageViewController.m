@@ -71,7 +71,7 @@
         [_dataArray removeAllObjects];
         [_dataArray addObject:_sectionOneModel];
         for (NSDictionary *dict in responseObject[@"rel"]) {
-            VehicleSeriesSctionModel *sectionModel = [[VehicleSeriesSctionModel alloc] initWithDictionary:dict];
+            VehicleSeriesSctionModel *sectionModel = [VehicleSeriesSctionModel mj_objectWithKeyValues:dict];
             [_dataArray addObject:sectionModel];
         }
         [_collectionView reloadData];

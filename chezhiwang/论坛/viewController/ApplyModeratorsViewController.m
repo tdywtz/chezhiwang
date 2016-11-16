@@ -7,13 +7,16 @@
 //
 
 #import "ApplyModeratorsViewController.h"
-#define SPACE 40
+#import "ChooseSexViewController.h"
+
+#define SPACE 50
 
 @interface ApplyModeratorsViewController ()<UITextFieldDelegate,UITextViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate>
 {
     UIScrollView *_scrollView;
     UILabel *userNameLabel;
     UITextField *realNameField;
+    UITextField *sexTextField;
     UITextField *provinceField;
     UITextField *cityField;
     UITextField *countyField;
@@ -117,58 +120,46 @@
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
     [_scrollView addGestureRecognizer:tap];
-    
-    UILabel *leftLabel = [LHController createLabelWithFrame:CGRectMake(10, 14, 10, 18) Font:_sizeFont Bold:NO TextColor:colorOrangeRed Text:@"*"];
-    [_scrollView addSubview:leftLabel];
-    
-    UILabel *tishilabel = [LHController createLabelWithFrame:CGRectMake(25, 10, WIDTH-10, 20) Font:13 Bold:NO TextColor:colorOrangeRed Text:@"号为必填选项，请您认真填写以下内容"];
+
+    UILabel *tishilabel = [LHController createLabelWithFrame:CGRectMake(0, 0, WIDTH, 40) Font:13 Bold:NO TextColor:colorDeepGray Text:@"以下信息全是必填选项，请您认真填写以下内容"];
+    tishilabel.backgroundColor = RGB_color(240, 240, 240, 1);
     [_scrollView addSubview:tishilabel];
-    
-    UIView *tishifgView = [[UIView alloc] initWithFrame:CGRectMake(0, 40, WIDTH, 2)];
-    tishifgView.backgroundColor = colorLineGray;
-    [_scrollView addSubview:tishifgView];
+
     
     NSArray *array = @[@"用户名：",@"真实姓名：",@"性别：",@"所在地区：",@"街道地址：",@"申请论坛：",@"职业：",@"手机：",@"QQ：",@"电子邮箱：",@"身份证号码：",@"爱车：",@"申请理由："];
      NSArray *placeholderArray = @[@"用户名",@"请输入真实姓名",@"性别",@"所在地区",@"请输入街道地址",@"申请论坛",@"请输入您的职业",@"请输入您的手机号码",@"请输入您的QQ",@"请输入电子邮箱",@"请输入身份证号码",@"爱车",@"请输入申请理由"];
-    CGFloat frameY = tishifgView.frame.origin.y+1;
+    CGFloat frameY = tishilabel.lh_bottom+1;
     
     for (int i = 0; i < array.count; i ++) {
         CGFloat width = [self getStr:array[i] andFont:_sizeFont];
-        UILabel *starLabel = [LHController createLabelWithFrame:CGRectMake(10, frameY+SPACE*i+4, 10, SPACE) Font:_sizeFont Bold:NO TextColor:colorOrangeRed Text:@"*"];
-        [_scrollView addSubview:starLabel];
+
+        UILabel *nameLabel = [LHController createLabelWithFrame:CGRectMake(15, frameY+SPACE*i+1, width, SPACE) Font:_sizeFont Bold:NO TextColor:colorBlack Text:array[i]];
+        [_scrollView addSubview:nameLabel];
        
-        if(i == 0 || i == 5 || i == 9) [starLabel removeFromSuperview];
-        
-        UILabel *label = [LHController createLabelWithFrame:CGRectMake(25, frameY+SPACE*i+1, width, SPACE) Font:_sizeFont Bold:NO TextColor:colorBlack Text:array[i]];
-        [_scrollView addSubview:label];
-       
-        UIView *fgView = [[UIView alloc] initWithFrame:CGRectMake(0, label.frame.origin.y+label.frame.size.height, WIDTH, 1)];
+        UIView *fgView = [[UIView alloc] initWithFrame:CGRectMake(0, nameLabel.lh_bottom, WIDTH, 1)];
         fgView.backgroundColor = colorLineGray;
         [_scrollView addSubview:fgView];
         
         if (i > 3) {
-            starLabel.frame = CGRectMake(10, starLabel.frame.origin.y+90, 10, SPACE);
-            label.frame = CGRectMake(25, label.frame.origin.y+90, width, SPACE);
-            fgView.frame = CGRectMake(0, label.frame.origin.y+label.frame.size.height, WIDTH, 1);
+            nameLabel.lh_top = nameLabel.frame.origin.y+SPACE*3+3;
+            fgView.lh_top =  nameLabel.lh_bottom;
         }
         if (i > 11) {
-            starLabel.frame = CGRectMake(10, starLabel.frame.origin.y+90, 10, SPACE);
-            label.frame = CGRectMake(25, label.frame.origin.y+90, width, SPACE);
-            fgView.frame = CGRectMake(0, label.frame.origin.y+label.frame.size.height, WIDTH, 1);
+            nameLabel.lh_top =  nameLabel.frame.origin.y+SPACE*3+3;
+            fgView.lh_top = nameLabel.lh_bottom;
         }
         
         if (i == 0) {
-            userNameLabel = [LHController createLabelWithFrame:CGRectMake(label.frame.origin.x+label.frame.size.width, label.frame.origin.y, WIDTH-20, SPACE) Font:_sizeFont Bold:NO TextColor:colorDeepGray Text:nil];
+            userNameLabel = [LHController createLabelWithFrame:CGRectMake(nameLabel.lh_right, nameLabel.lh_top, WIDTH-20, SPACE) Font:_sizeFont Bold:NO TextColor:colorDeepGray Text:nil];
             [_scrollView addSubview:userNameLabel];
-        }else if (i == 2){
-            [self createSexButton:label.frame.origin.y andX:label.frame.origin.x+label.frame.size.width];
-            
         }else if (i == 3){
             NSArray *areaArray = @[@"省份",@"地级市",@"市、县级市、县"];
             for (int k = 0; k < 3; k ++) {
-                UITextField  *field = [LHController createTextFieldWithFrame:CGRectMake(label.frame.origin.x, label.frame.origin.y+label.frame.size.height+30*k+1, WIDTH-20, 30) Placeholder:areaArray[k] Font:_sizeFont  Delegate:self];
+                UITextField  *field = [LHController createTextFieldWithFrame:CGRectMake(nameLabel.lh_left+10, nameLabel.lh_bottom+SPACE*k+1, WIDTH-nameLabel.lh_left-20, SPACE) Placeholder:areaArray[k] Font:_sizeFont  Delegate:self];
+                field.rightViewMode = UITextFieldViewModeAlways;
+                field.rightView = [self textFieldRightView];
                 [_scrollView addSubview:field];
-                UIView *bgbg = [[UIView alloc] initWithFrame:CGRectMake(20, field.frame.origin.y+field.frame.size.height, WIDTH-20, 1)];
+                UIView *bgbg = [[UIView alloc] initWithFrame:CGRectMake(20, field.lh_bottom, WIDTH-20, 1)];
                 bgbg.backgroundColor = colorLineGray;
                 [_scrollView addSubview:bgbg];
                 
@@ -180,9 +171,11 @@
 
             NSArray *areaArray = @[@"===请选择品牌===",@"===请选择车系===",@"===请选择车型==="];
             for (int k = 0; k < 3; k ++) {
-                UITextField  *field = [LHController createTextFieldWithFrame:CGRectMake(label.frame.origin.x, label.frame.origin.y+label.frame.size.height+30*k+1, WIDTH-20, 30) Placeholder:areaArray[k] Font:_sizeFont  Delegate:self];
+                UITextField  *field = [LHController createTextFieldWithFrame:CGRectMake(nameLabel.lh_left+10, nameLabel.lh_bottom+SPACE*k+1, WIDTH-nameLabel.lh_left-20, SPACE) Placeholder:areaArray[k] Font:_sizeFont  Delegate:self];
+                field.rightViewMode = UITextFieldViewModeAlways;
+                field.rightView = [self textFieldRightView];
                 [_scrollView addSubview:field];
-                UIView *bgbg  =[[ UIView alloc] initWithFrame:CGRectMake(20, field.frame.origin.y+field.frame.size.height, WIDTH-20, 1)];
+                UIView *bgbg  =[[ UIView alloc] initWithFrame:CGRectMake(20, field.lh_bottom, WIDTH-20, 1)];
                 bgbg.backgroundColor = colorLineGray;
                 [_scrollView addSubview:bgbg];
                 
@@ -193,7 +186,7 @@
 
         }else if (i == 12){
           
-            reasonTextView = [[UITextView alloc] initWithFrame:CGRectMake(15, label.frame.origin.y+label.frame.size.height+1, WIDTH-30, 100)];
+            reasonTextView = [[UITextView alloc] initWithFrame:CGRectMake(15, nameLabel.lh_bottom+1, WIDTH-30, 100)];
             reasonTextView.delegate = self;
             reasonTextView.font = [UIFont systemFontOfSize:_sizeFont-2];
             [_scrollView addSubview:reasonTextView];
@@ -211,7 +204,7 @@
             
              _scrollView.contentSize = CGSizeMake(0, button.frame.origin.y+80);
         }else{
-            UITextField  *field = [LHController createTextFieldWithFrame:CGRectMake(label.frame.origin.x+label.frame.size.width, label.frame.origin.y, WIDTH-label.frame.origin.x+label.frame.size.width-10, SPACE) Placeholder:nil Font:_sizeFont Delegate:self];
+            UITextField  *field = [LHController createTextFieldWithFrame:CGRectMake(nameLabel.lh_right, nameLabel.lh_top, WIDTH-nameLabel.lh_right-10, SPACE) Placeholder:nil Font:_sizeFont Delegate:self];
             [_scrollView addSubview:field];
             [self fuzhi:field and:i];
             field.placeholder = placeholderArray[i];
@@ -219,6 +212,10 @@
     }
 }
 
+- (UIView *)textFieldRightView{
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"top"]];
+    return imageView;
+}
 //手势
 -(void)tap:(UITapGestureRecognizer *)tap{
     [self.view endEditing:YES];
@@ -232,7 +229,14 @@
         case 1:
             realNameField = textField;
             break;
-            
+
+        case 2:{
+            sexTextField = textField;
+            sexTextField.rightViewMode = UITextFieldViewModeAlways;
+            sexTextField.rightView = [self textFieldRightView];
+            break;
+        }
+
         case 4:
             addressField = textField;
             break;
@@ -311,8 +315,9 @@
     userNameLabel.text = dict[@"username"];
     realNameField.text = dict[@"realname"];
     if ([dict[@"sex"] integerValue] == 2) {
-        womenButton.selected = YES;
-        manButton.selected = NO;
+        sexTextField.text = @"男";
+    }else{
+        sexTextField.text = @"女";
     }
     provinceField.text = dict[@"sheng"];
     provinceId = dict[@"pid"];
@@ -368,7 +373,7 @@
     [dict setObject:[CZWManager manager].userID forKey:@"uid"];
     [dict setObject:[CZWManager manager].userName forKey:@"username"];
     [dict setObject:realNameField.text forKey:@"realname"];
-    if (manButton.selected) {
+    if ([sexTextField.text isEqualToString:@"男"]) {
         [dict setObject:@"1" forKey:@"sex"];
     }else{
         [dict setObject:@"2" forKey:@"sex"];
@@ -575,6 +580,23 @@
 #pragma mark - UITextFieldDelegate
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     frame_y = textField.frame.origin.y+textField.frame.size.height;
+
+    if (textField == sexTextField) {
+        [self.view endEditing:YES];
+        NSDictionary *dict1 = @{@"title":@"男",@"id":@"1"};
+        NSDictionary *dict2 = @{@"title":@"女",@"id":@"2"};
+        NSArray *array = @[dict1,dict2];
+        ChooseSexViewController *picker = [[ChooseSexViewController alloc] init];
+        picker.dataArray = array;
+        picker.titleText = @"性别";
+        [picker showPickerView];
+
+        [picker returnResult:^(NSString *title, NSString *ID) {
+            sexTextField.text = title;
+        }];
+        [self presentViewController:picker animated:YES completion:nil];
+        return  NO;
+    }
     tempTextField = textField;
     tempId = @"";
     tempName = @"";

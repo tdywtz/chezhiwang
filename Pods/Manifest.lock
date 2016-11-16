@@ -16,6 +16,7 @@ PODS:
     - AFNetworking/NSURLSession
   - Masonry (1.0.2)
   - MBProgressHUD (0.9.2)
+  - MJExtension (3.0.13)
   - MJNIndexView (0.0.1)
   - MJRefresh (3.1.12)
   - pop (1.0.9)
@@ -24,29 +25,35 @@ PODS:
   - SDWebImage/Core (3.8.1)
   - TTTAttributedLabel (1.13.4)
   - UMengAnalytics-NO-IDFA (4.1.1)
+  - VBFPopFlatButton (0.0.7):
+    - pop
 
 DEPENDENCIES:
   - AFNetworking (~> 3.1.0)
   - Masonry (~> 1.0.2)
   - MBProgressHUD (~> 0.9.2)
+  - MJExtension (~> 3.0.13)
   - MJNIndexView (~> 0.0.1)
   - MJRefresh (~> 3.1.12)
   - pop (~> 1.0.9)
   - SDWebImage (~> 3.8.1)
   - TTTAttributedLabel
   - UMengAnalytics-NO-IDFA (~> 4.1.1)
+  - VBFPopFlatButton
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
+  MJExtension: 5932755f451458eefa24239358817f8d291240c7
   MJNIndexView: 6186c3ea302624ed5c008dba8a178677a7523cab
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
   UMengAnalytics-NO-IDFA: 1064992c1b7aaa22823179c0b33a664813fd7a85
+  VBFPopFlatButton: 39e48ab56277f3d056734a9b5ec5d0cc60d69778
 
-PODFILE CHECKSUM: 02c8d6dbed3e18de5550dd4f7cd100255badee2e
+PODFILE CHECKSUM: 5220fd65a3a491ed8ceb1cff0410c4cc234d0dd7
 
 COCOAPODS: 1.0.1

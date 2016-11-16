@@ -39,7 +39,7 @@
             [_tableView.mj_footer endRefreshing];
         }
 
-        [_dataArray addObjectsFromArray:[HomepageNewsModel arayWithArray:responseObject[@"rel"]]];
+        [_dataArray addObjectsFromArray:[HomepageNewsModel mj_objectArrayWithKeyValuesArray:responseObject[@"rel"]]];
 
         [_tableView reloadData];
         [_tableView.mj_header endRefreshing];

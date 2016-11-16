@@ -10,10 +10,8 @@
 
 @implementation HomepageAnswerModel
 
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary{
-    if (self = [super initWithDictionary:dictionary]) {
-        self.ID = dictionary[@"id"];
-    }
-    return self;
++ (NSDictionary *)mj_replacedKeyFromPropertyName{
+    return @{@"ID":@"id"};
 }
+
 @end

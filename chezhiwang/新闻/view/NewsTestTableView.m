@@ -153,7 +153,7 @@
         }
 
         for (NSDictionary *dict in responseObject[@"rel"]) {
-            NewsTestTableViewModel *model = [[NewsTestTableViewModel alloc] initWithDictionary:dict];
+            NewsTestTableViewModel *model = [NewsTestTableViewModel mj_objectWithKeyValues:dict];
             [_dataArray addObject:model];
         }
 

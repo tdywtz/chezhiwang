@@ -92,7 +92,7 @@
 
     __weak __typeof(self)weakSelf  = self;
     [HttpRequest GET:[URLFile urlStringForLogin_index] success:^(id responseObject) {
-
+ 
         hearView.pointImages = responseObject[@"focuspic"];
         hearView.pointNews = responseObject[@"headlines"];
         _dataArray = [HomepageSectionModel arrryWithDictionary:responseObject];
@@ -125,7 +125,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     HomepageSectionModel *sectionModel = _dataArray[indexPath.section];
-    BasicObject *obj = sectionModel.rowModels[indexPath.row];
+    NSObject *obj = sectionModel.rowModels[indexPath.row];
 
     if ([obj isKindOfClass:[HomepageNewsModel class]]) {
         //有图
@@ -213,7 +213,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     HomepageSectionModel *sectionModel = _dataArray[indexPath.section];
-    BasicObject *obj = sectionModel.rowModels[indexPath.row];
+    NSObject *obj = sectionModel.rowModels[indexPath.row];
     if ([obj isKindOfClass:[HomepageNewsModel class]]) {
         NewsDetailViewController *detail = [[NewsDetailViewController alloc] init];
         detail.ID = ((HomepageNewsModel *)obj).ID;

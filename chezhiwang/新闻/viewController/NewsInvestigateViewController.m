@@ -40,9 +40,10 @@
         }else{
             [_tableView.mj_footer endRefreshing];
         }
-
-        [_dataArray addObjectsFromArray:[HomepageResearchModel arayWithArray:responseObject[@"rel"]]];
-        
+        for (NSDictionary *dict in responseObject[@"rel"]) {
+            [_dataArray addObject:[HomepageResearchModel mj_objectWithKeyValues:dict]];
+        }
+     
         [_tableView reloadData];
 
     } failure:^(NSError *error) {

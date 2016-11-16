@@ -92,8 +92,8 @@ typedef enum {
             [_tableView.mj_footer endRefreshing];
         }
         for (NSDictionary *dic in responseObject[@"rel"]) {
-            CommentListModel *model = [[CommentListModel alloc] initWithDictionary:dic];
-            CommentListInitialModel *initialModel = [[CommentListInitialModel alloc] initWithDictionary:dic[@"huifu"]];
+            CommentListModel *model = [CommentListModel mj_objectWithKeyValues:dic];
+            CommentListInitialModel *initialModel = [CommentListInitialModel mj_objectWithKeyValues:dic[@"huifu"]];
             if (initialModel.h_id.length) {
                 //有数据，赋值
                 model.initialModel = initialModel;

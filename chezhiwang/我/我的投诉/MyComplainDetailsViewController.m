@@ -96,7 +96,7 @@
     NSString *url  =[NSString stringWithFormat:[URLFile urlStringFor_mytsbyid],_model.Cpid];
     [HttpRequest GET:url success:^(id responseObject) {
         NSDictionary *dict = responseObject[0];
-        MyComplainModel *model = [[MyComplainModel alloc] initWithDictionary:dict];
+        MyComplainModel *model = [MyComplainModel mj_objectWithKeyValues:dict];
         _model = model;
         [scrollView removeFromSuperview];
         [self createScrollView];

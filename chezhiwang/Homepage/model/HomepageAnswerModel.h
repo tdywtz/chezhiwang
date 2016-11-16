@@ -6,9 +6,9 @@
 //  Copyright © 2016年 车质网. All rights reserved.
 //
 
-#import "BasicObject.h"
+#import <Foundation/Foundation.h>
 
-@interface HomepageAnswerModel : BasicObject
+@interface HomepageAnswerModel : NSObject
 
 @property (nonatomic,copy) NSString *answer;
 @property (nonatomic,copy) NSString *answerdate;

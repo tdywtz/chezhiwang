@@ -42,7 +42,7 @@
             [_tableView.mj_footer endRefreshing];
         }
         for (NSDictionary *dict in responseObject) {
-            MyCommentModel *model = [[MyCommentModel alloc] initWithDictionary:dict];
+            MyCommentModel *model = [MyCommentModel mj_objectWithKeyValues:dict];
             [_dataArray addObject:model];
         }
 
@@ -176,7 +176,7 @@
 
     if (index == NSNotFound) {
         openModel = model;
-        myModel = [[MyCommentModel alloc] initWithDictionary:[model getDcitonary]];
+        myModel = [MyCommentModel mj_objectWithKeyValues:model.mj_keyValues];
         [_dataArray insertObject:myModel atIndex:indexPath.row+1];
     }else{
         if (index == indexPath.row) {
@@ -187,7 +187,7 @@
 
             openModel = model;
 
-            MyCommentModel *obj = [[MyCommentModel alloc] initWithDictionary:[model getDcitonary]];
+            MyCommentModel *obj = [MyCommentModel mj_objectWithKeyValues:model.mj_keyValues];
             [_dataArray insertObject:obj atIndex:indexPath.row+1];
             [_dataArray removeObject:myModel];
 

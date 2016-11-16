@@ -6,10 +6,10 @@
 //  Copyright © 2016年 车质网. All rights reserved.
 //
 
-#import "BasicObject.h"
+#import <Foundation/Foundation.h>
 #import "ChartChooseListViewController.h"
 
-@interface ChartChooseModel : BasicObject
+@interface ChartChooseModel : NSObject
 
 @property (nonatomic,copy) NSString *tid;
 @property (nonatomic,copy) NSString *title;

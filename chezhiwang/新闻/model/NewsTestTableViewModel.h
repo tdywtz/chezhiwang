@@ -6,9 +6,9 @@
 //  Copyright © 2016年 车质网. All rights reserved.
 //
 
-#import "BasicObject.h"
+#import <Foundation/Foundation.h>
 
-@interface NewsTestTableViewModel : BasicObject
+@interface NewsTestTableViewModel : NSObject
 
 @property (nonatomic,copy) NSString  *ID;//
 @property (nonatomic,copy) NSString  *gray;//灰色不能点击

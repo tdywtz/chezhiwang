@@ -70,6 +70,7 @@
         make.left.equalTo(10);
         make.top.equalTo(titleLabel.bottom).offset(10);
         make.bottom.equalTo(-10);
+        make.width.equalTo(80);
     }];
     
     [dateLabel makeConstraints:^(MASConstraintMaker *make) {
@@ -85,6 +86,7 @@
     [viewImageView makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(viewcountLabel.left).offset(-5);
         make.centerY.equalTo(viewcountLabel);
+        make.size.equalTo(CGSizeMake(14, 14));
     }];
 
     [replycountLabel makeConstraints:^(MASConstraintMaker *make) {
@@ -95,6 +97,7 @@
     [replyImageView makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(replycountLabel.left).offset(-5);
         make.centerY.equalTo(viewcountLabel);
+        make.size.equalTo(CGSizeMake(12, 12));
     }];
 }
 

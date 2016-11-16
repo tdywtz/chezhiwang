@@ -6,9 +6,9 @@
 //  Copyright (c) 2015年 车质网. All rights reserved.
 //
 
-#import "BasicObject.h"
+#import <Foundation/Foundation.h>
 
-@interface MyComplainModel : BasicObject
+@interface MyComplainModel : NSObject
 
 @property (nonatomic,copy) NSString *common;
 @property (nonatomic,copy) NSString *Cpid;
