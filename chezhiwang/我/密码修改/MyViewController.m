@@ -20,6 +20,28 @@
 #import "BasicNavigationController.h"
 
 
+@interface MyViewModel : NSObject
+
+@property (nonatomic,copy) NSString *title;
+@property (nonatomic,copy) NSString *imageName;
+@property (nonatomic,assign) Class aClass ;
+
+@end
+
+@implementation MyViewModel
+
+- (instancetype)initWithTitle:(NSString *)title imageName:(NSString *)imageName class:(Class)aClass{
+    self = [super init];
+    if (self) {
+        _title = title;
+        _imageName = imageName;
+        _aClass = aClass;
+    }
+    return self;
+}
+@end
+
+
 @interface MyViewController ()<UIAlertViewDelegate,UITableViewDataSource,UITableViewDelegate>
 {
 
@@ -37,13 +59,13 @@
     [super viewDidLoad];
 
     [self.view addSubview:[UIView new]];
-    
+
     [self createItem];
     [self createTableView];
     [self reloadData];
 
 
-   // [_tableView addTwitterCoverWithImage:[UIImage imageNamed:@"cover.png"] withTopView:nil];
+    // [_tableView addTwitterCoverWithImage:[UIImage imageNamed:@"cover.png"] withTopView:nil];
 }
 
 
@@ -89,32 +111,37 @@
 
 - (void)reloadData{
     if (![CZWManager manager].isLogin) {
-        //数量字典置空
+        //数量字典置空ns
         numDictonary = nil;
         _dataArray = @[
                        @[
-                           @{@"class":@"MyComplainViewController",@"title":@"我的投诉",@"imageName":@"centre_complain"},
-                           @{@"class":@"MyAskViewController",@"title":@"我的提问",@"imageName":@"centre_answer"},
-                           @{@"class":@"MyCommentViewController",@"title":@"我的评论",@"imageName":@"centre_comment"},
-                           @{@"class":@"FavouriteViewController",@"title":@"我的收藏",@"imageName":@"centre_favorite"}
+                           [[MyViewModel alloc] initWithTitle:@"我的投诉" imageName:@"centre_complain" class:NSClassFromString(@"MyComplainViewController")],
+                           [[MyViewModel alloc] initWithTitle:@"我的提问" imageName:@"centre_answer" class:NSClassFromString(@"MyAskViewController")]
                            ],
+                       @[
+                           [[MyViewModel alloc] initWithTitle:@"我的评论" imageName:@"centre_comment" class:[CentreCommentViewController class]],
+                           [[MyViewModel alloc] initWithTitle:@"我的收藏" imageName:@"centre_favorite" class:NSClassFromString(@"FavouriteViewController")]
+                           ]
                        ];
         _tableView.tableFooterView.hidden = YES;
         [headerView setTitle:@"  登录/注册  " imageUrl:nil login:NO];
 
     }else{
         _tableView.tableFooterView.hidden = NO;
-         [headerView setTitle:[CZWManager manager].userName imageUrl:[CZWManager manager].iconUrl login:YES];
+        [headerView setTitle:[CZWManager manager].userName imageUrl:[CZWManager manager].iconUrl login:YES];
         _dataArray = @[
                        @[
-                           @{@"class":@"MyComplainViewController",@"title":@"我的投诉",@"imageName":@"centre_complain"},
-                           @{@"class":@"MyAskViewController",@"title":@"我的提问",@"imageName":@"centre_answer"},
-                           @{@"class":@"MyCommentViewController",@"title":@"我的评论",@"imageName":@"centre_comment"},
-                           @{@"class":@"FavouriteViewController",@"title":@"我的收藏",@"imageName":@"centre_favorite"}
+                           [[MyViewModel alloc] initWithTitle:@"我的投诉" imageName:@"centre_complain" class:NSClassFromString(@"MyComplainViewController")],
+                           [[MyViewModel alloc] initWithTitle:@"我的提问" imageName:@"centre_answer" class:NSClassFromString(@"MyAskViewController")]
                            ],
                        @[
-                           @{@"class":@"PasswordViewController",@"title":@"密码修改",@"imageName":@"centre_password"}
+                           [[MyViewModel alloc] initWithTitle:@"我的评论" imageName:@"centre_comment" class:[CentreCommentViewController class]],
+                           [[MyViewModel alloc] initWithTitle:@"我的收藏" imageName:@"centre_favorite" class:NSClassFromString(@"FavouriteViewController")]
                            ],
+                       @[
+                           [[MyViewModel alloc] initWithTitle:@"密码修改" imageName:@"centre_password" class:NSClassFromString(@"PasswordViewController")]
+
+                           ]
                        ];
 
 
@@ -128,6 +155,7 @@
     _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStyleGrouped];
     _tableView.delegate = self;
     _tableView.dataSource = self;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
 
 
@@ -141,7 +169,7 @@
 
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn addTarget:self action:@selector(logoutClick) forControlEvents:UIControlEventTouchUpInside];
-     btn.backgroundColor = [UIColor whiteColor];
+    btn.backgroundColor = [UIColor whiteColor];
     [btn setTitle:@"退出登录" forState:UIControlStateNormal];
     [btn setTitleColor:colorOrangeRed forState:UIControlStateNormal];
     [tableFootView addSubview:btn];
@@ -155,11 +183,11 @@
 }
 
 - (void)logoutClick{
-   UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"是否确定退出当前账号？"
-                                                message:nil
-                                               delegate:self
-                                      cancelButtonTitle:@"取消"
-                                      otherButtonTitles:@"确定", nil];
+    UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"是否确定退出当前账号？"
+                                                 message:nil
+                                                delegate:self
+                                       cancelButtonTitle:@"取消"
+                                       otherButtonTitles:@"确定", nil];
     al.delegate = self;
     [al show];
 }
@@ -211,6 +239,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"centerCell"];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.textLabel.font = [UIFont systemFontOfSize:17];
         UILabel *label = [[UILabel alloc ] init];
         label.font = [UIFont systemFontOfSize:15];
         label.textColor = colorLightGray;
@@ -221,10 +250,21 @@
             make.right.equalTo(-4);
             make.centerY.equalTo(0);
         }];
+
+
+        UIView *lineView = [[UIView alloc] init];
+        lineView.backgroundColor = RGB_color(240, 240, 240, 1);
+        [cell.contentView addSubview:lineView];
+
+        [lineView makeConstraints:^(MASConstraintMaker *make) {
+            make.left.bottom.equalTo(0);
+            make.width.equalTo(WIDTH);
+            make.height.equalTo(1);
+        }];
     }
-    NSDictionary *dict = _dataArray[indexPath.section][indexPath.row];
-    cell.imageView.image = [UIImage imageNamed:dict[@"imageName"]];
-    cell.textLabel.text = dict[@"title"];
+    MyViewModel *model = _dataArray[indexPath.section][indexPath.row];
+    cell.imageView.image = [UIImage imageNamed:model.imageName];
+    cell.textLabel.text = model.title;
 
     UILabel *label = (UILabel *)[cell.contentView viewWithTag:100];
     if (indexPath.section == 0) {
@@ -246,7 +286,7 @@
 #pragma mark - UITableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
 
-    return 50;
+    return 55;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
@@ -260,25 +300,25 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
-        if (![CZWManager manager].isLogin) {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                                message:@"您还未登录，您可以登录后进行操作"
-                                                               delegate:nil
-                                                      cancelButtonTitle:nil
-                                                      otherButtonTitles:@"确定", nil];
-                [alert show];
+    if (![CZWManager manager].isLogin) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                            message:@"您还未登录，您可以登录后进行操作"
+                                                           delegate:nil
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:@"确定", nil];
+            [alert show];
 
 
-            });
-            return;
-        }
-    
-    Class cls = NSClassFromString(_dataArray[indexPath.section][indexPath.row][@"class"]);
-    if (!cls) {
+        });
         return;
     }
-    UIViewController *vc = [[cls alloc] init];
+
+    MyViewModel *model = _dataArray[indexPath.section][indexPath.row];
+    if (!model.aClass) {
+        return;
+    }
+    UIViewController *vc = [[model.aClass alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }

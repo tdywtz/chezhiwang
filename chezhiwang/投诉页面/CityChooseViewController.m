@@ -8,15 +8,35 @@
 
 #import "CityChooseViewController.h"
 
+@interface CityChooseModel : NSObject
+
+@property (nonatomic,copy) NSString *title;
+@property (nonatomic,copy) NSString *ID;
+
+- (instancetype)initWithTitle:(NSString *)title ID:(NSString *)ID;
+@end
+
+@implementation CityChooseModel
+
+- (instancetype)initWithTitle:(NSString *)title ID:(NSString *)ID{
+    if (self = [self init]) {
+        _title = title;
+        _ID = ID;
+    }
+    return self;
+}
+
+@end
+
 @interface CityChooseViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     UIButton *rightItemButton;
     UITableView *_oneTableView;
-    NSArray *_oneDataArray;
+    NSMutableArray *_oneDataArray;
     
     UIView *_twoSuperView;
     UITableView *_twoTableView;
-    NSArray *_twoDataArray;
+    NSMutableArray *_twoDataArray;
     
     NSString *_pid;
     NSString *_pName;
@@ -30,7 +50,11 @@
 
 -(void)loadDataOne{
     [HttpRequest GET:[URLFile urlStringForPro] success:^(id responseObject) {
-        _oneDataArray = responseObject;
+        [_oneDataArray removeAllObjects];
+        for (NSDictionary *dict in responseObject[@"rel"]) {
+            CityChooseModel *model = [[CityChooseModel alloc] initWithTitle:dict[@"name"] ID:dict[@"id"]];
+            [_oneDataArray addObject:model];
+        }
         [_oneTableView reloadData];
     } failure:^(NSError *error) {
         
@@ -40,7 +64,11 @@
 -(void)loadDataTwo:(NSString *)pid{
     NSString *urlSting = [NSString stringWithFormat:[URLFile urlStringForDisCity],pid];
     [HttpRequest GET:urlSting success:^(id responseObject) {
-        _twoDataArray = responseObject;
+        [_twoDataArray removeAllObjects];
+        for (NSDictionary *dict in responseObject[@"rel"]) {
+            CityChooseModel *model = [[CityChooseModel alloc] initWithTitle:dict[@"cityName"] ID:dict[@"cid"]];
+            [_twoDataArray addObject:model];
+        }
         [_twoTableView reloadData];
     } failure:^(NSError *error) {
         
@@ -49,13 +77,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
- 
+
+    _oneDataArray = [NSMutableArray array];
+    _twoDataArray = [NSMutableArray array];
+
     self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
     self.navigationController.navigationBar.barTintColor = colorLightBlue;
     self .title = @"省、市";
     self.view.backgroundColor = [UIColor whiteColor];
     [self createLeftItem];
-    //[self createRightItem];
+
     [self createTableView];
     [self loadDataOne];
 }
@@ -175,7 +206,8 @@
             //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-        cell.textLabel.text = _oneDataArray[indexPath.row][@"Name"];
+        CityChooseModel *model = _oneDataArray[indexPath.row];
+        cell.textLabel.text = model.title;
         UIImageView *cellImageView = (UIImageView *)[cell.contentView viewWithTag:100];
         if ([cell.textLabel.text isEqualToString:_pName]) {
             cell.textLabel.textColor = colorDeepBlue;
@@ -202,7 +234,8 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
 
-    cell.textLabel.text = _twoDataArray[indexPath.row][@"CityName"];
+    CityChooseModel *model = _twoDataArray[indexPath.row];
+    cell.textLabel.text = model.title;
     UIImageView *cellImageView = (UIImageView *)[cell.contentView viewWithTag:200];
     if ([cell.textLabel.text isEqualToString:_cName]) {
         cell.textLabel.textColor = colorDeepBlue;
@@ -224,13 +257,13 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == _oneTableView) {
     
-        NSDictionary *dict = _oneDataArray[indexPath.row];
-        if (![_pid isEqualToString:dict[@"Id"]]) {
-            [self loadDataTwo:dict[@"Id"]];
+        CityChooseModel *model = _oneDataArray[indexPath.row];
+        if (![_pid isEqualToString:model.ID]) {
+            [self loadDataTwo:model.ID];
             _twoSuperView.frame = CGRectMake(WIDTH+10, 64, WIDTH/3*2, HEIGHT-64);
             
-            _pid = dict[@"Id"];
-            _pName = dict[@"Name"];
+            _pid = model.ID;
+            _pName = model.title;
             if ([_pid isKindOfClass:[NSNumber class]]) {
                 _pid = [NSString stringWithFormat:@"%@",_pid];
             }
@@ -244,12 +277,13 @@
             _twoSuperView.frame = CGRectMake(WIDTH/3, 64, WIDTH/3*2, HEIGHT-64);
         }];
     }else{
-        NSDictionary *dict = _twoDataArray[indexPath.row];
 
-        if (![_cName isEqualToString:dict[@"CityName"]]) {
+        CityChooseModel *model = _twoDataArray[indexPath.row];
+
+        if (![_cName isEqualToString:model.title]) {
             
-            _cid = dict[@"CityId"];
-            _cName = dict[@"CityName"];
+            _cid = model.ID;
+            _cName = model.title;
             if ([_cid isKindOfClass:[NSNumber class]]) {
                 _pid = [NSString stringWithFormat:@"%@",_cid];
             }

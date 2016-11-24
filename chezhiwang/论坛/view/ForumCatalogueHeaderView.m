@@ -27,7 +27,7 @@
     HeaderViewUIButton *item = [HeaderViewUIButton buttonWithType:UIButtonTypeCustom];
 
 
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, width, 60)];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, width, 50)];
     imageView.image = image;
     imageView.contentMode = UIViewContentModeScaleAspectFit;
     [item addSubview:imageView];
@@ -62,12 +62,12 @@
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
 
-        CZWLabel *lanmuLabel = [[CZWLabel alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 30)];
+        CZWLabel *lanmuLabel = [[CZWLabel alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 40)];
         lanmuLabel.textInsets = UIEdgeInsetsMake(0, 15, 0, 0);
         lanmuLabel.backgroundColor = RGB_color(240, 240, 240, 1);
         lanmuLabel.text = @"栏目论坛";
 
-        CZWLabel *brandLabel = [[CZWLabel alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 30)];
+        CZWLabel *brandLabel = [[CZWLabel alloc] initWithFrame:CGRectMake(0, 0, WIDTH, lanmuLabel.lh_height)];
         brandLabel.textInsets = UIEdgeInsetsMake(0, 15, 0, 0);
         brandLabel.backgroundColor = RGB_color(240, 240, 240, 1);
         brandLabel.text = @"品牌论坛";
@@ -77,7 +77,7 @@
 
         NSArray *array = @[
                            @{@"title":@"故障交流",@"imageName":@"forum_故障交流",@"ID":@"2"},
-                           @{@"title":@"用车心得",@"imageName":@"forum_用车心得",@"ID":@"381"},
+                           @{@"title":@"用车心得",@"imageName":@"forum_用车心得",@"ID":@"3"},
                            @{@"title":@"人车生活",@"imageName":@"forum_人车生活",@"ID":@"1"},
                            @{@"title":@"汽车文化",@"imageName":@"forum_汽车文化",@"ID":@"5"},
                            @{@"title":@"七嘴八舌",@"imageName":@"forum_七嘴八舌",@"ID":@"4"},
@@ -91,12 +91,12 @@
             [itme addTarget:self action:@selector(itemClick:) forControlEvents:UIControlEventTouchUpInside];
              [self addSubview:itme];
 
-            CGFloat space = (WIDTH-itme.lh_width*3)/4;
+                CGFloat space = (WIDTH-itme.lh_width*3)/4;
 
             itme.lh_left = (i%3)*(itme.lh_width+space)+space;
             itme.lh_top = (i/3)*(itme.lh_height+20)+lanmuLabel.lh_bottom+20;
 
-            self.lh_height = itme.lh_bottom+20+30;
+            self.lh_height = itme.lh_bottom+20+brandLabel.lh_height;
         }
 
         brandLabel.lh_bottom = self.lh_bottom;

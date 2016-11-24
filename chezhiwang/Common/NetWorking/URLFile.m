@@ -12,14 +12,10 @@
 
 + (NSString *)stringWithBasic:(NSString *)actString{
 
-    return [self stringForAppWebServiceWithAct:actString];
+    return [NSString stringWithFormat:@"%@%@%@",[self prefixString],@"/server/forAppWebService.ashx?",actString];
 }
 
 /**车质网专用*/
-+ (NSString *)stringForAppWebServiceWithAct:(NSString *)act{
-    return [NSString stringWithFormat:@"%@%@%@",[self prefixString],@"/server/forAppWebService.ashx?",act];
-}
-
 
 + (NSString *)stringForCZWServiceWithAct:(NSString *)act{
     return [NSString stringWithFormat:@"%@%@%@",[self prefixString],@"/AppServer/forCZWService.ashx?",act];
@@ -29,6 +25,7 @@
 + (NSString *)stringForCommonServiceWithAct:(NSString *)act{
     return [NSString stringWithFormat:@"%@%@%@",[self prefixString],@"/AppServer/forCommonService.ashx?",act];
 }
+
 + (NSString *)stringForCommon:(NSString *)act{
     return [NSString stringWithFormat:@"%@%@%@",[self prefixString],@"/server/forCommonService.ashx?",act];
 }
@@ -37,7 +34,7 @@
 /**前缀*/
 + (NSString *)prefixString{
 #if DEBUG
-return  @"http://m.12365auto.com";
+
     return  @"http://192.168.1.114:8888";
 #else
     return  @"http://m.12365auto.com";
@@ -68,21 +65,21 @@ return  @"http://m.12365auto.com";
 }
 
 #pragma mark- 车型图片
-/**车型图片*/
+/**车型图片-根据参数获取车型图片列表*/
 + (NSString *)urlString_modelPlicList{
     // attr 车型属性
     // bid  品牌
     // sid  车系
     // mid  车型
-    return [self stringWithBasic:@"act=modelPicList"];
+    return [self stringForCZWServiceWithAct:@"act=modelPicList"];
 }
-/**品牌大全*/
+/**车型图片-品牌大全*/
 + (NSString *)urlString_picBrand{
-    return [self stringForCommonServiceWithAct:@"act=brandlist"];
+    return [self stringForCommonServiceWithAct:@"act=picBrand"];
 }
-/*车系大全*/
+/*车型图片-车系大全*/
 + (NSString *)urlString_picSeries{
-    return [self stringForAppWebServiceWithAct:@"act=picSeries&bid=%@"];
+    return [self stringForCZWServiceWithAct:@"act=picSeries&bid=%@"];
 }
 
 #pragma mark - homepage
@@ -94,16 +91,20 @@ return  @"http://m.12365auto.com";
 #pragma mark - 新闻
 /**新闻列表*/
 + (NSString *)urlStringForNewsList{
+    //style : 新闻分类
+    //title :  搜索时使用
     return [self stringForCZWServiceWithAct:@"act=newslist&style=%@%@"];
 }
 
 /**新闻-调查*/
 + (NSString *)urlStringForReport{
+    //t : 车型属性
     return  [self stringForCZWServiceWithAct:@"act=reportlist&t=%@%@"];
 }
 
-/**新闻详情*/
+/**新闻详情、type: 调查新闻3，其他新闻1 */
 + (NSString *)urlStringForNewsinfo{
+
     return [self stringForCZWServiceWithAct:@"act=newsinfo&id=%@&type=%@"];
 }
 
@@ -122,21 +123,8 @@ return  @"http://m.12365auto.com";
     return [self stringForCZWServiceWithAct:@"act=newslist&style=%@&title=%@&p=%ld&s=%ld"];
 }
 
-#pragma mark - 投诉
-/**大品牌*/
-+ (NSString *)urlStringForLetter{
-    return [self stringWithBasic:@"act=letter"];
-}
-
-
-/**车系*/
-+ (NSString *)urlStringForSeries{
-    return [self stringWithBasic:@"act=series&id=%@"];
-}
-
-
 #pragma mark - 投诉排行
-/**选择*/
+/**排行榜-页面查询条件*/
 + (NSString *)urlString_rankingAct{
 
     return [self stringForCZWServiceWithAct:@"act=rankingAct"];
@@ -173,53 +161,67 @@ return  @"http://m.12365auto.com";
 
 /**评论列表*/
 + (NSString *)urlStringForPL{
+    //id：   文章编号
+    //type :   1：新闻，2：投诉，3：答疑  5：新车调查
     return [self stringForCommonServiceWithAct:@"act=pl&id=%@&type=%@&p=%ld&s=10"];
 }
-
-///**评论总数*/
-//+ (NSString *)urlStringForPL_total{
-//    return [self stringWithBasic:@"act=pl&id=%@&type=%@"];
-//}
 
 /**提交评论*/
 + (NSString *)urlStringForAddcomment{
     return [self stringForCommonServiceWithAct:@"act=addpl"];
 }
 
+/**大品牌*/
++ (NSString *)urlStringForLetter{
+    return [self stringForCommonServiceWithAct:@"act=brandlist"];
+}
+
+
+/**车系*/
++ (NSString *)urlStringForSeries{
+    //id ： 品牌id
+    return [self stringForCommonServiceWithAct:@"act=serieslist&id=%@"];
+}
+
 /**车型*/
 + (NSString *)urlStringForModelList{
-    return [self stringWithBasic:@"act=modellist&sid=%@"];
+    //sid ： 车系id
+    return [self stringForCommonServiceWithAct:@"act=modellist&sid=%@"];
 }
 
-/**省份*/
+/**获取省份*/
 + (NSString *)urlStringForPro{
-    return [self stringWithBasic:@"act=pro"];
+    return [self stringForCommonServiceWithAct:@"act=pro"];
 }
 
-/**城市*/
+/**获取经销商城市*/
 + (NSString *)urlStringForDisCity{
-    return [self stringWithBasic:@"act=discity&pid=%@"];
+    return [self stringForCommonServiceWithAct:@"act=discity&pid=%@"];
 }
 
-/**经销商*/
+/**获取经销商*/
 + (NSString *)urlStringForDis{
-    return  [self stringForAppWebServiceWithAct:@"act=dis&pid=%@&cid=%@&sid=%@"];
+    return  [self stringForCommonServiceWithAct:@"act=dis&pid=%@&cid=%@&sid=%@"];
 }
 
-/**投诉*/
+/**提交、修改投诉*/
 + (NSString *)urlStringForProgressComplain{
-    return [self stringWithBasic:@"act=progressComplain"];
+    return [self stringForCommonServiceWithAct:@"act=addcomplain"];
 }
 
 #pragma mark -答疑
 /**答疑列表*/
 + (NSString *)urlStringForZJDY{
+    //title :  搜索时使用
+    //t     : 答疑分类
     return [self stringForCommonServiceWithAct:@"act=zjdylist&t=%@&p=%ld&s=10"];
 }
+
 /**答疑搜索*/
 + (NSString *)urlStringForZJDYSearch{
     return [self stringForCommonServiceWithAct:@"act=zjdylist&title=%@&p=%ld&s=%ld"];
 }
+
 /**我要提问*/
 + (NSString *)urlStringForEditZJDY{
     return  [self stringWithBasic:@"act=editZJDY"];
@@ -232,52 +234,53 @@ return  @"http://m.12365auto.com";
 #pragma mark - 论坛
 /**论坛列表*/
 + (NSString *)urlStringForPostList{
-    return [self stringWithBasic:@"act=postlist&order=%ld&topic=%ld&p=%ld&s=10"];
+    return [self stringForCZWServiceWithAct:@"act=bbslist&order=%ld&topic=%ld&p=%ld&s=10"];
 }
 /**帖子内容*/
-+ (NSString *)urlStringForPostInfo{
-    return [self stringWithBasic:@"act=postinfo&tid=%@"];
++ (NSString *)urlStringForBBSContent{
+    return [NSString stringWithFormat:@"%@%@",[self prefixString],@"/AppServer/forBBSContent.aspx?tid=%@"];
 }
 /**论坛车系品牌*/
 + (NSString *)urlStringForOtherSeries{
     return  [self stringWithBasic:@"act=otherseries"];
 }
+
 /**论坛分类->品牌论坛->指定论坛*/
 + (NSString *)urlStringForSeriesForm
 {
-    return [self stringWithBasic:@"act=seriesform&sid=%@"];
+    return [self stringForCZWServiceWithAct:@"act=bbsseries&sid=%@"];
 }
 /**论坛分类->栏目论坛->指定论坛*/
 + (NSString *)urlString_columnform{
-    return [self stringWithBasic:@"act=columnform&cid=%@"];
+    return [self stringForCZWServiceWithAct:@"act=bbscolumn&cid=%@"];
 }
 /**回复帖子*/
 + (NSString *)urlStringForReplyPost{
-    return [self stringWithBasic:@"act=replypost"];
+    return [self stringForCZWServiceWithAct:@"act=replypost"];
 }
 /**回复其中一条评论*/
 + (NSString *)urlStringForReplyFloor{
-    return [self stringWithBasic:@"act=replyfloor"];
+    return [self stringForCZWServiceWithAct:@"act=replyfloor"];
 }
 /**申请版主*/
 + (NSString *)urlStringForApplyOwner{
-    return [self stringWithBasic:@"act=applyOwner"];
+    return [self stringForCZWServiceWithAct:@"act=applyOwner"];
 }
 /**发表帖子*/
 + (NSString *)urlStringForNewTopic{
-    return [self stringWithBasic:@"act=newtopic"];
+    return [self stringForCZWServiceWithAct:@"act=newtopic"];
 }
-/**下载用户数据*/
+/**申请版主-下载用户数据*/
 + (NSString *)urlString_getApplyOwner{
-    return [self stringWithBasic:@"act=getApplyOwner&uid=%@"];
+    return [self stringForCZWServiceWithAct:@"act=getApplyOwner&uid=%@"];
 }
 /**论坛分类->品牌论坛->论坛列表*/
 + (NSString *)urlStringForBrand_postlist{
-    return [self stringWithBasic:@"act=postlist&sid=%@&order=%ld&topic=%ld&p=%ld&s=%ld"];
+    return [self stringForCZWServiceWithAct:@"act=bbslist&sid=%@&order=%ld&topic=%ld&p=%ld&s=10"];
 }
 /**论坛分类->栏目论坛->论坛列表*/
 + (NSString *)urlStringForColumn_postlist{
-    return  [self stringWithBasic:@"act=postlist&cid=%@&order=%ld&topic=%ld&p=%ld&s=%ld"];
+    return  [self stringForCZWServiceWithAct:@"act=bbslist&cid=%@&order=%ld&topic=%ld&p=%ld&s=10"];
 }
 
 #pragma mark-个人中心
@@ -343,7 +346,7 @@ return  @"http://m.12365auto.com";
 
 /**市*/
 + (NSString *)urlStringForCity{
-    return [self stringWithBasic:@"act=city&pid=%@"];
+    return [self stringForCommonServiceWithAct:@"act=city&pid=%@"];
 }
 
 
@@ -387,13 +390,13 @@ return  @"http://m.12365auto.com";
     return [self stringForCommon:@"act=sendemail&username=%@&origin=%@"];
 }
 #pragma mark - 数据对比
-/**对比*/
+/**对比-车型参数*/
 + (NSString *)urlString_mConfig{
     //(车系id,车型id)sid=%@&mid=%@
     //不传参数则为左侧第一列名称，传参数则为右边值
     return [self stringForCZWServiceWithAct:@"act=mConfig"];
 }
-/**头部概括信息*/
+/**对比-车型故障信息*/
 + (NSString *)urlString_dbInfo{
     //bid-品牌，sid-车系，mid-车型
     return [self stringForCZWServiceWithAct:@"act=dbInfo&bid=%@&sid=%@&mid=%@"];

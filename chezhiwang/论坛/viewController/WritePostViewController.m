@@ -137,19 +137,24 @@
 #pragma mark - 发布帖子
 -(void)submitData:(NSDictionary *)dict{
   
-    UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"正在上传"
-                                                 message:nil
-                                                delegate:nil
-                                       cancelButtonTitle:nil
-                                       otherButtonTitles:nil, nil];
-    [al show];
-    
-
+   MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    __weak __typeof(self)weakSelf = self;
     [HttpRequest POST:[URLFile urlStringForNewTopic] parameters:dict images:_dataArray success:^(id responseObject) {
-        [al dismissWithClickedButtonIndex:0 animated:YES];
-        [self dismissViewControllerAnimated:YES completion:nil];
+
+        if (responseObject[@"success"]) {
+             [MBProgressHUD hideHUDForView:self.view animated:YES];
+             [weakSelf dismissViewControllerAnimated:YES completion:nil];
+        }else{
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = @"上传失败";
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+            });
+        }
+
+
     } failure:^(NSError *error) {
-         [al dismissWithClickedButtonIndex:0 animated:YES];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
 }
 
@@ -188,7 +193,7 @@
     bgView.backgroundColor = [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1];
     [view addSubview:bgView];
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeTap:)];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(classifyClick)];
     [bgView addGestureRecognizer:tap];
     
     CGSize size =[@"请选择论坛" boundingRectWithSize:CGSizeMake(200, 20) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:[LHController setFont]-3]} context:nil].size;
@@ -216,43 +221,23 @@
 -(void)classifyClick{
     
     if (self.classify == forumClassifyColumn) {
-        ForumClassifyViewController *classify = [[ForumClassifyViewController alloc] init];
-        classify.nextType = classifyNextPop;
-        [classify returnSid:^(NSString *sid, NSString *titile) {
-            self.sid = sid;
-            [self changeClassifyButtonTitle:titile];
-        }];
-        [self.navigationController pushViewController:classify animated:YES];
-    }else{
         ForumClassifyTwoController *classify = [[ForumClassifyTwoController alloc] init];
-        classify.nextType = classifyNextPop;
         [classify returnCid:^(NSString *cid, NSString *title) {
             self.cid = cid;
             [self changeClassifyButtonTitle:title];
+        }];
+        [self.navigationController pushViewController:classify animated:YES];
+
+    }else{
+        ForumClassifyViewController *classify = [[ForumClassifyViewController alloc] init];
+        [classify returnSid:^(NSString *sid, NSString *titile) {
+            self.sid = sid;
+            [self changeClassifyButtonTitle:titile];
         }];
         [self.navigationController pushViewController:classify animated:YES];
     }
 }
 
--(void)changeTap:(UITapGestureRecognizer *)tap{
-    if (self.classify == forumClassifyColumn) {
-        ForumClassifyViewController *classify = [[ForumClassifyViewController alloc] init];
-        classify.nextType = classifyNextPop;
-        [classify returnSid:^(NSString *sid, NSString *titile) {
-            self.sid = sid;
-            [self changeClassifyButtonTitle:titile];
-        }];
-        [self.navigationController pushViewController:classify animated:YES];
-    }else{
-        ForumClassifyTwoController *classify = [[ForumClassifyTwoController alloc] init];
-        classify.nextType = classifyNextPop;
-        [classify returnCid:^(NSString *cid, NSString *title) {
-            self.cid = cid;
-            [self changeClassifyButtonTitle:title];
-        }];
-        [self.navigationController pushViewController:classify animated:YES];
-    }
-}
 
 -(void)changeClassifyButtonTitle:(NSString *)text{
      CGSize size =[text boundingRectWithSize:CGSizeMake(200, 20) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:[LHController setFont]-3]} context:nil].size;

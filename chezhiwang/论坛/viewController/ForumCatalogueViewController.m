@@ -47,6 +47,11 @@
     [sliderView addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)]];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self hiddeSliderView];
+}
+
 #pragma mark - 滑动手势
 -(void)pan:(UIPanGestureRecognizer *)pan{
     CGPoint point = [pan translationInView:self.view];
@@ -170,10 +175,39 @@
     [self showSliderView];
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-ForumCatalogueSectionModel *sectionModel = _dataArray[section];
-    return sectionModel.title;
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    ForumCatalogueSectionModel *sectionModel = _dataArray[section];
+
+    UILabel *label = [[UILabel alloc] init];
+    label.backgroundColor = [UIColor whiteColor];
+    label.text = [NSString stringWithFormat:@"    %@",sectionModel.title];
+
+    UIView *lineView1 = [[UIView alloc] init];
+    lineView1.backgroundColor = RGB_color(200, 200, 200, 1);
+
+    UIView *lineView2 = [[UIView alloc] init];
+    lineView2.backgroundColor = RGB_color(200, 200, 200, 1);
+
+    [label addSubview:lineView1];
+    [label addSubview:lineView2];
+
+    [lineView1 makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(40);
+        make.top.right.equalTo(0);
+        make.height.equalTo(0.6);
+    }];
+
+    [lineView2 makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(0);
+        make.height.equalTo(0.6);
+    }];
+
+    return label;
 }
+//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+//    ForumCatalogueSectionModel *sectionModel = _dataArray[section];
+//    return sectionModel.title;
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 0.1;

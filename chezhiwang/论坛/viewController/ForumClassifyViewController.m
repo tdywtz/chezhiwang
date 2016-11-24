@@ -8,55 +8,36 @@
 
 #import "ForumClassifyViewController.h"
 #import "ForumClassifyListViewController.h"
-#import "AIMTableViewIndexBar.h"
+#import <MJNIndexView.h>
 #import "WritePostViewController.h"
+#import "ForumCatalogueSectionModel.h"
 
-@interface ForumClassifyViewController ()<UITableViewDataSource,UITableViewDelegate,AIMTableViewIndexBarDelegate>
+@interface ForumClassifyViewController ()<UITableViewDataSource,UITableViewDelegate,MJNIndexViewDataSource>
 {
     UITableView *_tableView;
-    NSMutableArray *_dataArray;
-    NSMutableArray *_indexArray;
+    NSArray *_dataArray;
     
     UIView *twoView;
     NSArray *twoArray;
     UITableView *twoTableView;
 }
+@property (nonatomic, strong) MJNIndexView *indexView;
 @end
 
 @implementation ForumClassifyViewController
 
 -(void)readData{
 
-
+    __weak __typeof(self)weakSelf = self;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 
-    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
     [HttpRequest GET:[URLFile urlStringForOtherSeries] policy:NSURLRequestReturnCacheDataElseLoad success:^(id responseObject) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        for (NSDictionary *dict in responseObject) {
-          
-            NSString *key = dict[@"letter"];
-            NSMutableArray *mArr = dictionary[key];
-            if (mArr == nil) {
-                mArr = [[NSMutableArray alloc] init];
-            }
-            [mArr addObject:dict];
-            [dictionary setObject:mArr forKey:key];
-        }
-        
-        for (int i = 'A'; i <= 'Z'; i ++) {
-            NSString *key = [NSString stringWithFormat:@"%c",i];
-            if (dictionary[key]) {
-                [_dataArray addObject:dictionary[key]];
-                [_indexArray addObject:key];
-            }
-        }
-        AIMTableViewIndexBar *indexBar = [[AIMTableViewIndexBar alloc] initWithFrame:CGRectMake(WIDTH-30, 94, 30, HEIGHT-64-80) andArray:_indexArray];
-        indexBar.delegate = self;
-        [self.view insertSubview:indexBar belowSubview:twoView];
-        
-        [_tableView reloadData];
 
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        _dataArray = [ForumCatalogueSectionModel arrayWithArray:responseObject];
+        [_tableView reloadData];
+        weakSelf.indexView.dataSource = self;
+        [weakSelf.view insertSubview:weakSelf.indexView atIndex:1];
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
@@ -66,11 +47,36 @@
     [super viewDidLoad];
     
     self.navigationItem.title = @"品牌论坛";
-    _dataArray = [[NSMutableArray alloc] init];
-    _indexArray = [[NSMutableArray alloc] init];
 
     [self createTableView];
+    [self firstAttributesForMJNIndexView];
     [self readData];
+}
+
+- (void)firstAttributesForMJNIndexView
+{
+    self.indexView = [[MJNIndexView alloc]initWithFrame:CGRectMake(0, 64, WIDTH, HEIGHT-64)];
+
+    self.indexView.getSelectedItemsAfterPanGestureIsFinished = YES;
+    self.indexView.font = [UIFont fontWithName:@"HelveticaNeue" size:13.0];
+    self.indexView.selectedItemFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:40.0];
+    self.indexView.backgroundColor = [UIColor clearColor];
+    self.indexView.curtainColor = nil;
+    self.indexView.curtainFade = 0.0;
+    self.indexView.curtainStays = NO;
+    self.indexView.curtainMoves = YES;
+    self.indexView.curtainMargins = NO;
+    self.indexView.ergonomicHeight = NO;
+    self.indexView.upperMargin = 22.0;
+    self.indexView.lowerMargin = 22.0;
+    self.indexView.rightMargin = 10.0;
+    self.indexView.itemsAligment = NSTextAlignmentCenter;
+    self.indexView.maxItemDeflection = 100.0;
+    self.indexView.rangeOfDeflection = 5;
+    self.indexView.fontColor = colorLightBlue;
+    self.indexView.selectedItemFontColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
+    self.indexView.darkening = NO;
+    self.indexView.fading = YES;
 }
 
 
@@ -128,13 +134,19 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    if (tableView == twoTableView) return 1;
+    if (tableView == twoTableView) return twoArray.count;
     return _dataArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (tableView == twoTableView) return twoArray.count;
-    return [_dataArray[section] count];
+    if (tableView == twoTableView){
+        ForumCatalogueSectionModel *sectionModel = twoArray[section];
+        return sectionModel.roeModels.count;
+
+    }else{
+        ForumCatalogueSectionModel *sectionModel = _dataArray[section];
+        return sectionModel.roeModels.count;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -143,19 +155,22 @@
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"twocell"];
         }
-        //cell.imageView.image = [UIImage imageNamed:@""];
-        cell.textLabel.text = twoArray[indexPath.row][@"sname"];
-        cell.textLabel.font = [UIFont systemFontOfSize:[LHController setFont]-2];
+        ForumCatalogueSectionModel *sectionModel2 = twoArray[indexPath.section];
+        ForumCatalogueModel *model = sectionModel2.roeModels[indexPath.row];
+        cell.textLabel.text = model.title;
+        cell.textLabel.font = [UIFont systemFontOfSize:17];
+        return cell;
+    }else{
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+        }
+        ForumCatalogueSectionModel *sectionModel = _dataArray[indexPath.section];
+        ForumCatalogueModel *model = sectionModel.roeModels[indexPath.row];
+        cell.textLabel.text = model.title;
+        cell.textLabel.font = [UIFont systemFontOfSize:17];
         return cell;
     }
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-    }
-    //cell.imageView.image = [[UIImage alloc] init];
-    cell.textLabel.text = _dataArray[indexPath.section][indexPath.row][@"bname"];
-    cell.textLabel.font = [UIFont systemFontOfSize:[LHController setFont]-2];
-    return cell;
 }
 
 #pragma mark - UITableViewDelegate
@@ -164,8 +179,13 @@
 //}
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    if (tableView == twoTableView) return nil;
-    return _indexArray[section];
+    if (tableView == twoTableView){
+         ForumCatalogueSectionModel *sectionModel = twoArray[section];
+        return sectionModel.title;
+    }
+
+    ForumCatalogueSectionModel *sectionModel = _dataArray[section];
+    return sectionModel.title;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -175,28 +195,19 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (tableView == twoTableView) {
-        
-        if (self.nextType == classifyNextPop) {
-            //回调函数
+        //回调函数
+        ForumCatalogueSectionModel *sectionModel = _dataArray[indexPath.section];
+        ForumCatalogueModel *model = sectionModel.roeModels[indexPath.row];
             if (self.block) {
-                self.block(twoArray[indexPath.row][@"sid"],twoArray[indexPath.row][@"sname"]);
+                self.block(model.ID,model.title);
             }
             [self.navigationController popViewControllerAnimated:YES];
-            return;
-        }
-        if (self.pushtype == onePushTypeList) {
-            ForumClassifyListViewController *list = [[ForumClassifyListViewController alloc] init];
-            list.sid = twoArray[indexPath.row][@"sid"];
-            list.forumType = forumClassifyBrand;
-            [self.navigationController pushViewController:list animated:YES];
-        }else{
-            WritePostViewController *write = [[WritePostViewController alloc] init];
-            write.sid = twoArray[indexPath.row][@"sid"];
-            [self.navigationController pushViewController:write animated:YES];
-        }
         
     }else{
-        twoArray = _dataArray[indexPath.section][indexPath.row][@"series"];
+        ForumCatalogueSectionModel *sectionModel = _dataArray[indexPath.section];
+        ForumCatalogueModel *model = sectionModel.roeModels[indexPath.row];
+        twoArray = model.sections;
+
         [twoTableView reloadData];
         [self showTwoView:YES];
     }
@@ -206,20 +217,27 @@
     if (scrollView == _tableView) [self showTwoView:NO];
 }
 
-#pragma mark - AIMTableViewIndexBarDelegate
-- (void)tableViewIndexBar:(AIMTableViewIndexBar *)indexBar didSelectSectionAtIndex:(NSInteger)index{
-  
-    if ([_tableView numberOfSections] > index && index > -1){   // for safety, should always be YES
-        [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:index]
-                             atScrollPosition:UITableViewScrollPositionTop
-                                     animated:YES];
-    }
-}
-
-
 //回调
 -(void)returnSid:(returnSid)block{
     self.block = block;
+}
+
+
+#pragma mark - MJNIndexViewDataSource
+- (NSArray *)sectionIndexTitlesForMJNIndexView:(MJNIndexView *)indexView
+{
+    NSMutableArray *letters = [NSMutableArray array];
+    for (ForumCatalogueSectionModel *sectionModel in _dataArray) {
+        if(sectionModel.title)  [letters addObject:sectionModel.title];
+    }
+    return letters;
+}
+
+
+- (void)sectionForSectionMJNIndexTitle:(NSString *)title atIndex:(NSInteger)index
+{
+
+    [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:index] atScrollPosition: UITableViewScrollPositionTop animated:self.indexView.getSelectedItemsAfterPanGestureIsFinished];
 }
 
 - (void)didReceiveMemoryWarning {

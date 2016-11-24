@@ -10,7 +10,10 @@
 /**
  *  申请当版主
  */
+
 @interface ApplyModeratorsViewController : BasicViewController
 
 @property (nonatomic,strong) NSDictionary *dict;
+
+
 @end

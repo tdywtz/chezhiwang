@@ -20,15 +20,28 @@ typedef enum {
 
 typedef void(^returnResult)(NSString *title, NSString *ID);
 
+#pragma mark - class - ChooseSectionModel
+@class ChooseViewModel;
+@interface ChooseSectionModel : NSObject
 
-@interface ChooseViewModel : NSObject
-
-@property (nonatomic, copy) NSString *ID;
-@property (nonatomic, copy) NSString *name;
+@property (nonatomic,copy) NSString *title;
+@property (nonatomic,strong) NSArray <ChooseViewModel *> *rowModels;
 
 @end
 
 
+#pragma mark - class - ChooseViewModel
+@interface ChooseViewModel : NSObject
+
+@property (nonatomic, copy) NSString *ID;
+@property (nonatomic, copy) NSString *title;
+
+- (instancetype)initWithID:(NSString *)ID title:(NSString *)title;
+
+@end
+
+
+#pragma mark - class - ChooseViewController
 @interface ChooseViewController : BasicViewController
 
 @property (nonatomic,assign) chooseType choosetype;

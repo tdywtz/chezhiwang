@@ -130,6 +130,26 @@
             make.height.equalTo(1);
         }];
     }
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldTextChange:) name:UITextFieldTextDidChangeNotification object:nil];
+}
+
+- (void)textFieldTextChange:(NSNotification *)notification {
+
+    if (notification.object == brandTextField) {
+        self.brandModel.brandName = brandTextField.text;
+
+    }else if (notification.object == seriesTextField){
+
+        self.brandModel.seriesName = seriesTextField.text;
+
+    }else if (notification.object == modelTextField){
+
+        self.brandModel.modelName = modelTextField.text;
+
+    }
+    [self.delegate updateBrandModel:self.brandModel];
+    [self restting];
 }
 
 - (void)buttonClick:(UIButton *)button{
@@ -146,6 +166,11 @@
         _brandModel.brandName = @"";
         _brandModel.seriesName = @"";
         _brandModel.modelName = @"";
+        if (selected) {
+            _brandModel.BrandId = nil;
+            _brandModel.SeriesId = nil;
+            _brandModel.ModelId = nil;
+        }
 
     }else if (button == seriesButon){
 
@@ -154,11 +179,18 @@
 
         _brandModel.seriesName = @"";
         _brandModel.modelName = @"";
+        if (selected) {
+            _brandModel.SeriesId = nil;
+            _brandModel.ModelId = nil;
+        }
 
     }else{
 
         _brandModel.modelSelected = selected;
         _brandModel.modelName = @"";
+        if (selected) {
+            _brandModel.ModelId = nil;
+        }
     }
 
     [self restting];

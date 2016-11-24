@@ -16,6 +16,7 @@
 
 @interface ForumHeaderView : UIView
 
+@property (nonatomic,weak) UIView *showChooseView;
 @property (nonatomic,weak) id<ForumHeaderViewDelegate> delegate;
 
 @end

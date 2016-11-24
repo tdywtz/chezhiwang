@@ -78,8 +78,8 @@
     lineView3.backgroundColor = RGB_color(240, 240, 240, 1);
 
 
-    qualityImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"top"]];
-    serveImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"top"]];
+    qualityImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrow"]];
+    serveImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrow"]];
 
     [self.contentView addSubview:nameLabel];
     [self.contentView addSubview:qualityButton];
@@ -202,6 +202,7 @@
         qualityTextField.lh_left = 10;
         qualityTextField.lh_size = CGSizeMake(WIDTH-40, 50);
 
+        qualityImageView.lh_size = CGSizeMake(20, 20);
         qualityImageView.lh_centerY = qualityTextField.lh_centerY;
         qualityImageView.lh_right = WIDTH-10;
 
@@ -223,6 +224,7 @@
         serveTextField.lh_left = 10;
         serveTextField.lh_size = CGSizeMake(WIDTH-40, 50);
 
+        serveImageView.lh_size = CGSizeMake(20, 20);
         serveImageView.lh_centerY = serveImageView.lh_centerY;
         serveImageView.lh_right = WIDTH-10;
 
@@ -247,9 +249,11 @@
         serveTextField.lh_left = 10;
         serveTextField.lh_size = CGSizeMake(WIDTH-40, 50);
 
+        qualityImageView.lh_size = CGSizeMake(20, 20);
         qualityImageView.lh_centerY = qualityTextField.lh_centerY;
         qualityImageView.lh_right = WIDTH-10;
 
+        serveImageView.lh_size = CGSizeMake(20, 20);
         serveImageView.lh_centerY = serveTextField.lh_centerY;
         serveImageView.lh_right = WIDTH-10;
 

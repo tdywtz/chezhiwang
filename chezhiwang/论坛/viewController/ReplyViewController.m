@@ -67,13 +67,18 @@
     
 
      [HttpRequest POST:url parameters:dict images:self.dataArray success:^(id responseObject) {
-   
-         [LHController alert:@"发送成功"];
-         if (self.block) {
-             self.block();
-         }
          [al dismissWithClickedButtonIndex:0 animated:YES];
-         [self dismissViewControllerAnimated:YES completion:nil];
+         if (responseObject[@"success"]) {
+             [LHController alert:@"回复成功"];
+             if (self.block) {
+                 self.block();
+             }
+
+             [self dismissViewControllerAnimated:YES completion:nil];
+         }else{
+            [LHController alert:@"回复失败"];
+         }
+
      } failure:^(NSError *error) {
           [al dismissWithClickedButtonIndex:0 animated:YES];
      }];

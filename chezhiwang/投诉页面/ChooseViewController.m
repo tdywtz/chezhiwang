@@ -15,30 +15,100 @@ typedef enum {
 }chooseNumber;
 
 #pragma mark - class - ChooseSectionModel
-@interface ChooseSectionModel : NSObject
-
-@property (nonatomic,strong) NSArray <ChooseViewModel *> *rowModels;
-
-@end
-
 @implementation ChooseSectionModel
 
+//质量投诉
++ (NSArray<ChooseSectionModel *> *) getComplainQualityArray{
+    ChooseSectionModel *sectionModel = [[ChooseSectionModel alloc] init];
+    sectionModel.rowModels = @[
+                               [[ChooseViewModel alloc] initWithID:@"0" title:@"发动机"],
+                               [[ChooseViewModel alloc] initWithID:@"1" title:@"变速器"],
+                               [[ChooseViewModel alloc] initWithID:@"2" title:@"离合器"],
+                               [[ChooseViewModel alloc] initWithID:@"3" title:@"转向系统"],
+                               [[ChooseViewModel alloc] initWithID:@"4" title:@"制动系统"],
+                               [[ChooseViewModel alloc] initWithID:@"5" title:@"前后桥及悬挂系统"],
+                               [[ChooseViewModel alloc] initWithID:@"6" title:@"轮胎"],
+                               [[ChooseViewModel alloc] initWithID:@"7" title:@"车身附件及电器"],
+                               [[ChooseViewModel alloc] initWithID:@"8" title:@"发动机"]
+                               ];
+    return @[sectionModel];
+}
+//服务问题投诉
++ (NSArray<ChooseSectionModel *> *) getComplainServiceArray{
+    ChooseSectionModel *sectionModel = [[ChooseSectionModel alloc] init];
+    sectionModel.rowModels = @[
+                               [[ChooseViewModel alloc] initWithID:@"0" title:@"服务态度"],
+                               [[ChooseViewModel alloc] initWithID:@"1" title:@"人员技术"],
+                               [[ChooseViewModel alloc] initWithID:@"2" title:@"服务收费"],
+                               [[ChooseViewModel alloc] initWithID:@"3" title:@"承诺不兑现"],
+                               [[ChooseViewModel alloc] initWithID:@"4" title:@"销售欺诈"],
+                               [[ChooseViewModel alloc] initWithID:@"5" title:@"配件争议"],
+                               [[ChooseViewModel alloc] initWithID:@"6" title:@"其他问题"]
+                               ];
+    return @[sectionModel];
+
+    NSArray *array = @[@"服务态度",@"人员技术",@"服务收费",@"承诺不兑现",@"销售欺诈",@"配件争议",@"其他问题"];
+    NSMutableArray *marr = [[NSMutableArray alloc] init];
+    for (int i = 0; i < array.count; i ++) {
+        NSString *ID = [NSString stringWithFormat:@"%d",i];
+        [marr addObject:@{@"id":ID,@"title":array[i]}];
+    }
+    return marr;
+}
+
+//综合投诉
++ (NSArray<ChooseSectionModel *> *) getComplainSumupArray{
+    ChooseSectionModel *sectionModel = [[ChooseSectionModel alloc] init];
+    sectionModel.rowModels = @[
+                               [[ChooseViewModel alloc] initWithID:@"0" title:@"发动机"],
+                               [[ChooseViewModel alloc] initWithID:@"1" title:@"变速器"],
+                               [[ChooseViewModel alloc] initWithID:@"2" title:@"离合器"],
+                               [[ChooseViewModel alloc] initWithID:@"3" title:@"转向系统"],
+                               [[ChooseViewModel alloc] initWithID:@"4" title:@"制动系统"],
+                               [[ChooseViewModel alloc] initWithID:@"5" title:@"前后桥及悬挂系统"],
+                               [[ChooseViewModel alloc] initWithID:@"6" title:@"轮胎"],
+                               [[ChooseViewModel alloc] initWithID:@"7" title:@"车身附件及电器"],
+                               [[ChooseViewModel alloc] initWithID:@"8" title:@"发动机"],
+                               [[ChooseViewModel alloc] initWithID:@"0" title:@"服务态度"],
+                               [[ChooseViewModel alloc] initWithID:@"1" title:@"人员技术"],
+                               [[ChooseViewModel alloc] initWithID:@"2" title:@"服务收费"],
+                               [[ChooseViewModel alloc] initWithID:@"3" title:@"承诺不兑现"],
+                               [[ChooseViewModel alloc] initWithID:@"4" title:@"销售欺诈"],
+                               [[ChooseViewModel alloc] initWithID:@"5" title:@"配件争议"],
+                               [[ChooseViewModel alloc] initWithID:@"6" title:@"其他问题"]
+                               ];
+    return @[sectionModel];
+
+    NSArray *array = @[@"发动机",@"变速器",@"离合器",@"转向系统",@"制动系统",@"前后桥及悬挂系统",@"轮胎",@"车身附件及电器",@"服务态度",@"人员技术",@"服务收费",@"承诺不兑现",@"销售欺诈",@"配件争议",@"其他问题"];
+    NSMutableArray *marr = [[NSMutableArray alloc] init];
+    for (int i = 0; i < array.count; i ++) {
+        NSString *ID = [NSString stringWithFormat:@"%d",i];
+        [marr addObject:@{@"id":ID,@"title":array[i]}];
+    }
+    return marr;
+}
 
 @end
 
 #pragma mark - class - ChooseViewModel
 @implementation ChooseViewModel
 
-
+- (instancetype)initWithID:(NSString *)ID title:(NSString *)title{
+    if (self = [super init]) {
+        _ID = ID;
+        _title = title;
+    }
+    return self;
+}
 @end
 
-#pragma mark - class - 
+#pragma mark - class - ChooseViewController
 
 @interface ChooseViewController ()<UITableViewDataSource,UITableViewDelegate,AIMTableViewIndexBarDelegate>
 {
     UIButton *rightItemButton;
     UITableView *_tableView;
-    NSArray *_dataArray;
+    NSArray *_sectionModels;
     
     NSString *_returnID;
     NSString *_returnTitle;
@@ -62,54 +132,27 @@ typedef enum {
 }
 
 
-//质量投诉
--(NSArray *) getComplainQualityArray{
-    NSArray *array = @[@"发动机",@"变速器",@"离合器",@"转向系统",@"制动系统",@"前后桥及悬挂系统",@"轮胎",@"车身附件及电器"];
-    NSMutableArray *marr = [[NSMutableArray alloc] init];
-    for (int i = 0; i < array.count; i ++) {
-        NSString *ID = [NSString stringWithFormat:@"%d",i];
-        [marr addObject:@{@"id":ID,@"title":array[i]}];
-    }
-    return marr;
-}
-//服务问题投诉
--(NSArray *) getComplainServiceArray{
-    NSArray *array = @[@"服务态度",@"人员技术",@"服务收费",@"承诺不兑现",@"销售欺诈",@"配件争议",@"其他问题"];
-    NSMutableArray *marr = [[NSMutableArray alloc] init];
-    for (int i = 0; i < array.count; i ++) {
-        NSString *ID = [NSString stringWithFormat:@"%d",i];
-        [marr addObject:@{@"id":ID,@"title":array[i]}];
-    }
-    return marr;
-}
-//综合投诉
--(NSArray *) getComplainSumupArray{
-    NSArray *array = @[@"发动机",@"变速器",@"离合器",@"转向系统",@"制动系统",@"前后桥及悬挂系统",@"轮胎",@"车身附件及电器",@"服务态度",@"人员技术",@"服务收费",@"承诺不兑现",@"销售欺诈",@"配件争议",@"其他问题"];
-    NSMutableArray *marr = [[NSMutableArray alloc] init];
-    for (int i = 0; i < array.count; i ++) {
-        NSString *ID = [NSString stringWithFormat:@"%d",i];
-        [marr addObject:@{@"id":ID,@"title":array[i]}];
-    }
-    return marr;
-}
 
 -(void)downloadBrand{
     _activity = [self createActivity];
    [HttpRequest GET:[URLFile urlStringForLetter] success:^(id responseObject) {
+
        NSMutableArray *mArray = [[NSMutableArray alloc] init];
        NSMutableArray *letterArray = [[NSMutableArray alloc] init];
-       for (NSDictionary *dict in responseObject) {
+       for (NSDictionary *dict in responseObject[@"rel"]) {
            [letterArray addObject:dict[@"letter"]];
-           NSMutableDictionary *mDict = [[NSMutableDictionary alloc] init];
-           [mDict setObject:dict[@"letter"] forKey:@"section"];
-           NSMutableArray *mArr = [[NSMutableArray alloc] init];
+           ChooseSectionModel *sectionModel = [[ChooseSectionModel alloc] init];
+           sectionModel.title = dict[@"letter"];
+
+           NSMutableArray *rowModels = [[NSMutableArray alloc] init];
            for (NSDictionary *subDic in dict[@"brand"]) {
-               [mArr addObject:@{@"id":subDic[@"id"],@"title":subDic[@"name"]}];
+               ChooseViewModel *model = [[ChooseViewModel alloc] initWithID:subDic[@"id"] title:subDic[@"name"]];
+               [rowModels addObject:model];
            }
-           [mDict setObject:mArr forKey:@"array"];
-           [mArray addObject:mDict];
+           sectionModel.rowModels = rowModels;
+           [mArray addObject:sectionModel];
        }
-       _dataArray = mArray;
+       _sectionModels = mArray;
        [self createIndexView:letterArray];
        [_tableView reloadData];
        [_activity stopAnimating];
@@ -128,21 +171,24 @@ typedef enum {
 
 -(void)downloadSeries:(NSString *)brandID{ 
     _activity = [self createActivity];
-    NSString *urlString = [NSString stringWithFormat:auto_car_series,brandID];
+    NSString *urlString = [NSString stringWithFormat:[URLFile urlStringForSeries],brandID];
     [HttpRequest GET:urlString success:^(id responseObject) {
+
         NSMutableArray *mArray = [[NSMutableArray alloc] init];
         for (NSDictionary *dict in responseObject[@"rel"]) {
-            NSMutableDictionary *mDict = [[NSMutableDictionary alloc] init];
-            [mDict setObject:dict[@"brands"] forKey:@"section"];
 
-            NSMutableArray *marr = [[NSMutableArray alloc] init];
+            ChooseSectionModel *sectionModel = [[ChooseSectionModel alloc] init];
+            sectionModel.title = dict[@"brands"];
+
+            NSMutableArray *rowModels = [[NSMutableArray alloc] init];
             for (NSDictionary *subDict in dict[@"series"]) {
-                [marr addObject:@{@"id":subDict[@"id"],@"title":subDict[@"name"]}];
+                ChooseViewModel *model = [[ChooseViewModel alloc] initWithID:subDict[@"seriesid"] title:subDict[@"seriesname"]];
+                [rowModels addObject:model];
             }
-            [mDict setObject:marr forKey:@"array"];
-            [mArray addObject:mDict];
+            sectionModel.rowModels = rowModels;
+            [mArray addObject:sectionModel];
         }
-        _dataArray = mArray;
+        _sectionModels = mArray;
         [_tableView reloadData];
         [_activity stopAnimating];
 
@@ -155,11 +201,17 @@ typedef enum {
     _activity = [self createActivity];
     NSString *urlString = [NSString stringWithFormat:[URLFile urlStringForModelList],seriesID];
      [HttpRequest GET:urlString success:^(id responseObject) {
-         NSMutableArray *array = [[NSMutableArray alloc] init];
-         for (NSDictionary *dict in responseObject) {
-             [array addObject:@{@"id":dict[@"Id"],@"title":dict[@"Model_Name"]}];
+
+         ChooseSectionModel *sectionModel = [[ChooseSectionModel alloc] init];
+
+         NSMutableArray *rowModels = [[NSMutableArray alloc] init];
+         for (NSDictionary *dict in responseObject[@"rel"]) {
+             ChooseViewModel *model = [[ChooseViewModel alloc] initWithID:dict[@"mid"] title:dict[@"modelname"]];
+             [rowModels addObject:model];
          }
-         _dataArray = array;
+         sectionModel.rowModels = rowModels;
+         _sectionModels = @[sectionModel];
+          
          [_tableView reloadData];
          [_activity stopAnimating];
 
@@ -174,15 +226,15 @@ typedef enum {
     NSString *urlString = [NSString stringWithFormat:[URLFile urlStringForDis],provinceId,cityId,seriesId];
     [HttpRequest GET:urlString success:^(id responseObject) {
 
-        NSMutableArray *mArray = [[NSMutableArray alloc] init];
-        for (NSDictionary *dict in responseObject) {
-            NSMutableDictionary *newdict = [[NSMutableDictionary alloc] init];
-          
-            newdict[@"id"] = dict[@"Id"];
-            newdict[@"title"] = dict[@"Name"];
-            [mArray addObject:newdict];
+         ChooseSectionModel *sectionModel = [[ChooseSectionModel alloc] init];
+        NSMutableArray *rowModels = [[NSMutableArray alloc] init];
+        for (NSDictionary *dict in responseObject[@"rel"]) {
+            ChooseViewModel *model = [[ChooseViewModel alloc] initWithID:dict[@"did"] title:dict[@"name"]];
+            [rowModels addObject:model];
         }
-        _dataArray = mArray;
+        sectionModel.rowModels = rowModels;
+
+        _sectionModels = @[sectionModel];
         [_tableView reloadData];
     } failure:^(NSError *error) {
         
@@ -295,17 +347,17 @@ typedef enum {
     }else if (_choosetype == chooseTypeComplainQuality){
         self.title = @"质量申诉部位";
         self.chooseNumbers = chooseNumberMany;
-        _dataArray = [self getComplainQualityArray];
+        _sectionModels = [ChooseSectionModel getComplainQualityArray];
         
     }else if (_choosetype == chooseTypeComplainService){
         self.title = @"服务投诉问题";
         self.chooseNumbers = chooseNumberMany;
-        _dataArray = [self getComplainServiceArray];
+        _sectionModels = [ChooseSectionModel getComplainServiceArray];
         
     }else if (_choosetype == chooseTypeComplainSumup){
         self.title = @"综合问题";
         self.chooseNumbers = chooseNumberMany;
-        _dataArray = [self getComplainSumupArray];
+        _sectionModels = [ChooseSectionModel getComplainSumupArray];
         
     }else if (_choosetype == chooseTypeBusiness){
         self.title = @"经销商";
@@ -320,16 +372,11 @@ typedef enum {
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    if (self.tabelViewStyle == UITableViewStyleGrouped) {
-        return _dataArray.count;
-    }
-    return 1;
+    return _sectionModels.count;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (self.tabelViewStyle == UITableViewStyleGrouped) {
-        return [_dataArray[section][@"array"] count];
-    }
-    return _dataArray.count;
+    ChooseSectionModel *sectionModel = _sectionModels[section];
+    return sectionModel.rowModels.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -348,25 +395,21 @@ typedef enum {
        // cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    NSDictionary *dict;
-    if (self.tabelViewStyle == UITableViewStyleGrouped) {
-        dict = _dataArray[indexPath.section][@"array"][indexPath.row];
-    }else{
-        dict  = _dataArray[indexPath.row];
-    }
-    
-    cell.textLabel.text = dict[@"title"];
+    ChooseSectionModel *sectionModel = _sectionModels[indexPath.section];
+    ChooseViewModel *model = sectionModel.rowModels[indexPath.row];
+    cell.textLabel.text = model.title;
     cell.textLabel.textColor = colorBlack;
+
     UIImageView *cellImageView = (UIImageView *)[cell.contentView viewWithTag:200];
     cellImageView.hidden = YES;
     if (self.chooseNumbers == chooseNumberAlone) {
-        if ([dict[@"title"] isEqualToString:_returnTitle]) {
+        if ([model.title isEqualToString:_returnTitle]) {
             cell.textLabel.textColor = colorDeepBlue;
             cellImageView.hidden = NO;
         }
     }else if (self.chooseNumbers == chooseNumberMany){
         for (int i = 0; i < self.titleArray.count; i ++) {
-            if ([dict[@"title"] isEqualToString:self.titleArray[i]]) {
+            if ([model.title isEqualToString:self.titleArray[i]]) {
                 cell.textLabel.textColor = colorDeepBlue;
                 cellImageView.hidden = NO;
             }
@@ -386,28 +429,25 @@ typedef enum {
     
     [self setRightItemButtonEnabled:YES];
    
-    NSDictionary *dict;
-    if (self.tabelViewStyle == UITableViewStyleGrouped) {
-        dict = _dataArray[indexPath.section][@"array"][indexPath.row];
-    }else{
-        dict  = _dataArray[indexPath.row];
-    }
+    ChooseSectionModel *sectionModel = _sectionModels[indexPath.section];
+    ChooseViewModel *model = sectionModel.rowModels[indexPath.row];
+
     if (self.chooseNumbers == chooseNumberAlone) {
-        if (![dict[@"title"] isEqualToString:_returnTitle]) {
-            _returnTitle = dict[@"title"];
-            _returnID = dict[@"id"];
+        if (![model.title isEqualToString:_returnTitle]) {
+            _returnTitle = model.title;
+            _returnID = model.ID;
             [_tableView reloadData];
         }
         [self rightItemClick];
     }else if (self.chooseNumbers == chooseNumberMany){
-        NSInteger integer = [self.titleArray indexOfObject:dict[@"title"]];
+        NSInteger integer = [self.titleArray indexOfObject:model.title];
         if (integer < 1000) {
-            [self.titleArray removeObject:dict[@"title"]];
+            [self.titleArray removeObject:model.title];
             if (self.titleArray.count == 0) {
                 [self setRightItemButtonEnabled:NO];
             }
         }else{
-            [self.titleArray addObject:dict[@"title"]];
+            [self.titleArray addObject:model.title];
         }
         [_tableView reloadData];
     }
@@ -416,8 +456,9 @@ typedef enum {
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     if (self.tabelViewStyle == UITableViewStyleGrouped) {
-    
-        return _dataArray[section][@"section"];
+
+        ChooseSectionModel *sectionModel = _sectionModels[section];
+        return sectionModel.title;
     }
     
     return nil;

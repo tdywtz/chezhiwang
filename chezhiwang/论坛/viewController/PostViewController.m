@@ -21,7 +21,7 @@ typedef enum {
 
 @interface PostViewController ()<UIWebViewDelegate,UIScrollViewDelegate>
 {
-    UIWebView *_webOne;
+    UIWebView *_webView;
     NSString *webHttp;
 }
 
@@ -31,14 +31,9 @@ typedef enum {
 
 -(void)loadData{
    
-    if (self.http) {
-        webHttp = self.http;
-    }else{
-        webHttp = [NSString stringWithFormat:@"http://m.12365auto.com/postcontentapp.aspx?tId=%@",self.tid];
-    }
-    NSURL *url = [NSURL URLWithString:webHttp];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [_webOne loadRequest:request];
+    webHttp = [NSString stringWithFormat:[URLFile urlStringForBBSContent],self.tid];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:webHttp]];
+    [_webView loadRequest:request];
 }
 
 - (void)viewDidLoad {
@@ -56,13 +51,13 @@ typedef enum {
 -(void)createWebView{
 
     
-    _webOne = [[UIWebView alloc] initWithFrame:CGRectMake(0, 64, WIDTH, HEIGHT-64)];
-    _webOne.scrollView.delegate = self;
-    _webOne.delegate = self;
+    _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 64, WIDTH, HEIGHT-64)];
+    _webView.scrollView.delegate = self;
+    _webView.delegate = self;
     
-    _webOne.backgroundColor = [UIColor clearColor];
+    _webView.backgroundColor = [UIColor clearColor];
  
-    [self.view addSubview:_webOne];
+    [self.view addSubview:_webView];
 }
 
 
@@ -84,8 +79,8 @@ typedef enum {
 
 -(void)rightItemClick{
     if (![CZWManager manager].isLogin) {
-        LoginViewController *login = [LoginViewController  init];
-        [self presentViewController:login animated:YES completion:nil];
+ 
+        [self presentViewController:[LoginViewController  instance] animated:YES completion:nil];
         return;
        
     }
@@ -107,7 +102,7 @@ typedef enum {
     NSString *html = @"";
     if (html.length > 100) html = [html substringToIndex:99];
     share.shareContent = html;
-    share.shareTitle = [_webOne stringByEvaluatingJavaScriptFromString:@"document.title"];
+    share.shareTitle = [_webView stringByEvaluatingJavaScriptFromString:@"document.title"];
     [self presentViewController:share animated:YES completion:nil];
 }
 
@@ -157,10 +152,12 @@ typedef enum {
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
     if (navigationType == UIWebViewNavigationTypeLinkClicked) {
-        NSInteger integer = @"http://m.12365auto.com/postcontentapp.aspx?".length;
+        NSRange range = [[URLFile urlStringForBBSContent] rangeOfString:@"?"];
+        NSInteger integer = range.location+range.length;
         NSString *string = request.URL.absoluteString;
         if (string.length > integer) {
              NSString *str = [string substringFromIndex:integer];
+            str = [str stringByReplacingCharactersInRange:[str rangeOfString:@"#"] withString:@""];
             if ([str hasPrefix:@"type=newtopic"]) {
                 NSString *sub = [str substringFromIndex:@"type=newtopic&".length];
                 [self clickWithTtpe:clickTypeNewtopic and:sub];

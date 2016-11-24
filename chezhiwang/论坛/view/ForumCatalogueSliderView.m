@@ -29,7 +29,7 @@
         _tableView.sectionHeaderHeight = 30;
         _tableView.sectionFooterHeight = 0.1;
         _tableView.backgroundColor = [UIColor whiteColor];
-        _tableView.tableFooterView = [UIView new];
+        _tableView.tableFooterView = [UIView new];       
         [self addSubview:_tableView];
 
     [_tableView makeConstraints:^(MASConstraintMaker *make) {

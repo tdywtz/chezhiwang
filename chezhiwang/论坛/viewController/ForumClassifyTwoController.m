@@ -10,10 +10,53 @@
 #import "ForumClassifyListViewController.h"
 #import "WritePostViewController.h"
 
+@interface ForumClassifyTwoCell : UITableViewCell
+
+@end
+
+@implementation ForumClassifyTwoCell
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    return self;
+}
+
+- (void)layoutSubviews {
+
+    [super layoutSubviews];
+
+    self.imageView.frame = CGRectMake(0,0,44,44);
+    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.imageView.lh_centerY = self.lh_centerY;
+
+
+    CGRect tmpFrame = self.textLabel.frame;
+
+    tmpFrame.origin.x = 46;
+
+    self.textLabel.frame = tmpFrame;
+
+    // self.textLabel.font = [UIFont systemFontOfSize:15];
+    self.textLabel.textColor = colorBlack;
+
+    tmpFrame = self.detailTextLabel.frame;
+
+    tmpFrame.origin.x = 46;
+    
+    self.detailTextLabel.frame = tmpFrame;
+    
+}
+
+@end
+
+
+#pragma mark - -----------------
 @interface ForumClassifyTwoController ()<UITableViewDataSource,UITableViewDelegate>
 {
     UITableView *_tableView;
-    NSMutableArray *_dataArray;
+    NSArray *_dataArray;
 }
 @end
 
@@ -30,12 +73,14 @@
 }
 
 -(void)createData{
-    NSArray *array1 = @[@"故障交流",@"用车心得",@"人车生活",@"汽车文化",@"七嘴八舌",@"汽车召回与三包"];
-    NSArray *array2 = @[@"2",@"381",@"1",@"5",@"4",@"6"];
-    _dataArray = [[NSMutableArray alloc] init];
-    for (int i = 0; i < array1.count; i ++) {
-        [_dataArray addObject:@{@"name":array1[i],@"cid":array2[i]}];
-    }
+  _dataArray = @[
+                       @{@"title":@"故障交流",@"imageName":@"forum_故障交流",@"ID":@"2"},
+                       @{@"title":@"用车心得",@"imageName":@"forum_用车心得",@"ID":@"3"},
+                       @{@"title":@"人车生活",@"imageName":@"forum_人车生活",@"ID":@"1"},
+                       @{@"title":@"汽车文化",@"imageName":@"forum_汽车文化",@"ID":@"5"},
+                       @{@"title":@"七嘴八舌",@"imageName":@"forum_七嘴八舌",@"ID":@"4"},
+                       @{@"title":@"召回与三包",@"imageName":@"forum_汽车召回与三包",@"ID":@"6"}
+                       ];
     [_tableView reloadData];
 }
 
@@ -67,9 +112,10 @@
         view.backgroundColor = [UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1];
         [cell.contentView addSubview:view];
     }
-    cell.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"column%ld",indexPath.row]];
+    NSDictionary *dict = _dataArray[indexPath.row];
+    cell.imageView.image = [UIImage imageNamed:dict[@"imageName"]];
     cell.imageView.transform = CGAffineTransformMakeScale(0.6, 0.6);
-    cell.textLabel.text = _dataArray[indexPath.row][@"name"];
+    cell.textLabel.text = dict[@"title"];
     return cell;
 }
 
@@ -79,24 +125,13 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (self.nextType == classifyNextPop) {
+    NSDictionary *dict = _dataArray[indexPath.row];
+
         if ( self.block) {
-            self.block(_dataArray[indexPath.row][@"cid"],_dataArray[indexPath.row][@"name"]);
+            self.block(dict[@"ID"],dict[@"title"]);
         }
         [self.navigationController popViewControllerAnimated:YES];
-        return;
-    }
-    if (self.pushtype == twoPushTypeList) {
-        ForumClassifyListViewController *post = [[ForumClassifyListViewController alloc] init];
-        post.sid = _dataArray[indexPath.row][@"cid"];
-        post.forumType = forumClassifyColumn;
-        [self.navigationController pushViewController:post animated:YES];
-    }else{
-        WritePostViewController *write = [[WritePostViewController alloc] init];
-        write.cid = _dataArray[indexPath.row][@"cid"];
-        [self.navigationController pushViewController:write animated:YES];
-    }
-   
+
 }
 
 //回调

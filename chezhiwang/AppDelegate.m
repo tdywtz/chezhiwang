@@ -57,8 +57,6 @@
     [self um_analyics];
     //友盟分享
     [self um_social];
-
-    [HttpRequest downloadProvince];
   
     _window.backgroundColor = [UIColor whiteColor];
     [NSThread sleepForTimeInterval:2.0];

@@ -10,7 +10,7 @@
 
 //#define auto_car_brand @"http://m.12365auto.com/server/forCommonService.ashx?act=letter"
 //获取车系
-#define auto_car_series @"http://m.12365auto.com/server/forCommonService.ashx?act=s_list&id=%@"
+//#define auto_car_series @"http://m.12365auto.com/server/forCommonService.ashx?act=s_list&id=%@"
 
 
 @interface URLFile : NSObject
@@ -26,11 +26,11 @@
 /**注册协议*/
 
 #pragma mark- 车型图片
-/**车型图片列表*/
+/**车型图片-根据参数获取车型图片列表*/
 + (NSString *)urlString_modelPlicList;
-/**品牌大全*/
+/**车型图片-品牌大全*/
 + (NSString *)urlString_picBrand;
-/**车系大全*/
+/**车型图片-车系大全*/
 + (NSString *)urlString_picSeries;
 
 
@@ -55,7 +55,7 @@
 
 
 #pragma mark - 投诉排行
-/**选择*/
+/**排行榜-页面查询条件*/
 + (NSString *)urlString_rankingAct;
 /**投诉排行列表*/
 + (NSString *)urlString_rankingList;
@@ -74,8 +74,6 @@
 
 /**评论列表*/
 + (NSString *)urlStringForPL;
-///**评论总数*/
-//+ (NSString *)urlStringForPL_total;
 /**提交评论*/
 + (NSString *)urlStringForAddcomment;
 
@@ -87,13 +85,13 @@
 + (NSString *)urlStringForSeries;
 /**车型*/
 + (NSString *)urlStringForModelList;
-/**省份*/
+/**获取省份*/
 + (NSString *)urlStringForPro;
-/**城市*/
+/**获取经销商城市*/
 + (NSString *)urlStringForDisCity;
-/**经销商*/
+/**获取经销商*/
 + (NSString *)urlStringForDis;
-/**提交投诉*/
+/**提交、修改投诉*/
 + (NSString *)urlStringForProgressComplain;
 
 
@@ -111,8 +109,8 @@
 #pragma mark - 论坛
 /**论坛列表*/
 + (NSString *)urlStringForPostList;
-/**帖子内容*/
-+ (NSString *)urlStringForPostInfo;
+/**帖子内容(web)*/
++ (NSString *)urlStringForBBSContent;
 /**论坛车系品牌*/
 + (NSString *)urlStringForOtherSeries;
 /**论坛分类->品牌论坛->指定论坛*/
@@ -127,7 +125,7 @@
 + (NSString *)urlStringForApplyOwner;
 /**发表帖子*/
 + (NSString *)urlStringForNewTopic;
-/**下载用户数据*/
+/**申请版主-下载用户数据*/
 + (NSString *)urlString_getApplyOwner;
 /**论坛分类->品牌论坛->论坛列表*/
 + (NSString *)urlStringForBrand_postlist;
@@ -189,9 +187,9 @@
 + (NSString *)urlString_sendemail;
 
 #pragma mark - 数据对比
-/**对比*/
+/**对比-车型参数*/
 + (NSString *)urlString_mConfig;
-/**头部概括信息*/
+/**对比-车型故障信息*/
 + (NSString *)urlString_dbInfo;
 
 @end

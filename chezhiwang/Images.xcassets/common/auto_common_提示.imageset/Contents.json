@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "circlekong.jpg",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "auto_common_提示@2x.png",
       "scale" : "2x"
     },
     {

@@ -9,6 +9,7 @@
 #import "BasicViewController.h"
 
 typedef void(^returnResults)(NSString *pName, NSString *pid, NSString *cName, NSString *cid);
+
 @interface CityChooseViewController : BasicViewController
 
 @property (nonatomic,copy) returnResults block;

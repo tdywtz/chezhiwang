@@ -11,7 +11,6 @@
 #import "LHController.h"
 #import "NSMutableAttributedString+CZWMutableAttributedString.h"
 #import "HttpRequest.h"
-#import "UrlFile.h"
 #import "LHLabel.h"
 #import "CZWLabel.h"
 #import "UIFont+LH.h"
@@ -19,6 +18,8 @@
 #import "NSString-Helper.h"
 #import "CZWManager.h"
 #import "UIView+LH.h"
+#import "BasicNavigationController.h"
+#import "chezhiwang-Swift.h"
 //友盟统计
 #import <UMMobClick/MobClick.h>
 //pop动画库
@@ -82,11 +83,6 @@ typedef enum {
     forumClassifyColumn//栏目论坛
 }forumClassify;
 
-//跳转还是返回
-typedef enum {
-    classifyNextPush,
-    classifyNextPop
-}classifyNext;
 
 #define LEFT 15
 

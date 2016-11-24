@@ -7,20 +7,14 @@
 //
 
 #import "BasicViewController.h"
-typedef enum {
-    twoPushTypeRwite,
-    twoPushTypeList
-}twoPushType;
 
 typedef void(^returnCid)(NSString *cid,NSString *title);
 /**
- *  栏目论坛
+ *  选择栏目论坛
  */
 @interface ForumClassifyTwoController : BasicViewController
 
 @property (nonatomic,copy) NSString *type;
-@property (nonatomic,assign) twoPushType pushtype;
-@property (nonatomic,assign) classifyNext nextType;
 @property (nonatomic,copy) returnCid block;
 
 -(void)returnCid:(returnCid)block;

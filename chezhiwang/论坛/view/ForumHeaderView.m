@@ -14,6 +14,12 @@
     UIButton *bestButton;
     UIView *moveView;
     UIButton *newButton;
+
+    UIButton *newButton1;
+    UIButton *newButton2;
+
+    NSInteger _orderType;
+    NSInteger _topicType;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -42,12 +48,20 @@
     bestButton.titleLabel.font = [UIFont systemFontOfSize:17];
     [bestButton addTarget:self action:@selector(bestButtonClick:) forControlEvents:UIControlEventTouchUpInside];
 
+
+    UIImage *image = [UIImage imageNamed:@"xuanze"];
+    //需要对图片进行特殊处理
+    image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+
     newButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [newButton setTitle:@"最新回复" forState:UIControlStateNormal];
     [newButton setTitleColor:colorYellow forState:UIControlStateNormal];
     newButton.titleLabel.font = [UIFont systemFontOfSize:17];
+    [newButton setImage:image forState:UIControlStateNormal];
+    [newButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -15, 0, 15)];
+    [newButton setImageEdgeInsets:UIEdgeInsetsMake(0, 75, 0, -75)];
+    [newButton setTintColor:colorYellow];
     [newButton addTarget:self action:@selector(newButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    newButton.tag = 100;
 
     moveView = [[UIView alloc] init];
     moveView.backgroundColor = colorYellow;
@@ -74,8 +88,9 @@
     moveView.lh_centerX = allButton.lh_centerX;
     moveView.lh_bottom = self.lh_height-1;
 
-    [newButton sizeToFit];
+
     newButton.lh_height = 30;
+    newButton.lh_width = 90;
     newButton.lh_right = WIDTH-10;
     newButton.lh_centerY = bestButton.lh_centerY;
 
@@ -92,8 +107,8 @@
     bestButton.selected = NO;
 
     moveView.lh_centerX = allButton.lh_centerX;
-
-    [self didSelectOrderType:0 topicType:newButton.tag-100];
+    _topicType = 0;
+    [self didSelectOrderType:_orderType topicType:_topicType];
 }
 
 - (void)bestButtonClick:(UIButton *)button{
@@ -105,11 +120,74 @@
 
     moveView.lh_centerX = bestButton.lh_centerX;
 
-    [self didSelectOrderType:1 topicType:newButton.tag-100];
+    _topicType = 1;
+    [self didSelectOrderType:_orderType topicType:_topicType];
 }
 
 - (void)newButtonClick:(UIButton *)button{
+    if (newButton1 == nil) {
+        newButton1= [UIButton buttonWithType:UIButtonTypeCustom];
+        [newButton1 setTitle:@"最新回复" forState:UIControlStateNormal];
+        newButton1.titleLabel.font = [UIFont systemFontOfSize:17];
+        [newButton1 setTitleColor:colorLightGray forState:UIControlStateNormal];
+        newButton1.backgroundColor = RGB_color(240, 240, 240, 1);
+//        newButton1.layer.borderColor = colorLineGray.CGColor;
+//        newButton1.layer.borderWidth = 1;
+        newButton1.hidden = YES;
+        [newButton1 addTarget:self action:@selector(newClick:) forControlEvents:UIControlEventTouchUpInside];
 
+        newButton2 = [UIButton buttonWithType:UIButtonTypeCustom];
+        [newButton2 setTitle:@"最新发布" forState:UIControlStateNormal];
+        newButton2.titleLabel.font = [UIFont systemFontOfSize:17];
+        newButton2.backgroundColor = RGB_color(240, 240, 240, 1);
+//        newButton2.layer.borderColor = colorLineGray.CGColor;
+//        newButton2.layer.borderWidth = 1;
+        newButton2.hidden = YES;
+        [newButton2 setTitleColor:colorLightGray forState:UIControlStateNormal];
+        [newButton2 addTarget:self action:@selector(newClick:) forControlEvents:UIControlEventTouchUpInside];
+        if (self.showChooseView) {
+            [self.showChooseView addSubview:newButton1];
+            [self.showChooseView addSubview:newButton2];
+        }else{
+            [self.superview addSubview:newButton1];
+            [self.superview addSubview:newButton2];
+        }
+
+        [newButton1 sizeToFit];
+        [newButton2 sizeToFit];
+
+        newButton1.lh_height = 40;
+        newButton1.lh_width += 20;
+        newButton1.lh_right = WIDTH-20;
+        newButton1.lh_top = self.lh_bottom;
+
+        newButton2.lh_height = newButton1.lh_height;
+        newButton2.lh_width = newButton1.lh_width;
+        newButton2.lh_right = WIDTH-20;
+        newButton2.lh_top = newButton1.lh_bottom-1;
+
+    }
+    if (newButton1.hidden) {
+        newButton1.hidden = NO;
+        newButton2.hidden = NO;
+    }else{
+        newButton1.hidden = YES;
+        newButton2.hidden = YES;
+    }
+
+}
+
+- (void)newClick:(UIButton *)button{
+    newButton1.hidden = YES;
+    newButton2.hidden = YES;
+
+    [newButton setTitle:button.titleLabel.text forState:UIControlStateNormal];
+    if ([button.titleLabel.text isEqualToString:@"最新回复"]) {
+        _orderType = 0;
+    }else{
+        _orderType = 1;
+    }
+    [self didSelectOrderType:_orderType topicType:_topicType];
 }
 
 - (void)didSelectOrderType:(NSInteger)orderType topicType:(NSInteger)topicType{

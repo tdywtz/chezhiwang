@@ -7,21 +7,177 @@
 //
 
 #import "ForumClassifyListViewController.h"
-#import "ForumListCell.h"
+#import "HomepageForumCell.h"
 #import "PostViewController.h"
 #import "WritePostViewController.h"
 #import "ApplyModeratorsViewController.h"
 #import "LoginViewController.h"
+#import "ForumHeaderView.h"
 
-@interface ForumClassifyListViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface ForumClassifyListHeaderView : UIView
+{
+    UIImageView *iconImageView;
+    UILabel *titleLabel;
+    UILabel *userNameLabel;
+    UILabel *numberLabel;
+    UIButton *applyButton;//申请当版主
+    UIView *lineView;
+}
+@property (nonatomic,strong) NSDictionary *dictionary;//论坛信息
+@property (nonatomic,assign) forumClassify style;
+@property (nonatomic,weak) UIViewController *parentViewController;
+
+@end
+
+@implementation ForumClassifyListHeaderView
+
+- (instancetype)initWithFrame:(CGRect)frame style:(forumClassify)style
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        _style = style;
+
+        titleLabel = [[UILabel alloc] init];
+        titleLabel.font = [UIFont systemFontOfSize:17];
+        titleLabel.textColor = colorBlack;
+
+        numberLabel = [[UILabel alloc] init];
+        numberLabel.font = [UIFont systemFontOfSize:15];
+        numberLabel.textColor = colorLightGray;
+
+        lineView = [[UIView alloc] init];
+        lineView.backgroundColor = RGB_color(240, 240, 240, 1);
+
+        [self addSubview:titleLabel];
+        [self addSubview:numberLabel];
+        [self addSubview:lineView];
+
+        if (style == forumClassifyBrand) {
+            iconImageView = [[UIImageView alloc] init];
+            iconImageView.contentMode = UIViewContentModeScaleAspectFit;
+
+            userNameLabel = [[UILabel alloc] init];
+            userNameLabel.font = [UIFont systemFontOfSize:15];
+            userNameLabel.textColor = colorDeepGray;
+            userNameLabel.numberOfLines = 2;
+
+            applyButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            [applyButton setTitle:@"申请当版主" forState:UIControlStateNormal];
+            [applyButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            applyButton.backgroundColor = colorYellow;
+            applyButton.titleLabel.font = [UIFont systemFontOfSize:15];
+            applyButton.layer.cornerRadius = 3;
+            applyButton.layer.masksToBounds = YES;
+            [applyButton addTarget:self action:@selector(applyButtonClick) forControlEvents:UIControlEventTouchUpInside];
+
+            [self addSubview:iconImageView];
+            [self addSubview:userNameLabel];
+            [self addSubview:applyButton];
+        }
+    }
+    return self;
+}
+
+- (void)applyButtonClick{
+    if ([CZWManager manager].isLogin) {
+        ApplyModeratorsViewController *apply = [[ApplyModeratorsViewController alloc] init];
+        apply.dict = _dictionary;
+        [self.parentViewController.navigationController pushViewController:apply animated:YES];
+    }else{
+
+        [self.parentViewController presentViewController:[LoginViewController instance] animated:YES completion:nil];
+    }
+}
+
+- (void)setDictionary:(NSDictionary *)dictionary{
+    _dictionary = dictionary;
+    
+    if (_style == forumClassifyBrand) {
+        [iconImageView sd_setImageWithURL:[NSURL URLWithString:dictionary[@"image"]] placeholderImage:[CZWManager defaultIconImage]];
+        titleLabel.text = [NSString stringWithFormat:@"%@%@",dictionary[@"bname"],dictionary[@"fname"]];
+        NSMutableAttributedString *userText = [[NSMutableAttributedString alloc] initWithString:@"版主：" attributes:@{NSForegroundColorAttributeName:colorLightGray}];
+        [userText appendAttributedString:[[NSAttributedString alloc] initWithString:dictionary[@"sname"]?dictionary[@"sname"]:@""]];
+        userNameLabel.attributedText = userText;
+
+        NSMutableAttributedString *numText = [[NSMutableAttributedString alloc] initWithString:@"总贴数："];
+        [numText appendAttributedString:[[NSAttributedString alloc] initWithString:dictionary[@"total"] attributes:@{NSForegroundColorAttributeName:colorOrangeRed}]];
+        [numText appendAttributedString:[[NSAttributedString alloc] initWithString:@"    今日帖子数："]];
+        [numText appendAttributedString:[[NSAttributedString alloc] initWithString:dictionary[@"nowday"] attributes:@{NSForegroundColorAttributeName:colorOrangeRed}]];
+        numberLabel.attributedText = numText;
+
+
+        iconImageView.lh_left = 10;
+        iconImageView.lh_top = 20;
+        iconImageView.lh_size = CGSizeMake(80, 60);
+
+        [titleLabel sizeToFit];
+        titleLabel.lh_width =  self.lh_width - iconImageView.lh_right-1;
+        titleLabel.lh_left = iconImageView.lh_right+10;
+        titleLabel.lh_top = 10;
+
+        userNameLabel.lh_width = self.lh_width - iconImageView.lh_right-10;
+        userNameLabel.lh_size = [userNameLabel sizeThatFits:CGSizeMake(self.lh_width - iconImageView.lh_right-10, 100)];
+        userNameLabel.lh_left = titleLabel.lh_left;
+        userNameLabel.lh_top = titleLabel.lh_bottom+10;
+
+        numberLabel.lh_width = self.lh_width - iconImageView.lh_right-10;
+         numberLabel.lh_size = [numberLabel sizeThatFits:CGSizeMake(self.lh_width - iconImageView.lh_right-10, 100)];
+        numberLabel.lh_left = titleLabel.lh_left;
+        numberLabel.lh_top = userNameLabel.lh_bottom+10;
+
+        applyButton.lh_left = titleLabel.lh_left;
+        applyButton.lh_top = numberLabel.lh_bottom+10;
+        applyButton.lh_size = CGSizeMake(90, 30);
+
+        lineView.lh_size = CGSizeMake(self.lh_width, 1);
+        lineView.lh_left = 0;
+        lineView.lh_top = applyButton.lh_bottom + 10;
+
+    }else{
+
+        titleLabel.text = dictionary[@"cname"];
+
+        NSMutableAttributedString *numText = [[NSMutableAttributedString alloc] initWithString:@"总贴数："];
+        [numText appendAttributedString:[[NSAttributedString alloc] initWithString:dictionary[@"total"] attributes:@{NSForegroundColorAttributeName:colorOrangeRed}]];
+        [numText appendAttributedString:[[NSAttributedString alloc] initWithString:@"    今日帖子数："]];
+        [numText appendAttributedString:[[NSAttributedString alloc] initWithString:dictionary[@"nowday"] attributes:@{NSForegroundColorAttributeName:colorOrangeRed}]];
+
+        numberLabel.attributedText = numText;
+
+        titleLabel.lh_width = self.lh_width - 20;
+        [titleLabel sizeToFit];
+        titleLabel.lh_left = 10;
+        titleLabel.lh_top = 10;
+
+        numberLabel.lh_width = self.lh_width - 20;
+        [numberLabel sizeToFit];
+        numberLabel.lh_left = titleLabel.lh_left;
+        numberLabel.lh_top = titleLabel.lh_bottom+10;
+
+        lineView.lh_size = CGSizeMake(self.lh_width, 1);
+        lineView.lh_left = 0;
+        lineView.lh_top = numberLabel.lh_bottom + 10;
+    }
+
+    self.lh_height = lineView.lh_bottom;
+}
+
+@end
+
+#pragma mark - /////
+@interface ForumClassifyListViewController ()<UITableViewDataSource,UITableViewDelegate,ForumHeaderViewDelegate>
 {
     UITableView *_tableView;
     NSMutableArray *_dataArray;
-    NSInteger orderType;
-    NSInteger topicType;
+    NSInteger _orderType;
+    NSInteger _topicType;
     
     NSString *_urlString;
     NSInteger _count;
+
+    ForumClassifyListHeaderView *_headerView;
+    ForumHeaderView *_chooseSegmented;
+    UIView *tableHeaderView;
 }
 
 @property (nonatomic,strong) NSDictionary *dictionary;
@@ -30,7 +186,7 @@
 @implementation ForumClassifyListViewController
 
 -(void)loadData{
-    NSString *url = [NSString stringWithFormat:_urlString,self.sid,orderType,topicType,_count,10];
+    NSString *url = [NSString stringWithFormat:_urlString,self.sid,_orderType,_topicType,_count];
     [HttpRequest GET:url success:^(id responseObject) {
         if (_count == 1) {
             
@@ -38,13 +194,14 @@
         }
 
         [_tableView.mj_header endRefreshing];
-        if ([responseObject count] == 0) {
+        if ([responseObject[@"rel"] count] == 0) {
             [_tableView.mj_footer endRefreshingWithNoMoreData];
         }else{
             [_tableView.mj_footer endRefreshing];
         }
-        for (NSDictionary *dict in responseObject) {
-            [_dataArray addObject:dict];
+        for (NSDictionary *dict in responseObject[@"rel"]) {
+            HomepageForumModel *model = [HomepageForumModel mj_objectWithKeyValues:dict];
+            [_dataArray addObject:model];
         }
         [_tableView reloadData];
 
@@ -71,14 +228,14 @@
     }
  
   [HttpRequest GET:url success:^(id responseObject) {
-      if ([responseObject count] > 0) {
-          if (self.forumType == forumClassifyBrand) {
-              [self createTableHeaderView:responseObject[0]];
-              self.dictionary = responseObject[0];
-          }else{
-              [self createTableHeaderViewLanMu:responseObject[0]];
-          }
-      }
+
+        self.dictionary = responseObject;
+
+            [_headerView setDictionary:responseObject];
+      _chooseSegmented.lh_left = 0;
+          _chooseSegmented.lh_top = _headerView.lh_bottom;
+       tableHeaderView.lh_height = _chooseSegmented.lh_bottom;
+         _tableView.tableHeaderView = tableHeaderView;
 
   } failure:^(NSError *error) {
       
@@ -92,8 +249,8 @@
     [self createRightItem];
     [self createTableView];
     [self loadDataHeader];
-    orderType = 0;
-    topicType = 0;
+    _orderType = 0;
+    _topicType = 0;
     _count = 1;
     [self setUrl];
 }
@@ -107,8 +264,8 @@
 -(void)rightItemClick{
     if ([CZWManager manager].isLogin){
         WritePostViewController *write = [[WritePostViewController alloc] init];
-        UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:write];
-        nvc.navigationBar.barStyle = UIBarStyleBlack;
+        BasicNavigationController *nvc = [[BasicNavigationController alloc] initWithRootViewController:write];
+     
         if (self.forumType == forumClassifyBrand) {
             write.sid = self.sid;
         }else{
@@ -117,8 +274,8 @@
         write.classify = self.forumType;
         [self presentViewController:nvc animated:YES completion:nil];
     }else{
-        LoginViewController *my = [[LoginViewController alloc] init];
-        [self presentViewController:my animated:YES completion:nil];
+    
+        [self presentViewController:[LoginViewController instance] animated:YES completion:nil];
     }
 }
 
@@ -128,6 +285,7 @@
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _tableView.estimatedRowHeight = 80;
     [self.view addSubview:_tableView];
 
 
@@ -144,222 +302,27 @@
     }];
     _tableView.mj_footer.automaticallyHidden = YES;
 
-}
 
-#pragma mark - 创建列表headerView
--(void)createTableHeaderView:(NSDictionary *)dict{
+    tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 100)];
 
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 140)];
-    _tableView.tableHeaderView = view;
-    
+    _headerView = [[ForumClassifyListHeaderView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 100) style:self.forumType];
+    _headerView.parentViewController = self;
 
-    UIImageView *iamgeView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 20, 80, 60)];
-    [iamgeView sd_setImageWithURL:[NSURL URLWithString:dict[@"image"]] placeholderImage:[UIImage imageNamed:@"新闻"]];
-    [view addSubview:iamgeView];
-    
-    UILabel *titleLabel = [LHController createLabelWithFrame:CGRectMake(100, 20, WIDTH-100, 20) Font:[LHController setFont]-2 Bold:NO TextColor:nil Text:dict[@"fname"]];
-    [view addSubview:titleLabel];
-    
-    NSAttributedString *att1 = [self attString:[NSString stringWithFormat:@"版主：%@",dict[@"moderator"]] Font:[LHController setFont]-5 type:0];
-    //计算高度
-    CGSize size = [att1 boundingRectWithSize:CGSizeMake(MAXFLOAT, 20) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil].size;
-    UILabel *webmasterLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 40, size.width<(WIDTH-100-100)?size.width:WIDTH-200, 20)];
-    webmasterLabel.attributedText = att1;
-    [view addSubview:webmasterLabel];
-    
-    UIButton *button = [LHController createButtnFram:CGRectMake(webmasterLabel.frame.origin.x+webmasterLabel.frame.size.width, 40, 100, 20) Target:self Action:@selector(applicationClick) Text:nil];
-    [button setAttributedTitle:[self attString:@"【申请当版主】" Font:[LHController setFont]-5] forState:UIControlStateNormal];
-    [view addSubview:button];
-    
-    UILabel *informationLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 60, WIDTH-100, 20)];
-    informationLabel.attributedText = [self attString:[NSString stringWithFormat:@"论坛信息：总帖数：%@   今日帖子数：%@",dict[@"total"],dict[@"nowday"]] Font:[LHController setFont]-5 type:1];
-    [view addSubview:informationLabel];
-   
-    UIView *fg1 = [[UIView alloc] initWithFrame:CGRectMake(0, 90, WIDTH, 1)];
-    fg1.backgroundColor = colorLineGray;
-    [view addSubview:fg1];
-    
-   
-    NSArray *array1 = @[@"全部",@"精华"];
-    NSArray *array2 = @[@"最新回复",@"最新发布"];
-    UISegmentedControl *sge1 = [[UISegmentedControl alloc] initWithItems:array1];
-    sge1.frame = CGRectMake(10, fg1.frame.origin.y+5, WIDTH/2-12.5, 30);
-    sge1.tintColor = colorLightBlue;
-    sge1.segmentedControlStyle = UISegmentedControlStyleBordered;
-    sge1.selectedSegmentIndex = 0;
-    [sge1 addTarget:self action:@selector(segmentActionOne:) forControlEvents:UIControlEventValueChanged];
-    [view addSubview:sge1];
-    
-    UISegmentedControl *sge2 = [[UISegmentedControl alloc] initWithItems:array2];
-    sge2.frame = CGRectMake(WIDTH/2+2.5, fg1.frame.origin.y+5, WIDTH/2-12.5, 30);
-    sge2.tintColor = colorLightBlue;
-    sge2.segmentedControlStyle = UISegmentedControlStyleBordered;
-    sge2.selectedSegmentIndex = 0;
-    [sge2 addTarget:self action:@selector(segmentActionTwo:) forControlEvents:UIControlEventValueChanged];
-    [view addSubview:sge2];
-    
-    UIView *fg2 = [[UIView alloc] initWithFrame:CGRectMake(0, sge1.frame.origin.y+sge1.frame.size.height+5, WIDTH, 1)];
-    fg2.backgroundColor = colorLineGray;
-    [view addSubview:fg2];
-}
+    _chooseSegmented = [[ForumHeaderView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 40)];
+    _chooseSegmented.showChooseView = _tableView;
+    _chooseSegmented.delegate = self;
 
--(void)createTableHeaderViewLanMu:(NSDictionary *)dict{
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 120)];
-    _tableView.tableHeaderView = view;
-    
-    UILabel *nameLabel = [LHController createLabelWithFrame:CGRectMake(10, 10, 200, 20) Font:[LHController setFont] Bold:NO TextColor:nil Text:dict[@"cname"]];
-    [view addSubview:nameLabel];
-    
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 40, WIDTH-20, 20)];
-    NSString *str = [NSString stringWithFormat:@"论坛信息：总贴数：%@  今日帖子数：%@",dict[@"total"],dict[@"nowday"]];
-    label.attributedText = [self attString:str Font:[LHController setFont]-6 type:1];
-    [view addSubview:label];
-    
-    UIView *fg1 = [[UIView alloc] initWithFrame:CGRectMake(0, 60, WIDTH, 1)];
-    fg1.backgroundColor = colorLineGray;
-    [view addSubview:fg1];
-    
-
-    NSArray *array1 = @[@"全部",@"精华"];
-    NSArray *array2 = @[@"最新回复",@"最新发布"];
-    UISegmentedControl *sge1 = [[UISegmentedControl alloc] initWithItems:array1];
-    sge1.frame = CGRectMake(10, fg1.frame.origin.y+5, WIDTH/2-12.5, 30);
-    sge1.tintColor = colorLightBlue;
-    sge1.segmentedControlStyle = UISegmentedControlStyleBordered;
-    sge1.selectedSegmentIndex = 0;
-    [sge1 addTarget:self action:@selector(segmentActionOne:) forControlEvents:UIControlEventValueChanged];
-    [view addSubview:sge1];
-    
-    UISegmentedControl *sge2 = [[UISegmentedControl alloc] initWithItems:array2];
-    sge2.frame = CGRectMake(WIDTH/2+2.5, fg1.frame.origin.y+5, WIDTH/2-12.5, 30);
-    sge2.tintColor = colorLightBlue;
-    sge2.segmentedControlStyle = UISegmentedControlStyleBordered;
-    sge2.selectedSegmentIndex = 0;
-    [sge2 addTarget:self action:@selector(segmentActionTwo:) forControlEvents:UIControlEventValueChanged];
-    [view addSubview:sge2];
-
-    
-    UIView *fg2 = [[UIView alloc] initWithFrame:CGRectMake(0, sge1.frame.origin.y+sge1  .frame.size.height+5, WIDTH, 1)];
-    fg2.backgroundColor = colorLineGray;
-    [view addSubview:fg2];
+    [tableHeaderView addSubview:_headerView];
+    [tableHeaderView addSubview:_chooseSegmented];
 }
 
 
-#pragma mark - 点击申请版主按钮响应方法
--(void)applicationClick{
-    if ([CZWManager manager].isLogin) {
-        ApplyModeratorsViewController *apply = [[ApplyModeratorsViewController alloc] init];
-        apply.dict = self.dictionary;
-        [self.navigationController pushViewController:apply animated:YES];
-    }else{
-        LoginViewController *my = [[LoginViewController alloc] init];
-        [self presentViewController:my animated:YES completion:nil];
-    }
-}
-
-#pragma mark - 属性化字符串
--(NSAttributedString *)attString:(NSString *)str Font:(CGFloat)size type:(NSInteger)type{
-    if (!str) {
-        return nil ;
-    }
-    NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:str];
-    [att addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:size] range:NSMakeRange(0, att.length)];
-    if (type == 0) {
-        [att addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:1] range:NSMakeRange(0, att.length)];
-        [att addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, 3)];
-    }else if (type == 1){
-         [att addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:180/255.0 green:180/255.0 blue:180/255.0 alpha:1] range:NSMakeRange(0, att.length)];
-        [att addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, 5)];
-        for (int i = 0; i < str.length; i ++) {
-            unichar C = [str characterAtIndex:i];
-            if (isdigit(C)) {
-                [att addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(i, 1)];
-            }
-        }
-    }
-    
-    return att;
-}
-
--(NSAttributedString *)attString:(NSString *)str Font:(CGFloat)size{
-    if (!str) {
-        return nil ;
-    }
-    NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:str];
-    [att addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:size] range:NSMakeRange(0, att.length)];
- 
-       // [att addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:1] range:NSMakeRange(0, att.length)];
-    [att addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:6/255.0 green:143/255.0 blue:206/255.0 alpha:1] range:NSMakeRange(1, 5)];
-    
-    return att;
-}
-
-#pragma mark - order/topic
--(void)segmentActionOne:(UISegmentedControl *)Seg{
-    switch (Seg.selectedSegmentIndex) {
-        case 0:
-        {
-            topicType = 0;
-            break;
-        }
-            
-        case 1:
-        {
-            topicType = 1;
-            break;
-        }
-    }
-    
+#pragma mark - ForumHeaderViewDelegate
+- (void)didSelectOrderType:(NSInteger)orderType topicType:(NSInteger)topicType{
+    _orderType = orderType;
+    _topicType = topicType;
     _count = 1;
-    [self loadData];
-}
-
--(void)segmentActionTwo:(UISegmentedControl *)Seg{
-    switch (Seg.selectedSegmentIndex) {
-        case 0:
-        {
-            orderType = 0;
-            break;
-        }
-            
-        case 1:
-        {
-            orderType = 1;
-            break;
-        }
-        default:
-            break;
-    }
-    
-    _count = 1;
-    [self loadData];
-}
-
--(void)createFootView{
-    UIView *foot = [[UIView alloc] initWithFrame:CGRectMake(0, HEIGHT-64-49, WIDTH, HEIGHT)];
-    foot.backgroundColor = [UIColor colorWithRed:6/255.0 green:143/255.0 blue:206/255.0 alpha:1];
-    [self.view addSubview:foot];
-    
-    UIButton *btn = [LHController createButtnFram:CGRectMake(10, 10, WIDTH-30, 29) Target:self Action:@selector(footBtnCLick) Text:@"发表新帖"];
-    btn.titleLabel.font = [UIFont systemFontOfSize:[LHController setFont]-3];
-    btn.backgroundColor = [UIColor whiteColor];
-    [foot addSubview:btn];
-}
-
--(void)footBtnCLick{
-    if ([CZWManager manager].isLogin){
-        WritePostViewController *write = [[WritePostViewController alloc] init];
-        if (self.forumType == forumClassifyBrand) {
-            write.sid = self.sid;
-        }else{
-            write.cid = self.sid;
-        }
-        [self.navigationController pushViewController:write animated:YES];
-    }else{
-        LoginViewController *my = [[LoginViewController alloc] init];
-        [self presentViewController:my animated:YES completion:nil];
-        
-    }
+    [_tableView.mj_header beginRefreshing];
 }
 
 #pragma mark - UITableViewDataSource
@@ -372,29 +335,22 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    ForumListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    HomepageForumCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (!cell) {
-        cell = [[ForumListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(10, 69, WIDTH-10, 1)];
-        view.backgroundColor = [UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1];
-        [cell.contentView addSubview:view];
+        cell = [[HomepageForumCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
-    
-    cell.dictionary = _dataArray[indexPath.row];
+
+    cell.forumModel = _dataArray[indexPath.row];
     return cell;
 }
 
 #pragma mark - UITableViewDelegate
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 70;
-}
-
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    HomepageForumModel *model = _dataArray[indexPath.row];
     PostViewController *detail = [[PostViewController alloc] init];
-    detail.tid = _dataArray[indexPath.row][@"tid"];
-    detail.titleText = _dataArray[indexPath.row][@"title"];
+    detail.tid = model.tid;
+    detail.titleText = model.title;
     [self.navigationController pushViewController:detail animated:YES];
 }
 

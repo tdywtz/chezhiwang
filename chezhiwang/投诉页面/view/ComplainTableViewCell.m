@@ -110,10 +110,10 @@
     [HttpRequest GET:[URLFile urlStringForPro] success:^(id responseObject) {
         if ([responseObject count] > 0) {
             NSMutableArray *array = [[NSMutableArray alloc] init];
-            for (NSDictionary *dict in responseObject) {
-                NSString *title = [dict[@"License_plate"] length] > 0?dict[@"License_plate"]:@"台";
+            for (NSDictionary *dict in responseObject[@"rel"]) {
+                NSString *title = [dict[@"license_plate"] length] > 0?dict[@"license_plate"]:@"台";
                 [array
-                 addObject:@{@"id":dict[@"Id"],@"title":title,@"name":dict[@"Name"]}];
+                 addObject:@{@"id":dict[@"id"],@"title":title,@"name":dict[@"name"]}];
             }
             picker.dataArray = array;
         }
@@ -189,7 +189,7 @@
 
     rightImageView = [[UIImageView alloc] init];
     rightImageView.contentMode = UIViewContentModeScaleAspectFit;
-    rightImageView.image = [UIImage imageNamed:@"top"];
+    rightImageView.image = [UIImage imageNamed:@"arrow"];
 
     [self.contentView addSubview:_nameLabel];
     [self.contentView addSubview:_textField];
@@ -206,6 +206,7 @@
     [rightImageView makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(-10);
         make.centerY.equalTo(0);
+        make.size.equalTo(CGSizeMake(20, 20));
     }];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textChange:) name:UITextFieldTextDidChangeNotification object:nil];

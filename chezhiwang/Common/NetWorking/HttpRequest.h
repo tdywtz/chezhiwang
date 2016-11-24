@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "URLFile.h"
 @class  UIImage;
 
 @interface HttpRequest : NSObject
@@ -45,6 +46,4 @@
 
 
 
-+ (void) downloadProvince;
-+(NSArray *) readProvince;
 @end

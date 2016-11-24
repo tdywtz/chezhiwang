@@ -64,7 +64,8 @@
     
     NSString *url = [NSString stringWithFormat:[URLFile urlString_getApplyOwner],[CZWManager manager].userID];
   [HttpRequest GET:url success:^(id responseObject) {
-      [self setCar:responseObject[0]];
+     
+      [self setCar:responseObject];
   } failure:^(NSError *error) {
       
   }];
@@ -104,7 +105,7 @@
    
     CGFloat height = [[notifaction.userInfo objectForKeyedSubscript:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size.height;
      [self showPickView:NO];
-    _scrollView.frame = CGRectMake(0, 0, WIDTH, HEIGHT-height);
+    _scrollView.frame = CGRectMake(0, 0, WIDTH, HEIGHT-height-64);
     if (frame_y-_scrollView.contentOffset.y > HEIGHT-height) {
         _scrollView.contentOffset = CGPointMake(0, frame_y-HEIGHT+height+60);
     }
@@ -121,11 +122,23 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
     [_scrollView addGestureRecognizer:tap];
 
-    UILabel *tishilabel = [LHController createLabelWithFrame:CGRectMake(0, 0, WIDTH, 40) Font:13 Bold:NO TextColor:colorDeepGray Text:@"以下信息全是必填选项，请您认真填写以下内容"];
+    CZWLabel *tishilabel = [[CZWLabel alloc] initWithFrame:CGRectZero];
+    tishilabel.textInsets = UIEdgeInsetsMake(0, 13, 0, 0);
+    tishilabel.font = [UIFont systemFontOfSize:13];
+    tishilabel.textColor = colorLightGray;
+    tishilabel.text = @"以下信息全是必填选项，请您认真填写以下内容";
+    [tishilabel insertImage:[UIImage imageNamed:@"auto_common_提示"] frame:CGRectMake(0, -7, 20, 20) index:0];
     tishilabel.backgroundColor = RGB_color(240, 240, 240, 1);
     [_scrollView addSubview:tishilabel];
 
-    
+    [tishilabel sizeToFit];
+    tishilabel.lh_left = 0;
+    tishilabel.lh_top = 0;
+    tishilabel.lh_height += 20;
+    tishilabel.lh_width = WIDTH;
+
+   
+
     NSArray *array = @[@"用户名：",@"真实姓名：",@"性别：",@"所在地区：",@"街道地址：",@"申请论坛：",@"职业：",@"手机：",@"QQ：",@"电子邮箱：",@"身份证号码：",@"爱车：",@"申请理由："];
      NSArray *placeholderArray = @[@"用户名",@"请输入真实姓名",@"性别",@"所在地区",@"请输入街道地址",@"申请论坛",@"请输入您的职业",@"请输入您的手机号码",@"请输入您的QQ",@"请输入电子邮箱",@"请输入身份证号码",@"爱车",@"请输入申请理由"];
     CGFloat frameY = tishilabel.lh_bottom+1;
@@ -213,7 +226,8 @@
 }
 
 - (UIView *)textFieldRightView{
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"top"]];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrow"]];
+    imageView.frame = CGRectMake(0, 0, 20, 20);
     return imageView;
 }
 //手势
@@ -409,8 +423,12 @@
 -(void)postData:(NSDictionary *)dict{
 
   [HttpRequest POST:[URLFile urlStringForApplyOwner] parameters:dict success:^(id responseObject) {
-      [LHController alert:responseObject[0][@"result"]];
-      [self.navigationController popViewControllerAnimated:YES];
+      if (responseObject[@"error"]) {
+          [LHController alert:responseObject[@"error"]];
+      }else{
+           [LHController alert:responseObject[@"success"]];
+          [self.navigationController popViewControllerAnimated:YES];
+      }
 
   } failure:^(NSError *error) {
       
@@ -485,7 +503,7 @@
     }else{
         [UIView animateWithDuration:0.2 animations:^{
             _pickViewSuper.frame = CGRectMake(0, HEIGHT, WIDTH, 220);
-            _scrollView.frame = CGRectMake(0, 0, WIDTH, HEIGHT-64);
+            _scrollView.frame = self.view.frame;
         }];
     }
 }
@@ -541,33 +559,40 @@
 
   
     [HttpRequest GET:url success:^(id responseObject) {
+
         if (num == 1) {
-            for (NSDictionary *dict in responseObject) {
-                [provinceArray addObject:@{@"id":dict[@"Id"],@"name":dict[@"Name"]}];
+            for (NSDictionary *dict in responseObject[@"rel"]) {
+                [provinceArray addObject:@{@"id":dict[@"id"],@"name":dict[@"name"]}];
             }
             [_pickDataArray setArray:provinceArray];
             
-        }else if (num == 2 || num == 3){
+        }else if (num == 2){
+            for (NSDictionary *dict in responseObject[@"rel"]) {
+                [_pickDataArray addObject:@{@"id":dict[@"cid"],@"name":dict[@"cityname"]}];
+            }
+        }
+        else if (num == 3){
             for (NSDictionary *dict in responseObject) {
                 [_pickDataArray addObject:@{@"id":dict[@"id"],@"name":dict[@"name"]}];
             }
         }
         else if (num == 4){
-            for (NSDictionary *dict in responseObject) {
+            for (NSDictionary *dict in responseObject[@"rel"]) {
                 for (NSDictionary *subDic in dict[@"brand"]) {
                     [brandArray addObject:@{@"id":subDic[@"id"],@"name":subDic[@"name"]}];
                 }
             }
             [_pickDataArray setArray:brandArray];
         }else if (num == 5){
-            for (NSDictionary *dict in responseObject) {
+            for (NSDictionary *dict in responseObject[@"rel"]) {
                 for (NSDictionary *subDic in dict[@"series"]) {
-                    [_pickDataArray addObject:@{@"id":subDic[@"id"],@"name":subDic[@"name"]}];
+                    [_pickDataArray addObject:@{@"id":subDic[@"seriesid"],@"name":subDic[@"seriesname"]}];
                 }
             }
         }else if (num == 6){
-            for (NSDictionary *dict in responseObject) {
-                [_pickDataArray addObject:@{@"id":[dict[@"Id"] stringValue],@"name":dict[@"Model_Name"]}];
+       
+            for (NSDictionary *dict in responseObject[@"rel"]) {
+                [_pickDataArray addObject:@{@"id":[NSString stringWithFormat:@"%@",dict[@"mid"]],@"name":dict[@"modelname"]}];
             }
         }
         [_pickView reloadAllComponents];
@@ -674,7 +699,7 @@
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
 
-    frame_y = textView.frame.origin.y+textView.frame.size.height;
+    frame_y = textView.frame.origin.y+textView.frame.size.height+50;
     return YES;
 }
 

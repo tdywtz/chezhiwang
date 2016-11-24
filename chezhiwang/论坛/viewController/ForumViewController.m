@@ -11,7 +11,6 @@
 #import "ForumListViewController.h"
 #import "ForumCatalogueViewController.h"
 
-#import "chezhiwang-Swift.h"
 
 @interface ForumViewController ()<LHPageViewcontrollerDelegate>
 {

@@ -31,14 +31,15 @@
         if (_count == 1) {
             [_dataArray removeAllObjects];
         }
+
         [_tableView.mj_header endRefreshing];
-        if ([responseObject count] == 0) {
+        if ([responseObject[@"rel"] count] == 0) {
             [_tableView.mj_footer endRefreshingWithNoMoreData];
         }else{
             [_tableView.mj_footer endRefreshing];
         }
 
-        for (NSDictionary *dict in responseObject) {
+        for (NSDictionary *dict in responseObject[@"rel"]) {
             
             HomepageForumModel *model = [HomepageForumModel mj_objectWithKeyValues:dict];
             [_dataArray addObject:model];

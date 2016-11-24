@@ -20,7 +20,7 @@ public struct SegmentConfigure {
     var textSelColor:UIColor
     
     var highlightColor:UIColor
-    
+
     var titles:[String]
 }
 
@@ -49,7 +49,8 @@ class TransitionSegmentView: UIView {
     
     //闭包回调方法
     open var scrollClosure:SegmentClosureType?
-    
+
+    public  var attribute : NSMutableAttributedString?
     //字体非选中状态颜色
     fileprivate var textNorColor:UIColor = UIColor.white
     
@@ -71,7 +72,7 @@ class TransitionSegmentView: UIView {
         super.init(frame:frame)
         
         self.configure = configure
-        
+  
         self.configUI()
     }
 
@@ -99,7 +100,7 @@ class TransitionSegmentView: UIView {
    open func setSegmentConfigure(configure:SegmentConfigure){
         self.configure = configure
     }
-    //初始化UI
+    ///初始化UI
     func configUI() {
         
         let rect = CGRect(x:0,y:0,width:frame.width,height:frame.height)

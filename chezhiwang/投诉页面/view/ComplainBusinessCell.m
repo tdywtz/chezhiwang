@@ -27,6 +27,12 @@
 @end
 
 @implementation ComplainBusinessCell
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -72,8 +78,8 @@
     _lineView3 = [[UIView alloc] init];
     _lineView3.backgroundColor = RGB_color(240, 240, 240, 1);
 
-    proImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"top"]];
-    businessImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"top"]];
+    proImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrow"]];
+    businessImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrow"]];
 
     [self.contentView addSubview:_nameLabel];
     [self.contentView addSubview:button];
@@ -95,6 +101,8 @@
         make.left.right.bottom.equalTo(0);
         make.height.equalTo(1);
     }];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dicChangetextFieldText:) name:UITextFieldTextDidChangeNotification object:nil];
 }
 
 - (UILabel *)leftLabelWithText:(NSString *)text{
@@ -106,6 +114,12 @@
     return leftLabel;
 }
 
+- (void)dicChangetextFieldText:(NSNotification *)notification{
+    if (notification.object == _businessTextField) {
+        _businessModel.businessValue = _businessTextField.text;
+    }
+}
+
 - (void)buttonClick{
     button.selected = !button.selected;
     _businessModel.custom = button.selected;
@@ -113,6 +127,18 @@
 
     [_businessTextField resignFirstResponder];
     [_proTextField resignFirstResponder];
+    if (button.selected) {
+        _businessModel.pid = nil;
+        _businessModel.cid = nil;
+        _businessModel.proValue = nil;
+        _businessModel.province = nil;
+        _businessModel.city = nil;
+        _businessModel.businessId = nil;
+        _businessModel.businessValue = nil;
+    }else{
+        _businessModel.businessId = nil;
+        _businessModel.businessValue = nil;
+    }
    // [self resettring];
 }
 
@@ -151,6 +177,7 @@
         _proTextField.lh_height = 50;
         _proTextField.lh_width = self.contentView.frame.size.width - 40;
 
+        proImageView.lh_size = CGSizeMake(20, 20);
         proImageView.lh_centerY = _proTextField.lh_centerY;
         proImageView.lh_right = WIDTH - 10;
 
@@ -158,10 +185,11 @@
         _lineView2.lh_top = _proTextField.lh_bottom;
         _lineView2.lh_size = CGSizeMake(WIDTH, 1);
 
+        _businessTextField.lh_size = _proTextField.lh_size;
         _businessTextField.lh_left = _proTextField.lh_left;
         _businessTextField.lh_top = _lineView2.lh_bottom;
-        _businessTextField.lh_size = _proTextField.lh_size;
 
+        businessImageView.lh_size = CGSizeMake(20, 20);
         businessImageView.lh_centerY = _businessTextField.lh_centerY;
         businessImageView.lh_right = proImageView.lh_right;
     }
@@ -205,6 +233,10 @@
 
         return NO;
     }else if (textField == _businessTextField) {
+        if (_businessModel.pid == nil) {
+            [LHController alert:@"请选择省、市"];
+            return NO;
+        }
         ChooseViewController *choose = [[ChooseViewController alloc] init];
         UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:choose];
         nvc.navigationBar.barStyle = UIBarStyleBlack;

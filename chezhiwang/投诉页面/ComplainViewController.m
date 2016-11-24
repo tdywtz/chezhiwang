@@ -118,6 +118,9 @@
                         brandModel.SeriesId = responseObject[@"series"];
                         brandModel.modelName = responseObject[@"modelName"];//车型
                         brandModel.ModelId = responseObject[@"model"];
+
+                        _businessModel.seriesId = responseObject[@"series"];
+
                     }else if(j <= 3){
                          ComplainModel *model = (ComplainModel *)rowModel;
                        if (j == 1){
@@ -220,6 +223,8 @@
                         businessModel.pid = responseObject[@"pid"];
                         businessModel.cid = responseObject[@"cid"];
                         businessModel.lid = responseObject[@"lid"];
+                    businessModel.seriesId = responseObject[@"seriesId"];
+
                 }else if (j == 8){
                         ComplainImageModel *imageModel = (ComplainImageModel *)rowModel;
                         NSString *str = responseObject[@"image"];
@@ -265,6 +270,9 @@
 - (void)setData{
     _dataDictionary = [[NSMutableDictionary alloc] init];
     _dataArray =[ComplainSectionModel dataArray];
+
+    ComplainSectionModel *sectionModel = _dataArray[2];
+    _businessModel = sectionModel.rowModels[7];
 }
 
 - (void)createTableView{
@@ -276,12 +284,13 @@
     [self.view addSubview:_tableView];
 
     CZWLabel *headerLabel = [[CZWLabel alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 10)];
-    headerLabel.textColor = colorDeepGray;
+    headerLabel.textColor = colorLightGray;
     headerLabel.backgroundColor = RGB_color(240, 240, 240, 1);
     headerLabel.font = [UIFont systemFontOfSize:12];
     headerLabel.numberOfLines = 0;
     headerLabel.textInsets = UIEdgeInsetsMake(10, 10, 10, 10);
-    headerLabel.text = @"为了我们能及时与您取得联系，了解到更详细信息，请您认真填写以下内容";
+    headerLabel.text = @"  为了我们能及时与您取得联系，了解到更详细信息，请您认真填写以下内容";
+    [headerLabel insertImage:[UIImage imageNamed:@"auto_common_提示"] frame:CGRectMake(0, -7, 20, 20) index:0];
     [headerLabel sizeToFit];
     _tableView.tableHeaderView = headerLabel;
 
