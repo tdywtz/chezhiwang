@@ -7,7 +7,7 @@
 //
 
 #import "ForumCatalogueViewController.h"
-#import <MJNIndexView.h>
+#import "MJNIndexView.h"
 #import "ForumCatalogueSliderView.h"
 #import "ForumCatalogueSectionModel.h"
 #import "ForumCatalogueHeaderView.h"
@@ -92,10 +92,10 @@
     __weak __typeof(self)weakSelf = self;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 
-    [HttpRequest GET:[URLFile urlStringForOtherSeries] policy:NSURLRequestReturnCacheDataElseLoad success:^(id responseObject) {
+    [HttpRequest GET:[URLFile urlStringForLetter] policy:NSURLRequestReturnCacheDataElseLoad success:^(id responseObject) {
 
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-        _dataArray = [ForumCatalogueSectionModel arrayWithArray:responseObject];
+        _dataArray = [ForumCatalogueSectionModel arrayWithArray:responseObject[@"rel"]];
         [_tableView reloadData];
         weakSelf.indexView.dataSource = self;
         [weakSelf.view insertSubview:weakSelf.indexView atIndex:1];
@@ -135,8 +135,10 @@
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+    _tableView.separatorInset = UIEdgeInsetsMake(0, 75, 0, 0);
     _tableView.backgroundColor = [UIColor whiteColor];
     _tableView.tableFooterView = [UIView new];
+    _tableView.rowHeight = 67;
     [self.view addSubview:_tableView];
 
 
@@ -149,6 +151,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return _dataArray.count;
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     ForumCatalogueSectionModel *sectionModel = _dataArray[section];
     return sectionModel.roeModels.count;
@@ -162,7 +165,7 @@
     ForumCatalogueSectionModel *sectionModel = _dataArray[indexPath.section];
     ForumCatalogueModel *model = sectionModel.roeModels[indexPath.row];
     cell.textLabel.text = model.title;
-    cell.imageView.image = [UIImage imageNamed:@"top"];
+    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:model.logo] placeholderImage:[CZWManager defaultIconImage]];
     return cell;
 }
 
@@ -170,8 +173,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     ForumCatalogueSectionModel *sectionModel = _dataArray[indexPath.section];
     ForumCatalogueModel *model = sectionModel.roeModels[indexPath.row];
-    sliderView.dataArray = model.sections;
- 
+    sliderView.brandId = model.ID;
     [self showSliderView];
 }
 
@@ -192,7 +194,7 @@
     [label addSubview:lineView2];
 
     [lineView1 makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(40);
+        make.left.equalTo(75);
         make.top.right.equalTo(0);
         make.height.equalTo(0.6);
     }];
@@ -204,6 +206,7 @@
 
     return label;
 }
+
 //- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
 //    ForumCatalogueSectionModel *sectionModel = _dataArray[section];
 //    return sectionModel.title;
@@ -214,7 +217,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 30;
+    return 40;
 }
 
 #pragma mark - MJNIndexViewDataSource

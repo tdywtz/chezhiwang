@@ -17,51 +17,21 @@
 
 + (NSArray *)arrayWithArray:(NSArray *)array{
 
-
-    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
-    for (NSDictionary *dict in array) {
-        NSString *key = dict[@"letter"];
-        NSMutableArray *mArr = dictionary[key];
-        if (mArr == nil) {
-            mArr = [[NSMutableArray alloc] init];
-        }
-        [mArr addObject:dict];
-        [dictionary setObject:mArr forKey:key];
+    if ([array isKindOfClass:[NSArray class]] == NO) {
+        return nil;
     }
 
-
+    [ForumCatalogueModel mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
+        return @{@"title":@"name",@"ID":@"id"};
+    }];
     NSMutableArray *sections = [[NSMutableArray alloc] init];
-    for (int i = 'A'; i <= 'Z'; i ++) {
-        NSString *key = [NSString stringWithFormat:@"%c",i];
-        if (dictionary[key] == nil) {
-            continue;
-        }
+    for (NSDictionary *dict in array) {
+
         ForumCatalogueSectionModel *sectionModel = [[ForumCatalogueSectionModel alloc] init];
-        sectionModel.title = key;
+        sectionModel.title = dict[@"letter"];
 
-        NSMutableArray *rows = [NSMutableArray array];
-        for (NSDictionary *subDict in dictionary[key]) {
-            ForumCatalogueModel *model = [[ForumCatalogueModel alloc] init];
-            model.title = subDict[@"bname"];
-            model.ID = subDict[@"bid"];
 
-            ForumCatalogueSectionModel *sonSectionModel = [[ForumCatalogueSectionModel alloc] init];
-            sonSectionModel.title = subDict[@"bname"];
-            NSMutableArray *sons = [NSMutableArray array];
-            for (NSDictionary *sonDict in subDict[@"series"]) {
-                ForumCatalogueModel *sonModel = [[ForumCatalogueModel alloc] init];
-                sonModel.title = sonDict[@"sname"];
-                sonModel.ID = sonDict[@"sid"];
-                [sons addObject:sonModel];
-            }
-            sonSectionModel.roeModels = sons;
-            model.sections = @[sonSectionModel];
-
-            [rows addObject:model];
-
-        }
-
-        sectionModel.roeModels = rows;
+        sectionModel.roeModels = [ForumCatalogueModel mj_objectArrayWithKeyValuesArray:dict[@"brand"]];
 
         [sections addObject:sectionModel];
     }

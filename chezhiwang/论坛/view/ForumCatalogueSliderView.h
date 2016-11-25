@@ -13,4 +13,5 @@
 
 @property (nonatomic,weak) UIViewController *parentViewController;
 @property (nonatomic,strong) NSArray <ForumCatalogueSectionModel *> *dataArray;
+@property (nonatomic,copy) NSString *brandId;//品牌id
 @end

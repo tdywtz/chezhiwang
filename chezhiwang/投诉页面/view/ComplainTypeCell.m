@@ -101,8 +101,10 @@
         make.top.equalTo(20);
     }];
 
+    [qualityLabel sizeToFit];
+    CGFloat space = (WIDTH-qualityLabel.lh_width*3-16*3-5*3)/4;
     [qualityButton makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(20);
+        make.left.equalTo(space);
         make.top.equalTo(nameLabel.bottom).offset(20);
         make.size.equalTo(CGSizeMake(16, 16));
     }];
@@ -113,7 +115,7 @@
     }];
 
     [serveButton makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(qualityLabel.right).offset(30);
+        make.left.equalTo(qualityLabel.right).offset(space);
         make.top.equalTo(qualityButton);
         make.size.equalTo(CGSizeMake(16, 16));
     }];
@@ -125,7 +127,7 @@
 
 
     [synthesizeButton makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(serveLabel.right).offset(30);
+        make.left.equalTo(serveLabel.right).offset(space);
         make.top.equalTo(qualityButton);
         make.size.equalTo(CGSizeMake(16, 16));
     }];
@@ -160,6 +162,7 @@
     button.layer.cornerRadius = 8;
     [button setTitle:@"•" forState:UIControlStateSelected];
     [button setTitleColor:colorDeepGray forState:UIControlStateSelected];
+    [button setTitleEdgeInsets:UIEdgeInsetsMake(-1, 0, 1, 0)];
     [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     return button;
 }

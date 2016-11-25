@@ -13,8 +13,7 @@
 
 @property (nonatomic,copy) NSString *title;
 @property (nonatomic,copy) NSString *ID;
-@property (nonatomic,copy) NSString *imageUrl;
-@property (nonatomic,strong) NSArray <ForumCatalogueSectionModel *> *sections;
+@property (nonatomic,copy) NSString *logo;
 
 @end
 

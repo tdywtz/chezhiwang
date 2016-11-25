@@ -21,17 +21,16 @@
 
     [super layoutSubviews];
 
-    self.imageView.bounds =CGRectMake(0,0,44,44);
 
-    self.imageView.frame = CGRectMake(0,0,44,44);
+    self.imageView.frame = CGRectMake(10,0,self.lh_height-10,self.lh_height-10);
+    self.imageView.lh_centerY = self.lh_height/2;
 
-    self.imageView.contentMode = UIViewContentModeCenter;
+    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
 
 
 
     CGRect tmpFrame = self.textLabel.frame;
-
-    tmpFrame.origin.x = 46;
+    tmpFrame.origin.x = self.imageView.lh_right+10;
 
     self.textLabel.frame = tmpFrame;
 
@@ -39,8 +38,7 @@
     self.textLabel.textColor = colorBlack;
 
     tmpFrame = self.detailTextLabel.frame;
-
-    tmpFrame.origin.x = 46;
+    tmpFrame.origin.x = self.textLabel.lh_left;
 
     self.detailTextLabel.frame = tmpFrame;
 

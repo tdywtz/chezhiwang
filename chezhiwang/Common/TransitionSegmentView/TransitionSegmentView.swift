@@ -50,7 +50,7 @@ class TransitionSegmentView: UIView {
     //闭包回调方法
     open var scrollClosure:SegmentClosureType?
 
-    public  var attribute : NSMutableAttributedString?
+    open  var attributed : NSMutableAttributedString?
     //字体非选中状态颜色
     fileprivate var textNorColor:UIColor = UIColor.white
     
@@ -97,7 +97,7 @@ class TransitionSegmentView: UIView {
     
     
     
-   open func setSegmentConfigure(configure:SegmentConfigure){
+   open func setSegmentConfigure(_ configure:SegmentConfigure){
         self.configure = configure
     }
     ///初始化UI

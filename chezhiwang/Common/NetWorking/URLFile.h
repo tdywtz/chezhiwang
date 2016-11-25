@@ -112,7 +112,7 @@
 /**帖子内容(web)*/
 + (NSString *)urlStringForBBSContent;
 /**论坛车系品牌*/
-+ (NSString *)urlStringForOtherSeries;
+//+ (NSString *)urlStringForOtherSeries;
 /**论坛分类->品牌论坛->指定论坛*/
 + (NSString *)urlStringForSeriesForm;
 /**论坛分类->栏目论坛->指定论坛*/

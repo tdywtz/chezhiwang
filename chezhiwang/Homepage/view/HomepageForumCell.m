@@ -68,7 +68,7 @@
     
     [nameLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(10);
-        make.top.equalTo(titleLabel.bottom).offset(10);
+        make.top.equalTo(titleLabel.bottom).offset(15);
         make.bottom.equalTo(-10);
         make.width.equalTo(80);
     }];

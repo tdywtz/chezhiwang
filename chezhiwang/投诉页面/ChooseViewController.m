@@ -345,7 +345,7 @@ typedef enum {
         [self downloadModel:self.ID];
         
     }else if (_choosetype == chooseTypeComplainQuality){
-        self.title = @"质量申诉部位";
+        self.title = @"质量投诉部位";
         self.chooseNumbers = chooseNumberMany;
         _sectionModels = [ChooseSectionModel getComplainQualityArray];
         

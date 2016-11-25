@@ -52,7 +52,6 @@
     } failure:^(NSError *error) {
         [_tableView.mj_header endRefreshing];
         [_tableView.mj_footer endRefreshing];
-
     }];
 }
 

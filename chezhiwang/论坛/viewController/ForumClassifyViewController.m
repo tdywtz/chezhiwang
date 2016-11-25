@@ -8,7 +8,7 @@
 
 #import "ForumClassifyViewController.h"
 #import "ForumClassifyListViewController.h"
-#import <MJNIndexView.h>
+#import "MJNIndexView.h"
 #import "WritePostViewController.h"
 #import "ForumCatalogueSectionModel.h"
 
@@ -31,10 +31,10 @@
     __weak __typeof(self)weakSelf = self;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 
-    [HttpRequest GET:[URLFile urlStringForOtherSeries] policy:NSURLRequestReturnCacheDataElseLoad success:^(id responseObject) {
+    [HttpRequest GET:[URLFile urlStringForLetter] policy:NSURLRequestReturnCacheDataElseLoad success:^(id responseObject) {
 
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-        _dataArray = [ForumCatalogueSectionModel arrayWithArray:responseObject];
+        _dataArray = [ForumCatalogueSectionModel arrayWithArray:responseObject[@"rel"]];
         [_tableView reloadData];
         weakSelf.indexView.dataSource = self;
         [weakSelf.view insertSubview:weakSelf.indexView atIndex:1];
@@ -42,6 +42,34 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
 }
+
+- (void)loadTwoData:(NSString *)brandId{
+    __weak __typeof(self)weakSlef = self;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    NSString *url = [NSString stringWithFormat:[URLFile urlStringForSeries],brandId];
+    [HttpRequest GET:url success:^(id responseObject) {
+        [MBProgressHUD hideHUDForView:weakSlef.view animated:YES];
+        [ForumCatalogueModel mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
+            return @{@"title":@"seriesname",@"ID":@"seriesid"};
+        }];
+        NSMutableArray *sections = [[NSMutableArray alloc] init];
+        for (NSDictionary *dict in responseObject[@"rel"]) {
+
+            ForumCatalogueSectionModel *sectionModel = [[ForumCatalogueSectionModel alloc] init];
+            sectionModel.title = dict[@"brands"];
+
+            sectionModel.roeModels = [ForumCatalogueModel mj_objectArrayWithKeyValuesArray:dict[@"series"]];
+
+            [sections addObject:sectionModel];
+        }
+        twoArray = sections;
+        [twoTableView reloadData];
+
+    } failure:^(NSError *error) {
+        [MBProgressHUD hideHUDForView:weakSlef.view animated:YES];
+    }];
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -206,9 +234,7 @@
     }else{
         ForumCatalogueSectionModel *sectionModel = _dataArray[indexPath.section];
         ForumCatalogueModel *model = sectionModel.roeModels[indexPath.row];
-        twoArray = model.sections;
-
-        [twoTableView reloadData];
+        [self loadTwoData:model.ID];
         [self showTwoView:YES];
     }
 }

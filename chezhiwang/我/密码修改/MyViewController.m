@@ -110,17 +110,18 @@
 
 
 - (void)reloadData{
+
     if (![CZWManager manager].isLogin) {
         //数量字典置空ns
         numDictonary = nil;
         _dataArray = @[
                        @[
-                           [[MyViewModel alloc] initWithTitle:@"我的投诉" imageName:@"centre_complain" class:NSClassFromString(@"MyComplainViewController")],
-                           [[MyViewModel alloc] initWithTitle:@"我的提问" imageName:@"centre_answer" class:NSClassFromString(@"MyAskViewController")]
+                           [[MyViewModel alloc] initWithTitle:@"我的投诉" imageName:@"centre_complain" class:[MyComplainViewController class]],
+                           [[MyViewModel alloc] initWithTitle:@"我的提问" imageName:@"centre_answer" class:[MyAskViewController class]]
                            ],
                        @[
                            [[MyViewModel alloc] initWithTitle:@"我的评论" imageName:@"centre_comment" class:[CentreCommentViewController class]],
-                           [[MyViewModel alloc] initWithTitle:@"我的收藏" imageName:@"centre_favorite" class:NSClassFromString(@"FavouriteViewController")]
+                           [[MyViewModel alloc] initWithTitle:@"我的收藏" imageName:@"centre_favorite" class:[FavouriteViewController class]]
                            ]
                        ];
         _tableView.tableFooterView.hidden = YES;

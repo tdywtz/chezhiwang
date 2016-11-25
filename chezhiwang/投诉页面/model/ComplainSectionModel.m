@@ -202,7 +202,7 @@
 - (NSArray *)rowModelsFourQuality{
     NSArray *array = @[
                        [[ComplainTypeModel alloc] initWithKey:@"C_Tslx" type:@"质量问题"],
-                       [[ComplainModel alloc] initWithKey:@"Question" placeholder:@"控制在24个汉子以内，仅限于汉子、数字、字母" text:@"" name:@"问题描述" style:0],
+                       [[ComplainModel alloc] initWithKey:@"Question" placeholder:@"控制在24个汉子以内，仅限于汉子、数字、字母" text:@"" name:@"问题简述" style:0],
                        [[ComplainModel alloc] initWithKey:@"Content" placeholder:@"输入投诉详情" text:@"" name:@"投诉详情" style:0]
                        ];
 

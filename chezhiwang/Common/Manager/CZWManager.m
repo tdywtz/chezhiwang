@@ -81,6 +81,10 @@ NSString *const userPassword = @"userPassword";
 #pragma mark - class method
 + (UIImage *)defaultIconImage{
     return [UIImage imageNamed:@"defaultImage_icon"];
-} 
+}
+
++ (NSString *)get_userID{
+    return [CZWManager manager].userID;
+}
 
 @end

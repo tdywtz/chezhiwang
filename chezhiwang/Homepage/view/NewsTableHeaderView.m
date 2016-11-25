@@ -12,7 +12,7 @@
 #import "ComplainDetailsViewController.h"
 #import "AnswerDetailsViewController.h"
 #import "AdvertisementViewController.h"
-#import <TTTAttributedLabel.h>
+
 
 @interface NewsTableHeaderImageView : UIImageView
 

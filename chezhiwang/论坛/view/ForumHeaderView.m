@@ -54,7 +54,7 @@
     image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 
     newButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [newButton setTitle:@"最新回复" forState:UIControlStateNormal];
+    [newButton setTitle:@"最新发布" forState:UIControlStateNormal];
     [newButton setTitleColor:colorYellow forState:UIControlStateNormal];
     newButton.titleLabel.font = [UIFont systemFontOfSize:17];
     [newButton setImage:image forState:UIControlStateNormal];
@@ -62,6 +62,8 @@
     [newButton setImageEdgeInsets:UIEdgeInsetsMake(0, 75, 0, -75)];
     [newButton setTintColor:colorYellow];
     [newButton addTarget:self action:@selector(newButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+
+    _orderType = 1;
 
     moveView = [[UIView alloc] init];
     moveView.backgroundColor = colorYellow;

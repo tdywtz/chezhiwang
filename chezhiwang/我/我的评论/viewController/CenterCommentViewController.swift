@@ -8,12 +8,32 @@
 
 import UIKit
 
-fileprivate class CentreCommentModel: NSObject {
 
+class CentreCommentModel: NSObject {
 
+    var title = String()
+    var ID = String()
+    var issuedate = String()//提问时间
+    var type = String()
+    var date = String()//评论时间
+    var content = String()
+    var userName = String()
 }
 
-fileprivate class CentreCommentCell: UITableViewCell {
+
+class CentreCommentCell: UITableViewCell {
+
+    let iconImageView = UIImageView.init()
+    let titleLabel = UILabel()
+
+   override  init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    self.contentView .addSubview(titleLabel)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
 
 }
 
@@ -22,23 +42,39 @@ fileprivate class CentreCommentCell: UITableViewCell {
 class CentreCommentViewController: BasicViewController {
 
     var _tableView = UITableView()
-    let dadaArray = Array<Any>()
+    var dadaArray = Array<CentreCommentModel>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
 
         _tableView = UITableView.init(frame: self.view.frame, style: .plain)
         _tableView.delegate = self
         _tableView.dataSource = self
         _tableView.rowHeight = 44
         self.view.addSubview(_tableView)
+     
+        loadData()
 
     }
 
     func loadData() {
-        HttpRequest .get(URLFile.urlStringForDiscuss(), success: { (data) in
 
+
+        let url = String.localizedStringWithFormat(URLFile.urlStringForDiscuss(),CZWManager.get_userID(),1)
+        HttpRequest.get(url, success: { (data: Any?) in
+
+
+            let arr = data as! Array<NSDictionary>
+            CentreCommentModel.mj_setupReplacedKey(fromPropertyName: { () -> [AnyHashable : Any]? in
+                return ["ID":"id"]
+            })
+                for dict in  arr {
+
+                    let model: CentreCommentModel =  CentreCommentModel.mj_object(withKeyValues:dict)
+                    self.dadaArray.append(model)
+                    self._tableView.reloadData()
+
+            }
         }, failure: { (error) in
 
         })
@@ -46,6 +82,8 @@ class CentreCommentViewController: BasicViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+
+
         // Dispose of any resources that can be recreated.
     }
 
@@ -66,7 +104,7 @@ extension CentreCommentViewController : UITableViewDelegate, UITableViewDataSour
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return 10
+        return dadaArray.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -75,6 +113,9 @@ extension CentreCommentViewController : UITableViewDelegate, UITableViewDataSour
         if cell == nil {
             cell = CentreCommentCell.init(style: .default, reuseIdentifier: "cell")
         }
+        let model = dadaArray[indexPath.row]
+        cell?.textLabel?.text = model.ID
+
         return cell!
     }
 }

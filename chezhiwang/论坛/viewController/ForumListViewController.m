@@ -81,7 +81,7 @@
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle =  UITableViewCellSeparatorStyleNone;
-    _tableView.contentInset = UIEdgeInsetsMake(104, 0, 0, 0);
+    _tableView.contentInset = UIEdgeInsetsMake(114, 0, 0, 0);
     [self.view addSubview:_tableView];
 
 
@@ -101,7 +101,7 @@
 
 -(void)createHeaderView{
 
-    ForumHeaderView *headerView = [[ForumHeaderView alloc] initWithFrame:CGRectMake(0,64, WIDTH, 40)];
+    ForumHeaderView *headerView = [[ForumHeaderView alloc] initWithFrame:CGRectMake(0,64, WIDTH, 50)];
     headerView.delegate = self;
     headerView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:headerView];

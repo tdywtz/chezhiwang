@@ -38,8 +38,12 @@ typedef NS_ENUM(NSInteger, NewsType) {
 /**退出账号*/
 - (void)logoutAccount;
 
+
 #pragma mark - class method
-+ (instancetype)manager;
+/***/
++ (CZWManager *)manager;
 /**默认展示图片*/
 + (UIImage *)defaultIconImage;
+
++ (NSString *)get_userID;
 @end

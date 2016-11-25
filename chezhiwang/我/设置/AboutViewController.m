@@ -37,7 +37,7 @@
     [_scrollView addSubview:imageView];
     
 
-    UILabel *label1 = [LHController createLabelWithFrame:CGRectZero Font:B-2 Bold:NO TextColor:colorBlack Text:nil];
+    CZWLabel *label1 = [[CZWLabel alloc] initWithFrame:CGRectZero];
     label1.numberOfLines = 0;
     [_scrollView addSubview:label1];
     
@@ -49,10 +49,13 @@
     }];
     
     NSString *text = @"车质网（www.12365auto.com）是国内领先的缺陷汽车产品信息和车主质量投诉信息收集平台，也是购买汽车的消费者了解相关车型品质状况的第三方优选媒介。\n“传递您的心声，解决您的难题”，车质网希望车主的抱怨在一个高效运转的通道里得到重视和解决，并致力于为改善车企的客户关系提供持续和全方位的服务。\n我们的目标是成为中国汽车质量第三方评价体系中更有力、更公正、更客观的声音和力量。";
+    NSMutableAttributedString *attribute = [[NSMutableAttributedString alloc] initWithString:text];
+    attribute.lh_firstLineHeadIndent = 30;
+    attribute.lh_paragraphSpacing = 20;
+    attribute.lh_color = colorBlack;
+    attribute.lh_font = [UIFont systemFontOfSize:15];
 
-    AttributStage *stage = [[AttributStage alloc] init];
-    label1.attributedText = [NSMutableAttributedString attributedStringWithStage:stage string:text];
-    
+    label1.attributedText = attribute;
 
     
     UILabel *banquan = [LHController createLabelWithFrame:CGRectMake(LEFT, HEIGHT-64-40, WIDTH-LEFT*2, 20) Font:B-4 Bold:NO TextColor:nil Text:@"©  车质网 版权所有"];
