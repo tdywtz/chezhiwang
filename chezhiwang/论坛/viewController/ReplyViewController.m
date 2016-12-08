@@ -7,6 +7,7 @@
 //
 
 #import "ReplyViewController.h"
+#import "BasicNavigationController.h"
 
 @interface ReplyViewController ()<UITextViewDelegate>
 
@@ -16,11 +17,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
 
-    self.navigationItem.title = @"回复";
-
+    self.title = @"回复";
 }
 
 -(void)rightItemClick{
@@ -51,12 +49,11 @@
 
 #pragma mark - 发布
 -(void)submitData:(NSDictionary *)dict{
-    UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"正在上传"
-                                                 message:nil
-                                                delegate:nil
-                                       cancelButtonTitle:nil
-                                       otherButtonTitles:nil, nil];
-    [al show];
+
+
+   MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    hud.mode = MBProgressHUDModeIndeterminate;
+//    hud.labelText = @"正在上传...";
     NSString *url;
     
     if (self.replaytype == replyTypePost) {
@@ -65,22 +62,28 @@
         url = [URLFile urlStringForReplyFloor];//forum_replyfloor;
     }
     
-
+    __weak __typeof(self)weakSelf = self;
      [HttpRequest POST:url parameters:dict images:self.dataArray success:^(id responseObject) {
-         [al dismissWithClickedButtonIndex:0 animated:YES];
+         [MBProgressHUD hideHUDForView:self.view animated:YES];
+         
          if (responseObject[@"success"]) {
+//             hud.mode = MBProgressHUDModeText;
+//             hud.labelText = @"回复成功";
              [LHController alert:@"回复成功"];
              if (self.block) {
                  self.block();
              }
+             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                 [weakSelf dismissViewControllerAnimated:YES completion:nil];
+             });
 
-             [self dismissViewControllerAnimated:YES completion:nil];
          }else{
             [LHController alert:@"回复失败"];
          }
 
      } failure:^(NSError *error) {
-          [al dismissWithClickedButtonIndex:0 animated:YES];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+         [LHController alert:@"回复失败"];
      }];
 }
 

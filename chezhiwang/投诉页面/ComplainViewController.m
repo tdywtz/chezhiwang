@@ -153,7 +153,6 @@
     } failure:^(NSError *error) {
        [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
-
 }
 
 - (void)setDateInfo:(NSDictionary *)responseObject{
@@ -308,22 +307,35 @@
 
 #pragma mark - 提交数据
 -(void)postData:(NSDictionary *)dic{
+
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"正在提交...";
+    hud.detailsLabelText = nil;
     ComplainSectionModel *sectionModel = _dataArray[2];
     ComplainImageModel *imageModel = sectionModel.rowModels[8];
+    __weak __typeof(self)weakSelf = self;
     [HttpRequest POST:[URLFile urlStringForProgressComplain] parameters:dic images:imageModel.imageArray success:^(id responseObject) {
-        hud.mode = MBProgressHUDModeText;
-        hud.labelText = @"提交成功";
 
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self.navigationController popViewControllerAnimated:YES];
-        });
+        if (responseObject[@"success"]) {
+            hud.mode = MBProgressHUDModeText;
+             hud.labelText = nil;
+            hud.detailsLabelText = responseObject[@"success"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [weakSelf.navigationController popViewControllerAnimated:YES];
+            });
+        }else{
+            hud.mode = MBProgressHUDModeText;
+             hud.labelText = nil;
+            hud.detailsLabelText = responseObject[@"error"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                 [MBProgressHUD hideHUDForView:self.view animated:YES];
+            });
+        }
 
     } failure:^(NSError *error) {
 
         hud.mode = MBProgressHUDModeText;
-        hud.labelText = @"提交失败";
+        hud.labelText = @"亲！网速不太理想，请稍后提交";
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [MBProgressHUD hideHUDForView:self.view animated:YES];
         });
@@ -447,9 +459,11 @@
 }
 
 - (void)setDataInfo{
-    _dataDictionary[@"Cpid"] = @"0";
-    if ([_Cpid integerValue] > 0) {
+      if ([_Cpid integerValue] > 0) {
          _dataDictionary[@"Cpid"] = _Cpid;
+    }else{
+        _dataDictionary[@"Cpid"] = @"0";
+
     }
     _dataDictionary[@"User_ID"] = [CZWManager manager].userID;
     _dataDictionary[@"origin"] = appOrigin;

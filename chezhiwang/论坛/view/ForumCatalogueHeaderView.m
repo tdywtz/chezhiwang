@@ -27,13 +27,14 @@
     HeaderViewUIButton *item = [HeaderViewUIButton buttonWithType:UIButtonTypeCustom];
 
 
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, width, 50)];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, width, 45)];
     imageView.image = image;
     imageView.contentMode = UIViewContentModeScaleAspectFit;
     [item addSubview:imageView];
 
     UILabel *titleLabel = [[UILabel alloc] init];
     titleLabel.text = title;
+    titleLabel.font = [UIFont systemFontOfSize:16];
     [item addSubview:titleLabel];
 
     [titleLabel sizeToFit];
@@ -100,7 +101,6 @@
         }
 
         brandLabel.lh_bottom = self.lh_bottom;
-
     }
     return self;
 }
@@ -112,6 +112,7 @@
     post.forumType = forumClassifyColumn;
     [self.parentViewController.navigationController pushViewController:post animated:YES];
 }
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

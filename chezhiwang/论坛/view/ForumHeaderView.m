@@ -17,6 +17,7 @@
 
     UIButton *newButton1;
     UIButton *newButton2;
+    UIView *backView;
 
     NSInteger _orderType;
     NSInteger _topicType;
@@ -132,57 +133,66 @@
         [newButton1 setTitle:@"最新回复" forState:UIControlStateNormal];
         newButton1.titleLabel.font = [UIFont systemFontOfSize:17];
         [newButton1 setTitleColor:colorLightGray forState:UIControlStateNormal];
-        newButton1.backgroundColor = RGB_color(240, 240, 240, 1);
-//        newButton1.layer.borderColor = colorLineGray.CGColor;
-//        newButton1.layer.borderWidth = 1;
-        newButton1.hidden = YES;
         [newButton1 addTarget:self action:@selector(newClick:) forControlEvents:UIControlEventTouchUpInside];
 
         newButton2 = [UIButton buttonWithType:UIButtonTypeCustom];
         [newButton2 setTitle:@"最新发布" forState:UIControlStateNormal];
         newButton2.titleLabel.font = [UIFont systemFontOfSize:17];
-        newButton2.backgroundColor = RGB_color(240, 240, 240, 1);
-//        newButton2.layer.borderColor = colorLineGray.CGColor;
-//        newButton2.layer.borderWidth = 1;
-        newButton2.hidden = YES;
         [newButton2 setTitleColor:colorLightGray forState:UIControlStateNormal];
         [newButton2 addTarget:self action:@selector(newClick:) forControlEvents:UIControlEventTouchUpInside];
+
+        backView = [[UIView alloc] init];
+        backView.hidden = YES;
+        backView.backgroundColor = RGB_color(0, 0, 0, 0.5);
+
+        UIView *whiteView = [[UIView alloc] init];
+        whiteView.backgroundColor = [UIColor whiteColor];
+
+        [backView addSubview:whiteView];
+        [backView addSubview:newButton1];
+        [backView addSubview:newButton2];
+
         if (self.showChooseView) {
-            [self.showChooseView addSubview:newButton1];
-            [self.showChooseView addSubview:newButton2];
+            [self.showChooseView addSubview:backView];
+
         }else{
-            [self.superview addSubview:newButton1];
-            [self.superview addSubview:newButton2];
+            [self.superview addSubview:backView];
         }
 
         [newButton1 sizeToFit];
         [newButton2 sizeToFit];
 
+        backView.lh_top = self.lh_bottom+self.navigationHeight;
+        backView.lh_left = 0;
+        backView.lh_width = WIDTH;
+        backView.lh_height = HEIGHT-self.lh_bottom;
+
         newButton1.lh_height = 40;
         newButton1.lh_width += 20;
         newButton1.lh_right = WIDTH-20;
-        newButton1.lh_top = self.lh_bottom;
+        newButton1.lh_top = 0;
 
         newButton2.lh_height = newButton1.lh_height;
         newButton2.lh_width = newButton1.lh_width;
         newButton2.lh_right = WIDTH-20;
         newButton2.lh_top = newButton1.lh_bottom-1;
 
-    }
-    if (newButton1.hidden) {
-        newButton1.hidden = NO;
-        newButton2.hidden = NO;
-    }else{
-        newButton1.hidden = YES;
-        newButton2.hidden = YES;
+        whiteView.lh_left = 0;
+        whiteView.lh_top = 0;
+        whiteView.lh_width = WIDTH;
+        whiteView.lh_height = newButton2.lh_bottom;
     }
 
+    if (backView.hidden) {
+        backView.hidden = NO;
+
+    }else{
+        backView.hidden = YES;
+    }
 }
 
 - (void)newClick:(UIButton *)button{
-    newButton1.hidden = YES;
-    newButton2.hidden = YES;
-
+    backView.hidden = YES;
     [newButton setTitle:button.titleLabel.text forState:UIControlStateNormal];
     if ([button.titleLabel.text isEqualToString:@"最新回复"]) {
         _orderType = 0;

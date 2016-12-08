@@ -36,9 +36,6 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [_webView loadRequest:request];
 
-
-
-
 }
 
 #pragma mark - UIWebViewDelegate

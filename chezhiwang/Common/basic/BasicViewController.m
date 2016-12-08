@@ -25,21 +25,8 @@
     if (self.navigationController.viewControllers.count > 1) {
         [self createLeftItemBack];
     }
-
-   // [self setNagitionBar];
 }
 
-
--(void)setNagitionBar{
-    //    if (SYSTEM_VERSION_GREATER_THAN(8.0)) {
-    //        self.navigationController.hidesBarsOnTap = NO;
-    //    }
-    //
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-    self.navigationController.navigationBar.barTintColor = colorDeepBlue;
-    self.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[UIColor whiteColor]};
-}
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];

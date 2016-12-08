@@ -107,7 +107,12 @@
 
 -(NSMutableAttributedString *)attributeString{
     if (_attributeString == nil) {
-        _attributeString = [[NSMutableAttributedString alloc] initWithString:self.text];
+        if (self.text) {
+            _attributeString = [[NSMutableAttributedString alloc] initWithString:self.text];
+        }else{
+            _attributeString = [[NSMutableAttributedString alloc] init];
+        }
+
     }
     return _attributeString;
 }

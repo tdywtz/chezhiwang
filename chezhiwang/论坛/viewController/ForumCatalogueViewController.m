@@ -152,6 +152,7 @@
     return _dataArray.count;
 }
 
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     ForumCatalogueSectionModel *sectionModel = _dataArray[section];
     return sectionModel.roeModels.count;

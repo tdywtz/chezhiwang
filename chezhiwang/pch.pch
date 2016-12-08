@@ -12,7 +12,6 @@
 #import "HttpRequest.h"
 #import "LHLabel.h"
 #import "CZWLabel.h"
-#import "UIFont+LH.h"
 #import "UIViewController+LH.h"
 #import "NSString-Helper.h"
 #import "CZWManager.h"
@@ -38,6 +37,9 @@
 //加载提示
 #import "MBProgressHUD.h"
 #import "TTTAttributedLabel.h"
+//颜色
+
+//#import <ChameleonFramework/Chameleon.h>
 
 
 //autolayout适配
@@ -56,6 +58,8 @@
 #else
 #define NSLog(format, ...)
 #endif
+
+#define APPLICATIONDIDBECOMEACTIVE @"APPLICATIONDIDBECOMEACTIVE" 
 
 #define appOrigin @"7"//APP标识
 #define THE_APPID @"1059672225"//AppStore

@@ -380,10 +380,10 @@
 
     NSDictionary  *dict = _pickDataArray[row];
     if (_number == 1) {
-        label.text = dict[@"Name"];
+        label.text = dict[@"name"];
     }
     else if (_number == 2){
-        label.text = dict[@"name"];
+        label.text = dict[@"cityname"];
     }
     else if (_number == 3){
         label.text = dict[@"name"];
@@ -392,9 +392,9 @@
     if (row == 0) {
         pickViewSelectText = label.text;
         if (_number == 1) {
-            tempID = dict[@"Id"];
-        }else if (_number == 2){
             tempID = dict[@"id"];
+        }else if (_number == 2){
+            tempID = dict[@"cid"];
         }else if (_number == 3){
             tempID = dict[@"id"];
         }
@@ -408,11 +408,11 @@
     if (_pickDataArray.count > 0) {
          NSDictionary  *dict = _pickDataArray[row];
         if (_number == 1) {
-            pickViewSelectText = dict[@"Name"];
-            tempID = dict[@"Id"];
-        }else if (_number == 2){
             pickViewSelectText = dict[@"name"];
             tempID = dict[@"id"];
+        }else if (_number == 2){
+            pickViewSelectText = dict[@"cityname"];
+            tempID = dict[@"cid"];
           
         }else if (_number == 3){
             pickViewSelectText = dict[@"name"];
@@ -438,8 +438,13 @@
     _number = num;
 
    [HttpRequest GET:url success:^(id responseObject) {
-       [_pickDataArray setArray:responseObject];
-       [_pickView reloadAllComponents];
+       if (num == 1 || num == 2) {
+           [_pickDataArray setArray:responseObject[@"rel"]];
+           [_pickView reloadAllComponents];
+       }else{
+           [_pickDataArray setArray:responseObject];
+           [_pickView reloadAllComponents];
+       }
 
    } failure:^(NSError *error) {
        

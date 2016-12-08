@@ -115,6 +115,10 @@
     NSDictionary *_dictionary;
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:APPLICATIONDIDBECOMEACTIVE object:nil];
+}
 - (instancetype)init
 {
     self = [super init];
@@ -128,6 +132,7 @@
         }];
         
         [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesture)]];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadGifData) name:APPLICATIONDIDBECOMEACTIVE object:nil];
     }
     return self;
 }
@@ -166,7 +171,12 @@
     }];
 }
 
+- (void)reloadGifData{
+    [self reloadData];
+}
+
 - (void)reloadData{
     [_gifIamgeView yh_setImage:[NSURL URLWithString:_dictionary[@"advUrl"]]];
 }
+
 @end

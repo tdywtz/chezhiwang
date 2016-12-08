@@ -36,7 +36,7 @@
         [imageView makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(10);
             make.bottom.equalTo(-10);
-            make.size.equalTo(CGSizeMake(25, 25));
+          //  make.size.equalTo(CGSizeMake(22, 22));
         }];
 
           [titleLabel makeConstraints:^(MASConstraintMaker *make) {

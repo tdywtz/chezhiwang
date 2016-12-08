@@ -17,11 +17,14 @@
     if (self) {
         _radius = 20;
         _font = [UIFont systemFontOfSize:12];
-        _textColor = [UIColor whiteColor];
+        _textColor = [UIColor lightGrayColor];
+        _lightTextColor =  RGB_color(0, 192, 155, 1);
+        _lineColor = RGB_color(220, 220, 220, 1);
+        _lightLineColor = RGB_color(0, 192, 155, 1);
+        
 
          self.backgroundColor = [UIColor whiteColor];
-        _backColor = [UIColor lightGrayColor];
-        _lightBackColor = [UIColor blueColor];
+
         _titles =  @[@"信息审核",@"厂家受理",@"处理反馈",@"用户评分",@"完成"];
     }
     return self;
@@ -62,30 +65,59 @@
 - (void)drawRect:(CGRect)rect{
 
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetStrokeColorWithColor(context, _backColor.CGColor);
-    CGContextMoveToPoint(context, 0, rect.size.height/2);
-    CGContextAddLineToPoint(context, rect.size.width, rect.size.height/2);
-    CGContextStrokePath(context);
-
+    //取平方根
     CGFloat textWidth = sqrtf(self.radius*self.radius/2);
-    NSArray *points = [self getPointsWithSize:rect.size.width number:_titles.count radius:_radius];
+    NSArray *points = [self getPointsWithSize:rect.size.width-2 number:_titles.count radius:_radius];
     for (int i = 0; i < _titles.count; i ++) {
 
         NSString *text = _titles[i];
-        CGFloat pointx = [points[i] floatValue];
+        CGFloat pointx = [points[i] floatValue]+1;
         CGRect frame = CGRectMake(pointx-textWidth, 0, textWidth*2,rect.size.height);
 
         CGSize size = [self sizeWith:text size:CGSizeMake(textWidth*2, rect.size.height)];
         CGRect drawFrame  = [self centreFrame:frame size:size];
+        UIColor *textColor = _textColor;
+
         if (i <= _current) {
-            CGContextSetFillColorWithColor(context, _lightBackColor.CGColor);
+            textColor =_lightTextColor;
+            CGContextSetStrokeColorWithColor(context, _lightLineColor.CGColor);
         }else{
-            CGContextSetFillColorWithColor(context,_backColor.CGColor);
+            CGContextSetStrokeColorWithColor(context,_lineColor.CGColor);
         }
         CGContextAddArc(context, pointx, rect.size.height/2, _radius, 0, 2*M_PI, 1);
-        CGContextFillPath(context);
+        CGContextStrokePath(context);
 
-        [text drawInRect:drawFrame withAttributes:@{NSFontAttributeName:_font,NSForegroundColorAttributeName:_textColor}];
+        [text drawInRect:drawFrame withAttributes:@{NSFontAttributeName:_font,NSForegroundColorAttributeName:textColor}];
+
+        if (i < _titles.count-1 ) {
+            if (i <= _current) {
+                 CGContextSetStrokeColorWithColor(context, _lightLineColor.CGColor);
+            }else{
+                CGContextSetStrokeColorWithColor(context, _lineColor.CGColor);
+            }
+
+            CGPoint benginPoint = CGPointMake(pointx+3+_radius,rect.size.height/2);
+            CGPoint endPoint = CGPointMake( [points[i+1] floatValue]-2-_radius, rect.size.height/2);
+
+            CGFloat tempLeight = (endPoint.x - benginPoint.x - 25);
+            if (tempLeight > 0) {
+                benginPoint.x += tempLeight/2.0;
+                endPoint.x -= tempLeight/2.0;
+            }
+            CGFloat radius = 3;
+            CGFloat leight = 12;
+
+            CGContextMoveToPoint(context, benginPoint.x, benginPoint.y+radius);
+            CGContextAddLineToPoint(context, endPoint.x-leight, benginPoint.y+radius);
+            CGContextAddLineToPoint(context, endPoint.x-leight, benginPoint.y+radius*2);
+            CGContextAddLineToPoint(context, endPoint.x, endPoint.y);
+            CGContextAddLineToPoint(context, endPoint.x-leight, benginPoint.y-radius*2);
+            CGContextAddLineToPoint(context, endPoint.x-leight, benginPoint.y-radius);
+            CGContextAddLineToPoint(context, benginPoint.x, benginPoint.y-radius);
+            CGContextClosePath(context);
+            CGContextDrawPath(context, kCGPathStroke);
+
+        }
     }
 }
 /*

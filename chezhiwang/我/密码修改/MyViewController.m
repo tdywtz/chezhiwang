@@ -120,7 +120,7 @@
                            [[MyViewModel alloc] initWithTitle:@"我的提问" imageName:@"centre_answer" class:[MyAskViewController class]]
                            ],
                        @[
-                           [[MyViewModel alloc] initWithTitle:@"我的评论" imageName:@"centre_comment" class:[CentreCommentViewController class]],
+                           [[MyViewModel alloc] initWithTitle:@"我的评论" imageName:@"centre_comment" class:[MyCommentViewController class]],
                            [[MyViewModel alloc] initWithTitle:@"我的收藏" imageName:@"centre_favorite" class:[FavouriteViewController class]]
                            ]
                        ];
@@ -136,7 +136,7 @@
                            [[MyViewModel alloc] initWithTitle:@"我的提问" imageName:@"centre_answer" class:NSClassFromString(@"MyAskViewController")]
                            ],
                        @[
-                           [[MyViewModel alloc] initWithTitle:@"我的评论" imageName:@"centre_comment" class:[CentreCommentViewController class]],
+                           [[MyViewModel alloc] initWithTitle:@"我的评论" imageName:@"centre_comment" class:[MyCommentViewController class]],
                            [[MyViewModel alloc] initWithTitle:@"我的收藏" imageName:@"centre_favorite" class:NSClassFromString(@"FavouriteViewController")]
                            ],
                        @[
@@ -273,12 +273,14 @@
             label.text = numDictonary[@"complain"];
         }else if (indexPath.row == 1){
             label.text = numDictonary[@"question"];
-        }else if (indexPath.row == 2){
-            label.text = numDictonary[@"discuss"];
-        }else if (indexPath.row == 3){
-            label.text = [NSString stringWithFormat:@"%ld",(long)[[FmdbManager shareManager] selectCollectNumber]];
-
         }
+    }else if (indexPath.section == 1){
+        if (indexPath.row == 0){
+            label.text = numDictonary[@"discuss"];
+        }else if (indexPath.row == 1){
+            label.text = [NSString stringWithFormat:@"%ld",(long)[[FmdbManager shareManager] selectCollectNumber]];
+        }
+
     }
 
     return cell;

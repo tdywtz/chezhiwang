@@ -34,6 +34,7 @@
     [super viewDidLoad];
 
     self.view.backgroundColor = RGB_color(0, 0, 0, 0.5);
+    [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
     // Do any additional setup after loading the view.
 }
 

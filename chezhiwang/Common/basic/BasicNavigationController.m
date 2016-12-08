@@ -52,10 +52,10 @@
     if (SYSTEM_VERSION_GREATER_THAN(8.0)) {
         self.navigationController.hidesBarsOnTap = NO;
     }
-    
+
     self.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationBar.barStyle = UIBarStyleBlack;
-    self.navigationBar.barTintColor = colorDeepBlue;
+    self.navigationBar.barTintColor = colorLightBlue;
     self.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont boldSystemFontOfSize:PT_FROM_PX(27)],NSForegroundColorAttributeName:[UIColor whiteColor]};
 }
 

@@ -417,6 +417,10 @@
          myPicker.navigationBar.tintColor = [UIColor whiteColor];
          myPicker.delegate = self;
          myPicker.allowsEditing = YES;
+        myPicker.navigationBar.tintColor = [UIColor whiteColor];
+        myPicker.navigationBar.barStyle = UIBarStyleBlack;
+        myPicker.navigationBar.barTintColor = colorLightBlue;
+        myPicker.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont boldSystemFontOfSize:PT_FROM_PX(27)],NSForegroundColorAttributeName:[UIColor whiteColor]};
     }
     
     if (buttonIndex == 0) {
@@ -430,45 +434,6 @@
         [self presentViewController:myPicker animated:YES completion:NULL];
     }
 }
-
-#pragma mark - 导航条代理
--(void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
-
-    if (navigationController == myPicker) {
-        myPicker.navigationBar.barStyle = UIBarStyleBlack;
-//        UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//        btn.frame = CGRectMake(0, 0, 40, 20);
-//        [btn setTitle:@"取消" forState:UIControlStateNormal];
-//        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//        [btn addTarget:self action:@selector(pickerItemClick:) forControlEvents:UIControlEventTouchUpInside];
-//        viewController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
-//        
-//        if (navigationController.viewControllers.count > 1) {
-//            viewController.navigationItem.leftBarButtonItem = [LHController createLeftItemButtonWithTarget:self Action:@selector(pickerItemClick:)];
-//        }
-//        if (navigationController.viewControllers.count == 3) {
-//            UIViewController *vc = navigationController.viewControllers[2];
-//            UIView *viv = vc.view.subviews[0];
-//            viv.frame = CGRectMake(0, 0, WIDTH, HEIGHT-20);
-//        }
-    }
-}
-
-//-(void)pickerItemClick:(UIButton *)btn{
-//    if ([btn.titleLabel.text isEqualToString:@"取消"]) {
-//        [myPicker dismissViewControllerAnimated:YES completion:nil];
-//    }else{
-//        [myPicker popViewControllerAnimated:YES];
-//    }
-//    
-//}
-//
-
-#pragma mark - UITextFieldDelegate
-//- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-//    [self.view endEditing:YES];
-//    return YES;
-//}
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
 
@@ -688,17 +653,24 @@
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f,0.0f,_pickView.frame.size.width,40.0f)];
     label.textAlignment = NSTextAlignmentCenter;
-    if (_number == 1 || _number == 2) {
-        NSDictionary *dict = _pickDataArray[row];
+     NSDictionary *dict = _pickDataArray[row];
+    if (_number == 1) {
+
         label.text = dict[@"name"];
         if (row == 0) {
             tempID = dict[@"id"];
         }
-    }else if (_number == 3){
-        NSDictionary *dict = _pickDataArray[row];
-        label.text = [NSString stringWithFormat:@"%@款  %@",dict[@"Model_Belongsyear"],dict[@"Model_Name"]];
+    }else if (_number == 2){
+        label.text = dict[@"seriesname"];
         if (row == 0) {
-            tempID = dict[@"Id"];
+            tempID = dict[@"seriesid"];
+        }
+
+    }else if (_number == 3){
+
+        label.text = dict[@"modelname"];
+        if (row == 0) {
+            tempID = dict[@"mid"];
         }
     }
     if (row == 0) {
@@ -709,15 +681,20 @@
 // 返回选中的行
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    
-    if (_number == 1 || _number == 2) {
-        NSDictionary  *dict = _pickDataArray[row];
+    NSDictionary  *dict = _pickDataArray[row];
+    if (_number == 1) {
         pickViewSelectText = dict[@"name"];
         tempID = dict[@"id"];
-    }else if (_number == 3){
-        NSDictionary *dict = _pickDataArray[row];
-        pickViewSelectText = [NSString stringWithFormat:@"%@款  %@",dict[@"Model_Belongsyear"],dict[@"Model_Name"]];
-        tempID = dict[@"Id"];
+
+    }else if (_number == 2){
+        pickViewSelectText = dict[@"seriesname"];
+        tempID = dict[@"seriesid"];
+
+    }
+    else if (_number == 3){
+
+        pickViewSelectText = dict[@"modelname"];
+        tempID = dict[@"mid"];
     }
     
 }
@@ -732,16 +709,6 @@
     
     [dicData setObject:value forKey:key];
     [self createData:dicData];
-}
-
--(UIView *)createBGViewFrame:(CGRect)frame{
-    UIView *view = [[UIView alloc] initWithFrame:frame];
-    view.backgroundColor = [UIColor blackColor];
-    view.layer.cornerRadius = 3;
-    view.layer.masksToBounds = YES;
-    view.center = CGPointMake(WIDTH/2, self.view.frame.size.height/2);
-    view.alpha = 0.8;
-    return view;
 }
 
 #pragma mark - 上传头像
@@ -786,7 +753,7 @@
     _number = num;
    [HttpRequest GET:url success:^(id responseObject) {
        if (num == 1) {
-           for (NSDictionary *dict in responseObject) {
+           for (NSDictionary *dict in responseObject[@"rel"]) {
                for (NSDictionary *subDic in dict[@"brand"]) {
                    [_brandArray addObject:subDic];
                }
@@ -797,19 +764,20 @@
            if (_seriesArray.count > 0) {
                [_seriesArray removeAllObjects];
            }
-           for (NSDictionary *dic in responseObject) {
+           for (NSDictionary *dic in responseObject[@"rel"]) {
                
                for (NSDictionary *subDic in dic[@"series"]) {
                    [_seriesArray addObject:subDic];
                }
            }
+
            [_pickDataArray setArray:_seriesArray];
            [_pickView reloadAllComponents];
        }else if (num == 3){
            if (_modelArray.count > 0) {
                [_modelArray removeAllObjects];
            }
-           for (NSDictionary *dict in responseObject) {
+           for (NSDictionary *dict in responseObject[@"rel"]) {
                [_modelArray addObject:dict];
            }
            
@@ -831,16 +799,6 @@
     dispatch_after(time, dispatch_get_main_queue(), ^{
         [alert dismissWithClickedButtonIndex:0 animated:YES];
     });
-}
-
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"PageOne"];
-}
-
--(void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"PageOne"];
 }
 
 /*

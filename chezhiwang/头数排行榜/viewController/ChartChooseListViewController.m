@@ -86,7 +86,7 @@
             [MBProgressHUD hideHUDForView:self.view animated:YES];
             
             NSMutableArray *mArray = [[NSMutableArray alloc] init];
-            for (NSDictionary *dict in responseObject) {
+            for (NSDictionary *dict in responseObject[@"rel"]) {
                 NSMutableArray *subArray = [[NSMutableArray alloc] init];
                 for (NSDictionary *subDict in dict[@"brand"]) {
                     ChartChooseModel * model = [[ChartChooseModel alloc] init];
@@ -112,20 +112,25 @@
 
             [MBProgressHUD hideHUDForView:self.view animated:YES];
 
-            if ([responseObject count] == 0) {
+            NSArray *array = responseObject[@"rel"];
+            if ([array isKindOfClass:[NSArray class]] == NO) {
                 return ;
             }
+            if (array.count == 0) {
+                return ;
+            }
+            NSArray *series = array[0][@"series"];
             NSMutableArray *mArray = [[NSMutableArray alloc] init];
-            for (NSDictionary *dict in responseObject[0][@"series"]) {
+            for (NSDictionary *dict in series) {
 
                     ChartChooseModel * model = [[ChartChooseModel alloc] init];
-                    model.tid = dict[@"id"];
-                    model.title = dict[@"name"];
+                    model.tid = dict[@"seriesid"];
+                    model.title = dict[@"seriesname"];
                     [mArray addObject:model];
             }
            
              _dataArray = @[
-                            @{@"name":responseObject[0][@"brand"],sectionArray:mArray}
+                            @{@"name":array[0][@"brands"],sectionArray:mArray}
                             ];
            
             [_tableView reloadData];

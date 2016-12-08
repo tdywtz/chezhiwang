@@ -220,7 +220,7 @@
 #pragma mark - 选择论坛类型按钮响应方法
 -(void)classifyClick{
     
-    if (self.classify == forumClassifyColumn) {
+    if (self.classify == forumClassifyBrand) {
         ForumClassifyTwoController *classify = [[ForumClassifyTwoController alloc] init];
         [classify returnCid:^(NSString *cid, NSString *title) {
             self.cid = cid;

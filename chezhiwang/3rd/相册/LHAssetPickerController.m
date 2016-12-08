@@ -17,12 +17,14 @@
 
 - (instancetype)init
 {
-    self = [super init];
-    if (self) {
         LHAssetGroupViewController *LHGroup = [[LHAssetGroupViewController alloc] init];
         self = [[LHAssetPickerController alloc] initWithRootViewController:LHGroup];
-        self.navigationBar.barStyle =  UIBarStyleBlack;
-    }
+
+        self.navigationBar.tintColor = [UIColor whiteColor];
+        self.navigationBar.barStyle = UIBarStyleBlack;
+        self.navigationBar.barTintColor = colorLightBlue;
+        self.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont boldSystemFontOfSize:PT_FROM_PX(27)],NSForegroundColorAttributeName:[UIColor whiteColor]};
+
     return self;
 }
 

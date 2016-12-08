@@ -106,17 +106,44 @@
     }
 
     for (int i = 0; i < fwtd.count; i ++) {
-        CGFloat w = [self getStr:fwtd[i] andFont:PT_FROM_PX(16)];
+         NSDictionary *dict = fwtd[i];
+
+        CGFloat w = [self getStr:dict[@"bw"] andFont:PT_FROM_PX(16)];
         [self upDataPint:w];
 
 
-        UILabel *labelServer = [LHController createLabelWithFrame:CGRectMake(_point.x, _point.y, w+20, 20) Font:PT_FROM_PX(16) Bold:NO TextColor:nil Text:fwtd[i]];
+
+        UILabel *labelServer = [LHController createLabelWithFrame:CGRectMake(_point.x, _point.y, w+20, 20) Font:PT_FROM_PX(16) Bold:NO TextColor:nil Text:dict[@"bw"]];
         labelServer.textColor = [UIColor whiteColor];
         labelServer.backgroundColor = RGB_color(29, 188, 158, 1);
         labelServer.textAlignment = NSTextAlignmentCenter;
         [self addSubview:labelServer];
 
-        _point = CGPointMake(labelServer.frame.origin.x+labelServer.frame.size.width+5, labelServer.frame.origin.y);
+
+
+        if ([dict[@"ques"] length]) {
+            _point = CGPointMake(labelServer.lh_left+labelServer.lh_width-1, labelServer.frame.origin.y);
+
+            NSString *str2 = dict[@"ques"];
+            CGFloat length2 = [self getStr:str2 andFont:PT_FROM_PX(16)];
+            [self upDataPint:length2];
+
+
+            UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(_point.x, _point.y, length2+20, 20)];
+            label2.text = str2;
+            label2.textColor = RGB_color(29, 188, 158, 1);
+            label2.textAlignment = NSTextAlignmentCenter;
+            label2.font = [UIFont systemFontOfSize:PT_FROM_PX(16)];
+            label2.layer.borderColor = RGB_color(29, 188, 158, 1).CGColor;
+            label2.layer.borderWidth = 1;
+
+            [self addSubview:label2];
+
+            _point = CGPointMake(label2.frame.size.width+label2.frame.origin.x+5,_point.y);
+
+        }else{
+            _point = CGPointMake(labelServer.frame.origin.x+labelServer.frame.size.width+5, labelServer.frame.origin.y);
+        }
     }
 }
 
@@ -271,10 +298,10 @@
     seriesNameLabel.attributedText = [self attributedWithString1:@"车系：" string2:self.complainModel.seriesname];
     modelNameLabel.attributedText = [self attributedWithString1:@"车型：" string2:self.complainModel.modelsname];
 
-    NSArray *fwtd = [self.complainModel.fwtd componentsSeparatedByString:@","];
-    NSMutableArray *mfwtd = [fwtd mutableCopy];
-    [mfwtd removeObject:@""];
-    [showView setTsbw:self.complainModel.tsbw fwtd:mfwtd];
+//    NSArray *fwtd = [self.complainModel.fwtd componentsSeparatedByString:@","];
+//    NSMutableArray *mfwtd = [fwtd mutableCopy];
+//    [mfwtd removeObject:@""];
+    [showView setTsbw:self.complainModel.tsbw fwtd:self.complainModel.tsfw];
     CGFloat height = [showView viewHeight];
     [showView updateConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(height);

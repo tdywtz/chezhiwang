@@ -59,7 +59,7 @@
     
     _dataArray = [[NSMutableArray alloc] init];
     
-    _orderType = 0;
+    _orderType = 1;
     _topicType = 0;
     _count = 1;
 

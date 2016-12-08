@@ -20,6 +20,7 @@
 @property (nonatomic,copy) NSString *seriesname;
 @property (nonatomic,strong) NSArray *tsbw;
 @property (nonatomic,copy) NSString *tslx;
+@property (nonatomic,strong) NSArray *tsfw;
 
 @end
 

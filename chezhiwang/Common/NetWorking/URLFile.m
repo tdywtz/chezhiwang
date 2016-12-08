@@ -34,7 +34,7 @@
 /**前缀*/
 + (NSString *)prefixString{
 #if DEBUG
-
+   // return  @"http://m.12365auto.com";
     return  @"http://192.168.1.114:8888";
 #else
     return  @"http://m.12365auto.com";
@@ -297,18 +297,19 @@
 
 /**个人中心我的投诉列表*/
 + (NSString *)urlStringForMyTS{
-    return [self stringWithBasic:@"act=myts&uid=%@&p=%ld&s=10"];
+    return [self stringForCommonServiceWithAct:@"act=mytslist&uid=%@&p=%ld&s=10"];
 }
 /***/
 + (NSString *)urlStringFor_mytsbyid{
-    return [self stringWithBasic:@"act=mytsbyid&cpid=%@"];
+    return [self stringForCommonServiceWithAct:@"act=mytslist&cpid=%@"];
 }
 
 
 /**个人中心根据cpid获取投诉详情*/
 + (NSString *)urlStringForDetail{
-    return [self stringWithBasic:@"act=detail&cpid=%@"];
+    return [self stringForCommonServiceWithAct:@"act=tsdetail&cpid=%@"];
 }
+
 /**插卡撤诉未成功原因*/
 + (NSString *)urlString_delComNoReason{
     return [self stringWithBasic:@"act=delComNoReason&cpid=%@"];

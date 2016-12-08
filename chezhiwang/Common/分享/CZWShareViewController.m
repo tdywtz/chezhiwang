@@ -69,13 +69,18 @@
             UIPasteboard *pboard = [UIPasteboard generalPasteboard];
             pboard.string = self.shareUrl;
             UIAlertController *ac = [UIAlertController alertControllerWithTitle:@"复制成功" message:nil preferredStyle:UIAlertControllerStyleAlert];
-            [self.parentController presentViewController:ac animated:YES completion:nil];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [ac dismissViewControllerAnimated:YES completion:nil];
-            });
-        }
+
+              __weak __typeof(self)weakSelf = self;
+            [self dismissViewControllerAnimated:YES completion:^{
+               __strong __typeof(weakSelf)strongSelf = weakSelf;
+                [strongSelf.parentController presentViewController:ac animated:YES completion:nil];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [ac dismissViewControllerAnimated:YES completion:nil];
+                });
+            }];
+         }
             break;
-            
+          
         default:
             break;
     }
@@ -89,13 +94,20 @@
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
 
     UIImage *shareIamge = self.shareImage?self.shareImage:[CZWManager defaultIconImage];
+
+    NSString *shareContent = self.shareContent;
+    if (shareContent.length > 90) {
+        shareContent = [shareContent substringToIndex:90];
+    }
     //创建网页内容对象
-    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:self.shareTitle descr:self.shareContent thumImage:shareIamge];
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:self.shareTitle descr:shareContent thumImage:shareIamge];
     //设置网页地址
     shareObject.webpageUrl = self.shareUrl;
+   // NSLog(@"%@",self.shareUrl)
 
     //分享消息对象设置分享内容对象
     messageObject.shareObject = shareObject;
+
 
     //调用分享接口
     [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {

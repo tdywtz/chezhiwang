@@ -224,7 +224,7 @@
     
     if (tableView == twoTableView) {
         //回调函数
-        ForumCatalogueSectionModel *sectionModel = _dataArray[indexPath.section];
+        ForumCatalogueSectionModel *sectionModel = twoArray[indexPath.section];
         ForumCatalogueModel *model = sectionModel.roeModels[indexPath.row];
             if (self.block) {
                 self.block(model.ID,model.title);

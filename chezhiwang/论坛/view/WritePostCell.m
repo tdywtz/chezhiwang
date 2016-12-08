@@ -84,7 +84,7 @@
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView{
-   
+
     if (self.contentBlock) {
         self.contentBlock(textView.text,self.asset,self);
     }

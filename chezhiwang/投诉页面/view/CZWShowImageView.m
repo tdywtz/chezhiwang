@@ -59,13 +59,25 @@
         addButton.frame = CGRectMake(0, 0, width/3-5, width/3-5);
         addButton.layer.borderColor = RGB_color(240, 240, 240, 1).CGColor;
         addButton.layer.borderWidth = 1;
-        [addButton setTitle:@"+" forState:UIControlStateNormal];
+       // [addButton setTitle:@"+" forState:UIControlStateNormal];
         [addButton setTitleColor:RGB_color(240, 240, 240, 1) forState:UIControlStateNormal];
         addButton.titleLabel.font = [UIFont systemFontOfSize:50];
         [addButton addTarget:self action:@selector(buttonClick) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:addButton];
 
-        self.backgroundColor = [UIColor redColor];
+        UIView *lineView1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 2)];
+        UIView *lineView2 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 2, 40)];
+
+        lineView1.backgroundColor = colorLineGray;
+        lineView2.backgroundColor = colorLineGray;
+
+        [addButton addSubview:lineView1];
+        [addButton addSubview:lineView2];
+
+        lineView1.lh_centerX = addButton.lh_width/2;
+        lineView1.lh_centerY = addButton.lh_height/2;
+
+        lineView2.center =  lineView1.center;
     }
     return self;
 }

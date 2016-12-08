@@ -108,7 +108,7 @@
 
         iconImageView.lh_left = 10;
         iconImageView.lh_top = 20;
-        iconImageView.lh_size = CGSizeMake(80, 60);
+        iconImageView.lh_size = CGSizeMake(WIDTH/3-10, 80);
 
         [titleLabel sizeToFit];
         titleLabel.lh_width =  self.lh_width - iconImageView.lh_right-1;
@@ -121,7 +121,7 @@
         userNameLabel.lh_top = titleLabel.lh_bottom+10;
 
         numberLabel.lh_width = self.lh_width - iconImageView.lh_right-10;
-         numberLabel.lh_size = [numberLabel sizeThatFits:CGSizeMake(self.lh_width - iconImageView.lh_right-10, 100)];
+        numberLabel.lh_size = [numberLabel sizeThatFits:CGSizeMake(self.lh_width - iconImageView.lh_right-10, 100)];
         numberLabel.lh_left = titleLabel.lh_left;
         numberLabel.lh_top = userNameLabel.lh_bottom+10;
 
@@ -235,12 +235,12 @@
       _chooseSegmented.lh_left = 0;
           _chooseSegmented.lh_top = _headerView.lh_bottom;
        tableHeaderView.lh_height = _chooseSegmented.lh_bottom;
-         _tableView.tableHeaderView = tableHeaderView;
 
   } failure:^(NSError *error) {
       
   }];
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -249,7 +249,7 @@
     [self createRightItem];
     [self createTableView];
     [self loadDataHeader];
-    _orderType = 0;
+    _orderType = 1;
     _topicType = 0;
     _count = 1;
     [self setUrl];
@@ -286,12 +286,13 @@
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.estimatedRowHeight = 80;
-    [self.view addSubview:_tableView];
+
 
 
     __weak __typeof(self)weakSelf = self;
     _tableView.mj_header = [MJChiBaoZiHeader headerWithRefreshingBlock:^{
         _count = 1;
+        [weakSelf loadDataHeader];
         [weakSelf loadData];
     }];
     [_tableView.mj_header beginRefreshing];
@@ -303,17 +304,29 @@
     _tableView.mj_footer.automaticallyHidden = YES;
 
 
-    tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 100)];
+    tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, WIDTH, 100)];
+    tableHeaderView.backgroundColor = [UIColor whiteColor];
 
     _headerView = [[ForumClassifyListHeaderView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 100) style:self.forumType];
     _headerView.parentViewController = self;
 
     _chooseSegmented = [[ForumHeaderView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 40)];
-    _chooseSegmented.showChooseView = _tableView;
+    _chooseSegmented.showChooseView = self.view;
+    _chooseSegmented.navigationHeight = 64;
     _chooseSegmented.delegate = self;
 
     [tableHeaderView addSubview:_headerView];
     [tableHeaderView addSubview:_chooseSegmented];
+
+    [self.view addSubview:tableHeaderView];
+    [self.view addSubview:_tableView];
+
+
+
+    [_tableView makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(0);
+        make.top.equalTo(tableHeaderView.bottom);
+    }];
 }
 
 

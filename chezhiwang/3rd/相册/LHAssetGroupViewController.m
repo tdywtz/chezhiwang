@@ -10,6 +10,27 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "LHAssetViewController.h"
 
+
+@interface LHAssetGroupViewCell : UITableViewCell
+
+@end
+
+@implementation LHAssetGroupViewCell
+
+- (void)layoutSubviews{
+    [super layoutSubviews];
+
+    CGRect frame = self.imageView.frame;
+    frame.origin.y = 5;
+    frame.size.width -= 10;
+    frame.size.height -= 10;
+    self.imageView.frame = frame;
+
+}
+@end
+
+
+
 @interface LHAssetGroupViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     UITableView *_tableView;
@@ -51,10 +72,12 @@
 
 -(void)createTableView{
     _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
-    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.dataSource = self;
     _tableView.delegate = self;
+    _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 20, 10)];
+    _tableView.tableFooterView = [UIView new];
     [self.view addSubview:_tableView];
+
 }
 
 - (void)setGroup
@@ -93,9 +116,9 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ID"];
+    LHAssetGroupViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ID"];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"ID"];
+        cell = [[LHAssetGroupViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"ID"];
     }
     
     ALAssetsGroup *group = self.groups[indexPath.row];
@@ -103,16 +126,12 @@
     cell.imageView.image = [UIImage imageWithCGImage:posterImage];
     cell.textLabel.text = [group valueForProperty:ALAssetsGroupPropertyName];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld",(long)[group numberOfAssets]];
-   
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(80, 59, self.view.frame.size.width-80, 1)];
-    view.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1];
-    [cell.contentView addSubview:view];
     
     return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 60;
+    return 80;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

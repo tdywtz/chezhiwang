@@ -169,6 +169,7 @@
     while ([set next]) {
         [array addObject:@{@"id":[set stringForColumn:@"id"],@"title":[set stringForColumn:@"title"],@"type":[set stringForColumn:@"type"]}];
     }
+
     return array;
 }
 

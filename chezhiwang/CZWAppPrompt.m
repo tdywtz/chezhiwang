@@ -63,9 +63,9 @@ NSString *LINE_VERSION_URL = @"https://itunes.apple.com/cn/lookup?id=APP_ID";
         }
        
     }else{
-        if (arc4random()%4==0) {
-            [self updataApp];
-        }
+
+        [self updataApp];
+
     }
 }
 

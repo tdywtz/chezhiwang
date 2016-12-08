@@ -10,7 +10,4 @@
 
 @interface MyAskViewController : BasicViewController
 
-@property (nonatomic,assign) NSInteger viewIndex;
-@property (nonatomic,assign) BOOL isRoot;
-
 @end

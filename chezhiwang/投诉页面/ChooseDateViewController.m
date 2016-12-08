@@ -36,6 +36,7 @@
     [super viewDidLoad];
 
     self.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+    [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
 }
 
 

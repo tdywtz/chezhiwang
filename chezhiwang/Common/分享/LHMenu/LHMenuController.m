@@ -61,6 +61,7 @@
 @interface LHMenuController ()
 {
     CGFloat changY;
+    UIView *backView;
 }
 @property (nonatomic,strong) NSMutableArray *buttons;
 @property (nonatomic,strong) UIImage *bluffImage;
@@ -80,14 +81,15 @@
         self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         _duration = 1.0/2;
         _beginTime = 0.042;
-        _itemSize = CGSizeMake(80, 60);
+        _itemSize = CGSizeMake(70, 70);
         _lineSpacing = 30;
-       _queues = 3;
+        _queues = 5;
         NSMutableArray *marray = [NSMutableArray new];
-        NSArray *titles = @[@"QQ好友",@"微信朋友圈",@"微信",@"新浪微博",@"QQ空间",@"复制链接"];
-        for (int i = 0; i < 6; i ++) {
-            NSString *name = [NSString stringWithFormat:@"fenxiang%d",i+1];
-            [marray addObject:[[LHMenuItem alloc]initWithTitle:titles[i] andImage: [UIImage imageNamed:[@"LHMenu.bundle" stringByAppendingPathComponent:name]]]];
+        NSArray *titles = @[@"QQ好友",@"微信朋友圈",@"微信",@"新浪微博",@"QQ空间"];
+        NSArray *iamgeNames = @[@"QQ",@"微信朋友圈",@"微信",@"新浪微博",@"QQ空间"];
+        for (int i = 0; i < titles.count; i ++) {
+
+            [marray addObject:[[LHMenuItem alloc]initWithTitle:titles[i] andImage: [UIImage imageNamed:[@"LHMenu.bundle" stringByAppendingPathComponent:iamgeNames[i]]]]];
         }
         _items = marray;
     }
@@ -98,20 +100,15 @@
     [super viewDidLoad];
 
     [self.view addGestureRecognizer:[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapOnBackground)]];
-//    if ([UIDevice currentDevice].systemVersion.floatValue >= 8.0) {
-//          [self addVisualEffectView];
-//    }else{
-//        UIImageView *iamgeView = [[UIImageView alloc] initWithFrame:self.view.frame];
-//        iamgeView.image =  self.bluffImage;
-//        [self.view insertSubview:iamgeView atIndex:0];
-//    }
     self.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-300, CGRectGetWidth(self.view.frame), 300)];
-    [self.view addSubview:view];
-    view.backgroundColor = [UIColor whiteColor];
+
 
     [self setUpView];
-    [self showItems];
+    __weak __typeof(self)weakSelf = self;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [weakSelf showItems];
+
+    });
 }
 
 -(void)setBluffImageWithView:(UIView *)view{
@@ -151,20 +148,58 @@
 
 //创建按钮
 - (void)setUpView{
+    backView = [[UIView alloc] initWithFrame:self.view.bounds];
+    backView.backgroundColor = RGB_color(238, 238, 238, 1);
+    [self.view addSubview:backView];
+
     CGFloat widthSpace = (self.view.frame.size.width - self.itemSize.width*self.queues)/(self.queues+1);
     for (int i = 0; i < self.items.count; i ++) {
         LHMenuItem *item = self.items[i];
    
-        item.frame = CGRectMake(widthSpace+(i%self.queues)*(self.itemSize.width+widthSpace), CGRectGetHeight(self.view.frame)+(i/self.queues)*(self.itemSize.height+self.lineSpacing), self.itemSize.width, self.itemSize.height);
+        item.frame = CGRectMake(widthSpace+(i%self.queues)*(self.itemSize.width+widthSpace), 20+(i/self.queues)*(self.itemSize.height+self.lineSpacing), self.itemSize.width, self.itemSize.height);
         item.tag = 100+i;
         [item addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:item];
+        [backView addSubview:item];
         [self.buttons addObject:item];
     }
-    
- 
-    NSInteger queues = self.items.count/self.queues+(self.items.count%self.queues>0?1:0);
-    changY = queues*(self.itemSize.height+self.lineSpacing)+30;
+
+    UIButton *copyButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [copyButton setTitleColor:RGB_color(100, 100, 100, 1) forState:UIControlStateNormal];
+    [copyButton setTitle:@"复制链接" forState:UIControlStateNormal];
+    [copyButton addTarget:self action:@selector(copyButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    copyButton.backgroundColor = [UIColor whiteColor];
+
+    UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [cancelButton setTitleColor:RGB_color(100, 100, 100, 1) forState:UIControlStateNormal];
+    [cancelButton setTitle:@"取消" forState:UIControlStateNormal];
+    [cancelButton addTarget:self action:@selector(didTapOnBackground) forControlEvents:UIControlEventTouchUpInside];
+    cancelButton.backgroundColor = [UIColor whiteColor];
+
+    [backView addSubview:copyButton];
+    [backView addSubview:cancelButton];
+
+    LHMenuItem *item = [self.buttons lastObject];
+    copyButton.lh_left = 0;
+    copyButton.lh_top = item.lh_bottom+20;
+    copyButton.lh_size = CGSizeMake(WIDTH, 50);
+
+    cancelButton.lh_left = 0;
+    cancelButton.lh_top = copyButton.lh_bottom+1;
+    cancelButton.lh_size = copyButton.lh_size;
+
+    backView.lh_width = WIDTH;
+    backView.lh_height = cancelButton.lh_bottom;
+    backView.lh_top = HEIGHT;
+}
+
+
+- (void)copyButtonClick{
+    [self caseNumber:5];
+}
+
+
+-(void)caseNumber:(NSInteger)num{
+
 }
 
 -(void)buttonClick:(LHMenuItem *)item{
@@ -175,55 +210,51 @@
 
 //展示按钮
 -(void)showItems{
-  
-    __weak __typeof(self)weakSelf = self;
-    dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, 0.1f*NSEC_PER_SEC);
-    dispatch_after(time, dispatch_get_main_queue(), ^{
-        __strong __typeof(weakSelf)strongSelf = weakSelf;
-        for (int i = 0; i < strongSelf.buttons.count; i ++) {
-            UIButton *btn = strongSelf.buttons[i];
-        
-            CGFloat k = fabsf(i%strongSelf.queues-((strongSelf.queues-1)/2.0f));
-        
-            [UIView animateWithDuration:self.duration delay:self.beginTime*k usingSpringWithDamping:0.6 initialSpringVelocity:1.5 options:UIViewAnimationOptionLayoutSubviews animations:^{
-                CGRect rect = btn.frame;
-                rect.origin.y = rect.origin.y-changY;
-                btn.frame = rect;
-            } completion:nil];
 
-        }
-    });
+    [UIView animateWithDuration:self.duration animations:^{
+        backView.lh_bottom = HEIGHT;
+    }];
+//    __weak __typeof(self)weakSelf = self;
+//    dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, 0.1f*NSEC_PER_SEC);
+//    dispatch_after(time, dispatch_get_main_queue(), ^{
+//        __strong __typeof(weakSelf)strongSelf = weakSelf;
+//        for (int i = 0; i < strongSelf.buttons.count; i ++) {
+//            UIButton *btn = strongSelf.buttons[i];
+//        
+//            CGFloat k = fabsf(i%strongSelf.queues-((strongSelf.queues-1)/2.0f));
+//        
+//            [UIView animateWithDuration:self.duration delay:self.beginTime*k usingSpringWithDamping:0.6 initialSpringVelocity:1.5 options:UIViewAnimationOptionLayoutSubviews animations:^{
+//                CGRect rect = btn.frame;
+//                rect.origin.y = rect.origin.y-changY;
+//                btn.frame = rect;
+//            } completion:nil];
+//
+//        }
+//    });
 }
 
 //隐藏按钮
 -(void)hidenItems{
-  
-    for (int i = 0; i < self.buttons.count; i ++) {
-
-        UIButton *btn = self.buttons[i];
-      
-        CGFloat k = fabsf(i%self.queues-((self.queues-1)/2.0f));
-
-        [UIView animateWithDuration:self.duration/3.0 delay:self.beginTime*k options:UIViewAnimationOptionLayoutSubviews animations:^{
-            CGRect rect = btn.frame;
-            rect.origin.y = rect.origin.y+changY;
-            btn.frame = rect;
-        } completion:^(BOOL finished) {
-            
-        }];
-    }
+  [UIView animateWithDuration:self.duration animations:^{
+      backView.lh_top = HEIGHT;
+  }];
+//    for (int i = 0; i < self.buttons.count; i ++) {
+//
+//        UIButton *btn = self.buttons[i];
+//      
+//        CGFloat k = fabsf(i%self.queues-((self.queues-1)/2.0f));
+//
+//        [UIView animateWithDuration:self.duration/3.0 delay:self.beginTime*k options:UIViewAnimationOptionLayoutSubviews animations:^{
+//            CGRect rect = btn.frame;
+//            rect.origin.y = rect.origin.y+changY;
+//            btn.frame = rect;
+//        } completion:^(BOOL finished) {
+//            
+//        }];
+//    }
 }
 
 
--(void)setQueues:(NSInteger)queues{
-    if (queues < 3) {
-        _queues = 3;
-    }else if (queues > 5){
-        _queues = 5;
-    }else{
-        _queues = queues;
-    }
-}
 
 -(NSMutableArray *)buttons{
    

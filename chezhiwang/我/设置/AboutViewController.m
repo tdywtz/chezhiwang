@@ -7,13 +7,9 @@
 //
 
 #import "AboutViewController.h"
-#define xs  HEIGHT/667.0
 
 @interface AboutViewController ()
-{
-    CGFloat B;
-    UIScrollView *_scrollView;
-}
+
 @end
 
 @implementation AboutViewController
@@ -21,31 +17,64 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    B = [LHController setFont];
+
     self.navigationItem.title = @"关于我们";
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = RGB_color(240, 240, 240, 1);
 
     [self createUI];
 }
 
 -(void)createUI{
-    _scrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
-    [self.view addSubview:_scrollView];
-    
-    UIImageView *imageView = [LHController createImageViewWithFrame:CGRectMake(0, 0, 150*xs, 150*xs) ImageName:@"auto_appIcon"];
-    imageView.center = CGPointMake(WIDTH/2, 110*xs);
-    [_scrollView addSubview:imageView];
-    
+
+    UIImageView *imageView = [[UIImageView alloc] init];
+    imageView.image = [UIImage imageNamed:@"auto_appIcon"];
+    imageView.layer.cornerRadius = 20;
+    imageView.layer.masksToBounds = YES;
+
+    NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
+    NSString *versionNow = [info objectForKey:@"CFBundleShortVersionString"];
+
+    UILabel *versionLabel = [[UILabel alloc] init];
+    versionLabel.text = versionNow;
 
     CZWLabel *label1 = [[CZWLabel alloc] initWithFrame:CGRectZero];
+    label1.textInsets = UIEdgeInsetsMake(10, 10, 10, 10);
+    label1.backgroundColor = [UIColor whiteColor];
     label1.numberOfLines = 0;
-    [_scrollView addSubview:label1];
-    
-    [_scrollView addSubview:label1];
+
+
+    UILabel *banquan = [[UILabel alloc] init];
+    banquan.font = [UIFont systemFontOfSize:13];
+    banquan.text = @"©  车质网 版权所有";
+    banquan.textAlignment = NSTextAlignmentCenter;
+
+
+    [self.view addSubview:imageView];
+    [self.view addSubview:versionLabel];
+    [self.view addSubview:label1];
+    [self.view addSubview:banquan];
+
+    CGFloat XS = HEIGHT/667.0;
+    [imageView makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(0);
+        make.top.equalTo(90);
+        make.size.equalTo(CGSizeMake(100*XS, 100*XS));
+    }];
+
+    [versionLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(0);
+        make.top.equalTo(imageView.bottom).offset(20*XS);
+    }];
+
     [label1 makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(imageView.bottom).offset(30);
-        make.left.equalTo(10);
-        make.width.equalTo(WIDTH-20);
+        make.top.equalTo(versionLabel.bottom).offset(20*XS);
+        make.left.equalTo(0);
+        make.width.equalTo(WIDTH);
+    }];
+
+    [banquan makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(0);
+        make.bottom.equalTo(-10);
     }];
     
     NSString *text = @"车质网（www.12365auto.com）是国内领先的缺陷汽车产品信息和车主质量投诉信息收集平台，也是购买汽车的消费者了解相关车型品质状况的第三方优选媒介。\n“传递您的心声，解决您的难题”，车质网希望车主的抱怨在一个高效运转的通道里得到重视和解决，并致力于为改善车企的客户关系提供持续和全方位的服务。\n我们的目标是成为中国汽车质量第三方评价体系中更有力、更公正、更客观的声音和力量。";
@@ -56,13 +85,6 @@
     attribute.lh_font = [UIFont systemFontOfSize:15];
 
     label1.attributedText = attribute;
-
-    
-    UILabel *banquan = [LHController createLabelWithFrame:CGRectMake(LEFT, HEIGHT-64-40, WIDTH-LEFT*2, 20) Font:B-4 Bold:NO TextColor:nil Text:@"©  车质网 版权所有"];
-    banquan.textAlignment = NSTextAlignmentCenter;
-    [_scrollView addSubview:banquan];
-    
-    _scrollView.contentSize = CGSizeMake(0, banquan.frame.origin.y+banquan.frame.size.height+30);
 }
 
 - (void)didReceiveMemoryWarning {

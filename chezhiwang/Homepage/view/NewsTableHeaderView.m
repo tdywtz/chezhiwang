@@ -55,7 +55,7 @@
 
 
     self.buttonTop   = [LHController createButtnFram:CGRectZero Target:self Action:@selector(buttonClick:) Text:nil];
-    self.buttonTop.titleLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(25)];
+    self.buttonTop.titleLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(23.5)];
     [self.buttonTop setTitleColor:RGB_color(237, 27, 36, 1) forState:UIControlStateNormal];
     
 

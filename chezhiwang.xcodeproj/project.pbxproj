@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		42D8F3D6063C27E553564365 /* libPods-chezhiwang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC7F9111F2D83F92E1F6B4F /* libPods-chezhiwang.a */; };
 		4D0069071B9D891400BA0CA1 /* CustomTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D0069061B9D891400BA0CA1 /* CustomTabBarController.m */; };
+		4D02ADFA1DF699B70008F895 /* ComplainDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D02ADF91DF699B70008F895 /* ComplainDetailsView.m */; };
 		4D0B0E661DCB1D3A00C41984 /* CZWAdvertisementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D0B0E651DCB1D3A00C41984 /* CZWAdvertisementViewController.m */; };
 		4D0B0E691DCB1D4100C41984 /* AdvertisementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D0B0E681DCB1D4100C41984 /* AdvertisementView.m */; };
 		4D10D8781DD19C72000AF2AC /* ChartDateChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D10D8771DD19C72000AF2AC /* ChartDateChooseViewController.m */; };
@@ -39,8 +40,17 @@
 		4D2578E71DD416C0007FC971 /* ComplainContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2578E61DD416C0007FC971 /* ComplainContentCell.m */; };
 		4D2578EA1DD436B9007FC971 /* CZWShowImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2578E91DD436B9007FC971 /* CZWShowImageView.m */; };
 		4D2578ED1DD44E1D007FC971 /* ComplainTableFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2578EC1DD44E1D007FC971 /* ComplainTableFootView.m */; };
+		4D259DE21DF4FA470039AE2B /* MyCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D259DE11DF4FA470039AE2B /* MyCommentViewController.m */; };
+		4D259DE51DF4FA510039AE2B /* MyCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D259DE41DF4FA510039AE2B /* MyCommentCell.m */; };
+		4D259DE81DF4FA570039AE2B /* MyCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D259DE71DF4FA570039AE2B /* MyCommentModel.m */; };
+		4D259DEB1DF527540039AE2B /* MyComplainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D259DEA1DF527540039AE2B /* MyComplainCell.m */; };
+		4D259DF81DF527EF0039AE2B /* MyComplainModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D259DF61DF527EF0039AE2B /* MyComplainModel.m */; };
+		4D259E041DF5280C0039AE2B /* MyComplainShowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D259E031DF5280C0039AE2B /* MyComplainShowCell.m */; };
+		4D259E0C1DF528350039AE2B /* MyComplainDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D259E071DF528350039AE2B /* MyComplainDetailsViewController.m */; };
+		4D259E0D1DF528350039AE2B /* MyComplainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D259E091DF528350039AE2B /* MyComplainViewController.m */; };
+		4D259E0E1DF528350039AE2B /* RevokeComplainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D259E0B1DF528350039AE2B /* RevokeComplainViewController.m */; };
+		4D259E111DF557370039AE2B /* ComplainDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D259E101DF557370039AE2B /* ComplainDrawView.m */; };
 		4D2ABA3A1CFC17A8003F72BA /* MyAskShowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2ABA391CFC17A8003F72BA /* MyAskShowCell.m */; };
-		4D2DE5431CDB2AAA001B7B86 /* RevokeComplainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2DE5421CDB2AAA001B7B86 /* RevokeComplainViewController.m */; };
 		4D2DE5531CDB48C6001B7B86 /* CZWIMInputTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D2DE5521CDB48C6001B7B86 /* CZWIMInputTextView.m */; };
 		4D316EAF1D66D06D00B4AC04 /* NSString-Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D316EAE1D66D06D00B4AC04 /* NSString-Helper.m */; };
 		4D373B5B1DB4CF4E00D31455 /* MJChiBaoZiFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D373B501DB4CF4E00D31455 /* MJChiBaoZiFooter.m */; };
@@ -86,7 +96,6 @@
 		4D8823541BBB80AB007F8653 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D8823531BBB80AB007F8653 /* CoreGraphics.framework */; };
 		4D8823561BBB80BB007F8653 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D8823551BBB80BB007F8653 /* CoreTelephony.framework */; };
 		4D8DD0B31B9EB54C00619923 /* LHController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8DD0B21B9EB54C00619923 /* LHController.m */; };
-		4D94C2901BCCA7CD0042C22D /* AIMTableViewIndexBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D94C28F1BCCA7CD0042C22D /* AIMTableViewIndexBar.m */; };
 		4D952C451BF0876D000F26C0 /* LHEmojiView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D952C441BF0876D000F26C0 /* LHEmojiView.m */; };
 		4D952CB11BF0886C000F26C0 /* NO.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C471BF0886C000F26C0 /* NO.gif */; };
 		4D952CB21BF0886C000F26C0 /* OK.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C481BF0886C000F26C0 /* OK.gif */; };
@@ -206,17 +215,9 @@
 		4D97FC7A1BAF94A40089C684 /* AreaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D97FC751BAF94A40089C684 /* AreaViewController.m */; };
 		4D97FC7B1BAF94A40089C684 /* MyCarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D97FC771BAF94A40089C684 /* MyCarCell.m */; };
 		4D97FC7C1BAF94A40089C684 /* MyCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D97FC791BAF94A40089C684 /* MyCarViewController.m */; };
-		4D97FC811BAF94B70089C684 /* FavouriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D97FC801BAF94B70089C684 /* FavouriteViewController.m */; };
 		4D97FC891BAF94C40089C684 /* MyAskCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D97FC841BAF94C40089C684 /* MyAskCell.m */; };
 		4D97FC8A1BAF94C40089C684 /* MyAskModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D97FC861BAF94C40089C684 /* MyAskModel.m */; };
 		4D97FC8B1BAF94C40089C684 /* MyAskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D97FC881BAF94C40089C684 /* MyAskViewController.m */; };
-		4D97FC931BAF94DC0089C684 /* MyCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D97FC8E1BAF94DC0089C684 /* MyCommentViewController.m */; };
-		4D97FC941BAF94DC0089C684 /* MyCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D97FC901BAF94DC0089C684 /* MyCommentCell.m */; };
-		4D97FC951BAF94DC0089C684 /* MyCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D97FC921BAF94DC0089C684 /* MyCommentModel.m */; };
-		4D97FC9F1BAF94E50089C684 /* MyComplainDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D97FC981BAF94E50089C684 /* MyComplainDetailsViewController.m */; };
-		4D97FCA01BAF94E50089C684 /* MyComplainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D97FC9A1BAF94E50089C684 /* MyComplainViewController.m */; };
-		4D97FCA11BAF94E50089C684 /* MyComplainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D97FC9C1BAF94E50089C684 /* MyComplainCell.m */; };
-		4D97FCA21BAF94E50089C684 /* MyComplainModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D97FC9E1BAF94E50089C684 /* MyComplainModel.m */; };
 		4D9A3F571B9E7255008805E4 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D9A3F4E1B9E7255008805E4 /* FMDatabase.m */; };
 		4D9A3F581B9E7255008805E4 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D9A3F501B9E7255008805E4 /* FMDatabaseAdditions.m */; };
 		4D9A3F591B9E7255008805E4 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D9A3F521B9E7255008805E4 /* FMDatabasePool.m */; };
@@ -295,8 +296,6 @@
 		4DDDBCAD1D24BAF800FC6081 /* ComplainListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDDBCA91D24BAF800FC6081 /* ComplainListViewController.m */; };
 		4DDDBCAE1D24BAF800FC6081 /* ComplainSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDDBCAB1D24BAF800FC6081 /* ComplainSearchViewController.m */; };
 		4DDDBCB41D24BB0600FC6081 /* SearchHistoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDDBCB21D24BB0600FC6081 /* SearchHistoryView.m */; };
-		4DE011C51D07ACE6003A3681 /* MyCommentShowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DE011C41D07ACE6003A3681 /* MyCommentShowCell.m */; };
-		4DE011C81D07C487003A3681 /* MyComplainShowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DE011C71D07C487003A3681 /* MyComplainShowCell.m */; };
 		4DE0D2BC1D6EDD150051FDA2 /* TopCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DE0D2BB1D6EDD150051FDA2 /* TopCollectionView.m */; };
 		4DE0D2BF1D6EDE6D0051FDA2 /* ChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DE0D2BE1D6EDE6D0051FDA2 /* ChartView.m */; };
 		4DE0D2C21D6EECC80051FDA2 /* UICollectionView+Chart.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DE0D2C11D6EECC80051FDA2 /* UICollectionView+Chart.m */; };
@@ -305,9 +304,12 @@
 		4DE8256C1D6D647700823E10 /* ChartSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DE8256B1D6D647700823E10 /* ChartSectionModel.m */; };
 		4DE8256F1D6D64EA00823E10 /* ChartRowModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DE8256E1D6D64EA00823E10 /* ChartRowModel.m */; };
 		4DE8257A1D6D73FD00823E10 /* ChartItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DE825791D6D73FD00823E10 /* ChartItemModel.m */; };
-		4DEAE34A1DC986C900D43D7B /* NSMutableAttributedString+LH.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DEAE3491DC986C900D43D7B /* NSMutableAttributedString+LH.m */; };
+		4DE9DA821DEC274600D4359A /* ReputationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DE9DA811DEC274600D4359A /* ReputationViewController.m */; };
+		4DE9DA851DEC27AC00D4359A /* ReputationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DE9DA841DEC27AC00D4359A /* ReputationCell.m */; };
 		4DEAE3501DC98F3300D43D7B /* ChartDateChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DEAE34F1DC98F3300D43D7B /* ChartDateChooseView.m */; };
 		4DEAE3531DC9A89E00D43D7B /* UIView+LH.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DEAE3521DC9A89E00D43D7B /* UIView+LH.m */; };
+		4DEC27D41DF8EBCF00C64CB9 /* FavouriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DEC27D31DF8EBCF00C64CB9 /* FavouriteViewController.m */; };
+		4DEC27D71DF8EC7300C64CB9 /* FavouriteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DEC27D61DF8EC7300C64CB9 /* FavouriteCell.m */; };
 		4DEE9EB91DA88DDF00E0ABAC /* NewsTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DEE9EB81DA88DDF00E0ABAC /* NewsTableHeaderView.m */; };
 		4DEF32E31DD9764A0043A411 /* TransitionSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEF32E01DD9764A0043A411 /* TransitionSegmentView.swift */; };
 		4DEF32E41DD9764A0043A411 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEF32E11DD9764A0043A411 /* UIView+Extension.swift */; };
@@ -379,6 +381,8 @@
 		451C11368C978A7EE2F94243 /* Pods-chezhiwang.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chezhiwang.debug.xcconfig"; path = "Pods/Target Support Files/Pods-chezhiwang/Pods-chezhiwang.debug.xcconfig"; sourceTree = "<group>"; };
 		4D0069051B9D891400BA0CA1 /* CustomTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTabBarController.h; sourceTree = "<group>"; };
 		4D0069061B9D891400BA0CA1 /* CustomTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTabBarController.m; sourceTree = "<group>"; };
+		4D02ADF81DF699B70008F895 /* ComplainDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComplainDetailsView.h; sourceTree = "<group>"; };
+		4D02ADF91DF699B70008F895 /* ComplainDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComplainDetailsView.m; sourceTree = "<group>"; };
 		4D0B0E641DCB1D3A00C41984 /* CZWAdvertisementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZWAdvertisementViewController.h; sourceTree = "<group>"; };
 		4D0B0E651DCB1D3A00C41984 /* CZWAdvertisementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZWAdvertisementViewController.m; sourceTree = "<group>"; };
 		4D0B0E671DCB1D4100C41984 /* AdvertisementView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvertisementView.h; sourceTree = "<group>"; };
@@ -440,10 +444,28 @@
 		4D2578E91DD436B9007FC971 /* CZWShowImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZWShowImageView.m; sourceTree = "<group>"; };
 		4D2578EB1DD44E1D007FC971 /* ComplainTableFootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComplainTableFootView.h; sourceTree = "<group>"; };
 		4D2578EC1DD44E1D007FC971 /* ComplainTableFootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComplainTableFootView.m; sourceTree = "<group>"; };
+		4D259DE01DF4FA470039AE2B /* MyCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCommentViewController.h; sourceTree = "<group>"; };
+		4D259DE11DF4FA470039AE2B /* MyCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCommentViewController.m; sourceTree = "<group>"; };
+		4D259DE31DF4FA510039AE2B /* MyCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCommentCell.h; sourceTree = "<group>"; };
+		4D259DE41DF4FA510039AE2B /* MyCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCommentCell.m; sourceTree = "<group>"; };
+		4D259DE61DF4FA570039AE2B /* MyCommentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCommentModel.h; sourceTree = "<group>"; };
+		4D259DE71DF4FA570039AE2B /* MyCommentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCommentModel.m; sourceTree = "<group>"; };
+		4D259DE91DF527540039AE2B /* MyComplainCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyComplainCell.h; sourceTree = "<group>"; };
+		4D259DEA1DF527540039AE2B /* MyComplainCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyComplainCell.m; sourceTree = "<group>"; };
+		4D259DF61DF527EF0039AE2B /* MyComplainModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyComplainModel.m; sourceTree = "<group>"; };
+		4D259DF71DF527EF0039AE2B /* MyComplainModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyComplainModel.h; sourceTree = "<group>"; };
+		4D259E021DF5280C0039AE2B /* MyComplainShowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyComplainShowCell.h; sourceTree = "<group>"; };
+		4D259E031DF5280C0039AE2B /* MyComplainShowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyComplainShowCell.m; sourceTree = "<group>"; };
+		4D259E061DF528350039AE2B /* MyComplainDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyComplainDetailsViewController.h; sourceTree = "<group>"; };
+		4D259E071DF528350039AE2B /* MyComplainDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyComplainDetailsViewController.m; sourceTree = "<group>"; };
+		4D259E081DF528350039AE2B /* MyComplainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyComplainViewController.h; sourceTree = "<group>"; };
+		4D259E091DF528350039AE2B /* MyComplainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyComplainViewController.m; sourceTree = "<group>"; };
+		4D259E0A1DF528350039AE2B /* RevokeComplainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RevokeComplainViewController.h; sourceTree = "<group>"; };
+		4D259E0B1DF528350039AE2B /* RevokeComplainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RevokeComplainViewController.m; sourceTree = "<group>"; };
+		4D259E0F1DF557370039AE2B /* ComplainDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComplainDrawView.h; sourceTree = "<group>"; };
+		4D259E101DF557370039AE2B /* ComplainDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComplainDrawView.m; sourceTree = "<group>"; };
 		4D2ABA381CFC17A8003F72BA /* MyAskShowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAskShowCell.h; sourceTree = "<group>"; };
 		4D2ABA391CFC17A8003F72BA /* MyAskShowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAskShowCell.m; sourceTree = "<group>"; };
-		4D2DE5411CDB2AAA001B7B86 /* RevokeComplainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RevokeComplainViewController.h; sourceTree = "<group>"; };
-		4D2DE5421CDB2AAA001B7B86 /* RevokeComplainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RevokeComplainViewController.m; sourceTree = "<group>"; };
 		4D2DE5511CDB48C6001B7B86 /* CZWIMInputTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZWIMInputTextView.h; sourceTree = "<group>"; };
 		4D2DE5521CDB48C6001B7B86 /* CZWIMInputTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZWIMInputTextView.m; sourceTree = "<group>"; };
 		4D316EAD1D66D06D00B4AC04 /* NSString-Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString-Helper.h"; sourceTree = "<group>"; };
@@ -530,8 +552,6 @@
 		4D8B22BB1BA808EF00659A56 /* pch.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pch.pch; sourceTree = "<group>"; };
 		4D8DD0B11B9EB54C00619923 /* LHController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHController.h; sourceTree = "<group>"; };
 		4D8DD0B21B9EB54C00619923 /* LHController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHController.m; sourceTree = "<group>"; };
-		4D94C28E1BCCA7CD0042C22D /* AIMTableViewIndexBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIMTableViewIndexBar.h; sourceTree = "<group>"; };
-		4D94C28F1BCCA7CD0042C22D /* AIMTableViewIndexBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIMTableViewIndexBar.m; sourceTree = "<group>"; };
 		4D952C431BF0876D000F26C0 /* LHEmojiView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHEmojiView.h; sourceTree = "<group>"; };
 		4D952C441BF0876D000F26C0 /* LHEmojiView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHEmojiView.m; sourceTree = "<group>"; };
 		4D952C471BF0886C000F26C0 /* NO.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = NO.gif; sourceTree = "<group>"; };
@@ -664,27 +684,12 @@
 		4D97FC771BAF94A40089C684 /* MyCarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCarCell.m; sourceTree = "<group>"; };
 		4D97FC781BAF94A40089C684 /* MyCarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCarViewController.h; sourceTree = "<group>"; };
 		4D97FC791BAF94A40089C684 /* MyCarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCarViewController.m; sourceTree = "<group>"; };
-		4D97FC7F1BAF94B70089C684 /* FavouriteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouriteViewController.h; sourceTree = "<group>"; };
-		4D97FC801BAF94B70089C684 /* FavouriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouriteViewController.m; sourceTree = "<group>"; };
 		4D97FC831BAF94C40089C684 /* MyAskCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAskCell.h; sourceTree = "<group>"; };
 		4D97FC841BAF94C40089C684 /* MyAskCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAskCell.m; sourceTree = "<group>"; };
 		4D97FC851BAF94C40089C684 /* MyAskModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAskModel.h; sourceTree = "<group>"; };
 		4D97FC861BAF94C40089C684 /* MyAskModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAskModel.m; sourceTree = "<group>"; };
 		4D97FC871BAF94C40089C684 /* MyAskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAskViewController.h; sourceTree = "<group>"; };
 		4D97FC881BAF94C40089C684 /* MyAskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAskViewController.m; sourceTree = "<group>"; };
-		4D97FC8D1BAF94DC0089C684 /* MyCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCommentViewController.h; sourceTree = "<group>"; };
-		4D97FC8E1BAF94DC0089C684 /* MyCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCommentViewController.m; sourceTree = "<group>"; };
-		4D97FC8F1BAF94DC0089C684 /* MyCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCommentCell.h; sourceTree = "<group>"; };
-		4D97FC901BAF94DC0089C684 /* MyCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCommentCell.m; sourceTree = "<group>"; };
-		4D97FC911BAF94DC0089C684 /* MyCommentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCommentModel.h; sourceTree = "<group>"; };
-		4D97FC921BAF94DC0089C684 /* MyCommentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCommentModel.m; sourceTree = "<group>"; };
-		4D97FC981BAF94E50089C684 /* MyComplainDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyComplainDetailsViewController.m; sourceTree = "<group>"; };
-		4D97FC991BAF94E50089C684 /* MyComplainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyComplainViewController.h; sourceTree = "<group>"; };
-		4D97FC9A1BAF94E50089C684 /* MyComplainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyComplainViewController.m; sourceTree = "<group>"; };
-		4D97FC9B1BAF94E50089C684 /* MyComplainCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyComplainCell.h; sourceTree = "<group>"; };
-		4D97FC9C1BAF94E50089C684 /* MyComplainCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyComplainCell.m; sourceTree = "<group>"; };
-		4D97FC9D1BAF94E50089C684 /* MyComplainModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyComplainModel.h; sourceTree = "<group>"; };
-		4D97FC9E1BAF94E50089C684 /* MyComplainModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyComplainModel.m; sourceTree = "<group>"; };
 		4D9A3F4D1B9E7255008805E4 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
 		4D9A3F4E1B9E7255008805E4 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
 		4D9A3F4F1B9E7255008805E4 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
@@ -705,7 +710,6 @@
 		4DC0B1D01DDAD506006E7BBD /* ForumCatalogueSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumCatalogueSliderView.m; sourceTree = "<group>"; };
 		4DC0B1D21DDAE11E006E7BBD /* ForumCatalogueHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumCatalogueHeaderView.h; sourceTree = "<group>"; };
 		4DC0B1D31DDAE11E006E7BBD /* ForumCatalogueHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForumCatalogueHeaderView.m; sourceTree = "<group>"; };
-		4DC208DE1DA9D17A00344E55 /* MyComplainDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyComplainDetailsViewController.h; sourceTree = "<group>"; };
 		4DC2BF681DD57E810006E8D5 /* ChooseSexViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSexViewController.h; sourceTree = "<group>"; };
 		4DC2BF691DD57E810006E8D5 /* ChooseSexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseSexViewController.m; sourceTree = "<group>"; };
 		4DC2BF6B1DD5872A0006E8D5 /* ChooseDateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseDateViewController.h; sourceTree = "<group>"; };
@@ -837,10 +841,6 @@
 		4DDDBCAB1D24BAF800FC6081 /* ComplainSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComplainSearchViewController.m; sourceTree = "<group>"; };
 		4DDDBCB11D24BB0600FC6081 /* SearchHistoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchHistoryView.h; sourceTree = "<group>"; };
 		4DDDBCB21D24BB0600FC6081 /* SearchHistoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchHistoryView.m; sourceTree = "<group>"; };
-		4DE011C31D07ACE6003A3681 /* MyCommentShowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCommentShowCell.h; sourceTree = "<group>"; };
-		4DE011C41D07ACE6003A3681 /* MyCommentShowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCommentShowCell.m; sourceTree = "<group>"; };
-		4DE011C61D07C487003A3681 /* MyComplainShowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyComplainShowCell.h; sourceTree = "<group>"; };
-		4DE011C71D07C487003A3681 /* MyComplainShowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyComplainShowCell.m; sourceTree = "<group>"; };
 		4DE0D2BA1D6EDD150051FDA2 /* TopCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopCollectionView.h; sourceTree = "<group>"; };
 		4DE0D2BB1D6EDD150051FDA2 /* TopCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopCollectionView.m; sourceTree = "<group>"; };
 		4DE0D2BD1D6EDE6D0051FDA2 /* ChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartView.h; sourceTree = "<group>"; };
@@ -857,12 +857,18 @@
 		4DE8256E1D6D64EA00823E10 /* ChartRowModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartRowModel.m; sourceTree = "<group>"; };
 		4DE825781D6D73FD00823E10 /* ChartItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartItemModel.h; sourceTree = "<group>"; };
 		4DE825791D6D73FD00823E10 /* ChartItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartItemModel.m; sourceTree = "<group>"; };
-		4DEAE3481DC986C900D43D7B /* NSMutableAttributedString+LH.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+LH.h"; sourceTree = "<group>"; };
-		4DEAE3491DC986C900D43D7B /* NSMutableAttributedString+LH.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+LH.m"; sourceTree = "<group>"; };
+		4DE9DA801DEC274600D4359A /* ReputationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReputationViewController.h; sourceTree = "<group>"; };
+		4DE9DA811DEC274600D4359A /* ReputationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReputationViewController.m; sourceTree = "<group>"; };
+		4DE9DA831DEC27AC00D4359A /* ReputationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReputationCell.h; sourceTree = "<group>"; };
+		4DE9DA841DEC27AC00D4359A /* ReputationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReputationCell.m; sourceTree = "<group>"; };
 		4DEAE34E1DC98F3300D43D7B /* ChartDateChooseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartDateChooseView.h; sourceTree = "<group>"; };
 		4DEAE34F1DC98F3300D43D7B /* ChartDateChooseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartDateChooseView.m; sourceTree = "<group>"; };
 		4DEAE3511DC9A89E00D43D7B /* UIView+LH.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LH.h"; sourceTree = "<group>"; };
 		4DEAE3521DC9A89E00D43D7B /* UIView+LH.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LH.m"; sourceTree = "<group>"; };
+		4DEC27D21DF8EBCF00C64CB9 /* FavouriteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouriteViewController.h; sourceTree = "<group>"; };
+		4DEC27D31DF8EBCF00C64CB9 /* FavouriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouriteViewController.m; sourceTree = "<group>"; };
+		4DEC27D51DF8EC7300C64CB9 /* FavouriteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouriteCell.h; sourceTree = "<group>"; };
+		4DEC27D61DF8EC7300C64CB9 /* FavouriteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouriteCell.m; sourceTree = "<group>"; };
 		4DEE9EB71DA88DDF00E0ABAC /* NewsTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsTableHeaderView.h; sourceTree = "<group>"; };
 		4DEE9EB81DA88DDF00E0ABAC /* NewsTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsTableHeaderView.m; sourceTree = "<group>"; };
 		4DEF32E01DD9764A0043A411 /* TransitionSegmentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionSegmentView.swift; sourceTree = "<group>"; };
@@ -1012,12 +1018,20 @@
 		0C0051F6B660A226598C02BD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4D3F02271DE7E769006AFC27 /* MJRefresh.framework */,
-				4D3F02251DE7E406006AFC27 /* SnapKit.framework */,
+				4D9E73651BD081140003AA48 /* libz.tbd */,
+				4D9E73631BD0810C0003AA48 /* libstdc++.tbd */,
+				4D9E73611BD081000003AA48 /* libiconv.tbd */,
+				4D9E735F1BD080F50003AA48 /* libsqlite3.tbd */,
 				4DFFA4FB1DB73098003B6178 /* libc++.tbd */,
-				4DFFA4F91DB7304F003B6178 /* ImageIO.framework */,
 				4D1D3A011D53244400B0D452 /* libicucore.tbd */,
 				BBC7F9111F2D83F92E1F6B4F /* libPods-chezhiwang.a */,
+				4D8823551BBB80BB007F8653 /* CoreTelephony.framework */,
+				4D8823531BBB80AB007F8653 /* CoreGraphics.framework */,
+				4D8823511BBB809F007F8653 /* SystemConfiguration.framework */,
+				4D88234D1BBB8080007F8653 /* Security.framework */,
+				4D3F02271DE7E769006AFC27 /* MJRefresh.framework */,
+				4D3F02251DE7E406006AFC27 /* SnapKit.framework */,
+				4DFFA4F91DB7304F003B6178 /* ImageIO.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1082,42 +1096,21 @@
 			path = "新闻";
 			sourceTree = "<group>";
 		};
-		4D0A8EE41CF2E2BE001BC612 /* framework */ = {
-			isa = PBXGroup;
-			children = (
-				4D9E73651BD081140003AA48 /* libz.tbd */,
-				4D9E73631BD0810C0003AA48 /* libstdc++.tbd */,
-				4D9E73611BD081000003AA48 /* libiconv.tbd */,
-				4D9E735F1BD080F50003AA48 /* libsqlite3.tbd */,
-				4D8823551BBB80BB007F8653 /* CoreTelephony.framework */,
-				4D8823531BBB80AB007F8653 /* CoreGraphics.framework */,
-				4D8823511BBB809F007F8653 /* SystemConfiguration.framework */,
-				4D88234D1BBB8080007F8653 /* Security.framework */,
-			);
-			name = framework;
-			sourceTree = "<group>";
-		};
-		4D0C32401D6C4C7900A780ED /* viewController */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = viewController;
-			sourceTree = "<group>";
-		};
 		4D0C32411D6C4C7F00A780ED /* view */ = {
 			isa = PBXGroup;
 			children = (
+				4D259DE91DF527540039AE2B /* MyComplainCell.h */,
+				4D259DEA1DF527540039AE2B /* MyComplainCell.m */,
 				4D6CD6991D9E62420038D5E5 /* MyComplainHeaderView.h */,
 				4D6CD69A1D9E62420038D5E5 /* MyComplainHeaderView.m */,
+				4D259E021DF5280C0039AE2B /* MyComplainShowCell.h */,
+				4D259E031DF5280C0039AE2B /* MyComplainShowCell.m */,
+				4D259E0F1DF557370039AE2B /* ComplainDrawView.h */,
+				4D259E101DF557370039AE2B /* ComplainDrawView.m */,
+				4D02ADF81DF699B70008F895 /* ComplainDetailsView.h */,
+				4D02ADF91DF699B70008F895 /* ComplainDetailsView.m */,
 			);
 			path = view;
-			sourceTree = "<group>";
-		};
-		4D0C32421D6C4C8500A780ED /* model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = model;
 			sourceTree = "<group>";
 		};
 		4D11BEB51D5477F500482F8F /* model */ = {
@@ -1230,6 +1223,28 @@
 				4DDD46011D2F88C3000BEC9C /* LHPageView.m */,
 			);
 			path = LHPageView;
+			sourceTree = "<group>";
+		};
+		4D259DF51DF527E90039AE2B /* model */ = {
+			isa = PBXGroup;
+			children = (
+				4D259DF71DF527EF0039AE2B /* MyComplainModel.h */,
+				4D259DF61DF527EF0039AE2B /* MyComplainModel.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		4D259E051DF528220039AE2B /* viewController */ = {
+			isa = PBXGroup;
+			children = (
+				4D259E061DF528350039AE2B /* MyComplainDetailsViewController.h */,
+				4D259E071DF528350039AE2B /* MyComplainDetailsViewController.m */,
+				4D259E081DF528350039AE2B /* MyComplainViewController.h */,
+				4D259E091DF528350039AE2B /* MyComplainViewController.m */,
+				4D259E0A1DF528350039AE2B /* RevokeComplainViewController.h */,
+				4D259E0B1DF528350039AE2B /* RevokeComplainViewController.m */,
+			);
+			path = viewController;
 			sourceTree = "<group>";
 		};
 		4D373B4B1DB4C55B00D31455 /* 刷新 */ = {
@@ -1349,7 +1364,6 @@
 		4D7E722F1B9D5CD10048F221 = {
 			isa = PBXGroup;
 			children = (
-				4D0A8EE41CF2E2BE001BC612 /* framework */,
 				4D7E723A1B9D5CD10048F221 /* chezhiwang */,
 				4D7E72541B9D5CD10048F221 /* chezhiwangTests */,
 				4D7E72391B9D5CD10048F221 /* Products */,
@@ -1370,6 +1384,7 @@
 		4D7E723A1B9D5CD10048F221 /* chezhiwang */ = {
 			isa = PBXGroup;
 			children = (
+				4DE9DA7C1DEC26EC00D4359A /* 口碑 */,
 				4DCDDE6D1D9E3AA900AE4446 /* Common */,
 				4DF75ECB1D9CE27900FB882E /* Homepage */,
 				4DF75EC71D9CE25A00FB882E /* Find */,
@@ -1463,15 +1478,6 @@
 				4D316EAE1D66D06D00B4AC04 /* NSString-Helper.m */,
 			);
 			path = "通用";
-			sourceTree = "<group>";
-		};
-		4D94C28D1BCCA7CD0042C22D /* index */ = {
-			isa = PBXGroup;
-			children = (
-				4D94C28E1BCCA7CD0042C22D /* AIMTableViewIndexBar.h */,
-				4D94C28F1BCCA7CD0042C22D /* AIMTableViewIndexBar.m */,
-			);
-			path = index;
 			sourceTree = "<group>";
 		};
 		4D952C421BF0875C000F26C0 /* LHEmoji */ = {
@@ -1689,8 +1695,9 @@
 		4D97FC7E1BAF94B70089C684 /* 我的收藏 */ = {
 			isa = PBXGroup;
 			children = (
-				4D97FC7F1BAF94B70089C684 /* FavouriteViewController.h */,
-				4D97FC801BAF94B70089C684 /* FavouriteViewController.m */,
+				4DEC27CF1DF8EB9D00C64CB9 /* model */,
+				4DEC27D01DF8EB9D00C64CB9 /* view */,
+				4DEC27D11DF8EB9D00C64CB9 /* viewController */,
 			);
 			path = "我的收藏";
 			sourceTree = "<group>";
@@ -1716,14 +1723,6 @@
 				4DF787E01DE6CDD400674C72 /* model */,
 				4DF787E11DE6CDD400674C72 /* view */,
 				4DF787E21DE6CDD400674C72 /* viewController */,
-				4D97FC8D1BAF94DC0089C684 /* MyCommentViewController.h */,
-				4D97FC8E1BAF94DC0089C684 /* MyCommentViewController.m */,
-				4D97FC8F1BAF94DC0089C684 /* MyCommentCell.h */,
-				4D97FC901BAF94DC0089C684 /* MyCommentCell.m */,
-				4DE011C31D07ACE6003A3681 /* MyCommentShowCell.h */,
-				4DE011C41D07ACE6003A3681 /* MyCommentShowCell.m */,
-				4D97FC911BAF94DC0089C684 /* MyCommentModel.h */,
-				4D97FC921BAF94DC0089C684 /* MyCommentModel.m */,
 			);
 			path = "我的评论";
 			sourceTree = "<group>";
@@ -1731,21 +1730,9 @@
 		4D97FC961BAF94E50089C684 /* 我的投诉 */ = {
 			isa = PBXGroup;
 			children = (
-				4D0C32421D6C4C8500A780ED /* model */,
+				4D259DF51DF527E90039AE2B /* model */,
 				4D0C32411D6C4C7F00A780ED /* view */,
-				4D0C32401D6C4C7900A780ED /* viewController */,
-				4DC208DE1DA9D17A00344E55 /* MyComplainDetailsViewController.h */,
-				4D97FC981BAF94E50089C684 /* MyComplainDetailsViewController.m */,
-				4D2DE5411CDB2AAA001B7B86 /* RevokeComplainViewController.h */,
-				4D2DE5421CDB2AAA001B7B86 /* RevokeComplainViewController.m */,
-				4D97FC991BAF94E50089C684 /* MyComplainViewController.h */,
-				4D97FC9A1BAF94E50089C684 /* MyComplainViewController.m */,
-				4D97FC9B1BAF94E50089C684 /* MyComplainCell.h */,
-				4D97FC9C1BAF94E50089C684 /* MyComplainCell.m */,
-				4DE011C61D07C487003A3681 /* MyComplainShowCell.h */,
-				4DE011C71D07C487003A3681 /* MyComplainShowCell.m */,
-				4D97FC9D1BAF94E50089C684 /* MyComplainModel.h */,
-				4D97FC9E1BAF94E50089C684 /* MyComplainModel.m */,
+				4D259E051DF528220039AE2B /* viewController */,
 			);
 			path = "我的投诉";
 			sourceTree = "<group>";
@@ -1755,7 +1742,6 @@
 			children = (
 				4DFFA4BA1DB72F9A003B6178 /* UMSocial */,
 				4D952C421BF0875C000F26C0 /* LHEmoji */,
-				4D94C28D1BCCA7CD0042C22D /* index */,
 				4DC407131BB12D40004079A8 /* 相册 */,
 				4D9A3F4C1B9E7255008805E4 /* FMDB */,
 			);
@@ -1861,8 +1847,6 @@
 				4DCAD2CC1CEC2A8E00A539B2 /* UIViewController+LH.m */,
 				4DDD33451D1A623800F52C0C /* UIFont+LH.h */,
 				4DDD33461D1A623800F52C0C /* UIFont+LH.m */,
-				4DEAE3481DC986C900D43D7B /* NSMutableAttributedString+LH.h */,
-				4DEAE3491DC986C900D43D7B /* NSMutableAttributedString+LH.m */,
 				4DEAE3511DC9A89E00D43D7B /* UIView+LH.h */,
 				4DEAE3521DC9A89E00D43D7B /* UIView+LH.m */,
 			);
@@ -2133,6 +2117,66 @@
 			path = model;
 			sourceTree = "<group>";
 		};
+		4DE9DA7C1DEC26EC00D4359A /* 口碑 */ = {
+			isa = PBXGroup;
+			children = (
+				4DE9DA7D1DEC26EC00D4359A /* model */,
+				4DE9DA7E1DEC26EC00D4359A /* view */,
+				4DE9DA7F1DEC26EC00D4359A /* viewController */,
+			);
+			path = "口碑";
+			sourceTree = "<group>";
+		};
+		4DE9DA7D1DEC26EC00D4359A /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		4DE9DA7E1DEC26EC00D4359A /* view */ = {
+			isa = PBXGroup;
+			children = (
+				4DE9DA831DEC27AC00D4359A /* ReputationCell.h */,
+				4DE9DA841DEC27AC00D4359A /* ReputationCell.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		4DE9DA7F1DEC26EC00D4359A /* viewController */ = {
+			isa = PBXGroup;
+			children = (
+				4DE9DA801DEC274600D4359A /* ReputationViewController.h */,
+				4DE9DA811DEC274600D4359A /* ReputationViewController.m */,
+			);
+			path = viewController;
+			sourceTree = "<group>";
+		};
+		4DEC27CF1DF8EB9D00C64CB9 /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		4DEC27D01DF8EB9D00C64CB9 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				4DEC27D51DF8EC7300C64CB9 /* FavouriteCell.h */,
+				4DEC27D61DF8EC7300C64CB9 /* FavouriteCell.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		4DEC27D11DF8EB9D00C64CB9 /* viewController */ = {
+			isa = PBXGroup;
+			children = (
+				4DEC27D21DF8EBCF00C64CB9 /* FavouriteViewController.h */,
+				4DEC27D31DF8EBCF00C64CB9 /* FavouriteViewController.m */,
+			);
+			path = viewController;
+			sourceTree = "<group>";
+		};
 		4DEF32DE1DD9764A0043A411 /* TransitionSegmentView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2295,6 +2339,8 @@
 		4DF787E01DE6CDD400674C72 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				4D259DE61DF4FA570039AE2B /* MyCommentModel.h */,
+				4D259DE71DF4FA570039AE2B /* MyCommentModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -2302,6 +2348,8 @@
 		4DF787E11DE6CDD400674C72 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				4D259DE31DF4FA510039AE2B /* MyCommentCell.h */,
+				4D259DE41DF4FA510039AE2B /* MyCommentCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -2309,6 +2357,8 @@
 		4DF787E21DE6CDD400674C72 /* viewController */ = {
 			isa = PBXGroup;
 			children = (
+				4D259DE01DF4FA470039AE2B /* MyCommentViewController.h */,
+				4D259DE11DF4FA470039AE2B /* MyCommentViewController.m */,
 				4D3F022A1DE803CA006AFC27 /* CenterCommentViewController.swift */,
 			);
 			path = viewController;
@@ -2714,6 +2764,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DEC27D41DF8EBCF00C64CB9 /* FavouriteViewController.m in Sources */,
 				4DD9DCB11D6FDBA100BA8C1F /* OnTheLeftView.m in Sources */,
 				4DC407241BB12D40004079A8 /* LHAssetGroupViewController.m in Sources */,
 				4DF75F331D9CE5B000FB882E /* HomepageForumModel.m in Sources */,
@@ -2721,10 +2772,10 @@
 				4DF0EA7B1DBDA5AD00EFAE58 /* TransitionAnima.m in Sources */,
 				4DCDDE691D9E00CE00AE4446 /* FindModel.m in Sources */,
 				4DD335651D64534D0037F2D2 /* ChartChooseModel.m in Sources */,
-				4D97FCA11BAF94E50089C684 /* MyComplainCell.m in Sources */,
 				4DE8256C1D6D647700823E10 /* ChartSectionModel.m in Sources */,
 				4D87CE581C0324BD00466A97 /* EditImageCell.m in Sources */,
 				4DF0EA791DBDA5AD00EFAE58 /* BasicTableViewCell.m in Sources */,
+				4D259E0C1DF528350039AE2B /* MyComplainDetailsViewController.m in Sources */,
 				4DD3357D1D64536B0037F2D2 /* ChartChooseListViewController.m in Sources */,
 				4DF75F2A1D9CE4E000FB882E /* HomepageComplainModel.m in Sources */,
 				4DD30C801D20C0F4009C3B05 /* NewsTestTableView.m in Sources */,
@@ -2737,6 +2788,7 @@
 				4D87CE621C0324E000466A97 /* LHPickerView.m in Sources */,
 				4DCB17541D5C5CFD005C2E76 /* CehicleChooseViewController.m in Sources */,
 				4DF0EA631DBDA4FF00EFAE58 /* CZWManager.m in Sources */,
+				4D259DE81DF4FA570039AE2B /* MyCommentModel.m in Sources */,
 				4D52046A1DD99B0E001587DB /* ForumViewController.m in Sources */,
 				4D9A3F571B9E7255008805E4 /* FMDatabase.m in Sources */,
 				4DE8257A1D6D73FD00823E10 /* ChartItemModel.m in Sources */,
@@ -2750,7 +2802,6 @@
 				4D0B0E661DCB1D3A00C41984 /* CZWAdvertisementViewController.m in Sources */,
 				4DDD33471D1A623800F52C0C /* UIFont+LH.m in Sources */,
 				4DF0EA6B1DBDA58500EFAE58 /* URLFile.m in Sources */,
-				4D2DE5431CDB2AAA001B7B86 /* RevokeComplainViewController.m in Sources */,
 				4DC2BF6D1DD5872A0006E8D5 /* ChooseDateViewController.m in Sources */,
 				4DDD46051D2F8D79000BEC9C /* SearchViewController.m in Sources */,
 				4DEF32E31DD9764A0043A411 /* TransitionSegmentView.swift in Sources */,
@@ -2760,20 +2811,19 @@
 				4D952C451BF0876D000F26C0 /* LHEmojiView.m in Sources */,
 				4D967DBD1DD2E12C00C1B255 /* ComplainViewController.m in Sources */,
 				4D3A1ED31DACBA4B00A9144B /* CommentListViewController.m in Sources */,
+				4DEC27D71DF8EC7300C64CB9 /* FavouriteCell.m in Sources */,
 				4D5204701DD99EC2001587DB /* ForumCatalogueViewController.m in Sources */,
 				4DF75F451D9CE67A00FB882E /* HomepageForumCell.m in Sources */,
 				4DDDBCAE1D24BAF800FC6081 /* ComplainSearchViewController.m in Sources */,
 				4D11BEB81D54781400482F8F /* NewsTestTableViewModel.m in Sources */,
 				4DD335731D6453570037F2D2 /* BezierPathView.m in Sources */,
 				4D373B5C1DB4CF4E00D31455 /* MJChiBaoZiFooter2.m in Sources */,
-				4D97FC951BAF94DC0089C684 /* MyCommentModel.m in Sources */,
 				4DC4070B1BB10638004079A8 /* SettingViewController.m in Sources */,
 				4D97FC891BAF94C40089C684 /* MyAskCell.m in Sources */,
 				4DD30C671D20C0E7009C3B05 /* InvestigateChangeViewController.m in Sources */,
 				4DCB17601D5C5D13005C2E76 /* VehicleModel.m in Sources */,
 				4DC407271BB12D40004079A8 /* LHAssetViewCell.m in Sources */,
 				4D3A1ED61DACBA8A00A9144B /* CommentListModel.m in Sources */,
-				4D97FC9F1BAF94E50089C684 /* MyComplainDetailsViewController.m in Sources */,
 				4DDD16E41DDBF3920084AA3F /* ForumCatalogueCell.m in Sources */,
 				4DF75F421D9CE65E00FB882E /* HomepageAnswerCell.m in Sources */,
 				4D8DD0B31B9EB54C00619923 /* LHController.m in Sources */,
@@ -2783,6 +2833,7 @@
 				4D3A1ECA1DAC8EB400A9144B /* LHMenuController.m in Sources */,
 				4DC407281BB12D40004079A8 /* LHAssetViewController.m in Sources */,
 				4D11D2FD1D22267600BBB172 /* AnawerToolView.m in Sources */,
+				4D259DE21DF4FA470039AE2B /* MyCommentViewController.m in Sources */,
 				4DDD46021D2F88C3000BEC9C /* LHPageView.m in Sources */,
 				4DD335771D6453570037F2D2 /* ComplainChartSecondHeaderView.m in Sources */,
 				4DCB17571D5C5CFD005C2E76 /* VehicleSeriesImageViewController.m in Sources */,
@@ -2792,8 +2843,8 @@
 				4DDDBCAC1D24BAF800FC6081 /* ComplainDetailsViewController.m in Sources */,
 				4D373B5B1DB4CF4E00D31455 /* MJChiBaoZiFooter.m in Sources */,
 				4DD335661D64534D0037F2D2 /* ComplainChartSecondModel.m in Sources */,
+				4DE9DA851DEC27AC00D4359A /* ReputationCell.m in Sources */,
 				4D97FC681BAF94800089C684 /* PasswordViewController.m in Sources */,
-				4D97FCA21BAF94E50089C684 /* MyComplainModel.m in Sources */,
 				4D2578DE1DD404AB007FC971 /* ComplainImageCell.m in Sources */,
 				4D11D3091D22356A00BBB172 /* AnswerDetailsViewController.m in Sources */,
 				4D17D8BA1D29ED79002E2B94 /* ForumClassifyListViewController.m in Sources */,
@@ -2806,6 +2857,7 @@
 				4D2578E71DD416C0007FC971 /* ComplainContentCell.m in Sources */,
 				4D11D30D1D22356A00BBB172 /* AskViewController.m in Sources */,
 				4D2578ED1DD44E1D007FC971 /* ComplainTableFootView.m in Sources */,
+				4D259DF81DF527EF0039AE2B /* MyComplainModel.m in Sources */,
 				4DF75F2D1D9CE55600FB882E /* HomepageResearchModel.m in Sources */,
 				4D97FC8B1BAF94C40089C684 /* MyAskViewController.m in Sources */,
 				4DCDDE6C1D9E0FDB00AE4446 /* MyHeaderView.m in Sources */,
@@ -2821,16 +2873,14 @@
 				4DEAE3501DC98F3300D43D7B /* ChartDateChooseView.m in Sources */,
 				4D17D8BD1D29ED79002E2B94 /* ForumListViewController.m in Sources */,
 				4DF75F4B1D9CEF3000FB882E /* HomepageSectionFooterView.m in Sources */,
-				4D97FC811BAF94B70089C684 /* FavouriteViewController.m in Sources */,
 				4DDD16ED1DDC28050084AA3F /* ForumClassifyViewController.m in Sources */,
 				4DD335751D6453570037F2D2 /* ComplainChartFirstShowCell.m in Sources */,
 				4D97FC7B1BAF94A40089C684 /* MyCarCell.m in Sources */,
-				4D97FC941BAF94DC0089C684 /* MyCommentCell.m in Sources */,
 				4DD30C681D20C0E7009C3B05 /* LHPageViewcontroller.m in Sources */,
 				4DD30C6E1D20C0E7009C3B05 /* NewsViewController.m in Sources */,
-				4D94C2901BCCA7CD0042C22D /* AIMTableViewIndexBar.m in Sources */,
 				4D5204671DD99276001587DB /* ForumHeaderView.m in Sources */,
 				4DD30C6D1D20C0E7009C3B05 /* NewsTestViewController.m in Sources */,
+				4D259E111DF557370039AE2B /* ComplainDrawView.m in Sources */,
 				4D3F022D1DE82094006AFC27 /* NSMutableAttributedString+LHText.swift in Sources */,
 				4D2578EA1DD436B9007FC971 /* CZWShowImageView.m in Sources */,
 				4D2ABA3A1CFC17A8003F72BA /* MyAskShowCell.m in Sources */,
@@ -2848,9 +2898,11 @@
 				4DCB17551D5C5CFD005C2E76 /* ImageShowViewController.m in Sources */,
 				4DC407251BB12D40004079A8 /* LHAssetPickerController.m in Sources */,
 				4DFBFA351CE56F110069F229 /* CZWAppPrompt.m in Sources */,
+				4D259DE51DF4FA510039AE2B /* MyCommentCell.m in Sources */,
 				4D373B5F1DB4CF4E00D31455 /* MJDIYBackFooter.m in Sources */,
 				4DD335741D6453570037F2D2 /* ComplainChartFirstCell.m in Sources */,
 				4DF012A21DC18AD800556132 /* LHNewsChooseView.m in Sources */,
+				4D259DEB1DF527540039AE2B /* MyComplainCell.m in Sources */,
 				4D11BEC71D5484F700482F8F /* LHLabelTextStorage.m in Sources */,
 				4D373B601DB4CF4E00D31455 /* MJDIYHeader.m in Sources */,
 				4DE825691D6D49B200823E10 /* ChartTableViewCell.m in Sources */,
@@ -2858,15 +2910,14 @@
 				4DCB17561D5C5CFD005C2E76 /* VehicleImageViewController.m in Sources */,
 				4DCB17631D5C5DFC005C2E76 /* CollectionSectionView.m in Sources */,
 				4DFFA4F51DB72F9A003B6178 /* UMShareMenuItem.m in Sources */,
+				4D259E0D1DF528350039AE2B /* MyComplainViewController.m in Sources */,
 				4DCB175C1D5C5D0A005C2E76 /* BrandCollectionView.m in Sources */,
 				4D17D8C71D29ED82002E2B94 /* EditCell.m in Sources */,
 				4DF75F361D9CE5E800FB882E /* HomepageNewsTextCell.m in Sources */,
-				4DEAE34A1DC986C900D43D7B /* NSMutableAttributedString+LH.m in Sources */,
 				4DD3357E1D64536B0037F2D2 /* ComplainChartViewController.m in Sources */,
 				4D967DD21DD30FAC00C1B255 /* BrandTableViewCell.m in Sources */,
 				4DCDDE701D9E3B5B00AE4446 /* FootCommentView.m in Sources */,
 				4D11BEAB1D54745500482F8F /* NewsTestTableViewCell.m in Sources */,
-				4DE011C51D07ACE6003A3681 /* MyCommentShowCell.m in Sources */,
 				4D7E723E1B9D5CD10048F221 /* main.m in Sources */,
 				4D952D1D1BF08E54000F26C0 /* LHEmojiButton.m in Sources */,
 				4D17D8C01D29ED79002E2B94 /* WritePostViewController.m in Sources */,
@@ -2880,13 +2931,13 @@
 				4DDD16EC1DDC28050084AA3F /* ForumClassifyTwoController.m in Sources */,
 				4DFFA4F81DB72F9A003B6178 /* UMSocialUIManager.m in Sources */,
 				4D0B0E691DCB1D4100C41984 /* AdvertisementView.m in Sources */,
+				4D259E0E1DF528350039AE2B /* RevokeComplainViewController.m in Sources */,
 				4D6CD69B1D9E62420038D5E5 /* MyComplainHeaderView.m in Sources */,
 				4D10D8781DD19C72000AF2AC /* ChartDateChooseViewController.m in Sources */,
 				4DFFA4F61DB72F9A003B6178 /* UMShareMenuSelectionView.m in Sources */,
 				4D967DCC1DD2EDED00C1B255 /* ComplainTableViewCell.m in Sources */,
 				4D87CE571C0324BD00466A97 /* EditImageViewController.m in Sources */,
 				4DCAD2CD1CEC2A8E00A539B2 /* UIViewController+LH.m in Sources */,
-				4DE011C81D07C487003A3681 /* MyComplainShowCell.m in Sources */,
 				4D373B5D1DB4CF4E00D31455 /* MJChiBaoZiHeader.m in Sources */,
 				4DC407261BB12D40004079A8 /* LHAssetPreviewController.m in Sources */,
 				4DD335781D6453570037F2D2 /* ComplainChartView.m in Sources */,
@@ -2894,9 +2945,9 @@
 				4DD30C6B1D20C0E7009C3B05 /* NewsListViewController.m in Sources */,
 				4DF2AAB01D62DBDD006F8D30 /* LHLabel.m in Sources */,
 				4D3A1ED01DACBA4000A9144B /* CommentListCell.m in Sources */,
+				4D02ADFA1DF699B70008F895 /* ComplainDetailsView.m in Sources */,
 				4D84E6561BF33B4800F901BF /* MyViewController.m in Sources */,
 				4D11D30A1D22356A00BBB172 /* AnswerListViewController.m in Sources */,
-				4D97FCA01BAF94E50089C684 /* MyComplainViewController.m in Sources */,
 				4D2DE5531CDB48C6001B7B86 /* CZWIMInputTextView.m in Sources */,
 				4D967DC31DD2E42300C1B255 /* ComplainSectionModel.m in Sources */,
 				4D17D8B91D29ED79002E2B94 /* EditViewController.m in Sources */,
@@ -2907,9 +2958,11 @@
 				4D17D8BE1D29ED79002E2B94 /* PostViewController.m in Sources */,
 				4D753CE91BF56ADA00D3232D /* LoginViewController.m in Sources */,
 				4DF75F241D9CE48A00FB882E /* HomepageSectionModel.m in Sources */,
+				4D259E041DF5280C0039AE2B /* MyComplainShowCell.m in Sources */,
 				4DF0EA7F1DBE0E9400EFAE58 /* UIScrollView+TwitterCover.m in Sources */,
 				4DEF32E41DD9764A0043A411 /* UIView+Extension.swift in Sources */,
 				4D11BEC81D5484F700482F8F /* NSMutableAttributedString+LH.m in Sources */,
+				4DE9DA821DEC274600D4359A /* ReputationViewController.m in Sources */,
 				4DF75F3C1D9CE61F00FB882E /* HomepageComplainCell.m in Sources */,
 				4DF0EA6A1DBDA58500EFAE58 /* HttpRequest.m in Sources */,
 				4DD9DCB41D6FDD7A00BA8C1F /* TopCollectionViewCell.m in Sources */,
@@ -2928,7 +2981,6 @@
 				4D9A3F591B9E7255008805E4 /* FMDatabasePool.m in Sources */,
 				4DF0EA771DBDA5AD00EFAE58 /* BasicNavigationController.m in Sources */,
 				4DD30D161D20ECD7009C3B05 /* LTInfiniteScrollView.m in Sources */,
-				4D97FC931BAF94DC0089C684 /* MyCommentViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

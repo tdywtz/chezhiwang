@@ -11,6 +11,8 @@
 #import "ReplyViewController.h"
 #import "WritePostViewController.h"
 #import "CZWShareViewController.h"
+#import "FootCommentView.h"
+#import "WriteViewController.h"
 
 //web页面按钮类型
 typedef enum {
@@ -19,7 +21,7 @@ typedef enum {
     clickTypeReplyfloor//回复本楼
 }clickType;
 
-@interface PostViewController ()<UIWebViewDelegate,UIScrollViewDelegate>
+@interface PostViewController ()<UIWebViewDelegate,UIScrollViewDelegate,FootCommentViewDelegate>
 {
     UIWebView *_webView;
     NSString *webHttp;
@@ -30,9 +32,33 @@ typedef enum {
 @implementation PostViewController
 
 -(void)loadData{
-   
+
+//    NSHTTPCookie *cookie;
+//
+//    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+//
+//    for (cookie in [storage cookies])
+//
+//    {
+//
+//        [storage deleteCookie:cookie];
+//
+//    }
+//
+//    //    清除webView的缓存
+//    
+//    [[NSURLCache sharedURLCache] removeAllCachedResponses];
+
     webHttp = [NSString stringWithFormat:[URLFile urlStringForBBSContent],self.tid];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:webHttp]];
+   //清除缓存
+    [[NSURLCache sharedURLCache] removeCachedResponseForRequest:request];
+    //清除cookie
+    for(NSHTTPCookie *cookie in [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]) {
+
+      [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
+    }
+    
     [_webView loadRequest:request];
 }
 
@@ -51,42 +77,56 @@ typedef enum {
 -(void)createWebView{
 
     
-    _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 64, WIDTH, HEIGHT-64)];
+    _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 64, WIDTH, HEIGHT-64-49)];
     _webView.scrollView.delegate = self;
     _webView.delegate = self;
-    
     _webView.backgroundColor = [UIColor clearColor];
- 
+
+   FootCommentView *footView = [[FootCommentView alloc] initWithFrame:CGRectZero];
+    footView.delegate = self;
+    [footView oneButton];
+
     [self.view addSubview:_webView];
+    [self.view addSubview:footView];
+
+    [footView makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(0);
+        make.height.equalTo(49);
+    }];
 }
 
 
 #pragma mark - rightItem
 -(void)crateRigthItem{
-    UIButton *btn = [LHController createButtnFram:CGRectMake(0, 2, 20, 20) Target:self Action:@selector(rightItemClick) Text:nil];
-    [btn setImage:[UIImage imageNamed:@"forum_reply"] forState:UIControlStateNormal];
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 20)];
-    [view addSubview:btn];
-    
-    UIBarButtonItem *item1 = [[UIBarButtonItem alloc] initWithCustomView:view];
-    
+
     UIButton *share = [LHController createButtnFram:CGRectMake(0, 0 , 20, 20) Target:self Action:@selector(rightItemClickShare) Text:nil];
     [share setBackgroundImage:[UIImage imageNamed:@"comment_转发"] forState:UIControlStateNormal];
-    UIBarButtonItem *item2 = [[UIBarButtonItem alloc] initWithCustomView:share];
-    
-    self.navigationItem.rightBarButtonItems = @[item2,item1];
+
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:share];
 }
 
--(void)rightItemClick{
+-(void)rightItemClickShare{
+    CZWShareViewController *share = [[CZWShareViewController alloc] initWithParentViewController:self];
+    share.shareUrl = webHttp;
+    share.shareImage = [UIImage imageNamed:@"Icon-60"];
+    share.shareContent = [_webView stringByEvaluatingJavaScriptFromString:@"document.body.innerText"];
+    share.shareTitle = [_webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    [self presentViewController:share animated:YES completion:nil];
+  
+}
+
+
+#pragma mark - FootCommentViewDelegate
+- (void)clickButton:(NSInteger)slected{
     if (![CZWManager manager].isLogin) {
- 
+
         [self presentViewController:[LoginViewController  instance] animated:YES completion:nil];
         return;
-       
+
     }
-    
+
     ReplyViewController *reply = [[ReplyViewController alloc] init];
-    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:reply];
+    BasicNavigationController *nvc = [[BasicNavigationController alloc] initWithRootViewController:reply];
     reply.Id = self.tid;
     [reply sucess:^{
         [self loadData];
@@ -94,18 +134,6 @@ typedef enum {
     reply.replaytype = replyTypePost;
     [self presentViewController:nvc animated:YES completion:nil];
 }
-
--(void)rightItemClickShare{
-    CZWShareViewController *share = [[CZWShareViewController alloc] initWithParentViewController:self];
-    share.shareUrl = webHttp;
-    share.shareImage = [UIImage imageNamed:@"Icon-60"];
-    NSString *html = @"";
-    if (html.length > 100) html = [html substringToIndex:99];
-    share.shareContent = html;
-    share.shareTitle = [_webView stringByEvaluatingJavaScriptFromString:@"document.title"];
-    [self presentViewController:share animated:YES completion:nil];
-}
-
 
 #pragma mark - UIScrollViewDelegate
 //动画结束
@@ -154,10 +182,12 @@ typedef enum {
     if (navigationType == UIWebViewNavigationTypeLinkClicked) {
         NSRange range = [[URLFile urlStringForBBSContent] rangeOfString:@"?"];
         NSInteger integer = range.location+range.length;
+
         NSString *string = request.URL.absoluteString;
+      
         if (string.length > integer) {
              NSString *str = [string substringFromIndex:integer];
-            str = [str stringByReplacingCharactersInRange:[str rangeOfString:@"#"] withString:@""];
+
             if ([str hasPrefix:@"type=newtopic"]) {
                 NSString *sub = [str substringFromIndex:@"type=newtopic&".length];
                 [self clickWithTtpe:clickTypeNewtopic and:sub];
@@ -193,7 +223,7 @@ typedef enum {
         [self.navigationController pushViewController:write animated:YES];
     }else {
         ReplyViewController *reply = [[ReplyViewController alloc] init];
-        UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:reply];
+        BasicNavigationController *nvc = [[BasicNavigationController alloc] initWithRootViewController:reply];
         reply.Id = string;
         [reply sucess:^{
             [self loadData];

@@ -48,9 +48,17 @@
     serveButton = [self button];
     synthesizeButton = [self button];
 
-    UILabel *qualityLabel = [self labelWithText:@"质量问题"];
-    UILabel *serveLabel = [self labelWithText:@"服务问题"];
-    UILabel *synthesizeLabel = [self labelWithText:@"综合问题"];
+    UILabel *qualityLabel = [self labelWithText:@" 质量问题"];
+    UILabel *serveLabel = [self labelWithText:@" 服务问题"];
+    UILabel *synthesizeLabel = [self labelWithText:@" 综合问题"];
+
+    qualityLabel.userInteractionEnabled = YES;
+    serveLabel.userInteractionEnabled = YES;
+    synthesizeLabel.userInteractionEnabled = YES;
+
+    [qualityLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap1)]];
+    [serveLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap2)]];
+    [synthesizeLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap3)]];
 
     qualityTextField = [[UITextField alloc] init];
     qualityTextField.font = [UIFont systemFontOfSize:15];
@@ -81,6 +89,8 @@
     qualityImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrow"]];
     serveImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrow"]];
 
+
+
     [self.contentView addSubview:nameLabel];
     [self.contentView addSubview:qualityButton];
     [self.contentView addSubview:serveButton];
@@ -110,7 +120,7 @@
     }];
 
     [qualityLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(qualityButton.right).offset(5);
+        make.left.equalTo(qualityButton.right);
         make.centerY.equalTo(qualityButton);
     }];
 
@@ -121,7 +131,7 @@
     }];
 
     [serveLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(serveButton.right).offset(5);
+        make.left.equalTo(serveButton.right);
         make.centerY.equalTo(qualityButton);
     }];
 
@@ -133,7 +143,7 @@
     }];
 
     [synthesizeLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(synthesizeButton.right).offset(5);
+        make.left.equalTo(synthesizeButton.right);
         make.centerY.equalTo(qualityButton);
     }];
 
@@ -154,6 +164,19 @@
         make.height.equalTo(1);
     }];
 }
+
+- (void)tap1{
+    [self buttonClick:qualityButton];
+}
+
+- (void)tap2{
+    [self buttonClick:serveButton];
+}
+
+- (void)tap3{
+    [self buttonClick:synthesizeButton];
+}
+
 
 - (UIButton *)button{
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -228,7 +251,7 @@
         serveTextField.lh_size = CGSizeMake(WIDTH-40, 50);
 
         serveImageView.lh_size = CGSizeMake(20, 20);
-        serveImageView.lh_centerY = serveImageView.lh_centerY;
+        serveImageView.lh_centerY = serveTextField.lh_centerY;
         serveImageView.lh_right = WIDTH-10;
 
         _typeModel.cellHeight = serveTextField.lh_bottom;

@@ -7,7 +7,7 @@
 //
 
 #import "ChooseViewController.h"
-#import "AIMTableViewIndexBar.h"
+#import "MJNIndexView.h"
 
 typedef enum {
     chooseNumberAlone,//单选
@@ -46,14 +46,6 @@ typedef enum {
                                [[ChooseViewModel alloc] initWithID:@"6" title:@"其他问题"]
                                ];
     return @[sectionModel];
-
-    NSArray *array = @[@"服务态度",@"人员技术",@"服务收费",@"承诺不兑现",@"销售欺诈",@"配件争议",@"其他问题"];
-    NSMutableArray *marr = [[NSMutableArray alloc] init];
-    for (int i = 0; i < array.count; i ++) {
-        NSString *ID = [NSString stringWithFormat:@"%d",i];
-        [marr addObject:@{@"id":ID,@"title":array[i]}];
-    }
-    return marr;
 }
 
 //综合投诉
@@ -69,23 +61,15 @@ typedef enum {
                                [[ChooseViewModel alloc] initWithID:@"6" title:@"轮胎"],
                                [[ChooseViewModel alloc] initWithID:@"7" title:@"车身附件及电器"],
                                [[ChooseViewModel alloc] initWithID:@"8" title:@"发动机"],
-                               [[ChooseViewModel alloc] initWithID:@"0" title:@"服务态度"],
-                               [[ChooseViewModel alloc] initWithID:@"1" title:@"人员技术"],
-                               [[ChooseViewModel alloc] initWithID:@"2" title:@"服务收费"],
-                               [[ChooseViewModel alloc] initWithID:@"3" title:@"承诺不兑现"],
-                               [[ChooseViewModel alloc] initWithID:@"4" title:@"销售欺诈"],
-                               [[ChooseViewModel alloc] initWithID:@"5" title:@"配件争议"],
-                               [[ChooseViewModel alloc] initWithID:@"6" title:@"其他问题"]
+                               [[ChooseViewModel alloc] initWithID:@"9" title:@"服务态度"],
+                               [[ChooseViewModel alloc] initWithID:@"10" title:@"人员技术"],
+                               [[ChooseViewModel alloc] initWithID:@"11" title:@"服务收费"],
+                               [[ChooseViewModel alloc] initWithID:@"12" title:@"承诺不兑现"],
+                               [[ChooseViewModel alloc] initWithID:@"13" title:@"销售欺诈"],
+                               [[ChooseViewModel alloc] initWithID:@"14" title:@"配件争议"],
+                               [[ChooseViewModel alloc] initWithID:@"15" title:@"其他问题"]
                                ];
     return @[sectionModel];
-
-    NSArray *array = @[@"发动机",@"变速器",@"离合器",@"转向系统",@"制动系统",@"前后桥及悬挂系统",@"轮胎",@"车身附件及电器",@"服务态度",@"人员技术",@"服务收费",@"承诺不兑现",@"销售欺诈",@"配件争议",@"其他问题"];
-    NSMutableArray *marr = [[NSMutableArray alloc] init];
-    for (int i = 0; i < array.count; i ++) {
-        NSString *ID = [NSString stringWithFormat:@"%d",i];
-        [marr addObject:@{@"id":ID,@"title":array[i]}];
-    }
-    return marr;
 }
 
 @end
@@ -104,7 +88,7 @@ typedef enum {
 
 #pragma mark - class - ChooseViewController
 
-@interface ChooseViewController ()<UITableViewDataSource,UITableViewDelegate,AIMTableViewIndexBarDelegate>
+@interface ChooseViewController ()<UITableViewDataSource,UITableViewDelegate,MJNIndexViewDataSource>
 {
     UIButton *rightItemButton;
     UITableView *_tableView;
@@ -117,6 +101,7 @@ typedef enum {
 @property (nonatomic,assign) UITableViewStyle tabelViewStyle;
 @property (nonatomic,assign) chooseNumber chooseNumbers;
 @property (nonatomic,strong) NSMutableArray *titleArray;//存放多选时被选择的名称
+@property (nonatomic, strong) MJNIndexView *indexView;
 @end
 
 @implementation ChooseViewController
@@ -135,6 +120,7 @@ typedef enum {
 
 -(void)downloadBrand{
     _activity = [self createActivity];
+     __weak __typeof(self)weakSelf = self;
    [HttpRequest GET:[URLFile urlStringForLetter] success:^(id responseObject) {
 
        NSMutableArray *mArray = [[NSMutableArray alloc] init];
@@ -153,8 +139,10 @@ typedef enum {
            [mArray addObject:sectionModel];
        }
        _sectionModels = mArray;
-       [self createIndexView:letterArray];
+
        [_tableView reloadData];
+        weakSelf.indexView.dataSource = self;
+       [weakSelf.view addSubview:weakSelf.indexView];
        [_activity stopAnimating];
 
    } failure:^(NSError *error) {
@@ -162,12 +150,6 @@ typedef enum {
    }];
 }
 
--(void)createIndexView:(NSArray *)array{
-    AIMTableViewIndexBar *indexbar = [[AIMTableViewIndexBar alloc] initWithFrame:CGRectMake(WIDTH-30, 64+30, 30, HEIGHT-60-64) andArray:array];
-    indexbar.indexes = array;
-    indexbar.delegate = self;
-    [self.view addSubview:indexbar];
-}
 
 -(void)downloadSeries:(NSString *)brandID{ 
     _activity = [self createActivity];
@@ -261,10 +243,12 @@ typedef enum {
     self.navigationController.navigationBar.barTintColor = colorLightBlue;
     
     [self createLeftItem];
+
     if (self.chooseNumbers == chooseNumberMany) {
         [self createRightItem];
     }
     [self createTableView];
+    [self firstAttributesForMJNIndexView];
 }
 
 -(void)createLeftItem{
@@ -311,6 +295,32 @@ typedef enum {
         [rightItemButton setTitleColor:RGB_color(200, 200, 200, 1) forState:UIControlStateNormal];
        
     }
+}
+
+- (void)firstAttributesForMJNIndexView
+{
+    self.indexView = [[MJNIndexView alloc]initWithFrame:CGRectMake(0, 64, WIDTH, HEIGHT-64)];
+
+    self.indexView.getSelectedItemsAfterPanGestureIsFinished = YES;
+    self.indexView.font = [UIFont fontWithName:@"HelveticaNeue" size:13.0];
+    self.indexView.selectedItemFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:40.0];
+    self.indexView.backgroundColor = [UIColor clearColor];
+    self.indexView.curtainColor = nil;
+    self.indexView.curtainFade = 0.0;
+    self.indexView.curtainStays = NO;
+    self.indexView.curtainMoves = YES;
+    self.indexView.curtainMargins = NO;
+    self.indexView.ergonomicHeight = NO;
+    self.indexView.upperMargin = 22.0;
+    self.indexView.lowerMargin = 22.0;
+    self.indexView.rightMargin = 10.0;
+    self.indexView.itemsAligment = NSTextAlignmentCenter;
+    self.indexView.maxItemDeflection = 100.0;
+    self.indexView.rangeOfDeflection = 5;
+    self.indexView.fontColor = colorLightBlue;
+    self.indexView.selectedItemFontColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
+    self.indexView.darkening = NO;
+    self.indexView.fading = YES;
 }
 
 -(void)createTableView{
@@ -369,6 +379,26 @@ typedef enum {
 -(void)retrunResults:(returnResult)block{
     self.block = block;
 }
+
+
+#pragma mark - MJNIndexViewDataSource
+- (NSArray *)sectionIndexTitlesForMJNIndexView:(MJNIndexView *)indexView
+{
+    NSMutableArray *letters = [NSMutableArray array];
+    for (ChooseSectionModel *sectionModel in _sectionModels) {
+        if(sectionModel.title)  [letters addObject:sectionModel.title];
+    }
+    return letters;
+
+}
+
+
+- (void)sectionForSectionMJNIndexTitle:(NSString *)title atIndex:(NSInteger)index
+{
+
+    [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:index] atScrollPosition: UITableViewScrollPositionTop animated:self.indexView.getSelectedItemsAfterPanGestureIsFinished];
+}
+
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -469,16 +499,6 @@ typedef enum {
          return 40;
     }
     return 0.0;
-}
-
-#pragma mark - AIMTableViewIndexBarDelegate
-- (void)tableViewIndexBar:(AIMTableViewIndexBar*)indexBar didSelectSectionAtIndex:(NSInteger)index{
-    
-    if ([_tableView numberOfSections] > index && index > -1){   // for safety, should always be YES
-        [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:index]
-                          atScrollPosition:UITableViewScrollPositionTop
-                                  animated:YES];
-    }
 }
 
 

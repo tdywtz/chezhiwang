@@ -124,14 +124,8 @@
 
 #pragma mark - 返回
 -(void)leftItemBackClick{
-    
-    if (self.isRoot) {
-        
-        [self.navigationController popViewControllerAnimated:YES];
-    }else{
-        UIViewController *controller = self.navigationController.viewControllers[self.viewIndex];
-        [self.navigationController popToViewController:controller animated:YES];
-    }
+
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - 跳转我要提问页面
@@ -176,7 +170,7 @@
         if (!showCell) {
             showCell = [[MyAskShowCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"showCell"];
             showCell.selectionStyle = UITableViewCellSelectionStyleNone;
-            showCell.contentView.backgroundColor = colorLineGray;
+            showCell.contentView.backgroundColor = RGB_color(240, 240, 240, 1);
         }
         [showCell setModel:model];
         return showCell;
@@ -191,7 +185,7 @@
     cell.contentView.backgroundColor = [UIColor clearColor];
     if ([model isEqual:openModel]) {
         model.isOpen = YES;
-        cell.contentView.backgroundColor = colorLineGray;
+        cell.contentView.backgroundColor = RGB_color(240, 240, 240, 1);
     }
     cell.model = model;
     

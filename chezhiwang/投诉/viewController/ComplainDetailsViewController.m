@@ -141,9 +141,7 @@
         CZWShareViewController *share = [[CZWShareViewController alloc] initWithParentViewController:self];
         share.shareUrl = self.dict[@"filepath"];
         share.shareImage = shareImage;
-        NSString *html = self.dict[@"content"];
-        if (html.length > 100) html = [html substringToIndex:99];
-        share.shareContent = html;
+        share.shareContent = self.dict[@"content"];
         share.shareTitle = self.dict[@"title"];
         [self presentViewController:share animated:YES completion:nil];
     }

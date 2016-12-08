@@ -170,8 +170,8 @@
         CZWShareViewController *share = [[CZWShareViewController alloc] initWithParentViewController:self];
         share.shareUrl = self.dictionary[@"url"];
         share.shareImage = shareImage;
-        NSString *html = [_webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.innerText"];
-        if (html.length > 100) html = [html substringToIndex:99];
+        NSString *html = [_webView stringByEvaluatingJavaScriptFromString:@"document.body.innerText"];
+
         share.shareContent = html;
         share.shareTitle = self.dictionary[@"title"];
 

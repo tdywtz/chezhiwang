@@ -52,8 +52,6 @@
    
     imageView = [[UIImageView alloc] initWithFrame:CGRectMake(WIDTH-20, 30, 15, 15)];
     imageView.image = [UIImage imageNamed:@"arrowu"];
-   
-  
     
     lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 74, WIDTH, 1)];
     lineView.backgroundColor = colorLineGray;;
@@ -99,10 +97,10 @@
     
    
     if (_model.isOpen) {
-        lineView.backgroundColor = [UIColor whiteColor];
+
         imageView.transform = CGAffineTransformMakeRotation(M_PI);
     }else{
-        lineView.backgroundColor = colorLineGray;
+
         imageView.transform = CGAffineTransformIdentity;
     }
    

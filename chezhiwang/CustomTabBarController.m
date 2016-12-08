@@ -22,6 +22,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+   
   
     HomepageTableViewController      *homepage = [[HomepageTableViewController  alloc] init];
     FindCollectionViewController     *find     = [FindCollectionViewController init];
@@ -37,10 +39,15 @@
 
     self.viewControllers  = @[n1,n2,n3];
     [self createCustomTabBar];
+
+    UILabel *label = [[UILabel alloc] init];
+    label.backgroundColor = [UIColor grayColor];
+    [self.view addSubview:label];
 }
 
 //处理 UITabBarItem
 -(void)createCustomTabBar{
+    self.tabBar.barTintColor = RGB_color(254, 254, 254, 1);
 
     NSArray *array = @[@"首页",@"发现",@"我"];
     NSArray *grays = @[@"auto_tabbar_home_gray",@"auto_tabbar_find_gray",@"auto_tabbar_my_gray"];
@@ -49,9 +56,9 @@
         
         UITabBarItem *item = self.tabBar.items[i];
         item = [item initWithTitle:array[i] image:[self createImageWithName:grays[i]] selectedImage:[self createImageWithName:brights[i]]];
-        
+      
         //设置item字体颜色
-        [item setTitleTextAttributes:@{NSForegroundColorAttributeName:RGB_color(153, 153, 153, 1)} forState:UIControlStateNormal];
+        [item setTitleTextAttributes:@{NSForegroundColorAttributeName:RGB_color(68, 68, 68, 1)} forState:UIControlStateNormal];
         //选中颜色
         [item setTitleTextAttributes:@{NSForegroundColorAttributeName:colorLightBlue} forState:UIControlStateSelected];
     }
