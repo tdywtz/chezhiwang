@@ -68,7 +68,6 @@
 		4D3A1ED61DACBA8A00A9144B /* CommentListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D3A1ED51DACBA8A00A9144B /* CommentListModel.m */; };
 		4D3A1ED91DACD9C700A9144B /* CommentListInitialCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D3A1ED81DACD9C700A9144B /* CommentListInitialCell.m */; };
 		4D3F022B1DE803CA006AFC27 /* CenterCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3F022A1DE803CA006AFC27 /* CenterCommentViewController.swift */; };
-		4D3F022D1DE82094006AFC27 /* NSMutableAttributedString+LHText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3F022C1DE82094006AFC27 /* NSMutableAttributedString+LHText.swift */; };
 		4D50795A1C45E38200656CA8 /* CustomCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5079591C45E38200656CA8 /* CustomCommentView.m */; };
 		4D5204671DD99276001587DB /* ForumHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5204661DD99276001587DB /* ForumHeaderView.m */; };
 		4D52046A1DD99B0E001587DB /* ForumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5204691DD99B0E001587DB /* ForumViewController.m */; };
@@ -310,6 +309,7 @@
 		4DEAE3531DC9A89E00D43D7B /* UIView+LH.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DEAE3521DC9A89E00D43D7B /* UIView+LH.m */; };
 		4DEC27D41DF8EBCF00C64CB9 /* FavouriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DEC27D31DF8EBCF00C64CB9 /* FavouriteViewController.m */; };
 		4DEC27D71DF8EC7300C64CB9 /* FavouriteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DEC27D61DF8EC7300C64CB9 /* FavouriteCell.m */; };
+		4DEC28B11DF9585300C64CB9 /* NSMutableAttributedString+LHText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEC28B01DF9585300C64CB9 /* NSMutableAttributedString+LHText.swift */; };
 		4DEE9EB91DA88DDF00E0ABAC /* NewsTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DEE9EB81DA88DDF00E0ABAC /* NewsTableHeaderView.m */; };
 		4DEF32E31DD9764A0043A411 /* TransitionSegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEF32E01DD9764A0043A411 /* TransitionSegmentView.swift */; };
 		4DEF32E41DD9764A0043A411 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEF32E11DD9764A0043A411 /* UIView+Extension.swift */; };
@@ -500,7 +500,6 @@
 		4D3F02251DE7E406006AFC27 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = "../../Library/Developer/Xcode/DerivedData/chezhiwang-bcpbebwawdhvzycnrtdeldauvqvq/Build/Products/Debug-iphonesimulator/SnapKit/SnapKit.framework"; sourceTree = "<group>"; };
 		4D3F02271DE7E769006AFC27 /* MJRefresh.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MJRefresh.framework; path = "../../Library/Developer/Xcode/DerivedData/chezhiwang-bcpbebwawdhvzycnrtdeldauvqvq/Build/Products/Debug-iphonesimulator/MJRefresh/MJRefresh.framework"; sourceTree = "<group>"; };
 		4D3F022A1DE803CA006AFC27 /* CenterCommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenterCommentViewController.swift; sourceTree = "<group>"; };
-		4D3F022C1DE82094006AFC27 /* NSMutableAttributedString+LHText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+LHText.swift"; sourceTree = "<group>"; };
 		4D5079581C45E38200656CA8 /* CustomCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCommentView.h; sourceTree = "<group>"; };
 		4D5079591C45E38200656CA8 /* CustomCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCommentView.m; sourceTree = "<group>"; };
 		4D5204651DD99276001587DB /* ForumHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForumHeaderView.h; sourceTree = "<group>"; };
@@ -869,6 +868,7 @@
 		4DEC27D31DF8EBCF00C64CB9 /* FavouriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouriteViewController.m; sourceTree = "<group>"; };
 		4DEC27D51DF8EC7300C64CB9 /* FavouriteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouriteCell.h; sourceTree = "<group>"; };
 		4DEC27D61DF8EC7300C64CB9 /* FavouriteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouriteCell.m; sourceTree = "<group>"; };
+		4DEC28B01DF9585300C64CB9 /* NSMutableAttributedString+LHText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+LHText.swift"; sourceTree = "<group>"; };
 		4DEE9EB71DA88DDF00E0ABAC /* NewsTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsTableHeaderView.h; sourceTree = "<group>"; };
 		4DEE9EB81DA88DDF00E0ABAC /* NewsTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsTableHeaderView.m; sourceTree = "<group>"; };
 		4DEF32E01DD9764A0043A411 /* TransitionSegmentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionSegmentView.swift; sourceTree = "<group>"; };
@@ -1340,15 +1340,6 @@
 				4D555FBF1D1146720091ED2E /* CZWLabel.m */,
 			);
 			path = CZWLabel;
-			sourceTree = "<group>";
-		};
-		4D3F02291DE7FE53006AFC27 /* swift */ = {
-			isa = PBXGroup;
-			children = (
-				4D3F022C1DE82094006AFC27 /* NSMutableAttributedString+LHText.swift */,
-			);
-			name = swift;
-			path = ../../../swift;
 			sourceTree = "<group>";
 		};
 		4D7979151BA8F7A900DC147D /* 评论列表 */ = {
@@ -1899,7 +1890,7 @@
 		4DCDDE6D1D9E3AA900AE4446 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				4D3F02291DE7FE53006AFC27 /* swift */,
+				4DEC28AF1DF9584B00C64CB9 /* swift */,
 				4DEF32DE1DD9764A0043A411 /* TransitionSegmentView */,
 				4DF0EA7C1DBE0E9400EFAE58 /* TwitterCover */,
 				4DF0EA6C1DBDA5AD00EFAE58 /* basic */,
@@ -2175,6 +2166,14 @@
 				4DEC27D31DF8EBCF00C64CB9 /* FavouriteViewController.m */,
 			);
 			path = viewController;
+			sourceTree = "<group>";
+		};
+		4DEC28AF1DF9584B00C64CB9 /* swift */ = {
+			isa = PBXGroup;
+			children = (
+				4DEC28B01DF9585300C64CB9 /* NSMutableAttributedString+LHText.swift */,
+			);
+			path = swift;
 			sourceTree = "<group>";
 		};
 		4DEF32DE1DD9764A0043A411 /* TransitionSegmentView */ = {
@@ -2787,6 +2786,7 @@
 				4DFFA5081DB77308003B6178 /* StarView.m in Sources */,
 				4D87CE621C0324E000466A97 /* LHPickerView.m in Sources */,
 				4DCB17541D5C5CFD005C2E76 /* CehicleChooseViewController.m in Sources */,
+				4DEC28B11DF9585300C64CB9 /* NSMutableAttributedString+LHText.swift in Sources */,
 				4DF0EA631DBDA4FF00EFAE58 /* CZWManager.m in Sources */,
 				4D259DE81DF4FA570039AE2B /* MyCommentModel.m in Sources */,
 				4D52046A1DD99B0E001587DB /* ForumViewController.m in Sources */,
@@ -2881,7 +2881,6 @@
 				4D5204671DD99276001587DB /* ForumHeaderView.m in Sources */,
 				4DD30C6D1D20C0E7009C3B05 /* NewsTestViewController.m in Sources */,
 				4D259E111DF557370039AE2B /* ComplainDrawView.m in Sources */,
-				4D3F022D1DE82094006AFC27 /* NSMutableAttributedString+LHText.swift in Sources */,
 				4D2578EA1DD436B9007FC971 /* CZWShowImageView.m in Sources */,
 				4D2ABA3A1CFC17A8003F72BA /* MyAskShowCell.m in Sources */,
 				4DD30C6C1D20C0E7009C3B05 /* NewsSearchViewController.m in Sources */,
