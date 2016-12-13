@@ -9,7 +9,6 @@
 #import "ContrastChartViewController.h"
 #import "ChartView.h"
 #import "StarView.h"
-#import "LHLabel.h"
 
 @interface ContrastChartViewController ()
 {

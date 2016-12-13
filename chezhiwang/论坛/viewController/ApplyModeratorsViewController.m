@@ -572,7 +572,7 @@
             }
         }
         else if (num == 3){
-            for (NSDictionary *dict in responseObject) {
+            for (NSDictionary *dict in responseObject[@"rel"]) {
                 [_pickDataArray addObject:@{@"id":dict[@"id"],@"name":dict[@"name"]}];
             }
         }

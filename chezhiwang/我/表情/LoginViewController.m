@@ -155,8 +155,8 @@
 -(void)submitNmae:(NSString *)name andPassword:(NSString *)pass{
 
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-    dict[@"uname"] = name;
-    dict[@"psw"] = pass;
+    dict[@"uname"] = [name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    dict[@"psw"] = [pass stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     [HttpRequest POST:[URLFile urlStringForLogin] parameters:dict success:^(id responseObject) {
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
 
@@ -164,17 +164,9 @@
         if (responseObject == nil) {
             [LHController alert:@"登录失败"];
         }else if (str != nil){
-            if ([str isEqualToString:@"1"]) {
-                [LHController alert:@"用户名或密码错误"];
-            }else if([str isEqualToString:@"2"]){
-                [LHController alert:@"密码错误"];
 
-            }else if ([str isEqualToString:@"3"]){
-                [LHController alert:@"用户名不存在"];
-            }
-            else{
-                [LHController alert:@"因发布非法信息，您的账号已封停"];
-            }
+                [LHController alert:str];
+
         }else{
             [[CZWManager manager] loginWithDictionary:responseObject];
             [[CZWManager manager] storagePassword:pass];

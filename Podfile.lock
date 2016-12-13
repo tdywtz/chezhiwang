@@ -25,8 +25,18 @@ PODS:
   - SDWebImage/Core (3.8.1)
   - TTTAttributedLabel (1.13.4)
   - UMengAnalytics-NO-IDFA (4.1.1)
+  - UMengUShare/Core (6.1):
+    - UMengUShare/Network
+  - UMengUShare/Network (6.1)
+  - UMengUShare/Social/QQ (6.1):
+    - UMengUShare/Core
+  - UMengUShare/Social/Sina (6.1):
+    - UMengUShare/Core
+  - UMengUShare/Social/WeChat (6.1):
+    - UMengUShare/Core
   - VBFPopFlatButton (0.0.7):
     - pop
+  - YYText (1.0.7)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.1.0)
@@ -39,7 +49,11 @@ DEPENDENCIES:
   - SDWebImage (~> 3.8.1)
   - TTTAttributedLabel
   - UMengAnalytics-NO-IDFA (~> 4.1.1)
+  - UMengUShare/Social/QQ (~> 6.1)
+  - UMengUShare/Social/Sina (~> 6.1)
+  - UMengUShare/Social/WeChat (~> 6.1)
   - VBFPopFlatButton
+  - YYText (~> 1.0.7)
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -52,8 +66,10 @@ SPEC CHECKSUMS:
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
   UMengAnalytics-NO-IDFA: 1064992c1b7aaa22823179c0b33a664813fd7a85
+  UMengUShare: 6c3902a68a06d01031bed6f426e97b89d4fc504f
   VBFPopFlatButton: 39e48ab56277f3d056734a9b5ec5d0cc60d69778
+  YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 3086e2163682a809e89b687b911d62a53d8d0696
+PODFILE CHECKSUM: 7aab7c878013bee0b446951a47e08f425d43d641
 
 COCOAPODS: 1.1.1

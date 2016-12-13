@@ -30,9 +30,9 @@
         self.titleLabel.layer.borderColor = colorYellow.CGColor;
         self.titleLabel.layer.cornerRadius = 4;
         self.titleLabel.layer.masksToBounds = YES;
-        
+
         [self.contentView addSubview:self.titleLabel];
-     
+
         [self.titleLabel makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(UIEdgeInsetsZero);
         }];
@@ -69,20 +69,20 @@
         self.textView.layer.borderWidth = 1;
         self.textView.textAlignment = NSTextAlignmentLeft;
         [self.contentView addSubview:self.textView];
-        
+
         [self.textView makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(UIEdgeInsetsZero);
         }];
-        
-         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewChange:) name:UITextViewTextDidChangeNotification object:nil];
+
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewChange:) name:UITextViewTextDidChangeNotification object:nil];
     }
     return self;
 }
 
 -(void)textViewChange:(NSNotification *)notification{
- 
+
     [self.parentController.dictionary setObject:self.textView.text forKey:self.dataKey];
- 
+
 }
 
 @end
@@ -103,29 +103,29 @@
         self.titleLabel = [[UILabel alloc] init];
         self.titleLabel.font = [UIFont systemFontOfSize:17];
         self.titleLabel.textColor = colorBlack;
-        
+
         UIView *grayView = [[UIView alloc] init];
         grayView.backgroundColor = colorLineGray;
-        
+
         UIView *blueView = [[UIView alloc] init];
         blueView.backgroundColor = colorDeepBlue;
-        
+
         [self addSubview:self.titleLabel];
         [self addSubview:grayView];
         [self addSubview:blueView];
-        
+
         [self.titleLabel makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(10);
             make.bottom.equalTo(-5);
         }];
-        
+
         [grayView makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(10);
             make.right.equalTo(-10);
             make.bottom.equalTo(0);
             make.height.equalTo(1);
         }];
-        
+
         [blueView makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(10);
             make.bottom.equalTo(0);
@@ -178,29 +178,29 @@
         for (NSDictionary *dict in responseObject[@"rel"]) {
             [_dataArray addObject:dict];
         }
-       [weakSelf.collectionView reloadData];
+        [weakSelf.collectionView reloadData];
     } failure:^(NSError *error) {
-        
+
     }];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+
     self.title = @"申请撤诉";
-    
+
     [self createCollectionView];
 
     [self.collectionView reloadData];
     [self loadData];
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 
 -(void)keyboardWillShow:(NSNotification *)notification{
-    
+
     CGFloat height = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
     [self.collectionView updateConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(-height);
@@ -215,15 +215,15 @@
 
 - (void)createCollectionView{
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    
+
     [layout setScrollDirection:UICollectionViewScrollDirectionVertical];
-    
+
     _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
     _collectionView.delegate = self;
     _collectionView.dataSource = self;
     _collectionView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_collectionView];
-    
+
     [_collectionView registerClass:[RevokeComplainCell class] forCellWithReuseIdentifier:@"RevokeComplainCell"];
     [_collectionView registerClass:[RevokeComplainTextViewCell class] forCellWithReuseIdentifier:@"RevokeComplainTextViewCell"];
     [_collectionView registerClass:[CellHederView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"CellHederView"];
@@ -240,50 +240,47 @@
     }
     if ([self.dictionary[keyName] isEqualToString:@"其他"]){
         if ([self hasChar:self.dictionary[keyOther]]== NO){
-             [LHController alert:@"请输入其他原因"];
+            [LHController alert:@"请输入其他原因"];
             return;
         }
 
     }
     if ([self hasChar:self.dictionary[keyReason]] == NO){
-         [LHController alert:@"请输入撤诉理由"];
+        [LHController alert:@"请输入撤诉理由"];
         return;
     }
-       
-     
-        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-        [dict setObject:self.cpid forKey:@"cpid"];
-        [dict setObject:self.dictionary[keyId] forKey:@"type"];
-        if ([self.dictionary[keyName] isEqualToString:@"其他"]) {
-             [dict setObject:self.dictionary[keyOther] forKey:@"otherCase"];
-        }else{
-            [dict setObject:@"" forKey:@"otherCase"];
 
+
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+
+    dict[@"cpid"] = self.cpid;
+    dict[@"type"] = self.dictionary[keyId];
+    dict[@"otherCase"] = self.dictionary[keyName];
+    dict[@"reason"] = self.dictionary[keyReason];
+
+
+    [HttpRequest POST:[URLFile urlStringForCancelComplain] parameters:dict success:^(id responseObject) {
+
+        NSString *title = responseObject[@"success"]?responseObject[@"success"]:responseObject[@"error"];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                        message:nil
+                                                       delegate:nil
+                                              cancelButtonTitle:nil
+                                              otherButtonTitles:nil, nil];
+        [alert show];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.0f*NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            [alert dismissWithClickedButtonIndex:0 animated:YES];
+        });
+        if (responseObject[@"success"]) {
+            if (self.success) {
+                self.success();
+            }
+            [self.navigationController popViewControllerAnimated:YES];
         }
-        [dict setObject:self.dictionary[keyReason] forKey:@"reason"];
-       [HttpRequest POST:[URLFile urlStringForCancelComplain] parameters:dict success:^(id responseObject) {
-           if ([responseObject count] == 0) {
-               return ;
-           }
-           UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[responseObject firstObject][@"result"]
-                                                           message:nil
-                                                          delegate:nil
-                                                 cancelButtonTitle:nil
-                                                 otherButtonTitles:nil, nil];
-           [alert show];
-           dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1.0f*NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-               [alert dismissWithClickedButtonIndex:0 animated:YES];
-           });
-           if ([[responseObject firstObject][@"result"] isEqualToString:@"撤诉成功"]) {
-               if (self.success) {
-                   self.success();
-               }
-               [self.navigationController popViewControllerAnimated:YES];
-           }
 
-       } failure:^(NSError *error) {
-           
-       }]; 
+    } failure:^(NSError *error) {
+
+    }];
 }
 
 -(BOOL)hasChar:(NSString *)string{
@@ -292,7 +289,7 @@
     }
     string = [string stringByReplacingOccurrencesOfString:@" " withString:@""];
     string = [string stringByReplacingOccurrencesOfString:@"\n" withString:@""];
- 
+
     return  [@(string.length) boolValue];
 }
 
@@ -320,21 +317,21 @@
 
 // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    
+
     if (indexPath.section == 0) {
         RevokeComplainCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"RevokeComplainCell" forIndexPath:indexPath];
         NSDictionary *dict = (NSDictionary *)self.dataArray[indexPath.row];
-      
+
         cell.titleLabel.text = dict[keyName];
         if ([cell.titleLabel.text isEqualToString:self.dictionary[keyName]]) {
             cell.titleLabel.backgroundColor = colorYellow;
             cell.titleLabel.textColor = [UIColor whiteColor];
-           
+
         }else{
             cell.titleLabel.backgroundColor = [UIColor clearColor];
             cell.titleLabel.textColor = colorDeepGray;
         }
-       
+
         return cell;
 
     }else if (indexPath.section == 1){
@@ -353,7 +350,7 @@
         cell.parentController = self;
         return cell;
     }
-  
+
     RevokeComplainCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"RevokeComplainCell" forIndexPath:indexPath];
     cell.titleLabel.text = @"提交";
     cell.titleLabel.backgroundColor = colorYellow;
@@ -364,19 +361,19 @@
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
 
 
-    
+
     if (kind == UICollectionElementKindSectionHeader){
         if (indexPath.section == 1 || indexPath.section == 3){
             return nil;
         }
-         CellHederView *reusableview  = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"CellHederView" forIndexPath:indexPath];
+        CellHederView *reusableview  = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"CellHederView" forIndexPath:indexPath];
         if (indexPath.section == 0) {
             reusableview.titleLabel.text = @"处理结果";
-          
+
         }else if (indexPath.section == 2){
             reusableview.titleLabel.text = @"撤诉理由";
         }
-       
+
         return reusableview;
     }
     return nil;
@@ -394,10 +391,10 @@
         RevokeComplainCell *cell = (RevokeComplainCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
         [self.dictionary setObject:cell.titleLabel.text forKey:keyName];
         [self.dictionary setObject:self.dataArray[indexPath.row][keyId] forKey:keyId];
-        
+
         [self.collectionView reloadData];
     }else if (indexPath.section == 3){
-    
+
         [self submitData];
     }
 }
@@ -406,13 +403,13 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
-         return CGSizeMake(self.view.frame.size.width/2-15, 40);
+        return CGSizeMake(self.view.frame.size.width/2-15, 40);
     }else if (indexPath.section == 1){
-         return CGSizeMake(self.view.frame.size.width-20, 80);
+        return CGSizeMake(self.view.frame.size.width-20, 80);
     }else if (indexPath.section == 2){
-         return CGSizeMake(self.view.frame.size.width-20, 120);
+        return CGSizeMake(self.view.frame.size.width-20, 120);
     }else{
-         return CGSizeMake(self.view.frame.size.width-20, 40);
+        return CGSizeMake(self.view.frame.size.width-20, 40);
     }
 }
 
@@ -444,13 +441,13 @@
 
 
 /*
-#pragma mark - Navigation
+ #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

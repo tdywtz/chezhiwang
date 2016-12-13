@@ -39,10 +39,6 @@
 
     self.viewControllers  = @[n1,n2,n3];
     [self createCustomTabBar];
-
-    UILabel *label = [[UILabel alloc] init];
-    label.backgroundColor = [UIColor grayColor];
-    [self.view addSubview:label];
 }
 
 //处理 UITabBarItem

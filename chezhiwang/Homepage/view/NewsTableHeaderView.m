@@ -13,7 +13,6 @@
 #import "AnswerDetailsViewController.h"
 #import "AdvertisementViewController.h"
 
-
 @interface NewsTableHeaderImageView : UIImageView
 
 @property (nonatomic,strong) NSDictionary *dictionary;
@@ -25,10 +24,10 @@
 
 @end
 
-@interface NewsTableHeaderView ()<LHLabelDelegate,LHPageViewDataSource,LHPageViewDelegate>
+@interface NewsTableHeaderView ()<LHPageViewDataSource,LHPageViewDelegate>
 
 @property (nonatomic,strong) UIButton *buttonTop;
-@property (nonatomic,strong) LHLabel  *toplabel;
+@property (nonatomic,strong) YYLabel  *toplabel;
 
 @property (nonatomic,strong) UIPageControl *pageControll;
 @property (nonatomic,strong) LHPageView *pageView;
@@ -59,15 +58,13 @@
     [self.buttonTop setTitleColor:RGB_color(237, 27, 36, 1) forState:UIControlStateNormal];
     
 
-    self.toplabel = [[LHLabel alloc] init];
+    self.toplabel = [[YYLabel alloc] init];
     self.toplabel.textAlignment = kCTTextAlignmentCenter;
     self.toplabel.textColor = RGB_color(119, 119, 119, 1);
-    self.toplabel.linkColor = RGB_color(119, 119, 119, 1);
     self.toplabel.numberOfLines = 1;
     self.toplabel.preferredMaxLayoutWidth = WIDTH-20;
     self.toplabel.font = [UIFont systemFontOfSize:PT_FROM_PX(18)];
-    self.toplabel.delegate = self;
-
+    self.toplabel.textAlignment = NSTextAlignmentCenter;
 
     self.pageView = [[LHPageView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 300) space:0];
     self.pageView.delegate = self;
@@ -158,9 +155,31 @@
         NSString *text1 = _pointNews[1][@"title"];
         NSString *text2 = _pointNews[2][@"title"];
         NSString *text = [NSString stringWithFormat:@"[%@]    [%@]",text1,text2];
-        self.toplabel.text = text;
-        [self.toplabel addData:_pointNews[1] range:[text rangeOfString:text1]];
-        [self.toplabel addData:_pointNews[2] range:[text rangeOfString:text2]];
+
+        NSMutableAttributedString *one = [[NSMutableAttributedString alloc] initWithString:text];
+        one.yy_color = RGB_color(119, 119, 119, 1);
+        one.yy_font = [UIFont systemFontOfSize:PT_FROM_PX(18)];
+
+        __weak __typeof(self)weakSelf = self;
+        YYTextHighlight *highlight1 = [YYTextHighlight new];
+        [highlight1 setColor:colorLightBlue];
+        highlight1.tapAction = ^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect) {
+            [weakSelf pushWithDict:_pointNews[1]];
+        };
+
+
+        YYTextHighlight *highlight2 = [YYTextHighlight new];
+        [highlight2 setColor:colorLightBlue];
+        highlight2.tapAction = ^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect) {
+            [weakSelf pushWithDict:_pointNews[2]];
+        };
+
+
+
+        [one yy_setTextHighlight:highlight1 range:[text rangeOfString:text1]];
+        [one yy_setTextHighlight:highlight2 range:[text rangeOfString:text2]];
+
+        self.toplabel.attributedText = one;
     }
 
 }
@@ -307,14 +326,6 @@
     //设置title
     NewsTableHeaderImageView *imageView = (NewsTableHeaderImageView *)previousView;
     self.imageTitleLabel.text = imageView.dictionary[@"title"];
-}
-
-
-#pragma mark - LHLabelDelegate
-- (void)storage:(LHLabelTextStorage *)storage{
-
-    NSDictionary *dict = storage.returnData;
-    [self pushWithDict:dict];
 }
 
 /*

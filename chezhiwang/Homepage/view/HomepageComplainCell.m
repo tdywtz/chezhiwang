@@ -245,7 +245,7 @@
     }];
 
     [dateLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(cpidLabel.right).offset(10);
+        make.left.equalTo(WIDTH/3+20);
         make.centerY.equalTo(cpidLabel);
     }];
 

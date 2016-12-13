@@ -17,20 +17,31 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+
+
     UIWebView *webView = [[UIWebView alloc] initWithFrame:self.view.frame];
     webView.delegate = self;
-    NSURL *url = [NSURL URLWithString:@"http://m.12365auto.com/user/agreeForIOS.shtml"];
+    NSURL *url = [NSURL URLWithString:[URLFile urlStringRegistrationAgreement]];
     [ webView setScalesPageToFit:YES];
     webView.pageLength = 10;
+    [self.view addSubview:webView];
     
-    NSData *data = [NSData dataWithContentsOfURL:url];
-    [webView loadData:data MIMEType:@"text/html" textEncodingName:@"GBK" baseURL:nil];
+//    NSData *data = [NSData dataWithContentsOfURL:url];
+//    [webView loadData:data MIMEType:@"text/html" textEncodingName:@"GBK" baseURL:nil];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];
-    [self.view addSubview:webView];
+
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
 
+#pragma mark - UIWebViewDelegate
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+}
 
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

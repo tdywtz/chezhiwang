@@ -107,7 +107,7 @@
     }else{
         btnView.titles = nil;
     }
-
+  
     titleLabel.lh_width = WIDTH - 20;
     [titleLabel sizeToFit];
     titleLabel.lh_left = 10;
@@ -273,13 +273,14 @@
     __weak __typeof(self)weakSelf = self;
     NSString *url  =[NSString stringWithFormat:[URLFile urlStringFor_mytsbyid],self.Cpid];
     [HttpRequest GET:url success:^(id responseObject) {
+
         if ([responseObject[@"rel"] isKindOfClass:[NSArray class]] == NO) {
             return ;
         }
         if ([responseObject[@"rel"] count] == 0) {
             return;
         }
-     
+
         weakSelf.model = [MyComplainModel mj_objectWithKeyValues:responseObject[@"rel"][0]];
         [detailsHeaderView setModel:weakSelf.model];
         [promtView setModel:weakSelf.model];
@@ -427,7 +428,7 @@
 -(void)submitStar:(NSInteger)star{
 
 
-    NSString *url = [NSString stringWithFormat:[URLFile urlStringForComplainScore],self.Cpid,star+1];
+    NSString *url = [NSString stringWithFormat:[URLFile urlStringForComplainScore],self.Cpid,star];
     [HttpRequest GET:url success:^(id responseObject) {
 
         [self loadHeaderData];

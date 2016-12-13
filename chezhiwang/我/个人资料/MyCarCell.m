@@ -101,13 +101,25 @@
         [self.contentView addSubview:sexView];
         
         UIButton *manBtn = [LHController createButtnFram:CGRectMake(0, 5, 30, 30) Target:self Action:@selector(manClick:)];
+        [manBtn setTitleColor:colorLightGray forState:UIControlStateNormal];
+        [manBtn setTitle:@"•" forState:UIControlStateSelected];
+        manBtn.layer.cornerRadius = 30/1.7/2;
+        manBtn.layer.masksToBounds = YES;
+        manBtn.layer.borderWidth = 1;
+        manBtn.layer.borderColor = colorLineGray.CGColor;
         manBtn.tag = 101;
         [sexView addSubview:manBtn];
         
         UILabel *manLabel = [LHController createLabelWithFrame:CGRectMake(manBtn.frame.origin.x+manBtn.frame.size.width+3, 10, 20, 20) Font:B Bold:NO TextColor:[UIColor grayColor] Text:@"男"];
         [sexView addSubview:manLabel];
-        
+
         UIButton *womenBtn = [LHController createButtnFram:CGRectMake(manLabel.frame.origin.x+manLabel.frame.size.width+10,5, 30, 30) Target:self Action:@selector(womenClick:)];
+         [womenBtn setTitle:@"•" forState:UIControlStateSelected];
+        [womenBtn setTitleColor:colorLightGray forState:UIControlStateNormal];
+        womenBtn.layer.cornerRadius = 30/1.7/2;
+        womenBtn.layer.masksToBounds = YES;
+        womenBtn.layer.borderWidth = 1;
+        womenBtn.layer.borderColor = colorLineGray.CGColor;
         womenBtn.tag = 102;
         [sexView addSubview:womenBtn];
         UILabel *womenLabel = [LHController createLabelWithFrame:CGRectMake(womenBtn.frame.origin.x+womenBtn.frame.size.width+3,10, 20, 20) Font:B Bold:NO TextColor:[UIColor grayColor] Text:@"女"];

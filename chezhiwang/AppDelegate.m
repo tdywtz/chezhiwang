@@ -31,6 +31,7 @@
     CustomTabBarController *cus = [[CustomTabBarController alloc] init];
     _window.rootViewController = cus;
 
+
     //友盟统计
     [self um_analyics];
     //友盟分享
@@ -88,7 +89,6 @@
 #if DEBUG
     return;
 #endif
-
 
     UMConfigInstance.appKey = @"55f8e766e0f55a5cb5001444";
     UMConfigInstance.channelId = @"";

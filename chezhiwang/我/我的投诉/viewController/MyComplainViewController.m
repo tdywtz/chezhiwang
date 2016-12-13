@@ -41,7 +41,7 @@
           [_dataArray removeAllObjects];
       }
       [_tableView.mj_header endRefreshing];
-      if ([responseObject count] == 0) {
+      if ([responseObject[@"rel"] count] == 0) {
           [_tableView.mj_footer endRefreshingWithNoMoreData];
       }else{
           [_tableView.mj_footer endRefreshing];

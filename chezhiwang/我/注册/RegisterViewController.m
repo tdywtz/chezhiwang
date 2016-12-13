@@ -233,8 +233,8 @@
         [ webView setScalesPageToFit:YES];
         webView.pageLength = 10;
         
-        NSData *data = [NSData dataWithContentsOfURL:url];
-        [webView loadData:data MIMEType:@"text/html" textEncodingName:@"GBK" baseURL:nil];
+       // NSData *data = [NSData dataWithContentsOfURL:url];
+      //  [webView loadData:data MIMEType:@"text/html" textEncodingName:@"GBK" baseURL:nil];
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         [webView loadRequest:request];
         [serverView addSubview:webView];

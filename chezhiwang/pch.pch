@@ -10,7 +10,7 @@
 
 #import "LHController.h"
 #import "HttpRequest.h"
-#import "LHLabel.h"
+#import <YYText.h>
 #import "CZWLabel.h"
 #import "UIViewController+LH.h"
 #import "NSString-Helper.h"

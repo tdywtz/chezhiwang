@@ -118,8 +118,12 @@
     
     NSString *url = [NSString stringWithFormat:[URLFile urlStringForUpdatePWD],[CZWManager manager].userID,oldPassword.text,newPassword.text];
    [HttpRequest GET:url success:^(id responseObject) {
-       NSString *str = [[responseObject objectAtIndex:0] objectForKey:@"result"];
-       [self alert:str];
+       if (responseObject[@"success"]) {
+            [self alert:responseObject[@"success"]];
+       }else{
+            [self alert:responseObject[@"error"]];
+       }
+
 
    } failure:^(NSError *error) {
        
@@ -179,16 +183,6 @@
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     temp = textField.frame.origin.y+textField.frame.size.height;
     return YES;
-}
-
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-   [MobClick beginLogPageView:@"PageOne"];
-}
-
--(void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"PageOne"];
 }
 
 - (void)didReceiveMemoryWarning {

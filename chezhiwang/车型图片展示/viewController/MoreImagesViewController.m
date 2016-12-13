@@ -14,7 +14,7 @@
 {
     UICollectionView *_collectionView;
 }
-@property (nonatomic,strong) LHLabel *modelnameLabel;
+@property (nonatomic,strong) CZWLabel *modelnameLabel;
 
 @end
 
@@ -24,7 +24,7 @@
     [super viewDidLoad];
     [self createLeftItemBack];
 
-    _modelnameLabel = [[LHLabel alloc] init];
+    _modelnameLabel = [[CZWLabel alloc] init];
     _modelnameLabel.font = [UIFont systemFontOfSize:15];
     _modelnameLabel.textColor = colorDeepGray;
     _modelnameLabel.text = self.modelname;

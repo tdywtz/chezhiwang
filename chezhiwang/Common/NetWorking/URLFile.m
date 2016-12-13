@@ -10,13 +10,8 @@
 
 @implementation URLFile
 
-+ (NSString *)stringWithBasic:(NSString *)actString{
-
-    return [NSString stringWithFormat:@"%@%@%@",[self prefixString],@"/server/forAppWebService.ashx?",actString];
-}
 
 /**车质网专用*/
-
 + (NSString *)stringForCZWServiceWithAct:(NSString *)act{
     return [NSString stringWithFormat:@"%@%@%@",[self prefixString],@"/AppServer/forCZWService.ashx?",act];
 }
@@ -24,10 +19,6 @@
 /**公用*/
 + (NSString *)stringForCommonServiceWithAct:(NSString *)act{
     return [NSString stringWithFormat:@"%@%@%@",[self prefixString],@"/AppServer/forCommonService.ashx?",act];
-}
-
-+ (NSString *)stringForCommon:(NSString *)act{
-    return [NSString stringWithFormat:@"%@%@%@",[self prefixString],@"/server/forCommonService.ashx?",act];
 }
 
 
@@ -45,7 +36,6 @@
 /**注册协议*/
 + (NSString *)urlStringRegistrationAgreement{
     return [NSString stringWithFormat:@"%@%@",[self prefixString],@"/user/agreeForIOS.shtml"];
-
 }
 
 //广告
@@ -61,7 +51,7 @@
 
 /**注册*/
 + (NSString *)urlStringForRegister{
-    return [self stringWithBasic:@"act=reg"];
+    return [self stringForCommonServiceWithAct:@"act=reg"];
 }
 
 #pragma mark- 车型图片
@@ -107,11 +97,6 @@
 
     return [self stringForCZWServiceWithAct:@"act=newsinfo&id=%@&type=%@"];
 }
-
-///**新闻详情（新车调查）*/
-//+ (NSString *)urlString_carownerinfo{
-//    return [self stringWithBasic:@"act=carownerinfo&id=%@"];
-//}
 
 /**精品试驾list*/
 + (NSString *)urlString_testDrive{
@@ -224,8 +209,9 @@
 
 /**我要提问*/
 + (NSString *)urlStringForEditZJDY{
-    return  [self stringWithBasic:@"act=editZJDY"];
+    return  [self stringForCommonServiceWithAct:@"act=editZJDY"];
 }
+
 /**答疑详情*/
 + (NSString *)urlStringForGetZJDY{
     return [self stringForCommonServiceWithAct:@"act=zjdyinfo&id=%@"];
@@ -239,10 +225,6 @@
 /**帖子内容*/
 + (NSString *)urlStringForBBSContent{
     return [NSString stringWithFormat:@"%@%@",[self prefixString],@"/AppServer/forBBSContent.aspx?tid=%@"];
-}
-/**论坛车系品牌*/
-+ (NSString *)urlStringForOtherSeries{
-    return  [self stringWithBasic:@"act=otherseries"];
 }
 
 /**论坛分类->品牌论坛->指定论坛*/
@@ -286,12 +268,12 @@
 #pragma mark-个人中心
 /**获取用户信息*/
 + (NSString *)urlStringForUser{
-    return [self stringWithBasic:@"act=user&uid=%@"];
+    return [self stringForCommonServiceWithAct:@"act=user&uid=%@"];
 }
 
 /**个人中心*/
 + (NSString *)urlStringForPersonalCount{
-    return [self stringWithBasic:@"act=personalCount&uname=%@&psw=%@"];
+    return [self stringForCommonServiceWithAct:@"act=personalCount&uid=%@"];
 }
 
 
@@ -299,49 +281,48 @@
 + (NSString *)urlStringForMyTS{
     return [self stringForCommonServiceWithAct:@"act=mytslist&uid=%@&p=%ld&s=10"];
 }
-/***/
+/**根据cpid获取一条投诉进度信息*/
 + (NSString *)urlStringFor_mytsbyid{
     return [self stringForCommonServiceWithAct:@"act=mytslist&cpid=%@"];
 }
-
 
 /**个人中心根据cpid获取投诉详情*/
 + (NSString *)urlStringForDetail{
     return [self stringForCommonServiceWithAct:@"act=tsdetail&cpid=%@"];
 }
 
-/**插卡撤诉未成功原因*/
+/**查看撤诉未成功原因*/
 + (NSString *)urlString_delComNoReason{
-    return [self stringWithBasic:@"act=delComNoReason&cpid=%@"];
+    return [self stringForCommonServiceWithAct:@"act=delComNoReason&cpid=%@"];
 }
 
 /**申请撤诉-原因选择列表*/
 + (NSString *)urlString_delComTypeList{
-    return [self stringWithBasic:@"act=delComTypeList"];
+    return [self stringForCommonServiceWithAct:@"act=delComTypeList"];
 }
 
 
-/**我的评论*/
+/**提交评分*/
 + (NSString *)urlStringForComplainScore{
-    return [self stringWithBasic:@"act=complainscore&cpid=%@&score=%ld"];
+    return [self stringForCommonServiceWithAct:@"act=complainscore&cpid=%@&score=%ld"];
 }
 
 
 /**修改密码*/
 + (NSString *)urlStringForUpdatePWD{
-    return [self stringWithBasic:@"act=updatepwd&uid=%@&oldpwd=%@&newpwd=%@"];
+    return [self stringForCommonServiceWithAct:@"act=updatepwd&uid=%@&oldpwd=%@&newpwd=%@"];
 }
 
 
 /**申请撤诉*/
 + (NSString *)urlStringForCancelComplain{
-    return [self stringWithBasic:@"act=cancelComplain"];
+    return [self stringForCommonServiceWithAct:@"act=cancelComplain"];
 }
 
 
 /**获取地区*/
 + (NSString *)urlStringForGetPersonalAddress{
-    return [self stringWithBasic:@"act=getPersonalAddress&uid=%@"];
+    return [self stringForCommonServiceWithAct:@"act=getMyAddress&uid=%@"];
 }
 
 
@@ -353,43 +334,44 @@
 
 /**县*/
 + (NSString *)urlStringForArea{
-    return [self stringWithBasic:@"act=area&cid=%@"];
+    return [self stringForCommonServiceWithAct:@"act=area&cid=%@"];
 }
 
 
 /**提交地区*/
 + (NSString *)urlStringForUpdatePersonalAddress{
-    return [self stringWithBasic:@"act=updatePersonalAddress&uid=%@&realname=%@&pid=%@&cid=%@&aid=%@&pname=%@&cname=%@&aname=%@&address=%@&postcode=%@"];
+    return [self stringForCommonServiceWithAct:@"act=updateMyAddress&uid=%@&realname=%@&pid=%@&cid=%@&aid=%@&pname=%@&cname=%@&aname=%@&address=%@&postcode=%@"];
 }
 
 
 /**提交用户信息*/
 + (NSString *)urlStringForpersonalInfo{
-    return [self stringWithBasic:@"act=personalInfo&uid=%@&realname=%@&gender=%@&birth=%@&email=%@&mobile=%@&qq=%@&telephone=%@&bid=%@&bname=%@&sid=%@&sname=%@&mid=%@&mname=%@"];
+    return [self stringForCommonServiceWithAct:@"act=u_updateinfo&uid=%@&realname=%@&gender=%@&birth=%@&email=%@&mobile=%@&qq=%@&telephone=%@&bid=%@&bname=%@&sid=%@&sname=%@&mid=%@&mname=%@"];
 }
 
 
 /**我的评论*/
 + (NSString *)urlStringForDiscuss{
-    return [self stringWithBasic:@"act=discuss&uid=%@&p=%ld&s=10"];
+    return [self stringForCommonServiceWithAct:@"act=mypl&uid=%@&p=%ld&s=10"];
 }
 
 
 /**上传头像*/
 + (NSString *)urlStringForUploadAvatar{
-    return [self stringWithBasic:@"act=uploadAvatar&uid=%@"];
+    return [self stringForCommonServiceWithAct:@"act=uploadAvatar&uid=%@"];
 }
 
 /**我的提问*/
 + (NSString *)urlStringFor_myZJDY{
-    return [self stringWithBasic:@"act=myZJDY&uid=%@&p=%ld&s=10"];
+    return [self stringForCommonServiceWithAct:@"act=myzjdy&uid=%@&p=%ld&s=10"];
 }
 
 
 /** 找回密码*/
 + (NSString *)urlString_sendemail{
-    return [self stringForCommon:@"act=sendemail&username=%@&origin=%@"];
+    return [self stringForCommonServiceWithAct:@"act=sendemail&username=%@&origin=%@"];
 }
+
 #pragma mark - 数据对比
 /**对比-车型参数*/
 + (NSString *)urlString_mConfig{

@@ -10,4 +10,8 @@
 
 @implementation MyAskModel
 
++ (NSDictionary *)mj_replacedKeyFromPropertyName{
+    return @{@"cid":@"id"};
+}
+
 @end

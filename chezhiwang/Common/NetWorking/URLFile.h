@@ -8,10 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-//#define auto_car_brand @"http://m.12365auto.com/server/forCommonService.ashx?act=letter"
-//获取车系
-//#define auto_car_series @"http://m.12365auto.com/server/forCommonService.ashx?act=s_list&id=%@"
-
 
 @interface URLFile : NSObject
 
@@ -23,7 +19,7 @@
 + (NSString *)urlStringForLogin;
 /**注册*/
 + (NSString *)urlStringForRegister;
-/**注册协议*/
+
 
 #pragma mark- 车型图片
 /**车型图片-根据参数获取车型图片列表*/
@@ -46,8 +42,6 @@
 + (NSString *)urlStringForReport;
 /**新闻详情*/
 + (NSString *)urlStringForNewsinfo;
-///**新闻详情（新车调查）*/
-//+ (NSString *)urlString_carownerinfo;
 /**精品试list*/
 + (NSString *)urlString_testDrive;
 /**新闻搜索*/
@@ -111,8 +105,7 @@
 + (NSString *)urlStringForPostList;
 /**帖子内容(web)*/
 + (NSString *)urlStringForBBSContent;
-/**论坛车系品牌*/
-//+ (NSString *)urlStringForOtherSeries;
+
 /**论坛分类->品牌论坛->指定论坛*/
 + (NSString *)urlStringForSeriesForm;
 /**论坛分类->栏目论坛->指定论坛*/
@@ -141,16 +134,16 @@
 
 /**我的投诉列表*/
 + (NSString *)urlStringForMyTS;
-/***/
+/**根据cpid获取一条投诉进度信息*/
 + (NSString *)urlStringFor_mytsbyid;
 /**个人中心根据cpid获取投诉详情*/
 + (NSString *)urlStringForDetail;
-/**插卡撤诉未成功原因*/
+/**查看撤诉未成功原因*/
 + (NSString *)urlString_delComNoReason;
 /**申请撤诉-原因选择列表*/
 + (NSString *)urlString_delComTypeList;
 
-/**我的评论*/
+/**提交评分*/
 + (NSString *)urlStringForComplainScore;
 
 /**修改密码*/

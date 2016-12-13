@@ -46,7 +46,7 @@
 -(void)loadData{
     NSString *url = [NSString stringWithFormat:[URLFile urlStringForGetPersonalAddress],[CZWManager manager].userID];
     [HttpRequest GET:url success:^(id responseObject) {
-        self.dictionary = [responseObject objectAtIndex:0];
+        self.dictionary = responseObject;
         [self setData];
     } failure:^(NSError *error) {
         
@@ -67,33 +67,6 @@
     [self loadData];
     [self createNotification];
     [self createTap];
-    
-}
-
--(NSAttributedString *)attributeSize:(NSString *)str{
-
-    NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:str];
-    [att addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"STHeitiK-Medium" size:B-1] range:NSMakeRange(0, att.length)];
-    [att addAttribute:NSForegroundColorAttributeName value:[UIColor orangeColor] range:NSMakeRange(0, att.length)];
-    [att addAttribute:NSKernAttributeName value:[NSNumber numberWithFloat:1.5] range:NSMakeRange(0,att.length)];
-   // [att addAttribute:NSStrokeWidthAttributeName value:[NSNumber numberWithFloat:1] range:NSMakeRange(0, att.length)];
-    NSShadow *shadow = [[NSShadow alloc] init];
-    shadow.shadowOffset = CGSizeMake(1, 5);
-    shadow.shadowColor = [UIColor blackColor];
-    shadow.shadowBlurRadius = 10;
-    
-    [att addAttribute:NSShadowAttributeName value:shadow range:NSMakeRange(0, att.length)];
-    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
-    [style setLineSpacing:5];
-    [style setLineBreakMode:NSLineBreakByWordWrapping];
-    style.firstLineHeadIndent = 30;
-    style.paragraphSpacing = 20;
-    [att addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, att.length)];
-//    CGSize size = [att boundingRectWithSize:CGSizeMake(WIDTH-65, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil].size;
-//    NSLog(@"%f==%f",size.width,size.height);
-//    NSLog(@"%@",att);
-
-    return att;
 }
 
 -(void)createTap{
@@ -231,10 +204,6 @@
         return;
     }
     
-//    if (postcode.text.length > 0 && postcode.text.length != 6) {
-//        [self alert:@"邮政编码应当是六位数字"];
-//        return;
-//    }
     [self getData:nil];
 }
 
@@ -438,13 +407,10 @@
     _number = num;
 
    [HttpRequest GET:url success:^(id responseObject) {
-       if (num == 1 || num == 2) {
+     
            [_pickDataArray setArray:responseObject[@"rel"]];
            [_pickView reloadAllComponents];
-       }else{
-           [_pickDataArray setArray:responseObject];
-           [_pickView reloadAllComponents];
-       }
+
 
    } failure:^(NSError *error) {
        

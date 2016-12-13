@@ -73,6 +73,8 @@
 
     [super viewWillAppear:animated];
 
+    [_tableView reloadData];
+
     if([CZWManager manager].isLogin){
         //每次页面出现刷新页面数据
         [self updateNumber];
@@ -196,11 +198,11 @@
 
 #pragma mark -更新数目
 -(void)updateNumber{
-    NSString *url = [NSString stringWithFormat:[URLFile urlStringForPersonalCount],[CZWManager manager].userName,[CZWManager manager].password];
+    NSString *url = [NSString stringWithFormat:[URLFile urlStringForPersonalCount],[CZWManager manager].userID];
     [HttpRequest GET:url success:^(id responseObject) {
-        NSDictionary *dict = responseObject[0];
-        if (dict[@"complain"]) {
-            numDictonary = dict;
+
+        if (responseObject[@"complain"]) {
+            numDictonary = responseObject;
             [self reloadData];
         }
 
@@ -270,17 +272,16 @@
     UILabel *label = (UILabel *)[cell.contentView viewWithTag:100];
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            label.text = numDictonary[@"complain"];
+            label.text = numDictonary[@"complain"]?numDictonary[@"complain"]:@"0";
         }else if (indexPath.row == 1){
-            label.text = numDictonary[@"question"];
+            label.text = numDictonary[@"question"]?numDictonary[@"question"]:@"0";
         }
     }else if (indexPath.section == 1){
         if (indexPath.row == 0){
-            label.text = numDictonary[@"discuss"];
+            label.text = numDictonary[@"discuss"]?numDictonary[@"discuss"]:@"0";
         }else if (indexPath.row == 1){
             label.text = [NSString stringWithFormat:@"%ld",(long)[[FmdbManager shareManager] selectCollectNumber]];
         }
-
     }
 
     return cell;

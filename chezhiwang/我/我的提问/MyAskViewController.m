@@ -38,22 +38,14 @@
 
         }
         [_tableView.mj_header endRefreshing];
-        if ([responseObject count] == 0){
+        if ([responseObject[@"rel"] count] == 0){
             [_tableView.mj_footer endRefreshingWithNoMoreData];
         }else{
             [_tableView.mj_footer endRefreshing];
         }
 
-        for (NSDictionary *dict in responseObject) {
-            
-            MyAskModel *model = [[MyAskModel alloc] init];
-            model.answer = dict[@"answer"];
-            model.date = dict[@"date"];
-            model.cid = dict[@"id"];
-            model.path = dict[@"path"];
-            model.question = dict[@"question"];
-            model.type = dict[@"type"];
-            model.answerdate = dict[@"answerdate"];
+        for (NSDictionary *dict in responseObject[@"rel"]) {
+            MyAskModel *model = [MyAskModel mj_objectWithKeyValues:dict];
             [_dataArray addObject:model];
         }
 
