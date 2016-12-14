@@ -67,23 +67,25 @@
 }
 //右侧按钮
 -(void)createRightItem{
-    UIButton *btn = [LHController createButtnFram:CGRectMake(0, 0, 90, 20) Target:self Action:@selector(rightItemClick) Text:@"我要提问"];
-    btn.titleLabel.font = [UIFont systemFontOfSize:[LHController setFont]-2];
-    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(90-16, 3, 16, 14)];
-    imageView.image = [UIImage imageNamed:@"answer_question_right"];
-    [btn addSubview:imageView];
+    UIButton *searchButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [searchButton setImage:[UIImage imageNamed:@"auto_common_search"] forState:UIControlStateNormal];
+    searchButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    searchButton.frame = CGRectMake(0, 0, 30, 20);
+    [searchButton addTarget:self action:@selector(searchButtonClick) forControlEvents:UIControlEventTouchUpInside];
 
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
-    self.navigationItem.rightBarButtonItem = item;
+    UIButton *askButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [askButton setImage:[UIImage imageNamed:@"answer_question_right"] forState:UIControlStateNormal];
+    askButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    askButton.frame = CGRectMake(0, 0, 30, 20);
+    [askButton addTarget:self action:@selector(askButtonClick) forControlEvents:UIControlEventTouchUpInside];
 
-//    UIButton *btn = [LHController createButtnFram:CGRectMake(0, 0, 20, 20) Target:self Action:@selector(rightItemClick) Text:nil];
-//    [btn setImage:[UIImage imageNamed:@"search"] forState:UIControlStateNormal];
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
+
+    UIBarButtonItem *searchItem = [[UIBarButtonItem alloc] initWithCustomView:searchButton];
+    UIBarButtonItem *complainItem = [[UIBarButtonItem alloc] initWithCustomView:askButton];
+    self.navigationItem.rightBarButtonItems = @[complainItem,searchItem];
 }
 
--(void)rightItemClick{
+-(void)askButtonClick{
     if ([CZWManager manager].isLogin) {
         AskViewController *ask = [[AskViewController alloc] init];
         ask.hidesBottomBarWhenPushed = YES;
@@ -92,11 +94,13 @@
 
         [self presentViewController:[LoginViewController instance] animated:YES completion:nil];
     }
+}
 
-//        AnswerSearchViewController *search = [[AnswerSearchViewController alloc] init];
-//        search.numType = 3;
-//        search.hidesBottomBarWhenPushed = YES;
-//        [self.navigationController pushViewController:search animated:YES];
+- (void)searchButtonClick{
+            AnswerSearchViewController *search = [[AnswerSearchViewController alloc] init];
+            search.numType = 3;
+            search.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:search animated:YES];
 
 }
 

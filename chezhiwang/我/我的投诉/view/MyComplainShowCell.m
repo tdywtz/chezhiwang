@@ -113,8 +113,15 @@
 - (void)setModel:(MyComplainModel *)model{
     _model = model;
     
-    
-    stateLabel.text = model.common;
+    NSString *text = [NSString stringWithFormat:@"当前投诉状态：%@",model.status];
+    NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:text];
+    NSRange range = [text rangeOfString:model.status];
+    if (range.length) {
+        [att setLh_colorWithColor:RGB_color(237, 27, 36, 1) range:range];
+    }
+
+    stateLabel.attributedText = att;
+
     [stepView setSteps:model.steps];
     headerView.current = [model.stepid integerValue];
 

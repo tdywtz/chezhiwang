@@ -134,19 +134,17 @@
 
 #pragma mark - 我要投诉
 -(void)creaRightItem{
-    UIButton *btn = [LHController createButtnFram:CGRectMake(0, 0, 90, 20) Target:self Action:@selector(rightItemClick) Text:@"我要投诉"];
-    btn.titleLabel.font = [UIFont systemFontOfSize:[LHController setFont]-2];
-    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(90-16, 3, 16, 14)];
-    imageView.image = [UIImage imageNamed:@"complain_complain"];
-    [btn addSubview:imageView];
-    
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
-    self.navigationItem.rightBarButtonItem = item;
+
+    UIButton *complainButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [complainButton setImage:[UIImage imageNamed:@"auto_投诉列表_提问"] forState:UIControlStateNormal];
+    complainButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    complainButton.frame = CGRectMake(0, 0, 30, 20);
+    [complainButton addTarget:self action:@selector(complainButtonClick) forControlEvents:UIControlEventTouchUpInside];
+
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:complainButton];
 }
 //投诉
--(void)rightItemClick{
+-(void)complainButtonClick{
     ComplainViewController *complain =[[ComplainViewController alloc] init];
     [self.navigationController pushViewController:complain animated:YES];
 }

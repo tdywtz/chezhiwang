@@ -24,7 +24,6 @@
         
         //创建UI
         [self makeUI];
-        
     }
     return self;
 }
@@ -40,19 +39,19 @@
     
     stateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 60, 18)];
     stateLabel.textAlignment = NSTextAlignmentCenter;
-    stateLabel.textColor = colorYellow;
+    stateLabel.textColor = RGB_color(237, 27, 36, 1);
     stateLabel.font = [UIFont systemFontOfSize:B-5];
-    stateLabel.layer.cornerRadius = 2;
+    stateLabel.layer.cornerRadius = 4;
     stateLabel.layer.masksToBounds = YES;
-    stateLabel.layer.borderColor = colorYellow.CGColor;
+    stateLabel.layer.borderColor = RGB_color(237, 27, 36, 1).CGColor;
     stateLabel.layer.borderWidth = 1;
     
     timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 50, 150, 20)];
     timeLabel.font = [UIFont systemFontOfSize:B-5];
     timeLabel.textColor = colorLightGray;
     
-    imageView = [[UIImageView alloc] initWithFrame:CGRectMake(WIDTH-20, 40, 15, 15)];
-    imageView.image = [UIImage imageNamed:@"arrowu"];
+    imageView = [[UIImageView alloc] init];
+    imageView.image = [UIImage imageNamed:@"top"];
     
     lineView = [[UIView alloc] init];
     lineView.backgroundColor = colorLineGray;
@@ -81,7 +80,7 @@
     }];
     
     [imageView makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(-10);
+        make.right.equalTo(-15);
         make.centerY.equalTo(0);
     }];
     

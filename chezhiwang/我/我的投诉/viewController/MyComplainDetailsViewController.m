@@ -50,6 +50,8 @@
         styleLabel.layer.cornerRadius = 3;
         styleLabel.layer.masksToBounds = YES;
         styleLabel.layer.borderWidth = 1;
+        styleLabel.textColor = RGB_color(237, 27, 36, 1);
+        styleLabel.layer.borderColor = RGB_color(237, 27, 36, 1).CGColor;
 
         dateLabel = [[UILabel alloc] init];
         dateLabel.font = [UIFont systemFontOfSize:14];
@@ -91,8 +93,18 @@
     titleLabel.text = model.title;
     styleLabel.text = model.status;
     dateLabel.text = model.date;
-    stateLabel.text = model.common;
     headerView.current = [model.stepid integerValue];
+
+    NSString *text = [NSString stringWithFormat:@"当前投诉状态：%@",model.status];
+    NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:text];
+    NSRange range = [text rangeOfString:model.status];
+    if (range.length) {
+        [att setLh_colorWithColor:RGB_color(237, 27, 36, 1) range:range];
+    }
+
+    stateLabel.attributedText = att;
+
+
 
     stepView.lh_width = WIDTH;
     [stepView setSteps:model.steps];
@@ -211,7 +223,7 @@
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn setTitle:title forState:UIControlStateNormal];
     btn.titleLabel.font = [UIFont systemFontOfSize:15];
-    [btn setTitleColor:colorDeepGray forState:UIControlStateNormal];
+    [btn setTitleColor:colorBlack forState:UIControlStateNormal];
     [btn setTitleColor:colorYellow forState:UIControlStateSelected];
     [btn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:btn];
@@ -309,9 +321,10 @@
     detailsView = [[ComplainDetailsView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 0)];
 
     bottomLabel = [[UILabel alloc] init];
-    bottomLabel.font = [UIFont systemFontOfSize:10];
+    bottomLabel.font = [UIFont systemFontOfSize:13];
     bottomLabel.backgroundColor = RGB_color(240, 240, 240, 1);
     bottomLabel.text = @"投诉热线：010-65994868";
+    bottomLabel.textColor = RGB_color(237, 27, 36, 1);
     bottomLabel.textAlignment = NSTextAlignmentCenter;
 
 
@@ -395,7 +408,7 @@
 
         NSString *url = [NSString stringWithFormat:[URLFile urlString_delComNoReason],self.Cpid];
         [HttpRequest GET:url success:^(id responseObject) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"撤诉未成功原因"
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"申请撤诉未成功原因"
                                                             message:responseObject[@"reason"]
                                                            delegate:self
                                                   cancelButtonTitle:@"再次申请撤诉"

@@ -194,6 +194,7 @@
                     brandModel.SeriesId = responseObject[@"seriesId"];
                     brandModel.modelName = responseObject[@"model"];//车型
                     brandModel.ModelId = responseObject[@"modelId"];
+                    [brandModel resetSelected];
                 }else if(j <= 6){
                     ComplainModel *model = (ComplainModel *)rowModel;
                     if (j == 1){
@@ -222,7 +223,10 @@
                         businessModel.pid = responseObject[@"pid"];
                         businessModel.cid = responseObject[@"cid"];
                         businessModel.lid = responseObject[@"lid"];
-                    businessModel.seriesId = responseObject[@"seriesId"];
+                        businessModel.seriesId = responseObject[@"seriesId"];
+                    if (businessModel.city.length == 0) {
+                        businessModel.custom = YES;
+                    }
 
                 }else if (j == 8){
                         ComplainImageModel *imageModel = (ComplainImageModel *)rowModel;
@@ -495,9 +499,12 @@
                     _dataDictionary[model.key] = model.value;
                 }else if (j == 7){
                     ComplainBusinessModel *businessModel = sectionModel.rowModels[j];
-                    _dataDictionary[businessModel.businessIdKey] = businessModel.businessId;
-                    _dataDictionary[businessModel.businessKey] = businessModel.businessValue;
-                    _dataDictionary[businessModel.businessCustomKey] = businessModel.businessValue;
+                    if (businessModel.businessKey.length) {
+                        _dataDictionary[businessModel.businessIdKey] = businessModel.businessId;
+                        _dataDictionary[businessModel.businessKey] = businessModel.businessValue;
+                    }else{
+                        _dataDictionary[businessModel.businessCustomKey] = businessModel.businessValue;
+                    }
                 }
             }
         }else if (i == 3) {

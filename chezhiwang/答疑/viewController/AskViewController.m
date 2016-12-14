@@ -191,19 +191,19 @@
     [HttpRequest POST:[URLFile urlStringForEditZJDY] parameters:dict success:^(id responseObject) {
         button.enabled = YES;
         [button setBackgroundColor:[UIColor colorWithRed:254/255.0 green:153/255.0 blue:23/255.0 alpha:1]];
-        NSDictionary *dict = responseObject[0];
-        if ([dict[@"success"] isEqualToString:@"1"]) {
+
+        if (responseObject[@"success"]) {
             
             [self onTapToGenerateCode:nil];
             hud.mode = MBProgressHUDModeText;
-            hud.labelText = @"提交成功";
+            hud.labelText = responseObject[@"success"];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                  [self.navigationController popViewControllerAnimated:YES];
             });
 
         }else{
             hud.mode = MBProgressHUDModeText;
-            hud.labelText = @"提交失败";
+            hud.labelText = responseObject[@"error"];
             [self onTapToGenerateCode:nil];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -213,7 +213,7 @@
     } failure:^(NSError *error) {
         button.enabled = YES;
         [button setBackgroundColor:[UIColor colorWithRed:254/255.0 green:153/255.0 blue:23/255.0 alpha:1]];
-        [self alert:@"提交失败"];
+        [self alert:@"网络可能不太好！"];
     }];
 }
 

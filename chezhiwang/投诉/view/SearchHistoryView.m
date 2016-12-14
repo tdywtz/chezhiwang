@@ -78,7 +78,10 @@
 
 //刷新列表
 -(void)reloadDataOFtableview:(NSString *)string{
-    NSArray *array = [_userDefaults objectForKey:history];
+    if (history == nil) {
+        history = @"";
+    }
+    NSArray *array = [[NSUserDefaults standardUserDefaults] objectForKey:history];
     [_dataArray removeAllObjects];
     if (string.length == 0) {
         for (NSString *str in array) {

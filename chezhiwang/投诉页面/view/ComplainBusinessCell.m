@@ -121,8 +121,8 @@
 }
 
 - (void)buttonClick{
-    button.selected = !button.selected;
-    _businessModel.custom = button.selected;
+
+    _businessModel.custom = !button.selected;
     [self.delegate updateCellHeight];
 
     [_businessTextField resignFirstResponder];
@@ -139,10 +139,17 @@
         _businessModel.businessId = nil;
         _businessModel.businessValue = nil;
     }
-   // [self resettring];
+    [self resettring];
 }
 
 - (void)resettring{
+
+    button.selected = _businessModel.custom;
+
+    _proTextField.placeholder = _businessModel.proPlaceholder;
+    _businessTextField.placeholder = _businessModel.businessPlaceholder;
+    _proTextField.text = [NSString stringWithFormat:@"%@%@",_businessModel.province,_businessModel.city];
+    _businessTextField.text = _businessModel.businessValue;
 
     _nameLabel.lh_left = 10;
     _nameLabel.lh_top = 0;
@@ -198,11 +205,6 @@
 - (void)setBusinessModel:(ComplainBusinessModel *)businessModel{
     _businessModel = businessModel;
 
-    _proTextField.placeholder = businessModel.proPlaceholder;
-    _businessTextField.placeholder = businessModel.businessPlaceholder;
-    _proTextField.text = [NSString stringWithFormat:@"%@%@",businessModel.province,businessModel.city];
-    _businessTextField.text = businessModel.businessValue;
-
     [self resettring];
 }
 
@@ -227,6 +229,8 @@
             weakSelf.businessModel.cid = [NSString stringWithFormat:@"%@",cid];
             weakSelf.businessModel.province = pName;
             weakSelf.businessModel.city = cName;
+            weakSelf.businessModel.businessValue = nil;
+            [weakSelf resettring];
         }];
 
         [self.parentViewController presentViewController:nvc animated:YES completion:nil];

@@ -28,8 +28,7 @@ typedef enum {
                                [[ChooseViewModel alloc] initWithID:@"4" title:@"制动系统"],
                                [[ChooseViewModel alloc] initWithID:@"5" title:@"前后桥及悬挂系统"],
                                [[ChooseViewModel alloc] initWithID:@"6" title:@"轮胎"],
-                               [[ChooseViewModel alloc] initWithID:@"7" title:@"车身附件及电器"],
-                               [[ChooseViewModel alloc] initWithID:@"8" title:@"发动机"]
+                               [[ChooseViewModel alloc] initWithID:@"7" title:@"车身附件及电器"]
                                ];
     return @[sectionModel];
 }
@@ -60,7 +59,7 @@ typedef enum {
                                [[ChooseViewModel alloc] initWithID:@"5" title:@"前后桥及悬挂系统"],
                                [[ChooseViewModel alloc] initWithID:@"6" title:@"轮胎"],
                                [[ChooseViewModel alloc] initWithID:@"7" title:@"车身附件及电器"],
-                               [[ChooseViewModel alloc] initWithID:@"8" title:@"发动机"],
+
                                [[ChooseViewModel alloc] initWithID:@"9" title:@"服务态度"],
                                [[ChooseViewModel alloc] initWithID:@"10" title:@"人员技术"],
                                [[ChooseViewModel alloc] initWithID:@"11" title:@"服务收费"],

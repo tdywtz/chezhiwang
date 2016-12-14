@@ -158,7 +158,7 @@
         answerImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"auto_answerDetail_answer"]];
         answerImageView.contentMode = UIViewContentModeScaleAspectFit;
 
-        gratifiedImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"auto_answerDetail_answer"]];
+        gratifiedImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"auto_complainDetails_gratified"]];
         gratifiedImageView.contentMode = UIViewContentModeScaleAspectFit;
 
         answerTitleLabel  = [[UILabel alloc] init];
@@ -482,9 +482,9 @@
 
     NSMutableAttributedString *attribute = [[NSMutableAttributedString alloc] initWithString:name];
     attribute.lh_font = [UIFont systemFontOfSize:15];
-    attribute.lh_color = RGB_color(153, 153, 153, 1);
+    attribute.lh_color = colorBlack;
 
-    NSAttributedString *att = [[NSAttributedString alloc] initWithString:contet attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15],NSForegroundColorAttributeName:RGB_color(199, 199, 199, 1)}];
+    NSAttributedString *att = [[NSAttributedString alloc] initWithString:contet attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15],NSForegroundColorAttributeName:colorDeepGray}];
 
     [attribute appendAttributedString:att];
     attribute.lh_lineSpacing = 15;

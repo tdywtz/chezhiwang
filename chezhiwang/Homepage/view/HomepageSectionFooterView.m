@@ -9,17 +9,18 @@
 #import "HomepageSectionFooterView.h"
 #import "HomepageSectionModel.h"
 
-#import "NewsViewController.h"
-#import "ComplainListViewController.h"
-#import "NewsInvestigateViewController.h"
-#import "AnswerListViewController.h"
-#import "ForumClassifyListViewController.h"
+//#import "NewsViewController.h"
+//#import "ComplainListViewController.h"
+//#import "NewsInvestigateViewController.h"
+//#import "AnswerListViewController.h"
+//#import "ForumClassifyListViewController.h"
 
 @implementation HomepageSectionFooterView
 {
     UIButton *pushButton;
     UIImageView *imageView;
 }
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -50,7 +51,7 @@
 }
 
 - (void)pushClick{
-    NSArray *array = @[@"NewsViewController",@"ComplainListViewController",@"NewsInvestigateViewController",@"AnswerViewController",@"ForumListViewController"];
+    NSArray *array = @[@"NewsViewController",@"ComplainListViewController",@"NewsInvestigateViewController",@"AnswerViewController",@"ForumViewController"];
     UIViewController *VC = [[NSClassFromString(array[_sectionModel.section]) alloc] init];
     VC.hidesBottomBarWhenPushed = YES;
     [self.parentVC.navigationController pushViewController:VC animated:YES];

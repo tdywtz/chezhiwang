@@ -104,6 +104,8 @@ typedef NS_ENUM(NSInteger, ComplainCellStyle) {
 @property (nonatomic,assign) BOOL modelSelected;
 @property (nonatomic,assign) CGFloat cellHeight;
 
+- (void)resetSelected;
+
 @end
 
 #pragma mark - 投诉类型

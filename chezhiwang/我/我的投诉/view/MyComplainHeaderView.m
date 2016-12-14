@@ -78,7 +78,7 @@
         CGRect drawFrame  = [self centreFrame:frame size:size];
         UIColor *textColor = _textColor;
 
-        if (i <= _current) {
+        if (i < _current) {
             textColor =_lightTextColor;
             CGContextSetStrokeColorWithColor(context, _lightLineColor.CGColor);
         }else{
@@ -90,7 +90,7 @@
         [text drawInRect:drawFrame withAttributes:@{NSFontAttributeName:_font,NSForegroundColorAttributeName:textColor}];
 
         if (i < _titles.count-1 ) {
-            if (i <= _current) {
+            if (i < _current) {
                  CGContextSetStrokeColorWithColor(context, _lightLineColor.CGColor);
             }else{
                 CGContextSetStrokeColorWithColor(context, _lineColor.CGColor);

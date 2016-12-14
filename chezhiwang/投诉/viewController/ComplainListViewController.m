@@ -75,19 +75,25 @@
 
 #pragma mark - 我要投诉
 -(void)creaRightItem{
-    UIButton *btn = [LHController createButtnFram:CGRectMake(0, 0, 90, 20) Target:self Action:@selector(rightItemClick) Text:@"我要投诉"];
-    btn.titleLabel.font = [UIFont systemFontOfSize:[LHController setFont]-2];
-    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(90-16, 3, 16, 14)];
-    imageView.image = [UIImage imageNamed:@"complain_complain"];
-    [btn addSubview:imageView];
+    UIButton *searchButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [searchButton setImage:[UIImage imageNamed:@"auto_common_search"] forState:UIControlStateNormal];
+    searchButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    searchButton.frame = CGRectMake(0, 0, 30, 20);
+    [searchButton addTarget:self action:@selector(searchButtonClick) forControlEvents:UIControlEventTouchUpInside];
 
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
-    self.navigationItem.rightBarButtonItem = item;
+    UIButton *complainButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [complainButton setImage:[UIImage imageNamed:@"auto_投诉列表_提问"] forState:UIControlStateNormal];
+    complainButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    complainButton.frame = CGRectMake(0, 0, 30, 20);
+    [complainButton addTarget:self action:@selector(complainButtonClick) forControlEvents:UIControlEventTouchUpInside];
+
+
+    UIBarButtonItem *searchItem = [[UIBarButtonItem alloc] initWithCustomView:searchButton];
+    UIBarButtonItem *complainItem = [[UIBarButtonItem alloc] initWithCustomView:complainButton];
+    self.navigationItem.rightBarButtonItems = @[complainItem,searchItem];
 }
 
--(void)rightItemClick{
+-(void)complainButtonClick{
     
     if ([CZWManager manager].isLogin) {
         ComplainViewController *complain = [[ComplainViewController alloc] init];
@@ -97,6 +103,14 @@
 
         [self presentViewController:[LoginViewController instance] animated:YES completion:nil];
     }
+}
+
+- (void)searchButtonClick{
+    ComplainSearchViewController *search = [[ComplainSearchViewController alloc] init];
+    search.numType = 2;
+    search.hidesBottomBarWhenPushed = YES;
+
+    [self.navigationController pushViewController:search animated:YES];
 }
 
 - (void)createTableView{

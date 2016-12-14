@@ -42,7 +42,7 @@
     haveLabel = [[UILabel alloc] init];
     haveLabel.textAlignment  = NSTextAlignmentCenter;
     haveLabel.font = [UIFont systemFontOfSize:B-5];
-    haveLabel.layer.cornerRadius = 2;
+    haveLabel.layer.cornerRadius = 4;
     haveLabel.layer.masksToBounds = YES;
     haveLabel.layer.borderWidth = 1;
  
@@ -51,7 +51,7 @@
     timeLabel.textColor = colorLightGray;
    
     imageView = [[UIImageView alloc] initWithFrame:CGRectMake(WIDTH-20, 30, 15, 15)];
-    imageView.image = [UIImage imageNamed:@"arrowu"];
+    imageView.image = [UIImage imageNamed:@"top"];
     
     lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 74, WIDTH, 1)];
     lineView.backgroundColor = colorLineGray;;
@@ -71,7 +71,7 @@
     [haveLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(titleLabel);
         make.top.equalTo(titleLabel.bottom).offset(10);
-        make.size.equalTo(CGSizeMake(60, 18));
+        make.size.equalTo(CGSizeMake(50, 18));
     }];
     
     [timeLabel makeConstraints:^(MASConstraintMaker *make) {
@@ -86,7 +86,7 @@
     }];
 
     [imageView makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(-20);
+        make.right.equalTo(-15);
         make.centerY.equalTo(0);
     }];
 }
@@ -106,11 +106,11 @@
    
     if (_model.answer.length > 0) {
         haveLabel.text = @"已回复";
-        haveLabel.textColor = colorDeepBlue;
+        haveLabel.textColor = colorLightBlue;
     
     }else{
         haveLabel.text = @"未回复";
-        haveLabel.textColor = colorYellow;
+        haveLabel.textColor = RGB_color(237, 27, 36, 1);
     }
     haveLabel.layer.borderColor = haveLabel.textColor.CGColor;
 

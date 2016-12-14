@@ -163,9 +163,9 @@
         _brandModel.seriesSelected = NO;
         _brandModel.modelSelected = NO;
 
-        _brandModel.brandName = @"";
-        _brandModel.seriesName = @"";
-        _brandModel.modelName = @"";
+        _brandModel.brandName = nil;
+        _brandModel.seriesName = nil;
+        _brandModel.modelName = nil;
         if (selected) {
             _brandModel.BrandId = nil;
             _brandModel.SeriesId = nil;
@@ -177,8 +177,8 @@
         _brandModel.seriesSelected = selected;
         _brandModel.modelSelected = NO;
 
-        _brandModel.seriesName = @"";
-        _brandModel.modelName = @"";
+        _brandModel.seriesName = nil;
+        _brandModel.modelName = nil;
         if (selected) {
             _brandModel.SeriesId = nil;
             _brandModel.ModelId = nil;
@@ -187,7 +187,7 @@
     }else{
 
         _brandModel.modelSelected = selected;
-        _brandModel.modelName = @"";
+        _brandModel.modelName = nil;
         if (selected) {
             _brandModel.ModelId = nil;
         }
@@ -209,13 +209,12 @@
     modelTextField.text = _brandModel.modelName;
 
 
+    brandButon.selected = _brandModel.brandSelected;
+    seriesButon.selected = NO;
+    modelButon.selected = NO;
 
     seriesButon.enabled = YES;
     modelButon.enabled = YES;
-
-    brandButon.selected = _brandModel.brandSelected;
-    seriesButon.selected = _brandModel.seriesSelected;
-    modelButon.selected = _brandModel.modelSelected;
 
 
     [seriesButon setTitleColor:colorLightBlue forState:UIControlStateNormal];
@@ -226,25 +225,31 @@
     modelTextField.placeholder = @"选择车型";
 
     if (_brandModel.brandSelected) {
+
         seriesButon.enabled = NO;
         modelButon.enabled = NO;
+
         [seriesButon setTitleColor:colorLightGray forState:UIControlStateNormal];
         [modelButon setTitleColor:colorLightGray forState:UIControlStateNormal];
         seriesTextField.placeholder = @"输入车系";
         modelTextField.placeholder = @"输入车型";
     }else if(_brandModel.seriesSelected){
+        seriesButon.selected = YES;
         modelButon.enabled = NO;
+        modelButon.selected = NO;
+
         [modelButon setTitleColor:colorLightGray forState:UIControlStateNormal];
         seriesTextField.placeholder = @"输入车系";
         modelTextField.placeholder = @"输入车型";
     }else if (_brandModel.modelSelected){
+        modelButon.selected = YES;
         modelTextField.placeholder = @"输入车型";
     }
 }
 
 - (void)setBrandModel:(ComplainBrandModel *)brandModel{
     _brandModel = brandModel;
-
+  
     [self restting];
 }
 

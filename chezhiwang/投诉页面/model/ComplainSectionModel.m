@@ -62,6 +62,7 @@
     return self;
 }
 
+
 - (CGFloat)cellHeight{
     if (_custom) {
         return 102;
@@ -104,6 +105,31 @@
         self.cellHeight = 205;
     }
     return self;
+}
+
+- (void)resetSelected{
+
+    NSInteger mMnt = _ModelId?[_ModelId integerValue]:0;
+    NSInteger sMnt = _ModelId?[_SeriesId integerValue]:0;
+    NSInteger bMnt = _ModelId?[_BrandId integerValue]:0;
+
+    _brandSelected = NO;
+    _seriesSelected = NO;
+    _modelSelected = NO;
+
+    if (bMnt == 0) {
+        _brandSelected = YES;
+        return;
+    }
+
+    if (sMnt == 0) {
+        _seriesSelected = YES;
+        return;
+    }
+
+    if (mMnt == 0) {
+        _modelSelected = YES;
+    }
 }
 
 @end

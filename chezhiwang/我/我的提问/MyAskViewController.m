@@ -122,19 +122,17 @@
 
 #pragma mark - 跳转我要提问页面
 -(void)createRightItem{
-    UIButton *btn = [LHController createButtnFram:CGRectMake(0, 0, 90, 20) Target:self Action:@selector(rightItemClick) Text:@"我要提问"];
-    btn.titleLabel.font = [UIFont systemFontOfSize:[LHController setFont]-2];
-    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(90-16, 3, 16, 14)];
-    imageView.image = [UIImage imageNamed:@"answer_question_right"];
-    [btn addSubview:imageView];
-    
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    UIButton *askButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [askButton setImage:[UIImage imageNamed:@"answer_question_right"] forState:UIControlStateNormal];
+    askButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    askButton.frame = CGRectMake(0, 0, 30, 20);
+    [askButton addTarget:self action:@selector(askButtonClick) forControlEvents:UIControlEventTouchUpInside];
+
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:askButton];
     self.navigationItem.rightBarButtonItem = item;
 }
 
--(void)rightItemClick{
+-(void)askButtonClick{
     AskViewController *ask = [[AskViewController alloc] init];
     [self.navigationController pushViewController:ask animated:YES];
 }

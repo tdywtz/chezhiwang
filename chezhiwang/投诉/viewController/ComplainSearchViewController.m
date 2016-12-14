@@ -27,6 +27,11 @@
 
 @implementation ComplainSearchViewController
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark 请求数据
 -(void)loadData{
     //处理汉字
@@ -36,9 +41,7 @@
 
             [_dataArray removeAllObjects];
         }
-        if ([responseObject count] == 0) {
 
-        }
       [_dataArray addObjectsFromArray:[self arrayWithResponseObject:responseObject]];
         [_tableView reloadData];
 
@@ -56,7 +59,7 @@
 
 - (NSArray *)arrayWithResponseObject:(id)responseObject{
     NSMutableArray *marr = [[NSMutableArray alloc] init];
-    for (NSDictionary *dict in responseObject) {
+    for (NSDictionary *dict in responseObject[@"rel"]) {
         NSString *ID = dict[@"id"]?dict[@"id"]:dict[@"cpid"];
         NSString *question = dict[@"question"]?dict[@"question"]:dict[@"title"];
         [marr addObject:@{@"id":ID,@"question":question}];
@@ -90,6 +93,13 @@
     [self createTabelView];
     [self createNoView];
     [self history];
+}
+
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+
+    [self.searchBar becomeFirstResponder];
 }
 
 -(void)history{
@@ -152,8 +162,6 @@
     self.navigationItem.titleView = self.searchBar;
     self.searchBar.delegate = self;
     self.searchBar.placeholder = @"请输入关键字";
-
-    [self.searchBar becomeFirstResponder];
 }
 
 -(void)createLeftItem{
@@ -168,14 +176,7 @@
 }
 
 -(void)rightitemClick{
-    [self.searchBar endEditing:YES];
-
-    double delayInSeconds = 0.2;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-
-        [self.navigationController popViewControllerAnimated:YES];
-    });
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

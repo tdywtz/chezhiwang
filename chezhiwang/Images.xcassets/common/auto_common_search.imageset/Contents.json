@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "complain_complain.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "auto_common_search@2x.png",
       "scale" : "2x"
     },
     {

@@ -26,16 +26,16 @@
 
 -(void)makeUI{
 
-    UIImageView *questionImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"auto_answerDetail_question"]];
+    UIImageView *questionImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"auto_answerDetail_answer"]];
     questionImageView.contentMode = UIViewContentModeScaleAspectFit;
 
-    UIImageView *answerIamgeView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"auto_answerDetail_answer"]];
+    UIImageView *answerIamgeView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"auto_answerDetail_question"]];
     answerIamgeView.contentMode = UIViewContentModeScaleAspectFit;
 
     
     UILabel * contentTitle = [[UILabel alloc] initWithFrame:CGRectZero];
     contentTitle.text = @"提问内容:";
-    contentTitle.textColor = colorLightGray;
+    contentTitle.textColor = colorDeepGray;
     contentTitle.font = [UIFont systemFontOfSize:15];
     
     contentLabel = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -46,7 +46,7 @@
     
     UILabel *expert = [[UILabel alloc] initWithFrame:CGRectZero];
     expert.text = @"专家回答:";
-    expert.textColor = [UIColor colorWithRed:255/255.0 green:84/255.0 blue:0/255.0 alpha:1];
+    expert.textColor = colorDeepGray;
     expert.font = [UIFont systemFontOfSize:15];
    
     
