@@ -93,14 +93,11 @@
     [self createTabelView];
     [self createNoView];
     [self history];
-}
-
-
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
 
     [self.searchBar becomeFirstResponder];
 }
+
+
 
 -(void)history{
     historyType type;

@@ -131,8 +131,8 @@
    
     _model = model;
 
-    [iconImageView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[CZWManager defaultIconImage]];
-    userNameLabel.text = model.title;
+    [iconImageView sd_setImageWithURL:[NSURL URLWithString:[CZWManager manager].iconUrl] placeholderImage:[CZWManager defaultIconImage]];
+    userNameLabel.text = [CZWManager manager].userName;
     dateLabel.text = model.date;
 
     NSMutableAttributedString *contentText = [[NSMutableAttributedString alloc] initWithString:model.content];

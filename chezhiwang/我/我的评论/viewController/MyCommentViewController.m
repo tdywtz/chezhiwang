@@ -9,6 +9,9 @@
 #import "MyCommentViewController.h"
 #import "MyCommentCell.h"
 #import "MyCommentModel.h"
+#import "AnswerDetailsViewController.h"
+#import "NewsDetailViewController.h"
+#import "ComplainDetailsViewController.h"
 
 @interface MyCommentViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -134,9 +137,31 @@
     }
 
     cell.contentView.backgroundColor = [UIColor clearColor];
-    cell.parentViewController = self;
     cell.model = _dataArray[indexPath.row];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    MyCommentModel *model = _dataArray[indexPath.row];
+
+    NSInteger type = [model.type integerValue];
+    if (type == 3) {
+        AnswerDetailsViewController *an = [[AnswerDetailsViewController alloc] init];
+        an.cid = model.ID;
+        [self.navigationController pushViewController:an animated:YES];
+
+    }else if (type == 2){
+        ComplainDetailsViewController *user = [[ComplainDetailsViewController alloc] init];
+        user.cid = model.ID;
+        [self.navigationController pushViewController:user animated:YES];
+
+    }else if (type == 1){
+        NewsDetailViewController *new = [[NewsDetailViewController alloc] init];
+        new.ID = model.ID;
+        [self.navigationController pushViewController:new animated:YES];
+    }
+
 }
 
 

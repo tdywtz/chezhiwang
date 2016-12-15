@@ -108,9 +108,7 @@
 
     stepView.lh_width = WIDTH;
     [stepView setSteps:model.steps];
-    if ([model.show integerValue] == 2) {
-        btnView.titles = @[@"修改"];
-    }else if ([model.show integerValue] == 3) {
+    if ([model.show integerValue] == 3) {
         btnView.titles = @[@"再次投诉",@"申请撤诉"];
     }else if ([model.show integerValue] == 4){
         btnView.titles = @[@"再次投诉",@"查看原因"];
@@ -148,7 +146,7 @@
     stepView.lh_top = headerView.lh_bottom + 10;
 
     NSInteger step = [model.show integerValue];
-    if (step == 2 || step == 3 || step == 4 || step == 5) {
+    if (step == 3 || step == 4 || step == 5) {
         btnView.lh_centerX = WIDTH/2;
         btnView.lh_top = stepView.lh_bottom + 10;
         btnView.lh_size = btnView.bounds.size;
@@ -356,14 +354,14 @@
 
         bottomLabel.lh_left = 0;
         bottomLabel.lh_top = promtView.lh_bottom;
-        bottomLabel.lh_size = CGSizeMake(WIDTH, 30);
+        bottomLabel.lh_size = CGSizeMake(WIDTH, 45);
     }else{
         promtView.hidden = YES;
         detailsView.hidden = NO;
 
         bottomLabel.lh_left = 0;
         bottomLabel.lh_top = detailsView.lh_bottom;
-        bottomLabel.lh_size = CGSizeMake(WIDTH, 30);
+        bottomLabel.lh_size = CGSizeMake(WIDTH, 45);
 
     }
 

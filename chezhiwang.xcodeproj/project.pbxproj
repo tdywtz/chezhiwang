@@ -2348,7 +2348,6 @@
 				TargetAttributes = {
 					4D7E72371B9D5CD10048F221 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = MFH5RT668M;
 						LastSwiftMigration = 0810;
 						ProvisioningStyle = Manual;
 					};
@@ -2908,7 +2907,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = NO;
-				DEVELOPMENT_TEAM = MFH5RT668M;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2936,9 +2935,9 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0eb72660-4ec9-45a6-8b0d-577e26472081";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=*]" = "0eb72660-4ec9-45a6-8b0d-577e26472081";
-				PROVISIONING_PROFILE_SPECIFIER = CZWDevelopment;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "chezhiwang/chezhiwang-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -2957,7 +2956,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Chezhi Network Information Technology Co., Ltd (MFH5RT668M)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEFINES_MODULE = NO;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = MFH5RT668M;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2984,9 +2983,9 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b8ade865-eb92-4860-b50c-c83a85fa3e8e";
+				PROVISIONING_PROFILE = "bc839be7-85df-4264-bc3e-066fdc8f45a3";
 				"PROVISIONING_PROFILE[sdk=*]" = "b8ade865-eb92-4860-b50c-c83a85fa3e8e";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = chezhiwang;
 				SWIFT_OBJC_BRIDGING_HEADER = "chezhiwang/chezhiwang-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				VALID_ARCHS = "arm64 armv7 armv7s";
