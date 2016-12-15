@@ -42,17 +42,14 @@ NSString *LINE_VERSION_URL = @"https://itunes.apple.com/cn/lookup?id=APP_ID";
 }
 
 -(void)shouAlert:(AppPromptStyle)style{
-//    if (DEBUG) {
-//        return;
-//    }
+
     NSString *numberOpen = [[NSUserDefaults standardUserDefaults] valueForKey:auto_numberOpenAPP];
     NSInteger num = [numberOpen integerValue]+1;
     [[NSUserDefaults standardUserDefaults] setObject:@(num) forKey:auto_numberOpenAPP];
     if (style == AppPromptStyleScore) {
        
        
-        if (![[NSUserDefaults standardUserDefaults] boolForKey:auto_appstoreScore]
-            && (num%5) == 3){
+        if (![[NSUserDefaults standardUserDefaults] boolForKey:auto_appstoreScore]){
             UIAlertView  *alertView = [[UIAlertView alloc] initWithTitle:@"亲，给个好评吧"
                                                                  message:nil//@"我轻轻的来，不想轻轻的走了，让我带走你一个好评吧"
                                                                 delegate:self

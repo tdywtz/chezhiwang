@@ -189,7 +189,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        leftButton = [self buttonWithTitle:@"及时操作"];
+        leftButton = [self buttonWithTitle:@"即时操作"];
         rightButton = [self buttonWithTitle:@"投诉详情"];
 
         moveView = [[UIView alloc] initWithFrame:CGRectZero];

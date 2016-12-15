@@ -90,7 +90,7 @@
 
     UIBarButtonItem *searchItem = [[UIBarButtonItem alloc] initWithCustomView:searchButton];
     UIBarButtonItem *complainItem = [[UIBarButtonItem alloc] initWithCustomView:complainButton];
-    self.navigationItem.rightBarButtonItems = @[complainItem,searchItem];
+    self.navigationItem.rightBarButtonItems = @[searchItem,complainItem];
 }
 
 -(void)complainButtonClick{

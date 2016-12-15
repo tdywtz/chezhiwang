@@ -96,7 +96,7 @@
     _model = model;
     
    
-    if (_model.isOpen) {
+    if (!_model.isOpen) {
 
         imageView.transform = CGAffineTransformMakeRotation(M_PI);
     }else{
