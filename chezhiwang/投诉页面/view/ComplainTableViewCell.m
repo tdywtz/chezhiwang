@@ -185,7 +185,7 @@
     _textField.delegate = self;
 
     _lineView = [[UIView alloc] init];
-    _lineView.backgroundColor = RGB_color(240, 240, 240, 1);
+    _lineView.backgroundColor = colorBackGround;
 
     rightImageView = [[UIImageView alloc] init];
     rightImageView.contentMode = UIViewContentModeScaleAspectFit;

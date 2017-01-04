@@ -133,6 +133,7 @@
     
     UILabel *label = (UILabel *)[cell.contentView viewWithTag:100];
     if (indexPath.section == 0 && indexPath.row == 0) {
+        
         label.text = [self getText];
     }else if (indexPath.section == 1 && indexPath.row == 0){
         NSDictionary *info = [[NSBundle mainBundle] infoDictionary];

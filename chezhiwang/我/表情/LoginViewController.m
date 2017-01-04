@@ -118,7 +118,7 @@
 
     UIButton *button = [LHController createButtnFram:CGRectMake(0, 300, 30, 30) Target:self Action:@selector(buttonClick) Text:@"找回密码"];
     button.titleLabel.font = [UIFont systemFontOfSize:B];
-    [button setTitleColor:[UIColor colorWithRed:6/255.0 green:143/255.0 blue:207/255.0 alpha:1] forState:UIControlStateNormal];
+    [button setTitleColor:colorLightBlue forState:UIControlStateNormal];
     [self.scrollView addSubview:button];
 
     [button makeConstraints:^(MASConstraintMaker *make) {
@@ -155,8 +155,10 @@
 -(void)submitNmae:(NSString *)name andPassword:(NSString *)pass{
 
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+
     dict[@"uname"] = [name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     dict[@"psw"] = [pass stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+
     [HttpRequest POST:[URLFile urlStringForLogin] parameters:dict success:^(id responseObject) {
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
 

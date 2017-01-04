@@ -27,8 +27,8 @@
     if (self) {
         pushButton = [UIButton buttonWithType:UIButtonTypeCustom];
         pushButton.titleLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(19)];
-        [pushButton setTitleColor:RGB_color(154, 154, 154, 1) forState:UIControlStateNormal];
-        pushButton.backgroundColor = RGB_color(240, 240, 240, 1);
+        [pushButton setTitleColor:colorLightGray forState:UIControlStateNormal];
+        pushButton.backgroundColor = colorBackGround;
         [pushButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 20)];
         [pushButton addTarget:self action:@selector(pushClick) forControlEvents:UIControlEventTouchUpInside];
 
@@ -43,7 +43,7 @@
         }];
 
         [imageView makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(40);
+            make.centerX.equalTo(25);
             make.centerY.equalTo(pushButton);
         }];
     }
@@ -51,8 +51,8 @@
 }
 
 - (void)pushClick{
-    NSArray *array = @[@"NewsViewController",@"ComplainListViewController",@"NewsInvestigateViewController",@"AnswerViewController",@"ForumViewController"];
-    UIViewController *VC = [[NSClassFromString(array[_sectionModel.section]) alloc] init];
+
+    UIViewController *VC = [[_sectionModel.pushClass alloc] init];
     VC.hidesBottomBarWhenPushed = YES;
     [self.parentVC.navigationController pushViewController:VC animated:YES];
 

@@ -28,6 +28,15 @@
     return self;
 }
 
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+         [self createUI];
+    }
+    return self;
+}
+
 -(void)createUI{
     self.frame = [UIScreen mainScreen].bounds;
     self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];

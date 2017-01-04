@@ -108,7 +108,7 @@
         grayView.backgroundColor = colorLineGray;
 
         UIView *blueView = [[UIView alloc] init];
-        blueView.backgroundColor = colorDeepBlue;
+        blueView.backgroundColor = colorLightBlue;
 
         [self addSubview:self.titleLabel];
         [self addSubview:grayView];

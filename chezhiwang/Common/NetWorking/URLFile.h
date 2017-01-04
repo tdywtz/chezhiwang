@@ -162,7 +162,7 @@
 + (NSString *)urlStringForArea;
 
 /**提交地区*/
-+ (NSString *)urlStringForUpdatePersonalAddress;
+//+ (NSString *)urlStringForUpdatePersonalAddress;
 
 /**提交用户信息*/
 + (NSString *)urlStringForpersonalInfo;

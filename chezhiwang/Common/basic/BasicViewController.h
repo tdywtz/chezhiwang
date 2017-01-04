@@ -8,10 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+@interface BasicBackgroundView : UIView
+
+@property (nonatomic,strong) UIImageView *imageView;
+@property (nonatomic,strong) UILabel *contentLabel;
+
+@end
+
+#pragma mark - BasicViewController
+
 @interface BasicViewController : UIViewController
 
 @property (nonatomic,strong) UIScrollView *scrollView;
 @property (nonatomic,strong) UIView *contentView;
+@property (nonatomic,strong) BasicBackgroundView *backgroundView;
 
 -(void)createLeftItemBack;
 

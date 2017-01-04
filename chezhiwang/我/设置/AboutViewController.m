@@ -37,8 +37,9 @@
     UILabel *versionLabel = [[UILabel alloc] init];
     versionLabel.text = versionNow;
 
-    CZWLabel *label1 = [[CZWLabel alloc] initWithFrame:CGRectZero];
-    label1.textInsets = UIEdgeInsetsMake(10, 10, 10, 10);
+    YYLabel *label1 = [[YYLabel alloc] initWithFrame:CGRectZero];
+    label1.preferredMaxLayoutWidth = WIDTH;
+    label1.textContainerInset = UIEdgeInsetsMake(10, 10, 10, 10);
     label1.backgroundColor = [UIColor whiteColor];
     label1.numberOfLines = 0;
 
@@ -65,6 +66,7 @@
         make.centerX.equalTo(0);
         make.top.equalTo(imageView.bottom).offset(20*XS);
     }];
+
 
     [label1 makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(versionLabel.bottom).offset(20*XS);

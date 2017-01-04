@@ -14,11 +14,11 @@
     UIImageView *iconImageView;
     UILabel *nameLabel;//用户名
     UILabel *floorLabel;//楼层
-    CZWLabel *contentLabel;//内容
+    YYLabel *contentLabel;//内容
     UILabel *dateLabel; //日期
     UIButton *button;//回复按钮
 
-    CZWLabel *initialLabel;//原评论
+    YYLabel *initialLabel;//原评论
 }
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -42,16 +42,16 @@
     floorLabel = [LHController createLabelWithFrame:CGRectZero Font:PT_FROM_PX(18) Bold:NO TextColor:colorLightGray Text:nil];
 
 
-    contentLabel = [[CZWLabel alloc] init];
+    contentLabel = [[YYLabel alloc] init];
     contentLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(19)];
-    contentLabel.linesSpacing = 4;
+    //contentLabel.linesSpacing = 4;
     contentLabel.numberOfLines = 0;
 
-    initialLabel = [[CZWLabel alloc] initWithFrame:CGRectZero];
-    initialLabel.textInsets = UIEdgeInsetsMake(10, 10, 10, 10);
+    initialLabel = [[YYLabel alloc] initWithFrame:CGRectZero];
+    initialLabel.textContainerInset = UIEdgeInsetsMake(10, 10, 10, 10);
     initialLabel.backgroundColor = RGB_color(240, 240, 240, 1);
     initialLabel.numberOfLines = 0;
-    initialLabel.linesSpacing = 4;
+    //initialLabel.linesSpacing = 4;
     initialLabel.textColor = colorDeepGray;
     initialLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(19)];
 
@@ -88,13 +88,15 @@
         make.right.equalTo(-10);
         make.top.equalTo(nameLabel.top);
     }];
-    
+
+    contentLabel.preferredMaxLayoutWidth = WIDTH - 20;
     [contentLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(nameLabel);
         make.top.equalTo(iconImageView.bottom).offset(10);
         make.right.equalTo(-10);
     }];
 
+    initialLabel.preferredMaxLayoutWidth = WIDTH - 20;
     [initialLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(contentLabel);
         make.right.equalTo(-10);
@@ -127,12 +129,22 @@
     [iconImageView sd_setImageWithURL:[NSURL URLWithString:_model.p_logo] placeholderImage:[CZWManager defaultIconImage]];
     nameLabel.text =  _model.p_uname;
     floorLabel.text = [NSString stringWithFormat:@"%@楼",_model.p_floor];
-    contentLabel.text = _model.p_content;
     dateLabel.text =  _model.p_time;
+    if (_model.p_content) {
+        NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:_model.p_content];
+        att.yy_font = contentLabel.font;
+        att.yy_color = contentLabel.textColor;
+        att.lh_lineSpacing = 4;
+        contentLabel.attributedText = att;
+    }
 
-
+    NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n%@",_model.initialModel.h_uname,_model.initialModel.h_content]];
+    att.yy_font = initialLabel.font;
+    att.yy_color = initialLabel.textColor;
+    att.lh_lineSpacing = 4;
+    [att yy_setColor:colorLightBlue range:NSMakeRange(0, _model.initialModel.h_uname.length)];
+    initialLabel.attributedText = att;
     initialLabel.text = [NSString stringWithFormat:@"%@\n%@",_model.initialModel.h_uname,_model.initialModel.h_content];
-    [initialLabel addAttributes:@{NSForegroundColorAttributeName:colorLightBlue} range:NSMakeRange(0, _model.initialModel.h_uname.length)];
 
 }
 

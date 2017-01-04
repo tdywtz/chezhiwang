@@ -142,6 +142,7 @@
                            [[MyViewModel alloc] initWithTitle:@"我的收藏" imageName:@"centre_favorite" class:NSClassFromString(@"FavouriteViewController")]
                            ],
                        @[
+                           [[MyViewModel alloc] initWithTitle:@"个人资料" imageName:@"centre_card" class:NSClassFromString(@"MyCarViewController")],
                            [[MyViewModel alloc] initWithTitle:@"密码修改" imageName:@"centre_password" class:NSClassFromString(@"PasswordViewController")]
 
                            ]
@@ -167,7 +168,7 @@
     headerView.backgroundColor = colorLightBlue;
     _tableView.tableHeaderView = headerView;
 
-    UIView *tableFootView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 80)];
+    UIView *tableFootView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 120)];
     _tableView.tableFooterView = tableFootView;
 
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -179,7 +180,7 @@
 
     [btn makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(0);
-        make.top.equalTo(20);
+        make.top.equalTo(10);
         make.height.equalTo(40);
     }];
 

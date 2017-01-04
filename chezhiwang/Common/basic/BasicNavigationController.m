@@ -45,6 +45,7 @@
    
     self.interactivePopGestureRecognizer.delegate = self;
     self.delegate = self;
+    [self setStatusBarStyle:UIStatusBarStyleLightContent];
     [self setNagitionBar];
 }
 

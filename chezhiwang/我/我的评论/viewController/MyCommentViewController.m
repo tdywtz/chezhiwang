@@ -96,20 +96,8 @@
 }
 
 -(void)createSpace{
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 140)];
-    imageView.center = CGPointMake(WIDTH/2, HEIGHT/2-64);
-    [self.view addSubview:imageView];
-
-    UIImageView *subImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-    subImageView.image = [UIImage imageNamed:@"90"];
-    [imageView addSubview:subImageView];
-
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, 100, 40)];
-    label.text = @"您还没有评论暂无平论内容";
-    label.numberOfLines = 0;
-    label.textAlignment = NSTextAlignmentCenter;
-    label.font = [UIFont systemFontOfSize:15];
-    [imageView addSubview:label];
+    self.backgroundView.contentLabel.text = @"暂无评论";
+    self.backgroundView.hidden = NO;
 }
 
 - (void)didReceiveMemoryWarning {

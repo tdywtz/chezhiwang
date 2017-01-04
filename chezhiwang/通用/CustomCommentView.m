@@ -21,6 +21,7 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
 - (instancetype)init
 {
     self = [super init];
@@ -116,11 +117,12 @@
         frame.origin.y = HEIGHT;
         _bgView.frame = frame;
  
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self removeFromSuperview];
 }
 
 -(void)show{
- 
+    self.hidden = NO;
     [[UIApplication sharedApplication].keyWindow addSubview:self];
     [[UIApplication sharedApplication].keyWindow bringSubviewToFront:self];
     [_textView becomeFirstResponder];

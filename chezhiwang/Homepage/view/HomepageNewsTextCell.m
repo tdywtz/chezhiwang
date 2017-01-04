@@ -27,20 +27,20 @@
 - (void)makeUI{
     titleLabel = [[UILabel alloc] init];
     titleLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(23)];
-    titleLabel.textColor = RGB_color(17, 17, 17, 1);
+    titleLabel.textColor = colorBlack;
     titleLabel.numberOfLines = 1;
 
     stylenamelabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
     stylenamelabel.textInsets = UIEdgeInsetsMake(1, 3, 1, 3);
     stylenamelabel.font = [UIFont systemFontOfSize:PT_FROM_PX(16.5)];
-    stylenamelabel.textColor = RGB_color(237, 27, 36, 1);
+    stylenamelabel.textColor = colorOrangeRed;
     stylenamelabel.layer.cornerRadius = 3;
     stylenamelabel.layer.borderWidth = 1;
     stylenamelabel.layer.borderColor = stylenamelabel.textColor.CGColor;
 
     dateLabel = [[UILabel alloc] init];
     dateLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(18)];
-    dateLabel.textColor = RGB_color(153, 153, 153, 1);
+    dateLabel.textColor = colorLightGray;
 
     [self.contentView addSubview:titleLabel];
     [self.contentView addSubview:stylenamelabel];

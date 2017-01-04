@@ -28,23 +28,23 @@
     titleLabel = [[UILabel alloc] init];
     titleLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(23)];
     titleLabel.numberOfLines = 1;
-    titleLabel.textColor = RGB_color(17, 17, 17, 1);
+    titleLabel.textColor = colorBlack;
     
     nameLabel = [[UILabel alloc] init];
     nameLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(18)];
-    nameLabel.textColor = RGB_color(153, 153, 153, 1);
+    nameLabel.textColor = colorLightGray;
     
     dateLabel = [[UILabel alloc] init];
     dateLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(18)];
-    dateLabel.textColor = RGB_color(153, 153, 153, 1);
+    dateLabel.textColor = colorLightGray;
     
     replycountLabel = [[UILabel alloc] init];
     replycountLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(19)];
-    replycountLabel.textColor = RGB_color(100, 100, 100, 1);
+    replycountLabel.textColor = colorDeepGray;
 
     viewcountLabel = [[UILabel alloc] init];
     viewcountLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(19)];
-    viewcountLabel.textColor = RGB_color(100, 100, 100, 1);
+    viewcountLabel.textColor = colorDeepGray;
 
     UIImageView *replyImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"留言"]];
     replyImageView.contentMode = UIViewContentModeScaleAspectFit;

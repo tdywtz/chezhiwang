@@ -200,7 +200,7 @@
 
 #pragma mark - 底部label、服务协议按钮
 -(void)createLabelAndServerButton{
-    UIButton *serverButton = [LHController createButtnFram:CGRectMake(LEFT, addressTextFeild.frame.origin.y+130, WIDTH-LEFT*2, 20) Target:self Action:@selector(serverButtonClick:) Text:@"点击注册即表示已阅读并同意《网络服务协议》"];
+    UIButton *serverButton = [LHController createButtnFram:CGRectMake(15, addressTextFeild.frame.origin.y+130, WIDTH-15*2, 20) Target:self Action:@selector(serverButtonClick:) Text:@"点击注册即表示已阅读并同意《网络服务协议》"];
     serverButton.titleLabel.font = [UIFont systemFontOfSize:15];
     [serverButton setTitleColor:colorOrangeRed forState:UIControlStateNormal];
     [scrollView addSubview:serverButton];
@@ -209,6 +209,8 @@
 
 #pragma mark - 点击服务协议弹出页面
 -(void)serverButtonClick:(UIButton *)btn{
+
+    CGFloat LEFT = 15.0;
     if (serverView == nil) {
         serverView = [[UIView alloc] initWithFrame:CGRectMake(-WIDTH, 20, WIDTH, HEIGHT-20)];
         serverView.backgroundColor = [UIColor whiteColor];

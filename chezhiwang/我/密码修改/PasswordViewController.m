@@ -50,14 +50,14 @@
         gao = 0;
     }
     [UIView animateWithDuration:0.3 animations:^{
-        scrollView.frame = CGRectMake(0, 0, WIDTH, HEIGHT-64-height);
+        scrollView.frame = CGRectMake(0, 64, WIDTH, HEIGHT-64-height);
         scrollView.contentOffset = CGPointMake(0, -gao);
     }];
 }
 
 -(void)keyboardHide:(NSNotification *)notification
 {
-    scrollView.frame = CGRectMake(0, 0, WIDTH, HEIGHT-64);
+    scrollView.frame = CGRectMake(0, 64, WIDTH, HEIGHT-64);
     scrollView.contentOffset = CGPointMake(0, 0);
 }
 
@@ -115,18 +115,22 @@
     [self.view endEditing:YES];
 }
 -(void)updatePassword{
-    
+
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    __weak __typeof(self)weakSelf = self;
     NSString *url = [NSString stringWithFormat:[URLFile urlStringForUpdatePWD],[CZWManager manager].userID,oldPassword.text,newPassword.text];
    [HttpRequest GET:url success:^(id responseObject) {
+       [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
        if (responseObject[@"success"]) {
             [self alert:responseObject[@"success"]];
+           [weakSelf.navigationController popViewControllerAnimated:YES];
        }else{
             [self alert:responseObject[@"error"]];
        }
 
-
    } failure:^(NSError *error) {
-       
+       [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+
    }];
 }
 
@@ -141,7 +145,7 @@
     NSArray *array = @[@"当前密码",@"新密码",@"确认密码"];
     for (int i = 0; i < array.count; i ++) {
        
-       UITextField *textField = [LHController createTextFieldWithFrame:CGRectMake(LEFT, imageView.frame.size.height+i*51, WIDTH-LEFT, 50) andBGImageName:nil andPlaceholder:array[i] andTextFont:17 andSmallImageName:nil andDelegate:self];
+       UITextField *textField = [LHController createTextFieldWithFrame:CGRectMake(15, imageView.frame.size.height+i*51, WIDTH-15, 50) andBGImageName:nil andPlaceholder:array[i] andTextFont:17 andSmallImageName:nil andDelegate:self];
         textField.secureTextEntry = YES;
         [scrollView addSubview:textField];
         if (i == 0) {
@@ -156,7 +160,7 @@
         [scrollView addSubview:view];
         
         if (i == 2) {
-            UIButton *btn = [LHController createButtnFram:CGRectMake(LEFT, textField.frame.origin.y+textField.frame.size.height+40, WIDTH-LEFT*2, 35) Target:self Action:@selector(submitClick) Font:17 Text:@"提交"];
+            UIButton *btn = [LHController createButtnFram:CGRectMake(15, textField.frame.origin.y+textField.frame.size.height+40, WIDTH-15*2, 40) Target:self Action:@selector(submitClick) Font:17 Text:@"提交"];
             [scrollView addSubview:btn];
             scrollView.contentSize = CGSizeMake(0, btn.frame.origin.y+btn.frame.size.height+50);
         }

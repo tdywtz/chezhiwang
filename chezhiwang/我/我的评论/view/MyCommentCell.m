@@ -16,7 +16,7 @@
     UILabel *userNameLabel;
     UILabel *dateLabel;
     UILabel *contentLabel;
-    CZWLabel *titleLabel;
+    YYLabel *titleLabel;
     UIView *lineView;
 }
 
@@ -48,15 +48,22 @@
     contentLabel.numberOfLines = 0;
     contentLabel.textColor = colorBlack;
 
-    titleLabel = [[CZWLabel alloc] initWithFrame:CGRectZero];
+    titleLabel = [[YYLabel alloc] initWithFrame:CGRectZero];
     titleLabel.font = [UIFont systemFontOfSize:17];
     titleLabel.textColor = colorDeepGray;
-    titleLabel.textInsets = UIEdgeInsetsMake(0, 10, 2, 10);
+    titleLabel.textContainerInset = UIEdgeInsetsMake(2, 10, 2, 30);
     titleLabel.layer.borderColor = colorLineGray.CGColor;
     titleLabel.layer.borderWidth = 1;
     titleLabel.userInteractionEnabled = YES;
     [titleLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(titleLabelTap)]];
 
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrow"]];
+    [titleLabel addSubview:imageView];
+    [imageView makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(-10);
+        make.centerY.equalTo(0);
+        make.size.equalTo(CGSizeMake(17, 17));
+    }];
     
     lineView = [[UIView alloc] init];
     lineView.backgroundColor = colorLineGray;
@@ -143,9 +150,9 @@
 
     NSString *title = [NSString stringWithFormat:@"标题：%@ ", model.title];
     NSMutableAttributedString *titleText = [[NSMutableAttributedString alloc] initWithString:title];
-    [titleText setLh_colorWithColor:colorLightGray range:NSMakeRange(0, 3)];
-    [titleText appendWithImage:[UIImage imageNamed:@"arrow"] frame:CGRectMake(0, -3, 17, 17)];
-
+    titleText.yy_color = colorDeepGray;
+    [titleText yy_setColor:colorLightGray range:NSMakeRange(0, 3)];
+    titleText.yy_font = [UIFont systemFontOfSize:17];
     titleLabel.attributedText = titleText;
 }
 

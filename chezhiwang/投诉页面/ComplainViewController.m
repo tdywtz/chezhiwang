@@ -224,7 +224,7 @@
                         businessModel.cid = responseObject[@"cid"];
                         businessModel.lid = responseObject[@"lid"];
                         businessModel.seriesId = responseObject[@"seriesId"];
-                    if (businessModel.city.length == 0) {
+                    if (businessModel.lid.integerValue == 0) {
                         businessModel.custom = YES;
                     }
 
@@ -286,14 +286,19 @@
     _tableView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_tableView];
 
-    CZWLabel *headerLabel = [[CZWLabel alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 10)];
+    YYLabel *headerLabel = [[YYLabel alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 60)];
     headerLabel.textColor = colorLightGray;
-    headerLabel.backgroundColor = RGB_color(240, 240, 240, 1);
+    headerLabel.backgroundColor = colorBackGround;
     headerLabel.font = [UIFont systemFontOfSize:12];
     headerLabel.numberOfLines = 0;
-    headerLabel.textInsets = UIEdgeInsetsMake(10, 10, 10, 10);
+    headerLabel.textContainerInset = UIEdgeInsetsMake(10, 10, 10, 10);
     headerLabel.text = @"  为了我们能及时与您取得联系，了解到更详细信息，请您认真填写以下内容";
-    [headerLabel insertImage:[UIImage imageNamed:@"auto_common_提示"] frame:CGRectMake(0, -7, 20, 20) index:0];
+    NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:@"  为了我们能及时与您取得联系，了解到更详细信息，请您认真填写以下内容"];
+    att.yy_font = [UIFont systemFontOfSize:12];
+    att.yy_color = colorLightGray;
+    NSMutableAttributedString *chment = [NSMutableAttributedString yy_attachmentStringWithContent:[UIImage imageNamed:@"auto_common_提示"] contentMode:UIViewContentModeScaleToFill attachmentSize:CGSizeMake(20, 20) alignToFont:att.yy_font alignment:YYTextVerticalAlignmentCenter];
+    [att insertAttributedString:chment atIndex:0];
+    headerLabel.attributedText = att;
     [headerLabel sizeToFit];
     _tableView.tableHeaderView = headerLabel;
 
@@ -331,7 +336,7 @@
             hud.mode = MBProgressHUDModeText;
              hud.labelText = nil;
             hud.detailsLabelText = responseObject[@"error"];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                  [MBProgressHUD hideHUDForView:self.view animated:YES];
             });
         }
@@ -340,7 +345,7 @@
 
         hud.mode = MBProgressHUDModeText;
         hud.labelText = @"亲！网速不太理想，请稍后提交";
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [MBProgressHUD hideHUDForView:self.view animated:YES];
         });
     }];
@@ -472,7 +477,7 @@
     _dataDictionary[@"User_ID"] = [CZWManager manager].userID;
     _dataDictionary[@"origin"] = appOrigin;
     if (_again) {
-        _dataDictionary[@"again"] = @"agein";
+        _dataDictionary[@"again"] = @"again";
     }
 
     for (int i = 0; i < _dataArray.count; i ++) {
@@ -499,7 +504,7 @@
                     _dataDictionary[model.key] = model.value;
                 }else if (j == 7){
                     ComplainBusinessModel *businessModel = sectionModel.rowModels[j];
-                    if (businessModel.businessKey.length) {
+                    if (businessModel.custom == NO) {
                         _dataDictionary[businessModel.businessIdKey] = businessModel.businessId;
                         _dataDictionary[businessModel.businessKey] = businessModel.businessValue;
                     }else{

@@ -133,15 +133,12 @@
     
     __weak __typeof(self)weakSelf = self;
     [HttpRequest GET:url success:^(id responseObject) {
-        if ([responseObject count] == 0) {
-            return ;
-        }
-        NSDictionary *dict = [responseObject firstObject];
-        if (dict[@"error"]) {
-            [LHController alert:dict[@"error"]];
-        }else if (dict[@"scuess"]){
+
+        if (responseObject[@"error"]) {
+            [LHController alert:responseObject[@"error"]];
+        }else if (responseObject[@"scuess"]){
             EmailViewController *email = [[EmailViewController alloc] init];
-            email.email = dict[@"scuess"];
+            email.email = responseObject[@"scuess"];
             [weakSelf.navigationController pushViewController:email animated:YES];
         }
         [act stopAnimating];

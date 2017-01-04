@@ -39,7 +39,7 @@
     contentLabel.numberOfLines = 2;
     contentLabel.lineSpacing = 3;
     contentLabel.textInsets = UIEdgeInsetsMake(10, 10, 10, 10);
-    contentLabel.backgroundColor = RGB_color(240, 240, 240, 1);
+    contentLabel.backgroundColor = colorBackGround;
 
     [self.contentView addSubview:iconImageView];
     [self.contentView addSubview:hottypeImageView];
@@ -87,10 +87,10 @@
 
     hottypeImageView.hidden = !self.researchModel.hottype;
 
-    modelLabel.attributedText = [self attributed:@"调查车型：" font1:[UIFont systemFontOfSize:PT_FROM_PX(18)] color1:RGB_color(153, 153, 153, 1) stirng2:self.researchModel.models font2:[UIFont systemFontOfSize:PT_FROM_PX(23)] color2:RGB_color(17, 27, 36, 1)];
-     scoreLabel.attributedText = [self attributed:@"综合评分：" font1:[UIFont systemFontOfSize:PT_FROM_PX(18)] color1:RGB_color(153, 153, 153, 1) stirng2:self.researchModel.score font2:[UIFont systemFontOfSize:PT_FROM_PX(23)] color2:RGB_color(237, 17, 17, 1)];
+    modelLabel.attributedText = [self attributed:@"调查车型：" font1:[UIFont systemFontOfSize:PT_FROM_PX(18)] color1:colorLightGray stirng2:self.researchModel.models font2:[UIFont systemFontOfSize:PT_FROM_PX(23)] color2:RGB_color(17, 27, 36, 1)];
+     scoreLabel.attributedText = [self attributed:@"综合评分：" font1:[UIFont systemFontOfSize:PT_FROM_PX(18)] color1:colorLightGray stirng2:self.researchModel.score font2:[UIFont systemFontOfSize:PT_FROM_PX(23)] color2:RGB_color(237, 17, 17, 1)];
 
-    NSMutableAttributedString *result = [self attributed:@"调查结论：" font1:[UIFont systemFontOfSize:PT_FROM_PX(19)] color1:RGB_color(153, 153, 153, 1) stirng2:self.researchModel.content font2:[UIFont systemFontOfSize:PT_FROM_PX(19)] color2:RGB_color(68, 68, 68, 1)];
+    NSMutableAttributedString *result = [self attributed:@"调查结论：" font1:[UIFont systemFontOfSize:PT_FROM_PX(19)] color1:colorLightGray stirng2:self.researchModel.content font2:[UIFont systemFontOfSize:PT_FROM_PX(19)] color2:colorBlack];
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
     style.lineSpacing = 4;
     [result addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, result.length)];

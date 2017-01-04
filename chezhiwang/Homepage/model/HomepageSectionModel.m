@@ -13,6 +13,12 @@
 #import "HomepageAnswerModel.h"
 #include "HomepageForumModel.h"
 
+#import "NewsViewController.h"
+#import "ComplainListViewController.h"
+#import "NewsInvestigateViewController.h"
+#import "AnswerViewController.h"
+#import "ForumViewController.h"
+
 @implementation HomepageSectionModel
 
 - (NSMutableArray *)rowModels{
@@ -28,7 +34,8 @@
     newsSectionModel.headTitle = @"新闻";
     newsSectionModel.headImageName = @"新闻";
     newsSectionModel.footTitle = @"更多新闻";
-    newsSectionModel.headLineColor = RGB_color(0, 159, 251, 1);
+    newsSectionModel.headLineColor = colorLightBlue;
+    newsSectionModel.pushClass = [NewsViewController class];
     for (NSDictionary *dict in dictionary[@"news"]) {
         HomepageNewsModel * Model = [HomepageNewsModel mj_objectWithKeyValues:dict];
 
@@ -39,7 +46,8 @@
     complainSectionModel.headTitle = @"投诉";
     complainSectionModel.headImageName = @"投诉";
     complainSectionModel.footTitle = @"更多投诉";
-    complainSectionModel.headLineColor = RGB_color(247, 162, 0, 1);
+    complainSectionModel.headLineColor = colorYellow;
+    complainSectionModel.pushClass = [ComplainListViewController class];
     for (NSDictionary *dict in dictionary[@"complain"]) {
         HomepageComplainModel * Model = [HomepageComplainModel mj_objectWithKeyValues:dict];
         [complainSectionModel.rowModels addObject:Model];
@@ -50,6 +58,7 @@
     researchSectionModel.headImageName =@"调查";
     researchSectionModel.footTitle = @"更多调查";
     researchSectionModel.headLineColor = RGB_color(239, 95, 96, 1);
+    researchSectionModel.pushClass = [NewsInvestigateViewController class];
     for (NSDictionary *dict in dictionary[@"report"]) {
         HomepageResearchModel * Model = [HomepageResearchModel mj_objectWithKeyValues:dict];
         [researchSectionModel.rowModels addObject:Model];
@@ -60,6 +69,7 @@
     answerSectionModel.headImageName = @"答疑";
     answerSectionModel.footTitle = @"更多答疑";
     answerSectionModel.headLineColor = RGB_color(0, 169, 75, 1);
+    answerSectionModel.pushClass = [AnswerViewController class];
     for (NSDictionary *dict in dictionary[@"zjdy"]) {
         HomepageAnswerModel * Model = [HomepageAnswerModel mj_objectWithKeyValues:dict];
         [answerSectionModel.rowModels addObject:Model];
@@ -70,6 +80,7 @@
     forumSectionModel.headImageName = @"论坛";
     forumSectionModel.footTitle = @"更多论坛";
     forumSectionModel.headLineColor = RGB_color(0, 159, 251, 1);
+    forumSectionModel.pushClass = [ForumViewController class];
     for (NSDictionary *dict in dictionary[@"bbs"]) {
         HomepageForumModel * Model = [HomepageForumModel mj_objectWithKeyValues:dict];
         [forumSectionModel.rowModels addObject:Model];

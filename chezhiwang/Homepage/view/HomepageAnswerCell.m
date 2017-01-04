@@ -26,7 +26,7 @@
 - (void)makeUI{
     titleLabel = [[UILabel alloc] init];
     titleLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(23)];
-    titleLabel.textColor = RGB_color(17, 17, 17, 1);
+    titleLabel.textColor = colorBlack;
     titleLabel.numberOfLines = 1;
     
     typeLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
@@ -37,11 +37,11 @@
     
     dateLabel = [[UILabel alloc] init];
     dateLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(18)];
-    dateLabel.textColor = RGB_color(153, 153, 153, 1);
+    dateLabel.textColor = colorLightGray;
     
     answerLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
     answerLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(19)];
-    answerLabel.textColor = RGB_color(119, 119, 119, 1);
+    answerLabel.textColor = colorDeepGray;
     answerLabel.lineSpacing = 3;
     answerLabel.numberOfLines = 2;
     
@@ -87,15 +87,15 @@
 
     NSInteger type = [_answerModel.type integerValue];
     if (type == 1) {
-        typeLabel.textColor = RGB_color(78, 191, 243, 1);
+        typeLabel.textColor = colorLightBlue;
         typeLabel.text = @"维修保养";
 
     }else if (type == 2){
-        typeLabel.textColor = RGB_color(255, 147, 4, 1);
+        typeLabel.textColor = colorYellow;
         typeLabel.text = @"买车咨询";
 
     }else if(type == 3){
-        typeLabel.textColor = RGB_color(27, 188, 157, 1);
+        typeLabel.textColor = colorGreen;
         typeLabel.text = @"政策法规";
     }
 

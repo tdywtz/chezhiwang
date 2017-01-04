@@ -51,7 +51,7 @@
     self.label.frame = self.bounds;
     //self.s.center = CGPointMake(self.mj_w - 20, self.mj_h - 20);
     
-    self.loading.center = CGPointMake(50, self.mj_h * 0.5);
+    self.loading.center = CGPointMake(WIDTH/2-60, self.mj_h * 0.5);
 }
 
 #pragma mark 监听scrollView的contentOffset改变
@@ -92,7 +92,7 @@
             [self.loading startAnimating];
             break;
         case MJRefreshStateNoMoreData:
-            self.label.text = @"木有数据了";
+            self.label.text = @"没有数据了";
            // [self.s setOn:NO animated:YES];
             [self.loading stopAnimating];
             break;

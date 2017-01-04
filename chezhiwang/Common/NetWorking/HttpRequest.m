@@ -66,7 +66,7 @@
     NSURLSessionDataTask *task = [session GET:URLString parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-         success(responseObject);
+         success([self resetData:responseObject]);
 
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failure(error);
@@ -89,7 +89,7 @@
     NSURLSessionDataTask *task = [session GET:URLString parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        success(responseObject);
+        success([self resetData:responseObject]);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failure(error);
     }];
@@ -105,7 +105,7 @@
     NSURLSessionDataTask *task = [[self sessionManager] POST:URLString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        success(responseObject);
+        success([self resetData:responseObject]);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failure(error);
     }];
@@ -129,7 +129,7 @@
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        success(responseObject);
+        success([self resetData:responseObject]);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failure (error);
     }];
@@ -158,12 +158,37 @@
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        success(responseObject);
+        success([self resetData:responseObject]);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failure(error);
     }];
     
     return task;
+}
+
+
++ (NSDictionary *)resetData:(id)data{
+    if (!data) {
+        return nil;
+    }
+    if ([data isKindOfClass:[NSDictionary class]]) {
+        return data;
+    }else if ([data isKindOfClass:[NSArray class]]){
+        if ([data count] == 0) {
+            return [NSDictionary dictionary];
+        }else if ([data count] == 1){
+            NSDictionary *dict = data[0];
+            if (dict[@"success"] || dict[@"error"]) {
+                return dict;
+            }else{
+                return @{@"rel":data};
+            }
+        }else{
+            return @{@"rel":data};
+        }
+    }
+
+    return nil;
 }
 
 @end

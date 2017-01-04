@@ -26,7 +26,7 @@
 @implementation MyComplainDetailsHeaderView
 {
     UILabel *titleLabel;
-    CZWLabel *styleLabel;
+    YYLabel *styleLabel;
     UILabel *dateLabel;
     UILabel *stateLabel;
     MyComplainHeaderView *headerView;
@@ -44,14 +44,15 @@
         titleLabel.font = [UIFont systemFontOfSize:17];
         titleLabel.textColor = colorBlack;
 
-        styleLabel = [[CZWLabel alloc] initWithFrame:CGRectZero];
+        styleLabel = [[YYLabel alloc] initWithFrame:CGRectZero];
         styleLabel.font = [UIFont systemFontOfSize:14];
-        styleLabel.textInsets = UIEdgeInsetsMake(2, 4, 2, 4);
+        styleLabel.textContainerInset = UIEdgeInsetsMake(2, 4, 2, 4);
         styleLabel.layer.cornerRadius = 3;
         styleLabel.layer.masksToBounds = YES;
         styleLabel.layer.borderWidth = 1;
         styleLabel.textColor = RGB_color(237, 27, 36, 1);
         styleLabel.layer.borderColor = RGB_color(237, 27, 36, 1).CGColor;
+        styleLabel.preferredMaxLayoutWidth = 300;
 
         dateLabel = [[UILabel alloc] init];
         dateLabel.font = [UIFont systemFontOfSize:14];

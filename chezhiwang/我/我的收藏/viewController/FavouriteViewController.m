@@ -44,6 +44,13 @@
         [_dataArray addObject:dict];
     }
     [_tableView reloadData];
+
+    if (_dataArray.count == 0) {
+        self.backgroundView.contentLabel.text = @"暂无收藏";
+        self.backgroundView.hidden = NO;
+    }else{
+        self.backgroundView.hidden = YES;
+    }
 }
 
 - (void)viewDidLoad {
@@ -54,6 +61,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
 
     [self createTableView];
+
 }
 
 -(void)createTableView{
@@ -64,25 +72,6 @@
     _tableView.rowHeight = 80;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
- 
-}
-
--(void)createSpace{
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 140)];
-    imageView.center = CGPointMake(WIDTH/2, HEIGHT/2-64);
-    [self.view addSubview:imageView];
-    
-    UIImageView *subImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-    subImageView.image = [UIImage imageNamed:@"90"];
-    [imageView addSubview:subImageView];
-    
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, 100, 40)];
-    label.text = @"您还没有收藏暂无收藏内容";
-    label.numberOfLines = 0;
-    label.textAlignment = NSTextAlignmentCenter;
-    label.font = [UIFont systemFontOfSize:B-2];
-    [imageView addSubview:label];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -136,19 +125,11 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"PageOne"];
-    
     [self reaData];
-    if (_dataArray.count == 0) {
-        [self createSpace];
-    }
 
 }
 
--(void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"PageOne"];
-}
+
 /*
 #pragma mark - Navigation
 

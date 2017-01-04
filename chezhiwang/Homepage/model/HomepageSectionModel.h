@@ -15,6 +15,7 @@
 @property (nonatomic,strong) UIColor *headLineColor;
 
 @property (nonatomic,copy) NSString *footTitle;
+@property (nonatomic,assign) Class pushClass;
 
 @property (nonatomic,strong) NSMutableArray *rowModels;
 

@@ -35,7 +35,7 @@
             CGRect rect = CGRectMake(35+i*30, 0 , 25, 25);
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
             btn.frame = rect;
-            [btn setBackgroundImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
+            [btn setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
             [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
             [self.buttons addObject:btn];
             [self addSubview:btn];
@@ -383,7 +383,7 @@
         }
     }
     NSArray *arr1 = @[@"uname",@"age",@"sex",@"mobile",@"email",@"phone",@"address",@"occ"];
-    NSArray *arr2 = @[@"brand",@"series",@"model",@"engine",@"carriage",@"sign",@"buytime",@"lname",@"issuetime",@"mileage"];
+    NSArray *arr2 = @[@"brand",@"series",@"model",@"engine",@"carriage",@"sign",@"buytime",@"issuetime",@"mileage",@"lname"];
     NSArray *arr3 = @[@"type",@"attribute",@"question",@"content"];
 
 

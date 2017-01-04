@@ -32,7 +32,7 @@ typedef enum {
     self = [super initWithFrame:frame];
     if (self) {
         _numLabel = [[UILabel alloc] init];
-        _numLabel.textColor = RGB_color(239, 95, 96, 1);
+        _numLabel.textColor = colorOrangeRed;
         _numLabel.font = [UIFont boldSystemFontOfSize:16];
         [self addSubview:_numLabel];
 

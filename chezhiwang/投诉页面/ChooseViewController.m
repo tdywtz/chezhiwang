@@ -433,13 +433,13 @@ typedef enum {
     cellImageView.hidden = YES;
     if (self.chooseNumbers == chooseNumberAlone) {
         if ([model.title isEqualToString:_returnTitle]) {
-            cell.textLabel.textColor = colorDeepBlue;
+            cell.textLabel.textColor = colorLightBlue;
             cellImageView.hidden = NO;
         }
     }else if (self.chooseNumbers == chooseNumberMany){
         for (int i = 0; i < self.titleArray.count; i ++) {
             if ([model.title isEqualToString:self.titleArray[i]]) {
-                cell.textLabel.textColor = colorDeepBlue;
+                cell.textLabel.textColor = colorLightBlue;
                 cellImageView.hidden = NO;
             }
         }

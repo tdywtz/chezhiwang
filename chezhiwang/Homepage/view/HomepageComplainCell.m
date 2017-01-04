@@ -54,7 +54,7 @@
         label.text = str1;
         label.textAlignment = NSTextAlignmentCenter;
         label.textColor = [UIColor whiteColor];
-        label.backgroundColor = RGB_color(172, 92, 158, 1);
+        label.backgroundColor = colorPurple;
         label.font = [UIFont systemFontOfSize:PT_FROM_PX(16)];
 
         [self addSubview:label];
@@ -68,10 +68,10 @@
 
         UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(_point.x, _point.y, length2+20, 20)];
         label2.text = str2;
-        label2.textColor = RGB_color(172, 92, 158, 1);
+        label2.textColor = colorPurple;
         label2.textAlignment = NSTextAlignmentCenter;
         label2.font = [UIFont systemFontOfSize:PT_FROM_PX(16)];
-        label2.layer.borderColor = RGB_color(172, 92, 158, 1).CGColor;
+        label2.layer.borderColor = colorPurple.CGColor;
         label2.layer.borderWidth = 1;
 
         [self addSubview:label2];
@@ -115,7 +115,7 @@
 
         UILabel *labelServer = [LHController createLabelWithFrame:CGRectMake(_point.x, _point.y, w+20, 20) Font:PT_FROM_PX(16) Bold:NO TextColor:nil Text:dict[@"bw"]];
         labelServer.textColor = [UIColor whiteColor];
-        labelServer.backgroundColor = RGB_color(29, 188, 158, 1);
+        labelServer.backgroundColor = colorGreen;
         labelServer.textAlignment = NSTextAlignmentCenter;
         [self addSubview:labelServer];
 
@@ -131,10 +131,10 @@
 
             UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(_point.x, _point.y, length2+20, 20)];
             label2.text = str2;
-            label2.textColor = RGB_color(29, 188, 158, 1);
+            label2.textColor = colorGreen;
             label2.textAlignment = NSTextAlignmentCenter;
             label2.font = [UIFont systemFontOfSize:PT_FROM_PX(16)];
-            label2.layer.borderColor = RGB_color(29, 188, 158, 1).CGColor;
+            label2.layer.borderColor = colorGreen.CGColor;
             label2.layer.borderWidth = 1;
 
             [self addSubview:label2];
@@ -195,34 +195,34 @@
 - (void)makeUI{
     titleLabel = [[UILabel alloc] init];
     titleLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(23)];
-    titleLabel.textColor = RGB_color(17, 17, 17, 1);
+    titleLabel.textColor = colorBlack;
     titleLabel.numberOfLines = 1;
     
 
     cpidLabel = [[UILabel alloc] init];
     cpidLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(18)];
-    cpidLabel.textColor = RGB_color(68, 68, 68, 1);
+    cpidLabel.textColor = colorBlack;
 
     dateLabel = [[UILabel alloc] init];
     dateLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(18)];
-    dateLabel.textColor = RGB_color(153, 153, 153, 1);
+    dateLabel.textColor = colorLightGray;
 
     brandNameLabel = [[UILabel alloc] init];
     brandNameLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(19)];
-    brandNameLabel.textColor = RGB_color(68, 68, 68, 1);
+    brandNameLabel.textColor = colorBlack;
 
     seriesNameLabel = [[UILabel alloc] init];
     seriesNameLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(19)];
-    seriesNameLabel.textColor = RGB_color(68, 68, 68, 1);
+    seriesNameLabel.textColor = colorBlack;
 
     modelNameLabel = [[UILabel alloc] init];
     modelNameLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(19)];
-    modelNameLabel.textColor = RGB_color(68, 68, 68, 1);
+    modelNameLabel.textColor = colorBlack;
 
     showView = [[CustomShowQuestionView alloc] initWithFrame:CGRectZero];
 
     UIView *bgView = [[UIView alloc] init];
-    bgView.backgroundColor = RGB_color(240, 240, 240, 1);
+    bgView.backgroundColor = colorBackGround;
 
     [self.contentView addSubview:bgView];
     [self.contentView addSubview:titleLabel];

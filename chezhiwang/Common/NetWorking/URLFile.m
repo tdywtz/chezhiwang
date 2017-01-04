@@ -339,14 +339,15 @@
 
 
 /**提交地区*/
-+ (NSString *)urlStringForUpdatePersonalAddress{
-    return [self stringForCommonServiceWithAct:@"act=updateMyAddress&uid=%@&realname=%@&pid=%@&cid=%@&aid=%@&pname=%@&cname=%@&aname=%@&address=%@&postcode=%@"];
-}
+//+ (NSString *)urlStringForUpdatePersonalAddress{
+//    return [self stringForCommonServiceWithAct:@"act=updateMyAddress&uid=%@&realname=%@&pid=%@&cid=%@&aid=%@&pname=%@&cname=%@&aname=%@&address=%@&postcode=%@"];
+//}
 
 
 /**提交用户信息*/
 + (NSString *)urlStringForpersonalInfo{
-    return [self stringForCommonServiceWithAct:@"act=u_updateinfo&uid=%@&realname=%@&gender=%@&birth=%@&email=%@&mobile=%@&qq=%@&telephone=%@&bid=%@&bname=%@&sid=%@&sname=%@&mid=%@&mname=%@"];
+    //&uid=%@&realname=%@&gender=%@&birth=%@&email=%@&mobile=%@&qq=%@&telephone=%@&bid=%@&bname=%@&sid=%@&sname=%@&mid=%@&mname=%@"
+    return [self stringForCommonServiceWithAct:@"act=u_updateinfo&uid=%@"];
 }
 
 

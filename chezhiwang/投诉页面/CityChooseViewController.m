@@ -210,7 +210,7 @@
         cell.textLabel.text = model.title;
         UIImageView *cellImageView = (UIImageView *)[cell.contentView viewWithTag:100];
         if ([cell.textLabel.text isEqualToString:_pName]) {
-            cell.textLabel.textColor = colorDeepBlue;
+            cell.textLabel.textColor = colorLightBlue;
             cellImageView.hidden = NO;
         }else{
             cell.textLabel.textColor = colorBlack;
@@ -238,7 +238,7 @@
     cell.textLabel.text = model.title;
     UIImageView *cellImageView = (UIImageView *)[cell.contentView viewWithTag:200];
     if ([cell.textLabel.text isEqualToString:_cName]) {
-        cell.textLabel.textColor = colorDeepBlue;
+        cell.textLabel.textColor = colorLightBlue;
         cellImageView.hidden = NO;
     }else{
         cell.textLabel.textColor = colorBlack;

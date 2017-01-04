@@ -8,6 +8,43 @@
 
 #import "BasicViewController.h"
 
+@implementation BasicBackgroundView
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+
+        _imageView = [[UIImageView alloc] init];
+        _imageView.image = [UIImage imageNamed:@"auto_backgruondView_暂无"];
+
+        _contentLabel = [[UILabel alloc] init];
+        _contentLabel.textColor = colorBlack;
+
+        [self addSubview:_imageView];
+        [self addSubview:_contentLabel];
+
+        [_imageView makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(0);
+            make.centerY.equalTo(-20);
+        }];
+
+        [_contentLabel makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(0);
+            make.width.lessThanOrEqualTo(WIDTH - 30);
+            make.top.equalTo(_imageView.bottom).offset(20);
+        }];
+    }
+    return self;
+}
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
+    return  nil;
+}
+
+@end
+
+#pragma mark - BasicViewController
 @interface BasicViewController ()
 
 @end
@@ -22,6 +59,10 @@
     [super viewDidLoad];
    
     self.view.backgroundColor = [UIColor whiteColor];
+    if (self.navigationController) {
+        [self.navigationController setStatusBarStyle:UIStatusBarStyleLightContent];
+    }
+
     if (self.navigationController.viewControllers.count > 1) {
         [self createLeftItemBack];
     }
@@ -95,6 +136,15 @@
         }];
     }
     return _contentView;
+}
+
+- (BasicBackgroundView *)backgroundView{
+    if (_backgroundView == nil) {
+        _backgroundView = [[BasicBackgroundView alloc] initWithFrame:self.view.frame];
+        _backgroundView.hidden = YES;
+        [self.view addSubview:_backgroundView];
+    }
+    return _backgroundView;
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle{

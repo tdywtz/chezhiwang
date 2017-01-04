@@ -54,6 +54,8 @@
       }
       if (_dataArray.count == 0) {
           [weakSelf createSpace];
+      }else{
+          weakSelf.backgroundView.hidden = YES;
       }
 
       [_tableView reloadData];
@@ -76,6 +78,7 @@
 
     [self creaRightItem];
     [self createTableView];
+
 }
 
 -(void)createTableView{
@@ -105,20 +108,8 @@
 }
 
 -(void)createSpace{
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 140)];
-    imageView.center = CGPointMake(WIDTH/2, HEIGHT/2-64);
-    [self.view addSubview:imageView];
-
-    UIImageView *subImageView =[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-    subImageView.image = [UIImage imageNamed:@"90"];
-    [imageView addSubview:subImageView];
-    
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, 100, 40)];
-    label.text = @"您还没有投诉暂无投诉内容";
-    label.numberOfLines = 0;
-    label.textAlignment = NSTextAlignmentCenter;
-    label.font = [UIFont systemFontOfSize:15];
-    [imageView addSubview:label];
+    self.backgroundView.contentLabel.text = @"暂无投诉";
+    self.backgroundView.hidden = NO;
 }
 
 #pragma mark - 返回
@@ -136,7 +127,7 @@
 -(void)creaRightItem{
 
     UIButton *complainButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [complainButton setImage:[UIImage imageNamed:@"auto_投诉列表_提问"] forState:UIControlStateNormal];
+    [complainButton setImage:[UIImage imageNamed:@"auto_投诉列表_投诉"] forState:UIControlStateNormal];
     complainButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
     complainButton.frame = CGRectMake(0, 0, 30, 20);
     [complainButton addTarget:self action:@selector(complainButtonClick) forControlEvents:UIControlEventTouchUpInside];

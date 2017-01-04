@@ -30,7 +30,7 @@
     
     [matt addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, matt.length)];
     [matt addAttribute:NSForegroundColorAttributeName value:colorBlack range:NSMakeRange(0, matt.length)];
-    NSAttributedString *att = [[NSAttributedString alloc] initWithString:self.email attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15],NSForegroundColorAttributeName:colorDeepBlue}];
+    NSAttributedString *att = [[NSAttributedString alloc] initWithString:self.email attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15],NSForegroundColorAttributeName:colorLightBlue}];
     [matt insertAttributedString:att atIndex:@"邮件已成功发送至邮箱：".length];
     NSMutableParagraphStyle *parag = [[NSMutableParagraphStyle alloc] init];
     parag.lineSpacing = 4;

@@ -32,7 +32,7 @@
     UITextField *textField = [[UITextField alloc] initWithFrame:frame];
     [textField setBackground:imge];
     textField.placeholder = placeholder;
-    textField.font = [UIFont systemFontOfSize:size-3];
+    textField.font = [UIFont systemFontOfSize:size];
     //清除按钮
     textField.clearButtonMode=YES;
     //关闭首字母大写
@@ -61,7 +61,7 @@
     
     UITextField *field = [[UITextField alloc] initWithFrame:frame];
     field.placeholder = placeholder;
-    field.font = [UIFont systemFontOfSize:font-3];
+    field.font = [UIFont systemFontOfSize:font];
     field.clearButtonMode = YES;
     field.textColor = colorBlack;
     //关闭首字母大写
