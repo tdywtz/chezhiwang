@@ -265,6 +265,16 @@
     return  [self stringForCZWServiceWithAct:@"act=bbslist&cid=%@&order=%ld&topic=%ld&p=%ld&s=10"];
 }
 
+#pragma mark - 找车--
+/**发现-找车-车系综述 - 车型信息 评分*/
++ (NSString *)urlString_s_index{
+    return [self stringForCommonServiceWithAct:@"act=s_index&sid=%@"];
+}
+/**发现-找车-车系综述 - 车型信息 评分*/
++ (NSString *)urlString_s_index2{
+    return [self stringForCommonServiceWithAct:@"act=s_index2&sid=%@"];
+}
+
 #pragma mark-个人中心
 /**获取用户信息*/
 + (NSString *)urlStringForUser{

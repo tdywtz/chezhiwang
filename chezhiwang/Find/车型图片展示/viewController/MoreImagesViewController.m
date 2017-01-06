@@ -40,7 +40,6 @@
         make.top.equalTo(64);
     }];
 
-
     UIView *lineView = [[UIView alloc] init];
     lineView.backgroundColor  = colorLineGray;
     [_modelnameLabel addSubview:lineView];

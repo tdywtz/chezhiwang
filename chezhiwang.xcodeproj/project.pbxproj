@@ -64,11 +64,6 @@
 		4D7E72581B9D5CD10048F221 /* chezhiwangTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D7E72571B9D5CD10048F221 /* chezhiwangTests.m */; };
 		4D8243771CA50EA100E6C332 /* LookPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8243741CA50EA100E6C332 /* LookPasswordViewController.m */; };
 		4D8243781CA50EA200E6C332 /* EmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8243761CA50EA100E6C332 /* EmailViewController.m */; };
-		4D84E6561BF33B4800F901BF /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D84E6551BF33B4800F901BF /* MyViewController.m */; };
-		4D87CE541C0324BD00466A97 /* ChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D87CE4B1C0324BD00466A97 /* ChooseViewController.m */; };
-		4D87CE551C0324BD00466A97 /* CityChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D87CE4D1C0324BD00466A97 /* CityChooseViewController.m */; };
-		4D87CE571C0324BD00466A97 /* EditImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D87CE511C0324BD00466A97 /* EditImageViewController.m */; };
-		4D87CE581C0324BD00466A97 /* EditImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D87CE531C0324BD00466A97 /* EditImageCell.m */; };
 		4D87CE611C0324E000466A97 /* LHDatePickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D87CE5C1C0324E000466A97 /* LHDatePickView.m */; };
 		4D87CE621C0324E000466A97 /* LHPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D87CE5E1C0324E000466A97 /* LHPickerView.m */; };
 		4D88234E1BBB8080007F8653 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D88234D1BBB8080007F8653 /* Security.framework */; };
@@ -76,115 +71,6 @@
 		4D8823541BBB80AB007F8653 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D8823531BBB80AB007F8653 /* CoreGraphics.framework */; };
 		4D8823561BBB80BB007F8653 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D8823551BBB80BB007F8653 /* CoreTelephony.framework */; };
 		4D8DD0B31B9EB54C00619923 /* LHController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D8DD0B21B9EB54C00619923 /* LHController.m */; };
-		4D952C451BF0876D000F26C0 /* LHEmojiView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D952C441BF0876D000F26C0 /* LHEmojiView.m */; };
-		4D952CB11BF0886C000F26C0 /* NO.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C471BF0886C000F26C0 /* NO.gif */; };
-		4D952CB21BF0886C000F26C0 /* OK.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C481BF0886C000F26C0 /* OK.gif */; };
-		4D952CB31BF0886C000F26C0 /* Thumbs.db in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C491BF0886C000F26C0 /* Thumbs.db */; };
-		4D952CB41BF0886C000F26C0 /* 乒乓.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C4A1BF0886C000F26C0 /* 乒乓.gif */; };
-		4D952CB51BF0886C000F26C0 /* 亲亲.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C4B1BF0886C000F26C0 /* 亲亲.gif */; };
-		4D952CB61BF0886C000F26C0 /* 便便.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C4C1BF0886C000F26C0 /* 便便.gif */; };
-		4D952CB71BF0886C000F26C0 /* 偷笑.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C4D1BF0886C000F26C0 /* 偷笑.gif */; };
-		4D952CB81BF0886C000F26C0 /* 傲慢.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C4E1BF0886C000F26C0 /* 傲慢.gif */; };
-		4D952CB91BF0886C000F26C0 /* 再见.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C4F1BF0886C000F26C0 /* 再见.gif */; };
-		4D952CBA1BF0886C000F26C0 /* 冷汗.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C501BF0886C000F26C0 /* 冷汗.gif */; };
-		4D952CBB1BF0886C000F26C0 /* 凋谢.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C511BF0886C000F26C0 /* 凋谢.gif */; };
-		4D952CBC1BF0886C000F26C0 /* 刀.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C521BF0886C000F26C0 /* 刀.gif */; };
-		4D952CBD1BF0886C000F26C0 /* 勾引.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C531BF0886C000F26C0 /* 勾引.gif */; };
-		4D952CBE1BF0886C000F26C0 /* 发呆.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C541BF0886C000F26C0 /* 发呆.gif */; };
-		4D952CBF1BF0886C000F26C0 /* 发怒.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C551BF0886C000F26C0 /* 发怒.gif */; };
-		4D952CC01BF0886C000F26C0 /* 发抖.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C561BF0886C000F26C0 /* 发抖.gif */; };
-		4D952CC11BF0886C000F26C0 /* 可怜.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C571BF0886C000F26C0 /* 可怜.gif */; };
-		4D952CC21BF0886C000F26C0 /* 可爱.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C581BF0886C000F26C0 /* 可爱.gif */; };
-		4D952CC31BF0886C000F26C0 /* 右哼哼.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C591BF0886C000F26C0 /* 右哼哼.gif */; };
-		4D952CC41BF0886C000F26C0 /* 右太极.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C5A1BF0886C000F26C0 /* 右太极.gif */; };
-		4D952CC51BF0886C000F26C0 /* 吐.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C5B1BF0886C000F26C0 /* 吐.gif */; };
-		4D952CC61BF0886C000F26C0 /* 吓.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C5C1BF0886C000F26C0 /* 吓.gif */; };
-		4D952CC71BF0886C000F26C0 /* 呲牙.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C5D1BF0886C000F26C0 /* 呲牙.gif */; };
-		4D952CC81BF0886C000F26C0 /* 咒骂.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C5E1BF0886C000F26C0 /* 咒骂.gif */; };
-		4D952CC91BF0886C000F26C0 /* 咖啡.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C5F1BF0886C000F26C0 /* 咖啡.gif */; };
-		4D952CCA1BF0886C000F26C0 /* 哈欠.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C601BF0886C000F26C0 /* 哈欠.gif */; };
-		4D952CCB1BF0886C000F26C0 /* 啤酒.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C611BF0886C000F26C0 /* 啤酒.gif */; };
-		4D952CCC1BF0886C000F26C0 /* 嘘.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C621BF0886C000F26C0 /* 嘘.gif */; };
-		4D952CCD1BF0886C000F26C0 /* 回头.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C631BF0886C000F26C0 /* 回头.gif */; };
-		4D952CCE1BF0886C000F26C0 /* 困.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C641BF0886C000F26C0 /* 困.gif */; };
-		4D952CCF1BF0886C000F26C0 /* 坏笑.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C651BF0886C000F26C0 /* 坏笑.gif */; };
-		4D952CD01BF0886C000F26C0 /* 大兵.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C661BF0886C000F26C0 /* 大兵.gif */; };
-		4D952CD11BF0886C000F26C0 /* 大哭.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C671BF0886C000F26C0 /* 大哭.gif */; };
-		4D952CD21BF0886C000F26C0 /* 太阳.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C681BF0886C000F26C0 /* 太阳.gif */; };
-		4D952CD31BF0886C000F26C0 /* 奋斗.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C691BF0886C000F26C0 /* 奋斗.gif */; };
-		4D952CD41BF0886C000F26C0 /* 委屈.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C6A1BF0886C000F26C0 /* 委屈.gif */; };
-		4D952CD51BF0886C000F26C0 /* 害羞.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C6B1BF0886C000F26C0 /* 害羞.gif */; };
-		4D952CD61BF0886C000F26C0 /* 尴尬.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C6C1BF0886C000F26C0 /* 尴尬.gif */; };
-		4D952CD71BF0886C000F26C0 /* 左哼哼.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C6D1BF0886C000F26C0 /* 左哼哼.gif */; };
-		4D952CD81BF0886C000F26C0 /* 左太极.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C6E1BF0886C000F26C0 /* 左太极.gif */; };
-		4D952CD91BF0886C000F26C0 /* 差劲.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C6F1BF0886C000F26C0 /* 差劲.gif */; };
-		4D952CDA1BF0886C000F26C0 /* 弱.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C701BF0886C000F26C0 /* 弱.gif */; };
-		4D952CDB1BF0886C000F26C0 /* 强.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C711BF0886C000F26C0 /* 强.gif */; };
-		4D952CDC1BF0886C000F26C0 /* 得意.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C721BF0886C000F26C0 /* 得意.gif */; };
-		4D952CDD1BF0886C000F26C0 /* 微笑.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C731BF0886C000F26C0 /* 微笑.gif */; };
-		4D952CDE1BF0886C000F26C0 /* 心碎.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C741BF0886C000F26C0 /* 心碎.gif */; };
-		4D952CDF1BF0886C000F26C0 /* 快哭了.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C751BF0886C000F26C0 /* 快哭了.gif */; };
-		4D952CE01BF0886C000F26C0 /* 怄火.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C761BF0886C000F26C0 /* 怄火.gif */; };
-		4D952CE11BF0886C000F26C0 /* 惊恐.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C771BF0886C000F26C0 /* 惊恐.gif */; };
-		4D952CE21BF0886C000F26C0 /* 惊讶.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C781BF0886C000F26C0 /* 惊讶.gif */; };
-		4D952CE31BF0886C000F26C0 /* 憨笑.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C791BF0886C000F26C0 /* 憨笑.gif */; };
-		4D952CE41BF0886C000F26C0 /* 抓狂.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C7A1BF0886C000F26C0 /* 抓狂.gif */; };
-		4D952CE51BF0886C000F26C0 /* 折磨.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C7B1BF0886C000F26C0 /* 折磨.gif */; };
-		4D952CE61BF0886C000F26C0 /* 抠鼻.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C7C1BF0886C000F26C0 /* 抠鼻.gif */; };
-		4D952CE71BF0886C000F26C0 /* 抱拳.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C7D1BF0886C000F26C0 /* 抱拳.gif */; };
-		4D952CE81BF0886C000F26C0 /* 拥抱.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C7E1BF0886C000F26C0 /* 拥抱.gif */; };
-		4D952CE91BF0886C000F26C0 /* 拳头.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C7F1BF0886C000F26C0 /* 拳头.gif */; };
-		4D952CEA1BF0886C000F26C0 /* 挥手.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C801BF0886C000F26C0 /* 挥手.gif */; };
-		4D952CEB1BF0886C000F26C0 /* 握手.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C811BF0886C000F26C0 /* 握手.gif */; };
-		4D952CEC1BF0886C000F26C0 /* 撇嘴.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C821BF0886C000F26C0 /* 撇嘴.gif */; };
-		4D952CED1BF0886C000F26C0 /* 擦汗.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C831BF0886C000F26C0 /* 擦汗.gif */; };
-		4D952CEE1BF0886C000F26C0 /* 敲打.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C841BF0886C000F26C0 /* 敲打.gif */; };
-		4D952CEF1BF0886C000F26C0 /* 晕.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C851BF0886C000F26C0 /* 晕.gif */; };
-		4D952CF01BF0886C000F26C0 /* 月亮.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C861BF0886C000F26C0 /* 月亮.gif */; };
-		4D952CF11BF0886C000F26C0 /* 流汗.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C871BF0886C000F26C0 /* 流汗.gif */; };
-		4D952CF21BF0886C000F26C0 /* 流泪.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C881BF0886C000F26C0 /* 流泪.gif */; };
-		4D952CF31BF0886C000F26C0 /* 激动.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C891BF0886C000F26C0 /* 激动.gif */; };
-		4D952CF41BF0886C000F26C0 /* 激吻.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C8A1BF0886C000F26C0 /* 激吻.gif */; };
-		4D952CF51BF0886C000F26C0 /* 炸弹.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C8B1BF0886C000F26C0 /* 炸弹.gif */; };
-		4D952CF61BF0886C000F26C0 /* 爱你.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C8C1BF0886C000F26C0 /* 爱你.gif */; };
-		4D952CF71BF0886C000F26C0 /* 爱心.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C8D1BF0886C000F26C0 /* 爱心.gif */; };
-		4D952CF81BF0886C000F26C0 /* 爱情.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C8E1BF0886C000F26C0 /* 爱情.gif */; };
-		4D952CF91BF0886C000F26C0 /* 猪头.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C8F1BF0886C000F26C0 /* 猪头.gif */; };
-		4D952CFA1BF0886C000F26C0 /* 献吻.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C901BF0886C000F26C0 /* 献吻.gif */; };
-		4D952CFB1BF0886C000F26C0 /* 玫瑰.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C911BF0886C000F26C0 /* 玫瑰.gif */; };
-		4D952CFC1BF0886C000F26C0 /* 瓢虫.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C921BF0886C000F26C0 /* 瓢虫.gif */; };
-		4D952CFD1BF0886C000F26C0 /* 疑问.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C931BF0886C000F26C0 /* 疑问.gif */; };
-		4D952CFE1BF0886C000F26C0 /* 白眼.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C941BF0886C000F26C0 /* 白眼.gif */; };
-		4D952CFF1BF0886C000F26C0 /* 睡.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C951BF0886C000F26C0 /* 睡.gif */; };
-		4D952D001BF0886C000F26C0 /* 磕头.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C961BF0886C000F26C0 /* 磕头.gif */; };
-		4D952D011BF0886C000F26C0 /* 示爱.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C971BF0886C000F26C0 /* 示爱.gif */; };
-		4D952D021BF0886C000F26C0 /* 礼物.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C981BF0886C000F26C0 /* 礼物.gif */; };
-		4D952D031BF0886C000F26C0 /* 篮球.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C991BF0886C000F26C0 /* 篮球.gif */; };
-		4D952D041BF0886C000F26C0 /* 糗大了.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C9A1BF0886C000F26C0 /* 糗大了.gif */; };
-		4D952D051BF0886C000F26C0 /* 胜利.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C9B1BF0886C000F26C0 /* 胜利.gif */; };
-		4D952D061BF0886C000F26C0 /* 色.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C9C1BF0886C000F26C0 /* 色.gif */; };
-		4D952D071BF0886C000F26C0 /* 菜刀.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C9D1BF0886C000F26C0 /* 菜刀.gif */; };
-		4D952D081BF0886C000F26C0 /* 蛋糕.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C9E1BF0886C000F26C0 /* 蛋糕.gif */; };
-		4D952D091BF0886C000F26C0 /* 衰.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952C9F1BF0886C000F26C0 /* 衰.gif */; };
-		4D952D0A1BF0886C000F26C0 /* 西瓜.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952CA01BF0886C000F26C0 /* 西瓜.gif */; };
-		4D952D0B1BF0886C000F26C0 /* 调皮.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952CA11BF0886C000F26C0 /* 调皮.gif */; };
-		4D952D0C1BF0886C000F26C0 /* 足球.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952CA21BF0886C000F26C0 /* 足球.gif */; };
-		4D952D0D1BF0886C000F26C0 /* 跳绳.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952CA31BF0886C000F26C0 /* 跳绳.gif */; };
-		4D952D0E1BF0886C000F26C0 /* 跳跳.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952CA41BF0886C000F26C0 /* 跳跳.gif */; };
-		4D952D0F1BF0886C000F26C0 /* 转圈.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952CA51BF0886C000F26C0 /* 转圈.gif */; };
-		4D952D101BF0886C000F26C0 /* 鄙视.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952CA61BF0886C000F26C0 /* 鄙视.gif */; };
-		4D952D111BF0886C000F26C0 /* 酷.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952CA71BF0886C000F26C0 /* 酷.gif */; };
-		4D952D121BF0886C000F26C0 /* 闪电.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952CA81BF0886C000F26C0 /* 闪电.gif */; };
-		4D952D131BF0886C000F26C0 /* 闭嘴.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952CA91BF0886C000F26C0 /* 闭嘴.gif */; };
-		4D952D141BF0886C000F26C0 /* 阴险.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952CAA1BF0886C000F26C0 /* 阴险.gif */; };
-		4D952D151BF0886C000F26C0 /* 难过.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952CAB1BF0886C000F26C0 /* 难过.gif */; };
-		4D952D161BF0886C000F26C0 /* 飞吻.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952CAC1BF0886C000F26C0 /* 飞吻.gif */; };
-		4D952D171BF0886C000F26C0 /* 饥饿.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952CAD1BF0886C000F26C0 /* 饥饿.gif */; };
-		4D952D181BF0886C000F26C0 /* 饭.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952CAE1BF0886C000F26C0 /* 饭.gif */; };
-		4D952D191BF0886C000F26C0 /* 骷髅.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952CAF1BF0886C000F26C0 /* 骷髅.gif */; };
-		4D952D1A1BF0886C000F26C0 /* 鼓掌.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4D952CB01BF0886C000F26C0 /* 鼓掌.gif */; };
-		4D952D1D1BF08E54000F26C0 /* LHEmojiButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D952D1C1BF08E54000F26C0 /* LHEmojiButton.m */; };
-		4D967DBD1DD2E12C00C1B255 /* ComplainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D967DBC1DD2E12C00C1B255 /* ComplainViewController.m */; };
 		4D967DC31DD2E42300C1B255 /* ComplainSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D967DC21DD2E42300C1B255 /* ComplainSectionModel.m */; };
 		4D967DCC1DD2EDED00C1B255 /* ComplainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D967DCB1DD2EDED00C1B255 /* ComplainTableViewCell.m */; };
 		4D967DCF1DD2F3CF00C1B255 /* ComplainSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D967DCE1DD2F3CF00C1B255 /* ComplainSectionHeaderView.m */; };
@@ -195,31 +81,14 @@
 		4D97FC891BAF94C40089C684 /* MyAskCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D97FC841BAF94C40089C684 /* MyAskCell.m */; };
 		4D97FC8A1BAF94C40089C684 /* MyAskModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D97FC861BAF94C40089C684 /* MyAskModel.m */; };
 		4D97FC8B1BAF94C40089C684 /* MyAskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D97FC881BAF94C40089C684 /* MyAskViewController.m */; };
-		4D9A3F571B9E7255008805E4 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D9A3F4E1B9E7255008805E4 /* FMDatabase.m */; };
-		4D9A3F581B9E7255008805E4 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D9A3F501B9E7255008805E4 /* FMDatabaseAdditions.m */; };
-		4D9A3F591B9E7255008805E4 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D9A3F521B9E7255008805E4 /* FMDatabasePool.m */; };
-		4D9A3F5A1B9E7255008805E4 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D9A3F541B9E7255008805E4 /* FMDatabaseQueue.m */; };
-		4D9A3F5B1B9E7255008805E4 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D9A3F561B9E7255008805E4 /* FMResultSet.m */; };
 		4D9E73601BD080F50003AA48 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D9E735F1BD080F50003AA48 /* libsqlite3.tbd */; };
 		4D9E73621BD081000003AA48 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D9E73611BD081000003AA48 /* libiconv.tbd */; };
 		4D9E73661BD081140003AA48 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D9E73651BD081140003AA48 /* libz.tbd */; };
 		4DB95BBA1E090FE400D387D1 /* CZWPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB95BB91E090FE400D387D1 /* CZWPickerView.m */; };
-		4DC2BF6A1DD57E810006E8D5 /* ChooseSexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC2BF691DD57E810006E8D5 /* ChooseSexViewController.m */; };
-		4DC2BF6D1DD5872A0006E8D5 /* ChooseDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC2BF6C1DD5872A0006E8D5 /* ChooseDateViewController.m */; };
 		4DC4070B1BB10638004079A8 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC4070A1BB10638004079A8 /* SettingViewController.m */; };
 		4DC4070E1BB11A50004079A8 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC4070D1BB11A50004079A8 /* RegisterViewController.m */; };
-		4DC407241BB12D40004079A8 /* LHAssetGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC407151BB12D40004079A8 /* LHAssetGroupViewController.m */; };
-		4DC407251BB12D40004079A8 /* LHAssetPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC407171BB12D40004079A8 /* LHAssetPickerController.m */; };
-		4DC407261BB12D40004079A8 /* LHAssetPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC407191BB12D40004079A8 /* LHAssetPreviewController.m */; };
-		4DC407271BB12D40004079A8 /* LHAssetViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC4071B1BB12D40004079A8 /* LHAssetViewCell.m */; };
-		4DC407281BB12D40004079A8 /* LHAssetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC4071D1BB12D40004079A8 /* LHAssetViewController.m */; };
-		4DC407291BB12D40004079A8 /* LHPreViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC4071F1BB12D40004079A8 /* LHPreViewCell.m */; };
-		4DC4072A1BB12D40004079A8 /* FriendsSendsPicturesSelectBigNIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DC407211BB12D40004079A8 /* FriendsSendsPicturesSelectBigNIcon@2x.png */; };
-		4DC4072B1BB12D40004079A8 /* FriendsSendsPicturesSelectBigYIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DC407221BB12D40004079A8 /* FriendsSendsPicturesSelectBigYIcon@2x.png */; };
-		4DC4072C1BB12D40004079A8 /* item_left@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DC407231BB12D40004079A8 /* item_left@3x.png */; };
 		4DCAD2CA1CEC2A5A00A539B2 /* UIImage+LH.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DCAD2C91CEC2A5A00A539B2 /* UIImage+LH.m */; };
 		4DCAD2CD1CEC2A8E00A539B2 /* UIViewController+LH.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DCAD2CC1CEC2A8E00A539B2 /* UIViewController+LH.m */; };
-		4DCDDE6C1D9E0FDB00AE4446 /* MyHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DCDDE6B1D9E0FDB00AE4446 /* MyHeaderView.m */; };
 		4DCDDE701D9E3B5B00AE4446 /* FootCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DCDDE6F1D9E3B5B00AE4446 /* FootCommentView.m */; };
 		4DD30D161D20ECD7009C3B05 /* LTInfiniteScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DD30D151D20ECD7009C3B05 /* LTInfiniteScrollView.m */; };
 		4DDD33471D1A623800F52C0C /* UIFont+LH.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD33461D1A623800F52C0C /* UIFont+LH.m */; };
@@ -238,6 +107,138 @@
 		4DF0EA7A1DBDA5AD00EFAE58 /* BasicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF0EA741DBDA5AD00EFAE58 /* BasicViewController.m */; };
 		4DF0EA7B1DBDA5AD00EFAE58 /* TransitionAnima.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF0EA761DBDA5AD00EFAE58 /* TransitionAnima.m */; };
 		4DF0EA7F1DBE0E9400EFAE58 /* UIScrollView+TwitterCover.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF0EA7E1DBE0E9400EFAE58 /* UIScrollView+TwitterCover.m */; };
+		4DF2C7A11E1DDCCE00C5B24A /* ParameterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF2C7A01E1DDCCE00C5B24A /* ParameterViewController.m */; };
+		4DF2C7A41E1DE06000C5B24A /* ParameterChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF2C7A31E1DE06000C5B24A /* ParameterChartView.m */; };
+		4DF343901E1F6E9E005584CB /* LHEmojiButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF343221E1F6E9E005584CB /* LHEmojiButton.m */; };
+		4DF343911E1F6E9E005584CB /* LHEmojiView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF343241E1F6E9E005584CB /* LHEmojiView.m */; };
+		4DF343921E1F6E9E005584CB /* NO.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343261E1F6E9E005584CB /* NO.gif */; };
+		4DF343931E1F6E9E005584CB /* OK.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343271E1F6E9E005584CB /* OK.gif */; };
+		4DF343941E1F6E9E005584CB /* Thumbs.db in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343281E1F6E9E005584CB /* Thumbs.db */; };
+		4DF343951E1F6E9E005584CB /* 乒乓.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343291E1F6E9E005584CB /* 乒乓.gif */; };
+		4DF343961E1F6E9E005584CB /* 亲亲.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3432A1E1F6E9E005584CB /* 亲亲.gif */; };
+		4DF343971E1F6E9E005584CB /* 便便.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3432B1E1F6E9E005584CB /* 便便.gif */; };
+		4DF343981E1F6E9E005584CB /* 偷笑.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3432C1E1F6E9E005584CB /* 偷笑.gif */; };
+		4DF343991E1F6E9E005584CB /* 傲慢.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3432D1E1F6E9E005584CB /* 傲慢.gif */; };
+		4DF3439A1E1F6E9E005584CB /* 再见.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3432E1E1F6E9E005584CB /* 再见.gif */; };
+		4DF3439B1E1F6E9E005584CB /* 冷汗.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3432F1E1F6E9E005584CB /* 冷汗.gif */; };
+		4DF3439C1E1F6E9E005584CB /* 凋谢.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343301E1F6E9E005584CB /* 凋谢.gif */; };
+		4DF3439D1E1F6E9E005584CB /* 刀.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343311E1F6E9E005584CB /* 刀.gif */; };
+		4DF3439E1E1F6E9E005584CB /* 勾引.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343321E1F6E9E005584CB /* 勾引.gif */; };
+		4DF3439F1E1F6E9E005584CB /* 发呆.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343331E1F6E9E005584CB /* 发呆.gif */; };
+		4DF343A01E1F6E9E005584CB /* 发怒.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343341E1F6E9E005584CB /* 发怒.gif */; };
+		4DF343A11E1F6E9E005584CB /* 发抖.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343351E1F6E9E005584CB /* 发抖.gif */; };
+		4DF343A21E1F6E9E005584CB /* 可怜.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343361E1F6E9E005584CB /* 可怜.gif */; };
+		4DF343A31E1F6E9E005584CB /* 可爱.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343371E1F6E9E005584CB /* 可爱.gif */; };
+		4DF343A41E1F6E9E005584CB /* 右哼哼.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343381E1F6E9E005584CB /* 右哼哼.gif */; };
+		4DF343A51E1F6E9E005584CB /* 右太极.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343391E1F6E9E005584CB /* 右太极.gif */; };
+		4DF343A61E1F6E9E005584CB /* 吐.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3433A1E1F6E9E005584CB /* 吐.gif */; };
+		4DF343A71E1F6E9E005584CB /* 吓.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3433B1E1F6E9E005584CB /* 吓.gif */; };
+		4DF343A81E1F6E9E005584CB /* 呲牙.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3433C1E1F6E9E005584CB /* 呲牙.gif */; };
+		4DF343A91E1F6E9E005584CB /* 咒骂.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3433D1E1F6E9E005584CB /* 咒骂.gif */; };
+		4DF343AA1E1F6E9E005584CB /* 咖啡.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3433E1E1F6E9E005584CB /* 咖啡.gif */; };
+		4DF343AB1E1F6E9E005584CB /* 哈欠.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3433F1E1F6E9E005584CB /* 哈欠.gif */; };
+		4DF343AC1E1F6E9E005584CB /* 啤酒.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343401E1F6E9E005584CB /* 啤酒.gif */; };
+		4DF343AD1E1F6E9E005584CB /* 嘘.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343411E1F6E9E005584CB /* 嘘.gif */; };
+		4DF343AE1E1F6E9E005584CB /* 回头.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343421E1F6E9E005584CB /* 回头.gif */; };
+		4DF343AF1E1F6E9E005584CB /* 困.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343431E1F6E9E005584CB /* 困.gif */; };
+		4DF343B01E1F6E9E005584CB /* 坏笑.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343441E1F6E9E005584CB /* 坏笑.gif */; };
+		4DF343B11E1F6E9E005584CB /* 大兵.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343451E1F6E9E005584CB /* 大兵.gif */; };
+		4DF343B21E1F6E9E005584CB /* 大哭.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343461E1F6E9E005584CB /* 大哭.gif */; };
+		4DF343B31E1F6E9E005584CB /* 太阳.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343471E1F6E9E005584CB /* 太阳.gif */; };
+		4DF343B41E1F6E9E005584CB /* 奋斗.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343481E1F6E9E005584CB /* 奋斗.gif */; };
+		4DF343B51E1F6E9E005584CB /* 委屈.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343491E1F6E9E005584CB /* 委屈.gif */; };
+		4DF343B61E1F6E9E005584CB /* 害羞.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3434A1E1F6E9E005584CB /* 害羞.gif */; };
+		4DF343B71E1F6E9E005584CB /* 尴尬.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3434B1E1F6E9E005584CB /* 尴尬.gif */; };
+		4DF343B81E1F6E9E005584CB /* 左哼哼.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3434C1E1F6E9E005584CB /* 左哼哼.gif */; };
+		4DF343B91E1F6E9E005584CB /* 左太极.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3434D1E1F6E9E005584CB /* 左太极.gif */; };
+		4DF343BA1E1F6E9E005584CB /* 差劲.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3434E1E1F6E9E005584CB /* 差劲.gif */; };
+		4DF343BB1E1F6E9E005584CB /* 弱.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3434F1E1F6E9E005584CB /* 弱.gif */; };
+		4DF343BC1E1F6E9E005584CB /* 强.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343501E1F6E9E005584CB /* 强.gif */; };
+		4DF343BD1E1F6E9E005584CB /* 得意.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343511E1F6E9E005584CB /* 得意.gif */; };
+		4DF343BE1E1F6E9E005584CB /* 微笑.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343521E1F6E9E005584CB /* 微笑.gif */; };
+		4DF343BF1E1F6E9E005584CB /* 心碎.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343531E1F6E9E005584CB /* 心碎.gif */; };
+		4DF343C01E1F6E9E005584CB /* 快哭了.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343541E1F6E9E005584CB /* 快哭了.gif */; };
+		4DF343C11E1F6E9E005584CB /* 怄火.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343551E1F6E9E005584CB /* 怄火.gif */; };
+		4DF343C21E1F6E9E005584CB /* 惊恐.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343561E1F6E9E005584CB /* 惊恐.gif */; };
+		4DF343C31E1F6E9E005584CB /* 惊讶.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343571E1F6E9E005584CB /* 惊讶.gif */; };
+		4DF343C41E1F6E9E005584CB /* 憨笑.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343581E1F6E9E005584CB /* 憨笑.gif */; };
+		4DF343C51E1F6E9E005584CB /* 抓狂.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343591E1F6E9E005584CB /* 抓狂.gif */; };
+		4DF343C61E1F6E9E005584CB /* 折磨.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3435A1E1F6E9E005584CB /* 折磨.gif */; };
+		4DF343C71E1F6E9E005584CB /* 抠鼻.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3435B1E1F6E9E005584CB /* 抠鼻.gif */; };
+		4DF343C81E1F6E9E005584CB /* 抱拳.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3435C1E1F6E9E005584CB /* 抱拳.gif */; };
+		4DF343C91E1F6E9E005584CB /* 拥抱.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3435D1E1F6E9E005584CB /* 拥抱.gif */; };
+		4DF343CA1E1F6E9E005584CB /* 拳头.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3435E1E1F6E9E005584CB /* 拳头.gif */; };
+		4DF343CB1E1F6E9E005584CB /* 挥手.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3435F1E1F6E9E005584CB /* 挥手.gif */; };
+		4DF343CC1E1F6E9E005584CB /* 握手.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343601E1F6E9E005584CB /* 握手.gif */; };
+		4DF343CD1E1F6E9E005584CB /* 撇嘴.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343611E1F6E9E005584CB /* 撇嘴.gif */; };
+		4DF343CE1E1F6E9E005584CB /* 擦汗.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343621E1F6E9E005584CB /* 擦汗.gif */; };
+		4DF343CF1E1F6E9E005584CB /* 敲打.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343631E1F6E9E005584CB /* 敲打.gif */; };
+		4DF343D01E1F6E9E005584CB /* 晕.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343641E1F6E9E005584CB /* 晕.gif */; };
+		4DF343D11E1F6E9E005584CB /* 月亮.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343651E1F6E9E005584CB /* 月亮.gif */; };
+		4DF343D21E1F6E9E005584CB /* 流汗.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343661E1F6E9E005584CB /* 流汗.gif */; };
+		4DF343D31E1F6E9E005584CB /* 流泪.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343671E1F6E9E005584CB /* 流泪.gif */; };
+		4DF343D41E1F6E9E005584CB /* 激动.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343681E1F6E9E005584CB /* 激动.gif */; };
+		4DF343D51E1F6E9E005584CB /* 激吻.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343691E1F6E9E005584CB /* 激吻.gif */; };
+		4DF343D61E1F6E9E005584CB /* 炸弹.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3436A1E1F6E9E005584CB /* 炸弹.gif */; };
+		4DF343D71E1F6E9E005584CB /* 爱你.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3436B1E1F6E9E005584CB /* 爱你.gif */; };
+		4DF343D81E1F6E9E005584CB /* 爱心.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3436C1E1F6E9E005584CB /* 爱心.gif */; };
+		4DF343D91E1F6E9E005584CB /* 爱情.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3436D1E1F6E9E005584CB /* 爱情.gif */; };
+		4DF343DA1E1F6E9E005584CB /* 猪头.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3436E1E1F6E9E005584CB /* 猪头.gif */; };
+		4DF343DB1E1F6E9E005584CB /* 献吻.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3436F1E1F6E9E005584CB /* 献吻.gif */; };
+		4DF343DC1E1F6E9E005584CB /* 玫瑰.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343701E1F6E9E005584CB /* 玫瑰.gif */; };
+		4DF343DD1E1F6E9E005584CB /* 瓢虫.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343711E1F6E9E005584CB /* 瓢虫.gif */; };
+		4DF343DE1E1F6E9E005584CB /* 疑问.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343721E1F6E9E005584CB /* 疑问.gif */; };
+		4DF343DF1E1F6E9E005584CB /* 白眼.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343731E1F6E9E005584CB /* 白眼.gif */; };
+		4DF343E01E1F6E9E005584CB /* 睡.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343741E1F6E9E005584CB /* 睡.gif */; };
+		4DF343E11E1F6E9E005584CB /* 磕头.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343751E1F6E9E005584CB /* 磕头.gif */; };
+		4DF343E21E1F6E9E005584CB /* 示爱.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343761E1F6E9E005584CB /* 示爱.gif */; };
+		4DF343E31E1F6E9E005584CB /* 礼物.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343771E1F6E9E005584CB /* 礼物.gif */; };
+		4DF343E41E1F6E9E005584CB /* 篮球.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343781E1F6E9E005584CB /* 篮球.gif */; };
+		4DF343E51E1F6E9E005584CB /* 糗大了.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343791E1F6E9E005584CB /* 糗大了.gif */; };
+		4DF343E61E1F6E9E005584CB /* 胜利.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3437A1E1F6E9E005584CB /* 胜利.gif */; };
+		4DF343E71E1F6E9E005584CB /* 色.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3437B1E1F6E9E005584CB /* 色.gif */; };
+		4DF343E81E1F6E9E005584CB /* 菜刀.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3437C1E1F6E9E005584CB /* 菜刀.gif */; };
+		4DF343E91E1F6E9E005584CB /* 蛋糕.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3437D1E1F6E9E005584CB /* 蛋糕.gif */; };
+		4DF343EA1E1F6E9E005584CB /* 衰.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3437E1E1F6E9E005584CB /* 衰.gif */; };
+		4DF343EB1E1F6E9E005584CB /* 西瓜.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3437F1E1F6E9E005584CB /* 西瓜.gif */; };
+		4DF343EC1E1F6E9E005584CB /* 调皮.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343801E1F6E9E005584CB /* 调皮.gif */; };
+		4DF343ED1E1F6E9E005584CB /* 足球.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343811E1F6E9E005584CB /* 足球.gif */; };
+		4DF343EE1E1F6E9E005584CB /* 跳绳.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343821E1F6E9E005584CB /* 跳绳.gif */; };
+		4DF343EF1E1F6E9E005584CB /* 跳跳.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343831E1F6E9E005584CB /* 跳跳.gif */; };
+		4DF343F01E1F6E9E005584CB /* 转圈.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343841E1F6E9E005584CB /* 转圈.gif */; };
+		4DF343F11E1F6E9E005584CB /* 鄙视.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343851E1F6E9E005584CB /* 鄙视.gif */; };
+		4DF343F21E1F6E9E005584CB /* 酷.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343861E1F6E9E005584CB /* 酷.gif */; };
+		4DF343F31E1F6E9E005584CB /* 闪电.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343871E1F6E9E005584CB /* 闪电.gif */; };
+		4DF343F41E1F6E9E005584CB /* 闭嘴.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343881E1F6E9E005584CB /* 闭嘴.gif */; };
+		4DF343F51E1F6E9E005584CB /* 阴险.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF343891E1F6E9E005584CB /* 阴险.gif */; };
+		4DF343F61E1F6E9E005584CB /* 难过.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3438A1E1F6E9E005584CB /* 难过.gif */; };
+		4DF343F71E1F6E9E005584CB /* 飞吻.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3438B1E1F6E9E005584CB /* 飞吻.gif */; };
+		4DF343F81E1F6E9E005584CB /* 饥饿.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3438C1E1F6E9E005584CB /* 饥饿.gif */; };
+		4DF343F91E1F6E9E005584CB /* 饭.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3438D1E1F6E9E005584CB /* 饭.gif */; };
+		4DF343FA1E1F6E9E005584CB /* 骷髅.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3438E1E1F6E9E005584CB /* 骷髅.gif */; };
+		4DF343FB1E1F6E9E005584CB /* 鼓掌.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3438F1E1F6E9E005584CB /* 鼓掌.gif */; };
+		4DF344071E1F6EA2005584CB /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF343FE1E1F6EA2005584CB /* FMDatabase.m */; };
+		4DF344081E1F6EA2005584CB /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF344001E1F6EA2005584CB /* FMDatabaseAdditions.m */; };
+		4DF344091E1F6EA2005584CB /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF344021E1F6EA2005584CB /* FMDatabasePool.m */; };
+		4DF3440A1E1F6EA2005584CB /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF344041E1F6EA2005584CB /* FMDatabaseQueue.m */; };
+		4DF3440B1E1F6EA2005584CB /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF344061E1F6EA2005584CB /* FMResultSet.m */; };
+		4DF3441D1E1F6EA6005584CB /* LHAssetGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF3440E1E1F6EA6005584CB /* LHAssetGroupViewController.m */; };
+		4DF3441E1E1F6EA6005584CB /* LHAssetPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF344101E1F6EA6005584CB /* LHAssetPickerController.m */; };
+		4DF3441F1E1F6EA6005584CB /* LHAssetPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF344121E1F6EA6005584CB /* LHAssetPreviewController.m */; };
+		4DF344201E1F6EA6005584CB /* LHAssetViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF344141E1F6EA6005584CB /* LHAssetViewCell.m */; };
+		4DF344211E1F6EA6005584CB /* LHAssetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF344161E1F6EA6005584CB /* LHAssetViewController.m */; };
+		4DF344221E1F6EA6005584CB /* LHPreViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF344181E1F6EA6005584CB /* LHPreViewCell.m */; };
+		4DF344231E1F6EA6005584CB /* FriendsSendsPicturesSelectBigNIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3441A1E1F6EA6005584CB /* FriendsSendsPicturesSelectBigNIcon@2x.png */; };
+		4DF344241E1F6EA6005584CB /* FriendsSendsPicturesSelectBigYIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3441B1E1F6EA6005584CB /* FriendsSendsPicturesSelectBigYIcon@2x.png */; };
+		4DF344251E1F6EA6005584CB /* item_left@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DF3441C1E1F6EA6005584CB /* item_left@3x.png */; };
+		4DF344321E1F6FF0005584CB /* ChooseDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF344271E1F6FF0005584CB /* ChooseDateViewController.m */; };
+		4DF344331E1F6FF0005584CB /* ChooseSexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF344291E1F6FF0005584CB /* ChooseSexViewController.m */; };
+		4DF344341E1F6FF0005584CB /* ChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF3442B1E1F6FF0005584CB /* ChooseViewController.m */; };
+		4DF344351E1F6FF0005584CB /* CityChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF3442D1E1F6FF0005584CB /* CityChooseViewController.m */; };
+		4DF344361E1F6FF0005584CB /* ComplainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF3442F1E1F6FF0005584CB /* ComplainViewController.m */; };
+		4DF344371E1F6FF0005584CB /* EditImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF344311E1F6FF0005584CB /* EditImageViewController.m */; };
+		4DF3443E1E1F71A3005584CB /* MyHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF3443B1E1F71A3005584CB /* MyHeaderView.m */; };
+		4DF3443F1E1F71A3005584CB /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF3443D1E1F71A3005584CB /* MyViewController.m */; };
 		4DF4DA431E08F43000DDA429 /* MyCardChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF4DA421E08F43000DDA429 /* MyCardChooseViewController.m */; };
 		4DF4DA461E0909F600DDA429 /* CZWDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF4DA451E0909F600DDA429 /* CZWDatePicker.m */; };
 		4DF75F211D9CE46100FB882E /* HomepageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF75F201D9CE46100FB882E /* HomepageTableViewController.m */; };
@@ -468,7 +469,6 @@
 		4D753CE81BF56ADA00D3232D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		4D756F231BC64DEF00107653 /* AgreementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgreementViewController.h; sourceTree = "<group>"; };
 		4D756F241BC64DEF00107653 /* AgreementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgreementViewController.m; sourceTree = "<group>"; };
-		4D79792F1BA9699200DC147D /* MyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
 		4D7E72381B9D5CD10048F221 /* chezhiwang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chezhiwang.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D7E723C1B9D5CD10048F221 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D7E723D1B9D5CD10048F221 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -483,15 +483,6 @@
 		4D8243741CA50EA100E6C332 /* LookPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookPasswordViewController.m; sourceTree = "<group>"; };
 		4D8243751CA50EA100E6C332 /* EmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailViewController.h; sourceTree = "<group>"; };
 		4D8243761CA50EA100E6C332 /* EmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailViewController.m; sourceTree = "<group>"; };
-		4D84E6551BF33B4800F901BF /* MyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyViewController.m; path = "密码修改/MyViewController.m"; sourceTree = "<group>"; };
-		4D87CE4A1C0324BD00466A97 /* ChooseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseViewController.h; sourceTree = "<group>"; };
-		4D87CE4B1C0324BD00466A97 /* ChooseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseViewController.m; sourceTree = "<group>"; };
-		4D87CE4C1C0324BD00466A97 /* CityChooseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityChooseViewController.h; sourceTree = "<group>"; };
-		4D87CE4D1C0324BD00466A97 /* CityChooseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityChooseViewController.m; sourceTree = "<group>"; };
-		4D87CE501C0324BD00466A97 /* EditImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditImageViewController.h; sourceTree = "<group>"; };
-		4D87CE511C0324BD00466A97 /* EditImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditImageViewController.m; sourceTree = "<group>"; };
-		4D87CE521C0324BD00466A97 /* EditImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditImageCell.h; sourceTree = "<group>"; };
-		4D87CE531C0324BD00466A97 /* EditImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditImageCell.m; sourceTree = "<group>"; };
 		4D87CE5B1C0324E000466A97 /* LHDatePickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHDatePickView.h; sourceTree = "<group>"; };
 		4D87CE5C1C0324E000466A97 /* LHDatePickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHDatePickView.m; sourceTree = "<group>"; };
 		4D87CE5D1C0324E000466A97 /* LHPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHPickerView.h; sourceTree = "<group>"; };
@@ -503,118 +494,6 @@
 		4D8B22BB1BA808EF00659A56 /* pch.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pch.pch; sourceTree = "<group>"; };
 		4D8DD0B11B9EB54C00619923 /* LHController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHController.h; sourceTree = "<group>"; };
 		4D8DD0B21B9EB54C00619923 /* LHController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHController.m; sourceTree = "<group>"; };
-		4D952C431BF0876D000F26C0 /* LHEmojiView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHEmojiView.h; sourceTree = "<group>"; };
-		4D952C441BF0876D000F26C0 /* LHEmojiView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHEmojiView.m; sourceTree = "<group>"; };
-		4D952C471BF0886C000F26C0 /* NO.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = NO.gif; sourceTree = "<group>"; };
-		4D952C481BF0886C000F26C0 /* OK.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = OK.gif; sourceTree = "<group>"; };
-		4D952C491BF0886C000F26C0 /* Thumbs.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = Thumbs.db; sourceTree = "<group>"; };
-		4D952C4A1BF0886C000F26C0 /* 乒乓.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "乒乓.gif"; sourceTree = "<group>"; };
-		4D952C4B1BF0886C000F26C0 /* 亲亲.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "亲亲.gif"; sourceTree = "<group>"; };
-		4D952C4C1BF0886C000F26C0 /* 便便.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "便便.gif"; sourceTree = "<group>"; };
-		4D952C4D1BF0886C000F26C0 /* 偷笑.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "偷笑.gif"; sourceTree = "<group>"; };
-		4D952C4E1BF0886C000F26C0 /* 傲慢.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "傲慢.gif"; sourceTree = "<group>"; };
-		4D952C4F1BF0886C000F26C0 /* 再见.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "再见.gif"; sourceTree = "<group>"; };
-		4D952C501BF0886C000F26C0 /* 冷汗.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "冷汗.gif"; sourceTree = "<group>"; };
-		4D952C511BF0886C000F26C0 /* 凋谢.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "凋谢.gif"; sourceTree = "<group>"; };
-		4D952C521BF0886C000F26C0 /* 刀.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "刀.gif"; sourceTree = "<group>"; };
-		4D952C531BF0886C000F26C0 /* 勾引.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "勾引.gif"; sourceTree = "<group>"; };
-		4D952C541BF0886C000F26C0 /* 发呆.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "发呆.gif"; sourceTree = "<group>"; };
-		4D952C551BF0886C000F26C0 /* 发怒.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "发怒.gif"; sourceTree = "<group>"; };
-		4D952C561BF0886C000F26C0 /* 发抖.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "发抖.gif"; sourceTree = "<group>"; };
-		4D952C571BF0886C000F26C0 /* 可怜.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "可怜.gif"; sourceTree = "<group>"; };
-		4D952C581BF0886C000F26C0 /* 可爱.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "可爱.gif"; sourceTree = "<group>"; };
-		4D952C591BF0886C000F26C0 /* 右哼哼.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "右哼哼.gif"; sourceTree = "<group>"; };
-		4D952C5A1BF0886C000F26C0 /* 右太极.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "右太极.gif"; sourceTree = "<group>"; };
-		4D952C5B1BF0886C000F26C0 /* 吐.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "吐.gif"; sourceTree = "<group>"; };
-		4D952C5C1BF0886C000F26C0 /* 吓.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "吓.gif"; sourceTree = "<group>"; };
-		4D952C5D1BF0886C000F26C0 /* 呲牙.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "呲牙.gif"; sourceTree = "<group>"; };
-		4D952C5E1BF0886C000F26C0 /* 咒骂.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "咒骂.gif"; sourceTree = "<group>"; };
-		4D952C5F1BF0886C000F26C0 /* 咖啡.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "咖啡.gif"; sourceTree = "<group>"; };
-		4D952C601BF0886C000F26C0 /* 哈欠.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "哈欠.gif"; sourceTree = "<group>"; };
-		4D952C611BF0886C000F26C0 /* 啤酒.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "啤酒.gif"; sourceTree = "<group>"; };
-		4D952C621BF0886C000F26C0 /* 嘘.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "嘘.gif"; sourceTree = "<group>"; };
-		4D952C631BF0886C000F26C0 /* 回头.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "回头.gif"; sourceTree = "<group>"; };
-		4D952C641BF0886C000F26C0 /* 困.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "困.gif"; sourceTree = "<group>"; };
-		4D952C651BF0886C000F26C0 /* 坏笑.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "坏笑.gif"; sourceTree = "<group>"; };
-		4D952C661BF0886C000F26C0 /* 大兵.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "大兵.gif"; sourceTree = "<group>"; };
-		4D952C671BF0886C000F26C0 /* 大哭.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "大哭.gif"; sourceTree = "<group>"; };
-		4D952C681BF0886C000F26C0 /* 太阳.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "太阳.gif"; sourceTree = "<group>"; };
-		4D952C691BF0886C000F26C0 /* 奋斗.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "奋斗.gif"; sourceTree = "<group>"; };
-		4D952C6A1BF0886C000F26C0 /* 委屈.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "委屈.gif"; sourceTree = "<group>"; };
-		4D952C6B1BF0886C000F26C0 /* 害羞.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "害羞.gif"; sourceTree = "<group>"; };
-		4D952C6C1BF0886C000F26C0 /* 尴尬.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "尴尬.gif"; sourceTree = "<group>"; };
-		4D952C6D1BF0886C000F26C0 /* 左哼哼.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "左哼哼.gif"; sourceTree = "<group>"; };
-		4D952C6E1BF0886C000F26C0 /* 左太极.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "左太极.gif"; sourceTree = "<group>"; };
-		4D952C6F1BF0886C000F26C0 /* 差劲.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "差劲.gif"; sourceTree = "<group>"; };
-		4D952C701BF0886C000F26C0 /* 弱.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "弱.gif"; sourceTree = "<group>"; };
-		4D952C711BF0886C000F26C0 /* 强.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "强.gif"; sourceTree = "<group>"; };
-		4D952C721BF0886C000F26C0 /* 得意.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "得意.gif"; sourceTree = "<group>"; };
-		4D952C731BF0886C000F26C0 /* 微笑.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "微笑.gif"; sourceTree = "<group>"; };
-		4D952C741BF0886C000F26C0 /* 心碎.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "心碎.gif"; sourceTree = "<group>"; };
-		4D952C751BF0886C000F26C0 /* 快哭了.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "快哭了.gif"; sourceTree = "<group>"; };
-		4D952C761BF0886C000F26C0 /* 怄火.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "怄火.gif"; sourceTree = "<group>"; };
-		4D952C771BF0886C000F26C0 /* 惊恐.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "惊恐.gif"; sourceTree = "<group>"; };
-		4D952C781BF0886C000F26C0 /* 惊讶.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "惊讶.gif"; sourceTree = "<group>"; };
-		4D952C791BF0886C000F26C0 /* 憨笑.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "憨笑.gif"; sourceTree = "<group>"; };
-		4D952C7A1BF0886C000F26C0 /* 抓狂.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "抓狂.gif"; sourceTree = "<group>"; };
-		4D952C7B1BF0886C000F26C0 /* 折磨.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "折磨.gif"; sourceTree = "<group>"; };
-		4D952C7C1BF0886C000F26C0 /* 抠鼻.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "抠鼻.gif"; sourceTree = "<group>"; };
-		4D952C7D1BF0886C000F26C0 /* 抱拳.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "抱拳.gif"; sourceTree = "<group>"; };
-		4D952C7E1BF0886C000F26C0 /* 拥抱.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "拥抱.gif"; sourceTree = "<group>"; };
-		4D952C7F1BF0886C000F26C0 /* 拳头.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "拳头.gif"; sourceTree = "<group>"; };
-		4D952C801BF0886C000F26C0 /* 挥手.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "挥手.gif"; sourceTree = "<group>"; };
-		4D952C811BF0886C000F26C0 /* 握手.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "握手.gif"; sourceTree = "<group>"; };
-		4D952C821BF0886C000F26C0 /* 撇嘴.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "撇嘴.gif"; sourceTree = "<group>"; };
-		4D952C831BF0886C000F26C0 /* 擦汗.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "擦汗.gif"; sourceTree = "<group>"; };
-		4D952C841BF0886C000F26C0 /* 敲打.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "敲打.gif"; sourceTree = "<group>"; };
-		4D952C851BF0886C000F26C0 /* 晕.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "晕.gif"; sourceTree = "<group>"; };
-		4D952C861BF0886C000F26C0 /* 月亮.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "月亮.gif"; sourceTree = "<group>"; };
-		4D952C871BF0886C000F26C0 /* 流汗.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "流汗.gif"; sourceTree = "<group>"; };
-		4D952C881BF0886C000F26C0 /* 流泪.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "流泪.gif"; sourceTree = "<group>"; };
-		4D952C891BF0886C000F26C0 /* 激动.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "激动.gif"; sourceTree = "<group>"; };
-		4D952C8A1BF0886C000F26C0 /* 激吻.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "激吻.gif"; sourceTree = "<group>"; };
-		4D952C8B1BF0886C000F26C0 /* 炸弹.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "炸弹.gif"; sourceTree = "<group>"; };
-		4D952C8C1BF0886C000F26C0 /* 爱你.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "爱你.gif"; sourceTree = "<group>"; };
-		4D952C8D1BF0886C000F26C0 /* 爱心.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "爱心.gif"; sourceTree = "<group>"; };
-		4D952C8E1BF0886C000F26C0 /* 爱情.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "爱情.gif"; sourceTree = "<group>"; };
-		4D952C8F1BF0886C000F26C0 /* 猪头.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "猪头.gif"; sourceTree = "<group>"; };
-		4D952C901BF0886C000F26C0 /* 献吻.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "献吻.gif"; sourceTree = "<group>"; };
-		4D952C911BF0886C000F26C0 /* 玫瑰.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "玫瑰.gif"; sourceTree = "<group>"; };
-		4D952C921BF0886C000F26C0 /* 瓢虫.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "瓢虫.gif"; sourceTree = "<group>"; };
-		4D952C931BF0886C000F26C0 /* 疑问.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "疑问.gif"; sourceTree = "<group>"; };
-		4D952C941BF0886C000F26C0 /* 白眼.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "白眼.gif"; sourceTree = "<group>"; };
-		4D952C951BF0886C000F26C0 /* 睡.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "睡.gif"; sourceTree = "<group>"; };
-		4D952C961BF0886C000F26C0 /* 磕头.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "磕头.gif"; sourceTree = "<group>"; };
-		4D952C971BF0886C000F26C0 /* 示爱.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "示爱.gif"; sourceTree = "<group>"; };
-		4D952C981BF0886C000F26C0 /* 礼物.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "礼物.gif"; sourceTree = "<group>"; };
-		4D952C991BF0886C000F26C0 /* 篮球.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "篮球.gif"; sourceTree = "<group>"; };
-		4D952C9A1BF0886C000F26C0 /* 糗大了.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "糗大了.gif"; sourceTree = "<group>"; };
-		4D952C9B1BF0886C000F26C0 /* 胜利.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "胜利.gif"; sourceTree = "<group>"; };
-		4D952C9C1BF0886C000F26C0 /* 色.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "色.gif"; sourceTree = "<group>"; };
-		4D952C9D1BF0886C000F26C0 /* 菜刀.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "菜刀.gif"; sourceTree = "<group>"; };
-		4D952C9E1BF0886C000F26C0 /* 蛋糕.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "蛋糕.gif"; sourceTree = "<group>"; };
-		4D952C9F1BF0886C000F26C0 /* 衰.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "衰.gif"; sourceTree = "<group>"; };
-		4D952CA01BF0886C000F26C0 /* 西瓜.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "西瓜.gif"; sourceTree = "<group>"; };
-		4D952CA11BF0886C000F26C0 /* 调皮.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "调皮.gif"; sourceTree = "<group>"; };
-		4D952CA21BF0886C000F26C0 /* 足球.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "足球.gif"; sourceTree = "<group>"; };
-		4D952CA31BF0886C000F26C0 /* 跳绳.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "跳绳.gif"; sourceTree = "<group>"; };
-		4D952CA41BF0886C000F26C0 /* 跳跳.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "跳跳.gif"; sourceTree = "<group>"; };
-		4D952CA51BF0886C000F26C0 /* 转圈.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "转圈.gif"; sourceTree = "<group>"; };
-		4D952CA61BF0886C000F26C0 /* 鄙视.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "鄙视.gif"; sourceTree = "<group>"; };
-		4D952CA71BF0886C000F26C0 /* 酷.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "酷.gif"; sourceTree = "<group>"; };
-		4D952CA81BF0886C000F26C0 /* 闪电.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "闪电.gif"; sourceTree = "<group>"; };
-		4D952CA91BF0886C000F26C0 /* 闭嘴.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "闭嘴.gif"; sourceTree = "<group>"; };
-		4D952CAA1BF0886C000F26C0 /* 阴险.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "阴险.gif"; sourceTree = "<group>"; };
-		4D952CAB1BF0886C000F26C0 /* 难过.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "难过.gif"; sourceTree = "<group>"; };
-		4D952CAC1BF0886C000F26C0 /* 飞吻.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "飞吻.gif"; sourceTree = "<group>"; };
-		4D952CAD1BF0886C000F26C0 /* 饥饿.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "饥饿.gif"; sourceTree = "<group>"; };
-		4D952CAE1BF0886C000F26C0 /* 饭.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "饭.gif"; sourceTree = "<group>"; };
-		4D952CAF1BF0886C000F26C0 /* 骷髅.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "骷髅.gif"; sourceTree = "<group>"; };
-		4D952CB01BF0886C000F26C0 /* 鼓掌.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "鼓掌.gif"; sourceTree = "<group>"; };
-		4D952D1B1BF08E54000F26C0 /* LHEmojiButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHEmojiButton.h; sourceTree = "<group>"; };
-		4D952D1C1BF08E54000F26C0 /* LHEmojiButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHEmojiButton.m; sourceTree = "<group>"; };
-		4D967DBB1DD2E12C00C1B255 /* ComplainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComplainViewController.h; sourceTree = "<group>"; };
-		4D967DBC1DD2E12C00C1B255 /* ComplainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComplainViewController.m; sourceTree = "<group>"; };
 		4D967DC11DD2E42300C1B255 /* ComplainSectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComplainSectionModel.h; sourceTree = "<group>"; };
 		4D967DC21DD2E42300C1B255 /* ComplainSectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComplainSectionModel.m; sourceTree = "<group>"; };
 		4D967DCA1DD2EDED00C1B255 /* ComplainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComplainTableViewCell.h; sourceTree = "<group>"; };
@@ -635,51 +514,20 @@
 		4D97FC861BAF94C40089C684 /* MyAskModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAskModel.m; sourceTree = "<group>"; };
 		4D97FC871BAF94C40089C684 /* MyAskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAskViewController.h; sourceTree = "<group>"; };
 		4D97FC881BAF94C40089C684 /* MyAskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAskViewController.m; sourceTree = "<group>"; };
-		4D9A3F4D1B9E7255008805E4 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
-		4D9A3F4E1B9E7255008805E4 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
-		4D9A3F4F1B9E7255008805E4 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
-		4D9A3F501B9E7255008805E4 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
-		4D9A3F511B9E7255008805E4 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
-		4D9A3F521B9E7255008805E4 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
-		4D9A3F531B9E7255008805E4 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
-		4D9A3F541B9E7255008805E4 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
-		4D9A3F551B9E7255008805E4 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
-		4D9A3F561B9E7255008805E4 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		4D9E735F1BD080F50003AA48 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		4D9E73611BD081000003AA48 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		4D9E73631BD0810C0003AA48 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		4D9E73651BD081140003AA48 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		4DB95BB81E090FE400D387D1 /* CZWPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZWPickerView.h; sourceTree = "<group>"; };
 		4DB95BB91E090FE400D387D1 /* CZWPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZWPickerView.m; sourceTree = "<group>"; };
-		4DC2BF681DD57E810006E8D5 /* ChooseSexViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSexViewController.h; sourceTree = "<group>"; };
-		4DC2BF691DD57E810006E8D5 /* ChooseSexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseSexViewController.m; sourceTree = "<group>"; };
-		4DC2BF6B1DD5872A0006E8D5 /* ChooseDateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseDateViewController.h; sourceTree = "<group>"; };
-		4DC2BF6C1DD5872A0006E8D5 /* ChooseDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseDateViewController.m; sourceTree = "<group>"; };
 		4DC407091BB10638004079A8 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		4DC4070A1BB10638004079A8 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		4DC4070C1BB11A50004079A8 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		4DC4070D1BB11A50004079A8 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
-		4DC407141BB12D40004079A8 /* LHAssetGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHAssetGroupViewController.h; sourceTree = "<group>"; };
-		4DC407151BB12D40004079A8 /* LHAssetGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHAssetGroupViewController.m; sourceTree = "<group>"; };
-		4DC407161BB12D40004079A8 /* LHAssetPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHAssetPickerController.h; sourceTree = "<group>"; };
-		4DC407171BB12D40004079A8 /* LHAssetPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHAssetPickerController.m; sourceTree = "<group>"; };
-		4DC407181BB12D40004079A8 /* LHAssetPreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHAssetPreviewController.h; sourceTree = "<group>"; };
-		4DC407191BB12D40004079A8 /* LHAssetPreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHAssetPreviewController.m; sourceTree = "<group>"; };
-		4DC4071A1BB12D40004079A8 /* LHAssetViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHAssetViewCell.h; sourceTree = "<group>"; };
-		4DC4071B1BB12D40004079A8 /* LHAssetViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHAssetViewCell.m; sourceTree = "<group>"; };
-		4DC4071C1BB12D40004079A8 /* LHAssetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHAssetViewController.h; sourceTree = "<group>"; };
-		4DC4071D1BB12D40004079A8 /* LHAssetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHAssetViewController.m; sourceTree = "<group>"; };
-		4DC4071E1BB12D40004079A8 /* LHPreViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHPreViewCell.h; sourceTree = "<group>"; };
-		4DC4071F1BB12D40004079A8 /* LHPreViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHPreViewCell.m; sourceTree = "<group>"; };
-		4DC407211BB12D40004079A8 /* FriendsSendsPicturesSelectBigNIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FriendsSendsPicturesSelectBigNIcon@2x.png"; sourceTree = "<group>"; };
-		4DC407221BB12D40004079A8 /* FriendsSendsPicturesSelectBigYIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FriendsSendsPicturesSelectBigYIcon@2x.png"; sourceTree = "<group>"; };
-		4DC407231BB12D40004079A8 /* item_left@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "item_left@3x.png"; sourceTree = "<group>"; };
 		4DCAD2C81CEC2A5A00A539B2 /* UIImage+LH.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+LH.h"; sourceTree = "<group>"; };
 		4DCAD2C91CEC2A5A00A539B2 /* UIImage+LH.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+LH.m"; sourceTree = "<group>"; };
 		4DCAD2CB1CEC2A8E00A539B2 /* UIViewController+LH.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+LH.h"; sourceTree = "<group>"; };
 		4DCAD2CC1CEC2A8E00A539B2 /* UIViewController+LH.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+LH.m"; sourceTree = "<group>"; };
-		4DCDDE6A1D9E0FDB00AE4446 /* MyHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHeaderView.h; sourceTree = "<group>"; };
-		4DCDDE6B1D9E0FDB00AE4446 /* MyHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHeaderView.m; sourceTree = "<group>"; };
 		4DCDDE6E1D9E3B5B00AE4446 /* FootCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FootCommentView.h; sourceTree = "<group>"; };
 		4DCDDE6F1D9E3B5B00AE4446 /* FootCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FootCommentView.m; sourceTree = "<group>"; };
 		4DD30D141D20ECD7009C3B05 /* LTInfiniteScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTInfiniteScrollView.h; sourceTree = "<group>"; };
@@ -715,6 +563,161 @@
 		4DF0EA761DBDA5AD00EFAE58 /* TransitionAnima.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransitionAnima.m; sourceTree = "<group>"; };
 		4DF0EA7D1DBE0E9400EFAE58 /* UIScrollView+TwitterCover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TwitterCover.h"; sourceTree = "<group>"; };
 		4DF0EA7E1DBE0E9400EFAE58 /* UIScrollView+TwitterCover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TwitterCover.m"; sourceTree = "<group>"; };
+		4DF2C79F1E1DDCCE00C5B24A /* ParameterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParameterViewController.h; sourceTree = "<group>"; };
+		4DF2C7A01E1DDCCE00C5B24A /* ParameterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParameterViewController.m; sourceTree = "<group>"; };
+		4DF2C7A21E1DE06000C5B24A /* ParameterChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParameterChartView.h; sourceTree = "<group>"; };
+		4DF2C7A31E1DE06000C5B24A /* ParameterChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParameterChartView.m; sourceTree = "<group>"; };
+		4DF343211E1F6E9E005584CB /* LHEmojiButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHEmojiButton.h; sourceTree = "<group>"; };
+		4DF343221E1F6E9E005584CB /* LHEmojiButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHEmojiButton.m; sourceTree = "<group>"; };
+		4DF343231E1F6E9E005584CB /* LHEmojiView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHEmojiView.h; sourceTree = "<group>"; };
+		4DF343241E1F6E9E005584CB /* LHEmojiView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHEmojiView.m; sourceTree = "<group>"; };
+		4DF343261E1F6E9E005584CB /* NO.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = NO.gif; sourceTree = "<group>"; };
+		4DF343271E1F6E9E005584CB /* OK.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = OK.gif; sourceTree = "<group>"; };
+		4DF343281E1F6E9E005584CB /* Thumbs.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = Thumbs.db; sourceTree = "<group>"; };
+		4DF343291E1F6E9E005584CB /* 乒乓.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "乒乓.gif"; sourceTree = "<group>"; };
+		4DF3432A1E1F6E9E005584CB /* 亲亲.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "亲亲.gif"; sourceTree = "<group>"; };
+		4DF3432B1E1F6E9E005584CB /* 便便.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "便便.gif"; sourceTree = "<group>"; };
+		4DF3432C1E1F6E9E005584CB /* 偷笑.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "偷笑.gif"; sourceTree = "<group>"; };
+		4DF3432D1E1F6E9E005584CB /* 傲慢.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "傲慢.gif"; sourceTree = "<group>"; };
+		4DF3432E1E1F6E9E005584CB /* 再见.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "再见.gif"; sourceTree = "<group>"; };
+		4DF3432F1E1F6E9E005584CB /* 冷汗.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "冷汗.gif"; sourceTree = "<group>"; };
+		4DF343301E1F6E9E005584CB /* 凋谢.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "凋谢.gif"; sourceTree = "<group>"; };
+		4DF343311E1F6E9E005584CB /* 刀.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "刀.gif"; sourceTree = "<group>"; };
+		4DF343321E1F6E9E005584CB /* 勾引.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "勾引.gif"; sourceTree = "<group>"; };
+		4DF343331E1F6E9E005584CB /* 发呆.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "发呆.gif"; sourceTree = "<group>"; };
+		4DF343341E1F6E9E005584CB /* 发怒.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "发怒.gif"; sourceTree = "<group>"; };
+		4DF343351E1F6E9E005584CB /* 发抖.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "发抖.gif"; sourceTree = "<group>"; };
+		4DF343361E1F6E9E005584CB /* 可怜.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "可怜.gif"; sourceTree = "<group>"; };
+		4DF343371E1F6E9E005584CB /* 可爱.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "可爱.gif"; sourceTree = "<group>"; };
+		4DF343381E1F6E9E005584CB /* 右哼哼.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "右哼哼.gif"; sourceTree = "<group>"; };
+		4DF343391E1F6E9E005584CB /* 右太极.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "右太极.gif"; sourceTree = "<group>"; };
+		4DF3433A1E1F6E9E005584CB /* 吐.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "吐.gif"; sourceTree = "<group>"; };
+		4DF3433B1E1F6E9E005584CB /* 吓.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "吓.gif"; sourceTree = "<group>"; };
+		4DF3433C1E1F6E9E005584CB /* 呲牙.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "呲牙.gif"; sourceTree = "<group>"; };
+		4DF3433D1E1F6E9E005584CB /* 咒骂.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "咒骂.gif"; sourceTree = "<group>"; };
+		4DF3433E1E1F6E9E005584CB /* 咖啡.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "咖啡.gif"; sourceTree = "<group>"; };
+		4DF3433F1E1F6E9E005584CB /* 哈欠.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "哈欠.gif"; sourceTree = "<group>"; };
+		4DF343401E1F6E9E005584CB /* 啤酒.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "啤酒.gif"; sourceTree = "<group>"; };
+		4DF343411E1F6E9E005584CB /* 嘘.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "嘘.gif"; sourceTree = "<group>"; };
+		4DF343421E1F6E9E005584CB /* 回头.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "回头.gif"; sourceTree = "<group>"; };
+		4DF343431E1F6E9E005584CB /* 困.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "困.gif"; sourceTree = "<group>"; };
+		4DF343441E1F6E9E005584CB /* 坏笑.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "坏笑.gif"; sourceTree = "<group>"; };
+		4DF343451E1F6E9E005584CB /* 大兵.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "大兵.gif"; sourceTree = "<group>"; };
+		4DF343461E1F6E9E005584CB /* 大哭.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "大哭.gif"; sourceTree = "<group>"; };
+		4DF343471E1F6E9E005584CB /* 太阳.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "太阳.gif"; sourceTree = "<group>"; };
+		4DF343481E1F6E9E005584CB /* 奋斗.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "奋斗.gif"; sourceTree = "<group>"; };
+		4DF343491E1F6E9E005584CB /* 委屈.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "委屈.gif"; sourceTree = "<group>"; };
+		4DF3434A1E1F6E9E005584CB /* 害羞.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "害羞.gif"; sourceTree = "<group>"; };
+		4DF3434B1E1F6E9E005584CB /* 尴尬.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "尴尬.gif"; sourceTree = "<group>"; };
+		4DF3434C1E1F6E9E005584CB /* 左哼哼.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "左哼哼.gif"; sourceTree = "<group>"; };
+		4DF3434D1E1F6E9E005584CB /* 左太极.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "左太极.gif"; sourceTree = "<group>"; };
+		4DF3434E1E1F6E9E005584CB /* 差劲.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "差劲.gif"; sourceTree = "<group>"; };
+		4DF3434F1E1F6E9E005584CB /* 弱.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "弱.gif"; sourceTree = "<group>"; };
+		4DF343501E1F6E9E005584CB /* 强.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "强.gif"; sourceTree = "<group>"; };
+		4DF343511E1F6E9E005584CB /* 得意.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "得意.gif"; sourceTree = "<group>"; };
+		4DF343521E1F6E9E005584CB /* 微笑.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "微笑.gif"; sourceTree = "<group>"; };
+		4DF343531E1F6E9E005584CB /* 心碎.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "心碎.gif"; sourceTree = "<group>"; };
+		4DF343541E1F6E9E005584CB /* 快哭了.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "快哭了.gif"; sourceTree = "<group>"; };
+		4DF343551E1F6E9E005584CB /* 怄火.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "怄火.gif"; sourceTree = "<group>"; };
+		4DF343561E1F6E9E005584CB /* 惊恐.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "惊恐.gif"; sourceTree = "<group>"; };
+		4DF343571E1F6E9E005584CB /* 惊讶.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "惊讶.gif"; sourceTree = "<group>"; };
+		4DF343581E1F6E9E005584CB /* 憨笑.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "憨笑.gif"; sourceTree = "<group>"; };
+		4DF343591E1F6E9E005584CB /* 抓狂.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "抓狂.gif"; sourceTree = "<group>"; };
+		4DF3435A1E1F6E9E005584CB /* 折磨.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "折磨.gif"; sourceTree = "<group>"; };
+		4DF3435B1E1F6E9E005584CB /* 抠鼻.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "抠鼻.gif"; sourceTree = "<group>"; };
+		4DF3435C1E1F6E9E005584CB /* 抱拳.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "抱拳.gif"; sourceTree = "<group>"; };
+		4DF3435D1E1F6E9E005584CB /* 拥抱.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "拥抱.gif"; sourceTree = "<group>"; };
+		4DF3435E1E1F6E9E005584CB /* 拳头.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "拳头.gif"; sourceTree = "<group>"; };
+		4DF3435F1E1F6E9E005584CB /* 挥手.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "挥手.gif"; sourceTree = "<group>"; };
+		4DF343601E1F6E9E005584CB /* 握手.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "握手.gif"; sourceTree = "<group>"; };
+		4DF343611E1F6E9E005584CB /* 撇嘴.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "撇嘴.gif"; sourceTree = "<group>"; };
+		4DF343621E1F6E9E005584CB /* 擦汗.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "擦汗.gif"; sourceTree = "<group>"; };
+		4DF343631E1F6E9E005584CB /* 敲打.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "敲打.gif"; sourceTree = "<group>"; };
+		4DF343641E1F6E9E005584CB /* 晕.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "晕.gif"; sourceTree = "<group>"; };
+		4DF343651E1F6E9E005584CB /* 月亮.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "月亮.gif"; sourceTree = "<group>"; };
+		4DF343661E1F6E9E005584CB /* 流汗.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "流汗.gif"; sourceTree = "<group>"; };
+		4DF343671E1F6E9E005584CB /* 流泪.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "流泪.gif"; sourceTree = "<group>"; };
+		4DF343681E1F6E9E005584CB /* 激动.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "激动.gif"; sourceTree = "<group>"; };
+		4DF343691E1F6E9E005584CB /* 激吻.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "激吻.gif"; sourceTree = "<group>"; };
+		4DF3436A1E1F6E9E005584CB /* 炸弹.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "炸弹.gif"; sourceTree = "<group>"; };
+		4DF3436B1E1F6E9E005584CB /* 爱你.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "爱你.gif"; sourceTree = "<group>"; };
+		4DF3436C1E1F6E9E005584CB /* 爱心.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "爱心.gif"; sourceTree = "<group>"; };
+		4DF3436D1E1F6E9E005584CB /* 爱情.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "爱情.gif"; sourceTree = "<group>"; };
+		4DF3436E1E1F6E9E005584CB /* 猪头.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "猪头.gif"; sourceTree = "<group>"; };
+		4DF3436F1E1F6E9E005584CB /* 献吻.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "献吻.gif"; sourceTree = "<group>"; };
+		4DF343701E1F6E9E005584CB /* 玫瑰.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "玫瑰.gif"; sourceTree = "<group>"; };
+		4DF343711E1F6E9E005584CB /* 瓢虫.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "瓢虫.gif"; sourceTree = "<group>"; };
+		4DF343721E1F6E9E005584CB /* 疑问.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "疑问.gif"; sourceTree = "<group>"; };
+		4DF343731E1F6E9E005584CB /* 白眼.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "白眼.gif"; sourceTree = "<group>"; };
+		4DF343741E1F6E9E005584CB /* 睡.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "睡.gif"; sourceTree = "<group>"; };
+		4DF343751E1F6E9E005584CB /* 磕头.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "磕头.gif"; sourceTree = "<group>"; };
+		4DF343761E1F6E9E005584CB /* 示爱.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "示爱.gif"; sourceTree = "<group>"; };
+		4DF343771E1F6E9E005584CB /* 礼物.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "礼物.gif"; sourceTree = "<group>"; };
+		4DF343781E1F6E9E005584CB /* 篮球.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "篮球.gif"; sourceTree = "<group>"; };
+		4DF343791E1F6E9E005584CB /* 糗大了.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "糗大了.gif"; sourceTree = "<group>"; };
+		4DF3437A1E1F6E9E005584CB /* 胜利.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "胜利.gif"; sourceTree = "<group>"; };
+		4DF3437B1E1F6E9E005584CB /* 色.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "色.gif"; sourceTree = "<group>"; };
+		4DF3437C1E1F6E9E005584CB /* 菜刀.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "菜刀.gif"; sourceTree = "<group>"; };
+		4DF3437D1E1F6E9E005584CB /* 蛋糕.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "蛋糕.gif"; sourceTree = "<group>"; };
+		4DF3437E1E1F6E9E005584CB /* 衰.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "衰.gif"; sourceTree = "<group>"; };
+		4DF3437F1E1F6E9E005584CB /* 西瓜.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "西瓜.gif"; sourceTree = "<group>"; };
+		4DF343801E1F6E9E005584CB /* 调皮.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "调皮.gif"; sourceTree = "<group>"; };
+		4DF343811E1F6E9E005584CB /* 足球.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "足球.gif"; sourceTree = "<group>"; };
+		4DF343821E1F6E9E005584CB /* 跳绳.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "跳绳.gif"; sourceTree = "<group>"; };
+		4DF343831E1F6E9E005584CB /* 跳跳.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "跳跳.gif"; sourceTree = "<group>"; };
+		4DF343841E1F6E9E005584CB /* 转圈.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "转圈.gif"; sourceTree = "<group>"; };
+		4DF343851E1F6E9E005584CB /* 鄙视.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "鄙视.gif"; sourceTree = "<group>"; };
+		4DF343861E1F6E9E005584CB /* 酷.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "酷.gif"; sourceTree = "<group>"; };
+		4DF343871E1F6E9E005584CB /* 闪电.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "闪电.gif"; sourceTree = "<group>"; };
+		4DF343881E1F6E9E005584CB /* 闭嘴.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "闭嘴.gif"; sourceTree = "<group>"; };
+		4DF343891E1F6E9E005584CB /* 阴险.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "阴险.gif"; sourceTree = "<group>"; };
+		4DF3438A1E1F6E9E005584CB /* 难过.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "难过.gif"; sourceTree = "<group>"; };
+		4DF3438B1E1F6E9E005584CB /* 飞吻.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "飞吻.gif"; sourceTree = "<group>"; };
+		4DF3438C1E1F6E9E005584CB /* 饥饿.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "饥饿.gif"; sourceTree = "<group>"; };
+		4DF3438D1E1F6E9E005584CB /* 饭.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "饭.gif"; sourceTree = "<group>"; };
+		4DF3438E1E1F6E9E005584CB /* 骷髅.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "骷髅.gif"; sourceTree = "<group>"; };
+		4DF3438F1E1F6E9E005584CB /* 鼓掌.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "鼓掌.gif"; sourceTree = "<group>"; };
+		4DF343FD1E1F6EA2005584CB /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		4DF343FE1E1F6EA2005584CB /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		4DF343FF1E1F6EA2005584CB /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		4DF344001E1F6EA2005584CB /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		4DF344011E1F6EA2005584CB /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		4DF344021E1F6EA2005584CB /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		4DF344031E1F6EA2005584CB /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		4DF344041E1F6EA2005584CB /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		4DF344051E1F6EA2005584CB /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		4DF344061E1F6EA2005584CB /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		4DF3440D1E1F6EA6005584CB /* LHAssetGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHAssetGroupViewController.h; sourceTree = "<group>"; };
+		4DF3440E1E1F6EA6005584CB /* LHAssetGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHAssetGroupViewController.m; sourceTree = "<group>"; };
+		4DF3440F1E1F6EA6005584CB /* LHAssetPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHAssetPickerController.h; sourceTree = "<group>"; };
+		4DF344101E1F6EA6005584CB /* LHAssetPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHAssetPickerController.m; sourceTree = "<group>"; };
+		4DF344111E1F6EA6005584CB /* LHAssetPreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHAssetPreviewController.h; sourceTree = "<group>"; };
+		4DF344121E1F6EA6005584CB /* LHAssetPreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHAssetPreviewController.m; sourceTree = "<group>"; };
+		4DF344131E1F6EA6005584CB /* LHAssetViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHAssetViewCell.h; sourceTree = "<group>"; };
+		4DF344141E1F6EA6005584CB /* LHAssetViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHAssetViewCell.m; sourceTree = "<group>"; };
+		4DF344151E1F6EA6005584CB /* LHAssetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHAssetViewController.h; sourceTree = "<group>"; };
+		4DF344161E1F6EA6005584CB /* LHAssetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHAssetViewController.m; sourceTree = "<group>"; };
+		4DF344171E1F6EA6005584CB /* LHPreViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHPreViewCell.h; sourceTree = "<group>"; };
+		4DF344181E1F6EA6005584CB /* LHPreViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHPreViewCell.m; sourceTree = "<group>"; };
+		4DF3441A1E1F6EA6005584CB /* FriendsSendsPicturesSelectBigNIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FriendsSendsPicturesSelectBigNIcon@2x.png"; sourceTree = "<group>"; };
+		4DF3441B1E1F6EA6005584CB /* FriendsSendsPicturesSelectBigYIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FriendsSendsPicturesSelectBigYIcon@2x.png"; sourceTree = "<group>"; };
+		4DF3441C1E1F6EA6005584CB /* item_left@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "item_left@3x.png"; sourceTree = "<group>"; };
+		4DF344261E1F6FF0005584CB /* ChooseDateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseDateViewController.h; sourceTree = "<group>"; };
+		4DF344271E1F6FF0005584CB /* ChooseDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseDateViewController.m; sourceTree = "<group>"; };
+		4DF344281E1F6FF0005584CB /* ChooseSexViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSexViewController.h; sourceTree = "<group>"; };
+		4DF344291E1F6FF0005584CB /* ChooseSexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseSexViewController.m; sourceTree = "<group>"; };
+		4DF3442A1E1F6FF0005584CB /* ChooseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseViewController.h; sourceTree = "<group>"; };
+		4DF3442B1E1F6FF0005584CB /* ChooseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseViewController.m; sourceTree = "<group>"; };
+		4DF3442C1E1F6FF0005584CB /* CityChooseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityChooseViewController.h; sourceTree = "<group>"; };
+		4DF3442D1E1F6FF0005584CB /* CityChooseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityChooseViewController.m; sourceTree = "<group>"; };
+		4DF3442E1E1F6FF0005584CB /* ComplainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComplainViewController.h; sourceTree = "<group>"; };
+		4DF3442F1E1F6FF0005584CB /* ComplainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComplainViewController.m; sourceTree = "<group>"; };
+		4DF344301E1F6FF0005584CB /* EditImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditImageViewController.h; sourceTree = "<group>"; };
+		4DF344311E1F6FF0005584CB /* EditImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditImageViewController.m; sourceTree = "<group>"; };
+		4DF3443A1E1F71A3005584CB /* MyHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHeaderView.h; sourceTree = "<group>"; };
+		4DF3443B1E1F71A3005584CB /* MyHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHeaderView.m; sourceTree = "<group>"; };
+		4DF3443C1E1F71A3005584CB /* MyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
+		4DF3443D1E1F71A3005584CB /* MyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
 		4DF4DA411E08F43000DDA429 /* MyCardChooseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCardChooseViewController.h; sourceTree = "<group>"; };
 		4DF4DA421E08F43000DDA429 /* MyCardChooseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCardChooseViewController.m; sourceTree = "<group>"; };
 		4DF4DA441E0909F600DDA429 /* CZWDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZWDatePicker.h; sourceTree = "<group>"; };
@@ -997,6 +1000,7 @@
 		4D0069081B9D908900BA0CA1 /* 我 */ = {
 			isa = PBXGroup;
 			children = (
+				4DF344391E1F7141005584CB /* 我-初始页面 */,
 				4D84E6481BF33ACC00F901BF /* 登录 */,
 				4D97FC961BAF94E50089C684 /* 我的投诉 */,
 				4D97FC8C1BAF94DC0089C684 /* 我的评论 */,
@@ -1006,10 +1010,6 @@
 				4D97FC731BAF94A40089C684 /* 个人资料 */,
 				4D97FC691BAF949B0089C684 /* 设置 */,
 				4D97FC651BAF94730089C684 /* 密码修改 */,
-				4D79792F1BA9699200DC147D /* MyViewController.h */,
-				4D84E6551BF33B4800F901BF /* MyViewController.m */,
-				4DCDDE6A1D9E0FDB00AE4446 /* MyHeaderView.h */,
-				4DCDDE6B1D9E0FDB00AE4446 /* MyHeaderView.m */,
 			);
 			path = "我";
 			sourceTree = "<group>";
@@ -1229,17 +1229,11 @@
 				4DF75ECB1D9CE27900FB882E /* Homepage */,
 				4DF75EC71D9CE25A00FB882E /* Find */,
 				4DCAD2C71CEC2A5A00A539B2 /* Category */,
-				4D9A3EFB1B9E720A008805E4 /* 3rd */,
 				4D8DD0901B9EB43700619923 /* 通用 */,
 				4D0069081B9D908900BA0CA1 /* 我 */,
 				4D7979151BA8F7A900DC147D /* 评论列表 */,
 				4DC4070F1BB11E64004079A8 /* 投诉页面 */,
-				4D7E723F1B9D5CD10048F221 /* AppDelegate.h */,
-				4D7E72401B9D5CD10048F221 /* AppDelegate.m */,
-				4D0069051B9D891400BA0CA1 /* CustomTabBarController.h */,
-				4D0069061B9D891400BA0CA1 /* CustomTabBarController.m */,
-				4DFBFA331CE56F110069F229 /* CZWAppPrompt.h */,
-				4DFBFA341CE56F110069F229 /* CZWAppPrompt.m */,
+				4DF344381E1F70C9005584CB /* Application */,
 				4D7E723B1B9D5CD10048F221 /* Supporting Files */,
 			);
 			path = chezhiwang;
@@ -1248,11 +1242,6 @@
 		4D7E723B1B9D5CD10048F221 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				4D7E72451B9D5CD10048F221 /* Main.storyboard */,
-				4D7E724A1B9D5CD10048F221 /* LaunchScreen.xib */,
-				4D1626941D52D79F00E74EC5 /* Images.xcassets */,
-				4D11BEBC1D54790700482F8F /* chezhiwang-Bridging-Header.h */,
-				4D8B22BB1BA808EF00659A56 /* pch.pch */,
 				4D7E723C1B9D5CD10048F221 /* Info.plist */,
 				4D7E723D1B9D5CD10048F221 /* main.m */,
 			);
@@ -1311,131 +1300,6 @@
 			path = "通用";
 			sourceTree = "<group>";
 		};
-		4D952C421BF0875C000F26C0 /* LHEmoji */ = {
-			isa = PBXGroup;
-			children = (
-				4D952C461BF0886C000F26C0 /* 表情图 */,
-				4D952C431BF0876D000F26C0 /* LHEmojiView.h */,
-				4D952C441BF0876D000F26C0 /* LHEmojiView.m */,
-				4D952D1B1BF08E54000F26C0 /* LHEmojiButton.h */,
-				4D952D1C1BF08E54000F26C0 /* LHEmojiButton.m */,
-			);
-			path = LHEmoji;
-			sourceTree = "<group>";
-		};
-		4D952C461BF0886C000F26C0 /* 表情图 */ = {
-			isa = PBXGroup;
-			children = (
-				4D952C471BF0886C000F26C0 /* NO.gif */,
-				4D952C481BF0886C000F26C0 /* OK.gif */,
-				4D952C491BF0886C000F26C0 /* Thumbs.db */,
-				4D952C4A1BF0886C000F26C0 /* 乒乓.gif */,
-				4D952C4B1BF0886C000F26C0 /* 亲亲.gif */,
-				4D952C4C1BF0886C000F26C0 /* 便便.gif */,
-				4D952C4D1BF0886C000F26C0 /* 偷笑.gif */,
-				4D952C4E1BF0886C000F26C0 /* 傲慢.gif */,
-				4D952C4F1BF0886C000F26C0 /* 再见.gif */,
-				4D952C501BF0886C000F26C0 /* 冷汗.gif */,
-				4D952C511BF0886C000F26C0 /* 凋谢.gif */,
-				4D952C521BF0886C000F26C0 /* 刀.gif */,
-				4D952C531BF0886C000F26C0 /* 勾引.gif */,
-				4D952C541BF0886C000F26C0 /* 发呆.gif */,
-				4D952C551BF0886C000F26C0 /* 发怒.gif */,
-				4D952C561BF0886C000F26C0 /* 发抖.gif */,
-				4D952C571BF0886C000F26C0 /* 可怜.gif */,
-				4D952C581BF0886C000F26C0 /* 可爱.gif */,
-				4D952C591BF0886C000F26C0 /* 右哼哼.gif */,
-				4D952C5A1BF0886C000F26C0 /* 右太极.gif */,
-				4D952C5B1BF0886C000F26C0 /* 吐.gif */,
-				4D952C5C1BF0886C000F26C0 /* 吓.gif */,
-				4D952C5D1BF0886C000F26C0 /* 呲牙.gif */,
-				4D952C5E1BF0886C000F26C0 /* 咒骂.gif */,
-				4D952C5F1BF0886C000F26C0 /* 咖啡.gif */,
-				4D952C601BF0886C000F26C0 /* 哈欠.gif */,
-				4D952C611BF0886C000F26C0 /* 啤酒.gif */,
-				4D952C621BF0886C000F26C0 /* 嘘.gif */,
-				4D952C631BF0886C000F26C0 /* 回头.gif */,
-				4D952C641BF0886C000F26C0 /* 困.gif */,
-				4D952C651BF0886C000F26C0 /* 坏笑.gif */,
-				4D952C661BF0886C000F26C0 /* 大兵.gif */,
-				4D952C671BF0886C000F26C0 /* 大哭.gif */,
-				4D952C681BF0886C000F26C0 /* 太阳.gif */,
-				4D952C691BF0886C000F26C0 /* 奋斗.gif */,
-				4D952C6A1BF0886C000F26C0 /* 委屈.gif */,
-				4D952C6B1BF0886C000F26C0 /* 害羞.gif */,
-				4D952C6C1BF0886C000F26C0 /* 尴尬.gif */,
-				4D952C6D1BF0886C000F26C0 /* 左哼哼.gif */,
-				4D952C6E1BF0886C000F26C0 /* 左太极.gif */,
-				4D952C6F1BF0886C000F26C0 /* 差劲.gif */,
-				4D952C701BF0886C000F26C0 /* 弱.gif */,
-				4D952C711BF0886C000F26C0 /* 强.gif */,
-				4D952C721BF0886C000F26C0 /* 得意.gif */,
-				4D952C731BF0886C000F26C0 /* 微笑.gif */,
-				4D952C741BF0886C000F26C0 /* 心碎.gif */,
-				4D952C751BF0886C000F26C0 /* 快哭了.gif */,
-				4D952C761BF0886C000F26C0 /* 怄火.gif */,
-				4D952C771BF0886C000F26C0 /* 惊恐.gif */,
-				4D952C781BF0886C000F26C0 /* 惊讶.gif */,
-				4D952C791BF0886C000F26C0 /* 憨笑.gif */,
-				4D952C7A1BF0886C000F26C0 /* 抓狂.gif */,
-				4D952C7B1BF0886C000F26C0 /* 折磨.gif */,
-				4D952C7C1BF0886C000F26C0 /* 抠鼻.gif */,
-				4D952C7D1BF0886C000F26C0 /* 抱拳.gif */,
-				4D952C7E1BF0886C000F26C0 /* 拥抱.gif */,
-				4D952C7F1BF0886C000F26C0 /* 拳头.gif */,
-				4D952C801BF0886C000F26C0 /* 挥手.gif */,
-				4D952C811BF0886C000F26C0 /* 握手.gif */,
-				4D952C821BF0886C000F26C0 /* 撇嘴.gif */,
-				4D952C831BF0886C000F26C0 /* 擦汗.gif */,
-				4D952C841BF0886C000F26C0 /* 敲打.gif */,
-				4D952C851BF0886C000F26C0 /* 晕.gif */,
-				4D952C861BF0886C000F26C0 /* 月亮.gif */,
-				4D952C871BF0886C000F26C0 /* 流汗.gif */,
-				4D952C881BF0886C000F26C0 /* 流泪.gif */,
-				4D952C891BF0886C000F26C0 /* 激动.gif */,
-				4D952C8A1BF0886C000F26C0 /* 激吻.gif */,
-				4D952C8B1BF0886C000F26C0 /* 炸弹.gif */,
-				4D952C8C1BF0886C000F26C0 /* 爱你.gif */,
-				4D952C8D1BF0886C000F26C0 /* 爱心.gif */,
-				4D952C8E1BF0886C000F26C0 /* 爱情.gif */,
-				4D952C8F1BF0886C000F26C0 /* 猪头.gif */,
-				4D952C901BF0886C000F26C0 /* 献吻.gif */,
-				4D952C911BF0886C000F26C0 /* 玫瑰.gif */,
-				4D952C921BF0886C000F26C0 /* 瓢虫.gif */,
-				4D952C931BF0886C000F26C0 /* 疑问.gif */,
-				4D952C941BF0886C000F26C0 /* 白眼.gif */,
-				4D952C951BF0886C000F26C0 /* 睡.gif */,
-				4D952C961BF0886C000F26C0 /* 磕头.gif */,
-				4D952C971BF0886C000F26C0 /* 示爱.gif */,
-				4D952C981BF0886C000F26C0 /* 礼物.gif */,
-				4D952C991BF0886C000F26C0 /* 篮球.gif */,
-				4D952C9A1BF0886C000F26C0 /* 糗大了.gif */,
-				4D952C9B1BF0886C000F26C0 /* 胜利.gif */,
-				4D952C9C1BF0886C000F26C0 /* 色.gif */,
-				4D952C9D1BF0886C000F26C0 /* 菜刀.gif */,
-				4D952C9E1BF0886C000F26C0 /* 蛋糕.gif */,
-				4D952C9F1BF0886C000F26C0 /* 衰.gif */,
-				4D952CA01BF0886C000F26C0 /* 西瓜.gif */,
-				4D952CA11BF0886C000F26C0 /* 调皮.gif */,
-				4D952CA21BF0886C000F26C0 /* 足球.gif */,
-				4D952CA31BF0886C000F26C0 /* 跳绳.gif */,
-				4D952CA41BF0886C000F26C0 /* 跳跳.gif */,
-				4D952CA51BF0886C000F26C0 /* 转圈.gif */,
-				4D952CA61BF0886C000F26C0 /* 鄙视.gif */,
-				4D952CA71BF0886C000F26C0 /* 酷.gif */,
-				4D952CA81BF0886C000F26C0 /* 闪电.gif */,
-				4D952CA91BF0886C000F26C0 /* 闭嘴.gif */,
-				4D952CAA1BF0886C000F26C0 /* 阴险.gif */,
-				4D952CAB1BF0886C000F26C0 /* 难过.gif */,
-				4D952CAC1BF0886C000F26C0 /* 飞吻.gif */,
-				4D952CAD1BF0886C000F26C0 /* 饥饿.gif */,
-				4D952CAE1BF0886C000F26C0 /* 饭.gif */,
-				4D952CAF1BF0886C000F26C0 /* 骷髅.gif */,
-				4D952CB01BF0886C000F26C0 /* 鼓掌.gif */,
-			);
-			path = "表情图";
-			sourceTree = "<group>";
-		};
 		4D967DB51DD2C87600C1B255 /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1473,6 +1337,18 @@
 		4D967DB71DD2C87600C1B255 /* viewController */ = {
 			isa = PBXGroup;
 			children = (
+				4DF344261E1F6FF0005584CB /* ChooseDateViewController.h */,
+				4DF344271E1F6FF0005584CB /* ChooseDateViewController.m */,
+				4DF344281E1F6FF0005584CB /* ChooseSexViewController.h */,
+				4DF344291E1F6FF0005584CB /* ChooseSexViewController.m */,
+				4DF3442A1E1F6FF0005584CB /* ChooseViewController.h */,
+				4DF3442B1E1F6FF0005584CB /* ChooseViewController.m */,
+				4DF3442C1E1F6FF0005584CB /* CityChooseViewController.h */,
+				4DF3442D1E1F6FF0005584CB /* CityChooseViewController.m */,
+				4DF3442E1E1F6FF0005584CB /* ComplainViewController.h */,
+				4DF3442F1E1F6FF0005584CB /* ComplainViewController.m */,
+				4DF344301E1F6FF0005584CB /* EditImageViewController.h */,
+				4DF344311E1F6FF0005584CB /* EditImageViewController.m */,
 			);
 			path = viewController;
 			sourceTree = "<group>";
@@ -1565,85 +1441,14 @@
 			path = "我的投诉";
 			sourceTree = "<group>";
 		};
-		4D9A3EFB1B9E720A008805E4 /* 3rd */ = {
-			isa = PBXGroup;
-			children = (
-				4D952C421BF0875C000F26C0 /* LHEmoji */,
-				4DC407131BB12D40004079A8 /* 相册 */,
-				4D9A3F4C1B9E7255008805E4 /* FMDB */,
-			);
-			path = 3rd;
-			sourceTree = "<group>";
-		};
-		4D9A3F4C1B9E7255008805E4 /* FMDB */ = {
-			isa = PBXGroup;
-			children = (
-				4D9A3F4D1B9E7255008805E4 /* FMDatabase.h */,
-				4D9A3F4E1B9E7255008805E4 /* FMDatabase.m */,
-				4D9A3F4F1B9E7255008805E4 /* FMDatabaseAdditions.h */,
-				4D9A3F501B9E7255008805E4 /* FMDatabaseAdditions.m */,
-				4D9A3F511B9E7255008805E4 /* FMDatabasePool.h */,
-				4D9A3F521B9E7255008805E4 /* FMDatabasePool.m */,
-				4D9A3F531B9E7255008805E4 /* FMDatabaseQueue.h */,
-				4D9A3F541B9E7255008805E4 /* FMDatabaseQueue.m */,
-				4D9A3F551B9E7255008805E4 /* FMResultSet.h */,
-				4D9A3F561B9E7255008805E4 /* FMResultSet.m */,
-			);
-			path = FMDB;
-			sourceTree = "<group>";
-		};
 		4DC4070F1BB11E64004079A8 /* 投诉页面 */ = {
 			isa = PBXGroup;
 			children = (
 				4D967DB51DD2C87600C1B255 /* model */,
 				4D967DB61DD2C87600C1B255 /* view */,
 				4D967DB71DD2C87600C1B255 /* viewController */,
-				4D87CE4A1C0324BD00466A97 /* ChooseViewController.h */,
-				4D87CE4B1C0324BD00466A97 /* ChooseViewController.m */,
-				4DC2BF6B1DD5872A0006E8D5 /* ChooseDateViewController.h */,
-				4DC2BF6C1DD5872A0006E8D5 /* ChooseDateViewController.m */,
-				4DC2BF681DD57E810006E8D5 /* ChooseSexViewController.h */,
-				4DC2BF691DD57E810006E8D5 /* ChooseSexViewController.m */,
-				4D87CE4C1C0324BD00466A97 /* CityChooseViewController.h */,
-				4D87CE4D1C0324BD00466A97 /* CityChooseViewController.m */,
-				4D967DBB1DD2E12C00C1B255 /* ComplainViewController.h */,
-				4D967DBC1DD2E12C00C1B255 /* ComplainViewController.m */,
-				4D87CE501C0324BD00466A97 /* EditImageViewController.h */,
-				4D87CE511C0324BD00466A97 /* EditImageViewController.m */,
-				4D87CE521C0324BD00466A97 /* EditImageCell.h */,
-				4D87CE531C0324BD00466A97 /* EditImageCell.m */,
 			);
 			path = "投诉页面";
-			sourceTree = "<group>";
-		};
-		4DC407131BB12D40004079A8 /* 相册 */ = {
-			isa = PBXGroup;
-			children = (
-				4DC407141BB12D40004079A8 /* LHAssetGroupViewController.h */,
-				4DC407151BB12D40004079A8 /* LHAssetGroupViewController.m */,
-				4DC407161BB12D40004079A8 /* LHAssetPickerController.h */,
-				4DC407171BB12D40004079A8 /* LHAssetPickerController.m */,
-				4DC407181BB12D40004079A8 /* LHAssetPreviewController.h */,
-				4DC407191BB12D40004079A8 /* LHAssetPreviewController.m */,
-				4DC4071A1BB12D40004079A8 /* LHAssetViewCell.h */,
-				4DC4071B1BB12D40004079A8 /* LHAssetViewCell.m */,
-				4DC4071C1BB12D40004079A8 /* LHAssetViewController.h */,
-				4DC4071D1BB12D40004079A8 /* LHAssetViewController.m */,
-				4DC4071E1BB12D40004079A8 /* LHPreViewCell.h */,
-				4DC4071F1BB12D40004079A8 /* LHPreViewCell.m */,
-				4DC407201BB12D40004079A8 /* 图片 */,
-			);
-			path = "相册";
-			sourceTree = "<group>";
-		};
-		4DC407201BB12D40004079A8 /* 图片 */ = {
-			isa = PBXGroup;
-			children = (
-				4DC407211BB12D40004079A8 /* FriendsSendsPicturesSelectBigNIcon@2x.png */,
-				4DC407221BB12D40004079A8 /* FriendsSendsPicturesSelectBigYIcon@2x.png */,
-				4DC407231BB12D40004079A8 /* item_left@3x.png */,
-			);
-			path = "图片";
 			sourceTree = "<group>";
 		};
 		4DCAD2C71CEC2A5A00A539B2 /* Category */ = {
@@ -1664,6 +1469,9 @@
 		4DCDDE6D1D9E3AA900AE4446 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				4DF3440C1E1F6EA6005584CB /* 相册 */,
+				4DF343FC1E1F6EA2005584CB /* FMDB */,
+				4DF343201E1F6E9E005584CB /* LHEmoji */,
 				4D0F0DEC1E037E1F000F75B0 /* 选择数据列表 */,
 				4DEC28AF1DF9584B00C64CB9 /* swift */,
 				4DEF32DE1DD9764A0043A411 /* TransitionSegmentView */,
@@ -1775,6 +1583,207 @@
 				4DF0EA7E1DBE0E9400EFAE58 /* UIScrollView+TwitterCover.m */,
 			);
 			path = TwitterCover;
+			sourceTree = "<group>";
+		};
+		4DF343201E1F6E9E005584CB /* LHEmoji */ = {
+			isa = PBXGroup;
+			children = (
+				4DF343211E1F6E9E005584CB /* LHEmojiButton.h */,
+				4DF343221E1F6E9E005584CB /* LHEmojiButton.m */,
+				4DF343231E1F6E9E005584CB /* LHEmojiView.h */,
+				4DF343241E1F6E9E005584CB /* LHEmojiView.m */,
+				4DF343251E1F6E9E005584CB /* 表情图 */,
+			);
+			path = LHEmoji;
+			sourceTree = "<group>";
+		};
+		4DF343251E1F6E9E005584CB /* 表情图 */ = {
+			isa = PBXGroup;
+			children = (
+				4DF343261E1F6E9E005584CB /* NO.gif */,
+				4DF343271E1F6E9E005584CB /* OK.gif */,
+				4DF343281E1F6E9E005584CB /* Thumbs.db */,
+				4DF343291E1F6E9E005584CB /* 乒乓.gif */,
+				4DF3432A1E1F6E9E005584CB /* 亲亲.gif */,
+				4DF3432B1E1F6E9E005584CB /* 便便.gif */,
+				4DF3432C1E1F6E9E005584CB /* 偷笑.gif */,
+				4DF3432D1E1F6E9E005584CB /* 傲慢.gif */,
+				4DF3432E1E1F6E9E005584CB /* 再见.gif */,
+				4DF3432F1E1F6E9E005584CB /* 冷汗.gif */,
+				4DF343301E1F6E9E005584CB /* 凋谢.gif */,
+				4DF343311E1F6E9E005584CB /* 刀.gif */,
+				4DF343321E1F6E9E005584CB /* 勾引.gif */,
+				4DF343331E1F6E9E005584CB /* 发呆.gif */,
+				4DF343341E1F6E9E005584CB /* 发怒.gif */,
+				4DF343351E1F6E9E005584CB /* 发抖.gif */,
+				4DF343361E1F6E9E005584CB /* 可怜.gif */,
+				4DF343371E1F6E9E005584CB /* 可爱.gif */,
+				4DF343381E1F6E9E005584CB /* 右哼哼.gif */,
+				4DF343391E1F6E9E005584CB /* 右太极.gif */,
+				4DF3433A1E1F6E9E005584CB /* 吐.gif */,
+				4DF3433B1E1F6E9E005584CB /* 吓.gif */,
+				4DF3433C1E1F6E9E005584CB /* 呲牙.gif */,
+				4DF3433D1E1F6E9E005584CB /* 咒骂.gif */,
+				4DF3433E1E1F6E9E005584CB /* 咖啡.gif */,
+				4DF3433F1E1F6E9E005584CB /* 哈欠.gif */,
+				4DF343401E1F6E9E005584CB /* 啤酒.gif */,
+				4DF343411E1F6E9E005584CB /* 嘘.gif */,
+				4DF343421E1F6E9E005584CB /* 回头.gif */,
+				4DF343431E1F6E9E005584CB /* 困.gif */,
+				4DF343441E1F6E9E005584CB /* 坏笑.gif */,
+				4DF343451E1F6E9E005584CB /* 大兵.gif */,
+				4DF343461E1F6E9E005584CB /* 大哭.gif */,
+				4DF343471E1F6E9E005584CB /* 太阳.gif */,
+				4DF343481E1F6E9E005584CB /* 奋斗.gif */,
+				4DF343491E1F6E9E005584CB /* 委屈.gif */,
+				4DF3434A1E1F6E9E005584CB /* 害羞.gif */,
+				4DF3434B1E1F6E9E005584CB /* 尴尬.gif */,
+				4DF3434C1E1F6E9E005584CB /* 左哼哼.gif */,
+				4DF3434D1E1F6E9E005584CB /* 左太极.gif */,
+				4DF3434E1E1F6E9E005584CB /* 差劲.gif */,
+				4DF3434F1E1F6E9E005584CB /* 弱.gif */,
+				4DF343501E1F6E9E005584CB /* 强.gif */,
+				4DF343511E1F6E9E005584CB /* 得意.gif */,
+				4DF343521E1F6E9E005584CB /* 微笑.gif */,
+				4DF343531E1F6E9E005584CB /* 心碎.gif */,
+				4DF343541E1F6E9E005584CB /* 快哭了.gif */,
+				4DF343551E1F6E9E005584CB /* 怄火.gif */,
+				4DF343561E1F6E9E005584CB /* 惊恐.gif */,
+				4DF343571E1F6E9E005584CB /* 惊讶.gif */,
+				4DF343581E1F6E9E005584CB /* 憨笑.gif */,
+				4DF343591E1F6E9E005584CB /* 抓狂.gif */,
+				4DF3435A1E1F6E9E005584CB /* 折磨.gif */,
+				4DF3435B1E1F6E9E005584CB /* 抠鼻.gif */,
+				4DF3435C1E1F6E9E005584CB /* 抱拳.gif */,
+				4DF3435D1E1F6E9E005584CB /* 拥抱.gif */,
+				4DF3435E1E1F6E9E005584CB /* 拳头.gif */,
+				4DF3435F1E1F6E9E005584CB /* 挥手.gif */,
+				4DF343601E1F6E9E005584CB /* 握手.gif */,
+				4DF343611E1F6E9E005584CB /* 撇嘴.gif */,
+				4DF343621E1F6E9E005584CB /* 擦汗.gif */,
+				4DF343631E1F6E9E005584CB /* 敲打.gif */,
+				4DF343641E1F6E9E005584CB /* 晕.gif */,
+				4DF343651E1F6E9E005584CB /* 月亮.gif */,
+				4DF343661E1F6E9E005584CB /* 流汗.gif */,
+				4DF343671E1F6E9E005584CB /* 流泪.gif */,
+				4DF343681E1F6E9E005584CB /* 激动.gif */,
+				4DF343691E1F6E9E005584CB /* 激吻.gif */,
+				4DF3436A1E1F6E9E005584CB /* 炸弹.gif */,
+				4DF3436B1E1F6E9E005584CB /* 爱你.gif */,
+				4DF3436C1E1F6E9E005584CB /* 爱心.gif */,
+				4DF3436D1E1F6E9E005584CB /* 爱情.gif */,
+				4DF3436E1E1F6E9E005584CB /* 猪头.gif */,
+				4DF3436F1E1F6E9E005584CB /* 献吻.gif */,
+				4DF343701E1F6E9E005584CB /* 玫瑰.gif */,
+				4DF343711E1F6E9E005584CB /* 瓢虫.gif */,
+				4DF343721E1F6E9E005584CB /* 疑问.gif */,
+				4DF343731E1F6E9E005584CB /* 白眼.gif */,
+				4DF343741E1F6E9E005584CB /* 睡.gif */,
+				4DF343751E1F6E9E005584CB /* 磕头.gif */,
+				4DF343761E1F6E9E005584CB /* 示爱.gif */,
+				4DF343771E1F6E9E005584CB /* 礼物.gif */,
+				4DF343781E1F6E9E005584CB /* 篮球.gif */,
+				4DF343791E1F6E9E005584CB /* 糗大了.gif */,
+				4DF3437A1E1F6E9E005584CB /* 胜利.gif */,
+				4DF3437B1E1F6E9E005584CB /* 色.gif */,
+				4DF3437C1E1F6E9E005584CB /* 菜刀.gif */,
+				4DF3437D1E1F6E9E005584CB /* 蛋糕.gif */,
+				4DF3437E1E1F6E9E005584CB /* 衰.gif */,
+				4DF3437F1E1F6E9E005584CB /* 西瓜.gif */,
+				4DF343801E1F6E9E005584CB /* 调皮.gif */,
+				4DF343811E1F6E9E005584CB /* 足球.gif */,
+				4DF343821E1F6E9E005584CB /* 跳绳.gif */,
+				4DF343831E1F6E9E005584CB /* 跳跳.gif */,
+				4DF343841E1F6E9E005584CB /* 转圈.gif */,
+				4DF343851E1F6E9E005584CB /* 鄙视.gif */,
+				4DF343861E1F6E9E005584CB /* 酷.gif */,
+				4DF343871E1F6E9E005584CB /* 闪电.gif */,
+				4DF343881E1F6E9E005584CB /* 闭嘴.gif */,
+				4DF343891E1F6E9E005584CB /* 阴险.gif */,
+				4DF3438A1E1F6E9E005584CB /* 难过.gif */,
+				4DF3438B1E1F6E9E005584CB /* 飞吻.gif */,
+				4DF3438C1E1F6E9E005584CB /* 饥饿.gif */,
+				4DF3438D1E1F6E9E005584CB /* 饭.gif */,
+				4DF3438E1E1F6E9E005584CB /* 骷髅.gif */,
+				4DF3438F1E1F6E9E005584CB /* 鼓掌.gif */,
+			);
+			path = "表情图";
+			sourceTree = "<group>";
+		};
+		4DF343FC1E1F6EA2005584CB /* FMDB */ = {
+			isa = PBXGroup;
+			children = (
+				4DF343FD1E1F6EA2005584CB /* FMDatabase.h */,
+				4DF343FE1E1F6EA2005584CB /* FMDatabase.m */,
+				4DF343FF1E1F6EA2005584CB /* FMDatabaseAdditions.h */,
+				4DF344001E1F6EA2005584CB /* FMDatabaseAdditions.m */,
+				4DF344011E1F6EA2005584CB /* FMDatabasePool.h */,
+				4DF344021E1F6EA2005584CB /* FMDatabasePool.m */,
+				4DF344031E1F6EA2005584CB /* FMDatabaseQueue.h */,
+				4DF344041E1F6EA2005584CB /* FMDatabaseQueue.m */,
+				4DF344051E1F6EA2005584CB /* FMResultSet.h */,
+				4DF344061E1F6EA2005584CB /* FMResultSet.m */,
+			);
+			path = FMDB;
+			sourceTree = "<group>";
+		};
+		4DF3440C1E1F6EA6005584CB /* 相册 */ = {
+			isa = PBXGroup;
+			children = (
+				4DF3440D1E1F6EA6005584CB /* LHAssetGroupViewController.h */,
+				4DF3440E1E1F6EA6005584CB /* LHAssetGroupViewController.m */,
+				4DF3440F1E1F6EA6005584CB /* LHAssetPickerController.h */,
+				4DF344101E1F6EA6005584CB /* LHAssetPickerController.m */,
+				4DF344111E1F6EA6005584CB /* LHAssetPreviewController.h */,
+				4DF344121E1F6EA6005584CB /* LHAssetPreviewController.m */,
+				4DF344131E1F6EA6005584CB /* LHAssetViewCell.h */,
+				4DF344141E1F6EA6005584CB /* LHAssetViewCell.m */,
+				4DF344151E1F6EA6005584CB /* LHAssetViewController.h */,
+				4DF344161E1F6EA6005584CB /* LHAssetViewController.m */,
+				4DF344171E1F6EA6005584CB /* LHPreViewCell.h */,
+				4DF344181E1F6EA6005584CB /* LHPreViewCell.m */,
+				4DF344191E1F6EA6005584CB /* 图片 */,
+			);
+			path = "相册";
+			sourceTree = "<group>";
+		};
+		4DF344191E1F6EA6005584CB /* 图片 */ = {
+			isa = PBXGroup;
+			children = (
+				4DF3441A1E1F6EA6005584CB /* FriendsSendsPicturesSelectBigNIcon@2x.png */,
+				4DF3441B1E1F6EA6005584CB /* FriendsSendsPicturesSelectBigYIcon@2x.png */,
+				4DF3441C1E1F6EA6005584CB /* item_left@3x.png */,
+			);
+			path = "图片";
+			sourceTree = "<group>";
+		};
+		4DF344381E1F70C9005584CB /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				4DFBFA331CE56F110069F229 /* CZWAppPrompt.h */,
+				4DFBFA341CE56F110069F229 /* CZWAppPrompt.m */,
+				4D7E723F1B9D5CD10048F221 /* AppDelegate.h */,
+				4D7E72401B9D5CD10048F221 /* AppDelegate.m */,
+				4D0069051B9D891400BA0CA1 /* CustomTabBarController.h */,
+				4D0069061B9D891400BA0CA1 /* CustomTabBarController.m */,
+				4D7E724A1B9D5CD10048F221 /* LaunchScreen.xib */,
+				4D7E72451B9D5CD10048F221 /* Main.storyboard */,
+				4D8B22BB1BA808EF00659A56 /* pch.pch */,
+				4D11BEBC1D54790700482F8F /* chezhiwang-Bridging-Header.h */,
+				4D1626941D52D79F00E74EC5 /* Images.xcassets */,
+			);
+			name = Application;
+			sourceTree = "<group>";
+		};
+		4DF344391E1F7141005584CB /* 我-初始页面 */ = {
+			isa = PBXGroup;
+			children = (
+				4DF3443A1E1F71A3005584CB /* MyHeaderView.h */,
+				4DF3443B1E1F71A3005584CB /* MyHeaderView.m */,
+				4DF3443C1E1F71A3005584CB /* MyViewController.h */,
+				4DF3443D1E1F71A3005584CB /* MyViewController.m */,
+			);
+			path = "我-初始页面";
 			sourceTree = "<group>";
 		};
 		4DF75EC71D9CE25A00FB882E /* Find */ = {
@@ -2399,6 +2408,8 @@
 				4D26A8221E1630870014AC5D /* OverviewScoreView.m */,
 				4D26A8241E1631020014AC5D /* OverviewStatisticsView.h */,
 				4D26A8251E1631020014AC5D /* OverviewStatisticsView.m */,
+				4DF2C7A21E1DE06000C5B24A /* ParameterChartView.h */,
+				4DF2C7A31E1DE06000C5B24A /* ParameterChartView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -2410,6 +2421,8 @@
 				4DFE2F5D1E149FBA00E02112 /* LookCarViewController.m */,
 				4DFE2F5F1E14A0DF00E02112 /* OverviewViewController.h */,
 				4DFE2F601E14A0DF00E02112 /* OverviewViewController.m */,
+				4DF2C79F1E1DDCCE00C5B24A /* ParameterViewController.h */,
+				4DF2C7A01E1DDCCE00C5B24A /* ParameterViewController.m */,
 			);
 			path = viewController;
 			sourceTree = "<group>";
@@ -2527,123 +2540,123 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D952CD61BF0886C000F26C0 /* 尴尬.gif in Resources */,
-				4D952D161BF0886C000F26C0 /* 飞吻.gif in Resources */,
-				4D952CB81BF0886C000F26C0 /* 傲慢.gif in Resources */,
-				4D952CC71BF0886C000F26C0 /* 呲牙.gif in Resources */,
-				4D952CFF1BF0886C000F26C0 /* 睡.gif in Resources */,
+				4DF343D91E1F6E9E005584CB /* 爱情.gif in Resources */,
+				4DF343F31E1F6E9E005584CB /* 闪电.gif in Resources */,
+				4DF344251E1F6EA6005584CB /* item_left@3x.png in Resources */,
+				4DF343E61E1F6E9E005584CB /* 胜利.gif in Resources */,
+				4DF343CA1E1F6E9E005584CB /* 拳头.gif in Resources */,
+				4DF343EE1E1F6E9E005584CB /* 跳绳.gif in Resources */,
+				4DF343C91E1F6E9E005584CB /* 拥抱.gif in Resources */,
+				4DF343DD1E1F6E9E005584CB /* 瓢虫.gif in Resources */,
+				4DF343BD1E1F6E9E005584CB /* 得意.gif in Resources */,
+				4DF343B01E1F6E9E005584CB /* 坏笑.gif in Resources */,
+				4DF343FB1E1F6E9E005584CB /* 鼓掌.gif in Resources */,
+				4DF343A71E1F6E9E005584CB /* 吓.gif in Resources */,
+				4DF343DF1E1F6E9E005584CB /* 白眼.gif in Resources */,
+				4DF343D31E1F6E9E005584CB /* 流泪.gif in Resources */,
+				4DF343E91E1F6E9E005584CB /* 蛋糕.gif in Resources */,
+				4DF343BB1E1F6E9E005584CB /* 弱.gif in Resources */,
+				4DF343EA1E1F6E9E005584CB /* 衰.gif in Resources */,
+				4DF343F71E1F6E9E005584CB /* 飞吻.gif in Resources */,
+				4DF343CE1E1F6E9E005584CB /* 擦汗.gif in Resources */,
+				4DF343D01E1F6E9E005584CB /* 晕.gif in Resources */,
+				4DF343D11E1F6E9E005584CB /* 月亮.gif in Resources */,
+				4DF343A31E1F6E9E005584CB /* 可爱.gif in Resources */,
+				4DF343961E1F6E9E005584CB /* 亲亲.gif in Resources */,
+				4DF343E31E1F6E9E005584CB /* 礼物.gif in Resources */,
+				4DF343D21E1F6E9E005584CB /* 流汗.gif in Resources */,
+				4DF343D71E1F6E9E005584CB /* 爱你.gif in Resources */,
+				4DF3439F1E1F6E9E005584CB /* 发呆.gif in Resources */,
+				4DF343B31E1F6E9E005584CB /* 太阳.gif in Resources */,
+				4DF343AE1E1F6E9E005584CB /* 回头.gif in Resources */,
+				4DF343C11E1F6E9E005584CB /* 怄火.gif in Resources */,
+				4DF343E21E1F6E9E005584CB /* 示爱.gif in Resources */,
+				4DF343931E1F6E9E005584CB /* OK.gif in Resources */,
 				4DFFA5051DB77308003B6178 /* StarsBackgroundBig@2x.png in Resources */,
-				4D952CED1BF0886C000F26C0 /* 擦汗.gif in Resources */,
-				4D952CE11BF0886C000F26C0 /* 惊恐.gif in Resources */,
+				4DF343CF1E1F6E9E005584CB /* 敲打.gif in Resources */,
+				4DF343FA1E1F6E9E005584CB /* 骷髅.gif in Resources */,
 				4DFFA5041DB77308003B6178 /* StarsBackground@2x.png in Resources */,
-				4D952D041BF0886C000F26C0 /* 糗大了.gif in Resources */,
-				4D952CE41BF0886C000F26C0 /* 抓狂.gif in Resources */,
+				4DF343BE1E1F6E9E005584CB /* 微笑.gif in Resources */,
+				4DF343A41E1F6E9E005584CB /* 右哼哼.gif in Resources */,
+				4DF343C51E1F6E9E005584CB /* 抓狂.gif in Resources */,
+				4DF343CB1E1F6E9E005584CB /* 挥手.gif in Resources */,
+				4DF343D51E1F6E9E005584CB /* 激吻.gif in Resources */,
+				4DF343F21E1F6E9E005584CB /* 酷.gif in Resources */,
+				4DF343F41E1F6E9E005584CB /* 闭嘴.gif in Resources */,
+				4DF344231E1F6EA6005584CB /* FriendsSendsPicturesSelectBigNIcon@2x.png in Resources */,
+				4DF343EB1E1F6E9E005584CB /* 西瓜.gif in Resources */,
+				4DF343CC1E1F6E9E005584CB /* 握手.gif in Resources */,
+				4DF3439A1E1F6E9E005584CB /* 再见.gif in Resources */,
+				4DF343DA1E1F6E9E005584CB /* 猪头.gif in Resources */,
+				4DF343BA1E1F6E9E005584CB /* 差劲.gif in Resources */,
+				4DF343F81E1F6E9E005584CB /* 饥饿.gif in Resources */,
+				4DF343B91E1F6E9E005584CB /* 左太极.gif in Resources */,
+				4DF343A61E1F6E9E005584CB /* 吐.gif in Resources */,
+				4DF343A81E1F6E9E005584CB /* 呲牙.gif in Resources */,
+				4DF343F51E1F6E9E005584CB /* 阴险.gif in Resources */,
+				4DF343DC1E1F6E9E005584CB /* 玫瑰.gif in Resources */,
+				4DF343A01E1F6E9E005584CB /* 发怒.gif in Resources */,
+				4DF343B21E1F6E9E005584CB /* 大哭.gif in Resources */,
+				4DF343AF1E1F6E9E005584CB /* 困.gif in Resources */,
+				4DF3439D1E1F6E9E005584CB /* 刀.gif in Resources */,
+				4DF343BC1E1F6E9E005584CB /* 强.gif in Resources */,
+				4DF343B71E1F6E9E005584CB /* 尴尬.gif in Resources */,
+				4DF343971E1F6E9E005584CB /* 便便.gif in Resources */,
+				4DF343C41E1F6E9E005584CB /* 憨笑.gif in Resources */,
+				4DF343C21E1F6E9E005584CB /* 惊恐.gif in Resources */,
+				4DF343D41E1F6E9E005584CB /* 激动.gif in Resources */,
+				4DF343B41E1F6E9E005584CB /* 奋斗.gif in Resources */,
+				4DF343B61E1F6E9E005584CB /* 害羞.gif in Resources */,
+				4DF343981E1F6E9E005584CB /* 偷笑.gif in Resources */,
+				4DF343D81E1F6E9E005584CB /* 爱心.gif in Resources */,
+				4DF343E81E1F6E9E005584CB /* 菜刀.gif in Resources */,
+				4DF343A21E1F6E9E005584CB /* 可怜.gif in Resources */,
+				4DF343ED1E1F6E9E005584CB /* 足球.gif in Resources */,
+				4DF343B51E1F6E9E005584CB /* 委屈.gif in Resources */,
+				4DF343BF1E1F6E9E005584CB /* 心碎.gif in Resources */,
+				4DF343951E1F6E9E005584CB /* 乒乓.gif in Resources */,
+				4DF343F11E1F6E9E005584CB /* 鄙视.gif in Resources */,
+				4DF343E71E1F6E9E005584CB /* 色.gif in Resources */,
+				4DF343921E1F6E9E005584CB /* NO.gif in Resources */,
 				4D1626951D52D79F00E74EC5 /* Images.xcassets in Resources */,
+				4DF343EF1E1F6E9E005584CB /* 跳跳.gif in Resources */,
+				4DF343C61E1F6E9E005584CB /* 折磨.gif in Resources */,
 				4DFFA5061DB77308003B6178 /* StarsForeground@2x.png in Resources */,
-				4D952CD41BF0886C000F26C0 /* 委屈.gif in Resources */,
-				4D952CD21BF0886C000F26C0 /* 太阳.gif in Resources */,
-				4D952CF91BF0886C000F26C0 /* 猪头.gif in Resources */,
-				4D952D021BF0886C000F26C0 /* 礼物.gif in Resources */,
+				4DF343E01E1F6E9E005584CB /* 睡.gif in Resources */,
+				4DF343C71E1F6E9E005584CB /* 抠鼻.gif in Resources */,
+				4DF343C81E1F6E9E005584CB /* 抱拳.gif in Resources */,
+				4DF343AA1E1F6E9E005584CB /* 咖啡.gif in Resources */,
+				4DF344241E1F6EA6005584CB /* FriendsSendsPicturesSelectBigYIcon@2x.png in Resources */,
+				4DF343AD1E1F6E9E005584CB /* 嘘.gif in Resources */,
+				4DF343A51E1F6E9E005584CB /* 右太极.gif in Resources */,
 				4D7E72471B9D5CD10048F221 /* Main.storyboard in Resources */,
-				4D952CCB1BF0886C000F26C0 /* 啤酒.gif in Resources */,
-				4D952CCA1BF0886C000F26C0 /* 哈欠.gif in Resources */,
-				4D952CFD1BF0886C000F26C0 /* 疑问.gif in Resources */,
-				4D952D101BF0886C000F26C0 /* 鄙视.gif in Resources */,
-				4D952D0B1BF0886C000F26C0 /* 调皮.gif in Resources */,
-				4DC4072A1BB12D40004079A8 /* FriendsSendsPicturesSelectBigNIcon@2x.png in Resources */,
-				4D952CC61BF0886C000F26C0 /* 吓.gif in Resources */,
-				4D952CC51BF0886C000F26C0 /* 吐.gif in Resources */,
-				4D952CE51BF0886C000F26C0 /* 折磨.gif in Resources */,
-				4D952CE71BF0886C000F26C0 /* 抱拳.gif in Resources */,
-				4D952CEF1BF0886C000F26C0 /* 晕.gif in Resources */,
-				4D952CF51BF0886C000F26C0 /* 炸弹.gif in Resources */,
-				4D952CF71BF0886C000F26C0 /* 爱心.gif in Resources */,
-				4D952D111BF0886C000F26C0 /* 酷.gif in Resources */,
-				4D952D031BF0886C000F26C0 /* 篮球.gif in Resources */,
-				4D952CB11BF0886C000F26C0 /* NO.gif in Resources */,
-				4D952CFC1BF0886C000F26C0 /* 瓢虫.gif in Resources */,
-				4DC4072B1BB12D40004079A8 /* FriendsSendsPicturesSelectBigYIcon@2x.png in Resources */,
-				4D952CF21BF0886C000F26C0 /* 流泪.gif in Resources */,
-				4D952CD31BF0886C000F26C0 /* 奋斗.gif in Resources */,
-				4D952D131BF0886C000F26C0 /* 闭嘴.gif in Resources */,
-				4D952CF41BF0886C000F26C0 /* 激吻.gif in Resources */,
-				4D952D081BF0886C000F26C0 /* 蛋糕.gif in Resources */,
-				4D952CF11BF0886C000F26C0 /* 流汗.gif in Resources */,
-				4D952CBB1BF0886C000F26C0 /* 凋谢.gif in Resources */,
+				4DF343DE1E1F6E9E005584CB /* 疑问.gif in Resources */,
+				4DF343F91E1F6E9E005584CB /* 饭.gif in Resources */,
 				4D3A1EC91DAC8EB400A9144B /* LHMenu.bundle in Resources */,
-				4D952D171BF0886C000F26C0 /* 饥饿.gif in Resources */,
-				4D952CCE1BF0886C000F26C0 /* 困.gif in Resources */,
-				4D952CB71BF0886C000F26C0 /* 偷笑.gif in Resources */,
-				4D952CE31BF0886C000F26C0 /* 憨笑.gif in Resources */,
-				4D952D0A1BF0886C000F26C0 /* 西瓜.gif in Resources */,
-				4D952CB51BF0886C000F26C0 /* 亲亲.gif in Resources */,
-				4D952CEA1BF0886C000F26C0 /* 挥手.gif in Resources */,
+				4DF343E51E1F6E9E005584CB /* 糗大了.gif in Resources */,
 				4DFFA5071DB77308003B6178 /* StarsForegroundBig@2x.png in Resources */,
-				4D952CDE1BF0886C000F26C0 /* 心碎.gif in Resources */,
-				4D952D061BF0886C000F26C0 /* 色.gif in Resources */,
-				4D952CE81BF0886C000F26C0 /* 拥抱.gif in Resources */,
-				4D952CDC1BF0886C000F26C0 /* 得意.gif in Resources */,
-				4D952CCC1BF0886C000F26C0 /* 嘘.gif in Resources */,
-				4D952CD91BF0886C000F26C0 /* 差劲.gif in Resources */,
-				4D952D091BF0886C000F26C0 /* 衰.gif in Resources */,
-				4D952CD81BF0886C000F26C0 /* 左太极.gif in Resources */,
-				4D952CD11BF0886C000F26C0 /* 大哭.gif in Resources */,
-				4D952CDD1BF0886C000F26C0 /* 微笑.gif in Resources */,
+				4DF343B81E1F6E9E005584CB /* 左哼哼.gif in Resources */,
+				4DF343A11E1F6E9E005584CB /* 发抖.gif in Resources */,
+				4DF343B11E1F6E9E005584CB /* 大兵.gif in Resources */,
+				4DF343F61E1F6E9E005584CB /* 难过.gif in Resources */,
+				4DF343C01E1F6E9E005584CB /* 快哭了.gif in Resources */,
+				4DF343DB1E1F6E9E005584CB /* 献吻.gif in Resources */,
+				4DF343CD1E1F6E9E005584CB /* 撇嘴.gif in Resources */,
+				4DF343EC1E1F6E9E005584CB /* 调皮.gif in Resources */,
+				4DF343E41E1F6E9E005584CB /* 篮球.gif in Resources */,
+				4DF343AB1E1F6E9E005584CB /* 哈欠.gif in Resources */,
 				4D7E724C1B9D5CD10048F221 /* LaunchScreen.xib in Resources */,
-				4D952CC01BF0886C000F26C0 /* 发抖.gif in Resources */,
-				4D952CD51BF0886C000F26C0 /* 害羞.gif in Resources */,
-				4D952CBE1BF0886C000F26C0 /* 发呆.gif in Resources */,
-				4D952CEB1BF0886C000F26C0 /* 握手.gif in Resources */,
-				4D952CDB1BF0886C000F26C0 /* 强.gif in Resources */,
-				4D952CC41BF0886C000F26C0 /* 右太极.gif in Resources */,
-				4D952CE21BF0886C000F26C0 /* 惊讶.gif in Resources */,
-				4D952CC11BF0886C000F26C0 /* 可怜.gif in Resources */,
-				4D952D181BF0886C000F26C0 /* 饭.gif in Resources */,
-				4D952D1A1BF0886C000F26C0 /* 鼓掌.gif in Resources */,
-				4D952CFA1BF0886C000F26C0 /* 献吻.gif in Resources */,
-				4D952CB61BF0886C000F26C0 /* 便便.gif in Resources */,
-				4D952CB31BF0886C000F26C0 /* Thumbs.db in Resources */,
-				4D952CBF1BF0886C000F26C0 /* 发怒.gif in Resources */,
-				4D952CC31BF0886C000F26C0 /* 右哼哼.gif in Resources */,
-				4D952D141BF0886C000F26C0 /* 阴险.gif in Resources */,
-				4D952CE01BF0886C000F26C0 /* 怄火.gif in Resources */,
-				4D952CF81BF0886C000F26C0 /* 爱情.gif in Resources */,
-				4D952CBA1BF0886C000F26C0 /* 冷汗.gif in Resources */,
-				4D952D0F1BF0886C000F26C0 /* 转圈.gif in Resources */,
-				4D952D0C1BF0886C000F26C0 /* 足球.gif in Resources */,
-				4D952CC81BF0886C000F26C0 /* 咒骂.gif in Resources */,
-				4D952D191BF0886C000F26C0 /* 骷髅.gif in Resources */,
-				4D952CEC1BF0886C000F26C0 /* 撇嘴.gif in Resources */,
-				4D952CCF1BF0886C000F26C0 /* 坏笑.gif in Resources */,
-				4D952CF31BF0886C000F26C0 /* 激动.gif in Resources */,
-				4D952CC91BF0886C000F26C0 /* 咖啡.gif in Resources */,
-				4D952CB41BF0886C000F26C0 /* 乒乓.gif in Resources */,
-				4D952D0E1BF0886C000F26C0 /* 跳跳.gif in Resources */,
-				4D952D121BF0886C000F26C0 /* 闪电.gif in Resources */,
-				4D952CE61BF0886C000F26C0 /* 抠鼻.gif in Resources */,
-				4D952D071BF0886C000F26C0 /* 菜刀.gif in Resources */,
-				4D952CB21BF0886C000F26C0 /* OK.gif in Resources */,
-				4D952D151BF0886C000F26C0 /* 难过.gif in Resources */,
-				4D952D011BF0886C000F26C0 /* 示爱.gif in Resources */,
-				4D952CDF1BF0886C000F26C0 /* 快哭了.gif in Resources */,
-				4D952CE91BF0886C000F26C0 /* 拳头.gif in Resources */,
-				4D952CB91BF0886C000F26C0 /* 再见.gif in Resources */,
-				4D952D001BF0886C000F26C0 /* 磕头.gif in Resources */,
-				4D952CDA1BF0886C000F26C0 /* 弱.gif in Resources */,
-				4D952CC21BF0886C000F26C0 /* 可爱.gif in Resources */,
-				4D952CEE1BF0886C000F26C0 /* 敲打.gif in Resources */,
-				4D952CD71BF0886C000F26C0 /* 左哼哼.gif in Resources */,
-				4D952CBD1BF0886C000F26C0 /* 勾引.gif in Resources */,
-				4DC4072C1BB12D40004079A8 /* item_left@3x.png in Resources */,
-				4D952CF01BF0886C000F26C0 /* 月亮.gif in Resources */,
-				4D952CFE1BF0886C000F26C0 /* 白眼.gif in Resources */,
-				4D952CD01BF0886C000F26C0 /* 大兵.gif in Resources */,
-				4D952CCD1BF0886C000F26C0 /* 回头.gif in Resources */,
-				4D952CBC1BF0886C000F26C0 /* 刀.gif in Resources */,
-				4D952D0D1BF0886C000F26C0 /* 跳绳.gif in Resources */,
-				4D952CF61BF0886C000F26C0 /* 爱你.gif in Resources */,
-				4D952CFB1BF0886C000F26C0 /* 玫瑰.gif in Resources */,
-				4D952D051BF0886C000F26C0 /* 胜利.gif in Resources */,
+				4DF343991E1F6E9E005584CB /* 傲慢.gif in Resources */,
+				4DF3439C1E1F6E9E005584CB /* 凋谢.gif in Resources */,
+				4DF343AC1E1F6E9E005584CB /* 啤酒.gif in Resources */,
+				4DF3439E1E1F6E9E005584CB /* 勾引.gif in Resources */,
+				4DF343D61E1F6E9E005584CB /* 炸弹.gif in Resources */,
+				4DF343E11E1F6E9E005584CB /* 磕头.gif in Resources */,
+				4DF3439B1E1F6E9E005584CB /* 冷汗.gif in Resources */,
+				4DF343A91E1F6E9E005584CB /* 咒骂.gif in Resources */,
+				4DF343C31E1F6E9E005584CB /* 惊讶.gif in Resources */,
+				4DF343941E1F6E9E005584CB /* Thumbs.db in Resources */,
+				4DF343F01E1F6E9E005584CB /* 转圈.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2710,14 +2723,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				4DEC27D41DF8EBCF00C64CB9 /* FavouriteViewController.m in Sources */,
-				4DC407241BB12D40004079A8 /* LHAssetGroupViewController.m in Sources */,
+				4DF3440A1E1F6EA2005584CB /* FMDatabaseQueue.m in Sources */,
 				4DFB4BA91E0BA2CA000AB10B /* ResearchViewController.m in Sources */,
 				4DFB4AF21E0B9C30000AB10B /* ForumViewController.m in Sources */,
 				4DF75F331D9CE5B000FB882E /* HomepageForumModel.m in Sources */,
 				4DF0EA7B1DBDA5AD00EFAE58 /* TransitionAnima.m in Sources */,
-				4D87CE581C0324BD00466A97 /* EditImageCell.m in Sources */,
 				4DFB4AE01E0B9C30000AB10B /* AnswerViewController.m in Sources */,
 				4DFB4A891E0B7EF5000AB10B /* FindCollectionViewController.m in Sources */,
+				4DF344201E1F6EA6005584CB /* LHAssetViewCell.m in Sources */,
 				4DF0EA791DBDA5AD00EFAE58 /* BasicTableViewCell.m in Sources */,
 				4DFB4B5B1E0B9EFA000AB10B /* ChartRowModel.m in Sources */,
 				4D259E0C1DF528350039AE2B /* MyComplainDetailsViewController.m in Sources */,
@@ -2732,15 +2745,15 @@
 				4DEC28B11DF9585300C64CB9 /* NSMutableAttributedString+LHText.swift in Sources */,
 				4DF0EA631DBDA4FF00EFAE58 /* CZWManager.m in Sources */,
 				4D259DE81DF4FA570039AE2B /* MyCommentModel.m in Sources */,
-				4D9A3F571B9E7255008805E4 /* FMDatabase.m in Sources */,
 				4DFB4A9A1E0B9BC7000AB10B /* ComplainListViewController.m in Sources */,
 				4D28A83D1E0768690070CD5B /* MyCarCell.m in Sources */,
 				4DFB4AE21E0B9C30000AB10B /* ReputationCell.m in Sources */,
 				4DFB4B541E0B9EFA000AB10B /* VehicleImageCell.m in Sources */,
 				4DFB4B741E0B9EFA000AB10B /* SearchViewController.m in Sources */,
+				4DF344371E1F6FF0005584CB /* EditImageViewController.m in Sources */,
 				4DFB4B6D1E0B9EFA000AB10B /* AdvertisementViewController.m in Sources */,
 				4D2578E41DD41583007FC971 /* ComplainTypeCell.m in Sources */,
-				4D9A3F5B1B9E7255008805E4 /* FMResultSet.m in Sources */,
+				4DF344361E1F6FF0005584CB /* ComplainViewController.m in Sources */,
 				4D0B0E661DCB1D3A00C41984 /* CZWAdvertisementViewController.m in Sources */,
 				4DDD33471D1A623800F52C0C /* UIFont+LH.m in Sources */,
 				4DFB4B621E0B9EFA000AB10B /* TopCollectionView.m in Sources */,
@@ -2748,40 +2761,41 @@
 				4DF0EA6B1DBDA58500EFAE58 /* URLFile.m in Sources */,
 				4DFB4AF41E0B9C30000AB10B /* ReplyViewController.m in Sources */,
 				4DFB4B631E0B9EFA000AB10B /* TopCollectionViewCell.m in Sources */,
-				4DC2BF6D1DD5872A0006E8D5 /* ChooseDateViewController.m in Sources */,
 				4DFB4ADD1E0B9C30000AB10B /* AnswerDetailsViewController.m in Sources */,
 				4DFB4B5F1E0B9EFA000AB10B /* ChartTableViewCell.m in Sources */,
 				4D3A1EC81DAC8EB400A9144B /* CZWShareViewController.m in Sources */,
 				4D7E72411B9D5CD10048F221 /* AppDelegate.m in Sources */,
-				4D952C451BF0876D000F26C0 /* LHEmojiView.m in Sources */,
-				4D967DBD1DD2E12C00C1B255 /* ComplainViewController.m in Sources */,
 				4DB95BBA1E090FE400D387D1 /* CZWPickerView.m in Sources */,
+				4DF3440B1E1F6EA2005584CB /* FMResultSet.m in Sources */,
 				4DFB4AF11E0B9C30000AB10B /* ForumListViewController.m in Sources */,
 				4DFB4A861E0B7EEF000AB10B /* FindModel.m in Sources */,
 				4D3A1ED31DACBA4B00A9144B /* CommentListViewController.m in Sources */,
+				4DF344221E1F6EA6005584CB /* LHPreViewCell.m in Sources */,
 				4DEC27D71DF8EC7300C64CB9 /* FavouriteCell.m in Sources */,
 				4DF75F451D9CE67A00FB882E /* HomepageForumCell.m in Sources */,
 				4DFB4AE61E0B9C30000AB10B /* ForumCatalogueCell.m in Sources */,
 				4D373B5C1DB4CF4E00D31455 /* MJChiBaoZiFooter2.m in Sources */,
 				4DC4070B1BB10638004079A8 /* SettingViewController.m in Sources */,
+				4DF2C7A41E1DE06000C5B24A /* ParameterChartView.m in Sources */,
 				4DFB4B6F1E0B9EFA000AB10B /* NewsDetailViewController.m in Sources */,
 				4DFB4B5C1E0B9EFA000AB10B /* ChartSectionModel.m in Sources */,
 				4DF4DA461E0909F600DDA429 /* CZWDatePicker.m in Sources */,
 				4DFB4B6B1E0B9EFA000AB10B /* NewsTestTableView.m in Sources */,
 				4D97FC891BAF94C40089C684 /* MyAskCell.m in Sources */,
 				4DFB4AE81E0B9C30000AB10B /* ForumCatalogueSliderView.m in Sources */,
-				4DC407271BB12D40004079A8 /* LHAssetViewCell.m in Sources */,
+				4DF344211E1F6EA6005584CB /* LHAssetViewController.m in Sources */,
 				4D3A1ED61DACBA8A00A9144B /* CommentListModel.m in Sources */,
+				4DF343901E1F6E9E005584CB /* LHEmojiButton.m in Sources */,
 				4DF75F421D9CE65E00FB882E /* HomepageAnswerCell.m in Sources */,
 				4D8DD0B31B9EB54C00619923 /* LHController.m in Sources */,
 				4D97FC8A1BAF94C40089C684 /* MyAskModel.m in Sources */,
+				4DF343911E1F6E9E005584CB /* LHEmojiView.m in Sources */,
 				4DFE2F5E1E149FBA00E02112 /* LookCarViewController.m in Sources */,
 				4DFB4B521E0B9EFA000AB10B /* BrandCollectionView.m in Sources */,
 				4D5249831E1B6C7000AD8601 /* ReputationModel.m in Sources */,
-				4D9A3F5A1B9E7255008805E4 /* FMDatabaseQueue.m in Sources */,
 				4D3A1ECA1DAC8EB400A9144B /* LHMenuController.m in Sources */,
-				4DC407281BB12D40004079A8 /* LHAssetViewController.m in Sources */,
 				4DFB4AEC1E0B9C30000AB10B /* EditViewController.m in Sources */,
+				4DF344321E1F6FF0005584CB /* ChooseDateViewController.m in Sources */,
 				4D0F0DF51E037EC0000F75B0 /* ChooseTableViewController.m in Sources */,
 				4DFB4B611E0B9EFA000AB10B /* OnTheLeftView.m in Sources */,
 				4DFB4AEE1E0B9C30000AB10B /* ForumClassifyListViewController.m in Sources */,
@@ -2798,14 +2812,13 @@
 				4DFB4AE71E0B9C30000AB10B /* ForumCatalogueHeaderView.m in Sources */,
 				4D97FC681BAF94800089C684 /* PasswordViewController.m in Sources */,
 				4D2578DE1DD404AB007FC971 /* ComplainImageCell.m in Sources */,
-				4D87CE541C0324BD00466A97 /* ChooseViewController.m in Sources */,
 				4DFB4B9C1E0BA026000AB10B /* ComplainChartViewController.m in Sources */,
 				4DFB4B701E0B9EFA000AB10B /* NewsListViewController.m in Sources */,
 				4D26A8261E1631020014AC5D /* OverviewStatisticsView.m in Sources */,
 				4DFB4B511E0B9EFA000AB10B /* VehicleSeriesSctionModel.m in Sources */,
 				4D3A1ED91DACD9C700A9144B /* CommentListInitialCell.m in Sources */,
-				4DC2BF6A1DD57E810006E8D5 /* ChooseSexViewController.m in Sources */,
 				4DFB4AEA1E0B9C30000AB10B /* WritePostCell.m in Sources */,
+				4DF3443E1E1F71A3005584CB /* MyHeaderView.m in Sources */,
 				4D2578E71DD416C0007FC971 /* ComplainContentCell.m in Sources */,
 				4D2578ED1DD44E1D007FC971 /* ComplainTableFootView.m in Sources */,
 				4DFE2F611E14A0DF00E02112 /* OverviewViewController.m in Sources */,
@@ -2816,7 +2829,6 @@
 				4DFB4B6E1E0B9EFA000AB10B /* LHPageViewcontroller.m in Sources */,
 				4D97FC8B1BAF94C40089C684 /* MyAskViewController.m in Sources */,
 				4DFB4AE41E0B9C30000AB10B /* ForumCatalogueSectionModel.m in Sources */,
-				4DCDDE6C1D9E0FDB00AE4446 /* MyHeaderView.m in Sources */,
 				4DF75F301D9CE56B00FB882E /* HomepageAnswerModel.m in Sources */,
 				4DEAE3531DC9A89E00D43D7B /* UIView+LH.m in Sources */,
 				4DFB4B961E0BA026000AB10B /* ComplainChartFirstShowCell.m in Sources */,
@@ -2824,7 +2836,7 @@
 				4DFB4B5E1E0B9EFA000AB10B /* ChartTableView.m in Sources */,
 				4DF75F481D9CEF0B00FB882E /* HomepageSectionHeaderView.m in Sources */,
 				4DFB4AF31E0B9C30000AB10B /* PostViewController.m in Sources */,
-				4D87CE551C0324BD00466A97 /* CityChooseViewController.m in Sources */,
+				4DF344071E1F6EA2005584CB /* FMDatabase.m in Sources */,
 				4DF75F391D9CE5FC00FB882E /* HomepageNewsImageCell.m in Sources */,
 				4DC4070E1BB11A50004079A8 /* RegisterViewController.m in Sources */,
 				4DFB4B681E0B9EFA000AB10B /* ChangeView.m in Sources */,
@@ -2837,13 +2849,15 @@
 				4D756F251BC64DEF00107653 /* AgreementViewController.m in Sources */,
 				4DFB4ADC1E0B9C30000AB10B /* AnawerToolView.m in Sources */,
 				4D8243771CA50EA100E6C332 /* LookPasswordViewController.m in Sources */,
+				4DF3441E1E1F6EA6005584CB /* LHAssetPickerController.m in Sources */,
 				4DFB4AEF1E0B9C30000AB10B /* ForumClassifyTwoController.m in Sources */,
 				4DFB4B581E0B9EFA000AB10B /* VehicleImageViewController.m in Sources */,
+				4DF344351E1F6FF0005584CB /* CityChooseViewController.m in Sources */,
 				4DF75F3F1D9CE64500FB882E /* HomepageResearchCell.m in Sources */,
 				4DEE9EB91DA88DDF00E0ABAC /* NewsTableHeaderView.m in Sources */,
-				4DC407251BB12D40004079A8 /* LHAssetPickerController.m in Sources */,
 				4DFB4B941E0BA026000AB10B /* ChartDateChooseView.m in Sources */,
 				4DFBFA351CE56F110069F229 /* CZWAppPrompt.m in Sources */,
+				4DF344331E1F6FF0005584CB /* ChooseSexViewController.m in Sources */,
 				4D259DE51DF4FA510039AE2B /* MyCommentCell.m in Sources */,
 				4D373B5F1DB4CF4E00D31455 /* MJDIYBackFooter.m in Sources */,
 				4DFB4BA51E0BA067000AB10B /* InvestigateChangeViewController.m in Sources */,
@@ -2853,7 +2867,6 @@
 				4D373B601DB4CF4E00D31455 /* MJDIYHeader.m in Sources */,
 				4DFB4B531E0B9EFA000AB10B /* CollectionSectionView.m in Sources */,
 				4DFB4B931E0BA026000AB10B /* BezierPathView.m in Sources */,
-				4D9A3F581B9E7255008805E4 /* FMDatabaseAdditions.m in Sources */,
 				4D259E0D1DF528350039AE2B /* MyComplainViewController.m in Sources */,
 				4DF75F361D9CE5E800FB882E /* HomepageNewsTextCell.m in Sources */,
 				4DFB4ADE1E0B9C30000AB10B /* AnswerListViewController.m in Sources */,
@@ -2863,8 +2876,8 @@
 				4DFB4B721E0B9EFA000AB10B /* NewsTestViewController.m in Sources */,
 				4D967DD21DD30FAC00C1B255 /* BrandTableViewCell.m in Sources */,
 				4DCDDE701D9E3B5B00AE4446 /* FootCommentView.m in Sources */,
+				4DF3443F1E1F71A3005584CB /* MyViewController.m in Sources */,
 				4D7E723E1B9D5CD10048F221 /* main.m in Sources */,
-				4D952D1D1BF08E54000F26C0 /* LHEmojiButton.m in Sources */,
 				4DFB4AE11E0B9C30000AB10B /* AskViewController.m in Sources */,
 				4D97FC721BAF949B0089C684 /* TakeViewController.m in Sources */,
 				4DFB4B651E0B9EFA000AB10B /* ContrastChartViewController.m in Sources */,
@@ -2877,17 +2890,15 @@
 				4D6CD69B1D9E62420038D5E5 /* MyComplainHeaderView.m in Sources */,
 				4DFB4B671E0B9EFA000AB10B /* NewsTestTableViewModel.m in Sources */,
 				4D967DCC1DD2EDED00C1B255 /* ComplainTableViewCell.m in Sources */,
-				4D87CE571C0324BD00466A97 /* EditImageViewController.m in Sources */,
+				4DF2C7A11E1DDCCE00C5B24A /* ParameterViewController.m in Sources */,
 				4DCAD2CD1CEC2A8E00A539B2 /* UIViewController+LH.m in Sources */,
 				4D373B5D1DB4CF4E00D31455 /* MJChiBaoZiHeader.m in Sources */,
 				4DFB4B921E0BA026000AB10B /* ComplainChartSecondModel.m in Sources */,
-				4DC407261BB12D40004079A8 /* LHAssetPreviewController.m in Sources */,
 				4D373B5E1DB4CF4E00D31455 /* MJDIYAutoFooter.m in Sources */,
 				4DFB4A981E0B9BC7000AB10B /* SearchHistoryView.m in Sources */,
 				4DFB4B601E0B9EFA000AB10B /* ChartView.m in Sources */,
 				4D3A1ED01DACBA4000A9144B /* CommentListCell.m in Sources */,
 				4D02ADFA1DF699B70008F895 /* ComplainDetailsView.m in Sources */,
-				4D84E6561BF33B4800F901BF /* MyViewController.m in Sources */,
 				4D2DE5531CDB48C6001B7B86 /* CZWIMInputTextView.m in Sources */,
 				4D967DC31DD2E42300C1B255 /* ComplainSectionModel.m in Sources */,
 				4DF90AB21E07C05F002C8ABB /* CZWCardChooseViewController.m in Sources */,
@@ -2899,7 +2910,9 @@
 				4DF75F241D9CE48A00FB882E /* HomepageSectionModel.m in Sources */,
 				4D28A83A1E0768640070CD5B /* MyCarViewController.m in Sources */,
 				4DFB4B9B1E0BA026000AB10B /* ChartDateChooseViewController.m in Sources */,
+				4DF344091E1F6EA2005584CB /* FMDatabasePool.m in Sources */,
 				4D259E041DF5280C0039AE2B /* MyComplainShowCell.m in Sources */,
+				4DF3441F1E1F6EA6005584CB /* LHAssetPreviewController.m in Sources */,
 				4DF0EA7F1DBE0E9400EFAE58 /* UIScrollView+TwitterCover.m in Sources */,
 				4DFB4B551E0B9EFA000AB10B /* CehicleChooseViewController.m in Sources */,
 				4DFB4AF51E0B9C30000AB10B /* WritePostViewController.m in Sources */,
@@ -2911,19 +2924,20 @@
 				4DFE2F641E14B25700E02112 /* OverviewView.m in Sources */,
 				4DF0EA6A1DBDA58500EFAE58 /* HttpRequest.m in Sources */,
 				4DFB4B641E0B9EFA000AB10B /* UICollectionView+Chart.m in Sources */,
+				4DF3441D1E1F6EA6005584CB /* LHAssetGroupViewController.m in Sources */,
 				4DFB4B911E0BA026000AB10B /* ChartChooseModel.m in Sources */,
 				4D316EAF1D66D06D00B4AC04 /* NSString-Helper.m in Sources */,
 				4D50795A1C45E38200656CA8 /* CustomCommentView.m in Sources */,
 				4DFB4AE51E0B9C30000AB10B /* EditCell.m in Sources */,
 				4D3A1EC01DAC8E3000A9144B /* WriteViewController.m in Sources */,
 				4DFB4B731E0B9EFA000AB10B /* NewsViewController.m in Sources */,
-				4DC407291BB12D40004079A8 /* LHPreViewCell.m in Sources */,
+				4DF344341E1F6FF0005584CB /* ChooseViewController.m in Sources */,
 				4DFB4B571E0B9EFA000AB10B /* MoreImagesViewController.m in Sources */,
 				4DF0EA641DBDA4FF00EFAE58 /* FmdbManager.m in Sources */,
 				4DFB4B5A1E0B9EFA000AB10B /* ChartItemModel.m in Sources */,
 				4D2578E11DD40D20007FC971 /* ComplainBusinessCell.m in Sources */,
-				4D9A3F591B9E7255008805E4 /* FMDatabasePool.m in Sources */,
 				4DFB4ADF1E0B9C30000AB10B /* AnswerSearchViewController.m in Sources */,
+				4DF344081E1F6EA2005584CB /* FMDatabaseAdditions.m in Sources */,
 				4DFB4B691E0B9EFA000AB10B /* LHNewsChooseView.m in Sources */,
 				4DF0EA771DBDA5AD00EFAE58 /* BasicNavigationController.m in Sources */,
 				4DD30D161D20ECD7009C3B05 /* LTInfiniteScrollView.m in Sources */,

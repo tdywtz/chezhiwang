@@ -15,7 +15,6 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
 
-
         _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 90, self.frame.size.height)];
         _nameLabel.textAlignment = NSTextAlignmentRight;
         _nameLabel.numberOfLines = 0;
@@ -30,6 +29,7 @@
         _collectionView = [[UICollectionView alloc ] initWithFrame:CGRectMake(100, 0, self.frame.size.width-100, self.frame.size.height) collectionViewLayout:layout];
         _collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _collectionView.showsHorizontalScrollIndicator = NO;
+        _collectionView.bounces = NO;
         _collectionView.backgroundColor = [UIColor whiteColor];
         [self.contentView addSubview:_collectionView];
 

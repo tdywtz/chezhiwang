@@ -12,14 +12,6 @@
 #import "OnTheLeftView.h"
 
 
-@interface ExcelMenu : UIView<UICollectionViewDelegate,UICollectionViewDataSource>
-
-@property (nonatomic,strong) UICollectionView *collectionView;
-@property (nonatomic,weak) NSArray *dataArray;
-@property (nonatomic,copy) void (^scrollToSection)(NSInteger section);
-
-@end
-
 @implementation ExcelMenu
 
 - (instancetype)initWithFrame:(CGRect)frame

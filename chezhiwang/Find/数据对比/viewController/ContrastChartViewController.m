@@ -112,6 +112,7 @@
                 NSMutableArray *items = [[NSMutableArray alloc] init];
                 for (int k = 0; k < 4; k ++) {
                     ChartItemModel *itemModel = [[ChartItemModel alloc] init];
+                    itemModel.isborder = YES;
                     [items addObject:itemModel];
                 }
                 rowModel.itemModels = items;

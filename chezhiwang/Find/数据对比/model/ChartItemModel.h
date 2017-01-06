@@ -12,6 +12,8 @@
 
 @property (nonatomic,copy) NSString *name;
 @property (nonatomic,copy) NSAttributedString *attribute;
+@property (nonatomic,assign) BOOL isborder;
 
 - (void)releaseData;
+
 @end

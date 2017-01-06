@@ -10,6 +10,7 @@
 #import "LHPageViewcontroller.h"
 #import "LHToolScrollView.h"
 #import "OverviewViewController.h"
+#import "ParameterViewController.h"
 
 @interface LookCarViewController ()<LHPageViewcontrollerDelegate,LHToolScrollViewDelegate>
 {
@@ -25,17 +26,21 @@
 
     toolView = [[LHToolScrollView alloc] initWithFrame:CGRectMake(0, 64, WIDTH, 44)];
     toolView.LHDelegate = self;
-    toolView.titles =  @[@"综述",@"车型",@"。。。"];
+    toolView.titles =  @[@"综述",@"车型参数"];
     toolView.current = 0;
     toolView.backgroundColor = [UIColor whiteColor];
 
     NSMutableArray *array = [[NSMutableArray alloc] init];
-    for (int i = 0; i < toolView.titles.count;  i ++) {
 
-            OverviewViewController *vc = [[OverviewViewController alloc] init];
-            vc.contentInsets = UIEdgeInsetsMake(64 + 44, 0, 0, 0);
-            [array addObject:vc];
-    }
+    OverviewViewController *vc = [[OverviewViewController alloc] init];
+    vc.contentInsets = UIEdgeInsetsMake(64 + 44, 0, 0, 0);
+    [array addObject:vc];
+
+    ParameterViewController *parameter = [[ParameterViewController alloc] init];
+    parameter.contentInsets = UIEdgeInsetsMake(64 + 44, 0, 0, 0);
+    [array addObject:parameter];
+
+
 
     pageViewController = [LHPageViewcontroller initWithSpace:0 withParentViewController:self];
     pageViewController.LHDelegate = self;

@@ -8,6 +8,14 @@
 #import "BasicViewController.h"
 
 typedef void(^deleteImage)(NSInteger index);
+
+@interface EditImageCell : UICollectionViewCell
+
+@property (nonatomic,strong) UIImage *image;
+
+@end
+
+
 @interface EditImageViewController : BasicViewController
 
 @property (nonatomic,strong) NSMutableArray *imageArray;

@@ -51,10 +51,7 @@
  //    headerView.backgroundColor = [UIColor brownColor];
     _tableView.tableHeaderView = headerView;
 
-    [self loadData];
-}
 
-- (void)loadData{
     HomepageSectionModel *one = [[HomepageSectionModel alloc] init];
     one.headTitle = @"新闻";
     one.headImageName = @"新闻";
@@ -78,6 +75,18 @@
     [three.rowModels addObject:[[NSObject alloc] init]];
 
     _dataArray = @[one,complainSectionModel,three];
+
+
+    [self loadData];
+}
+
+- (void)loadData{
+    [HttpRequest GET:[URLFile urlString_s_index] success:^(id responseObject) {
+        
+    } failure:^(NSError *error) {
+
+    }];
+
 }
 
 #pragma mark - UITableViewDataSource

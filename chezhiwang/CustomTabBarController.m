@@ -22,8 +22,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-   
   
     HomepageTableViewController      *homepage = [[HomepageTableViewController  alloc] init];
     FindCollectionViewController     *find     = [FindCollectionViewController init];

@@ -23,6 +23,7 @@
 
         self.showsVerticalScrollIndicator = NO;
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
+        self.bounces = NO;
         self.dataSource = self;
         self.delegate = self;
     }
@@ -42,6 +43,13 @@
     for (ChartTableViewCell* cell in self.visibleCells) {
         cell.collectionView.contentOffset = _topOffset;
     }
+}
+
+- (CGFloat)itemWidth{
+    if (_itemWidth == 0) {
+        return _itemWidth = 110;
+    }
+    return  _itemWidth;
 }
 
 
@@ -125,8 +133,9 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section{
-    if (section == 0) {
-        return 0;
+    ChartSectionModel *sectionMdoel = self.sectionModels[section];
+    if (sectionMdoel.name == nil && section == 0) {
+       return 0;
     }
     return 30;
 }
@@ -135,7 +144,8 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    if (section == 0) {
+    ChartSectionModel *sectionMdoel = self.sectionModels[section];
+    if (sectionMdoel.name == nil && section == 0) {
         return nil;
     }
     UIView *view = [[UIView alloc] init];
@@ -152,7 +162,7 @@
     zhushiLabel.text = @"● 标配 ○ 选配 - 无";
     [view addSubview:zhushiLabel];
 
-    ChartSectionModel *sectionMdoel = self.sectionModels[section];
+
     titleLabel.text = sectionMdoel.name;
     return view;
 }
@@ -170,7 +180,6 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"collectionCell" forIndexPath:indexPath];
     cell.backgroundColor = [UIColor whiteColor];
-    cell.contentView.layer.borderColor = RGB_color(230, 230, 230, 1).CGColor;
     cell.contentView.layer.borderWidth = 0.5;
     UILabel *label = (UILabel *)[cell.contentView viewWithTag:100];
     if (!label) {
@@ -188,14 +197,20 @@
     label.textColor = collectionView.rowTextColor;
     ChartItemModel *itemModel = collectionView.itemModels[indexPath.row];
     label.textAlignment =  NSTextAlignmentCenter;
-    if (collectionView.path.section == 0 && collectionView.path.row == 4) {
-        label.textAlignment = NSTextAlignmentLeft;
-    }
+
     if (itemModel.attribute) {
+        if (collectionView.path.section == 0 && collectionView.path.row == 4) {
+            label.textAlignment = NSTextAlignmentLeft;
+        }
         label.attributedText = itemModel.attribute;
 
     }else{
         label.text = itemModel.name;
+    }
+    if (itemModel.isborder == NO) {
+        cell.contentView.layer.borderColor = [UIColor clearColor].CGColor;
+    }else{
+        cell.contentView.layer.borderColor = colorLineGray.CGColor;
     }
 
     return cell;

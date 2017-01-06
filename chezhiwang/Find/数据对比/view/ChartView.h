@@ -10,6 +10,15 @@
 #import "ChartSectionModel.h"
 #import "TopCollectionViewModel.h"
 
+@interface ExcelMenu : UIView<UICollectionViewDelegate,UICollectionViewDataSource>
+
+@property (nonatomic,strong) UICollectionView *collectionView;
+@property (nonatomic,weak) NSArray *dataArray;
+@property (nonatomic,copy) void (^scrollToSection)(NSInteger section);
+
+@end
+
+#pragma mark - ChartView
 @interface ChartView : UIView
 
 @property (nonatomic,weak) UIViewController *parentViewController;
