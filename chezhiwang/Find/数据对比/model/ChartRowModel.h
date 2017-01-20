@@ -17,6 +17,8 @@
 @property (nonatomic,strong) UIColor *textColor;
 @property (nonatomic,copy)   NSString *name;//每行左侧第一列”名字“
 
+/**判断一行中是否都是相同数据*/
+- (BOOL)similarityData;
 - (CGFloat)getCellHeight;
 
 @end

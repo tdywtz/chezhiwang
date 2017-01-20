@@ -30,7 +30,8 @@
 }
 -(void)loadData{
    
-    NSString *url = [NSString stringWithFormat:[URLFile urlStringForZJDY],self.type,_count];
+    NSString *url = [URLFile url_zjdylistWithTitle:nil sid:self.sid t:self.type p:_count];
+  
     __weak __typeof(self)weakSelf = self;
     [HttpRequest GET:url success:^(id responseObject) {
         
@@ -39,6 +40,7 @@
             [_dataArray removeAllObjects];
         }
         [_tableView.mj_header endRefreshing];
+
         if ([responseObject[@"rel"] count] == 0) {
             [_tableView.mj_footer endRefreshingWithNoMoreData];
         }else{
@@ -81,7 +83,7 @@
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.estimatedRowHeight = 80;
-        _tableView.contentInset = UIEdgeInsetsMake(104, 0, 0, 0);
+        _tableView.contentInset = self.contentInsets;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [self.view addSubview:_tableView];
     }

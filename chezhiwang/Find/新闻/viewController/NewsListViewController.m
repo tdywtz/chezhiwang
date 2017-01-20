@@ -29,7 +29,6 @@
     [HttpRequest GET:url success:^(id responseObject) {
 
         if (_count == 1) {
-
             [_dataArray removeAllObjects];
         }
         if ([responseObject[@"rel"] count] == 0) {

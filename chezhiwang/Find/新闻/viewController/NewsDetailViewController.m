@@ -27,27 +27,37 @@
 @end
 
 @implementation NewsDetailViewController
-
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _contentInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+    }
+    return self;
+}
 -(void)loadData{
 
-
-    NSString *url = [NSString stringWithFormat:[URLFile urlStringForNewsinfo],self.ID,@"1"];
-    if (self.invest) {
-        url = [NSString stringWithFormat:[URLFile urlStringForNewsinfo],self.ID,@"3"];
-        // 调查页面过来的
+    NSString *type = @"1";
+    if (_invest) {
+         // 调查
+        type = @"3";
     }
+    NSString *url = [URLFile url_newsinfoWithID:_ID sid:_sid type:type];
+ 
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [MBProgressHUD showHUDAddedTo:self.view animated:NO];
 
     [HttpRequest GET:url success:^(id responseObject) {
-
+     
         self.dictionary = [responseObject copy];
-
         [footView setReplyConut:responseObject[@"replycount"]];
-
-
+        if (responseObject[@"content"] == nil) {
+            self.backgroundView.hidden = NO;
+            self.backgroundView.contentLabel.text = @"暂无数据";
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            return ;
+        }
         NSMutableString *newsContentHTML = [NSMutableString stringWithFormat:@"<style>body{padding:0 5px;}</style>%@",responseObject[@"content"]];
-
 
         NSRange range = range = [newsContentHTML rangeOfString:@"src=\"/"];
         while (range.length != 0) {
@@ -70,11 +80,10 @@
         }
 
 
-
         [_webView loadHTMLString:newsContentHTML baseURL:nil];
 
     } failure:^(NSError *error) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [MBProgressHUD hideHUDForView:self.view animated:NO];
     }];
 }
 
@@ -85,10 +94,14 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self createRightItem];
     [self createContent];
-
     [self loadData];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
     [self writeData];
 }
+
 
 - (void)setShareImageUrl:(NSString *)shareImageUrl{
     _shareImageUrl = shareImageUrl;
@@ -103,9 +116,11 @@
 
 //浏览记录
 -(void)writeData{
-    NSString *str = self.dictionary[@"title"] == nil?@"":self.dictionary[@"title"];
-    FmdbManager *manager = [FmdbManager shareManager];
-    [manager insertIntoReadHistoryWithId:self.ID andTitle:str andType:ReadHistoryTypeNews];
+    if (self.ID) {
+        NSString *str = self.dictionary[@"title"] == nil?@"":self.dictionary[@"title"];
+        FmdbManager *manager = [FmdbManager shareManager];
+        [manager insertIntoReadHistoryWithId:self.ID andTitle:str andType:ReadHistoryTypeNews];
+    }
 }
 
 -(void)createContent{
@@ -122,7 +137,7 @@
 
 
     [_webView makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(UIEdgeInsetsMake(0, 0, 49, 0));
+        make.edges.equalTo(UIEdgeInsetsMake( self.contentInsets.top, 0, 49, 0));
     }];
 
     [footView makeConstraints:^(MASConstraintMaker *make) {
@@ -167,15 +182,7 @@
 -(void)rightItemClick:(UIButton *)btn{
     if (btn.tag == 100) {
        
-        CZWShareViewController *share = [[CZWShareViewController alloc] initWithParentViewController:self];
-        share.shareUrl = self.dictionary[@"url"];
-        share.shareImage = shareImage;
-        NSString *html = [_webView stringByEvaluatingJavaScriptFromString:@"document.body.innerText"];
-
-        share.shareContent = html;
-        share.shareTitle = self.dictionary[@"title"];
-
-        [self presentViewController:share animated:YES completion:nil];
+        [self shareWeb];
 
     }else{
         btn.selected = !btn.selected;
@@ -186,6 +193,18 @@
         }
     }
 }
+
+- (void)shareWeb{
+    CZWShareViewController *share = [[CZWShareViewController alloc] initWithParentViewController:self];
+    share.shareUrl = self.dictionary[@"url"];
+    share.shareImage = shareImage;
+    NSString *html = [_webView stringByEvaluatingJavaScriptFromString:@"document.body.innerText"];
+    share.shareContent = html;
+    share.shareTitle = self.dictionary[@"title"];
+
+    [self presentViewController:share animated:YES completion:nil];
+}
+
 
 #pragma mark - 收藏
 -(void)favorate{
@@ -215,16 +234,15 @@
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     dict[@"uid"] = [CZWManager manager].userID;//用户id
     dict[@"fid"] = @"0";//回复的评论对象id（若是回复当前新闻为0或不设置）
-    [dict setObject:content forKey:@"content"];//回复内容
-    [dict setObject:self.ID forKey:@"tid"];//回复新闻的id
+    dict[@"content"] = content;//回复内容
+    dict[@"tid"] = self.ID?self.ID:self.dictionary[@"id"];//回复新闻的id
+    dict[@"origin"] = appOrigin;
     //类型（新闻-1、投诉-2、答疑-3,调查-5）
     if (self.invest) {
         dict[@"type"] = @"5";
     }else{
         dict[@"type"] = @"1";
     }
-
-    [dict setObject:appOrigin forKey:@"origin"];
 
     [HttpRequest POST:[URLFile urlStringForAddcomment] parameters:dict success:^(id responseObject) {
 
@@ -275,7 +293,7 @@
     }else{
         CommentListViewController *comment = [[CommentListViewController alloc] init];
         comment.type = self.invest?NewsTypeResearch:NewsTypeNews;
-        comment.cid = self.ID;
+        comment.cid = self.ID?self.ID:self.dictionary[@"id"];
         [self.navigationController pushViewController:comment animated:YES];
     }
 }

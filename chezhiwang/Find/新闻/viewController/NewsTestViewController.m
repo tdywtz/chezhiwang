@@ -84,7 +84,7 @@
 @implementation NewsTestViewController
 
 - (void)loadData{
-   NSString *url = [NSString stringWithFormat:[URLFile urlStringForNewsList],@"4",@"&p=%ld&s=10"];
+   NSString *url = [NSString stringWithFormat:@"%@%@",[URLFile url_newslistWithStyle:@"4" title:nil sid:nil],@"&p=%ld&s=10"];
     url = [NSString stringWithFormat:url,_count];
     [HttpRequest GET:url success:^(id responseObject) {
         if (_count == 1) {

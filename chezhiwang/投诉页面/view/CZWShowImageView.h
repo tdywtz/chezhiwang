@@ -31,12 +31,15 @@
 @property (nonatomic,copy) void(^updateFrame)(CGRect frame);
 /**增加图片*/
 @property (nonatomic,copy) void(^addImage)(UIImage *image);
+/**图片数组变动*/
+@property (nonatomic,copy) void(^imageArrayChange)(NSArray *imageArray);
 
 /**构造方法*/
 - (instancetype)initWithFrame:(CGRect)frame ViewController:(UIViewController *)ViewController;
 - (instancetype)initWithWidth:(CGFloat)width ViewController:(UIViewController *)ViewController;
 
-
+//返回图片地址数组拼接的字符串||
+- (NSString *)getImageUrl;
 /**显示图片*/
 -(void)showImage;
 

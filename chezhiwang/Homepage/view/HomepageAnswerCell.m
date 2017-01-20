@@ -11,9 +11,10 @@
 @implementation HomepageAnswerCell
 {
     UILabel *titleLabel;
-    TTTAttributedLabel *typeLabel;
+    YYLabel *typeLabel;
     UILabel *dateLabel;
-    TTTAttributedLabel *answerLabel;
+    YYLabel *questionLabel;
+    YYLabel *answerLabel;
 }
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
@@ -29,25 +30,27 @@
     titleLabel.textColor = colorBlack;
     titleLabel.numberOfLines = 1;
     
-    typeLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
+    typeLabel = [[YYLabel alloc] initWithFrame:CGRectZero];
     typeLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(16)];
     typeLabel.layer.cornerRadius = 3;
     typeLabel.layer.borderWidth = 1;
-    typeLabel.textInsets = UIEdgeInsetsMake(1, 3, 1, 3);
+    typeLabel.textContainerInset = UIEdgeInsetsMake(3, 3, 3, 3);
+    typeLabel.preferredMaxLayoutWidth = 200;
     
     dateLabel = [[UILabel alloc] init];
     dateLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(18)];
     dateLabel.textColor = colorLightGray;
-    
-    answerLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
+
+    questionLabel = [YYLabel new];
+
+    answerLabel = [[YYLabel alloc] initWithFrame:CGRectZero];
     answerLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(19)];
     answerLabel.textColor = colorDeepGray;
-    answerLabel.lineSpacing = 3;
-    answerLabel.numberOfLines = 2;
-    
+
     [self.contentView addSubview:titleLabel];
     [self.contentView addSubview:dateLabel];
     [self.contentView addSubview:typeLabel];
+    [self.contentView addSubview:questionLabel];
     [self.contentView addSubview:answerLabel];
     
     [titleLabel makeConstraints:^(MASConstraintMaker *make) {
@@ -62,13 +65,20 @@
     }];
     
     [dateLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(typeLabel.right).offset(15);
+        make.right.equalTo(-10);
         make.centerY.equalTo(typeLabel);
     }];
-    
-    [answerLabel makeConstraints:^(MASConstraintMaker *make) {
+
+    questionLabel.preferredMaxLayoutWidth = WIDTH - 20;
+    [questionLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(10);
         make.top.equalTo(typeLabel.bottom).offset(10);
+    }];
+
+    answerLabel.preferredMaxLayoutWidth = WIDTH - 20;
+    [answerLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(10);
+        make.top.equalTo(questionLabel.bottom).offset(5);
         make.right.equalTo(-10);
         make.bottom.equalTo(-10);
     }];
@@ -81,9 +91,7 @@
 
 - (void)setData{
     titleLabel.text = _answerModel.question;
-
     dateLabel.text = _answerModel.date;
-    answerLabel.text = _answerModel.answer;
 
     NSInteger type = [_answerModel.type integerValue];
     if (type == 1) {
@@ -100,7 +108,27 @@
     }
 
     typeLabel.layer.borderColor = typeLabel.textColor.CGColor;
+
+    NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:PT_FROM_PX(19)],NSForegroundColorAttributeName:colorDeepGray};
+    NSString *quesionText = [NSString stringWithFormat:@"  提问：%@",_answerModel.content];
+    NSMutableAttributedString *quesionAtt = [[NSMutableAttributedString alloc] initWithString:quesionText attributes:dict];
+    [quesionAtt yy_setColor:colorLightGray range:[quesionText rangeOfString:@"提问："]];
+
+    NSMutableAttributedString *attachmentAtt = [NSMutableAttributedString yy_attachmentStringWithContent:[UIImage imageNamed:@"auto_answerDetail_question"] contentMode:UIViewContentModeScaleAspectFill attachmentSize:CGSizeMake(16, 16) alignToFont:[UIFont systemFontOfSize:PT_FROM_PX(19)] alignment:YYTextVerticalAlignmentCenter];
+    [quesionAtt insertAttributedString:attachmentAtt atIndex:0];
+   
+    questionLabel.attributedText = quesionAtt;
+
+    NSString *answerText = [NSString stringWithFormat:@"  回答：%@",_answerModel.answer];
+    NSMutableAttributedString *answerAtt = [[NSMutableAttributedString alloc] initWithString:answerText attributes:dict];
+    [answerAtt yy_setColor:colorLightGray range:[answerText rangeOfString:@"回答："]];
+
+     attachmentAtt = [NSMutableAttributedString yy_attachmentStringWithContent:[UIImage imageNamed:@"auto_answerDetail_answer"] contentMode:UIViewContentModeScaleAspectFill attachmentSize:CGSizeMake(16, 16) alignToFont:[UIFont systemFontOfSize:PT_FROM_PX(19)] alignment:YYTextVerticalAlignmentCenter];
+    [answerAtt insertAttributedString:attachmentAtt atIndex:0];
+
+    answerLabel.attributedText = answerAtt;
 }
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

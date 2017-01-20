@@ -12,4 +12,7 @@
  */
 @interface ComplainListViewController : BasicViewController
 
+@property (nonatomic,assign) UIEdgeInsets contentInsets;
+@property (nonatomic,copy) NSString *sid;//车系
+
 @end

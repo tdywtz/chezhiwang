@@ -35,6 +35,7 @@
         NSMutableArray *items = [[NSMutableArray alloc] init];
         for (int j = 0; j < 4; j ++) {
             ChartItemModel *itemModel = [[ChartItemModel alloc] init];
+            itemModel.isborder = YES;
             [items addObject:itemModel];
         }
         rowModel.itemModels = items;
@@ -188,6 +189,7 @@
         for (int i = 0; i < sectionModel.rowModels.count; i ++) {
             ChartRowModel *rowModel = sectionModel.rowModels[i];
             ChartItemModel *itemModel = rowModel.itemModels[queue];
+           
             if (i == 0) {
                 itemModel.name = responseObject[@"CarInfo"];
             }else if (i == 1){

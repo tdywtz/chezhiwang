@@ -18,16 +18,16 @@
 
 -(void)createImage
 {
-    backgroundImageView=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"StarsBackground"]];
+    backgroundImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"StarsBackground"]];
     backgroundImageView.frame=CGRectMake(0, 0, 75, 23);
     
-    backgroundImageView.contentMode=UIViewContentModeLeft;
-    foregroundImageView=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"StarsForeground"]];
+    backgroundImageView.contentMode = UIViewContentModeLeft;
+    foregroundImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"StarsForeground"]];
     foregroundImageView.frame=CGRectMake(0, 0, 75, 23);
     //设置内容的对齐方式
     foregroundImageView.contentMode=UIViewContentModeLeft;
     //如果子视图超出父视图大小时被裁剪掉 
-    foregroundImageView.clipsToBounds=YES;
+    foregroundImageView.clipsToBounds = YES;
     [self addSubview:backgroundImageView];
     [self addSubview:foregroundImageView];
     self.backgroundColor=[UIColor clearColor];
@@ -50,6 +50,7 @@
     }
     return self;
 }
+
 
 -(void)setStar:(CGFloat)star
 {
@@ -79,7 +80,6 @@
         foregroundImageView.frame=CGRectMake(0, 0, 75, 23);
     }
 }
-
 
 /*
 // Only override drawRect: if you perform custom drawing.

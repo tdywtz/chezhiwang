@@ -50,7 +50,7 @@
         }else{
             NewsListViewController *vc = [[NewsListViewController alloc] init];
             vc.contentInsets = UIEdgeInsetsMake(64 + 44, 0, 0, 0);
-            vc.urlString =  [NSString stringWithFormat:[URLFile urlStringForNewsList],typeArray[i],@"&p=%ld&s=%ld"];
+            vc.urlString =  [NSString stringWithFormat:@"%@%@",[URLFile url_newslistWithStyle:typeArray[i] title:nil sid:nil],@"&p=%ld&s=%ld"];
             [array addObject:vc];
         }
     }

@@ -55,7 +55,7 @@
 
     HomepageSectionModel *researchSectionModel = [[HomepageSectionModel alloc] init];
     researchSectionModel.headTitle = @"调查";
-    researchSectionModel.headImageName =@"调查";
+    researchSectionModel.headImageName = @"调查";
     researchSectionModel.footTitle = @"更多调查";
     researchSectionModel.headLineColor = RGB_color(239, 95, 96, 1);
     researchSectionModel.pushClass = [NewsInvestigateViewController class];

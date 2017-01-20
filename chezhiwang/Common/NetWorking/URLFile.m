@@ -65,7 +65,7 @@
 }
 /**车型图片-品牌大全*/
 + (NSString *)urlString_picBrand{
-    return [self stringForCommonServiceWithAct:@"act=picBrand"];
+    return [self stringForCZWServiceWithAct:@"act=picBrand"];
 }
 /*车型图片-车系大全*/
 + (NSString *)urlString_picSeries{
@@ -80,10 +80,21 @@
 
 #pragma mark - 新闻
 /**新闻列表*/
-+ (NSString *)urlStringForNewsList{
++ (NSString *)url_newslistWithStyle:(NSString *)style title:(NSString *)title sid:(NSString *)sid{
     //style : 新闻分类
     //title :  搜索时使用
-    return [self stringForCZWServiceWithAct:@"act=newslist&style=%@%@"];
+    //sid : 查找车系下新闻
+    NSString *url = [self stringForCZWServiceWithAct:@"act=newslist"];
+    if (style) {
+        url = [NSString stringWithFormat:@"%@&style=%@",url,style];
+    }
+    if (title) {
+        url = [NSString stringWithFormat:@"%@&title=%@",url,title];
+    }
+    if (sid) {
+        url = [NSString stringWithFormat:@"%@&sid=%@",url,sid];
+    }
+    return url;
 }
 
 /**新闻-调查*/
@@ -93,9 +104,17 @@
 }
 
 /**新闻详情、type: 调查新闻3，其他新闻1 */
-+ (NSString *)urlStringForNewsinfo{
++ (NSString *)url_newsinfoWithID:(NSString *)ID sid:(NSString *)sid type:(NSString *)type{
+    NSString *parameter = @"act=newsinfo";
+    if (ID) {
+        parameter = [NSString stringWithFormat:@"%@&id=%@",parameter,ID];
+    }
+    if (sid) {
+        parameter = [NSString stringWithFormat:@"%@&sid=%@",parameter,sid];
+    }
+    parameter = [NSString stringWithFormat:@"%@&type=%@",parameter,type];
 
-    return [self stringForCZWServiceWithAct:@"act=newsinfo&id=%@&type=%@"];
+    return [self stringForCZWServiceWithAct:parameter];
 }
 
 /**精品试驾list*/
@@ -130,8 +149,17 @@
 
 #pragma mark -投诉
 /**投诉列表*/
-+ (NSString *)urlStringForZLTS{
-    return [self stringForCommonServiceWithAct:@"act=complainlist&p=%ld&s=10"];
++ (NSString *)url_complainlistWithTitle:(NSString *)title sid:(NSString *)sid p:(NSInteger)p s:(NSInteger)s{
+
+    NSString *parameter = @"act=complainlist";
+    if (title) {
+        parameter = [NSString stringWithFormat:@"%@&title=%@",parameter,title];
+    }
+    if (sid) {
+        parameter = [NSString stringWithFormat:@"%@&sid=%@",parameter,sid];
+    }
+    parameter = [NSString stringWithFormat:@"%@&p=%ld&s=%ld",parameter,p,s];
+    return [self stringForCommonServiceWithAct:parameter];
 }
 
 /**投诉搜索*/
@@ -196,11 +224,25 @@
 
 #pragma mark -答疑
 /**答疑列表*/
-+ (NSString *)urlStringForZJDY{
-    //title :  搜索时使用
++ (NSString *)url_zjdylistWithTitle:(NSString *)title sid:(NSString *)sid t:(NSString *)t p:(NSInteger)p{
+    //title : 搜索时使用
     //t     : 答疑分类
-    return [self stringForCommonServiceWithAct:@"act=zjdylist&t=%@&p=%ld&s=10"];
+    //sid   : 车系答疑
+    NSString *parameter =@"act=zjdylist";
+    if (title) {
+        parameter = [NSString stringWithFormat:@"%@&title=%@",parameter,title];
+    }
+    if (sid) {
+        parameter = [NSString stringWithFormat:@"%@&sid=%@",parameter,sid];
+    }
+    if (t) {
+        parameter = [NSString stringWithFormat:@"%@&t=%@",parameter,t];
+    }
+    parameter = [NSString stringWithFormat:@"%@&p=%ld&s=10",parameter,p];
+
+    return [self stringForCommonServiceWithAct:parameter];
 }
+
 
 /**答疑搜索*/
 + (NSString *)urlStringForZJDYSearch{
@@ -270,9 +312,15 @@
 + (NSString *)urlString_s_index{
     return [self stringForCommonServiceWithAct:@"act=s_index&sid=%@"];
 }
-/**发现-找车-车系综述 - 车型信息 评分*/
+/**发现-找车-车系综述 - 车型信息 车型故障统计*/
 + (NSString *)urlString_s_index2{
     return [self stringForCommonServiceWithAct:@"act=s_index2&sid=%@"];
+}
+
+/**发现-找车-投诉头部 满意度&回复率*/
++ (NSString *)url_s_complainWithSid:(NSString *)sid{
+    NSString *parameter = [NSString stringWithFormat:@"act=s_complain&sid=%@",sid];
+    return [self stringForCommonServiceWithAct:parameter];
 }
 
 #pragma mark-个人中心

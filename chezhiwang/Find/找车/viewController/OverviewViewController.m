@@ -24,6 +24,7 @@
 #import "NewsViewController.h"
 #import "ComplainListViewController.h"
 #import "ReputationViewController.h"
+#import "ComplainDetailsViewController.h"
 
 @interface OverviewViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -47,9 +48,16 @@
 
     [self.view addSubview:_tableView];
 
+
     headerView = [[OverviewView alloc] initWithFrame:CGRectMake(0, self.contentInsets.top, WIDTH, 100)];
- //    headerView.backgroundColor = [UIColor brownColor];
-    _tableView.tableHeaderView = headerView;
+    headerView.parentVC = self;
+     _tableView.tableHeaderView = headerView;
+
+    __weak __typeof(headerView)weakHeaderView = headerView;
+    __weak __typeof(_tableView)weakTableView = _tableView;
+    [headerView setUpdateBlock:^(CGRect frame) {
+        weakTableView.tableHeaderView = weakHeaderView;
+    }];
 
 
     HomepageSectionModel *one = [[HomepageSectionModel alloc] init];
@@ -66,27 +74,71 @@
     complainSectionModel.headLineColor = colorYellow;
     complainSectionModel.pushClass = [ComplainListViewController class];
 
-    HomepageSectionModel *three = [[HomepageSectionModel alloc] init];
-    three.headTitle = @"口碑";
-    three.headImageName = @"投诉";
-    three.footTitle = @"更多口碑";
-    three.headLineColor = colorGreen;
-    three.pushClass = [ReputationViewController class];
-    [three.rowModels addObject:[[NSObject alloc] init]];
+//    HomepageSectionModel *three = [[HomepageSectionModel alloc] init];
+//    three.headTitle = @"口碑";
+//    three.headImageName = @"投诉";
+//    three.footTitle = @"更多口碑";
+//    three.headLineColor = colorGreen;
+//    three.pushClass = [ReputationViewController class];
+//    [three.rowModels addObject:[[NSObject alloc] init]];
 
-    _dataArray = @[one,complainSectionModel,three];
+    _dataArray = @[one,complainSectionModel];
 
 
-    [self loadData];
+    [self loadDataScore];//评分
+    [self loadDataStatistics];//故障统计
+    [self loadNewsData];
+    [self loadComplainData];
 }
 
-- (void)loadData{
-    [HttpRequest GET:[URLFile urlString_s_index] success:^(id responseObject) {
+- (void)loadDataScore{
+    __weak __typeof(self)_self = self;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    NSString *url = [NSString stringWithFormat:[URLFile urlString_s_index],_seriesID];
+    [HttpRequest GET:url success:^(id responseObject) {
         
+        [MBProgressHUD hideHUDForView:_self.view animated:YES];
+        [headerView setDataScore:responseObject];
     } failure:^(NSError *error) {
-
+        [MBProgressHUD hideHUDForView:_self.view animated:YES];
     }];
 
+}
+
+//故障统计
+- (void)loadDataStatistics{
+    NSString *url = [NSString stringWithFormat:[URLFile urlString_s_index2],_seriesID];
+    [HttpRequest GET:url success:^(id responseObject) {
+        [headerView setDataStatistics:responseObject];
+        _tableView.tableHeaderView = headerView;
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+
+- (void)loadNewsData{
+    NSString *url = [URLFile url_newslistWithStyle:nil title:nil sid:self.seriesID];
+    url = [NSString stringWithFormat:@"%@&p=1&s=5",url];
+
+ [HttpRequest GET:url success:^(id responseObject) {
+     HomepageSectionModel *sectionModel = _dataArray[0];
+     sectionModel.rowModels = [HomepageNewsModel mj_objectArrayWithKeyValuesArray:responseObject[@"rel"]];
+     [_tableView reloadData];
+ } failure:^(NSError *error) {
+
+ }];
+}
+
+- (void)loadComplainData{
+    NSString *url = [URLFile url_complainlistWithTitle:nil sid:_seriesID p:1 s:5];
+    [HttpRequest GET:url success:^(id responseObject) {
+        HomepageSectionModel *sectionModel = _dataArray[1];
+        sectionModel.rowModels = [HomepageComplainModel mj_objectArrayWithKeyValuesArray:responseObject[@"rel"]];
+        [_tableView reloadData];
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 #pragma mark - UITableViewDataSource
@@ -164,11 +216,12 @@
         detail.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:detail animated:YES];
     }else if (indexPath.section == 1){
-
-    }else {
+        HomepageComplainModel *model = sectionModel.rowModels[indexPath.row];
+        ComplainDetailsViewController *detail = [[ComplainDetailsViewController alloc] init];
+        detail.cid = model.cpid;
+        [self.navigationController pushViewController:detail animated:YES];
 
     }
-
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -183,7 +236,12 @@
     HomepageSectionModel *sectionModel = _dataArray[section];
     HomepageSectionFooterView *footer = [[HomepageSectionFooterView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 40)];
     footer.sectionModel = sectionModel;
-    footer.parentVC = self;
+    __weak __typeof(self)_self = self;
+   [footer setClick:^{
+       if (_self.moreClick) {
+           _self.moreClick(section);
+       }
+   }];
     return footer;
 }
 

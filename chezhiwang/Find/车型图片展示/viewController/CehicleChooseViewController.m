@@ -32,9 +32,9 @@
             NSMutableArray *mArray = [[NSMutableArray alloc] init];
             for (NSDictionary *dict in responseObject[@"rel"]) {
                 NSMutableArray *subArray = [[NSMutableArray alloc] init];
-                for (NSDictionary *subDict in dict[@"brand"]) {
+                for (NSDictionary *subDict in dict[@"brandlist"]) {
                     ChartChooseModel * model = [[ChartChooseModel alloc] init];
-                    model.tid = subDict[@"id"];
+                    model.tid = subDict[@"bid"];
                     model.title = subDict[@"name"];
                     [subArray addObject:model];
                 }
@@ -42,7 +42,6 @@
                 [mArray addObject:saveDict];
             }
             self.dataArray = [mArray copy];
-
             [self.tableView reloadData];
 
         } failure:^(NSError *error) {

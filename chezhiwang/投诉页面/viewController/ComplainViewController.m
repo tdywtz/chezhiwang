@@ -224,7 +224,7 @@
                         businessModel.cid = responseObject[@"cid"];
                         businessModel.lid = responseObject[@"lid"];
                         businessModel.seriesId = responseObject[@"seriesId"];
-                    if (businessModel.lid.integerValue == 0) {
+                    if ([businessModel.lid integerValue] == 0) {
                         businessModel.custom = YES;
                     }
 
@@ -316,7 +316,7 @@
 
 #pragma mark - 提交数据
 -(void)postData:(NSDictionary *)dic{
-
+    
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"正在提交...";
     hud.detailsLabelText = nil;
@@ -505,11 +505,14 @@
                 }else if (j == 7){
                     ComplainBusinessModel *businessModel = sectionModel.rowModels[j];
                     if (businessModel.custom == NO) {
-                        _dataDictionary[businessModel.businessIdKey] = businessModel.businessId;
+                        _dataDictionary[businessModel.businessIdKey] = businessModel.lid;
                         _dataDictionary[businessModel.businessKey] = businessModel.businessValue;
                     }else{
                         _dataDictionary[businessModel.businessCustomKey] = businessModel.businessValue;
                     }
+                }else if (j == 8){
+                    ComplainImageModel *model = sectionModel.rowModels[j];
+                    _dataDictionary[model.key] = model.imageUrl;
                 }
             }
         }else if (i == 3) {

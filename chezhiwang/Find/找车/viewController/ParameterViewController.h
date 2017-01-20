@@ -7,9 +7,10 @@
 //
 
 #import "BasicViewController.h"
-
+/**车型参数*/
 @interface ParameterViewController : BasicViewController
 
 @property (nonatomic,assign) UIEdgeInsets contentInsets;
+@property (nonatomic,copy) NSString * seriesID;//品牌id
 
 @end

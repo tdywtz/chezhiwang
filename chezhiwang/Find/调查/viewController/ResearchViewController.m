@@ -25,14 +25,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    NSString *url1 = [URLFile url_newslistWithStyle:@"18" title:nil sid:nil];
+    url1 = [NSString stringWithFormat:@"%@%@",url1,@"&p=%ld&s=%ld"];
+
+    NSString *url2 = [URLFile url_newslistWithStyle:@"19" title:nil sid:nil];
+    url2 = [NSString stringWithFormat:@"%@%@",url2,@"&p=%ld&s=%ld"];
 
     NewsListViewController *vc1 = [[NewsListViewController alloc] init];
     vc1.contentInsets = UIEdgeInsetsMake(64, 0, 0, 0);
-    vc1.urlString =  [NSString stringWithFormat:[URLFile urlStringForNewsList],@"18",@"&p=%ld&s=%ld"];
+    vc1.urlString =  url1;
   
     NewsListViewController *vc2 = [[NewsListViewController alloc] init];
     vc2.contentInsets = UIEdgeInsetsMake(64, 0, 0, 0);
-    vc2.urlString =  [NSString stringWithFormat:[URLFile urlStringForNewsList],@"19",@"&p=%ld&s=%ld"];
+    vc2.urlString =  url2;
    
     NewsInvestigateViewController *research = [[NewsInvestigateViewController alloc] init];
 

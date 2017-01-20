@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface HomepageNewsModel : NSObject
 
+@interface HomepageNewsModel : NSObject
 
 /** 日期 */
 @property (nonatomic,copy) NSString *date;

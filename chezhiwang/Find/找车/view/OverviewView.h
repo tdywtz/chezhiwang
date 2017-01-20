@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "OverviewStatisticsView.h"
 
 
 
@@ -15,7 +15,16 @@
 
 @end
 
-
 @interface OverviewView : UIView
+
+@property (nonatomic,copy) updateFrame block;
+@property (nonatomic,weak) UIViewController *parentVC;
+
+- (void)setUpdateBlock:(updateFrame)block;
+
+- (void)setDataScore:(NSDictionary *)data;
+- (void)setDataStatistics:(NSDictionary *)data;
+
+
 
 @end

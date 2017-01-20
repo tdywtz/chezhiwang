@@ -13,6 +13,6 @@
 /**改变图片尺寸*/
 - (UIImage *)scaleToSize:(CGSize)size;
 
-- (UIImage*)getSubImageWithCGRect:(CGRect)mCGRect centerBool:(BOOL)centerBool;
+- (UIImage *)getSubImageWithCGRect:(CGRect)mCGRect centerBool:(BOOL)centerBool;
 
 @end

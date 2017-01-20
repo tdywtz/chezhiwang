@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface BasicBackgroundView : UIView
 
 @property (nonatomic,strong) UIImageView *imageView;

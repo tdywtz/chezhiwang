@@ -26,7 +26,7 @@
         nameLabel.textColor = colorBlack;
 
         iconImageView = [[UIImageView alloc] init];
-        //iconImageView.contentMode = UIViewContentModeScaleAspectFit;
+        iconImageView.contentMode = UIViewContentModeCenter;
 
         UIView *lineView = [[UIView alloc] init];
         lineView.backgroundColor = colorLineGray;

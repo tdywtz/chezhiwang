@@ -6,11 +6,11 @@
 //  Copyright © 2016年 车质网. All rights reserved.
 //
 
-#import "BasicViewController.h"
+#import "ChooseTableViewController.h"
 
 /**
  找车
  */
-@interface LookCarViewController : BasicViewController
+@interface LookCarViewController : ChooseTableViewController
 
 @end

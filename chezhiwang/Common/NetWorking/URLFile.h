@@ -37,11 +37,11 @@
 
 #pragma mark - 新闻
 /**新闻列表*/
-+ (NSString *)urlStringForNewsList;
++ (NSString *)url_newslistWithStyle:(NSString *)style title:(NSString *)title sid:(NSString *)sid;
 /**新闻-调查*/
 + (NSString *)urlStringForReport;
 /**新闻详情*/
-+ (NSString *)urlStringForNewsinfo;
++ (NSString *)url_newsinfoWithID:(NSString *)ID sid:(NSString *)sid type:(NSString *)type;
 /**精品试list*/
 + (NSString *)urlString_testDrive;
 /**新闻搜索*/
@@ -58,7 +58,7 @@
 
 #pragma mark - 投诉
 /**投诉列表*/
-+ (NSString *)urlStringForZLTS;
++ (NSString *)url_complainlistWithTitle:(NSString *)title sid:(NSString *)sid p:(NSInteger)p s:(NSInteger)s;
 /**投诉搜索*/
 + (NSString *)urlStringForZLTSWithSearch;
 /**投诉列表->投诉详情*/
@@ -92,7 +92,7 @@
 
 #pragma mark -答疑
 /**答疑列表*/
-+ (NSString *)urlStringForZJDY;
++ (NSString *)url_zjdylistWithTitle:(NSString *)title sid:(NSString *)sid t:(NSString *)t p:(NSInteger)p;
 /**答疑搜索*/
 + (NSString *)urlStringForZJDYSearch;
 /**我要提问*/
@@ -128,9 +128,10 @@
 #pragma mark - 找车--
 /**发现-找车-车系综述 - 车型信息 评分*/
 + (NSString *)urlString_s_index;
-/**发现-找车-车系综述 - 车型信息 评分*/
+/**发现-找车-车系综述 - 车型信息 车型故障统计*/
 + (NSString *)urlString_s_index2;
-
+/**发现-找车-投诉头部 满意度&回复率*/
++ (NSString *)url_s_complainWithSid:(NSString *)sid;
 
 #pragma Mark- 个人中心
 /**获取用户信息*/

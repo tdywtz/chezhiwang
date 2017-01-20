@@ -8,7 +8,7 @@
 
 #import "OverviewView.h"
 #import "OverviewScoreView.h"
-#import "OverviewStatisticsView.h"
+
 
 
 #pragma mark - 车型信息
@@ -33,29 +33,83 @@
 
         _imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
         _imageView.contentMode = UIViewContentModeScaleAspectFit;
-        _imageView.image = [CZWManager defaultIconImage];
 
-        brandLabel = [self labelTo];
-        seriesLabel = [self labelTo];
-        displacementLabel = [self labelTo];
-        brandAttributeLabel = [self labelTo];
-        seriesAttributeLabel = [self labelTo];
-        transmissionCaseLabel = [self labelTo];
+        _imageView.lh_size = CGSizeMake(WIDTH, 100);
+        _imageView.lh_top = 20;
+        _imageView.lh_left = 0;
+
+        NSArray *labels = @[@"brandLabel",@"brandAttributeLabel",@"seriesLabel",@"seriesAttributeLabel",@"displacementLabel",@"transmissionCaseLabel"];
+        UILabel *temp = nil;
+        for (int i = 0; i < labels.count; i ++) {
+            UILabel *label = [self labelTo];
+            [self setValue:label forKey:labels[i]];
+
+            [self addSubview:label];
+
+            if (i < 4) {
+                if (i == 0 || i == 2) {
+
+                    UIView *lineView = [UIView new];
+                    lineView.backgroundColor = colorLineGray;
+
+                    UIView *verticalLine = [UIView new];
+                    verticalLine.backgroundColor = colorLineGray;
+
+                    [self addSubview:lineView];
+                    [self addSubview:verticalLine];
+
+                    lineView.lh_size = CGSizeMake(WIDTH, 1);
+                    lineView.lh_left = 0;
+                    if (temp) {
+                         lineView.lh_top = temp.lh_bottom;
+                    }else{
+                         lineView.lh_top = _imageView.lh_bottom + 10;
+                    }
+
+                    label.lh_size = CGSizeMake(WIDTH/2-20, 40);
+                    label.lh_left = 10;
+                    label.lh_top = lineView.lh_bottom;
+
+                    verticalLine.lh_size = CGSizeMake(1, 15);
+                    verticalLine.lh_centerX = WIDTH/2;
+                    verticalLine.lh_centerY = label.lh_centerY;
+
+                    temp = label;
+                }else{
+                    label.lh_left = WIDTH/2 + 20;
+                    label.lh_top = temp.lh_top;
+                    label.lh_size = CGSizeMake(WIDTH/2-20, temp.lh_height);
+                }
+            }else{
+                UIView *lineView = [UIView new];
+                lineView.backgroundColor = colorLineGray;
+
+                [self addSubview:lineView];
+
+                lineView.lh_size = CGSizeMake(WIDTH, 1);
+                lineView.lh_left = 0;
+                lineView.lh_top = temp.lh_bottom;
+
+                label.lh_size = CGSizeMake(WIDTH-20, temp.lh_height);
+                label.lh_left = 10;
+                label.lh_top = lineView.lh_bottom;
+
+                temp = label;
+            }
+        }
 
         _lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 5)];
         _lineView.backgroundColor = colorBackGround;
 
+        _lineView.lh_size = CGSizeMake(WIDTH, 5);
+        _lineView.lh_left = 0;
+        _lineView.lh_top = transmissionCaseLabel.lh_bottom;
+
         [self addSubview:_imageView];
-        [self addSubview:brandLabel];
-        [self addSubview:seriesLabel];
-        [self addSubview:displacementLabel];
-        [self addSubview:brandAttributeLabel];
-        [self addSubview:seriesAttributeLabel];
-        [self addSubview:transmissionCaseLabel];
         [self addSubview:_lineView];
 
-        [self resetLayout];
-        [self setData];
+        self.lh_width = WIDTH;
+        self.lh_height = _lineView.lh_bottom;
     }
     return self;
 }
@@ -67,52 +121,44 @@
     return label;
 }
 
-- (void)setData{
-   brandLabel.text = @"品牌：1";
-    seriesLabel.text = @"品牌：2";
-    displacementLabel.text = @"品牌：3";
-    brandAttributeLabel.text = @"品牌：4";
-    seriesAttributeLabel.text = @"品牌：5";
-    transmissionCaseLabel.text = @"品牌：6";
+- (void)setData:(NSDictionary *)data{
+    [_imageView sd_setImageWithURL:[NSURL URLWithString:data[@"logo"]] placeholderImage:[CZWManager defaultIconImage]];
+
+    NSAttributedString *insetAtt = [[NSAttributedString alloc] initWithString:@"速" attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:PT_FROM_PX(18)],NSForegroundColorAttributeName:[UIColor clearColor]}];
+
+    NSMutableAttributedString *text = [self attbuteWithName:@"品牌：" value:data[@"brand"]];
+    text.yy_color = colorYellow;
+    text.yy_font = [UIFont systemFontOfSize:PT_FROM_PX(20)];
+    [text yy_setColor:colorLightGray range:NSMakeRange(0, 3)];
+    [text yy_setFont:[UIFont systemFontOfSize:PT_FROM_PX(18)] range:NSMakeRange(0, 3)];
+    [text insertAttributedString:insetAtt atIndex:1];
+    brandLabel.attributedText = text;
+
+    text = [self attbuteWithName:@"车系：" value:data[@"series"]];
+    [text insertAttributedString:insetAtt atIndex:1];
+    seriesLabel.attributedText = text;
+
+    text = [self attbuteWithName:@"排量：" value:data[@"engine"]];
+    [text insertAttributedString:insetAtt atIndex:1];
+    displacementLabel.attributedText = text;
+    
+    brandAttributeLabel.attributedText = [self attbuteWithName:@"品牌属性：" value:data[@"brandAttribute"]];
+    seriesAttributeLabel.attributedText = [self attbuteWithName:@"车系属性：" value:data[@"CarAttribute"]];
+    transmissionCaseLabel.attributedText = [self attbuteWithName:@"变速箱：" value:data[@"transmission"]];;
 
 }
 
-- (void)resetLayout{
-    _imageView.lh_size = CGSizeMake(WIDTH, 100);
-    _imageView.lh_top = 20;
-    _imageView.lh_left = 0;
+- (NSMutableAttributedString *)attbuteWithName:(NSString *)name value:(NSString *)value{
+    NSString *text = [NSString stringWithFormat:@"%@%@",name,value];
+    NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:text];
+    att.yy_font = [UIFont systemFontOfSize:PT_FROM_PX(18)];
+    [att yy_setColor:colorDeepGray range:NSMakeRange(0, att.length)];
+    [att yy_setColor:colorLightGray range:[text rangeOfString:name]];
 
-    brandLabel.lh_left = 10;
-    brandLabel.lh_top = _imageView.lh_bottom + 20;
-    brandLabel.lh_size = CGSizeMake(WIDTH/2-25, 18);
-
-    seriesLabel.lh_left = brandLabel.lh_left;
-    seriesLabel.lh_top = brandLabel.lh_bottom + 5;
-    seriesLabel.lh_size = brandLabel.lh_size;
-
-    displacementLabel.lh_left = brandLabel.lh_left;
-    displacementLabel.lh_top = seriesLabel.lh_bottom + 5;
-    displacementLabel.lh_size = brandLabel.lh_size;
-
-    brandAttributeLabel.lh_left = WIDTH/2+5;
-    brandAttributeLabel.lh_top = brandLabel.lh_top;
-    brandAttributeLabel.lh_size = brandLabel.lh_size;
-
-    seriesAttributeLabel.lh_left = brandAttributeLabel.lh_left;
-    seriesAttributeLabel.lh_top = brandAttributeLabel.lh_bottom + 5;
-    seriesAttributeLabel.lh_size = brandLabel.lh_size;
-
-    transmissionCaseLabel.lh_left = seriesAttributeLabel.lh_left;
-    transmissionCaseLabel.lh_top = seriesAttributeLabel.lh_bottom + 5;
-    transmissionCaseLabel.lh_size = brandLabel.lh_size;
-
-    _lineView.lh_size = CGSizeMake(WIDTH, 5);
-    _lineView.lh_left = 0;
-    _lineView.lh_top = displacementLabel.lh_bottom + 10;
-
-    self.lh_width = WIDTH;
-    self.lh_height = _lineView.lh_bottom;
+    return att;
 }
+
+
 @end
 
 
@@ -132,7 +178,13 @@
         self.backgroundColor = [UIColor clearColor];
         _infoView = [[OverviewInfoView alloc] initWithFrame:CGRectZero];
         _scoreView = [[OverviewScoreView alloc] initWithFrame:CGRectZero];
+
         _statistcsView = [[OverviewStatisticsView alloc] initWithFrame:CGRectZero];
+        __weak __typeof(self) _self =self;
+        _statistcsView.block = ^(CGRect frame){
+
+            [_self resetLayout];
+        };
 
         [self addSubview:_infoView];
         [self addSubview:_scoreView];
@@ -155,17 +207,56 @@
 
     self.lh_width = WIDTH;
     self.lh_height = _statistcsView.lh_bottom;
+
+    if (self.block) {
+        self.block(self.frame);
+    }
 }
 
-//坐标系
-- (void)drawCoordinateSystem{
+- (void)setDataScore:(NSDictionary *)data{
+    [_infoView setData:data[@"modelInfo"]];
+
+    NSDictionary *operation = data[@"operation"];
+    NSDictionary *score = data[@"score"];
+
+    OverviewScoreViewModel *model = [OverviewScoreViewModel new];
+    model.score = [NSString stringWithFormat:@"%@",score[@"avgScore"]];
+    model.reportId = operation[@"reportId"];
+    model.pcId = operation[@"pcId"];
+    model.pc =  [operation[@"pc"] boolValue];
+    model.report = [operation[@"report"] boolValue];
+    model.minScore = score[@"minScore"];
+    model.avgScore = score[@"avgScore"];
+    model.maxScore = score[@"maxScore"];
+
+
+    [_scoreView setModel:model];
+    _scoreView.parentVC = self.parentVC;
+}
+
+- (void)setDataStatistics:(NSDictionary *)data{
+    NSArray *dataArray = data[@"rel"];
+
+    NSMutableArray *models = [[NSMutableArray alloc] init];
+    for (int i = 0; i < dataArray.count; i ++) {
+
+        NSDictionary *subDict = dataArray[i];
+        OverviewStatisticsModel *model = [OverviewStatisticsModel mj_objectWithKeyValues:subDict];
+
+        model.exampleModels = [OverviewStatisticsExampleModel mj_objectArrayWithKeyValuesArray:subDict[@"data"]];
+        [models addObject:model];
+    }
+    [_statistcsView setModels:models];
+    [self resetLayout];
 
 }
 
-//柱子
--(void)drawColumn{
 
+- (void)setUpdateBlock:(updateFrame)block{
+    self.block = block;
 }
+
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

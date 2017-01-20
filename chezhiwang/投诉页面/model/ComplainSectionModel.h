@@ -46,6 +46,7 @@ typedef NS_ENUM(NSInteger, ComplainCellStyle) {
 @property (nonatomic,strong) NSMutableArray *imageArray;
 @property (nonatomic,strong) NSArray *imageUrlArray;
 @property (nonatomic,assign) CGFloat cellHeight;
+@property (nonatomic,copy) NSString *imageUrl;
 
 @end
 
@@ -66,7 +67,7 @@ typedef NS_ENUM(NSInteger, ComplainCellStyle) {
 @property (nonatomic,copy) NSString *proPlaceholder;
 @property (nonatomic,copy) NSString *businessPlaceholder;
 
-@property (nonatomic,copy) NSString *businessId;
+//@property (nonatomic,copy) NSString *businessId;
 @property (nonatomic,copy) NSString *province;
 @property (nonatomic,copy) NSString *pid;
 @property (nonatomic,copy) NSString *city;

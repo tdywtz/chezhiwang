@@ -10,5 +10,7 @@
 
 @interface AnswerViewController : BasicViewController
 
-@property (nonatomic,copy) NSString *cid;//根据车系
+@property (nonatomic,copy) NSString *sid;//根据车系
+@property (nonatomic,assign) UIEdgeInsets contentInsets;
+
 @end

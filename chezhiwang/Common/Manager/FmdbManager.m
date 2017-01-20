@@ -152,9 +152,11 @@
 }
 
 -(void)insertIntoReadHistoryWithId:(NSString *)ID andTitle:(NSString *)title andType:(ReadHistoryType)type{
-    NSString *sql =  @"insert into readHistory(id,title,type) values(?,?,?)";
-    [self deleteFromReadHistory:ID];
-    [_dataBase executeUpdate:sql,ID,title,[NSString stringWithFormat:@"%d",type]];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        NSString *sql =  @"insert into readHistory(id,title,type) values(?,?,?)";
+        [self deleteFromReadHistory:ID];
+        [_dataBase executeUpdate:sql,ID,title,[NSString stringWithFormat:@"%d",type]];
+    });
 }
 
 -(void)deleteFromReadHistory:(NSString *)ID{

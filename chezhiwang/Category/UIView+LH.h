@@ -20,4 +20,6 @@
 @property (nonatomic,assign) CGFloat lh_height;
 @property (nonatomic,assign) CGSize  lh_size;
 
+- (UIImage *)imageWithFrame:(CGRect)frame;
+
 @end

@@ -44,6 +44,8 @@
 		4D373B5E1DB4CF4E00D31455 /* MJDIYAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D373B561DB4CF4E00D31455 /* MJDIYAutoFooter.m */; };
 		4D373B5F1DB4CF4E00D31455 /* MJDIYBackFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D373B581DB4CF4E00D31455 /* MJDIYBackFooter.m */; };
 		4D373B601DB4CF4E00D31455 /* MJDIYHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D373B5A1DB4CF4E00D31455 /* MJDIYHeader.m */; };
+		4D38D9471E270F4B009B392C /* LCSeriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D38D9461E270F4B009B392C /* LCSeriesViewController.m */; };
+		4D38D94A1E276777009B392C /* ChooseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D38D9491E276777009B392C /* ChooseTableView.m */; };
 		4D3A1EC01DAC8E3000A9144B /* WriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D3A1EBF1DAC8E3000A9144B /* WriteViewController.m */; };
 		4D3A1EC81DAC8EB400A9144B /* CZWShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D3A1EC31DAC8EB400A9144B /* CZWShareViewController.m */; };
 		4D3A1EC91DAC8EB400A9144B /* LHMenu.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4D3A1EC51DAC8EB400A9144B /* LHMenu.bundle */; };
@@ -257,6 +259,7 @@
 		4DF75F481D9CEF0B00FB882E /* HomepageSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF75F471D9CEF0B00FB882E /* HomepageSectionHeaderView.m */; };
 		4DF75F4B1D9CEF3000FB882E /* HomepageSectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF75F4A1D9CEF3000FB882E /* HomepageSectionFooterView.m */; };
 		4DF90AB21E07C05F002C8ABB /* CZWCardChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF90AB11E07C05F002C8ABB /* CZWCardChooseViewController.m */; };
+		4DFB36F81E28AD1F00E0CFB6 /* LCComplainListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DFB36F71E28AD1F00E0CFB6 /* LCComplainListViewController.m */; };
 		4DFB4A861E0B7EEF000AB10B /* FindModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DFB4A851E0B7EEF000AB10B /* FindModel.m */; };
 		4DFB4A891E0B7EF5000AB10B /* FindCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DFB4A881E0B7EF5000AB10B /* FindCollectionViewController.m */; };
 		4DFB4A8C1E0B7EFA000AB10B /* FindCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DFB4A8B1E0B7EFA000AB10B /* FindCollectionViewCell.m */; };
@@ -442,6 +445,10 @@
 		4D373B581DB4CF4E00D31455 /* MJDIYBackFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJDIYBackFooter.m; sourceTree = "<group>"; };
 		4D373B591DB4CF4E00D31455 /* MJDIYHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJDIYHeader.h; sourceTree = "<group>"; };
 		4D373B5A1DB4CF4E00D31455 /* MJDIYHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJDIYHeader.m; sourceTree = "<group>"; };
+		4D38D9451E270F4B009B392C /* LCSeriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCSeriesViewController.h; sourceTree = "<group>"; };
+		4D38D9461E270F4B009B392C /* LCSeriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCSeriesViewController.m; sourceTree = "<group>"; };
+		4D38D9481E276777009B392C /* ChooseTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseTableView.h; sourceTree = "<group>"; };
+		4D38D9491E276777009B392C /* ChooseTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseTableView.m; sourceTree = "<group>"; };
 		4D3A1EBE1DAC8E3000A9144B /* WriteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WriteViewController.h; sourceTree = "<group>"; };
 		4D3A1EBF1DAC8E3000A9144B /* WriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WriteViewController.m; sourceTree = "<group>"; };
 		4D3A1EC21DAC8EB400A9144B /* CZWShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZWShareViewController.h; sourceTree = "<group>"; };
@@ -754,6 +761,8 @@
 		4DF75F4A1D9CEF3000FB882E /* HomepageSectionFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomepageSectionFooterView.m; sourceTree = "<group>"; };
 		4DF90AB01E07C05F002C8ABB /* CZWCardChooseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZWCardChooseViewController.h; sourceTree = "<group>"; };
 		4DF90AB11E07C05F002C8ABB /* CZWCardChooseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZWCardChooseViewController.m; sourceTree = "<group>"; };
+		4DFB36F61E28AD1F00E0CFB6 /* LCComplainListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCComplainListViewController.h; sourceTree = "<group>"; };
+		4DFB36F71E28AD1F00E0CFB6 /* LCComplainListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCComplainListViewController.m; sourceTree = "<group>"; };
 		4DFB4A841E0B7EEF000AB10B /* FindModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindModel.h; sourceTree = "<group>"; };
 		4DFB4A851E0B7EEF000AB10B /* FindModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindModel.m; sourceTree = "<group>"; };
 		4DFB4A871E0B7EF5000AB10B /* FindCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindCollectionViewController.h; sourceTree = "<group>"; };
@@ -1036,6 +1045,8 @@
 			children = (
 				4D0F0DF31E037EC0000F75B0 /* ChooseTableViewController.h */,
 				4D0F0DF41E037EC0000F75B0 /* ChooseTableViewController.m */,
+				4D38D9481E276777009B392C /* ChooseTableView.h */,
+				4D38D9491E276777009B392C /* ChooseTableView.m */,
 			);
 			path = "选择数据列表";
 			sourceTree = "<group>";
@@ -2419,6 +2430,10 @@
 			children = (
 				4DFE2F5C1E149FBA00E02112 /* LookCarViewController.h */,
 				4DFE2F5D1E149FBA00E02112 /* LookCarViewController.m */,
+				4D38D9451E270F4B009B392C /* LCSeriesViewController.h */,
+				4D38D9461E270F4B009B392C /* LCSeriesViewController.m */,
+				4DFB36F61E28AD1F00E0CFB6 /* LCComplainListViewController.h */,
+				4DFB36F71E28AD1F00E0CFB6 /* LCComplainListViewController.m */,
 				4DFE2F5F1E14A0DF00E02112 /* OverviewViewController.h */,
 				4DFE2F601E14A0DF00E02112 /* OverviewViewController.m */,
 				4DF2C79F1E1DDCCE00C5B24A /* ParameterViewController.h */,
@@ -2748,6 +2763,7 @@
 				4DFB4A9A1E0B9BC7000AB10B /* ComplainListViewController.m in Sources */,
 				4D28A83D1E0768690070CD5B /* MyCarCell.m in Sources */,
 				4DFB4AE21E0B9C30000AB10B /* ReputationCell.m in Sources */,
+				4D38D94A1E276777009B392C /* ChooseTableView.m in Sources */,
 				4DFB4B541E0B9EFA000AB10B /* VehicleImageCell.m in Sources */,
 				4DFB4B741E0B9EFA000AB10B /* SearchViewController.m in Sources */,
 				4DF344371E1F6FF0005584CB /* EditImageViewController.m in Sources */,
@@ -2863,6 +2879,7 @@
 				4DFB4BA51E0BA067000AB10B /* InvestigateChangeViewController.m in Sources */,
 				4DFB4B6A1E0B9EFA000AB10B /* LHToolScrollView.m in Sources */,
 				4DFB4B561E0B9EFA000AB10B /* ImageShowViewController.m in Sources */,
+				4D38D9471E270F4B009B392C /* LCSeriesViewController.m in Sources */,
 				4D259DEB1DF527540039AE2B /* MyComplainCell.m in Sources */,
 				4D373B601DB4CF4E00D31455 /* MJDIYHeader.m in Sources */,
 				4DFB4B531E0B9EFA000AB10B /* CollectionSectionView.m in Sources */,
@@ -2930,6 +2947,7 @@
 				4D50795A1C45E38200656CA8 /* CustomCommentView.m in Sources */,
 				4DFB4AE51E0B9C30000AB10B /* EditCell.m in Sources */,
 				4D3A1EC01DAC8E3000A9144B /* WriteViewController.m in Sources */,
+				4DFB36F81E28AD1F00E0CFB6 /* LCComplainListViewController.m in Sources */,
 				4DFB4B731E0B9EFA000AB10B /* NewsViewController.m in Sources */,
 				4DF344341E1F6FF0005584CB /* ChooseViewController.m in Sources */,
 				4DFB4B571E0B9EFA000AB10B /* MoreImagesViewController.m in Sources */,

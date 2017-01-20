@@ -15,6 +15,7 @@
 #import "NSString-Helper.h"
 #import "CZWManager.h"
 #import "UIView+LH.h"
+#import "UIImage+LH.h"
 #import "BasicNavigationController.h"
 #import "chezhiwang-Swift.h"
 //友盟统计

@@ -16,6 +16,7 @@
 {
     LHPageViewcontroller *pageViewController;
     LHSegmentView *segmentView;
+    NSInteger _current;
 }
 @end
 
@@ -44,13 +45,13 @@
     __weak __typeof(pageViewController) weakVC = pageViewController;
     segmentView.setScrollClosure = ^(NSInteger index) {
         [weakVC setViewControllerWithCurrent:index];
-        [weakVC.LHDelegate didFinishAnimatingApper:index];
+        _current = index;
     };
 
     [segmentView scrollTo:0 animer:NO];
 }
 
-#pragma mark -LHPageViewcontrollerDelegaterightProgress
+#pragma mark -LHPageViewcontrollerDelegate
 //变化当前停留在窗口的视图
 -(void)didFinishAnimatingApper:(NSInteger)current{
     [segmentView scrollTo:current animer:NO];
@@ -58,37 +59,34 @@
 
 //滑动进度
 -(void)scrollViewDidScrollLeft:(CGFloat)leftProgress{
-
-    
+    [segmentView resetToIndex:-leftProgress];
     [segmentView progress:-leftProgress];
-
 }
+
 -(void)scrollViewDidScrollRight:(CGFloat)rightProgress{
-   [segmentView progress:rightProgress];
+
+    [segmentView resetToIndex:rightProgress];
+    [segmentView progress:rightProgress];
 }
 
-//- (void)didScroll:(UIScrollView *)scrollView{
-//
-//    if (scrollView.contentOffset.x > WIDTH) {
-//      CGPoint point = CGPointMake(fabs(WIDTH - scrollView.contentOffset.x), 0);
-//        [segmentView segmentWillMove:point];
-//    }else if (scrollView.contentOffset.x < WIDTH){
-//        CGPoint  point = CGPointMake(scrollView.contentOffset.x, 0);
-//        [segmentView segmentWillMove:point];
-//    }else{
-//      //  point = CGPointZero;
-//    }
-//
-//}
+- (void)didScroll:(UIScrollView *)scrollView{
+    if (scrollView.dragging) {
+        return;
+    }
+    CGFloat offX = scrollView.contentOffset.x;
 
-- (void)DidEndDecelerating:(UIScrollView *)scrollView{
-
-  //  [segmentView segmentDidEndMove:scrollView.contentOffset];
+    if (offX < WIDTH && offX >= 0) {
+        [segmentView progress:-fabs((offX - WIDTH)/WIDTH)];
+    }else if (offX > WIDTH && WIDTH <= WIDTH*2){
+        [segmentView progress:fabs((offX - WIDTH)/WIDTH)];
+    }
 }
 
 - (void)DidEndScrollingAnimation:(UIScrollView *)scrollView{
-   //[segmentView segmentDidEndMove:scrollView.contentOffset];
+    [segmentView scrollTo:_current animer:NO];
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

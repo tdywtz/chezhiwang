@@ -260,7 +260,7 @@
 
     [complainTitle makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(10);
-        make.top.equalTo(temp.bottom).offset(40);
+        make.top.equalTo(temp.bottom).offset(37);
     }];
 
     [questionContent makeConstraints:^(MASConstraintMaker *make) {

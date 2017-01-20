@@ -117,13 +117,13 @@
 //        UIButton *chooseButton = [UIButton buttonWithType:UIButtonTypeCustom];
 //        [chooseButton addTarget:self action:@selector(chooseClick:) forControlEvents:UIControlEventTouchUpInside];
 //        chooseButton.backgroundColor = [UIColor redColor];
-
-        UIView *leftView = [[UIView alloc] init];
-        UIView *rightView = [[UIView alloc] init];
+//
+//        UIView *leftView = [[UIView alloc] init];
+//        UIView *rightView = [[UIView alloc] init];
 
       //  [self addSubview:chooseButton];
-        [self addSubview:leftView];
-        [self addSubview:rightView];
+//        [self addSubview:leftView];
+//        [self addSubview:rightView];
 
 //        [chooseButton makeConstraints:^(MASConstraintMaker *make) {
 //            make.right.equalTo(0);
@@ -171,6 +171,13 @@
 }
 
 -(void)createButtons{
+    [self.buttons removeAllObjects];
+    for (UIView *view in self.contentView.subviews) {
+        if (view != self.moveView) {
+               [view removeFromSuperview];
+        }
+
+    }
     LHToolButton *temp = nil;
     for (int i = 0; i < _titles.count; i ++) {
         LHToolButton *button = [[LHToolButton alloc] init];
@@ -217,8 +224,13 @@
 - (void)updateButtonTitleColor:(NSInteger )index{
     LHToolButton *_button = [self.buttons objectAtIndex:self.current];
     _button.selected = NO;
+    _button.titleLabel.font = [UIFont systemFontOfSize:17];
+
     LHToolButton *button = [self.buttons objectAtIndex:index];
     button.selected = YES;
+    [UIView animateWithDuration:0.3 animations:^{
+           button.titleLabel.font = [UIFont systemFontOfSize:19];
+    }];
 }
 //更新offset
 -(void)updateContentOffset{
@@ -234,9 +246,9 @@
     __weak __typeof(self)weakself = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         weakself.moveView.bounds = CGRectMake(0, 0, button.frame.size.width+10, 3);
-        [UIView animateWithDuration:0.3 delay:0 usingSpringWithDamping:0.2 initialSpringVelocity:1.4 options:UIViewAnimationOptionLayoutSubviews animations:^{
-            weakself.moveView.center = CGPointMake(button.center.x, weakself.frame.size.height-2-4);
-        } completion:nil];
+        [UIView animateWithDuration:0.3 animations:^{
+           weakself.moveView.center = CGPointMake(button.center.x, weakself.frame.size.height-2-4);
+        }];
     });
 
     if (contentOffsetx < 0) {

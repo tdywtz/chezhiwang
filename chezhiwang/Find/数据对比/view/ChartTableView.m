@@ -181,6 +181,8 @@
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"collectionCell" forIndexPath:indexPath];
     cell.backgroundColor = [UIColor whiteColor];
     cell.contentView.layer.borderWidth = 0.5;
+    cell.contentView.layer.borderColor = colorLineGray.CGColor;
+    
     UILabel *label = (UILabel *)[cell.contentView viewWithTag:100];
     if (!label) {
         label = [[UILabel alloc] initWithFrame:cell.bounds];

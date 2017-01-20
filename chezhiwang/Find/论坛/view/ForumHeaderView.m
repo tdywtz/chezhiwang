@@ -162,10 +162,11 @@
         [newButton1 sizeToFit];
         [newButton2 sizeToFit];
 
-        backView.lh_top = self.lh_bottom+self.navigationHeight;
+        CGRect frame = [self convertRect:self.bounds toView:[UIApplication sharedApplication].keyWindow];
+        backView.lh_top = frame.origin.y + frame.size.height;
         backView.lh_left = 0;
         backView.lh_width = WIDTH;
-        backView.lh_height = HEIGHT-self.lh_bottom;
+        backView.lh_height = HEIGHT;
 
         newButton1.lh_height = 40;
         newButton1.lh_width += 20;

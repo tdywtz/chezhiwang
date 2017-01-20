@@ -19,13 +19,26 @@
     }
     return self;
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+
+/**判断一行中是否都是相同数据*/
+- (BOOL)similarityData{
+    NSArray *items = _itemModels;
+    if (items.count < 2) {
+        return YES;
+    }
+    ChartItemModel *tempNodel = items[0];
+    for (int i = 1; i < items.count; i ++) {
+        ChartItemModel *itemModel = items[i];
+        if (itemModel.name == nil) {
+            continue;
+        }
+        if (![itemModel.name isEqualToString:tempNodel.name]) {
+            return NO;
+        }
+    }
+    return YES;
 }
-*/
+
 
 - (CGFloat)cellHeight{
     if (_cellHeight < 44) {

@@ -133,10 +133,10 @@
         _businessModel.proValue = nil;
         _businessModel.province = nil;
         _businessModel.city = nil;
-        _businessModel.businessId = nil;
+        _businessModel.lid = nil;
         _businessModel.businessValue = nil;
     }else{
-        _businessModel.businessId = nil;
+        _businessModel.lid = nil;
         _businessModel.businessValue = nil;
     }
     [self resettring];
@@ -247,7 +247,7 @@
         [choose retrunResults:^(NSString *title, NSString *ID) {
             weakSelf.businessModel.businessValue = title;
             _businessTextField.text = title;
-            weakSelf.businessModel.businessId = ID;
+            weakSelf.businessModel.lid = ID;
         }];
         choose.ID = _businessModel.pid;
         choose.cityId = _businessModel.cid;

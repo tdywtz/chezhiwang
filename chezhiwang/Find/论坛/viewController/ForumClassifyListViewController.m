@@ -185,6 +185,14 @@
 
 @implementation ForumClassifyListViewController
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _contentInsets = UIEdgeInsetsMake(64, 0, 0, 0);
+    }
+    return self;
+}
 -(void)loadData{
     NSString *url = [NSString stringWithFormat:_urlString,self.sid,_orderType,_topicType,_count];
     [HttpRequest GET:url success:^(id responseObject) {
@@ -286,7 +294,7 @@
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.estimatedRowHeight = 80;
-
+    //_tableView.contentInset = self.contentInsets;
 
 
     __weak __typeof(self)weakSelf = self;
@@ -304,7 +312,7 @@
     _tableView.mj_footer.automaticallyHidden = YES;
 
 
-    tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 64, WIDTH, 100)];
+    tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, _contentInsets.top, WIDTH, 100)];
     tableHeaderView.backgroundColor = [UIColor whiteColor];
 
     _headerView = [[ForumClassifyListHeaderView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 100) style:self.forumType];

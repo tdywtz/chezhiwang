@@ -45,7 +45,7 @@
 
         NSDictionary *ceDic = array[i];
 
-        NSString *str1 = [NSString stringWithFormat:@"%@%@",ceDic[@"bw"],@":"];
+        NSString *str1 = ceDic[@"bw"];
         CGFloat length1 = [self getStr:str1 andFont:PT_FROM_PX(16)];
         [self upDataPint:length1];
 
@@ -203,6 +203,10 @@
     cpidLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(18)];
     cpidLabel.textColor = colorBlack;
 
+    UIImageView *cpidImageView = [[UIImageView alloc] init];
+    cpidImageView.image = [UIImage imageNamed:@"auto_complain_cpid"];
+
+
     dateLabel = [[UILabel alloc] init];
     dateLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(18)];
     dateLabel.textColor = colorLightGray;
@@ -221,11 +225,8 @@
 
     showView = [[CustomShowQuestionView alloc] initWithFrame:CGRectZero];
 
-    UIView *bgView = [[UIView alloc] init];
-    bgView.backgroundColor = colorBackGround;
-
-    [self.contentView addSubview:bgView];
     [self.contentView addSubview:titleLabel];
+    [self.contentView addSubview:cpidImageView];
     [self.contentView addSubview:cpidLabel];
     [self.contentView addSubview:dateLabel];
     [self.contentView addSubview:brandNameLabel];
@@ -239,24 +240,25 @@
         make.right.equalTo(-10);
     }];
 
-    [cpidLabel makeConstraints:^(MASConstraintMaker *make) {
+    [cpidImageView makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(10);
-        make.top.equalTo(titleLabel.bottom).offset(10);
+        make.size.equalTo(CGSizeMake(15, 15));
+        make.centerY.equalTo(cpidLabel);
     }];
 
-    [dateLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(WIDTH/3+20);
-        make.centerY.equalTo(cpidLabel);
+    [cpidLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(cpidImageView.right).offset(5);
+        make.top.equalTo(titleLabel.bottom).offset(10);
     }];
 
     [brandNameLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(10);
-        make.top.equalTo(cpidLabel.bottom).offset(20);
+        make.top.equalTo(cpidLabel.bottom).offset(10);
         make.width.equalTo(WIDTH/3);
     }];
 
     [seriesNameLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(dateLabel);
+        make.left.equalTo(brandNameLabel.right).offset(5);
         make.top.equalTo(brandNameLabel);
     }];
 
@@ -268,14 +270,13 @@
     [showView makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(10);
         make.right.equalTo(-10);
-        make.top.equalTo(modelNameLabel.bottom).offset(20);
-        make.bottom.equalTo(-10);
+        make.top.equalTo(modelNameLabel.bottom).offset(10);
     }];
 
-    [bgView makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(0);
-        make.top.equalTo(brandNameLabel.top).offset(-10);
-        make.bottom.equalTo(modelNameLabel.bottom).offset(10);
+    [dateLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(titleLabel);
+        make.top.equalTo(showView.bottom).offset(10);
+        make.bottom.equalTo(-10);
     }];
 }
 
@@ -298,9 +299,6 @@
     seriesNameLabel.attributedText = [self attributedWithString1:@"车系：" string2:self.complainModel.seriesname];
     modelNameLabel.attributedText = [self attributedWithString1:@"车型：" string2:self.complainModel.modelsname];
 
-//    NSArray *fwtd = [self.complainModel.fwtd componentsSeparatedByString:@","];
-//    NSMutableArray *mfwtd = [fwtd mutableCopy];
-//    [mfwtd removeObject:@""];
     [showView setTsbw:self.complainModel.tsbw fwtd:self.complainModel.tsfw];
     CGFloat height = [showView viewHeight];
     [showView updateConstraints:^(MASConstraintMaker *make) {

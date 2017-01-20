@@ -12,6 +12,8 @@
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,copy) NSString *urlString;
 @property (nonatomic,copy) NSString *type;
-@property (nonatomic,copy) NSString *cid;
+@property (nonatomic,copy) NSString *sid;//车系
+
+@property (nonatomic,assign) UIEdgeInsets contentInsets;
 
 @end

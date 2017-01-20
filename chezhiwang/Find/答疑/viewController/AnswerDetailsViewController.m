@@ -186,7 +186,7 @@
     answerDate = [LHController createLabelWithFrame:CGRectZero Font:14 Bold:NO TextColor:colorLightGray Text:nil];
 
     UIView *lineView2 = [[UIView alloc] init];
-    lineView2.backgroundColor = colorLineGray;
+    lineView2.backgroundColor = colorBackGround;
 
     [self.contentView addSubview:titleLabel];
     [self.contentView addSubview:questionTitle];

@@ -13,5 +13,6 @@
 
 @property (nonatomic,strong) HomepageSectionModel *sectionModel;
 @property (nonatomic,weak) UIViewController *parentVC;
+@property (nonatomic,copy) void (^click)();
 
 @end

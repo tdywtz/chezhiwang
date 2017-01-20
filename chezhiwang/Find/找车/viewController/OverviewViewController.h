@@ -14,4 +14,6 @@
 @interface OverviewViewController : BasicViewController
 
 @property (nonatomic,assign) UIEdgeInsets contentInsets;
+@property (nonatomic,copy) NSString * seriesID;//
+@property (nonatomic,copy) void (^moreClick)(NSInteger idx);
 @end

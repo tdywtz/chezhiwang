@@ -36,7 +36,7 @@
     showImageView = [[CZWShowImageView alloc] initWithWidth:WIDTH-110 ViewController:self.parentVC];
     showImageView.maxNumber = 6;
     showImageView.backgroundColor = [UIColor clearColor];
-    
+
     __weak __typeof(self)weakSelf = self;
     [showImageView updateFrame:^(CGRect frame) {
         //通知tableview刷新
@@ -48,6 +48,10 @@
         }
         [weakSelf.delegate updateCellheight];
     }];
+
+    showImageView.imageArrayChange = ^(NSArray *imageArray){
+        weakSelf.imageModel.imageUrl = [showImageView getImageUrl];
+    };
     
     [self.contentView addSubview:nameLabel];
     [self.contentView addSubview:showImageView];

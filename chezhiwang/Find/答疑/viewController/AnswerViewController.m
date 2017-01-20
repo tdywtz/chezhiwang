@@ -26,9 +26,17 @@
 
 @implementation AnswerViewController
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _contentInsets = UIEdgeInsetsMake(64, 0, 0, 0);
+    }
+    return self;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+ 
     self.title = @"答疑";
    // [self createLeftItem];
     [self createRightItem]; 
@@ -41,14 +49,16 @@
     answer2.type = @"1";
     answer3.type = @"2";
     answer4.type = @"3";
-    answer1.cid = self.cid;
-    answer2.cid = self.cid;
-    answer3.cid = self.cid;
-    answer4.cid = self.cid;
-//    answer1.tableView.contentInset = UIEdgeInsetsMake(40+64, 0, 0, 0);
-//    answer2.tableView.contentInset = UIEdgeInsetsMake(40+64, 0, 0, 0);
-//    answer3.tableView.contentInset = UIEdgeInsetsMake(40+64, 0, 0, 0);
-//    answer4.tableView.contentInset = UIEdgeInsetsMake(40+64, 0, 0, 0);
+    answer1.sid = self.sid;
+    answer2.sid = self.sid;
+    answer3.sid = self.sid;
+    answer4.sid = self.sid;
+
+    CGFloat top = _contentInsets.top;
+    answer1.contentInsets = UIEdgeInsetsMake(40+top, 0, 0, 0);
+    answer2.contentInsets = UIEdgeInsetsMake(40+top, 0, 0, 0);
+    answer3.contentInsets = UIEdgeInsetsMake(40+top, 0, 0, 0);
+    answer4.contentInsets = UIEdgeInsetsMake(40+top, 0, 0, 0);
     
     newsView = [LHPageViewcontroller initWithSpace:0 withParentViewController:self];
     newsView.LHDelegate = self;
@@ -57,7 +67,7 @@
     
     
     
-    toolView = [[AnawerToolView alloc] initWithFrame:CGRectMake(0, 64, [UIScreen mainScreen].bounds.size.width, 40)];
+    toolView = [[AnawerToolView alloc] initWithFrame:CGRectMake(0, top, WIDTH, 40)];
     toolView.delegate = self;
     toolView.titleArray = @[@"全部",@"维修保养",@"买车咨询",@"政策法规"];
     toolView.currentIndex = 0;

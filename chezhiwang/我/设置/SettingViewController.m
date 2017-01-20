@@ -29,7 +29,7 @@
     
     B = [LHController setFont];
     self.navigationItem.title = @"设置";
-  
+ 
     _dataAray = @[
                   @[
                       @{@"title":@"清除缓存",@"class":@""},
@@ -50,6 +50,7 @@
 }
 
 -(NSString *)getText{
+
     long long a = [self fileSizeAtPath:[NSHomeDirectory() stringByAppendingString:@"/Documents/user.db"]];
     NSInteger m =  [[SDImageCache sharedImageCache] getSize];
     CGFloat n = a*8/1024/1024 + m*8.0/1024/1024*(1000000.0/(m+1000000));
@@ -133,8 +134,13 @@
     
     UILabel *label = (UILabel *)[cell.contentView viewWithTag:100];
     if (indexPath.section == 0 && indexPath.row == 0) {
-        
-        label.text = [self getText];
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+             NSString *text = [self getText];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                label.text = text;
+            });
+        });
+
     }else if (indexPath.section == 1 && indexPath.row == 0){
         NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
         NSString *versionNow = [info objectForKey:@"CFBundleShortVersionString"];

@@ -51,7 +51,9 @@
 }
 
 - (void)pushClick{
-
+    if (self.click) {
+        self.click();
+    }
     UIViewController *VC = [[_sectionModel.pushClass alloc] init];
     VC.hidesBottomBarWhenPushed = YES;
     [self.parentVC.navigationController pushViewController:VC animated:YES];

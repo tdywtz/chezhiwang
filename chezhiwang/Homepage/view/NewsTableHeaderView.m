@@ -268,7 +268,7 @@
         detail.ID = dict[@"id"];
 
         detail.invest = YES;
-        detail.type = dict[@"type"];
+       // detail.type = dict[@"type"];
         detail.hidesBottomBarWhenPushed = YES;
         [self.parentViewController.navigationController pushViewController:detail animated:YES];
 

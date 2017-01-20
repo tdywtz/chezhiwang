@@ -146,6 +146,18 @@
     [self.myVC presentViewController:alertController animated:YES completion:nil];
 }
 
+//返回图片地址数组拼接的字符串||
+- (NSString *)getImageUrl{
+    NSString *url = nil;
+    for (UIImage *image in _imageArray) {
+        if (url == nil) {
+            url = image.urlString;
+        }else{
+            url = [NSString stringWithFormat:@"%@||%@",url,image.urlString];
+        }
+    }
+    return url;
+}
 
 #pragma mark -  显示图片
 -(void)showImage{
@@ -207,6 +219,9 @@
     editor.index = tap.view.tag - 200;
     __weak __typeof(self)weakSelf = self;
     [editor deleteImage:^(NSInteger index) {
+        if (weakSelf.imageArrayChange) {
+            weakSelf.imageArrayChange(weakSelf.imageArray);
+        }
         [weakSelf showImage];
     }];
     [self.myVC.navigationController pushViewController:editor animated:YES];
@@ -220,6 +235,9 @@
  *  @param imageUrlArray <#imageUrlArray description#>
  */
 -(void)setImageUrlArray:(NSArray<__kindof NSString *> *)imageUrlArray{
+    if (_imageUrlArray == imageUrlArray) {
+        return;
+    }
     _imageUrlArray = imageUrlArray;
 
     __weak __typeof(self)weakSelf = self;
@@ -233,7 +251,9 @@
                 [weakSelf.imageArray addObject:image];
             
                 dispatch_async(dispatch_get_main_queue(),^{
-
+                    if (weakSelf.imageArrayChange) {
+                        self.imageArrayChange(weakSelf.imageArray);
+                    }
                      [weakSelf showImage];
                 });
             }
@@ -345,6 +365,9 @@
         //增加图片---回调
         if (self.addImage) {
             self.addImage(image);
+        }
+        if (self.imageArrayChange) {
+            self.imageArrayChange(self.imageArray);
         }
         [self showImage];
     }

@@ -18,8 +18,6 @@
 {
     UITableView *_tableView;
     NSMutableArray *_dataArray;
-    CGFloat cellheight;
-
     NSInteger _count;
     
     FmdbManager *_fmdb;
@@ -30,7 +28,7 @@
 
 -(void)loadData{
 
-    NSString *url = [NSString stringWithFormat:[URLFile urlStringForZLTS],_count,10];
+    NSString *url = [URLFile url_complainlistWithTitle:nil sid:self.sid p:_count s:10];
    [HttpRequest GET:url success:^(id responseObject) {
 
        if (_count == 1) {
@@ -120,6 +118,7 @@
     _tableView.dataSource = self;
     _tableView.estimatedRowHeight = 100;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _tableView.contentInset = self.contentInsets;
     [self.view addSubview:_tableView];
     
     [_tableView makeConstraints:^(MASConstraintMaker *make) {

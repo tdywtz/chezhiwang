@@ -26,18 +26,45 @@
 @end
 
 #pragma mark - cell
-@interface ChooseTableViewCell : UITableViewCell
-
-@end
-
 @implementation ChooseTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.textLabel.textColor = colorBlack;
+        self.textLabel.font = [UIFont systemFontOfSize:17];
     }
     return self;
+}
+
+- (void)setModel:(ChooseTableViewModel *)model{
+    if (_isShowImage) {
+        [self.imageView sd_setImageWithURL:[NSURL URLWithString:model.imageUrl] placeholderImage:[CZWManager defaultIconImage]];
+        self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    }
+    self.textLabel.text = model.title;
+}
+
+- (void)layoutSubviews{
+    [super layoutSubviews];
+
+    if (_isShowImage) {
+        self.imageView.hidden = NO;
+
+        CGRect rect = self.imageView.frame;
+        rect.size = CGSizeMake(self.lh_height, self.lh_height-4);
+        rect.origin.x = 10;
+        rect.origin.y = 2;
+        self.imageView.frame = rect;
+
+        rect = self.textLabel.frame;
+        rect.origin.x = self.imageView.lh_right + 10;
+        self.textLabel.frame = rect;
+
+    }else{
+
+       //   CGRect rect = self.textLabel.frame;
+    }
 }
 
 @end
@@ -110,9 +137,24 @@ static NSString * const reuseIdentifier = @"Cell";
         _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:self.style];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.separatorInset = UIEdgeInsetsMake(0, 10, 0, 0);
+        _tableView.separatorColor = colorLineGray;
+        _tableView.rowHeight = 67;
         [self.view addSubview:_tableView];
     }
     return _tableView;
+}
+
+- (BOOL)isSelectedID:(NSString *)ID selecteds:(NSArray<NSString *> *)selecteds{
+    if (selecteds == nil) {
+        return NO;
+    }
+    for (NSString *str in selecteds) {
+        if ([str isEqualToString:ID]) {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -150,10 +192,17 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ChooseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+    cell.isShowImage = self.isShowImage;
+    
     ChooseTableViewSectionModel *sectionModel = _sectionModels[indexPath.section];
     ChooseTableViewModel *model = sectionModel.rowModels[indexPath.row];
 
-    cell.textLabel.text = model.title;
+    [cell setModel:model];
+    if ([self isSelectedID:model.ID selecteds:_selectId]) {
+        cell.textLabel.textColor = colorLightBlue;
+    }else{
+        cell.textLabel.textColor = colorBlack;
+    }
 
     return cell;
 }
@@ -168,10 +217,21 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    ChooseTableViewSectionModel *sectionModel = _sectionModels[indexPath.section];
+    ChooseTableViewModel *model = sectionModel.rowModels[indexPath.row];
+
+    if ([self isSelectedID:model.ID selecteds:_selectId]) {
+        return;
+    }
+
     if (self.didSelectedRow) {
-        ChooseTableViewSectionModel *sectionModel = _sectionModels[indexPath.section];
-        ChooseTableViewModel *model = sectionModel.rowModels[indexPath.row];
         self.didSelectedRow(model);
+    }
+
+    if (self.navigationController.viewControllers.count > 1) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 

@@ -143,7 +143,7 @@
             return;
         }
         
-        [self serverButtonClick:nil];
+         [self registerData];
     }
 }
 
@@ -172,27 +172,25 @@
     }
     
     NSDictionary *dict = @{@"uname":userNameTextField.text,@"psw":passwordTextField.text,@"email":addressTextFeild.text,@"origin":appOrigin};
-    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   [HttpRequest POST:[URLFile urlStringForRegister] parameters:dict success:^(id responseObject) {
       
-      if ([responseObject isKindOfClass:[NSArray class]]) {
-          if ([responseObject count] > 0) {
-              NSDictionary *dict = responseObject[0];
-              NSString *str = [dict objectForKey:@"error"];
+      [MBProgressHUD hideHUDForView:self.view animated:YES];
+              NSString *str = responseObject[@"error"];
               if (str != nil) {
                   [self alert:str];
               }else{
-                  if (dict[@"name"] != nil) {
-                      if (self.succeed) {
-                          self.succeed(userNameTextField.text,passwordTextField.text);
-                      }
-                      [self.navigationController popViewControllerAnimated:YES];
+
+                  if (self.succeed) {
+                      self.succeed(userNameTextField.text,passwordTextField.text);
                   }
+                  [self.navigationController popViewControllerAnimated:YES];
+
               }
-          }
-      }
+
 
   } failure:^(NSError *error) {
+       [MBProgressHUD hideHUDForView:self.view animated:YES];
        [self alert:@"网络请求失败"];
   }];
 }
@@ -217,7 +215,8 @@
         [[UIApplication sharedApplication].keyWindow addSubview:serverView];
         
         jujue = [LHController createButtnFram:CGRectMake(WIDTH/2+LEFT, serverView.frame.size.height-50, WIDTH/2-LEFT*2, 40) Target:self Action:@selector(tongyi:) Text:@"拒绝"];
-        [jujue setBackgroundColor:[UIColor colorWithRed:255/255.0 green:84/255.0 blue:0/255.0 alpha:1]];
+        [jujue setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [jujue setBackgroundColor:colorYellow];
         jujue.layer.cornerRadius = 2;
         jujue.layer.masksToBounds = YES;
         [serverView addSubview:jujue];

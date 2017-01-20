@@ -9,7 +9,7 @@
 #import "MyHeaderView.h"
 #import "LoginViewController.h"
 #import "BasicNavigationController.h"
-#import "MyCarViewController.h"
+//#import "MyCarViewController.h"
 
 @interface MyHeaderView ()
 
@@ -24,8 +24,6 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-
-        [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapClick:)]];
 
         self.imageView = [[UIImageView alloc] init];
         self.imageView.layer.cornerRadius = 45;
@@ -56,24 +54,10 @@
     return self;
 }
 
-- (void)tapClick:(UITapGestureRecognizer *)tap{
-    if ([CZWManager manager].isLogin) {
-        MyCarViewController *car = [[MyCarViewController alloc] init];
-        car.hidesBottomBarWhenPushed = YES;
-        [self.parentVC.navigationController pushViewController:car animated:YES];
-
-    }
-}
 
 - (void)loginClick{
 
-    if ([CZWManager manager].isLogin) {
-        MyCarViewController *car = [[MyCarViewController alloc] init];
-        car.hidesBottomBarWhenPushed = YES;
-        [self.parentVC.navigationController pushViewController:car animated:YES];
-        return;
-
-    }else{
+    if (![CZWManager manager].isLogin) {
         [self.parentVC presentViewController:[LoginViewController instance] animated:YES completion:nil];
     }
  

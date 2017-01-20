@@ -12,7 +12,7 @@
 
 @property (nonatomic,copy) NSString *name;
 @property (nonatomic,copy) NSAttributedString *attribute;
-@property (nonatomic,assign) BOOL isborder;
+@property (nonatomic,assign) BOOL isborder;//边界线
 
 - (void)releaseData;
 

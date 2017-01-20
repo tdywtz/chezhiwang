@@ -8,6 +8,7 @@
 
 #import "ParameterViewController.h"
 #import "ParameterChartView.h"
+#import "ChooseTableViewController.h"
 
 @interface ParameterViewController ()
 {
@@ -23,19 +24,14 @@
     __weak __typeof(self)weakSelf = self;
 
     chartView = [[ParameterChartView alloc] initWithFrame:CGRectMake(0, _contentInsets.top, WIDTH, HEIGHT - _contentInsets.top)];
-    __weak __typeof(chartView)weakChartView = chartView;
     [chartView setBlock:^(ParameterTopModel *topModel) {
-        NSMutableArray *topModels = [weakChartView.topModels mutableCopy];
-        if (topModels) {
-            [topModels insertObject:topModel.addModel atIndex:topModel.index];
-        }
 
-        weakChartView.topModels = topModels;
-        [weakChartView reloadData];
-        [weakSelf loadValue];
+        [weakSelf loadTopData:topModel];
+
     }];
     [chartView setCancel:^(ParameterTopModel *topModel) {
         [weakSelf deleteQueue:topModel.index];
+
     }];
     
     [self.view addSubview:chartView];
@@ -43,6 +39,60 @@
     [self loadData];
 
 }
+
+- (void)loadTopData:(ParameterTopModel *)topModel{
+    __weak __typeof(self)weakSelf = self;
+    __weak __typeof(chartView)weakChartView = chartView;
+
+    NSString *urlString = [NSString stringWithFormat:[URLFile urlStringForModelList],_seriesID];
+    [HttpRequest GET:urlString success:^(id responseObject) {
+
+        ChooseTableViewSectionModel *sectionModel = [[ChooseTableViewSectionModel alloc] init];
+        NSMutableArray *rowModels = [[NSMutableArray alloc] init];
+        for (NSDictionary *dict in responseObject[@"rel"]) {
+            ChooseTableViewModel *model = [[ChooseTableViewModel alloc] init];
+            model.ID = dict[@"mid"];
+            model.title = dict[@"modelname"];
+            [rowModels addObject:model];
+        }
+        sectionModel.rowModels = rowModels;
+
+        NSMutableArray *selecteds = [NSMutableArray array];
+        for (ParameterTopModel *model in weakChartView.topModels) {
+            if (model.ID) {
+                [selecteds addObject:model.ID];
+            }
+        }
+
+        ChooseTableViewController *choose = [[ChooseTableViewController alloc] init];
+        choose.sectionModels = @[sectionModel];
+        choose.selectId = selecteds;
+        choose.didSelectedRow = ^(ChooseTableViewModel *model){
+            NSMutableArray *topModels = [weakChartView.topModels mutableCopy];
+            if (topModels) {
+                ParameterTopModel *one = [ParameterTopModel modelWithString:model.title];
+                one.isModelName = YES;
+                one.ID = model.ID;
+                [topModels insertObject:one atIndex:topModel.index];
+            }
+            //只显示4组
+            if (topModels.count > 4 && topModel.isModelName == NO) {
+                topModel.isHide = YES;
+            }
+            weakChartView.topModels = topModels;
+            [weakChartView leftTopInitialSetting];
+            [weakChartView reloadData];
+            [weakSelf loadValue:self.seriesID mid:model.ID];
+
+        };
+        [self.navigationController pushViewController:choose animated:YES];
+
+    } failure:^(NSError *error) {
+
+
+    }];
+}
+
 
 - (void)deleteQueue:(NSInteger)index{
     NSArray *sections = chartView.sectionModels;
@@ -55,8 +105,13 @@
     }
     NSMutableArray *topArr = [chartView.topModels mutableCopy];
     [topArr removeObjectAtIndex:index];
+    if (topArr.count < 5 && topArr.count > 0) {
+        for ( ParameterTopModel *topModel in topArr) {
+             topModel.isHide = NO;
+        }
+    }
     chartView.topModels = topArr;
-
+    [chartView leftTopInitialSetting];
     [chartView reloadData];
 
 }
@@ -97,10 +152,11 @@
     }];
 }
 
-- (void)loadValue{
+- (void)loadValue:(NSString *)sid mid:(NSString *)mid{
     NSArray *sectionModelArray = chartView.sectionModels;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [HttpRequest GET:[URLFile urlString_mConfig] success:^(id responseObject) {
+    NSString *url = [NSString stringWithFormat:@"%@&sid=%@&mid=%@",[URLFile urlString_mConfig],sid,mid];
+    [HttpRequest GET:url success:^(id responseObject) {
         for (int i = 0; i <  sectionModelArray.count; i ++) {
             if ([responseObject[@"rel"] count] <= i) {
                 break;
@@ -123,7 +179,12 @@
 
                 NSMutableArray *items = [rowModel.itemModels mutableCopy];
                 ChartItemModel *itemModel = [[ChartItemModel alloc] init];
-                itemModel.name = @"weasdgfhjkl";
+                if ([dict[@"valueitems"] isKindOfClass:[NSArray class]]) {
+                    if ([dict[@"valueitems"] count]) {
+                         itemModel.name =dict[@"valueitems"][0][@"value"];
+                    }
+                }
+
                 itemModel.isborder = YES;
                 if (items == nil) {
                     items = [NSMutableArray array];
