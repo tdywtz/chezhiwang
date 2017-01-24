@@ -45,6 +45,14 @@
         [_self.navigationController pushViewController:lc animated:YES];
         NSMutableArray *arr = [_self.navigationController.viewControllers mutableCopy];
         [arr removeObject:_self];
+        for (int i = 0; i < arr.count; i ++) {
+            UIViewController *vc = arr[i];
+            if (i == 0) {
+                 vc.hidesBottomBarWhenPushed = NO;
+            }else {
+                 vc.hidesBottomBarWhenPushed = YES;
+            }
+        }
         _self.navigationController.viewControllers = arr;
     };
 

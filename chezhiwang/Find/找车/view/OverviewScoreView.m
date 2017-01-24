@@ -146,8 +146,8 @@
     self = [super initWithFrame:frame];
     if (self) {
 
-        scoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 200, 18)];
-        scoreLabel.textColor = colorDeepGray;
+        scoreLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 15, 200, 18)];
+        scoreLabel.textColor = colorBlack;
         scoreLabel.font = [UIFont boldSystemFontOfSize:PT_FROM_PX(20)];
 
         maxView = [[OverviewSliderView alloc] initWithFrame:CGRectZero];
@@ -237,7 +237,7 @@
 - (UILabel *)scoreLabelWithTitle:(NSString *)title{
     UILabel *label = [[UILabel alloc] init];
     label.font = [UIFont systemFontOfSize:14];
-    label.textColor = colorDeepGray;
+    label.textColor = colorBlack;
     label.text = title;
     return label;
 }
@@ -309,14 +309,14 @@
     maxView.lh_size = CGSizeMake(WIDTH - maxView.lh_left - 40, 10);
 
     aveView.lh_left = maxView.lh_left;
-    aveView.lh_top = maxView.lh_bottom + 20;
+    aveView.lh_top = maxView.lh_bottom + 25;
     aveView.lh_size = maxView.lh_size;
 
     minView.lh_left = maxView.lh_left;
-    minView.lh_top = aveView.lh_bottom + 20;
+    minView.lh_top = aveView.lh_bottom + 25;
     minView.lh_size = maxView.lh_size;
 
-    maxScoreLabel.lh_size = CGSizeMake(60, 20);
+    maxScoreLabel.lh_size = CGSizeMake(60, 25);
     maxScoreLabel.lh_left = maxView.lh_right + 10;
     maxScoreLabel.lh_centerY = maxView.lh_centerY;
 
@@ -328,7 +328,7 @@
     minScoreLabel.lh_left = maxScoreLabel.lh_left;
     minScoreLabel.lh_centerY = minView.lh_centerY;
 
-    leftButton.lh_size = CGSizeMake(130, 38.5);
+    leftButton.lh_size = CGSizeMake(100, 30);
     leftButton.lh_top = minView.lh_bottom + 20;
     leftButton.lh_centerX = WIDTH/2;
 
@@ -339,7 +339,7 @@
     
     _lineView.lh_size = CGSizeMake(WIDTH, 5);
     _lineView.lh_left = 0;
-    _lineView.lh_top = leftButton.lh_bottom + 10;
+    _lineView.lh_top = leftButton.lh_bottom + 15;
     
     self.lh_width = WIDTH;
     self.lh_height = _lineView.lh_bottom;

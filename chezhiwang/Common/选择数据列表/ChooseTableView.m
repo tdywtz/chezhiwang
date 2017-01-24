@@ -33,7 +33,7 @@ static NSString * const reuseIdentifier = @"Cell";
         _tableView.dataSource = self;
         _tableView.separatorInset = UIEdgeInsetsMake(0, 10, 0, 0);
         _tableView.separatorColor = colorLineGray;
-        _tableView.rowHeight = 67;
+        _tableView.rowHeight = 60;
         [self addSubview:_tableView];
        
 //        [_tableView makeConstraints:^(MASConstraintMaker *make) {

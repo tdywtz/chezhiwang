@@ -91,6 +91,8 @@
     [self loadComplainData];
 }
 
+
+
 - (void)loadDataScore{
     __weak __typeof(self)_self = self;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -102,7 +104,6 @@
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUDForView:_self.view animated:YES];
     }];
-
 }
 
 //故障统计

@@ -52,14 +52,18 @@
             NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:responseObject[@"content"]];
             att.yy_font = questionContent.font;
             att.yy_color = questionContent.textColor;
-            att.yy_lineSpacing = 4;
+            att.yy_lineSpacing = 8;
+            att.yy_kern = @(-0.1);
+            att.yy_firstLineHeadIndent = 32;
             questionContent.attributedText = att;
         }
         if (responseObject[@"answer"]) {
             NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:responseObject[@"answer"]];
             att.yy_font = answerContent.font;
             att.yy_color = answerContent.textColor;
-            att.yy_lineSpacing = 4;
+            att.yy_lineSpacing = 10;
+            att.yy_kern = @(-0.1);
+            att.yy_firstLineHeadIndent = 32;
             answerContent.attributedText = att;
         }
         questionDate.text = responseObject[@"date"];

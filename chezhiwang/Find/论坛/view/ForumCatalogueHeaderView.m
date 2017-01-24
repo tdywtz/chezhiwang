@@ -34,7 +34,7 @@
 
     UILabel *titleLabel = [[UILabel alloc] init];
     titleLabel.text = title;
-    titleLabel.font = [UIFont systemFontOfSize:16];
+    titleLabel.font = [UIFont systemFontOfSize:15];
     [item addSubview:titleLabel];
 
     [titleLabel sizeToFit];

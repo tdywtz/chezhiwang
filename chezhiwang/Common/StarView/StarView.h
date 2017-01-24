@@ -8,13 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSInteger,StarViewStyle){
-    StarViewStyleDefault,
-    StarViewStyleBig
-};
 @interface StarView : UIView
 
-@property (nonatomic,assign) StarViewStyle style;
 //设置星级
 -(void)setStar:(CGFloat)star;
 

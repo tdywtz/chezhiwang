@@ -135,7 +135,7 @@
 
             UILabel *label = [[UILabel alloc] init];
             label.font = [UIFont systemFontOfSize:14];
-            label.textColor = colorDeepGray;
+            label.textColor = colorBlack;
             label.text = titles[i];
 
             UILabel *numLabel = [[UILabel alloc] init];
@@ -256,7 +256,7 @@
         UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [btn setTitle:titles[i] forState:UIControlStateNormal];
         btn.titleLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(18)];
-        [btn setTitleColor:colorLightGray forState:UIControlStateNormal];
+        [btn setTitleColor:colorBlack forState:UIControlStateNormal];
         [btn setTitleColor:colorYellow forState:UIControlStateSelected];
         [btn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
         btn.tag = 100 + i;
@@ -265,8 +265,9 @@
         }
 
         [btn sizeToFit];
+        btn.lh_width += 20;
         if (temp) {
-            btn.lh_left = temp.lh_right + 20;
+            btn.lh_left = temp.lh_right + 25;
             btn.lh_height = self.lh_height;
         }else{
             btn.lh_left = 0;

@@ -77,8 +77,9 @@
 
     if([CZWManager manager].isLogin){
         //每次页面出现刷新页面数据
-        [self updateNumber];
         [self reloadData];
+        [self updateNumber];
+
     }
 }
 
@@ -139,15 +140,10 @@
                            ],
                        @[
                            [[MyViewModel alloc] initWithTitle:@"我的评论" imageName:@"centre_comment" class:[MyCommentViewController class]],
-                           [[MyViewModel alloc] initWithTitle:@"我的收藏" imageName:@"centre_favorite" class:NSClassFromString(@"FavouriteViewController")]
-                           ],
-                       @[
-                           [[MyViewModel alloc] initWithTitle:@"个人资料" imageName:@"centre_card" class:NSClassFromString(@"MyCarViewController")],
+                           [[MyViewModel alloc] initWithTitle:@"我的收藏" imageName:@"centre_favorite" class:NSClassFromString(@"FavouriteViewController")],
                            [[MyViewModel alloc] initWithTitle:@"密码修改" imageName:@"centre_password" class:NSClassFromString(@"PasswordViewController")]
-
                            ]
                        ];
-
 
     }
 
@@ -161,7 +157,6 @@
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
-
 
     headerView = [[MyHeaderView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 210)];
     headerView.parentVC = self;

@@ -80,7 +80,6 @@
     }
 }
 
-
 #pragma mark - 清除缓存
 - (void)deleteDatabse
 {
@@ -98,6 +97,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return _dataAray.count;
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     return [_dataAray[section] count];
@@ -113,17 +113,21 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         UILabel *label = [[UILabel alloc] init];
         label.tag = 100;
-        [cell.contentView addSubview:label];
         label.textAlignment = NSTextAlignmentRight;
         label.font = [UIFont systemFontOfSize:14];
         label.textColor = colorDeepGray;
+
+        [cell.contentView addSubview:label];
+
         [label makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(WIDTH-120);
+            make.right.equalTo(-15 * (WIDTH/375));
             make.centerY.equalTo(0);
-            make.width.equalTo(90);
         }];
     }
-    if (indexPath.section == 1 && indexPath.row == 0) {
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+   else if (indexPath.section == 1 && indexPath.row == 0) {
         cell.accessoryType = UITableViewCellAccessoryNone;
 
     }else{

@@ -327,7 +327,9 @@
         NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:_dict[@"answer"]];
         att.yy_font = [UIFont systemFontOfSize:16];
         att.yy_color = colorBlack;
-        att.yy_lineSpacing = 4;
+        att.yy_lineSpacing = 10;
+        att.yy_kern = @(-0.1);
+        att.yy_firstLineHeadIndent = 32;
         answerContent.attributedText = att;
     }
 
@@ -338,14 +340,20 @@
     if (!contentText) {
         contentText = @"";
     }
+    if (imageArray.count) {
+        contentText = [NSString stringWithFormat:@"\n%@",contentText];
+    }
     NSMutableAttributedString *contentAtt = [[NSMutableAttributedString alloc] initWithString:contentText];
+    contentAtt.yy_firstLineHeadIndent = 32;
+
     for (int i = 0; i < imageArray.count; i ++) {
         NSMutableAttributedString *attchment = [NSMutableAttributedString yy_attachmentStringWithContent:[CZWManager defaultIconImage] contentMode:UIViewContentModeScaleToFill attachmentSize:CGSizeMake(WIDTH - 20, 200) alignToFont:questionContent.font alignment:YYTextVerticalAlignmentCenter];
         [contentAtt insertAttributedString:attchment atIndex:0];
     }
     contentAtt.yy_font = [UIFont systemFontOfSize:16];
     contentAtt.yy_color = colorBlack;
-    contentAtt.yy_lineSpacing = 4;
+    contentAtt.yy_lineSpacing = 10;
+    contentAtt.yy_kern = @(-0.1);
 
     questionContent.attributedText = contentAtt;
 
@@ -364,7 +372,7 @@
                     CGSize size = CGSizeMake(WIDTH-20, image.size.height*sx);
                     NSMutableAttributedString *attchment = [NSMutableAttributedString yy_attachmentStringWithContent:image contentMode:UIViewContentModeScaleToFill attachmentSize:size alignToFont:questionContent.font alignment:YYTextVerticalAlignmentCenter];
                     [contentAtt replaceCharactersInRange:NSMakeRange(i, 1) withAttributedString:attchment];
-                    contentAtt.yy_lineSpacing = 4;
+                    contentAtt.yy_lineSpacing = 10;
                     questionContent.attributedText = contentAtt;
                 });
             }

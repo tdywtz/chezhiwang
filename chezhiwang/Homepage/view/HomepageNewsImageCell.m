@@ -117,10 +117,11 @@
              [imageView2 sd_setImageWithURL:[NSURL URLWithString:array[i]] placeholderImage:[CZWManager defaultIconImage]];
         }
         if (i == 2) {
-             [imageView3 sd_setImageWithURL:[NSURL URLWithString:array[i]] placeholderImage:[CZWManager defaultIconImage]];
+            [imageView3 sd_setImageWithURL:[NSURL URLWithString:array[i]] placeholderImage:[CZWManager defaultIconImage]];
         }
     }
 }
+
 
 - (void)awakeFromNib {
     [super awakeFromNib];

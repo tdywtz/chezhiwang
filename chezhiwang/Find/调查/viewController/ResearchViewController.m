@@ -43,13 +43,13 @@
 
     pageViewController = [LHPageViewcontroller initWithSpace:0 withParentViewController:self];
     pageViewController.LHDelegate = self;
-    pageViewController.controllers = @[vc1,vc2,research];
+    pageViewController.controllers = @[research,vc2,vc1];
     [pageViewController setViewControllerWithCurrent:0];
     [self.view addSubview:pageViewController.view];
     [self addChildViewController:pageViewController];
 
 
-    segmentView = [LHSegmentView initWithFrame:CGRectMake(0, 0, 300, 30) titles:@[@"可靠性调查",@"满意度调查",@"新车调查"] textColor:colorLightBlue highlightColor:[UIColor whiteColor]];
+    segmentView = [LHSegmentView initWithFrame:CGRectMake(0, 0, 300, 30) titles:@[@"新车调查",@"满意度调查",@"可靠性调查"] textColor:colorLightBlue highlightColor:[UIColor whiteColor]];
     segmentView.layer.borderColor = [UIColor whiteColor].CGColor;
     segmentView.layer.borderWidth = 1;
     segmentView.layer.cornerRadius = 15;

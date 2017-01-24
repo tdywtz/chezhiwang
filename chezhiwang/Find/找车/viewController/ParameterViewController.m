@@ -26,24 +26,20 @@
     chartView = [[ParameterChartView alloc] initWithFrame:CGRectMake(0, _contentInsets.top, WIDTH, HEIGHT - _contentInsets.top)];
     [chartView setBlock:^(ParameterTopModel *topModel) {
 
-        [weakSelf loadTopData:topModel];
+        [weakSelf loadTopData:topModel choose:YES];
 
     }];
     [chartView setCancel:^(ParameterTopModel *topModel) {
         [weakSelf deleteQueue:topModel.index];
 
     }];
-    
     [self.view addSubview:chartView];
-
     [self loadData];
-
 }
 
-- (void)loadTopData:(ParameterTopModel *)topModel{
-    __weak __typeof(self)weakSelf = self;
-    __weak __typeof(chartView)weakChartView = chartView;
+- (void)loadTopData:(ParameterTopModel *)topModel choose:(BOOL)choose{
 
+    __weak __typeof(self)weakSelf = self;
     NSString *urlString = [NSString stringWithFormat:[URLFile urlStringForModelList],_seriesID];
     [HttpRequest GET:urlString success:^(id responseObject) {
 
@@ -56,43 +52,62 @@
             [rowModels addObject:model];
         }
         sectionModel.rowModels = rowModels;
+        if (choose) {
+            [weakSelf setPushChoose:@[sectionModel] topMdoel:topModel];
+        }else if(rowModels.count){
+            ChooseTableViewModel *model = rowModels[0];
 
-        NSMutableArray *selecteds = [NSMutableArray array];
-        for (ParameterTopModel *model in weakChartView.topModels) {
-            if (model.ID) {
-                [selecteds addObject:model.ID];
-            }
+            ParameterTopModel *one = [ParameterTopModel modelWithString:model.title];
+            one.isModelName = YES;
+            one.ID = model.ID;
+            [weakSelf insertTopModel:one index:topModel.index];
+            [weakSelf loadValue:self.seriesID mid:model.ID];
         }
 
-        ChooseTableViewController *choose = [[ChooseTableViewController alloc] init];
-        choose.sectionModels = @[sectionModel];
-        choose.selectId = selecteds;
-        choose.didSelectedRow = ^(ChooseTableViewModel *model){
-            NSMutableArray *topModels = [weakChartView.topModels mutableCopy];
-            if (topModels) {
-                ParameterTopModel *one = [ParameterTopModel modelWithString:model.title];
-                one.isModelName = YES;
-                one.ID = model.ID;
-                [topModels insertObject:one atIndex:topModel.index];
-            }
-            //只显示4组
-            if (topModels.count > 4 && topModel.isModelName == NO) {
-                topModel.isHide = YES;
-            }
-            weakChartView.topModels = topModels;
-            [weakChartView leftTopInitialSetting];
-            [weakChartView reloadData];
-            [weakSelf loadValue:self.seriesID mid:model.ID];
-
-        };
-        [self.navigationController pushViewController:choose animated:YES];
-
     } failure:^(NSError *error) {
-
 
     }];
 }
 
+
+- (void)setPushChoose:(NSArray *)sectionModels topMdoel:(ParameterTopModel *)topModel{
+    __weak __typeof(self)weakSelf = self;
+
+    NSMutableArray *selecteds = [NSMutableArray array];
+    for (ParameterTopModel *model in chartView.topModels) {
+        if (model.ID) {
+            [selecteds addObject:model.ID];
+        }
+    }
+    ChooseTableViewController *choose = [[ChooseTableViewController alloc] init];
+    choose.sectionModels = sectionModels;
+    choose.selectId = selecteds;
+    choose.didSelectedRow = ^(ChooseTableViewModel *model){
+        ParameterTopModel *one = [ParameterTopModel modelWithString:model.title];
+        one.isModelName = YES;
+        one.ID = model.ID;
+        [weakSelf insertTopModel:one index:topModel.index];
+
+        [weakSelf loadValue:self.seriesID mid:model.ID];
+    };
+
+    BasicNavigationController *nvc = [[BasicNavigationController alloc] initWithRootViewController:choose];
+    [self presentViewController:nvc animated:YES completion:nil];
+}
+
+- (void)insertTopModel:(ParameterTopModel *)one index:(NSInteger)index{
+    NSMutableArray *topModels = [chartView.topModels mutableCopy];
+    if (topModels) {
+        [topModels insertObject:one atIndex:index];
+    }
+    //只显示4组
+    if (topModels.count > 4 && one.isModelName == NO) {
+        one.isHide = YES;
+    }
+    chartView.topModels = topModels;
+    [chartView leftTopInitialSetting];
+    [chartView reloadData];
+}
 
 - (void)deleteQueue:(NSInteger)index{
     NSArray *sections = chartView.sectionModels;
@@ -113,13 +128,14 @@
     chartView.topModels = topArr;
     [chartView leftTopInitialSetting];
     [chartView reloadData];
-
 }
 
 - (void)loadData{
     NSMutableArray *sectionModelArray = [NSMutableArray array];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [HttpRequest GET:[URLFile urlString_mConfig] success:^(id responseObject) {
+         [MBProgressHUD hideHUDForView:self.view animated:YES];
+
         for (int i = 0; i <  [responseObject[@"rel"] count]; i ++) {
             NSDictionary *superDict = responseObject[@"rel"][i];
 
@@ -146,7 +162,10 @@
         }
         chartView.sectionModels = sectionModelArray;
         [chartView reloadData];
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        if (chartView.topModels.count) {
+            [self loadTopData:[chartView.topModels lastObject] choose:NO];
+        }
+
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];

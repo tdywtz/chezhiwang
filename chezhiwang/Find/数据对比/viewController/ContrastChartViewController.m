@@ -22,7 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"对比";
+    self.title = @"车型对比";
     
     [self createLeftItemBack];
     //第一分组

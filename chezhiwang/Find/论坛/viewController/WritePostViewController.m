@@ -198,15 +198,25 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(classifyClick)];
     [bgView addGestureRecognizer:tap];
     
-    CGSize size =[@"请选择论坛" boundingRectWithSize:CGSizeMake(200, 20) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil].size;
-    
-    classifyButton = [LHController createButtnFram:CGRectMake(10, 10, size.width, 20) Target:self Action:@selector(classifyClick) Text:@"请选择论坛"];
+//    CGSize size =[@"请选择论坛" boundingRectWithSize:CGSizeMake(200, 20) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil].size;
+
+    classifyButton = [LHController createButtnFram:CGRectZero Target:self Action:@selector(classifyClick) Text:@"请选择论坛"];
     [classifyButton setTitleColor:colorLightBlue forState:UIControlStateNormal];
     classifyButton.titleLabel.font = [UIFont systemFontOfSize:15];
     [view addSubview:classifyButton];
-    
+
+    [classifyButton makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(10);
+        make.top.equalTo(10);
+        make.height.equalTo(20);
+    }];
     classifyButtonImageView = [LHController createImageViewWithFrame:CGRectMake(classifyButton.frame.size.width+5, 3, 14, 14) ImageName:@"news_jiantou"];
-    [classifyButton addSubview:classifyButtonImageView];
+    [view addSubview:classifyButtonImageView];
+   [classifyButtonImageView makeConstraints:^(MASConstraintMaker *make) {
+    make.left.equalTo(classifyButton.right).equalTo(10);
+    make.centerY.equalTo(classifyButton);
+    make.size.equalTo(CGSizeMake(14, 14));
+  }];
     
     
     _titleTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, 50, WIDTH-20, 30)];

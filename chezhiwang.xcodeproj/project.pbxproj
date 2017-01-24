@@ -99,6 +99,8 @@
 		4DEC27D41DF8EBCF00C64CB9 /* FavouriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DEC27D31DF8EBCF00C64CB9 /* FavouriteViewController.m */; };
 		4DEC27D71DF8EC7300C64CB9 /* FavouriteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DEC27D61DF8EC7300C64CB9 /* FavouriteCell.m */; };
 		4DEC28B11DF9585300C64CB9 /* NSMutableAttributedString+LHText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEC28B01DF9585300C64CB9 /* NSMutableAttributedString+LHText.swift */; };
+		4DEC2EE11E35F58200842D02 /* StarsBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DEC2EE01E35F58200842D02 /* StarsBackground@2x.png */; };
+		4DEC2EE31E35F58900842D02 /* StarsForeground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DEC2EE21E35F58900842D02 /* StarsForeground@2x.png */; };
 		4DEE9EB91DA88DDF00E0ABAC /* NewsTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DEE9EB81DA88DDF00E0ABAC /* NewsTableHeaderView.m */; };
 		4DF0EA631DBDA4FF00EFAE58 /* CZWManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF0EA601DBDA4FF00EFAE58 /* CZWManager.m */; };
 		4DF0EA641DBDA4FF00EFAE58 /* FmdbManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF0EA621DBDA4FF00EFAE58 /* FmdbManager.m */; };
@@ -353,10 +355,6 @@
 		4DFE2F641E14B25700E02112 /* OverviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DFE2F631E14B25700E02112 /* OverviewView.m */; };
 		4DFFA4FA1DB7304F003B6178 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DFFA4F91DB7304F003B6178 /* ImageIO.framework */; };
 		4DFFA4FC1DB73098003B6178 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DFFA4FB1DB73098003B6178 /* libc++.tbd */; };
-		4DFFA5041DB77308003B6178 /* StarsBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DFFA4FE1DB77308003B6178 /* StarsBackground@2x.png */; };
-		4DFFA5051DB77308003B6178 /* StarsBackgroundBig@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DFFA4FF1DB77308003B6178 /* StarsBackgroundBig@2x.png */; };
-		4DFFA5061DB77308003B6178 /* StarsForeground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DFFA5001DB77308003B6178 /* StarsForeground@2x.png */; };
-		4DFFA5071DB77308003B6178 /* StarsForegroundBig@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DFFA5011DB77308003B6178 /* StarsForegroundBig@2x.png */; };
 		4DFFA5081DB77308003B6178 /* StarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DFFA5031DB77308003B6178 /* StarView.m */; };
 /* End PBXBuildFile section */
 
@@ -550,6 +548,8 @@
 		4DEC27D51DF8EC7300C64CB9 /* FavouriteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouriteCell.h; sourceTree = "<group>"; };
 		4DEC27D61DF8EC7300C64CB9 /* FavouriteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouriteCell.m; sourceTree = "<group>"; };
 		4DEC28B01DF9585300C64CB9 /* NSMutableAttributedString+LHText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+LHText.swift"; sourceTree = "<group>"; };
+		4DEC2EE01E35F58200842D02 /* StarsBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StarsBackground@2x.png"; sourceTree = "<group>"; };
+		4DEC2EE21E35F58900842D02 /* StarsForeground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StarsForeground@2x.png"; sourceTree = "<group>"; };
 		4DEE9EB71DA88DDF00E0ABAC /* NewsTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsTableHeaderView.h; sourceTree = "<group>"; };
 		4DEE9EB81DA88DDF00E0ABAC /* NewsTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsTableHeaderView.m; sourceTree = "<group>"; };
 		4DF0EA5F1DBDA4FF00EFAE58 /* CZWManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZWManager.h; sourceTree = "<group>"; };
@@ -947,10 +947,6 @@
 		4DFE2F631E14B25700E02112 /* OverviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverviewView.m; sourceTree = "<group>"; };
 		4DFFA4F91DB7304F003B6178 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		4DFFA4FB1DB73098003B6178 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
-		4DFFA4FE1DB77308003B6178 /* StarsBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StarsBackground@2x.png"; sourceTree = "<group>"; };
-		4DFFA4FF1DB77308003B6178 /* StarsBackgroundBig@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StarsBackgroundBig@2x.png"; sourceTree = "<group>"; };
-		4DFFA5001DB77308003B6178 /* StarsForeground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StarsForeground@2x.png"; sourceTree = "<group>"; };
-		4DFFA5011DB77308003B6178 /* StarsForegroundBig@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StarsForegroundBig@2x.png"; sourceTree = "<group>"; };
 		4DFFA5021DB77308003B6178 /* StarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StarView.h; sourceTree = "<group>"; };
 		4DFFA5031DB77308003B6178 /* StarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StarView.m; sourceTree = "<group>"; };
 		BBC7F9111F2D83F92E1F6B4F /* libPods-chezhiwang.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-chezhiwang.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2445,10 +2441,8 @@
 		4DFFA4FD1DB77308003B6178 /* StarView */ = {
 			isa = PBXGroup;
 			children = (
-				4DFFA4FE1DB77308003B6178 /* StarsBackground@2x.png */,
-				4DFFA4FF1DB77308003B6178 /* StarsBackgroundBig@2x.png */,
-				4DFFA5001DB77308003B6178 /* StarsForeground@2x.png */,
-				4DFFA5011DB77308003B6178 /* StarsForegroundBig@2x.png */,
+				4DEC2EE21E35F58900842D02 /* StarsForeground@2x.png */,
+				4DEC2EE01E35F58200842D02 /* StarsBackground@2x.png */,
 				4DFFA5021DB77308003B6178 /* StarView.h */,
 				4DFFA5031DB77308003B6178 /* StarView.m */,
 			);
@@ -2587,10 +2581,8 @@
 				4DF343C11E1F6E9E005584CB /* 怄火.gif in Resources */,
 				4DF343E21E1F6E9E005584CB /* 示爱.gif in Resources */,
 				4DF343931E1F6E9E005584CB /* OK.gif in Resources */,
-				4DFFA5051DB77308003B6178 /* StarsBackgroundBig@2x.png in Resources */,
 				4DF343CF1E1F6E9E005584CB /* 敲打.gif in Resources */,
 				4DF343FA1E1F6E9E005584CB /* 骷髅.gif in Resources */,
-				4DFFA5041DB77308003B6178 /* StarsBackground@2x.png in Resources */,
 				4DF343BE1E1F6E9E005584CB /* 微笑.gif in Resources */,
 				4DF343A41E1F6E9E005584CB /* 右哼哼.gif in Resources */,
 				4DF343C51E1F6E9E005584CB /* 抓狂.gif in Resources */,
@@ -2636,7 +2628,6 @@
 				4D1626951D52D79F00E74EC5 /* Images.xcassets in Resources */,
 				4DF343EF1E1F6E9E005584CB /* 跳跳.gif in Resources */,
 				4DF343C61E1F6E9E005584CB /* 折磨.gif in Resources */,
-				4DFFA5061DB77308003B6178 /* StarsForeground@2x.png in Resources */,
 				4DF343E01E1F6E9E005584CB /* 睡.gif in Resources */,
 				4DF343C71E1F6E9E005584CB /* 抠鼻.gif in Resources */,
 				4DF343C81E1F6E9E005584CB /* 抱拳.gif in Resources */,
@@ -2649,9 +2640,9 @@
 				4DF343F91E1F6E9E005584CB /* 饭.gif in Resources */,
 				4D3A1EC91DAC8EB400A9144B /* LHMenu.bundle in Resources */,
 				4DF343E51E1F6E9E005584CB /* 糗大了.gif in Resources */,
-				4DFFA5071DB77308003B6178 /* StarsForegroundBig@2x.png in Resources */,
 				4DF343B81E1F6E9E005584CB /* 左哼哼.gif in Resources */,
 				4DF343A11E1F6E9E005584CB /* 发抖.gif in Resources */,
+				4DEC2EE11E35F58200842D02 /* StarsBackground@2x.png in Resources */,
 				4DF343B11E1F6E9E005584CB /* 大兵.gif in Resources */,
 				4DF343F61E1F6E9E005584CB /* 难过.gif in Resources */,
 				4DF343C01E1F6E9E005584CB /* 快哭了.gif in Resources */,
@@ -2671,6 +2662,7 @@
 				4DF343A91E1F6E9E005584CB /* 咒骂.gif in Resources */,
 				4DF343C31E1F6E9E005584CB /* 惊讶.gif in Resources */,
 				4DF343941E1F6E9E005584CB /* Thumbs.db in Resources */,
+				4DEC2EE31E35F58900842D02 /* StarsForeground@2x.png in Resources */,
 				4DF343F01E1F6E9E005584CB /* 转圈.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3018,6 +3010,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -3062,7 +3055,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -3138,7 +3132,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = NO;
 				DEVELOPMENT_TEAM = MFH5RT668M;
@@ -3208,7 +3202,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = MFH5RT668M;
 				FRAMEWORK_SEARCH_PATHS = (

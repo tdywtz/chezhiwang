@@ -265,7 +265,7 @@
     [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.webkitTextFillColor= '#333333'"];
     [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByName('hscolor')[0].style.webkitTextFillColor='#999'"];
      [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByName('divmargin')[0].style.marginBottom='70px'"];
-    //[webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '330%'"];
+   // [webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('p').style.lineHeight='180%'"];
     //[webView stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.background='#2E2E2E'"];
    [MBProgressHUD hideHUDForView:self.view animated:YES];
 }

@@ -34,8 +34,8 @@
         _imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
         _imageView.contentMode = UIViewContentModeScaleAspectFit;
 
-        _imageView.lh_size = CGSizeMake(WIDTH, 100);
-        _imageView.lh_top = 20;
+        _imageView.lh_size = CGSizeMake(WIDTH, 160);
+        _imageView.lh_top = 10;
         _imageView.lh_left = 0;
 
         NSArray *labels = @[@"brandLabel",@"brandAttributeLabel",@"seriesLabel",@"seriesAttributeLabel",@"displacementLabel",@"transmissionCaseLabel"];
@@ -66,7 +66,7 @@
                          lineView.lh_top = _imageView.lh_bottom + 10;
                     }
 
-                    label.lh_size = CGSizeMake(WIDTH/2-20, 40);
+                    label.lh_size = CGSizeMake(WIDTH/2-20, 42);
                     label.lh_left = 10;
                     label.lh_top = lineView.lh_bottom;
 
@@ -76,7 +76,7 @@
 
                     temp = label;
                 }else{
-                    label.lh_left = WIDTH/2 + 20;
+                    label.lh_left = WIDTH/2 + 10;
                     label.lh_top = temp.lh_top;
                     label.lh_size = CGSizeMake(WIDTH/2-20, temp.lh_height);
                 }
@@ -129,7 +129,7 @@
     NSMutableAttributedString *text = [self attbuteWithName:@"品牌：" value:data[@"brand"]];
     text.yy_color = colorYellow;
     text.yy_font = [UIFont systemFontOfSize:PT_FROM_PX(20)];
-    [text yy_setColor:colorLightGray range:NSMakeRange(0, 3)];
+    [text yy_setColor:colorBlack range:NSMakeRange(0, 3)];
     [text yy_setFont:[UIFont systemFontOfSize:PT_FROM_PX(18)] range:NSMakeRange(0, 3)];
     [text insertAttributedString:insetAtt atIndex:1];
     brandLabel.attributedText = text;
@@ -144,16 +144,15 @@
     
     brandAttributeLabel.attributedText = [self attbuteWithName:@"品牌属性：" value:data[@"brandAttribute"]];
     seriesAttributeLabel.attributedText = [self attbuteWithName:@"车系属性：" value:data[@"CarAttribute"]];
-    transmissionCaseLabel.attributedText = [self attbuteWithName:@"变速箱：" value:data[@"transmission"]];;
-
+    transmissionCaseLabel.attributedText = [self attbuteWithName:@"变速箱：" value:data[@"transmission"]];
 }
 
 - (NSMutableAttributedString *)attbuteWithName:(NSString *)name value:(NSString *)value{
     NSString *text = [NSString stringWithFormat:@"%@%@",name,value];
     NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:text];
     att.yy_font = [UIFont systemFontOfSize:PT_FROM_PX(18)];
-    [att yy_setColor:colorDeepGray range:NSMakeRange(0, att.length)];
-    [att yy_setColor:colorLightGray range:[text rangeOfString:name]];
+    [att yy_setColor:colorBlack range:NSMakeRange(0, att.length)];
+    [att yy_setColor:colorBlack range:[text rangeOfString:name]];
 
     return att;
 }

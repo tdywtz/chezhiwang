@@ -176,7 +176,6 @@
         if (view != self.moveView) {
                [view removeFromSuperview];
         }
-
     }
     LHToolButton *temp = nil;
     for (int i = 0; i < _titles.count; i ++) {

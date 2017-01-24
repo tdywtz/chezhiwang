@@ -26,7 +26,7 @@
 
     _modelnameLabel = [[UILabel alloc] init];
     _modelnameLabel.font = [UIFont systemFontOfSize:15];
-    _modelnameLabel.textColor = colorDeepGray;
+    _modelnameLabel.textColor = colorLightBlue;
     NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:self.modelname?self.modelname:@""];
     att.yy_firstLineHeadIndent = 10;
     _modelnameLabel.attributedText = att;

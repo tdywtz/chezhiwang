@@ -75,6 +75,7 @@
     self.imageTitleLabel.backgroundColor = RGB_color(0, 0, 0, 0.6);
     self.imageTitleLabel.textInsets = UIEdgeInsetsMake(0, 10, 0, 95);
     self.imageTitleLabel.textColor = [UIColor whiteColor];
+    self.imageTitleLabel.font = [UIFont systemFontOfSize:14];
     self.imageTitleLabel.textAlignment = kCTTextAlignmentLeft;
     
     self.pageControll = [[UIPageControl alloc] init];

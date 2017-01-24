@@ -35,7 +35,9 @@
             CGRect rect = CGRectMake(35+i*30, 0 , 25, 25);
             UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
             btn.frame = rect;
-            [btn setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
+            UIImage *image = [UIImage imageNamed:@"star"];
+            [btn setImage:image forState:UIControlStateNormal];
+
             [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
             [self.buttons addObject:btn];
             [self addSubview:btn];
@@ -114,6 +116,8 @@
         }else{
            [btn setBackgroundImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
         }
+//        btn.imageView.image = [btn.imageView imagem]
+//         btn.imageView.tintColor = [UIColor blueColor];
     }
 
     [self upateLayout];
@@ -250,10 +254,8 @@
 
     NSString *huifu = model.huifu.length?model.huifu:@"对不起，该投诉还未进行到此步";
     NSMutableAttributedString *huifuAtt = [[NSMutableAttributedString alloc] initWithString:huifu];
-
-    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
     //huifuAtt.lh_font = [UIFont systemFontOfSize:15];
-    [huifuAtt addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, huifuAtt.length)];
+    huifuAtt.lh_lineSpacing = 8;
     answerLabel.attributedText = huifuAtt;
 
 

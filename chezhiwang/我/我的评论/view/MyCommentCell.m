@@ -55,7 +55,7 @@
     titleLabel.layer.borderColor = colorLineGray.CGColor;
     titleLabel.layer.borderWidth = 1;
     titleLabel.userInteractionEnabled = YES;
-    [titleLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(titleLabelTap)]];
+   // [titleLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(titleLabelTap)]];
 
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrow"]];
     [titleLabel addSubview:imageView];
@@ -119,20 +119,20 @@
     }];
 }
 
-- (void)titleLabelTap{
-    if ([self.model.type isEqualToString:@"3"]) {
-        AnswerDetailsViewController *an = [[AnswerDetailsViewController alloc] init];
-
-        an.cid = self.model.ID;
-
-        [self.parentViewController.navigationController pushViewController:an animated:YES];
-
-    }else{
-        ComplainDetailsViewController *user = [[ComplainDetailsViewController alloc] init];
-        user.cid = self.model.ID;
-        [self.parentViewController.navigationController pushViewController:user animated:YES];
-    }
-}
+//- (void)titleLabelTap{
+//    if ([self.model.type isEqualToString:@"3"]) {
+//        AnswerDetailsViewController *an = [[AnswerDetailsViewController alloc] init];
+//
+//        an.cid = self.model.ID;
+//
+//        [self.parentViewController.navigationController pushViewController:an animated:YES];
+//
+//    }else{
+//        ComplainDetailsViewController *user = [[ComplainDetailsViewController alloc] init];
+//        user.cid = self.model.ID;
+//        [self.parentViewController.navigationController pushViewController:user animated:YES];
+//    }
+//}
 
 -(void)setModel:(MyCommentModel *)model{
    

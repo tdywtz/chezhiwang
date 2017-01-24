@@ -50,11 +50,11 @@
 
     if (_isShowImage) {
         self.imageView.hidden = NO;
-
+        self.imageView.contentMode = UIViewContentModeScaleAspectFit;
         CGRect rect = self.imageView.frame;
-        rect.size = CGSizeMake(self.lh_height, self.lh_height-4);
+        rect.size = CGSizeMake(self.lh_height, self.lh_height-18);
         rect.origin.x = 10;
-        rect.origin.y = 2;
+        rect.origin.y = 9;
         self.imageView.frame = rect;
 
         rect = self.textLabel.frame;
@@ -90,7 +90,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    [self createLeftItemBack];
     [self.tableView registerClass:[ChooseTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
 }
 
@@ -139,7 +139,7 @@ static NSString * const reuseIdentifier = @"Cell";
         _tableView.dataSource = self;
         _tableView.separatorInset = UIEdgeInsetsMake(0, 10, 0, 0);
         _tableView.separatorColor = colorLineGray;
-        _tableView.rowHeight = 67;
+        _tableView.rowHeight = 60;
         [self.view addSubview:_tableView];
     }
     return _tableView;

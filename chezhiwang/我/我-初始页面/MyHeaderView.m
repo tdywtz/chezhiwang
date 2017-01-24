@@ -9,7 +9,7 @@
 #import "MyHeaderView.h"
 #import "LoginViewController.h"
 #import "BasicNavigationController.h"
-//#import "MyCarViewController.h"
+#import "MyCarViewController.h"
 
 @interface MyHeaderView ()
 
@@ -25,6 +25,8 @@
     self = [super initWithFrame:frame];
     if (self) {
 
+        [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(loginClick)]];
+
         self.imageView = [[UIImageView alloc] init];
         self.imageView.layer.cornerRadius = 45;
         self.imageView.layer.masksToBounds = YES;
@@ -33,7 +35,7 @@
 
         self.nameButton = [UIButton buttonWithType:UIButtonTypeCustom];
         self.nameButton.layer.borderWidth = 1;
-        self.nameButton.layer.cornerRadius = 3;
+        self.nameButton.layer.cornerRadius = 6;
         [self.nameButton addTarget:self action:@selector(loginClick) forControlEvents:UIControlEventTouchUpInside];
 
         [self addSubview:self.imageView];
@@ -46,10 +48,9 @@
         }];
         [self.nameButton makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(0);
-            make.bottom.equalTo(-20);
+            make.bottom.equalTo(-18);
             make.height.equalTo(30);
         }];
-
     }
     return self;
 }
@@ -59,8 +60,11 @@
 
     if (![CZWManager manager].isLogin) {
         [self.parentVC presentViewController:[LoginViewController instance] animated:YES completion:nil];
+    }else{
+        MyCarViewController *car = [[MyCarViewController alloc] init];
+        car.hidesBottomBarWhenPushed = YES;
+        [self.parentVC.navigationController pushViewController:car animated:YES];
     }
- 
 }
 
 - (void)setTitle:(NSString *)title imageUrl:(NSString *)imageUrl login:(BOOL)login{

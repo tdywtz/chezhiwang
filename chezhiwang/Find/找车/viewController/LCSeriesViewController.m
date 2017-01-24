@@ -106,6 +106,35 @@
     [self addChildViewController:pageViewController];
     [self.view addSubview:pageViewController.view];
     [self.view addSubview:toolView];
+
+    [self loadDataScore];
+}
+
+- (void)loadDataScore{
+    __weak __typeof(self)_self = self;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    NSString *url = [NSString stringWithFormat:[URLFile urlString_s_index],_seriesID];
+    [HttpRequest GET:url success:^(id responseObject) {
+
+
+        BOOL pc =  [responseObject[@"operation"][@"pc"] boolValue];
+        if (pc == NO) {
+            [self deleteText];
+        }
+        [MBProgressHUD hideHUDForView:_self.view animated:YES];
+
+    } failure:^(NSError *error) {
+        [MBProgressHUD hideHUDForView:_self.view animated:YES];
+    }];
+}
+
+
+- (void)deleteText{
+   toolView.titles =  @[@"综述",@"车型参数",@"投诉",@"答疑",@"新闻",@"论坛"];
+    NSMutableArray *marr = [pageViewController.controllers mutableCopy];
+    [marr removeObjectAtIndex:marr.count - 1];
+    pageViewController.controllers = marr;
+    [pageViewController setViewControllerWithCurrent:0];
 }
 
 
@@ -120,7 +149,7 @@
             imageName = @"auto_投诉列表_投诉";
         }else if (index == 3){
             imageName = @"answer_question_right";
-        }else if (index == 5){
+        }else if (index == 5 && pageViewController.controllers.count == 7){
             imageName = @"comment_转发";
         }
         [btn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];

@@ -132,13 +132,13 @@
         newButton1= [UIButton buttonWithType:UIButtonTypeCustom];
         [newButton1 setTitle:@"最新回复" forState:UIControlStateNormal];
         newButton1.titleLabel.font = [UIFont systemFontOfSize:17];
-        [newButton1 setTitleColor:colorLightGray forState:UIControlStateNormal];
+        [newButton1 setTitleColor:colorBlack forState:UIControlStateNormal];
         [newButton1 addTarget:self action:@selector(newClick:) forControlEvents:UIControlEventTouchUpInside];
 
         newButton2 = [UIButton buttonWithType:UIButtonTypeCustom];
         [newButton2 setTitle:@"最新发布" forState:UIControlStateNormal];
         newButton2.titleLabel.font = [UIFont systemFontOfSize:17];
-        [newButton2 setTitleColor:colorLightGray forState:UIControlStateNormal];
+        [newButton2 setTitleColor:colorBlack forState:UIControlStateNormal];
         [newButton2 addTarget:self action:@selector(newClick:) forControlEvents:UIControlEventTouchUpInside];
 
         backView = [[UIView alloc] init];

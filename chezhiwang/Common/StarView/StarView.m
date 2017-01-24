@@ -18,14 +18,16 @@
 
 -(void)createImage
 {
-    backgroundImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"StarsBackground"]];
-    backgroundImageView.frame=CGRectMake(0, 0, 75, 23);
-    
+    UIImage *backImage = [UIImage imageNamed:@"StarsBackground"];
+    backgroundImageView = [[UIImageView alloc] initWithImage:backImage];
+   // backgroundImageView.frame=CGRectMake(0, 0, 75, 23);
     backgroundImageView.contentMode = UIViewContentModeLeft;
-    foregroundImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"StarsForeground"]];
-    foregroundImageView.frame=CGRectMake(0, 0, 75, 23);
+
+    UIImage *fgImage = [UIImage imageNamed:@"StarsForeground"];
+    foregroundImageView = [[UIImageView alloc] initWithImage:fgImage];
+    //foregroundImageView.frame = CGRectMake(0, 0, 75, 23);
     //设置内容的对齐方式
-    foregroundImageView.contentMode=UIViewContentModeLeft;
+    foregroundImageView.contentMode = UIViewContentModeLeft;
     //如果子视图超出父视图大小时被裁剪掉 
     foregroundImageView.clipsToBounds = YES;
     [self addSubview:backgroundImageView];
@@ -47,10 +49,17 @@
     if (self) {
         // Initialization code
         [self createImage];
+        CGRect rect = frame;
+        rect.size = backgroundImageView.frame.size;
+        self.frame = rect;
     }
     return self;
 }
 
+- (void)setFrame:(CGRect)frame{
+    frame.size = backgroundImageView.frame.size;
+    [super setFrame:frame];
+}
 
 -(void)setStar:(CGFloat)star
 {
@@ -60,25 +69,6 @@
     
     foregroundImageView.frame = frame;
    
-}
-
-
--(void)setStyle:(StarViewStyle)style{
-    _style = style;
-    
-    if (style == StarViewStyleBig) {
-        backgroundImageView.image = [UIImage imageNamed:@"StarsBackgroundBig"];
-        backgroundImageView.frame=CGRectMake(0, 0, 91, 17);
-        
-        foregroundImageView.image = [UIImage imageNamed:@"StarsForegroundBig"];
-        foregroundImageView.frame=CGRectMake(0, 0, 91, 17);
-    }else if (style == StarViewStyleDefault){
-        backgroundImageView.image = [UIImage imageNamed:@"StarsBackground"];
-        backgroundImageView.frame=CGRectMake(0, 0, 75, 23);
-        
-        foregroundImageView.image = [UIImage imageNamed:@"StarsForeground"];
-        foregroundImageView.frame=CGRectMake(0, 0, 75, 23);
-    }
 }
 
 /*

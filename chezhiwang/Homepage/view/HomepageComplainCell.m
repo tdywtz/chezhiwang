@@ -290,7 +290,7 @@
 - (void)setData{
     titleLabel.text = self.complainModel.question;
 
-    NSMutableAttributedString *matt = [self attributedWithString1:@"编号：" string2:[NSString stringWithFormat:@"【%@】",self.complainModel.cpid]];
+    NSMutableAttributedString *matt = [self attributedWithString1:@"编号：" string2:self.complainModel.cpid];
     [matt addAttribute:NSKernAttributeName value:@(-3.2) range:NSMakeRange(2, 1)];
     cpidLabel.attributedText = matt;
 

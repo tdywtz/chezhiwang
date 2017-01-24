@@ -99,7 +99,7 @@
         typeLabel.text = @"维修保养";
 
     }else if (type == 2){
-        typeLabel.textColor = colorYellow;
+        typeLabel.textColor = colorOrangeRed;
         typeLabel.text = @"买车咨询";
 
     }else if(type == 3){

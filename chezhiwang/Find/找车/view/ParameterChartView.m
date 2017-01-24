@@ -75,12 +75,12 @@
 
         [_highlightButton makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(0);
-            make.top.equalTo(20);
+            make.top.equalTo(15);
         }];
 
         [_hideButton makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(0);
-            make.bottom.equalTo(-20);
+            make.bottom.equalTo(-15);
         }];
 
         [lineView makeConstraints:^(MASConstraintMaker *make) {
@@ -326,7 +326,10 @@
         };
 
         topCollectionView = [ParameterTopCollectionView HorizontalWithFrame:CGRectZero];
+        topCollectionView.itemWidth = 120;
+
          _chartTableView  = [ChartTableView initWithFrame:CGRectZero];
+        _chartTableView.itemWidth = 120;
 
         scrollToTopButton = [UIButton buttonWithType:UIButtonTypeCustom];
         scrollToTopButton.layer.cornerRadius = 15;

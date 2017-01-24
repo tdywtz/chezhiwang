@@ -66,9 +66,10 @@
         [self addSubview:drawView];
         [self addSubview:lineView2];
 
+        CGFloat width = WIDTH*4/10 - 10;
         imageView.lh_left = 10;
         imageView.lh_top = 10;
-        imageView.lh_size = CGSizeMake(WIDTH/3, WIDTH/3*0.8);
+        imageView.lh_size = CGSizeMake(width, width * 0.8);
 
         scoreTitleLabel.lh_left = imageView.lh_right + 20;
         scoreTitleLabel.lh_top = imageView.lh_top+10;

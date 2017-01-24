@@ -85,6 +85,7 @@
     attribute.lh_paragraphSpacing = 20;
     attribute.lh_color = colorBlack;
     attribute.lh_font = [UIFont systemFontOfSize:15];
+    attribute.lh_lineSpacing = 3;
 
     label1.attributedText = attribute;
 }

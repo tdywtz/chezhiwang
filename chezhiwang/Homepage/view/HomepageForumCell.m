@@ -74,7 +74,7 @@
     }];
     
     [dateLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(nameLabel.right).offset(15);
+        make.right.equalTo(-110);
         make.bottom.equalTo(nameLabel);
     }];
     
