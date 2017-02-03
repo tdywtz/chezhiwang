@@ -316,7 +316,7 @@
 
 #pragma mark - 提交数据
 -(void)postData:(NSDictionary *)dic{
-    
+
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = @"正在提交...";
     hud.detailsLabelText = nil;

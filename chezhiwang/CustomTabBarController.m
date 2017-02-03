@@ -14,6 +14,8 @@
 #import "HomepageTableViewController.h"
 #import "FindCollectionViewController.h"
 
+
+#import "LHDBModel.h"
 @interface CustomTabBarController ()<UITabBarControllerDelegate>
 
 @end
@@ -37,6 +39,7 @@
 
     self.viewControllers  = @[n1,n2,n3];
     [self createCustomTabBar];
+    [LHDBModel getPropertys];
 }
 
 //处理 UITabBarItem

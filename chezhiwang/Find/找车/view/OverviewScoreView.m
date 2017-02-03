@@ -16,7 +16,6 @@
 @end
 
 
-
 @interface OverviewSliderView : UIView
 
 @property (nonatomic,strong) UIColor *backColor;
@@ -31,7 +30,7 @@
     CGFloat _progress;
     CGFloat oldProgress;
     CGFloat newProgress;
-    CADisplayLink *_displayLink;
+    NSTimer *_timer;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -68,15 +67,11 @@
     }
     _progress = progress;
     if (animar) {
-        if (_displayLink) {
-            [_displayLink invalidate];
-            _displayLink = nil;
+        if (_timer) {
+            [_timer invalidate];
+            _timer = nil;
         }
-
-        _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(setNeeds)];
-        _displayLink.preferredFramesPerSecond = 100;
-        [_displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-
+        _timer = [NSTimer scheduledTimerWithTimeInterval:1/60.0 target:self selector:@selector(setNeeds) userInfo:nil repeats:YES];
     }else{
         [self setNeedsDisplay];
     }
@@ -88,7 +83,8 @@
 
     if (newProgress > _progress) {
         newProgress =  _progress;
-        [_displayLink invalidate];
+        [_timer invalidate];
+        _timer = nil;
     }
     if (self.proress) {
         self.proress(newProgress);

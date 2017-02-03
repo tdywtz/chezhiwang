@@ -118,7 +118,7 @@
                     image = [self scaleToSize:image size:image.size];
                     //延迟执行
 
-                    if (self.addImage) {
+                    if (weakSelf.addImage) {
 
                         dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, i*0.25*NSEC_PER_SEC);
                         dispatch_after(time, dispatch_get_main_queue(), ^{

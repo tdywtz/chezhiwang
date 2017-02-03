@@ -223,13 +223,10 @@
 - (void)updateButtonTitleColor:(NSInteger )index{
     LHToolButton *_button = [self.buttons objectAtIndex:self.current];
     _button.selected = NO;
-    _button.titleLabel.font = [UIFont systemFontOfSize:17];
+ //   _button.titleLabel.font = [UIFont systemFontOfSize:17];
 
     LHToolButton *button = [self.buttons objectAtIndex:index];
     button.selected = YES;
-    [UIView animateWithDuration:0.3 animations:^{
-           button.titleLabel.font = [UIFont systemFontOfSize:19];
-    }];
 }
 //更新offset
 -(void)updateContentOffset{

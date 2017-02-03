@@ -49,8 +49,9 @@
         [weakSelf.delegate updateCellheight];
     }];
 
+    __weak __typeof(showImageView)weakshowImageView = showImageView;
     showImageView.imageArrayChange = ^(NSArray *imageArray){
-        weakSelf.imageModel.imageUrl = [showImageView getImageUrl];
+        weakSelf.imageModel.imageUrl = [weakshowImageView getImageUrl];
     };
     
     [self.contentView addSubview:nameLabel];

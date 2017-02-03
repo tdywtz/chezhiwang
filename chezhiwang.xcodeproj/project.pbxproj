@@ -57,6 +57,7 @@
 		4D50795A1C45E38200656CA8 /* CustomCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5079591C45E38200656CA8 /* CustomCommentView.m */; };
 		4D5249831E1B6C7000AD8601 /* ReputationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5249821E1B6C7000AD8601 /* ReputationModel.m */; };
 		4D6CD69B1D9E62420038D5E5 /* MyComplainHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D6CD69A1D9E62420038D5E5 /* MyComplainHeaderView.m */; };
+		4D7355491E445B9000C7A74E /* LHDBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D7355481E445B9000C7A74E /* LHDBModel.m */; };
 		4D753CE91BF56ADA00D3232D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D753CE81BF56ADA00D3232D /* LoginViewController.m */; };
 		4D756F251BC64DEF00107653 /* AgreementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D756F241BC64DEF00107653 /* AgreementViewController.m */; };
 		4D7E723E1B9D5CD10048F221 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D7E723D1B9D5CD10048F221 /* main.m */; };
@@ -470,6 +471,8 @@
 		4D5249821E1B6C7000AD8601 /* ReputationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReputationModel.m; sourceTree = "<group>"; };
 		4D6CD6991D9E62420038D5E5 /* MyComplainHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyComplainHeaderView.h; sourceTree = "<group>"; };
 		4D6CD69A1D9E62420038D5E5 /* MyComplainHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyComplainHeaderView.m; sourceTree = "<group>"; };
+		4D7355471E445B9000C7A74E /* LHDBModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHDBModel.h; sourceTree = "<group>"; };
+		4D7355481E445B9000C7A74E /* LHDBModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHDBModel.m; sourceTree = "<group>"; };
 		4D753CE71BF56ADA00D3232D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		4D753CE81BF56ADA00D3232D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		4D756F231BC64DEF00107653 /* AgreementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgreementViewController.h; sourceTree = "<group>"; };
@@ -1553,6 +1556,8 @@
 				4DF0EA601DBDA4FF00EFAE58 /* CZWManager.m */,
 				4DF0EA611DBDA4FF00EFAE58 /* FmdbManager.h */,
 				4DF0EA621DBDA4FF00EFAE58 /* FmdbManager.m */,
+				4D7355471E445B9000C7A74E /* LHDBModel.h */,
+				4D7355481E445B9000C7A74E /* LHDBModel.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -2874,6 +2879,7 @@
 				4D38D9471E270F4B009B392C /* LCSeriesViewController.m in Sources */,
 				4D259DEB1DF527540039AE2B /* MyComplainCell.m in Sources */,
 				4D373B601DB4CF4E00D31455 /* MJDIYHeader.m in Sources */,
+				4D7355491E445B9000C7A74E /* LHDBModel.m in Sources */,
 				4DFB4B531E0B9EFA000AB10B /* CollectionSectionView.m in Sources */,
 				4DFB4B931E0BA026000AB10B /* BezierPathView.m in Sources */,
 				4D259E0D1DF528350039AE2B /* MyComplainViewController.m in Sources */,

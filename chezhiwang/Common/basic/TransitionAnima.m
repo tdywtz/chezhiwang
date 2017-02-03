@@ -63,4 +63,90 @@
     return @"push";
 }
 
+#pragma mark - UIViewControllerAnimatedTransitioning
+
+- (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext
+{
+    return 0.35f;
+}
+
+- (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext
+{
+    UIView *containerView = [transitionContext containerView];
+    containerView.backgroundColor = [UIColor whiteColor];
+    if (self.operation == UINavigationControllerOperationPush)
+    {
+        UIViewController *fromVC  = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+        UIViewController *toVC    = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+
+
+        // Create the mask
+        UIImageView *snapshot            = [[UIImageView alloc] initWithFrame:_fromRect];
+        snapshot.backgroundColor    = [UIColor whiteColor];
+        snapshot.image = _transitionImage;
+
+
+        toVC.view.frame     = [transitionContext finalFrameForViewController:toVC];
+        toVC.view.alpha     = 0;
+
+        // Add to container view
+        [containerView addSubview:toVC.view];
+        [containerView addSubview:snapshot];
+
+        // Animate
+        [UIView animateWithDuration:[self transitionDuration:transitionContext]
+                              delay:0
+             usingSpringWithDamping:0.75
+              initialSpringVelocity:0
+                            options:UIViewAnimationOptionCurveLinear
+                         animations:^{
+                             fromVC.view.alpha          = 0;
+                             snapshot.layer.mask.bounds = snapshot.bounds;
+                             snapshot.frame            = _toRect;
+                             toVC.navigationController.toolbar.alpha = 0;
+                         }
+                         completion:^(BOOL finished){
+                             toVC.view.alpha   = 1;
+                             [snapshot removeFromSuperview];
+                             [transitionContext completeTransition:YES];
+                         }];
+    }
+
+    else
+    {
+        UIViewController *fromVC  = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+        UIViewController *toVC    = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+
+
+        UIImageView *snapshot          = [[UIImageView alloc] initWithFrame:_fromRect];
+        snapshot.backgroundColor    = [UIColor whiteColor];
+        snapshot.image = _transitionImage;
+
+        toVC.view.frame         = [transitionContext finalFrameForViewController:toVC];
+        toVC.view.alpha         = 0;
+        fromVC.view.alpha       = 0;
+
+        // Add to container view
+        [containerView addSubview:toVC.view];
+        [containerView addSubview:snapshot];
+
+        // Animate
+        [UIView animateWithDuration:[self transitionDuration:transitionContext]
+                              delay:0
+             usingSpringWithDamping:1.0
+              initialSpringVelocity:0
+                            options:UIViewAnimationOptionCurveLinear
+                         animations:^{
+                             toVC.view.alpha            = 1;
+                             snapshot.frame            = _toRect;
+                             toVC.navigationController.toolbar.alpha = 0;
+                         }
+                         completion:^(BOOL finished){
+                             [snapshot removeFromSuperview];
+                             [transitionContext completeTransition:YES];
+                         }];
+    }
+}
+
+
 @end

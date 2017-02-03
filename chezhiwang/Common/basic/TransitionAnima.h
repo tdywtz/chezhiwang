@@ -25,7 +25,12 @@ typedef NS_ENUM(NSInteger, TransitionAnimaType) {
     TransitionAnimaCameraIrisHollowClose//相机镜头关上效果(不支持过渡方向)
 };
 
-@interface TransitionAnima : NSObject
+@interface TransitionAnima : NSObject<UIViewControllerAnimatedTransitioning>
+
+@property (nonatomic, assign) UINavigationControllerOperation operation;
+@property (nonatomic, assign) CGRect fromRect;
+@property (nonatomic, assign) CGRect toRect;
+@property (nonatomic, strong) UIImage *transitionImage;
 
 + (CATransition *)transitionAnimationWithType:(TransitionAnimaType)type;
 
