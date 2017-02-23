@@ -79,7 +79,7 @@
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
         self.modalPresentationStyle = UIModalPresentationCustom;
         self.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        _duration = 1.0/2;
+        _duration = 0.3;
         _beginTime = 0.042;
         _itemSize = CGSizeMake(70, 70);
         _lineSpacing = 30;

@@ -11,14 +11,14 @@
 #import "ComplainDetailsViewController.h"
 #import "LoginViewController.h"
 #import "MyComplainHeaderView.h"
-#import "StarView.h"
+#import "LHStarView.h"
 
 @interface LCComplainListHeaderView : UIView
 {
     UIImageView *imageView;
     MyComplainHeaderView *drawView;
 
-    StarView *scoreStarView;
+    LHStarView *scoreStarView;
     UILabel *scoreLabel;//评分
     UILabel *answerPercentageLabel;//回复率
 }
@@ -39,7 +39,8 @@
 
         scoreLabel = [[UILabel alloc] init];
 
-        scoreStarView = [[StarView alloc] initWithFrame:CGRectMake(0, 0, 75, 23)];
+        scoreStarView = [[LHStarView alloc] initWithFrame:CGRectZero draw:YES];
+        [scoreStarView setStarWidth:20 space:3];
 
         answerPercentageLabel = [[UILabel alloc] init];
         answerPercentageLabel.font = [UIFont systemFontOfSize:14];
@@ -129,7 +130,7 @@
     [imageView sd_setImageWithURL:data[@"log"] placeholderImage:[CZWManager defaultIconImage]];
 
     NSString *score = data[@"myd"]?data[@"myd"]:@"0";
-    [scoreStarView setStar:[score integerValue]];
+    [scoreStarView setStar:[score floatValue]];
 
     NSMutableAttributedString *scoreAtt = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@分",score]];
     scoreAtt.yy_font = [UIFont systemFontOfSize:14];
@@ -139,7 +140,7 @@
 
     scoreLabel.attributedText = scoreAtt;
 
-    NSString *percentage = data[@"hfl"]?data[@"hfl"]:@"";
+    NSString *percentage = data[@"hfl"]?data[@"hfl"]:@"0";
     NSString *text = [NSString stringWithFormat:@"厂家回复率：%@",percentage];
 
     NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:text];

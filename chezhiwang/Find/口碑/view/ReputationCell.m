@@ -7,21 +7,21 @@
 //
 
 #import "ReputationCell.h"
+#import "LHStarView.h"
+#import "ReputationModel.h"
 
-@interface ReputationCellContentView : UIView
+@implementation ReputationCellContentView
 {
     UILabel *titleLabel;
     UILabel *outsideLabel;
-    UILabel *defectLabel;
-    UILabel *summaryLabel;
+    UILabel *defectLabel;//瑕疵
+    UILabel *summaryLabel;//总结
     UILabel *praiseLabel;//👍
     UILabel *commentLabel;
+
+    UIButton *praiseButton;
 }
-@end
-
-@implementation ReputationCellContentView
-
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame praise:(BOOL)praise
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -39,20 +39,19 @@
         UILabel *four = [self labelWithColor:colorDeepGray];
         four.text = @"总结";
 
+        NSInteger numberOfLines = praise?2:0;
+
         titleLabel = [self labelWithColor:colorBlack];
-        titleLabel.numberOfLines = 2;
+        titleLabel.numberOfLines =numberOfLines;
 
         outsideLabel = [self labelWithColor:colorBlack];
-        outsideLabel.numberOfLines = 2;
+        outsideLabel.numberOfLines = numberOfLines;
 
         defectLabel = [self labelWithColor:colorBlack];
-        defectLabel.numberOfLines = 2;
+        defectLabel.numberOfLines = numberOfLines;
 
         summaryLabel = [self labelWithColor:colorBlack];
-        summaryLabel.numberOfLines = 2;
-
-        praiseLabel = [self labelWithColor:colorDeepGray];
-        commentLabel = [self labelWithColor:colorDeepGray];
+        summaryLabel.numberOfLines = numberOfLines;
 
         [self addSubview:one];
         [self addSubview:two];
@@ -63,18 +62,18 @@
         [self addSubview:outsideLabel];
         [self addSubview:defectLabel];
         [self addSubview:summaryLabel];
-        [self addSubview:praiseLabel];
-        [self addSubview:commentLabel];
+
 
         [one makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(10);
-            make.top.equalTo(10);
+            make.top.equalTo(titleLabel);
         }];
 
         [titleLabel makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(10);
             make.left.equalTo(50);
             make.right.lessThanOrEqualTo(-10);
+            make.height.greaterThanOrEqualTo(20);
         }];
 
         [two makeConstraints:^(MASConstraintMaker *make) {
@@ -86,6 +85,7 @@
             make.left.equalTo(titleLabel);
             make.top.equalTo(titleLabel.bottom).offset(15);
             make.right.lessThanOrEqualTo(-10);
+            make.height.greaterThanOrEqualTo(20);
         }];
 
         [three makeConstraints:^(MASConstraintMaker *make) {
@@ -97,6 +97,7 @@
             make.left.equalTo(titleLabel);
             make.top.equalTo(outsideLabel.bottom).offset(15);
             make.right.lessThanOrEqualTo(-10);
+            make.height.greaterThanOrEqualTo(20);
         }];
 
         [four makeConstraints:^(MASConstraintMaker *make) {
@@ -108,25 +109,68 @@
             make.left.equalTo(titleLabel);
             make.top.equalTo(defectLabel.bottom).offset(15);
             make.right.lessThanOrEqualTo(-10);
+            make.height.greaterThanOrEqualTo(20);
         }];
 
-        [praiseLabel makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(commentLabel);
-            make.right.equalTo(commentLabel.left).offset(-10);
-        }];
+        if (praise) {
+            praiseButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            [praiseButton setImage:[UIImage imageNamed:@"auto_common_点赞高亮"] forState:UIControlStateSelected];
+            [praiseButton setImage:[UIImage imageNamed:@"auto_common_点赞灰"] forState:UIControlStateNormal];
+            [praiseButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+            [praiseButton addTarget:self action:@selector(praiseButtonClick:) forControlEvents:UIControlEventTouchUpInside];
 
-        [commentLabel makeConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(-10);
-            make.top.equalTo(summaryLabel.bottom).offset(15);
-            make.bottom.equalTo(-10);
-        }];
+            UIImageView *commentImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"auto_common_回复"]];
+            commentImageView.contentMode = UIViewContentModeScaleAspectFit;
 
-        titleLabel.text = @"傲娇了公开了地方价格";
-        outsideLabel.text = @"傲娇了公开了地方价格傲娇了公开了地方价格傲娇了公开了地方价格傲娇了公开了地方价格";
-        defectLabel.text = @"傲娇了公开了地方价格傲娇了公开了地方价格傲娇了公开了地方价格傲娇了公开了地方价格";
-        summaryLabel.text = @"傲娇了公开了地方价格傲娇了公开了地方价格傲娇了公开了地方价格傲娇了公开了地方价格";
+            praiseLabel = [self labelWithColor:colorDeepGray];
+            commentLabel = [self labelWithColor:colorDeepGray];
+
+            [self addSubview:praiseLabel];
+            [self addSubview:commentLabel];
+            [self addSubview:praiseButton];
+            [self addSubview:commentImageView];
+
+            [praiseButton makeConstraints:^(MASConstraintMaker *make) {
+                make.right.equalTo(praiseLabel.left);
+                make.height.equalTo(16);
+                make.centerY.equalTo(praiseLabel);
+                make.width.equalTo(22);
+            }];
+
+            [praiseLabel makeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(commentLabel);
+                make.right.equalTo(commentImageView.left).offset(-10);
+            }];
+
+            [commentImageView makeConstraints:^(MASConstraintMaker *make) {
+                make.right.equalTo(commentLabel.left);
+                make.centerY.equalTo(commentLabel);
+                make.height.equalTo(16);
+                make.width.equalTo(22);
+            }];
+
+            [commentLabel makeConstraints:^(MASConstraintMaker *make) {
+                make.right.equalTo(-10);
+                make.top.equalTo(summaryLabel.bottom).offset(15);
+                make.bottom.equalTo(-10);
+            }];
+
+        }else{
+            [summaryLabel updateConstraints:^(MASConstraintMaker *make) {
+                make.bottom.equalTo(0);
+            }];
+        }
     }
     return self;
+}
+
+- (void)praiseButtonClick:(UIButton *)btn{
+    if (self.model.isAgree) {
+        return;
+    }
+
+    [self postData];
+    [self animateInView:btn];
 }
 
 - (UILabel *)labelWithColor:(UIColor *)color{
@@ -136,30 +180,101 @@
     return label;
 }
 
+
+- (void)setdata:(ReputationModel *)model{
+    _model = model;
+    titleLabel.text = model.title;
+    outsideLabel.attributedText = [self atttributeWithText:model.good];
+    defectLabel.attributedText = [self atttributeWithText:model.bad];
+    summaryLabel.attributedText = [self atttributeWithText:model.sum];
+    praiseLabel.text = model.agree;
+    commentLabel.text = model.pl;
+    if (praiseButton) {
+        praiseButton.selected = _model.isAgree;
+    }
+}
+
+- (NSAttributedString *)atttributeWithText:(NSString *)text{
+    if (text) {
+        NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:text];
+        att.lh_lineSpacing = 3;
+        return att;
+    }
+    return nil;
+}
+
+- (void)postData{
+    praiseButton.enabled = NO;
+    __weak __typeof(self)weakSelf = self;
+   [HttpRequest GET:[URLFile url_reputationZanWithID:self.model.ID] success:^(id responseObject) {
+    
+       if (responseObject[@"success"]) {
+           weakSelf.model.isAgree = YES;
+           praiseButton.selected = YES;
+           NSString *str = [NSString stringWithFormat:@"%ld",[weakSelf.model.agree integerValue] + 1];
+           weakSelf.model.agree = str;
+           praiseLabel.text = str;
+       }
+        praiseButton.enabled = YES;
+   } failure:^(NSError *error) {
+         praiseButton.enabled = YES;
+   }];
+}
+
+- (void)animateInView:(UIView *)view{
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"auto_common_点赞高亮"]];
+    imageView.frame = view.frame;
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    [self addSubview:imageView];
+
+    view.hidden = YES;
+
+    POPBasicAnimation *animation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerSize];
+    animation.duration = 0.2;
+    [animation setCompletionBlock:^(POPAnimation *anim, BOOL finish) {
+        if (finish) {
+            POPBasicAnimation *animation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerSize];
+            animation.duration = 0.1;
+            [animation setCompletionBlock:^(POPAnimation *anim, BOOL finish) {
+                if (finish) {
+                    [imageView removeFromSuperview];
+                    view.hidden = NO;
+                }
+            }];
+            animation.toValue = [NSValue valueWithCGSize:view.lh_size];
+            [imageView pop_addAnimation:animation forKey:@"size"];
+        }
+    }];
+    animation.toValue = [NSValue valueWithCGSize:CGSizeMake(40, 40)];
+    [imageView pop_addAnimation:animation forKey:@"size"];
+}
+
+
 @end
 
 
 
 @implementation ReputationCell
 {
-    UILabel *titleLabel;
+    UILabel *seriesnameLabel;
     UIImageView *iconImageView;
     UILabel *userNameLabel;
     UILabel *dateLabel;
-    UILabel *scoreLabel;
+    YYLabel *scoreLabel;
     ReputationCellContentView *contentView;
 }
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+    
         [self makeUI];
     }
     return self;
 }
 
 - (void)makeUI{
-    titleLabel = [[UILabel alloc] init];
-    titleLabel.textColor = colorBlack;
+    seriesnameLabel = [[UILabel alloc] init];
+    seriesnameLabel.textColor = colorBlack;
 
     iconImageView = [[UIImageView alloc] init];
 
@@ -172,29 +287,38 @@
 
     dateLabel = [[UILabel alloc] init];
     dateLabel.textColor = colorLightGray;
-    dateLabel.font = [UIFont systemFontOfSize:12];
+    dateLabel.font = [UIFont systemFontOfSize:13];
 
-    scoreLabel = [[UILabel alloc] init];
+    scoreLabel = [[YYLabel alloc] init];
+//    scoreLabel.font = [UIFont systemFontOfSize:12];
+//    scoreLabel.textColor = colorLightGray;
+//    scoreLabel.text = @"综合评价：";
 
-    contentView = [[ReputationCellContentView alloc] initWithFrame:CGRectMake(0, 0, WIDTH-20, 100)];
+    contentView = [[ReputationCellContentView alloc] initWithFrame:CGRectMake(0, 0, WIDTH-20, 100) praise:YES];
 
-    [self.contentView addSubview:titleLabel];
+    UIView *_lineView = [UIView new];
+    _lineView.backgroundColor = colorBackGround;
+
+
+    [self.contentView addSubview:seriesnameLabel];
     [self.contentView addSubview:lineView];
     [self.contentView addSubview:iconImageView];
     [self.contentView addSubview:userNameLabel];
     [self.contentView addSubview:dateLabel];
     [self.contentView addSubview:scoreLabel];
     [self.contentView addSubview:contentView];
+    [self.contentView addSubview:_lineView];
 
-    [titleLabel makeConstraints:^(MASConstraintMaker *make) {
+    [seriesnameLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(10);
         make.right.equalTo(-10);
-        make.top.equalTo(10);
+        make.top.equalTo(13);
     }];
 
     [lineView makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(0);
-        make.top.equalTo(titleLabel.bottom).offset(10);
+        make.left.equalTo(10);
+        make.right.equalTo(-10);
+        make.top.equalTo(seriesnameLabel.bottom).offset(13);
         make.height.equalTo(1);
     }];
 
@@ -215,30 +339,56 @@
     [dateLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(userNameLabel);
         make.bottom.equalTo(iconImageView.bottom);
-        make.width.equalTo(110);
+        make.width.equalTo(115);
     }];
 
     [scoreLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(dateLabel.right).offset(10);
-        make.bottom.equalTo(dateLabel);
         make.right.equalTo(-10);
+        make.bottom.equalTo(dateLabel);
     }];
 
     [contentView makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(10);
         make.right.equalTo(-10);
         make.top.equalTo(iconImageView.bottom).offset(10);
-        make.bottom.equalTo(-10);
+    }];
+
+    [_lineView makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(0);
+        make.top.equalTo(contentView.bottom).offset(15);
+        make.height.equalTo(8);
     }];
 }
 
 - (void)setModel:(ReputationModel *)model{
     _model = model;
 
-    titleLabel.text = @"asdfghjk";
-    userNameLabel.text = @"okokok";
-    dateLabel.text = @"2015-02-55 14:50";
-    scoreLabel.text = @"fjdsalgjdfkkkkkkkkkkkkkkkkkkkkkkkkkkg";
+    [contentView setdata:model];
+
+    NSURL *imageUrl = [NSURL URLWithString:model.headurl];
+    [iconImageView sd_setImageWithURL:imageUrl placeholderImage:[UIImage imageNamed:@"auto_reputation_avatar"]];
+
+
+    seriesnameLabel.text = _model.seriesname;
+    userNameLabel.text = _model.username;
+    dateLabel.text = _model.date;
+
+    LHStarView *starView = [[LHStarView alloc] initWithFrame:CGRectZero draw:NO];
+    //[starView setStarWidth:15 space:3];
+    [starView setStar:[model.stars floatValue]];
+
+
+    NSMutableAttributedString *scoreAtt = [[NSMutableAttributedString alloc] initWithString:@"综合评分："];
+    scoreAtt.yy_font = [UIFont systemFontOfSize:13];
+    scoreAtt.yy_color = colorDeepGray;
+
+    UIImage *image =  [starView getImage];
+
+    CGSize size = CGSizeMake(starView.frame.size.width * (14.0/starView.frame.size.height), 14);
+    NSMutableAttributedString *star = [NSMutableAttributedString yy_attachmentStringWithContent:image contentMode:UIViewContentModeScaleAspectFill attachmentSize:size alignToFont:scoreAtt.yy_font alignment:YYTextVerticalAlignmentCenter];
+    [scoreAtt appendAttributedString:star];
+
+    scoreLabel.attributedText = scoreAtt;
 }
 
 - (void)awakeFromNib {

@@ -20,7 +20,7 @@ typedef NS_ENUM(NSInteger, TransitionAnimaType) {
     TransitionAnimaRippleEffect,//滴水效果,(不支持过渡方向)
     TransitionAnimaOglFlip,//上下左右翻转效果
     TransitionAnimaRotate,//旋转效果
-    TransitionAnimaPush,
+    TransitionAnimaPush,//
     TransitionAnimaCameraIrisHollowOpen,//相机镜头打开效果(不支持过渡方向)
     TransitionAnimaCameraIrisHollowClose//相机镜头关上效果(不支持过渡方向)
 };

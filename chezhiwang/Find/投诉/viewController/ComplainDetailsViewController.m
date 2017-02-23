@@ -448,8 +448,8 @@
             [self submitComment:content];
         }];
     }else{
-        LoginViewController *my = [[LoginViewController alloc] init];
-        [self presentViewController:my animated:YES completion:nil];
+      
+        [self presentViewController:[LoginViewController instance] animated:YES completion:nil];
     }
 }
 

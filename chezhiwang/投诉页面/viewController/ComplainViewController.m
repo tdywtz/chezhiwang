@@ -136,7 +136,7 @@
         }
         [_tableView reloadData];
     } failure:^(NSError *error) {
-[MBProgressHUD hideHUDForView:self.view animated:YES];
+           [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
 }
 
@@ -511,8 +511,8 @@
                         _dataDictionary[businessModel.businessCustomKey] = businessModel.businessValue;
                     }
                 }else if (j == 8){
-                    ComplainImageModel *model = sectionModel.rowModels[j];
-                    _dataDictionary[model.key] = model.imageUrl;
+//                    ComplainImageModel *model = sectionModel.rowModels[j];
+//                    _dataDictionary[model.key] = model.imageUrl;
                 }
             }
         }else if (i == 3) {

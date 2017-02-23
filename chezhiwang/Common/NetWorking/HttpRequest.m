@@ -20,20 +20,20 @@
     bzero(&zeroAddress, sizeof(zeroAddress));
     zeroAddress.sin_len = sizeof(zeroAddress);
     zeroAddress.sin_family = AF_INET;
-    
+
     // Recover reachability flags
     SCNetworkReachabilityRef defaultRouteReachability = SCNetworkReachabilityCreateWithAddress(NULL, (struct sockaddr *)&zeroAddress);
     SCNetworkReachabilityFlags flags;
-    
+
     BOOL didRetrieveFlags = SCNetworkReachabilityGetFlags(defaultRouteReachability, &flags);
     CFRelease(defaultRouteReachability);
-    
+
     if (!didRetrieveFlags)
     {
         // printf("Error. Could not recover network reachability flags\n");
         return NO;
     }
-    
+
     BOOL isReachable = ((flags & kSCNetworkFlagsReachable) != 0);
     BOOL needsConnection = ((flags & kSCNetworkFlagsConnectionRequired) != 0);
     return (isReachable && !needsConnection) ? YES : NO;
@@ -52,7 +52,7 @@
 + (NSURLSessionDataTask *)GET:(NSString *)URLString
                       success:(void (^)(id responseObject))success
                       failure:(void (^)(NSError * error))failure{
- NSLog(@"%@",URLString);
+    NSLog(@"%@",URLString);
     //汉子编码处理
     URLString = [URLString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     //默认的缓存策略， 如果缓存不存在，直接从服务端获取。如果缓存存在，会根据response中的Cache-Control字段判断下一步操作，如: Cache-Control字段为must-revalidata, 则询问服务端该数据是否有更新，无更新的话直接返回给用户缓存数据，若已更新，则请求服务端.
@@ -62,16 +62,16 @@
     }
     AFHTTPSessionManager *session = [self sessionManager];
     session.requestSerializer.cachePolicy = policy;
-    
+
     NSURLSessionDataTask *task = [session GET:URLString parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
-        
+
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-         success([self resetData:responseObject]);
+        success([self resetData:responseObject]);
 
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failure(error);
     }];
-    
+
     return task;
 }
 
@@ -85,9 +85,9 @@
 
     AFHTTPSessionManager *session = [self sessionManager];
     session.requestSerializer.cachePolicy = policy;
-    
+
     NSURLSessionDataTask *task = [session GET:URLString parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
-        
+
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         success([self resetData:responseObject]);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -101,9 +101,9 @@
                     parameters:(NSDictionary *)parameters
                        success:(void (^)(id responseObject))success
                        failure:(void (^)(NSError * error))failure{
-  
+    NSLog(@"%@",URLString);
     NSURLSessionDataTask *task = [[self sessionManager] POST:URLString parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
-        
+
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         success([self resetData:responseObject]);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -119,15 +119,15 @@
                          parameters:(NSDictionary *)parameters
                             success:(void (^)(id responseObject))success
                             failure:(void (^)(NSError * error))failure{
-    
-    
+
+
     return  [[self sessionManager] POST:URLString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        
+
         NSData *data = UIImageJPEGRepresentation(image, 1);
         [formData appendPartWithFileData:data name:@"" fileName:name mimeType:@"image/jpg/file"];
-        
+
     } progress:^(NSProgress * _Nonnull uploadProgress) {
-        
+
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         success([self resetData:responseObject]);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -141,28 +141,28 @@
                         images:(NSArray <__kindof UIImage *> *)images
                        success:(void (^)(id _Nullable responseObject))success
                        failure:(void (^)(NSError * _Nonnull error))failure{
-    
+
     NSURLSessionDataTask *task = [[self sessionManager] POST:URLString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         for (int i = 0;i < images.count ; i++) {
-            
+
             NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
             formatter.dateFormat = @"yyyyMMddHHmmss";
             NSString *str = [formatter stringFromDate:[NSDate date]];
-            
+
             NSString *name = [NSString stringWithFormat:@"%d",i];
             NSString *fileName = [NSString stringWithFormat:@"%@%d.jpg", str,i];
             NSData *date = UIImageJPEGRepresentation(images[i], 1);
             [formData appendPartWithFileData:date name:name fileName:fileName mimeType:@"image/jpg/file"];
         }
-        
+
     } progress:^(NSProgress * _Nonnull uploadProgress) {
-        
+
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         success([self resetData:responseObject]);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         failure(error);
     }];
-    
+
     return task;
 }
 
@@ -182,7 +182,7 @@
                 return dict;
             }else{
                 return @{@"rel":data};
-            }   
+            }
         }else{
             return @{@"rel":data};
         }

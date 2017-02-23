@@ -15,7 +15,7 @@
 
 #import "NewsViewController.h"
 #import "ComplainListViewController.h"
-#import "NewsInvestigateViewController.h"
+#import "ResearchViewController.h"
 #import "AnswerViewController.h"
 #import "ForumViewController.h"
 
@@ -58,7 +58,7 @@
     researchSectionModel.headImageName = @"调查";
     researchSectionModel.footTitle = @"更多调查";
     researchSectionModel.headLineColor = RGB_color(239, 95, 96, 1);
-    researchSectionModel.pushClass = [NewsInvestigateViewController class];
+    researchSectionModel.pushClass = [ResearchViewController class];
     for (NSDictionary *dict in dictionary[@"report"]) {
         HomepageResearchModel * Model = [HomepageResearchModel mj_objectWithKeyValues:dict];
         [researchSectionModel.rowModels addObject:Model];

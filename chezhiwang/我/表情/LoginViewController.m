@@ -86,7 +86,7 @@
     imageView.image = [UIImage imageNamed:@"auto_logo"];
     [self.scrollView addSubview:imageView];
 
-    UIImageView *userNameImageView =[LHController createImageViewWithFrame:CGRectMake(10, 8, 20, 20) ImageName:@"userName.png"];
+    UIImageView *userNameImageView =[LHController createImageViewWithFrame:CGRectMake(10, 8, 20, 20) ImageName:@"userName"];
     UIImageView *tempUserNameImageView = [LHController createImageViewWithFrame:CGRectMake(0, 0, 40, 40) ImageName:nil];
     [tempUserNameImageView addSubview:userNameImageView];
 

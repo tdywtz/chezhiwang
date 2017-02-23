@@ -50,41 +50,50 @@
     [HttpRequest GET:url success:^(id responseObject) {
      
         self.dictionary = [responseObject copy];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+             [self createData];
+        });
+
         [footView setReplyConut:responseObject[@"replycount"]];
-        if (responseObject[@"content"] == nil) {
-            self.backgroundView.hidden = NO;
-            self.backgroundView.contentLabel.text = @"暂无数据";
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-            return ;
-        }
-        NSMutableString *newsContentHTML = [NSMutableString stringWithFormat:@"<style>body{padding:0 5px;}</style>%@",responseObject[@"content"]];
 
-        NSRange range = range = [newsContentHTML rangeOfString:@"src=\"/"];
-        while (range.length != 0) {
-            [newsContentHTML insertString:@"http://www.12365auto.com" atIndex:range.location+range.length-1];
-            range = [newsContentHTML rangeOfString:@"src=\"/"];
-        }
-
-        NSString *width = [[NSString alloc] initWithFormat:@" style='max-width:%fpx'",WIDTH-30];
-        range = [newsContentHTML rangeOfString:@"<IMG" options:NSCaseInsensitiveSearch range:NSMakeRange(0, newsContentHTML.length)];
-        while (range.length != 0) {
-            [newsContentHTML insertString:width atIndex:range.location+range.length];
-         NSRange tempRange = NSMakeRange(range.location+range.length, newsContentHTML.length-range.location-range.length);
-          range = [newsContentHTML rangeOfString:@"<IMG" options:NSCaseInsensitiveSearch range:tempRange];
-        }
-        range = [newsContentHTML rangeOfString:@"<img" options:NSCaseInsensitiveSearch range:NSMakeRange(0, newsContentHTML.length)];
-        while (range.length != 0) {
-            [newsContentHTML insertString:width atIndex:range.location+range.length];
-            NSRange tempRange = NSMakeRange(range.location+range.length, newsContentHTML.length-range.location-range.length);
-            range = [newsContentHTML rangeOfString:@"<img" options:NSCaseInsensitiveSearch range:tempRange];
-        }
-
-
-        [_webView loadHTMLString:newsContentHTML baseURL:nil];
 
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:NO];
     }];
+}
+
+
+- (void)createData{
+    if (self.dictionary[@"content"] == nil) {
+        self.backgroundView.hidden = NO;
+        self.backgroundView.contentLabel.text = @"暂无数据";
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        return ;
+    }
+    NSMutableString *newsContentHTML = [NSMutableString stringWithFormat:@"<style>body{padding:0 5px;}</style>%@",self.dictionary[@"content"]];
+
+    NSRange range = range = [newsContentHTML rangeOfString:@"src=\"/"];
+    while (range.length != 0) {
+        [newsContentHTML insertString:@"http://www.12365auto.com" atIndex:range.location+range.length-1];
+        range = [newsContentHTML rangeOfString:@"src=\"/"];
+    }
+
+    NSString *width = [[NSString alloc] initWithFormat:@" style='max-width:%fpx'",WIDTH-30];
+    range = [newsContentHTML rangeOfString:@"<IMG" options:NSCaseInsensitiveSearch range:NSMakeRange(0, newsContentHTML.length)];
+    while (range.length != 0) {
+        [newsContentHTML insertString:width atIndex:range.location+range.length];
+        NSRange tempRange = NSMakeRange(range.location+range.length, newsContentHTML.length-range.location-range.length);
+        range = [newsContentHTML rangeOfString:@"<IMG" options:NSCaseInsensitiveSearch range:tempRange];
+    }
+    range = [newsContentHTML rangeOfString:@"<img" options:NSCaseInsensitiveSearch range:NSMakeRange(0, newsContentHTML.length)];
+    while (range.length != 0) {
+        [newsContentHTML insertString:width atIndex:range.location+range.length];
+        NSRange tempRange = NSMakeRange(range.location+range.length, newsContentHTML.length-range.location-range.length);
+        range = [newsContentHTML rangeOfString:@"<img" options:NSCaseInsensitiveSearch range:tempRange];
+    }
+
+
+    [_webView loadHTMLString:newsContentHTML baseURL:nil];
 }
 
 - (void)viewDidLoad {

@@ -200,7 +200,8 @@
                 ChartItemModel *itemModel = [[ChartItemModel alloc] init];
                 if ([dict[@"valueitems"] isKindOfClass:[NSArray class]]) {
                     if ([dict[@"valueitems"] count]) {
-                         itemModel.name =dict[@"valueitems"][0][@"value"];
+                         itemModel.name = [dict[@"valueitems"][0][@"value"] stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+
                     }
                 }
 

@@ -45,38 +45,22 @@
 
         NSDictionary *ceDic = array[i];
 
-        NSString *str1 = ceDic[@"bw"];
-        CGFloat length1 = [self getStr:str1 andFont:PT_FROM_PX(16)];
-        [self upDataPint:length1];
-
-
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(_point.x, _point.y, length1+20, 20)];
-        label.text = str1;
-        label.textAlignment = NSTextAlignmentCenter;
-        label.textColor = [UIColor whiteColor];
-        label.backgroundColor = colorPurple;
-        label.font = [UIFont systemFontOfSize:PT_FROM_PX(16)];
-
+        UILabel *label = [self labelWithText:ceDic[@"bw"] backColor:colorPurple borderColor:nil];
+        [self upDataPint:label.lh_width];
+        label.lh_left = _point.x;
+        label.lh_top = _point.y;
         [self addSubview:label];
-        _point = CGPointMake(label.frame.size.width+label.frame.origin.x-1, _point.y);
+
+        _point = CGPointMake(label.lh_right-1, _point.y);
 
         //
-        NSString *str2 = ceDic[@"ques"];
-        CGFloat length2 = [self getStr:str2 andFont:PT_FROM_PX(16)];
-        [self upDataPint:length2];
-
-
-        UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(_point.x, _point.y, length2+20, 20)];
-        label2.text = str2;
-        label2.textColor = colorPurple;
-        label2.textAlignment = NSTextAlignmentCenter;
-        label2.font = [UIFont systemFontOfSize:PT_FROM_PX(16)];
-        label2.layer.borderColor = colorPurple.CGColor;
-        label2.layer.borderWidth = 1;
-
+        UILabel *label2 = [self labelWithText:ceDic[@"ques"] backColor:nil borderColor:colorPurple];
+        [self upDataPint:label2.lh_width];
+        label2.lh_left = _point.x;
+        label2.lh_top = _point.y;
         [self addSubview:label2];
 
-        _point = CGPointMake(label2.frame.size.width+label2.frame.origin.x+5,_point.y);
+        _point = CGPointMake(label2.lh_right+5,_point.y);
     }
 }
 
@@ -99,7 +83,7 @@
     UIImageView *questionImageView = [[UIImageView alloc] initWithFrame:CGRectMake(x, _point.y, 20, 20)];
     questionImageView.image = [UIImage imageNamed:@"auto_complain_serve"];
     [self addSubview:questionImageView];
-    _point = CGPointMake(questionImageView.frame.origin.x+questionImageView.frame.size.width+5, _point.y);
+    _point = CGPointMake(questionImageView.lh_right+5, _point.y);
 
     if (_point.x+70 > WIDTH-20) {
         _point = CGPointMake(10, _point.y+25);
@@ -108,49 +92,50 @@
     for (int i = 0; i < fwtd.count; i ++) {
          NSDictionary *dict = fwtd[i];
 
-        CGFloat w = [self getStr:dict[@"bw"] andFont:PT_FROM_PX(16)];
-        [self upDataPint:w];
 
 
-
-        UILabel *labelServer = [LHController createLabelWithFrame:CGRectMake(_point.x, _point.y, w+20, 20) Font:PT_FROM_PX(16) Bold:NO TextColor:nil Text:dict[@"bw"]];
-        labelServer.textColor = [UIColor whiteColor];
-        labelServer.backgroundColor = colorGreen;
-        labelServer.textAlignment = NSTextAlignmentCenter;
+        UILabel *labelServer = [self labelWithText:dict[@"bw"] backColor:colorGreen borderColor:nil];
+        [self upDataPint:labelServer.lh_width];
+        labelServer.lh_left = _point.x;
+        labelServer.lh_top = _point.y;
         [self addSubview:labelServer];
 
 
 
         if ([dict[@"ques"] length]) {
-            _point = CGPointMake(labelServer.lh_left+labelServer.lh_width-1, labelServer.frame.origin.y);
+            _point = CGPointMake(labelServer.lh_right-1, labelServer.lh_top);
 
-            NSString *str2 = dict[@"ques"];
-            CGFloat length2 = [self getStr:str2 andFont:PT_FROM_PX(16)];
-            [self upDataPint:length2];
-
-
-            UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(_point.x, _point.y, length2+20, 20)];
-            label2.text = str2;
-            label2.textColor = colorGreen;
-            label2.textAlignment = NSTextAlignmentCenter;
-            label2.font = [UIFont systemFontOfSize:PT_FROM_PX(16)];
-            label2.layer.borderColor = colorGreen.CGColor;
-            label2.layer.borderWidth = 1;
-
+            UILabel *label2 = [self labelWithText:dict[@"ques"] backColor:nil borderColor:colorGreen];
+            [self upDataPint:label2.lh_width];
+            label2.lh_left = _point.x;
+            label2.lh_top = _point.y;
             [self addSubview:label2];
 
-            _point = CGPointMake(label2.frame.size.width+label2.frame.origin.x+5,_point.y);
+            _point = CGPointMake(label2.lh_right+5,_point.y);
 
         }else{
-            _point = CGPointMake(labelServer.frame.origin.x+labelServer.frame.size.width+5, labelServer.frame.origin.y);
+            _point = CGPointMake(labelServer.lh_right+5, labelServer.lh_top);
         }
     }
 }
 
-#pragma mark - 计算字符串长度
--(CGFloat)getStr:(NSString *)str andFont:(CGFloat)font{
-    CGSize size =[str boundingRectWithSize:CGSizeMake(1000, 20) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:font]} context:nil].size;
-    return size.width;
+- (UILabel *)labelWithText:(NSString *)text backColor:(UIColor *)backColor borderColor:(UIColor *)borderColor{
+    UILabel *label = [[UILabel alloc] init];
+    label.text = text;
+    label.textAlignment = NSTextAlignmentCenter;
+    label.font = [UIFont systemFontOfSize:PT_FROM_PX(16)];
+    if (backColor) {
+        label.textColor = [UIColor whiteColor];
+        label.backgroundColor = backColor;
+    }else{
+        label.textColor = borderColor;
+        label.layer.borderColor = borderColor.CGColor;
+        label.layer.borderWidth = 1;
+    }
+    [label sizeToFit];
+    label.lh_width += 10;
+    label.lh_height += 5;
+    return label;
 }
 
 #pragma mark - 计算坐标
@@ -200,7 +185,7 @@
     
 
     cpidLabel = [[UILabel alloc] init];
-    cpidLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(18)];
+    cpidLabel.font = [UIFont systemFontOfSize:PT_FROM_PX(19)];
     cpidLabel.textColor = colorBlack;
 
     UIImageView *cpidImageView = [[UIImageView alloc] init];
@@ -295,9 +280,10 @@
     cpidLabel.attributedText = matt;
 
     dateLabel.text = self.complainModel.date;
-    brandNameLabel.attributedText = [self attributedWithString1:@"品牌：" string2:self.complainModel.brandname];
-    seriesNameLabel.attributedText = [self attributedWithString1:@"车系：" string2:self.complainModel.seriesname];
-    modelNameLabel.attributedText = [self attributedWithString1:@"车型：" string2:self.complainModel.modelsname];
+
+    brandNameLabel.attributedText = [self attributedWithString1:@"品牌:" string2:[NSString stringWithFormat:@"【%@】",self.complainModel.brandname]];
+    seriesNameLabel.attributedText = [self attributedWithString1:@"车系:" string2:[NSString stringWithFormat:@"【%@】",self.complainModel.seriesname]];
+    modelNameLabel.attributedText = [self attributedWithString1:@"车型:" string2:[NSString stringWithFormat:@"【%@】",self.complainModel.modelsname]];
 
     [showView setTsbw:self.complainModel.tsbw fwtd:self.complainModel.tsfw];
     CGFloat height = [showView viewHeight];

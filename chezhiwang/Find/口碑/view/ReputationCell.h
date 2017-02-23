@@ -9,6 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "ReputationModel.h"
 
+@interface ReputationCellContentView : UIView
+
+@property (nonatomic,weak) ReputationModel *model;
+
+- (instancetype)initWithFrame:(CGRect)frame praise:(BOOL)praise;
+- (void)setdata:(ReputationModel *)model;
+
+@end
+
 @interface ReputationCell : UITableViewCell
 
 @property (nonatomic,strong) ReputationModel *model;

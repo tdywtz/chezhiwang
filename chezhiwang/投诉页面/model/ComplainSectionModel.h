@@ -17,6 +17,16 @@ typedef NS_ENUM(NSInteger, ComplainCellStyle) {
     ComplainCellStyleBeginDate,
     ComplainCellStyleEndDate
 };
+
+#pragma mark - ComplainBasicModel
+@interface ComplainBasicModel : NSObject
+
+- (void)setPostKeyValueWithDictionary:(NSMutableDictionary *)dictionary;
+- (void)setKeyValueWithDictionary:(NSMutableDictionary *)dictionary;
+
+@end
+
+
 #pragma mark - 模型一
 @interface ComplainModel : NSObject
 /**上传数据key*/

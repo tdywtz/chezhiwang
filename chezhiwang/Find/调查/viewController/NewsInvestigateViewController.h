@@ -13,5 +13,6 @@
 @interface NewsInvestigateViewController : BasicViewController
 
 @property (nonatomic,copy) NSString *urlString;
+@property (nonatomic, assign) UIEdgeInsets contentInsets;
 
 @end

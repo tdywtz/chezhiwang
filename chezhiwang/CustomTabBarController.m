@@ -14,8 +14,6 @@
 #import "HomepageTableViewController.h"
 #import "FindCollectionViewController.h"
 
-
-#import "LHDBModel.h"
 @interface CustomTabBarController ()<UITabBarControllerDelegate>
 
 @end
@@ -39,7 +37,26 @@
 
     self.viewControllers  = @[n1,n2,n3];
     [self createCustomTabBar];
-    [LHDBModel getPropertys];
+
+
+
+    int numClasses;
+    Class *classes = NULL;
+    numClasses = objc_getClassList(NULL,0);
+
+    if (numClasses >0 )
+    {
+        classes = (__unsafe_unretained Class *)malloc(sizeof(Class) * numClasses);
+        numClasses = objc_getClassList(classes, numClasses);
+        for (int i = 0; i < numClasses; i++) {
+             id class = classes[0];
+            if (class) {
+              //  NSLog(@"=====%s",[class ]);
+            }
+        }
+        free(classes);
+    }
+
 }
 
 //处理 UITabBarItem
@@ -72,14 +89,14 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-      // 自定义tabbar时设置
+    // 自定义tabbar时设置
    // [self.selectedViewController beginAppearanceTransition: YES animated: animated];
     [MobClick beginLogPageView:@"PageOne"];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-      // 自定义tabbar时设置
+    //自定义tabbar时设置
     //[self.selectedViewController beginAppearanceTransition: NO animated: animated];
     [MobClick endLogPageView:@"PageOne"];
 }
@@ -87,14 +104,14 @@
 -(void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-      // 自定义tabbar时设置
+    //自定义tabbar时设置
     //[self.selectedViewController endAppearanceTransition];
 }
 
 -(void) viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-      // 自定义tabbar时设置
+    // 自定义tabbar时设置
    // [self.selectedViewController endAppearanceTransition];
 }
 

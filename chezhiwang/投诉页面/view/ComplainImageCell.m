@@ -65,7 +65,7 @@
 
     showImageView.lh_left = 100;
     showImageView.lh_top = 15;
-    showImageView.lh_width =WIDTH-110;
+    showImageView.lh_width = WIDTH-110;
     CGFloat height =  (WIDTH-110-15)/3;
     if (showImageView.imageArray.count > 2) {
         showImageView.lh_height = height*2+5;

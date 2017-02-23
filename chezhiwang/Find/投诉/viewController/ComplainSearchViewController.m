@@ -34,8 +34,7 @@
 
 #pragma mark 请求数据
 -(void)loadData{
-    //处理汉字
-
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [HttpRequest GET:self.urlString success:^(id responseObject) {
         if (_count == 1) {
 
@@ -52,8 +51,10 @@
         }
 
         [_tableView.mj_footer endRefreshing];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     } failure:^(NSError *error) {
         [_tableView.mj_footer endRefreshing];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
 }
 
@@ -224,12 +225,7 @@
         [att addAttribute:NSForegroundColorAttributeName value:[UIColor orangeColor] range:range];
     }
 
-
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
-    [style setLineSpacing:5];
-    //[style setLineBreakMode:NSLineBreakByWordWrapping];
-    // style.firstLineHeadIndent = 30;
-    //style.paragraphSpacing = 20;
     [att addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, att.length)];
     return att;
 }
@@ -243,13 +239,20 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ID"];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ID"];
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 39, WIDTH, 1)];
+        cell.textLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+        UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
         view.backgroundColor = colorBackGround;
         [cell.contentView addSubview:view];
+        [view makeConstraints:^(MASConstraintMaker *make) {
+            make.left.bottom.equalTo(0);
+            make.width.equalTo(WIDTH);
+            make.height.equalTo(1);
+        }];
     }
 
     NSDictionary *dict = _dataArray[indexPath.row];
     cell.textLabel.attributedText = [self attributeSize:dict[@"question"] searchStr:_searchText];
+
 
 
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -257,8 +260,9 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 40;
+    return 50;
 }
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSDictionary *dic = _dataArray[indexPath.row];
     ComplainDetailsViewController *user = [[ComplainDetailsViewController alloc] init];

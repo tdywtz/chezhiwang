@@ -62,6 +62,8 @@
         gratifiedLabel.lh_size = CGSizeMake(60, 20);
         gratifiedLabel.lh_left = tempRect.origin.x + tempRect.size.width + 20;
         gratifiedLabel.lh_centerY = tempRect.origin.y + tempRect.size.height/2;
+
+        [self upateLayout];
     }
     return self;
 }

@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "straight.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "auto_reputation_avatar@2x.png",
       "scale" : "2x"
     },
     {

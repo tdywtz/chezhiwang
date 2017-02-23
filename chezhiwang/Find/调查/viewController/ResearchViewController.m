@@ -40,6 +40,7 @@
     vc2.urlString =  url2;
    
     NewsInvestigateViewController *research = [[NewsInvestigateViewController alloc] init];
+    research.contentInsets = UIEdgeInsetsMake(64, 0, 0, 0);
 
     pageViewController = [LHPageViewcontroller initWithSpace:0 withParentViewController:self];
     pageViewController.LHDelegate = self;

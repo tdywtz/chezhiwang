@@ -18,6 +18,86 @@
     }
     return  _title;
 }
+
++ (void)brand:(void(^)(NSArray <ChooseTableViewSectionModel *> *))result{
+    if (result == nil) {
+        return;
+    }
+    [HttpRequest GET:[URLFile urlStringForLetter] success:^(id responseObject) {
+        NSMutableArray *mArray = [[NSMutableArray alloc] init];
+
+        for (NSDictionary *dict in responseObject[@"rel"]) {
+            ChooseTableViewSectionModel *sectionModel = [[ChooseTableViewSectionModel alloc] init];
+            sectionModel.title = dict[@"letter"];
+
+            NSMutableArray *rowModels = [[NSMutableArray alloc] init];
+            for (NSDictionary *subDic in dict[@"brand"]) {
+                ChooseTableViewModel *model = [[ChooseTableViewModel alloc] init];
+                model.ID = subDic[@"id"];
+                model.title = subDic[@"name"];
+                model.imageUrl = subDic[@"logo"];
+                [rowModels addObject:model];
+            }
+            sectionModel.rowModels = rowModels;
+            [mArray addObject:sectionModel];
+        }
+         result(mArray);
+    } failure:^(NSError *error) {
+        result(nil);
+    }];
+
+}
+
++ (void)seriesWithBid:(NSString *)bid result:(void (^)(NSArray<ChooseTableViewSectionModel *> *))result{
+    if (result == nil) {
+        return;
+    }
+    NSString *url = [NSString stringWithFormat:[URLFile urlStringForSeries],bid];
+    [HttpRequest GET:url success:^(id responseObject) {
+
+
+        NSMutableArray *mArray = [[NSMutableArray alloc] init];
+
+        for (NSDictionary *dict in responseObject[@"rel"]) {
+            ChooseTableViewSectionModel *sectionModel = [[ChooseTableViewSectionModel alloc] init];
+            sectionModel.title = dict[@"brands"];
+
+            NSMutableArray *rowModels = [[NSMutableArray alloc] init];
+            for (NSDictionary *subDic in dict[@"series"]) {
+                ChooseTableViewModel *model = [[ChooseTableViewModel alloc] init];
+                model.ID = subDic[@"seriesid"];
+                model.title = subDic[@"seriesname"];
+                model.imageUrl = subDic[@"logo"];
+                [rowModels addObject:model];
+            }
+            sectionModel.rowModels = rowModels;
+            [mArray addObject:sectionModel];
+        }
+        result(mArray);
+
+    } failure:^(NSError *error) {
+        result(nil);
+    }];
+}
+
++ (void)modelWithSid:(NSString *)sid result:(void (^)(NSArray<ChooseTableViewSectionModel *> *))result{
+    if (result == nil) {
+        return;
+    }
+    NSString *url = [NSString stringWithFormat:[URLFile urlStringForModelList],sid];
+    [HttpRequest GET:url success:^(id responseObject) {
+        ChooseTableViewSectionModel *sectionModel = [[ChooseTableViewSectionModel alloc] init];
+        [ChooseTableViewModel mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
+            return @{@"ID":@"mid",@"title":@"modelname",@"imageUrl":@"logo"};
+        }];
+        sectionModel.rowModels = [ChooseTableViewModel mj_objectArrayWithKeyValuesArray:responseObject[@"rel"]];
+        result(@[sectionModel]);
+        
+    } failure:^(NSError *error) {
+        result(nil);
+    }];
+}
+
 @end
 
 #pragma mark - ChooseTableViewModel
@@ -51,7 +131,8 @@
     if (_isShowImage) {
         self.imageView.hidden = NO;
         self.imageView.contentMode = UIViewContentModeScaleAspectFit;
-        CGRect rect = self.imageView.frame;
+
+        CGRect rect = CGRectZero;
         rect.size = CGSizeMake(self.lh_height, self.lh_height-18);
         rect.origin.x = 10;
         rect.origin.y = 9;
@@ -63,7 +144,11 @@
 
     }else{
 
-       //   CGRect rect = self.textLabel.frame;
+        self.imageView.hidden = YES;
+        CGRect rect = self.textLabel.frame;
+        rect.origin.x = 10;
+        rect.size.width = WIDTH - 20;
+        self.textLabel.frame = rect;
     }
 }
 

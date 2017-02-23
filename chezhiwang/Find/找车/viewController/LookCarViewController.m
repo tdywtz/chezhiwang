@@ -55,10 +55,8 @@
         }
         _self.navigationController.viewControllers = arr;
     };
-
     
     [chooseTabel addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)]];
-
 
     [self.view addSubview:chooseTabel];
 

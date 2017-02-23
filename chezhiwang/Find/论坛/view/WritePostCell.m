@@ -33,7 +33,7 @@
     
     _textView = [[UITextView alloc] initWithFrame:CGRectMake(90, 5, [[UIScreen mainScreen] bounds].size.width-100, 80)];
     _textView.delegate = self;
-    _textView.backgroundColor = [UIColor colorWithRed:238/255.0 green:238/255.0 blue:238/255.0 alpha:1];
+    _textView.backgroundColor = colorBackGround;
     _textView.font = [UIFont systemFontOfSize:[LHController setFont]-3];
     [self.contentView addSubview:_textView];
     

@@ -32,6 +32,7 @@
         att.yy_font = [UIFont systemFontOfSize:13];
         att.yy_color = colorLightBlue;
         att.yy_lineSpacing = 2;
+        att.yy_alignment = NSTextAlignmentCenter;
         model.attributeText = att;
     }
     return model;

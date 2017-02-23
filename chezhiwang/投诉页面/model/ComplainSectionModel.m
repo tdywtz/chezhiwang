@@ -8,6 +8,19 @@
 
 #import "ComplainSectionModel.h"
 
+#pragma mark - ComplainBasicModel
+@implementation ComplainBasicModel
+
+- (void)setPostKeyValueWithDictionary:(NSMutableDictionary *)dictionary{
+
+}
+- (void)setKeyValueWithDictionary:(NSMutableDictionary *)dictionary{
+
+}
+
+@end
+
+
 #pragma mark - 模型一
 @implementation ComplainModel
 

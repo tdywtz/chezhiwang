@@ -1,13 +1,12 @@
 //
 //  URLFile.h
-//  12365auto
+//  chezhiwang
 //
-//  Created by bangong on 16/5/16.
-//  Copyright © 2016年 车质网. All rights reserved.
+//  Created by bangong on 17/2/14.
+//  Copyright © 2017年 车质网. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-
 
 @interface URLFile : NSObject
 
@@ -132,6 +131,41 @@
 + (NSString *)urlString_s_index2;
 /**发现-找车-投诉头部 满意度&回复率*/
 + (NSString *)url_s_complainWithSid:(NSString *)sid;
+/**发现-口碑 - 赞*/
++ (NSString *)url_reputationZanWithID:(NSString *)Id;
+
+/**
+ 发现-口碑列表
+
+ @param bid 品牌编号
+ @param sid 车系编号
+ @param mid 车型编号,
+ @param Id 口碑编号（获取单个口碑时使用)
+ @param iOrder （0是最新的  1是最有道理的）
+ @param p 页码
+ @param s 个数
+ @return <#return value description#>
+ */
++ (NSString *)url_reputationlistWithBid:(NSString *)bid
+                                    sid:(NSString *)sid
+                                    mid:(NSString *)mid
+                                     ID:(NSString *)Id
+                                 iOrder:(NSString *)iOrder
+                                      p:(NSInteger)p
+                                      s:(NSInteger)s;
+
++ (NSString *)url_reputationlistWithSid:(NSString *)sid
+                                 iOrder:(NSString *)iOrder
+                                      p:(NSInteger)p
+                                      s:(NSInteger)s;
+/**发现-车系口碑 -基本信息*/
++ (NSString *)url_s_reputationWithSid:(NSString *)sid;
+/**发现-口碑 - 评论列表*/
++ (NSString *)url_reputationPLWithID:(NSString *)Id
+                                   p:(NSInteger)p
+                                   s:(NSInteger)s;
+/**发现-口碑 - 评论*/
++ (NSString *)url_reputationReplyWithID:(NSString *)Id;
 
 #pragma Mark- 个人中心
 /**获取用户信息*/
@@ -192,5 +226,6 @@
 + (NSString *)urlString_mConfig;
 /**对比-车型故障信息*/
 + (NSString *)urlString_dbInfo;
+
 
 @end

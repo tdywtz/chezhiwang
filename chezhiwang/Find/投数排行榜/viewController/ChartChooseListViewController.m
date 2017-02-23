@@ -350,8 +350,7 @@
     
     NSArray *titles = @[@"时间",@"车型属性",@"品牌属性",@"系别",@"质量问题",@"品牌",@"车系",@"车型"];
     label.text = titles[self.type];
-    
-    
+
     _tableView.tableFooterView = [UIView new];
     
     if (self.direction == DirectionLeft) {
@@ -373,7 +372,6 @@
                 _tableView.frame = rect;
             }];
         });
-
     }
 }
 
@@ -390,7 +388,7 @@
              return;
         }
     }
-    
+
     if (CGRectContainsPoint(_tableView.frame, location)) {
        [super touchesEnded:touches withEvent:event];
         return;

@@ -68,7 +68,7 @@
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.estimatedRowHeight = 100;
-    _tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+    _tableView.contentInset = _contentInsets;
      _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
     

@@ -40,6 +40,7 @@
     _window.backgroundColor = [UIColor whiteColor];
     [NSThread sleepForTimeInterval:2.0];
     [_window makeKeyAndVisible];
+
     return YES;
 }
 

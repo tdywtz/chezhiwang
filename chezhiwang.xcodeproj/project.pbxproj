@@ -10,6 +10,8 @@
 		42D8F3D6063C27E553564365 /* libPods-chezhiwang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC7F9111F2D83F92E1F6B4F /* libPods-chezhiwang.a */; };
 		4D0069071B9D891400BA0CA1 /* CustomTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D0069061B9D891400BA0CA1 /* CustomTabBarController.m */; };
 		4D02ADFA1DF699B70008F895 /* ComplainDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D02ADF91DF699B70008F895 /* ComplainDetailsView.m */; };
+		4D0904AE1E48118700B3923A /* LCReputationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D0904AD1E48118700B3923A /* LCReputationViewController.m */; };
+		4D0904B11E4836B500B3923A /* LHStarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D0904B01E4836B500B3923A /* LHStarView.m */; };
 		4D0B0E661DCB1D3A00C41984 /* CZWAdvertisementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D0B0E651DCB1D3A00C41984 /* CZWAdvertisementViewController.m */; };
 		4D0B0E691DCB1D4100C41984 /* AdvertisementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D0B0E681DCB1D4100C41984 /* AdvertisementView.m */; };
 		4D0F0DF51E037EC0000F75B0 /* ChooseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D0F0DF41E037EC0000F75B0 /* ChooseTableViewController.m */; };
@@ -57,7 +59,6 @@
 		4D50795A1C45E38200656CA8 /* CustomCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5079591C45E38200656CA8 /* CustomCommentView.m */; };
 		4D5249831E1B6C7000AD8601 /* ReputationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5249821E1B6C7000AD8601 /* ReputationModel.m */; };
 		4D6CD69B1D9E62420038D5E5 /* MyComplainHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D6CD69A1D9E62420038D5E5 /* MyComplainHeaderView.m */; };
-		4D7355491E445B9000C7A74E /* LHDBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D7355481E445B9000C7A74E /* LHDBModel.m */; };
 		4D753CE91BF56ADA00D3232D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D753CE81BF56ADA00D3232D /* LoginViewController.m */; };
 		4D756F251BC64DEF00107653 /* AgreementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D756F241BC64DEF00107653 /* AgreementViewController.m */; };
 		4D7E723E1B9D5CD10048F221 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D7E723D1B9D5CD10048F221 /* main.m */; };
@@ -100,18 +101,18 @@
 		4DEC27D41DF8EBCF00C64CB9 /* FavouriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DEC27D31DF8EBCF00C64CB9 /* FavouriteViewController.m */; };
 		4DEC27D71DF8EC7300C64CB9 /* FavouriteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DEC27D61DF8EC7300C64CB9 /* FavouriteCell.m */; };
 		4DEC28B11DF9585300C64CB9 /* NSMutableAttributedString+LHText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEC28B01DF9585300C64CB9 /* NSMutableAttributedString+LHText.swift */; };
-		4DEC2EE11E35F58200842D02 /* StarsBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DEC2EE01E35F58200842D02 /* StarsBackground@2x.png */; };
-		4DEC2EE31E35F58900842D02 /* StarsForeground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DEC2EE21E35F58900842D02 /* StarsForeground@2x.png */; };
 		4DEE9EB91DA88DDF00E0ABAC /* NewsTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DEE9EB81DA88DDF00E0ABAC /* NewsTableHeaderView.m */; };
 		4DF0EA631DBDA4FF00EFAE58 /* CZWManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF0EA601DBDA4FF00EFAE58 /* CZWManager.m */; };
 		4DF0EA641DBDA4FF00EFAE58 /* FmdbManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF0EA621DBDA4FF00EFAE58 /* FmdbManager.m */; };
-		4DF0EA6A1DBDA58500EFAE58 /* HttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF0EA671DBDA58500EFAE58 /* HttpRequest.m */; };
-		4DF0EA6B1DBDA58500EFAE58 /* URLFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF0EA691DBDA58500EFAE58 /* URLFile.m */; };
 		4DF0EA771DBDA5AD00EFAE58 /* BasicNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF0EA6E1DBDA5AD00EFAE58 /* BasicNavigationController.m */; };
 		4DF0EA791DBDA5AD00EFAE58 /* BasicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF0EA721DBDA5AD00EFAE58 /* BasicTableViewCell.m */; };
 		4DF0EA7A1DBDA5AD00EFAE58 /* BasicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF0EA741DBDA5AD00EFAE58 /* BasicViewController.m */; };
 		4DF0EA7B1DBDA5AD00EFAE58 /* TransitionAnima.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF0EA761DBDA5AD00EFAE58 /* TransitionAnima.m */; };
 		4DF0EA7F1DBE0E9400EFAE58 /* UIScrollView+TwitterCover.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF0EA7E1DBE0E9400EFAE58 /* UIScrollView+TwitterCover.m */; };
+		4DF13A181E528AE4000BC270 /* starBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DF13A171E528AE4000BC270 /* starBackground@2x.png */; };
+		4DF13A1A1E528AE9000BC270 /* starForeground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4DF13A191E528AE9000BC270 /* starForeground@2x.png */; };
+		4DF13AC01E52F734000BC270 /* HttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF13ABF1E52F734000BC270 /* HttpRequest.m */; };
+		4DF13AC31E52F8E1000BC270 /* URLFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF13AC21E52F8E1000BC270 /* URLFile.m */; };
 		4DF2C7A11E1DDCCE00C5B24A /* ParameterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF2C7A01E1DDCCE00C5B24A /* ParameterViewController.m */; };
 		4DF2C7A41E1DE06000C5B24A /* ParameterChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF2C7A31E1DE06000C5B24A /* ParameterChartView.m */; };
 		4DF343901E1F6E9E005584CB /* LHEmojiButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF343221E1F6E9E005584CB /* LHEmojiButton.m */; };
@@ -246,6 +247,7 @@
 		4DF3443F1E1F71A3005584CB /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF3443D1E1F71A3005584CB /* MyViewController.m */; };
 		4DF4DA431E08F43000DDA429 /* MyCardChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF4DA421E08F43000DDA429 /* MyCardChooseViewController.m */; };
 		4DF4DA461E0909F600DDA429 /* CZWDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF4DA451E0909F600DDA429 /* CZWDatePicker.m */; };
+		4DF4ECC11E45C97B0010E2B5 /* MYSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF4ECC01E45C97B0010E2B5 /* MYSearchViewController.m */; };
 		4DF75F211D9CE46100FB882E /* HomepageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF75F201D9CE46100FB882E /* HomepageTableViewController.m */; };
 		4DF75F241D9CE48A00FB882E /* HomepageSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF75F231D9CE48A00FB882E /* HomepageSectionModel.m */; };
 		4DF75F271D9CE4A600FB882E /* HomepageNewsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF75F261D9CE4A600FB882E /* HomepageNewsModel.m */; };
@@ -261,6 +263,7 @@
 		4DF75F451D9CE67A00FB882E /* HomepageForumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF75F441D9CE67A00FB882E /* HomepageForumCell.m */; };
 		4DF75F481D9CEF0B00FB882E /* HomepageSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF75F471D9CEF0B00FB882E /* HomepageSectionHeaderView.m */; };
 		4DF75F4B1D9CEF3000FB882E /* HomepageSectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF75F4A1D9CEF3000FB882E /* HomepageSectionFooterView.m */; };
+		4DF84BFD1E4D5363003C95A7 /* CZWRootToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF84BFC1E4D5363003C95A7 /* CZWRootToolBar.m */; };
 		4DF90AB21E07C05F002C8ABB /* CZWCardChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF90AB11E07C05F002C8ABB /* CZWCardChooseViewController.m */; };
 		4DFB36F81E28AD1F00E0CFB6 /* LCComplainListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DFB36F71E28AD1F00E0CFB6 /* LCComplainListViewController.m */; };
 		4DFB4A861E0B7EEF000AB10B /* FindModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DFB4A851E0B7EEF000AB10B /* FindModel.m */; };
@@ -333,7 +336,6 @@
 		4DFB4B711E0B9EFA000AB10B /* NewsSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DFB4B481E0B9EFA000AB10B /* NewsSearchViewController.m */; };
 		4DFB4B721E0B9EFA000AB10B /* NewsTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DFB4B4A1E0B9EFA000AB10B /* NewsTestViewController.m */; };
 		4DFB4B731E0B9EFA000AB10B /* NewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DFB4B4C1E0B9EFA000AB10B /* NewsViewController.m */; };
-		4DFB4B741E0B9EFA000AB10B /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DFB4B4E1E0B9EFA000AB10B /* SearchViewController.m */; };
 		4DFB4B911E0BA026000AB10B /* ChartChooseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DFB4B781E0BA026000AB10B /* ChartChooseModel.m */; };
 		4DFB4B921E0BA026000AB10B /* ComplainChartSecondModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DFB4B7A1E0BA026000AB10B /* ComplainChartSecondModel.m */; };
 		4DFB4B931E0BA026000AB10B /* BezierPathView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DFB4B7D1E0BA026000AB10B /* BezierPathView.m */; };
@@ -351,12 +353,12 @@
 		4DFB4BA91E0BA2CA000AB10B /* ResearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DFB4BA81E0BA2CA000AB10B /* ResearchViewController.m */; };
 		4DFB4BAC1E0BB832000AB10B /* LHSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DFB4BAB1E0BB832000AB10B /* LHSegmentView.m */; };
 		4DFBFA351CE56F110069F229 /* CZWAppPrompt.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DFBFA341CE56F110069F229 /* CZWAppPrompt.m */; };
+		4DFE100B1E4AAD1F003250C3 /* LCReputationDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DFE100A1E4AAD1F003250C3 /* LCReputationDetailsViewController.m */; };
 		4DFE2F5E1E149FBA00E02112 /* LookCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DFE2F5D1E149FBA00E02112 /* LookCarViewController.m */; };
 		4DFE2F611E14A0DF00E02112 /* OverviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DFE2F601E14A0DF00E02112 /* OverviewViewController.m */; };
 		4DFE2F641E14B25700E02112 /* OverviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DFE2F631E14B25700E02112 /* OverviewView.m */; };
 		4DFFA4FA1DB7304F003B6178 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DFFA4F91DB7304F003B6178 /* ImageIO.framework */; };
 		4DFFA4FC1DB73098003B6178 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DFFA4FB1DB73098003B6178 /* libc++.tbd */; };
-		4DFFA5081DB77308003B6178 /* StarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DFFA5031DB77308003B6178 /* StarView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -375,6 +377,10 @@
 		4D0069061B9D891400BA0CA1 /* CustomTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTabBarController.m; sourceTree = "<group>"; };
 		4D02ADF81DF699B70008F895 /* ComplainDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComplainDetailsView.h; sourceTree = "<group>"; };
 		4D02ADF91DF699B70008F895 /* ComplainDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComplainDetailsView.m; sourceTree = "<group>"; };
+		4D0904AC1E48118700B3923A /* LCReputationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCReputationViewController.h; sourceTree = "<group>"; };
+		4D0904AD1E48118700B3923A /* LCReputationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCReputationViewController.m; sourceTree = "<group>"; };
+		4D0904AF1E4836B500B3923A /* LHStarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHStarView.h; sourceTree = "<group>"; };
+		4D0904B01E4836B500B3923A /* LHStarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHStarView.m; sourceTree = "<group>"; };
 		4D0B0E641DCB1D3A00C41984 /* CZWAdvertisementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZWAdvertisementViewController.h; sourceTree = "<group>"; };
 		4D0B0E651DCB1D3A00C41984 /* CZWAdvertisementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZWAdvertisementViewController.m; sourceTree = "<group>"; };
 		4D0B0E671DCB1D4100C41984 /* AdvertisementView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvertisementView.h; sourceTree = "<group>"; };
@@ -471,8 +477,6 @@
 		4D5249821E1B6C7000AD8601 /* ReputationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReputationModel.m; sourceTree = "<group>"; };
 		4D6CD6991D9E62420038D5E5 /* MyComplainHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyComplainHeaderView.h; sourceTree = "<group>"; };
 		4D6CD69A1D9E62420038D5E5 /* MyComplainHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyComplainHeaderView.m; sourceTree = "<group>"; };
-		4D7355471E445B9000C7A74E /* LHDBModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHDBModel.h; sourceTree = "<group>"; };
-		4D7355481E445B9000C7A74E /* LHDBModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHDBModel.m; sourceTree = "<group>"; };
 		4D753CE71BF56ADA00D3232D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		4D753CE81BF56ADA00D3232D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		4D756F231BC64DEF00107653 /* AgreementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgreementViewController.h; sourceTree = "<group>"; };
@@ -551,18 +555,12 @@
 		4DEC27D51DF8EC7300C64CB9 /* FavouriteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouriteCell.h; sourceTree = "<group>"; };
 		4DEC27D61DF8EC7300C64CB9 /* FavouriteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouriteCell.m; sourceTree = "<group>"; };
 		4DEC28B01DF9585300C64CB9 /* NSMutableAttributedString+LHText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+LHText.swift"; sourceTree = "<group>"; };
-		4DEC2EE01E35F58200842D02 /* StarsBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StarsBackground@2x.png"; sourceTree = "<group>"; };
-		4DEC2EE21E35F58900842D02 /* StarsForeground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "StarsForeground@2x.png"; sourceTree = "<group>"; };
 		4DEE9EB71DA88DDF00E0ABAC /* NewsTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsTableHeaderView.h; sourceTree = "<group>"; };
 		4DEE9EB81DA88DDF00E0ABAC /* NewsTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsTableHeaderView.m; sourceTree = "<group>"; };
 		4DF0EA5F1DBDA4FF00EFAE58 /* CZWManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZWManager.h; sourceTree = "<group>"; };
 		4DF0EA601DBDA4FF00EFAE58 /* CZWManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZWManager.m; sourceTree = "<group>"; };
 		4DF0EA611DBDA4FF00EFAE58 /* FmdbManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FmdbManager.h; sourceTree = "<group>"; };
 		4DF0EA621DBDA4FF00EFAE58 /* FmdbManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FmdbManager.m; sourceTree = "<group>"; };
-		4DF0EA661DBDA58500EFAE58 /* HttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequest.h; sourceTree = "<group>"; };
-		4DF0EA671DBDA58500EFAE58 /* HttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpRequest.m; sourceTree = "<group>"; };
-		4DF0EA681DBDA58500EFAE58 /* URLFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLFile.h; sourceTree = "<group>"; };
-		4DF0EA691DBDA58500EFAE58 /* URLFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLFile.m; sourceTree = "<group>"; };
 		4DF0EA6D1DBDA5AD00EFAE58 /* BasicNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicNavigationController.h; sourceTree = "<group>"; };
 		4DF0EA6E1DBDA5AD00EFAE58 /* BasicNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicNavigationController.m; sourceTree = "<group>"; };
 		4DF0EA711DBDA5AD00EFAE58 /* BasicTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicTableViewCell.h; sourceTree = "<group>"; };
@@ -573,6 +571,12 @@
 		4DF0EA761DBDA5AD00EFAE58 /* TransitionAnima.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransitionAnima.m; sourceTree = "<group>"; };
 		4DF0EA7D1DBE0E9400EFAE58 /* UIScrollView+TwitterCover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TwitterCover.h"; sourceTree = "<group>"; };
 		4DF0EA7E1DBE0E9400EFAE58 /* UIScrollView+TwitterCover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TwitterCover.m"; sourceTree = "<group>"; };
+		4DF13A171E528AE4000BC270 /* starBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "starBackground@2x.png"; sourceTree = "<group>"; };
+		4DF13A191E528AE9000BC270 /* starForeground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "starForeground@2x.png"; sourceTree = "<group>"; };
+		4DF13ABE1E52F734000BC270 /* HttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequest.h; sourceTree = "<group>"; };
+		4DF13ABF1E52F734000BC270 /* HttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpRequest.m; sourceTree = "<group>"; };
+		4DF13AC11E52F8E1000BC270 /* URLFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLFile.h; sourceTree = "<group>"; };
+		4DF13AC21E52F8E1000BC270 /* URLFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLFile.m; sourceTree = "<group>"; };
 		4DF2C79F1E1DDCCE00C5B24A /* ParameterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParameterViewController.h; sourceTree = "<group>"; };
 		4DF2C7A01E1DDCCE00C5B24A /* ParameterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParameterViewController.m; sourceTree = "<group>"; };
 		4DF2C7A21E1DE06000C5B24A /* ParameterChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParameterChartView.h; sourceTree = "<group>"; };
@@ -732,6 +736,8 @@
 		4DF4DA421E08F43000DDA429 /* MyCardChooseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCardChooseViewController.m; sourceTree = "<group>"; };
 		4DF4DA441E0909F600DDA429 /* CZWDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZWDatePicker.h; sourceTree = "<group>"; };
 		4DF4DA451E0909F600DDA429 /* CZWDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZWDatePicker.m; sourceTree = "<group>"; };
+		4DF4ECBF1E45C97B0010E2B5 /* MYSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSearchViewController.h; sourceTree = "<group>"; };
+		4DF4ECC01E45C97B0010E2B5 /* MYSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSearchViewController.m; sourceTree = "<group>"; };
 		4DF75F1F1D9CE46100FB882E /* HomepageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomepageTableViewController.h; sourceTree = "<group>"; };
 		4DF75F201D9CE46100FB882E /* HomepageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomepageTableViewController.m; sourceTree = "<group>"; };
 		4DF75F221D9CE48A00FB882E /* HomepageSectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomepageSectionModel.h; sourceTree = "<group>"; };
@@ -762,6 +768,8 @@
 		4DF75F471D9CEF0B00FB882E /* HomepageSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomepageSectionHeaderView.m; sourceTree = "<group>"; };
 		4DF75F491D9CEF3000FB882E /* HomepageSectionFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomepageSectionFooterView.h; sourceTree = "<group>"; };
 		4DF75F4A1D9CEF3000FB882E /* HomepageSectionFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomepageSectionFooterView.m; sourceTree = "<group>"; };
+		4DF84BFB1E4D5363003C95A7 /* CZWRootToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZWRootToolBar.h; sourceTree = "<group>"; };
+		4DF84BFC1E4D5363003C95A7 /* CZWRootToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZWRootToolBar.m; sourceTree = "<group>"; };
 		4DF90AB01E07C05F002C8ABB /* CZWCardChooseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZWCardChooseViewController.h; sourceTree = "<group>"; };
 		4DF90AB11E07C05F002C8ABB /* CZWCardChooseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZWCardChooseViewController.m; sourceTree = "<group>"; };
 		4DFB36F61E28AD1F00E0CFB6 /* LCComplainListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCComplainListViewController.h; sourceTree = "<group>"; };
@@ -906,8 +914,6 @@
 		4DFB4B4A1E0B9EFA000AB10B /* NewsTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsTestViewController.m; sourceTree = "<group>"; };
 		4DFB4B4B1E0B9EFA000AB10B /* NewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsViewController.h; sourceTree = "<group>"; };
 		4DFB4B4C1E0B9EFA000AB10B /* NewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsViewController.m; sourceTree = "<group>"; };
-		4DFB4B4D1E0B9EFA000AB10B /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
-		4DFB4B4E1E0B9EFA000AB10B /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		4DFB4B771E0BA026000AB10B /* ChartChooseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartChooseModel.h; sourceTree = "<group>"; };
 		4DFB4B781E0BA026000AB10B /* ChartChooseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartChooseModel.m; sourceTree = "<group>"; };
 		4DFB4B791E0BA026000AB10B /* ComplainChartSecondModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComplainChartSecondModel.h; sourceTree = "<group>"; };
@@ -942,6 +948,8 @@
 		4DFB4BAB1E0BB832000AB10B /* LHSegmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHSegmentView.m; sourceTree = "<group>"; };
 		4DFBFA331CE56F110069F229 /* CZWAppPrompt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZWAppPrompt.h; sourceTree = "<group>"; };
 		4DFBFA341CE56F110069F229 /* CZWAppPrompt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZWAppPrompt.m; sourceTree = "<group>"; };
+		4DFE10091E4AAD1F003250C3 /* LCReputationDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCReputationDetailsViewController.h; sourceTree = "<group>"; };
+		4DFE100A1E4AAD1F003250C3 /* LCReputationDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCReputationDetailsViewController.m; sourceTree = "<group>"; };
 		4DFE2F5C1E149FBA00E02112 /* LookCarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookCarViewController.h; sourceTree = "<group>"; };
 		4DFE2F5D1E149FBA00E02112 /* LookCarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookCarViewController.m; sourceTree = "<group>"; };
 		4DFE2F5F1E14A0DF00E02112 /* OverviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverviewViewController.h; sourceTree = "<group>"; };
@@ -950,8 +958,6 @@
 		4DFE2F631E14B25700E02112 /* OverviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverviewView.m; sourceTree = "<group>"; };
 		4DFFA4F91DB7304F003B6178 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		4DFFA4FB1DB73098003B6178 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
-		4DFFA5021DB77308003B6178 /* StarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StarView.h; sourceTree = "<group>"; };
-		4DFFA5031DB77308003B6178 /* StarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StarView.m; sourceTree = "<group>"; };
 		BBC7F9111F2D83F92E1F6B4F /* libPods-chezhiwang.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-chezhiwang.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC8E2E367F7C1C9E2BCFEF56 /* Pods-chezhiwang.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chezhiwang.release.xcconfig"; path = "Pods/Target Support Files/Pods-chezhiwang/Pods-chezhiwang.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1556,8 +1562,6 @@
 				4DF0EA601DBDA4FF00EFAE58 /* CZWManager.m */,
 				4DF0EA611DBDA4FF00EFAE58 /* FmdbManager.h */,
 				4DF0EA621DBDA4FF00EFAE58 /* FmdbManager.m */,
-				4D7355471E445B9000C7A74E /* LHDBModel.h */,
-				4D7355481E445B9000C7A74E /* LHDBModel.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -1565,10 +1569,10 @@
 		4DF0EA651DBDA58500EFAE58 /* NetWorking */ = {
 			isa = PBXGroup;
 			children = (
-				4DF0EA661DBDA58500EFAE58 /* HttpRequest.h */,
-				4DF0EA671DBDA58500EFAE58 /* HttpRequest.m */,
-				4DF0EA681DBDA58500EFAE58 /* URLFile.h */,
-				4DF0EA691DBDA58500EFAE58 /* URLFile.m */,
+				4DF13ABE1E52F734000BC270 /* HttpRequest.h */,
+				4DF13ABF1E52F734000BC270 /* HttpRequest.m */,
+				4DF13AC11E52F8E1000BC270 /* URLFile.h */,
+				4DF13AC21E52F8E1000BC270 /* URLFile.m */,
 			);
 			path = NetWorking;
 			sourceTree = "<group>";
@@ -1778,6 +1782,8 @@
 				4D7E72401B9D5CD10048F221 /* AppDelegate.m */,
 				4D0069051B9D891400BA0CA1 /* CustomTabBarController.h */,
 				4D0069061B9D891400BA0CA1 /* CustomTabBarController.m */,
+				4DF4ECBF1E45C97B0010E2B5 /* MYSearchViewController.h */,
+				4DF4ECC01E45C97B0010E2B5 /* MYSearchViewController.m */,
 				4D7E724A1B9D5CD10048F221 /* LaunchScreen.xib */,
 				4D7E72451B9D5CD10048F221 /* Main.storyboard */,
 				4D8B22BB1BA808EF00659A56 /* pch.pch */,
@@ -2045,6 +2051,8 @@
 			children = (
 				4DFB4AAF1E0B9C30000AB10B /* ReputationCell.h */,
 				4DFB4AB01E0B9C30000AB10B /* ReputationCell.m */,
+				4DF84BFB1E4D5363003C95A7 /* CZWRootToolBar.h */,
+				4DF84BFC1E4D5363003C95A7 /* CZWRootToolBar.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -2296,8 +2304,6 @@
 				4DFB4B4A1E0B9EFA000AB10B /* NewsTestViewController.m */,
 				4DFB4B4B1E0B9EFA000AB10B /* NewsViewController.h */,
 				4DFB4B4C1E0B9EFA000AB10B /* NewsViewController.m */,
-				4DFB4B4D1E0B9EFA000AB10B /* SearchViewController.h */,
-				4DFB4B4E1E0B9EFA000AB10B /* SearchViewController.m */,
 			);
 			path = viewController;
 			sourceTree = "<group>";
@@ -2439,6 +2445,10 @@
 				4DFE2F601E14A0DF00E02112 /* OverviewViewController.m */,
 				4DF2C79F1E1DDCCE00C5B24A /* ParameterViewController.h */,
 				4DF2C7A01E1DDCCE00C5B24A /* ParameterViewController.m */,
+				4D0904AC1E48118700B3923A /* LCReputationViewController.h */,
+				4D0904AD1E48118700B3923A /* LCReputationViewController.m */,
+				4DFE10091E4AAD1F003250C3 /* LCReputationDetailsViewController.h */,
+				4DFE100A1E4AAD1F003250C3 /* LCReputationDetailsViewController.m */,
 			);
 			path = viewController;
 			sourceTree = "<group>";
@@ -2446,10 +2456,10 @@
 		4DFFA4FD1DB77308003B6178 /* StarView */ = {
 			isa = PBXGroup;
 			children = (
-				4DEC2EE21E35F58900842D02 /* StarsForeground@2x.png */,
-				4DEC2EE01E35F58200842D02 /* StarsBackground@2x.png */,
-				4DFFA5021DB77308003B6178 /* StarView.h */,
-				4DFFA5031DB77308003B6178 /* StarView.m */,
+				4DF13A171E528AE4000BC270 /* starBackground@2x.png */,
+				4DF13A191E528AE9000BC270 /* starForeground@2x.png */,
+				4D0904AF1E4836B500B3923A /* LHStarView.h */,
+				4D0904B01E4836B500B3923A /* LHStarView.m */,
 			);
 			path = StarView;
 			sourceTree = "<group>";
@@ -2617,6 +2627,7 @@
 				4DF343C41E1F6E9E005584CB /* 憨笑.gif in Resources */,
 				4DF343C21E1F6E9E005584CB /* 惊恐.gif in Resources */,
 				4DF343D41E1F6E9E005584CB /* 激动.gif in Resources */,
+				4DF13A1A1E528AE9000BC270 /* starForeground@2x.png in Resources */,
 				4DF343B41E1F6E9E005584CB /* 奋斗.gif in Resources */,
 				4DF343B61E1F6E9E005584CB /* 害羞.gif in Resources */,
 				4DF343981E1F6E9E005584CB /* 偷笑.gif in Resources */,
@@ -2647,7 +2658,6 @@
 				4DF343E51E1F6E9E005584CB /* 糗大了.gif in Resources */,
 				4DF343B81E1F6E9E005584CB /* 左哼哼.gif in Resources */,
 				4DF343A11E1F6E9E005584CB /* 发抖.gif in Resources */,
-				4DEC2EE11E35F58200842D02 /* StarsBackground@2x.png in Resources */,
 				4DF343B11E1F6E9E005584CB /* 大兵.gif in Resources */,
 				4DF343F61E1F6E9E005584CB /* 难过.gif in Resources */,
 				4DF343C01E1F6E9E005584CB /* 快哭了.gif in Resources */,
@@ -2657,6 +2667,7 @@
 				4DF343E41E1F6E9E005584CB /* 篮球.gif in Resources */,
 				4DF343AB1E1F6E9E005584CB /* 哈欠.gif in Resources */,
 				4D7E724C1B9D5CD10048F221 /* LaunchScreen.xib in Resources */,
+				4DF13A181E528AE4000BC270 /* starBackground@2x.png in Resources */,
 				4DF343991E1F6E9E005584CB /* 傲慢.gif in Resources */,
 				4DF3439C1E1F6E9E005584CB /* 凋谢.gif in Resources */,
 				4DF343AC1E1F6E9E005584CB /* 啤酒.gif in Resources */,
@@ -2667,7 +2678,6 @@
 				4DF343A91E1F6E9E005584CB /* 咒骂.gif in Resources */,
 				4DF343C31E1F6E9E005584CB /* 惊讶.gif in Resources */,
 				4DF343941E1F6E9E005584CB /* Thumbs.db in Resources */,
-				4DEC2EE31E35F58900842D02 /* StarsForeground@2x.png in Resources */,
 				4DF343F01E1F6E9E005584CB /* 转圈.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2747,12 +2757,13 @@
 				4DFB4B5B1E0B9EFA000AB10B /* ChartRowModel.m in Sources */,
 				4D259E0C1DF528350039AE2B /* MyComplainDetailsViewController.m in Sources */,
 				4DFB4B981E0BA026000AB10B /* ComplainChartSecondHeaderView.m in Sources */,
+				4DF13AC01E52F734000BC270 /* HttpRequest.m in Sources */,
 				4DF75F2A1D9CE4E000FB882E /* HomepageComplainModel.m in Sources */,
 				4DFB4A991E0B9BC7000AB10B /* ComplainDetailsViewController.m in Sources */,
 				4DF75F211D9CE46100FB882E /* HomepageTableViewController.m in Sources */,
 				4D87CE611C0324E000466A97 /* LHDatePickView.m in Sources */,
 				4D967DCF1DD2F3CF00C1B255 /* ComplainSectionHeaderView.m in Sources */,
-				4DFFA5081DB77308003B6178 /* StarView.m in Sources */,
+				4DF84BFD1E4D5363003C95A7 /* CZWRootToolBar.m in Sources */,
 				4D87CE621C0324E000466A97 /* LHPickerView.m in Sources */,
 				4DEC28B11DF9585300C64CB9 /* NSMutableAttributedString+LHText.swift in Sources */,
 				4DF0EA631DBDA4FF00EFAE58 /* CZWManager.m in Sources */,
@@ -2762,7 +2773,6 @@
 				4DFB4AE21E0B9C30000AB10B /* ReputationCell.m in Sources */,
 				4D38D94A1E276777009B392C /* ChooseTableView.m in Sources */,
 				4DFB4B541E0B9EFA000AB10B /* VehicleImageCell.m in Sources */,
-				4DFB4B741E0B9EFA000AB10B /* SearchViewController.m in Sources */,
 				4DF344371E1F6FF0005584CB /* EditImageViewController.m in Sources */,
 				4DFB4B6D1E0B9EFA000AB10B /* AdvertisementViewController.m in Sources */,
 				4D2578E41DD41583007FC971 /* ComplainTypeCell.m in Sources */,
@@ -2771,7 +2781,6 @@
 				4DDD33471D1A623800F52C0C /* UIFont+LH.m in Sources */,
 				4DFB4B621E0B9EFA000AB10B /* TopCollectionView.m in Sources */,
 				4DFB4B4F1E0B9EFA000AB10B /* VehicleModel.m in Sources */,
-				4DF0EA6B1DBDA58500EFAE58 /* URLFile.m in Sources */,
 				4DFB4AF41E0B9C30000AB10B /* ReplyViewController.m in Sources */,
 				4DFB4B631E0B9EFA000AB10B /* TopCollectionViewCell.m in Sources */,
 				4DFB4ADD1E0B9C30000AB10B /* AnswerDetailsViewController.m in Sources */,
@@ -2848,6 +2857,7 @@
 				4DF75F271D9CE4A600FB882E /* HomepageNewsModel.m in Sources */,
 				4DFB4B5E1E0B9EFA000AB10B /* ChartTableView.m in Sources */,
 				4DF75F481D9CEF0B00FB882E /* HomepageSectionHeaderView.m in Sources */,
+				4D0904B11E4836B500B3923A /* LHStarView.m in Sources */,
 				4DFB4AF31E0B9C30000AB10B /* PostViewController.m in Sources */,
 				4DF344071E1F6EA2005584CB /* FMDatabase.m in Sources */,
 				4DF75F391D9CE5FC00FB882E /* HomepageNewsImageCell.m in Sources */,
@@ -2876,10 +2886,10 @@
 				4DFB4BA51E0BA067000AB10B /* InvestigateChangeViewController.m in Sources */,
 				4DFB4B6A1E0B9EFA000AB10B /* LHToolScrollView.m in Sources */,
 				4DFB4B561E0B9EFA000AB10B /* ImageShowViewController.m in Sources */,
+				4DF4ECC11E45C97B0010E2B5 /* MYSearchViewController.m in Sources */,
 				4D38D9471E270F4B009B392C /* LCSeriesViewController.m in Sources */,
 				4D259DEB1DF527540039AE2B /* MyComplainCell.m in Sources */,
 				4D373B601DB4CF4E00D31455 /* MJDIYHeader.m in Sources */,
-				4D7355491E445B9000C7A74E /* LHDBModel.m in Sources */,
 				4DFB4B531E0B9EFA000AB10B /* CollectionSectionView.m in Sources */,
 				4DFB4B931E0BA026000AB10B /* BezierPathView.m in Sources */,
 				4D259E0D1DF528350039AE2B /* MyComplainViewController.m in Sources */,
@@ -2908,6 +2918,7 @@
 				4DF2C7A11E1DDCCE00C5B24A /* ParameterViewController.m in Sources */,
 				4DCAD2CD1CEC2A8E00A539B2 /* UIViewController+LH.m in Sources */,
 				4D373B5D1DB4CF4E00D31455 /* MJChiBaoZiHeader.m in Sources */,
+				4D0904AE1E48118700B3923A /* LCReputationViewController.m in Sources */,
 				4DFB4B921E0BA026000AB10B /* ComplainChartSecondModel.m in Sources */,
 				4D373B5E1DB4CF4E00D31455 /* MJDIYAutoFooter.m in Sources */,
 				4DFB4A981E0B9BC7000AB10B /* SearchHistoryView.m in Sources */,
@@ -2931,13 +2942,13 @@
 				4DF0EA7F1DBE0E9400EFAE58 /* UIScrollView+TwitterCover.m in Sources */,
 				4DFB4B551E0B9EFA000AB10B /* CehicleChooseViewController.m in Sources */,
 				4DFB4AF51E0B9C30000AB10B /* WritePostViewController.m in Sources */,
+				4DFE100B1E4AAD1F003250C3 /* LCReputationDetailsViewController.m in Sources */,
 				4DFB4B6C1E0B9EFA000AB10B /* NewsTestTableViewCell.m in Sources */,
 				4DFB4B711E0B9EFA000AB10B /* NewsSearchViewController.m in Sources */,
 				4DFB4B951E0BA026000AB10B /* ComplainChartFirstCell.m in Sources */,
 				4DF75F3C1D9CE61F00FB882E /* HomepageComplainCell.m in Sources */,
 				4DFB4BAC1E0BB832000AB10B /* LHSegmentView.m in Sources */,
 				4DFE2F641E14B25700E02112 /* OverviewView.m in Sources */,
-				4DF0EA6A1DBDA58500EFAE58 /* HttpRequest.m in Sources */,
 				4DFB4B641E0B9EFA000AB10B /* UICollectionView+Chart.m in Sources */,
 				4DF3441D1E1F6EA6005584CB /* LHAssetGroupViewController.m in Sources */,
 				4DFB4B911E0BA026000AB10B /* ChartChooseModel.m in Sources */,
@@ -2946,6 +2957,7 @@
 				4DFB4AE51E0B9C30000AB10B /* EditCell.m in Sources */,
 				4D3A1EC01DAC8E3000A9144B /* WriteViewController.m in Sources */,
 				4DFB36F81E28AD1F00E0CFB6 /* LCComplainListViewController.m in Sources */,
+				4DF13AC31E52F8E1000BC270 /* URLFile.m in Sources */,
 				4DFB4B731E0B9EFA000AB10B /* NewsViewController.m in Sources */,
 				4DF344341E1F6FF0005584CB /* ChooseViewController.m in Sources */,
 				4DFB4B571E0B9EFA000AB10B /* MoreImagesViewController.m in Sources */,

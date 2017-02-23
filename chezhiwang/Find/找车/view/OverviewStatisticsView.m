@@ -331,7 +331,7 @@
         changeView = [[StatisticsChangeView alloc] initWithFrame:CGRectMake(10, 39, WIDTH-20, 40) titles:nil];
         __weak __typeof(self)_self = self;
         changeView.click = ^(NSInteger index, NSString *text){
-            if (index > 0 && index < _models.count) {
+            if (index >= 0 && index < _models.count) {
                 [_self setBreak_example:_self.models[index]];
                 [_self resetLayout];
             }

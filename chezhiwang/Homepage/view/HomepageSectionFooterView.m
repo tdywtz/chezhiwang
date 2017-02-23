@@ -64,6 +64,12 @@
     _sectionModel = sectionModel;
     [pushButton setTitle:sectionModel.footTitle forState:UIControlStateNormal];
 }
+
+- (void)noSpace{
+    [pushButton updateConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(0);
+    }];
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

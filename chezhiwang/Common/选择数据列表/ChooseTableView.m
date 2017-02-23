@@ -76,9 +76,10 @@ static NSString * const reuseIdentifier = @"Cell";
     _sectionModels = sectionModels;
 
     if (_isIndex) {
-        if (self.indexView == nil) {
-            [self firstAttributesForMJNIndexView];
+        if (self.indexView) {
+            [self.indexView removeFromSuperview];
         }
+        [self firstAttributesForMJNIndexView];
         self.indexView.dataSource = self;
         self.indexView.frame = self.bounds;
         [self insertSubview:self.indexView aboveSubview:self.tableView];

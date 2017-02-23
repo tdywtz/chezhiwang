@@ -1,15 +1,40 @@
 //
 //  URLFile.m
-//  12365auto
+//  chezhiwang
 //
-//  Created by bangong on 16/5/16.
-//  Copyright © 2016年 车质网. All rights reserved.
+//  Created by bangong on 17/2/14.
+//  Copyright © 2017年 车质网. All rights reserved.
 //
 
 #import "URLFile.h"
 
-@implementation URLFile
+@interface NSString (URLFile)
 
+@end
+
+@implementation NSString (URLFile)
+
+- (NSString *)appendingWithValue:(NSString *)value key:(NSString *)key{
+
+    if (value && key) {
+        return  [NSString stringWithFormat:@"%@&%@=%@",self,key,value];
+    }
+    return self;
+}
+
+- (NSString *)appendingWithPage:(NSInteger)page sum:(NSInteger)sum{
+    if (page > 0 && sum > 0) {
+        return  [NSString stringWithFormat:@"%@&p=%ld&s=%ld",self,page,sum];
+    }
+    return self;
+}
+
+@end
+
+
+
+#pragma mark - ---------------------
+@implementation URLFile
 
 /**车质网专用*/
 + (NSString *)stringForCZWServiceWithAct:(NSString *)act{
@@ -25,7 +50,7 @@
 /**前缀*/
 + (NSString *)prefixString{
 #if DEBUG
-   // return  @"http://m.12365auto.com";
+    // return  @"http://m.12365auto.com";
     return  @"http://192.168.1.114:8888";
 #else
     return  @"http://m.12365auto.com";
@@ -45,7 +70,7 @@
 
 /**登录*/
 + (NSString *)urlStringForLogin{
-    
+
     return [self stringForCommonServiceWithAct:@"act=login"];
 }
 
@@ -156,7 +181,7 @@
         parameter = [NSString stringWithFormat:@"%@&title=%@",parameter,title];
     }
     if (sid) {
-        parameter = [NSString stringWithFormat:@"%@&sid=%@",parameter,sid];
+        parameter = [NSString stringWithFormat:@"%@&id=%@",parameter,sid];
     }
     parameter = [NSString stringWithFormat:@"%@&p=%ld&s=%ld",parameter,p,s];
     return [self stringForCommonServiceWithAct:parameter];
@@ -264,6 +289,7 @@
 + (NSString *)urlStringForPostList{
     return [self stringForCZWServiceWithAct:@"act=bbslist&order=%ld&topic=%ld&p=%ld&s=10"];
 }
+
 /**帖子内容*/
 + (NSString *)urlStringForBBSContent{
     return [NSString stringWithFormat:@"%@%@",[self prefixString],@"/AppServer/forBBSContent.aspx?tid=%@"];
@@ -312,6 +338,7 @@
 + (NSString *)urlString_s_index{
     return [self stringForCommonServiceWithAct:@"act=s_index&sid=%@"];
 }
+
 /**发现-找车-车系综述 - 车型信息 车型故障统计*/
 + (NSString *)urlString_s_index2{
     return [self stringForCommonServiceWithAct:@"act=s_index2&sid=%@"];
@@ -320,6 +347,61 @@
 /**发现-找车-投诉头部 满意度&回复率*/
 + (NSString *)url_s_complainWithSid:(NSString *)sid{
     NSString *parameter = [NSString stringWithFormat:@"act=s_complain&sid=%@",sid];
+    return [self stringForCommonServiceWithAct:parameter];
+}
+
+/**发现-口碑 - 赞*/
++ (NSString *)url_reputationZanWithID:(NSString *)Id{
+    NSString *parameter = @"act=reputationZan";
+    parameter = [parameter appendingWithValue:Id key:@"id"];
+    return [self stringForCommonServiceWithAct:parameter];
+}
+
+/**发现-口碑列表*/
++ (NSString *)url_reputationlistWithBid:(NSString *)bid
+                                    sid:(NSString *)sid
+                                    mid:(NSString *)mid
+                                     ID:(NSString *)Id
+                                 iOrder:(NSString *)iOrder
+                                      p:(NSInteger)p
+                                      s:(NSInteger)s{
+    NSString *parameter = @"act=reputationlist";
+    parameter = [parameter appendingWithValue:bid key:@"bid"];
+    parameter = [parameter appendingWithValue:sid key:@"sid"];
+    parameter = [parameter appendingWithValue:mid key:@"mid"];
+    parameter = [parameter appendingWithValue:Id key:@"id"];
+    parameter = [parameter appendingWithValue:iOrder key:@"iOrder"];
+    parameter = [parameter appendingWithPage:p sum:s];
+    return [self stringForCommonServiceWithAct:parameter];
+}
+
++ (NSString *)url_reputationlistWithSid:(NSString *)sid
+                                 iOrder:(NSString *)iOrder
+                                      p:(NSInteger)p
+                                      s:(NSInteger)s{
+    return [self url_reputationlistWithBid:nil sid:sid mid:nil ID:nil iOrder:iOrder p:p s:s];
+}
+
++ (NSString *)url_s_reputationWithSid:(NSString *)sid{
+    NSString *parameter = @"act=s_reputation";
+    parameter = [parameter appendingWithValue:sid key:@"sid"];
+    return [self stringForCommonServiceWithAct:parameter];
+}
+
+/**发现-口碑 - 评论列表*/
++ (NSString *)url_reputationPLWithID:(NSString *)Id
+                                   p:(NSInteger)p
+                                   s:(NSInteger)s{
+    NSString *parameter = @"act=reputationPL";
+    parameter = [parameter appendingWithValue:Id key:@"id"];
+    parameter = [parameter appendingWithPage:p sum:s];
+    return [self stringForCommonServiceWithAct:parameter];
+}
+
+/**发现-口碑 - 评论*/
++ (NSString *)url_reputationReplyWithID:(NSString *)Id{
+    NSString *parameter = @"act=reputationReply";
+    parameter = [parameter appendingWithValue:Id key:@"id"];
     return [self stringForCommonServiceWithAct:parameter];
 }
 
@@ -443,5 +525,4 @@
     //bid-品牌，sid-车系，mid-车型
     return [self stringForCZWServiceWithAct:@"act=dbInfo&bid=%@&sid=%@&mid=%@"];
 }
-
 @end

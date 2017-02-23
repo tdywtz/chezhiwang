@@ -110,41 +110,55 @@
 #pragma mark - 点击注册
 -(void)registerClick:(UIButton *)btn{
     [self.view endEditing:YES];
-    
+
+    if (!userNameTextField.text.length){
+        [self alert:@"请输入用户名"];
+        return;
+    }
+    if ([NSString isNumber:userNameTextField.text]) {
+        [self alert:@"用户名不能是纯数字"];
+        return;
+    }
+    if (userNameTextField.text.length < 4 || userNameTextField.text.length > 20) {
+        [self alert:@"用户名必须在4-20个字符之间"];
+        return;
+    }
+    if (![LHController judegmentChar:userNameTextField.text]){
+        [self alert:@"用户名只能包含汉字、字母、数字"];
+        return;
+    }
+
+    if (!passwordTextField.text.length){
+        [self alert:@"请输入密码"];
+        return;
+    }
+
     if (![passwordTextField.text isEqualToString:certainPassword.text]) {
         [self alert:@"两次密码输入不匹配，请重新输入"];
-    }else if (!userNameTextField.text.length){
-        [self alert:@"请输入用户名"];
-    }else if (!passwordTextField.text.length){
-        [self alert:@"请输入密码"];
-    }else{
-        if (passwordTextField.text.length < 6 || passwordTextField.text.length > 20) {
-            [self alert:@"密码长度需在6到20个字符之间"];
-            return;
-        }
-        if (userNameTextField.text.length < 4 || userNameTextField.text.length > 20) {
-            [self alert:@"用户名必须在4-20个字符之间"];
-        }
-        
-        if (![LHController judegmentChar:userNameTextField.text]){
-            [self alert:@"用户名只能包含汉字、字母、数字"];
-            return;
-        }
+        return;
+    }
+
+    if (passwordTextField.text.length < 6 || passwordTextField.text.length > 20) {
+        [self alert:@"密码长度需在6到20个字符之间"];
+        return;
+    }
+
+    if (![self password:passwordTextField.text]){
+        [self alert:@"密码不能是完全一样的字符"];
+        return;
+    }
+
+
+
         if (![LHController emailTest:addressTextFeild.text]){
             if(addressTextFeild.text.length == 0)
                 [self alert:@"邮箱不能为空"];
+
             else
                 [self alert:@"邮箱格式不正确"];
             return;
         }
-        
-        if (![self password:passwordTextField.text]){
-            [self alert:@"密码不能是完全一样的字符"];
-            return;
-        }
-        
-         [self registerData];
-    }
+    [self registerData];
 }
 
 -(BOOL)password:(NSString *)str{

@@ -25,6 +25,7 @@
 #import "ComplainListViewController.h"
 #import "ReputationViewController.h"
 #import "ComplainDetailsViewController.h"
+#import "LCReputationDetailsViewController.h"
 
 @interface OverviewViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -44,6 +45,7 @@
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.backgroundColor = [UIColor clearColor];
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.estimatedRowHeight = 200;
 
     [self.view addSubview:_tableView];
@@ -74,21 +76,22 @@
     complainSectionModel.headLineColor = colorYellow;
     complainSectionModel.pushClass = [ComplainListViewController class];
 
-//    HomepageSectionModel *three = [[HomepageSectionModel alloc] init];
-//    three.headTitle = @"口碑";
-//    three.headImageName = @"投诉";
-//    three.footTitle = @"更多口碑";
-//    three.headLineColor = colorGreen;
-//    three.pushClass = [ReputationViewController class];
-//    [three.rowModels addObject:[[NSObject alloc] init]];
+    HomepageSectionModel *three = [[HomepageSectionModel alloc] init];
+    three.headTitle = @"口碑";
+    three.headImageName = @"口碑";
+    three.footTitle = @"更多口碑";
+    three.headLineColor = colorGreen;
+    three.pushClass = [ReputationViewController class];
+    [three.rowModels addObject:[[NSObject alloc] init]];
 
-    _dataArray = @[one,complainSectionModel];
+    _dataArray = @[one,complainSectionModel,three];
 
 
     [self loadDataScore];//评分
     [self loadDataStatistics];//故障统计
     [self loadNewsData];
     [self loadComplainData];
+    [self loadReputationData];
 }
 
 
@@ -140,6 +143,17 @@
     } failure:^(NSError *error) {
         
     }];
+}
+
+- (void)loadReputationData{
+    [HttpRequest GET:[URLFile url_reputationlistWithSid:_seriesID iOrder:nil p:1 s:1] success:^(id responseObject) {
+        HomepageSectionModel *sectionModel = _dataArray[2];
+        sectionModel.rowModels = [ReputationModel mj_objectArrayWithKeyValuesArray:responseObject[@"rel"]];
+        [_tableView reloadData];
+    } failure:^(NSError *error) {
+
+    }];
+
 }
 
 #pragma mark - UITableViewDataSource
@@ -222,6 +236,11 @@
         detail.cid = model.cpid;
         [self.navigationController pushViewController:detail animated:YES];
 
+    }else if (indexPath.section == 2){
+        ReputationModel *model = sectionModel.rowModels[indexPath.row];
+        LCReputationDetailsViewController *detail = [[LCReputationDetailsViewController alloc] init];
+        detail.ID = model.ID;
+        [self.navigationController pushViewController:detail animated:YES];
     }
 }
 
@@ -236,6 +255,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     HomepageSectionModel *sectionModel = _dataArray[section];
     HomepageSectionFooterView *footer = [[HomepageSectionFooterView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 40)];
+    [footer noSpace];
     footer.sectionModel = sectionModel;
     __weak __typeof(self)_self = self;
    [footer setClick:^{
@@ -247,7 +267,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 40;
+    return 60;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{

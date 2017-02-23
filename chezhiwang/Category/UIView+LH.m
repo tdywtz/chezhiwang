@@ -106,17 +106,19 @@
 
 
 - (UIImage *)imageWithFrame:(CGRect)frame{
-    CGFloat width = self.frame.size.width;
-    CGFloat height = self.frame.size.height;
+    UIImage *viewImage = [self getImage];
+    CGImageRef resultRef = CGImageCreateWithImageInRect(viewImage.CGImage, frame);
+    UIImage *result = [UIImage imageWithCGImage:resultRef];
+    return result;
+}
 
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(width, height), NO, 0.0);
+- (UIImage *)getImage{
+    UIGraphicsBeginImageContextWithOptions(self.frame.size, NO, 0.0);
     //设置截屏大小
     [[self layer] renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
 
-    CGImageRef resultRef = CGImageCreateWithImageInRect(viewImage.CGImage, frame);
-    UIImage *result = [UIImage imageWithCGImage:resultRef];
-    return result;
+    return viewImage;
 }
 @end

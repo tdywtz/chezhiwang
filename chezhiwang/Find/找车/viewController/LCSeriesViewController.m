@@ -7,11 +7,14 @@
 //
 
 #import "LCSeriesViewController.h"
+
 #import "LHPageViewcontroller.h"
 #import "LHToolScrollView.h"
+
 #import "OverviewViewController.h"
 #import "ParameterViewController.h"
 #import "LCComplainListViewController.h"
+#import "LCReputationViewController.h"
 #import "AnswerViewController.h"
 #import "NewsListViewController.h"
 #import "ForumClassifyListViewController.h"
@@ -37,7 +40,7 @@
   
     toolView = [[LHToolScrollView alloc] initWithFrame:CGRectMake(0, 64, WIDTH, 44)];
     toolView.LHDelegate = self;
-    toolView.titles =  @[@"综述",@"车型参数",@"投诉",@"答疑",@"新闻",@"评测",@"论坛"];
+    toolView.titles =  @[@"综述",@"车型参数",@"投诉",@"口碑",@"答疑",@"新闻",@"评测",@"论坛"];
     toolView.current = 0;
     toolView.backgroundColor = [UIColor whiteColor];
 
@@ -54,14 +57,17 @@
     __weak __typeof(toolView) weakToolView = toolView;
     __weak __typeof(pageViewController) weakPageViewController = pageViewController;
     [vc setMoreClick:^(NSInteger idx) {
+        NSInteger index = 0;
         if (idx == 0) {
-            weakToolView.current = 4;
-            [weakPageViewController setViewControllerWithCurrent:4];
+            index = 5;
+        }else if(idx == 1){
+           index = 2;
         }else{
-            weakToolView.current = 2;
-            [weakPageViewController setViewControllerWithCurrent:2];
+           index = 3;
         }
-        [_self setRightItem:idx];
+        weakToolView.current = index;
+        [weakPageViewController setViewControllerWithCurrent:index];
+        [_self setRightItem:index];
     }];
     [array addObject:vc];
 
@@ -75,6 +81,12 @@
     complain.contentInsets = insets;
     complain.sid = self.seriesID;
     [array addObject:complain];
+
+    LCReputationViewController *reputation = [[LCReputationViewController alloc] init];
+    reputation.contentInsets = insets;
+    reputation.sid = self.seriesID;
+    [array addObject:reputation];
+    
 
     AnswerViewController *answer = [[AnswerViewController alloc] init];
     answer.contentInsets = insets;
@@ -130,33 +142,40 @@
 
 
 - (void)deleteText{
-   toolView.titles =  @[@"综述",@"车型参数",@"投诉",@"答疑",@"新闻",@"论坛"];
+
+
+    NSMutableArray *titles = [toolView.titles mutableCopy];
+    [titles removeObjectAtIndex:titles.count - 2];
+    toolView.titles = titles;
+    toolView.current = 0;
+
     NSMutableArray *marr = [pageViewController.controllers mutableCopy];
-    [marr removeObjectAtIndex:marr.count - 1];
+    [marr removeObjectAtIndex:marr.count - 2];
     pageViewController.controllers = marr;
     [pageViewController setViewControllerWithCurrent:0];
 }
 
 
 - (void)setRightItem:(NSInteger)index{
-    if (index == 0 || index == 1 || index == 6 || index == 4) {
-        self.navigationItem.rightBarButtonItem = nil;
-    }else{
+
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.tag = 100 + index;
         NSString *imageName;
         if (index == 2){
             imageName = @"auto_投诉列表_投诉";
-        }else if (index == 3){
+        }else if (index == 4){
             imageName = @"answer_question_right";
-        }else if (index == 5 && pageViewController.controllers.count == 7){
+        }else if (index == 6 && pageViewController.controllers.count == 8){
             imageName = @"comment_转发";
+        }else{
+            self.navigationItem.rightBarButtonItem = nil;
+            return;
         }
         [btn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
         btn.frame = CGRectMake(0, 0, 20, 20);
         [btn addTarget:self action:@selector(rightItemClick:) forControlEvents:UIControlEventTouchUpInside];
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
-    }
+
 }
 
 - (void)rightItemClick:(UIButton *)btn{
@@ -169,7 +188,7 @@
 
             [self presentViewController:[LoginViewController instance] animated:YES completion:nil];
         }
-    }else if (btn.tag == 103){
+    }else if (btn.tag == 104){
         if ([CZWManager manager].isLogin) {
             AskViewController *ask = [[AskViewController alloc] init];
             ask.hidesBottomBarWhenPushed = YES;
@@ -178,8 +197,8 @@
 
             [self presentViewController:[LoginViewController instance] animated:YES completion:nil];
         }
-    }else if (btn.tag == 105){
-        NewsDetailViewController *detail = pageViewController.controllers[5];
+    }else if (btn.tag == 106){
+        NewsDetailViewController *detail = pageViewController.controllers[6];
         if ([detail respondsToSelector:@selector(shareWeb)]) {
             [detail shareWeb];
         }

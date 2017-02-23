@@ -15,4 +15,5 @@
 @property (nonatomic,weak) UIViewController *parentVC;
 @property (nonatomic,copy) void (^click)();
 
+- (void)noSpace;
 @end

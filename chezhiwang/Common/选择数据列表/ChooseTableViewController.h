@@ -16,6 +16,11 @@
 @property (nonatomic,copy) NSString *title;
 @property (nonatomic,strong) NSArray <__kindof ChooseTableViewModel*> *rowModels;
 
++ (void)brand:(void(^)(NSArray <ChooseTableViewSectionModel *> *))result;
++ (void)seriesWithBid:(NSString *)bid result:(void(^)(NSArray <ChooseTableViewSectionModel *> *))result;
++ (void)modelWithSid:(NSString *)sid result:(void(^)(NSArray <ChooseTableViewSectionModel *> *))result;
+
+
 @end
 
 @interface ChooseTableViewModel : NSObject

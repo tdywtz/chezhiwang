@@ -8,7 +8,7 @@
 
 #import "ContrastChartViewController.h"
 #import "ChartView.h"
-#import "StarView.h"
+#import "LHStarView.h"
 
 @interface ContrastChartViewController ()
 {
@@ -229,7 +229,7 @@
 }
 
 - (UIImage *)starIamge:(CGFloat)star{
-    StarView *starView = [[StarView alloc] initWithFrame:CGRectMake(0, 0, 75, 23)];
+    LHStarView *starView = [[LHStarView alloc] initWithFrame:CGRectZero];
     starView.backgroundColor = [UIColor whiteColor];
     [starView setStar:star];
     UIImage *image = [self imageWithView:starView];

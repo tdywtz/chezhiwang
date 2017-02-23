@@ -22,4 +22,6 @@
 
 - (UIImage *)imageWithFrame:(CGRect)frame;
 
+- (UIImage *)getImage;
+
 @end
