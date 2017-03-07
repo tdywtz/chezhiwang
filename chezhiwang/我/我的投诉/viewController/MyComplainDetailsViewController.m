@@ -331,7 +331,13 @@
     [self.scrollView addSubview:chooseView];
     [self.scrollView addSubview:promtView];
     [self.scrollView addSubview:detailsView];
-    [self.scrollView addSubview:bottomLabel];
+    [self.view addSubview:bottomLabel];
+
+    self.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 45, 0);
+    
+    bottomLabel.lh_left = 0;
+    bottomLabel.lh_size = CGSizeMake(WIDTH, 45);
+    bottomLabel.lh_bottom = HEIGHT;
 
     [self loadHeaderData];
     [self loadData];
@@ -352,21 +358,21 @@
     if (showLeft) {
         promtView.hidden = NO;
         detailsView.hidden = YES;
-
-        bottomLabel.lh_left = 0;
-        bottomLabel.lh_top = promtView.lh_bottom;
-        bottomLabel.lh_size = CGSizeMake(WIDTH, 45);
+ self.scrollView.contentSize = CGSizeMake(0, promtView.lh_bottom);
+//        bottomLabel.lh_left = 0;
+//        bottomLabel.lh_top = promtView.lh_bottom;
+//        bottomLabel.lh_size = CGSizeMake(WIDTH, 45);
     }else{
         promtView.hidden = YES;
         detailsView.hidden = NO;
-
-        bottomLabel.lh_left = 0;
-        bottomLabel.lh_top = detailsView.lh_bottom;
-        bottomLabel.lh_size = CGSizeMake(WIDTH, 45);
+ self.scrollView.contentSize = CGSizeMake(0, detailsView.lh_bottom);
+//        bottomLabel.lh_left = 0;
+//        bottomLabel.lh_top = detailsView.lh_bottom;
+//        bottomLabel.lh_size = CGSizeMake(WIDTH, 45);
 
     }
 
-    self.scrollView.contentSize = CGSizeMake(0, bottomLabel.lh_bottom);
+
 }
 
 #pragma mark - 注册通知

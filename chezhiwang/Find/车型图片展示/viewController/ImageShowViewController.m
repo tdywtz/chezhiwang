@@ -241,7 +241,7 @@
 - (UIView *)pageView:(LHPageView *)pageView viewBeforeView:(UIView *)view{
     NSInteger index = [_viewArray indexOfObject:view];
     index--;
-    if (index >= 0) {
+    if (index >= 0 && index < _viewArray.count) {
         UIImageView *imageView = (UIImageView *)_viewArray[index];
         NSURL *url = [NSURL URLWithString:self.imageUrlArray[index][@"url"]];
         [imageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"defaultImage_icon"]];

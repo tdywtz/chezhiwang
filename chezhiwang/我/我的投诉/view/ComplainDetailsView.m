@@ -398,10 +398,9 @@
     CGRect tempRect = sectionView1.frame;
     for (int i = 0; i < arr1.count; i ++) {
 
-        UILabel *label = [self labelWithName:noeArray[i] content:detailsDict[arr1[i]]];
+        YYLabel *label = [self labelWithName:noeArray[i] content:detailsDict[arr1[i]]];
         [self addSubview:label];
 
-        [self addSubview:label];
         label.lh_left = 10;
         label.lh_top = tempRect.origin.y + tempRect.size.height + 15;
 
@@ -416,10 +415,9 @@
 
     for (int i = 0; i < arr2.count; i ++) {
 
-        UILabel *label = [self labelWithName:twoArray[i] content:detailsDict[arr2[i]]];
+        YYLabel *label = [self labelWithName:twoArray[i] content:detailsDict[arr2[i]]];
         [self addSubview:label];
 
-        [self addSubview:label];
         label.lh_left = 10;
         label.lh_top = tempRect.origin.y + tempRect.size.height + 15;
 
@@ -438,16 +436,13 @@
         if (i >= 2) {
             content = [NSString stringWithFormat:@"\n%@",content?content:@""];
         }
-        UILabel *label = [self labelWithName:name content:content];
+        YYLabel *label = [self labelWithName:name content:content];
         [self addSubview:label];
 
         label.lh_left = 10;
         label.lh_top = tempRect.origin.y + tempRect.size.height + 15;
-        if (i >= 2) {
-            tempRect = [self addLineWith:CGRectMake(0, label.lh_bottom+15, WIDTH, 0)];
-        }else{
-            tempRect = [self addLineWith:label.frame];
-        }
+
+        tempRect = [self addLineWith:label.frame];
 
     }
 
@@ -461,16 +456,17 @@
     [self addSubview:view];
 
     view.lh_left = 0;
-    view.lh_top = tempRect.origin.y + tempRect.size.height;
+    view.lh_top = tempRect.origin.y + tempRect.size.height + 15;
     view.lh_size = CGSizeMake(WIDTH, 1);
 
     return view.frame;
 }
 
-- (UILabel *)labelWithName:(NSString *)name content:(NSString *)contet{
+- (YYLabel *)labelWithName:(NSString *)name content:(NSString *)contet{
 
-    UILabel *label = [[UILabel alloc] init];
+    YYLabel *label = [[YYLabel alloc] init];
     label.lh_width = WIDTH - 20;
+    label.lh_height = 1000;
     label.numberOfLines = 0;
     label.attributedText = [self attributeWithName:name content:contet];
     [label sizeToFit];

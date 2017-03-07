@@ -236,10 +236,10 @@
             POPBasicAnimation *animation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerSize];
             animation.duration = 0.1;
             [animation setCompletionBlock:^(POPAnimation *anim, BOOL finish) {
-                if (finish) {
+
                     [imageView removeFromSuperview];
                     view.hidden = NO;
-                }
+                
             }];
             animation.toValue = [NSValue valueWithCGSize:view.lh_size];
             [imageView pop_addAnimation:animation forKey:@"size"];

@@ -137,7 +137,7 @@
         attribute.lh_paragraphSpacing = 5;
 
         CGFloat width = self.lh_width - _leftSpace - _rightSpace;
-        CGSize size = [attribute sizeWithSize:CGSizeMake(width, CGFLOAT_MAX)];
+        CGSize size = [attribute boundingRectWithSize:CGSizeMake(width, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin context:nil].size;
         CGRect rect = CGRectMake(_leftSpace, 0, size.width, size.height);
         if (i == 0) {
             rect.origin.y = _lineSpace;
@@ -185,6 +185,7 @@
         
         ListModel *model = _listModels[i];
         [model.attribute drawInRect:model.textFrame];
+
         if (i < _listModels.count-1) {
             CGContextSetStrokeColorWithColor(context, _lineColor.CGColor);
             CGContextSetFillColorWithColor(context, _lineColor.CGColor);

@@ -32,7 +32,7 @@ import UIKit
 extension NSAttributedString {
     func size(size: CGSize) -> CGSize {
 
-        return   boundingRect(with: size, options: [.usesDeviceMetrics,.usesLineFragmentOrigin], context: nil).size
+        return   boundingRect(with: size, options: [.usesLineFragmentOrigin], context: nil).size
     }
 
     func userSize(width: CGFloat) -> CGSize {

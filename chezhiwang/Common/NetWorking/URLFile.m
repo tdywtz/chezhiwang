@@ -24,7 +24,7 @@
 
 - (NSString *)appendingWithPage:(NSInteger)page sum:(NSInteger)sum{
     if (page > 0 && sum > 0) {
-        return  [NSString stringWithFormat:@"%@&p=%ld&s=%ld",self,page,sum];
+        return  [NSString stringWithFormat:@"%@&p=%ld&s=%ld",self,(long)page,(long)sum];
     }
     return self;
 }
