@@ -70,7 +70,7 @@
         return;
     }
 
-    if (_point.x+30 > WIDTH) {
+    if (_point.x+40 > WIDTH) {
         _point = CGPointMake(0, _point.y+25);
     }
     CGFloat x;
@@ -91,8 +91,6 @@
 
     for (int i = 0; i < fwtd.count; i ++) {
          NSDictionary *dict = fwtd[i];
-
-
 
         UILabel *labelServer = [self labelWithText:dict[@"bw"] backColor:colorGreen borderColor:nil];
         [self upDataPint:labelServer.lh_width];

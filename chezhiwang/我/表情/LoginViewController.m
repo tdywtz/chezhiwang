@@ -18,7 +18,6 @@
     UITextField *_userName;
     UITextField *_passWord;
     UIButton *logoin;
-    CGFloat B;
 }
 @end
 
@@ -35,13 +34,18 @@
 
     [self createLeftItemBack];
     self.view.backgroundColor = RGB_color(240, 240, 240, 1);
-    B = [LHController setFont];
     self.navigationItem.title = @"登录";
 
     [self createRightItem];
     [self createField];
     [self createLogoin];
     [self keyboardNotificaion];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldTextDidChange:) name:UITextFieldTextDidChangeNotification object:nil];
+}
+
+- (void)textFieldTextDidChange:(NSNotification *)noti{
+    UITextField *text = noti.object;
+    text.text = [text.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 }
 
 - (void)viewDidLayoutSubviews{
@@ -66,7 +70,7 @@
     btn.frame = CGRectMake(0, 0, 35, 20);
     [btn setTitle:@"注册" forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    btn .titleLabel.font = [UIFont boldSystemFontOfSize:B-1];
+    btn .titleLabel.font = [UIFont boldSystemFontOfSize:16];
     [btn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
 
 
@@ -112,12 +116,12 @@
 
 #pragma mark - createLogoin
 -(void)createLogoin{
-    logoin =  [LHController createButtnFram:CGRectMake(10, _passWord.frame.origin.y+_passWord.frame.size.height+60, WIDTH-20, 40) Target:self Action:@selector(logoinClick) Font:B Text:@"点击登录"];
+    logoin =  [LHController createButtnFram:CGRectMake(10, _passWord.frame.origin.y+_passWord.frame.size.height+60, WIDTH-20, 40) Target:self Action:@selector(logoinClick) Font:17 Text:@"点击登录"];
 
     [self.scrollView addSubview:logoin];
 
     UIButton *button = [LHController createButtnFram:CGRectMake(0, 300, 30, 30) Target:self Action:@selector(buttonClick) Text:@"找回密码"];
-    button.titleLabel.font = [UIFont systemFontOfSize:B];
+    button.titleLabel.font = [UIFont systemFontOfSize:17];
     [button setTitleColor:colorLightBlue forState:UIControlStateNormal];
     [self.scrollView addSubview:button];
 

@@ -65,7 +65,7 @@
     field.clearButtonMode = YES;
     field.textColor = colorBlack;
     //关闭首字母大写
-    field.autocapitalizationType=NO;
+    field.autocapitalizationType = NO;
     field.delegate = delegate;
    // UIView *leftview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, frame.size.height)];
     field.leftViewMode = UITextFieldViewModeAlways;

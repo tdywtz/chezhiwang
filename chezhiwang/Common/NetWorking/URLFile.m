@@ -38,34 +38,42 @@
 
 /**车质网专用*/
 + (NSString *)stringForCZWServiceWithAct:(NSString *)act{
-    return [NSString stringWithFormat:@"%@%@%@",[self prefixString],@"/AppServer/forCZWService.ashx?",act];
+    return [NSString stringWithFormat:@"%@%@%@",[self prefixString],@"/forCZWService.ashx?",act];
 }
 
 /**公用*/
 + (NSString *)stringForCommonServiceWithAct:(NSString *)act{
-    return [NSString stringWithFormat:@"%@%@%@",[self prefixString],@"/AppServer/forCommonService.ashx?",act];
+    return [NSString stringWithFormat:@"%@%@%@",[self prefixString],@"/forCommonService.ashx?",act];
 }
 
 
 /**前缀*/
 + (NSString *)prefixString{
+
 #if DEBUG
-    // return  @"http://m.12365auto.com";
-    return  @"http://192.168.1.114:8888";
+    NSString *base = [[NSUserDefaults standardUserDefaults] objectForKey:URL_PrefirString_debug];
+    if (base.length) {
+        return base;
+    }
+    return  @"http://192.168.1.114:8888/AppServer";
 #else
-    return  @"http://m.12365auto.com";
+    NSString *base = [[NSUserDefaults standardUserDefaults] objectForKey:URL_PrefirString_release];
+    if (base.length) {
+        return base;
+    }
+    return  @"http://m.12365auto.com/AppServer";
 #endif
 }
 
 #pragma mark - 接口-——————————》》》》》
 /**注册协议*/
 + (NSString *)urlStringRegistrationAgreement{
-    return [NSString stringWithFormat:@"%@%@",[self prefixString],@"/user/agreeForIOS.shtml"];
+    return @"http://m.12365auto.com/user/agreeForIOS.shtml";
 }
 
 //广告
 + (NSString *)url_DTopAdv{
-    return [NSString stringWithFormat:@"%@%@",[self prefixString],@"/AppServer/forAdvService.ashx?act=czw_dt"];
+    return [NSString stringWithFormat:@"%@%@",[self prefixString],@"/forAdvService.ashx?act=czw_dt"];
 }
 
 /**登录*/
@@ -88,10 +96,12 @@
     // mid  车型
     return [self stringForCZWServiceWithAct:@"act=modelPicList"];
 }
+
 /**车型图片-品牌大全*/
 + (NSString *)urlString_picBrand{
     return [self stringForCZWServiceWithAct:@"act=picBrand"];
 }
+
 /*车型图片-车系大全*/
 + (NSString *)urlString_picSeries{
     return [self stringForCZWServiceWithAct:@"act=picSeries&bid=%@"];
@@ -292,7 +302,7 @@
 
 /**帖子内容*/
 + (NSString *)urlStringForBBSContent{
-    return [NSString stringWithFormat:@"%@%@",[self prefixString],@"/AppServer/forBBSContent.aspx?tid=%@"];
+    return [NSString stringWithFormat:@"%@%@",[self prefixString],@"/forBBSContent.aspx?tid=%@"];
 }
 
 /**论坛分类->品牌论坛->指定论坛*/
@@ -520,9 +530,11 @@
     //不传参数则为左侧第一列名称，传参数则为右边值
     return [self stringForCZWServiceWithAct:@"act=mConfig"];
 }
+
 /**对比-车型故障信息*/
 + (NSString *)urlString_dbInfo{
     //bid-品牌，sid-车系，mid-车型
     return [self stringForCZWServiceWithAct:@"act=dbInfo&bid=%@&sid=%@&mid=%@"];
 }
+
 @end

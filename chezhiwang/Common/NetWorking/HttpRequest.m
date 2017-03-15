@@ -10,6 +10,14 @@
 #import "AFNetworking.h"
 #import <netinet/in.h>
 
+@interface HttpRequest ()<NSXMLParserDelegate>
+
+@property (nonatomic, strong) NSMutableArray *saxArray;
+@property (nonatomic, strong) NSMutableDictionary *saxDic;
+@property (nonatomic, strong) NSMutableString *valueString;
+
+@end
+
 @implementation HttpRequest
 
 /**检测网络是否可用*/
@@ -190,5 +198,123 @@
 
     return nil;
 }
+
+
+- (void)updatePrefix{
+    NSString *url = @"http://m.12365auto.com/version/interfaceprefix.xml";
+#if DEBUG
+    url = @"http://192.168.1.114:8888/version/interfaceprefix.xml";
+#endif
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+    request.HTTPMethod = @"GET";
+
+
+    NSURLSessionDataTask *dataTask = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        // NSLog(@"data-----%@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+        //NSLog(@"第一次线程：%@",[NSThread currentThread]);
+
+        //创建sax解析的工具类对象
+        NSXMLParser *saxParser = [[NSXMLParser alloc] initWithData:data];
+        // 指定代理
+        saxParser.delegate = self;
+        //  开始解析  sax解析是一个同步的过程
+        BOOL isParse = [saxParser parse];
+        if (isParse) {
+
+            NSLog(@"解析完成");
+        }else{
+            NSLog(@"解析失败");
+        }
+
+    }];
+    [dataTask resume];
+}
+
+#pragma mark - xml
+//开始解析的代理方法
+-(void)parserDidStartDocument:(NSXMLParser *)parser {
+    NSLog(@"开始解析");
+    self.saxArray = [NSMutableArray array];
+}
+
+//开始解析某个节点
+//elementName:标签名称
+//namespaceURI:命名空间指向的链接
+//qName:命名空间的名称
+//attributeDict:节点的所有属性
+-(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary<NSString *,NSString *> *)attributeDict {
+    NSLog(@"开始解析%@节点",elementName);
+    //当开始解析student标签的时候,就应该初始化字典,因为一个字典就对应的是一个学生的信息
+    if ([elementName isEqualToString:@"auto"]) {
+        self.saxDic = [NSMutableDictionary dictionary];
+    }
+}
+//获取节点之间的值
+-(void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
+    NSLog(@"取值--------%@",string);
+    if (self.valueString) {//说明有值
+        [self.valueString appendString:string];
+    } else {
+        self.valueString = [NSMutableString stringWithString:string];
+    }
+}
+//某个节点结束取值
+
+
+-(void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
+    if ([elementName isEqualToString:@"versionNumber"]) {//说明name节点已经取值结束
+        [self.saxDic setObject:self.valueString forKey:elementName];
+    }
+    if ([elementName isEqualToString:@"appName"]) {
+        [self.saxDic setObject:self.valueString forKey:elementName];
+    }
+    if ([elementName isEqualToString:@"url"]) {
+        [self.saxDic setObject:self.valueString forKey:elementName];
+    }
+    if ([elementName isEqualToString:@"reason01"]) {
+        [self.saxArray addObject:self.valueString];
+    }
+    if ([elementName isEqualToString:@"reason02"]) {
+        [self.saxArray addObject:self.valueString];
+    }
+    self.valueString = nil;//置空
+    NSLog(@"结束%@节点的解析",elementName);
+}
+
+
+//结束解析
+
+
+-(void)parserDidEndDocument:(NSXMLParser *)parser {
+    //可以使用解析完成的数据
+    NSLog(@"===%@",self.saxArray);
+    NSLog(@"%@",self.saxDic);
+    NSLog(@"整个解析结束");
+    NSString *url = self.saxDic[@"url"];
+    url = [url stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    if ([url hasSuffix:@"/"]) {
+        url =  [url stringByReplacingCharactersInRange:NSMakeRange(url.length - 1, 1) withString:@""];
+    }
+    if (url.length) {
+#if DEBUG
+         [[NSUserDefaults standardUserDefaults] setObject:url forKey:URL_PrefirString_debug];
+#else
+         [[NSUserDefaults standardUserDefaults] setObject:url forKey:URL_PrefirString_release];
+#endif
+    }
+
+    self.saxDic = nil;
+    self.saxArray = nil;
+
+}
+
+
+//解析出错
+
+
+-(void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
+    NSLog(@"解析出现错误-------%@",parseError.description);
+}
+
 
 @end

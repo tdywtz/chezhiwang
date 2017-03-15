@@ -60,6 +60,8 @@
 #endif
 
 #define APPLICATIONDIDBECOMEACTIVE @"APPLICATIONDIDBECOMEACTIVE" 
+#define URL_PrefirString_release @"URL_PrefirString_release"//接口前缀
+#define URL_PrefirString_debug @"URL_PrefirString_release"//接口前缀
 
 #define appOrigin @"7"//APP标识
 #define THE_APPID @"1059672225"//AppStore

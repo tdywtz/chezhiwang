@@ -22,7 +22,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-
+//    char * a[] = {"sdg","dddd","rtghj"};
+//    int count  = sizeof(a)/sizeof(a[0]);
+//    for (int i  = 0; i < count; i ++) {
+//        printf("===%s",*(a+i));
+//    }
     CZWAppPrompt *prompt = [CZWAppPrompt sharedInstance];
     prompt.appId = THE_APPID;
     [prompt shouAlert:AppPromptStyleScore];
@@ -32,6 +36,8 @@
     _window.rootViewController = cus;
 
 
+    HttpRequest *hr = [[HttpRequest alloc] init];
+    [hr updatePrefix];
     //友盟统计
     [self um_analyics];
     //友盟分享
@@ -104,9 +110,9 @@
 
     [[UMSocialManager defaultManager] setUmSocialAppkey:@"55f8e766e0f55a5cb5001444"];
     //QQ
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"1104889760" appSecret:nil redirectURL:@"http://www.12365auto.com"];
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"1105499488" appSecret:@"qYxvM0QKjkd58Ye5" redirectURL:@"http://www.12365auto.com"];
     //微信
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatTimeLine appKey:@"wxfdc8e48568025b98" appSecret:@"2a61fc9735d8fbd1dbd946e8fb6b14ce" redirectURL:@"http://www.12365auto.com"];
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatTimeLine appKey:@"wxfb5a87287bee3ff9" appSecret:@"7d2efe456ae851b688dfc751c807088b" redirectURL:@"http://www.12365auto.com"];
     //新浪微博
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:@"2288638211" appSecret:@"b79a37a46aae4533c30204781a11ae24" redirectURL:@"http://sns.whalecloud.com/sina2/callback"];
     
